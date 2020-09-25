@@ -34,6 +34,7 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 * Add "Cost" input field to product **bulk** and **quick edit**.
 * **Recalculate orders cost and profit** (for all orders or only for orders with no costs).
 * View graphical [costs/profit](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#orders-report) and [stock](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#stock-report) **reports**.
+* Handle **multicurrency**.
 
 = Feedback =
 
@@ -56,6 +57,22 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.2.0 - 25/09/2020 =
+~	* Dev - "Multicurrency" section added.
+~!	* Dev - Orders - Admin Orders List Columns - "Profit percent" and "Profit margin" columns added.
+~	* Dev - Orders - Displaying all COG data in default shop currency now (i.e. instead of in order currency).
+~	* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_item_cost` - Order variable added to the filter's params.
+~	* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_shipping_cost_fixed`, `alg_wc_cog_order_shipping_cost_percent`, `alg_wc_cog_order_gateway_cost_fixed`, `alg_wc_cog_order_gateway_cost_percent`, `alg_wc_cog_order_extra_cost_fixed`, `alg_wc_cog_order_extra_cost_percent`, `alg_wc_cog_order_total_for_pecentage_fees`, `alg_wc_cog_order_line_total`, `alg_wc_cog_order_extra_cost_from_meta`, `alg_wc_cog_order_shipping_total`, `alg_wc_cog_order_total_fees` filters added.
+~!	* Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to the CSV server export.
+~	* Dev - Tools & Reports - Product Bulk Edit Costs Tool - Code refactoring (now using `wc_get_products()` function).
+~	* Dev - Tools & Reports - Product Bulk Edit Costs Tool - "Product types" option added.
+	* Dev - Compatibility - "WooCommerce Point of Sale" plugin (by "Webkul") compatibility added.
+~	* Dev - Compatibility - "Multi Currency for WooCommerce" plugin (by "VillaTheme") compatibility added.
+~	* Dev - Settings - Using unfiltered currency now, i.e. `get_option( 'woocommerce_currency' )` vs `get_woocommerce_currency()`.
+	* Dev - Core - `add_to_log()` function added.
+	* Dev - Code refactoring.
+	* Localization - Turkish (`tr_TR`) translation added.
 
 = 2.1.2 - 17/09/2020 =
 * Plugin author updated.

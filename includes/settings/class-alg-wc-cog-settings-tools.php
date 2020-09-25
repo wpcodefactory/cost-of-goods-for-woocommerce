@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.1.0
+	 * @version 2.2.0
 	 * @since   1.4.0
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
 	 * @todo    [maybe] Orders report: Extra data: better description
@@ -82,6 +82,15 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 					'meta' => __( 'Update product meta', 'cost-of-goods-for-woocommerce' ),
 					'func' => __( 'Use product functions', 'cost-of-goods-for-woocommerce' ),
 				),
+			),
+			array(
+				'title'    => __( 'Product types', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Leave empty to display all product types.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'multiselect',
+				'class'    => 'chosen_select',
+				'id'       => 'alg_wc_cog_bulk_edit_tool_product_types',
+				'default'  => array(),
+				'options'  => wc_get_product_types(),
 			),
 			array(
 				'type'     => 'sectionend',

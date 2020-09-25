@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.1.1
+ * @version 2.2.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -18,6 +18,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 *
 	 * @version 2.1.0
 	 * @since   2.1.0
+	 * @todo    [now] `profit_percent`, `profit_margin` to meta box
+	 * @todo    [now] more columns (not only cost, profit, profit_percent, profit_margin and per order fees)
 	 */
 	function __construct() {
 		$this->get_options();
@@ -27,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * get_options.
 	 *
-	 * @version 2.1.1
+	 * @version 2.2.0
 	 * @since   2.1.0
 	 * @todo    [maybe] Fees: From Meta: no `trim`
 	 */
@@ -46,13 +48,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 			$this->shipping_costs_percent             = get_option( 'alg_wc_cog_shipping_costs_percent', array() );
 		}
 		// Fees: All Orders
-		$this->order_extra_cost_fixed                 = get_option( 'alg_wc_cog_order_extra_cost_fixed', 0 );
+		$this->order_extra_cost_fixed                 = get_option( 'alg_wc_cog_order_extra_cost_fixed',   0 );
 		$this->order_extra_cost_percent               = get_option( 'alg_wc_cog_order_extra_cost_percent', 0 );
 		// Fees: Per Order
 		$this->is_order_extra_cost_per_order          = array(
 			'handling' => ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_per_order_handling_fee', 'no' ) ),
 			'shipping' => ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_per_order_shipping_fee', 'no' ) ),
-			'payment'  => ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_per_order_payment_fee', 'no' ) ),
+			'payment'  => ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_per_order_payment_fee',  'no' ) ),
 		);
 		// Fees: From Meta
 		$this->order_extra_cost_from_meta             = get_option( 'alg_wc_cog_order_extra_cost_from_meta', '' );
@@ -80,11 +82,15 @@ class Alg_WC_Cost_of_Goods_Orders {
 		// Admin Orders List Columns
 		$this->is_column_cost                         = ( 'yes' === get_option( 'alg_wc_cog_orders_columns_cost', 'no' ) );
 		$this->is_column_profit                       = ( 'yes' === get_option( 'alg_wc_cog_orders_columns_profit', 'yes' ) );
+		$this->is_column_profit_percent               = ( 'yes' === get_option( 'alg_wc_cog_orders_columns_profit_percent', 'no' ) );
+		$this->is_column_profit_margin                = ( 'yes' === get_option( 'alg_wc_cog_orders_columns_profit_margin', 'no' ) );
 		$this->is_columns_extra_cost_per_order        = ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_per_order_columns', 'no' ) );
 		$this->column_order_status                    = array(
-			'cost'   => get_option( 'alg_wc_cog_orders_columns_cost_order_status', array() ),
+			'cost'   => get_option( 'alg_wc_cog_orders_columns_cost_order_status',   array() ),
 			'profit' => get_option( 'alg_wc_cog_orders_columns_profit_order_status', array() ),
 		);
+		$this->column_order_status['profit_percent'] = $this->column_order_status['profit'];
+		$this->column_order_status['profit_margin']  = $this->column_order_status['profit'];
 		// Sorting
 		$this->is_columns_sorting                     = ( 'yes' === get_option( 'alg_wc_cog_columns_sorting', 'yes' ) );
 		$this->is_columns_sorting_exclude_empty_lines = ( 'yes' === get_option( 'alg_wc_cog_columns_sorting_exclude_empty_lines', 'yes' ) );
@@ -93,8 +99,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.1.0
+	 * @version 2.2.0
 	 * @since   2.1.0
+	 * @todo    [now] [!] `$this->is_column_profit || $this->is_column_cost`: `profit_percent`, `profit_margin`
+	 * @todo    [now] [!] `$this->is_column_profit || $this->is_column_cost`: `( $this->is_columns_extra_cost_per_order && in_array( true, $this->is_order_extra_cost_per_order ) )`?
+	 * @todo    [now] Save order items costs on new order: REST API?
+	 * @todo    [now] Save order items costs on new order: `wp_insert_post`?
+	 * @todo    [now] Save order items costs on new order: "Point of Sale POS for WooCommerce" plugin (by "BizSwoop a CPF Concepts, LLC Brand")
 	 */
 	function add_hooks() {
 		// Order item costs: Force update
@@ -117,6 +128,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'woocommerce_cli_create_order',                     array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 		add_action( 'kco_before_confirm_order',                         array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 		add_action( 'woocommerce_checkout_order_processed',             array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
+		add_action( 'wkwcpos_after_creating_order',                     array( $this, 'save_cost_input_shop_order_new_by_order' ), PHP_INT_MAX );
 		// Order extra cost: per order
 		add_action( 'add_meta_boxes',                                   array( $this, 'add_order_extra_cost_meta_box' ) );
 		add_action( 'save_post_shop_order',                             array( $this, 'save_order_extra_cost' ), 10, 2 );
@@ -144,17 +156,32 @@ class Alg_WC_Cost_of_Goods_Orders {
 				add_action( 'woocommerce_order_status_' . $status,      array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 			}
 		}
+		// Compatibility: "WooCommerce PDF Invoices, Packing Slips, Delivery Notes & Shipping Labels" plugin
+		add_filter( 'wf_pklist_modify_meta_data',                       array( $this, 'wf_pklist_remove_cog_meta' ), PHP_INT_MAX );
+	}
+
+	/**
+	 * wf_pklist_remove_cog_meta.
+	 *
+	 * @version 1.3.4
+	 * @since   1.3.4
+	 */
+	function wf_pklist_remove_cog_meta( $meta_data ) {
+		if ( isset( $meta_data['_alg_wc_cog_item_cost'] ) ) {
+			unset( $meta_data['_alg_wc_cog_item_cost'] );
+		}
+		return $meta_data;
 	}
 
 	/**
 	 * shop_order_sortable_columns.
 	 *
-	 * @version 1.7.0
+	 * @version 2.2.0
 	 * @since   1.7.0
 	 */
 	function shop_order_sortable_columns( $columns ) {
 		foreach ( $this->order_columns as $column_id => $column_title ) {
-			$columns[ $column_id ] = ( in_array( $column_id, array( 'cost', 'profit' ) ) ? '_alg_wc_cog_order_' . $column_id : '_alg_wc_cog_order_' . $column_id . '_fee' );
+			$columns[ $column_id ] = $this->get_order_column_key( $column_id );
 		}
 		return $columns;
 	}
@@ -201,7 +228,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 2.0.0
+	 * @version 2.2.0
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 * @todo    [maybe] profit percent
@@ -211,11 +238,10 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$order      = wc_get_order( $order_id );
 		$cost       = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'cost',   true );
 		$profit     = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit', true );
-		$price_args = array( 'currency' => ( $order ? $order->get_currency() : '' ) );
 		$table_args = array( 'table_heading_type' => 'vertical', 'table_class' => 'widefat', 'columns_styles' => array( '', 'text-align:right;' ) );
 		$table_data = array(
-			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ),   ( '' !== $cost   ? '<span style="color:red;">'   . wc_price( $cost,   $price_args ) . '</span>' : '' ) ),
-			array( __( 'Profit', 'cost-of-goods-for-woocommerce' ), ( '' !== $profit ? '<span style="color:green;">' . wc_price( $profit, $price_args ) . '</span>' : '' ) ),
+			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ),   ( '' !== $cost   ? '<span style="color:red;">'   . wc_price( $cost )   . '</span>' : '' ) ),
+			array( __( 'Profit', 'cost-of-goods-for-woocommerce' ), ( '' !== $profit ? '<span style="color:green;">' . wc_price( $profit ) . '</span>' : '' ) ),
 		);
 		echo alg_wc_cog_get_table_html( $table_data, $table_args );
 		// Cost details
@@ -230,13 +256,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 			'_alg_wc_cog_order_extra_cost_percent'     => __( 'Order fee (percent)', 'cost-of-goods-for-woocommerce' ),
 			'_alg_wc_cog_order_' . 'handling' . '_fee' => __( 'Handling fee', 'cost-of-goods-for-woocommerce' ),
 			'_alg_wc_cog_order_' . 'shipping' . '_fee' => __( 'Shipping fee', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_' . 'payment' . '_fee'  => __( 'Payment fee', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_' . 'payment'  . '_fee' => __( 'Payment fee', 'cost-of-goods-for-woocommerce' ),
 			'_alg_wc_cog_order_extra_cost_from_meta'   => __( 'Meta fees', 'cost-of-goods-for-woocommerce' ),
 		);
 		foreach ( $cost_meta_keys as $key => $value ) {
 			$cost = get_post_meta( $order_id, $key, true );
 			if ( 0 != $cost ) {
-				$table_data[] = array( $value, wc_price( $cost, $price_args ) );
+				$table_data[] = array( $value, wc_price( $cost ) );
 			}
 		}
 		if ( count( $table_data ) > 1 ) {
@@ -248,7 +274,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_order_columns.
 	 *
-	 * @version 2.1.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
 	function add_order_columns( $columns ) {
@@ -264,7 +290,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 			}
 		}
 		if ( $this->is_column_profit ) {
-			$this->order_columns['profit'] = __( 'Profit', 'cost-of-goods-for-woocommerce' );
+			$this->order_columns['profit']         = __( 'Profit', 'cost-of-goods-for-woocommerce' );
+		}
+		if ( $this->is_column_profit_percent ) {
+			$this->order_columns['profit_percent'] = __( 'Profit percent', 'cost-of-goods-for-woocommerce' );
+		}
+		if ( $this->is_column_profit_margin ) {
+			$this->order_columns['profit_margin']  = __( 'Profit margin', 'cost-of-goods-for-woocommerce' );
 		}
 		return alg_wc_cog_insert_in_array( $columns, $this->order_columns, 'order_total' );
 	}
@@ -272,7 +304,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * render_order_columns.
 	 *
-	 * @version 2.1.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 * @todo    [dev] order status for the fee columns
 	 * @todo    [feature] forecasted profit `$value = $line_total * $average_profit_margin`
@@ -286,10 +318,30 @@ class Alg_WC_Cost_of_Goods_Orders {
 			if ( ! empty( $order_status ) && ( ! $order || ! $order->has_status( $order_status ) ) ) {
 				return;
 			}
-			$key   = ( in_array( $column, array( 'cost', 'profit' ) ) ? '_alg_wc_cog_order_' . $column : '_alg_wc_cog_order_' . $column . '_fee' );
+			$key   = $this->get_order_column_key( $column );
 			$value = get_post_meta( $order_id, $key, true );
-			echo ( '' !== $value ? wc_price( $value, array( 'currency' => ( $order ? $order->get_currency() : '' ) ) ) : '' );
+			echo ( '' !== $value ? $this->format_order_column_value( $value, $column ) : '' );
 		}
+	}
+
+	/**
+	 * format_order_column_value.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function format_order_column_value( $value, $column ) {
+		return ( in_array( $column, array( 'profit_percent', 'profit_margin' ) ) ? sprintf( '%0.2f%%', $value ) : wc_price( $value ) );
+	}
+
+	/**
+	 * get_order_column_key.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function get_order_column_key( $column ) {
+		return ( in_array( $column, array( 'cost', 'profit', 'profit_percent', 'profit_margin' ) ) ? '_alg_wc_cog_order_' . $column : '_alg_wc_cog_order_' . $column . '_fee' );
 	}
 
 	/**
@@ -312,7 +364,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * order_extra_cost_meta_box.
 	 *
-	 * @version 1.7.0
+	 * @version 2.2.0
 	 * @since   1.7.0
 	 * @todo    [maybe] better `$title`
 	 * @todo    [maybe] better styling
@@ -324,7 +376,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		foreach ( $this->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 			if ( $is_enabled ) {
 				$id    = 'alg_wc_cog_order_' . $fee_type . '_fee';
-				$title = ucfirst( $fee_type ) . ' ' . __( 'fee', 'cost-of-goods-for-woocommerce' ) . ' (' . get_woocommerce_currency_symbol( $order->get_currency() ) . ')';
+				$title = ucfirst( $fee_type ) . ' ' . __( 'fee', 'cost-of-goods-for-woocommerce' ) . ' (' . get_woocommerce_currency_symbol() . ')';
 				$value = get_post_meta( get_the_ID(), '_' . $id, true );
 				$rows .= '<tr><td><label style="font-size:smaller;" for="' . $id . '">' . $title . '</label></td>' .
 					'<td><input name="' . $id . '" id="' . $id . '" type="number" step="0.0001" class="short wc_input_price" value="' . $value . '"></td></tr>';
@@ -410,6 +462,19 @@ class Alg_WC_Cost_of_Goods_Orders {
 	}
 
 	/**
+	 * save_cost_input_shop_order_new_by_order.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 * @todo    [maybe] merge this with `save_cost_input_shop_order_new()`?
+	 */
+	function save_cost_input_shop_order_new_by_order( $order ) {
+		if ( is_a( $order, 'WC_Order' ) ) {
+			$this->update_order_items_costs( $order->get_id(), true );
+		}
+	}
+
+	/**
 	 * recalculate_order_ajax.
 	 *
 	 * @version 2.1.0
@@ -492,7 +557,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_cost_input_shop_order.
 	 *
-	 * @version 1.4.5
+	 * @version 2.2.0
 	 * @since   1.1.0
 	 */
 	function add_cost_input_shop_order( $item_id, $item, $product ) {
@@ -501,7 +566,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			$readonly = ( 'readonly' === $this->item_costs_option ? ' readonly' : '' );
 			echo '<p>' .
 				'<label for="alg_wc_cog_item_cost_' . $item_id . '">' . __( 'Cost of goods', 'cost-of-goods-for-woocommerce' ) .
-					' (' . get_woocommerce_currency_symbol( $order->get_currency() ) . ') ' . '</label>' .
+					' (' . get_woocommerce_currency_symbol() . ') ' . '</label>' .
 				'<input name="alg_wc_cog_item_cost[' . $item_id . ']" id="alg_wc_cog_item_cost_' . $item_id . '" type="text" class="short wc_input_price" value="' .
 					wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' ). '"' . $readonly . '>' .
 			'</p>';
@@ -511,7 +576,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * get_order_total_for_pecentage_fees.
 	 *
-	 * @version 1.7.2
+	 * @version 2.2.0
 	 * @since   1.7.2
 	 * @todo    [next] add more options, e.g. `subtotal_incl_tax`
 	 * @todo    [next] optionally set different "order total" for different fees, e.g. shipping total for shipping method fees
@@ -519,19 +584,21 @@ class Alg_WC_Cost_of_Goods_Orders {
 	function get_order_total_for_pecentage_fees( $order ) {
 		switch ( $this->order_extra_cost_percent_total ) {
 			case 'total_excl_tax':
-				return ( $order->get_total() - $order->get_total_tax() );
+				return apply_filters( 'alg_wc_cog_order_total_for_pecentage_fees', ( $order->get_total() - $order->get_total_tax() ), $order );
 			case 'total_incl_tax':
-				return $order->get_total();
+				return apply_filters( 'alg_wc_cog_order_total_for_pecentage_fees', $order->get_total(), $order );
 			default: // 'subtotal_excl_tax'
-				return $order->get_subtotal();
+				return apply_filters( 'alg_wc_cog_order_total_for_pecentage_fees', $order->get_subtotal(), $order );
 		}
 	}
 
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.1.1
+	 * @version 2.2.0
 	 * @since   1.1.0
+	 * @todo    [now] filters: add more?
+	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
 	 * @todo    [maybe] split into smaller functions, e.g. `update_order_fees()`
 	 * @todo    [maybe] Fees: From Meta: convert value (e.g. `_stripe_currency`)
 	 * @todo    [maybe] Fees: From Meta: check for matching `$order_gateway` value (e.g. `stripe`)
@@ -566,6 +633,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$profit                = 0;
 		$total_cost            = 0;
 		$fees                  = 0;
+		$total_price           = 0;
 
 		// Calculations
 		if ( empty( $this->delay_calculations_status ) || $order->has_status( $this->delay_calculations_status ) ) {
@@ -575,7 +643,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 				if ( $is_new_order ) {
 					if ( ! $is_no_costs_only || '' === wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' ) ) {
 						$product_id = ( ! empty( $item['variation_id'] ) ? $item['variation_id'] : $item['product_id'] );
-						$cost       = apply_filters( 'alg_wc_cog_order_item_cost', alg_wc_cog()->core->products->get_product_cost( $product_id ), $product_id );
+						$cost       = apply_filters( 'alg_wc_cog_order_item_cost',
+							alg_wc_cog()->core->products->get_product_cost( $product_id ), $order, $product_id );
 						$do_update  = ( 0 != $cost );
 					} else {
 						$do_update  = false;
@@ -593,10 +662,12 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$cost = '0';
 				}
 				if ( '' != $cost ) {
-					$cost        = str_replace( ',', '.', $cost );
-					$line_cost   = $cost * $item['qty'];
-					$profit     += $item['line_total'] - $line_cost;
-					$items_cost += $line_cost;
+					$cost         = str_replace( ',', '.', $cost );
+					$line_cost    = $cost * $item['qty'];
+					$line_total   = apply_filters( 'alg_wc_cog_order_line_total', $item['line_total'], $order );
+					$profit      += ( $line_total - $line_cost );
+					$items_cost  += $line_cost;
+					$total_price += $line_total;
 				}
 			}
 			if ( 0 != $items_cost ) {
@@ -609,14 +680,16 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$shipping_method_id = ( $this->shipping_use_instances ? $shipping_method->get_instance_id() : $shipping_method->get_method_id() );
 					// Fixed
 					if ( ! empty( $this->shipping_costs_fixed[ $shipping_method_id ] ) ) {
-						$shipping_cost_fixed += $this->shipping_costs_fixed[ $shipping_method_id ];
+						$shipping_cost_fixed += apply_filters( 'alg_wc_cog_order_shipping_cost_fixed',
+							$this->shipping_costs_fixed[ $shipping_method_id ], $order, $shipping_method_id );
 					}
 					// Percent
 					if ( ! empty( $this->shipping_costs_percent[ $shipping_method_id ] ) ) {
 						if ( ! isset( $order_total ) ) {
 							$order_total = $this->get_order_total_for_pecentage_fees( $order );
 						}
-						$shipping_cost_percent += $order_total * ( $this->shipping_costs_percent[ $shipping_method_id ] / 100 );
+						$shipping_cost_percent += apply_filters( 'alg_wc_cog_order_shipping_cost_percent',
+							( $order_total * ( $this->shipping_costs_percent[ $shipping_method_id ] / 100 ) ), $order, $shipping_method_id );
 					}
 				}
 				$shipping_cost = ( $shipping_cost_fixed + $shipping_cost_percent );
@@ -629,14 +702,16 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$order_gateway = $order->get_payment_method();
 				// Fixed
 				if ( ! empty( $this->gateway_costs_fixed[ $order_gateway ] ) ) {
-					$gateway_cost_fixed = $this->gateway_costs_fixed[ $order_gateway ];
+					$gateway_cost_fixed = apply_filters( 'alg_wc_cog_order_gateway_cost_fixed',
+						$this->gateway_costs_fixed[ $order_gateway ], $order, $order_gateway );
 				}
 				// Percent
 				if ( ! empty( $this->gateway_costs_percent[ $order_gateway ] ) ) {
 					if ( ! isset( $order_total ) ) {
 						$order_total = $this->get_order_total_for_pecentage_fees( $order );
 					}
-					$gateway_cost_percent = $order_total * ( $this->gateway_costs_percent[ $order_gateway ] / 100 );
+					$gateway_cost_percent = apply_filters( 'alg_wc_cog_order_gateway_cost_percent',
+						( $order_total * ( $this->gateway_costs_percent[ $order_gateway ] / 100 ) ), $order, $order_gateway );
 				}
 				$gateway_cost = ( $gateway_cost_fixed + $gateway_cost_percent );
 				$profit     -= $gateway_cost;
@@ -647,14 +722,16 @@ class Alg_WC_Cost_of_Goods_Orders {
 			if ( 0 != $this->order_extra_cost_fixed || 0 != $this->order_extra_cost_percent ) {
 				// Order extra cost: all orders: fixed
 				if ( 0 != $this->order_extra_cost_fixed ) {
-					$extra_cost_fixed = $this->order_extra_cost_fixed;
+					$extra_cost_fixed = apply_filters( 'alg_wc_cog_order_extra_cost_fixed',
+						$this->order_extra_cost_fixed, $order );
 				}
 				// Order extra cost: all orders: percent
 				if ( 0 != $this->order_extra_cost_percent ) {
 					if ( ! isset( $order_total ) ) {
 						$order_total = $this->get_order_total_for_pecentage_fees( $order );
 					}
-					$extra_cost_percent = $order_total * ( $this->order_extra_cost_percent / 100 );
+					$extra_cost_percent = apply_filters( 'alg_wc_cog_order_extra_cost_percent',
+						( $order_total * ( $this->order_extra_cost_percent / 100 ) ), $order );
 				}
 				$extra_cost = ( $extra_cost_fixed + $extra_cost_percent );
 				$profit     -= $extra_cost;
@@ -676,7 +753,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			if ( '' != $this->order_extra_cost_from_meta ) {
 				foreach ( $this->order_extra_cost_from_meta as $meta_key ) {
 					$fee        = get_post_meta( $order_id, $meta_key, true );
-					$meta_fees += floatval( $fee );
+					$meta_fees += apply_filters( 'alg_wc_cog_order_extra_cost_from_meta', floatval( $fee ), $order );
 				}
 				if ( 0 != $meta_fees ) {
 					$profit     -= $meta_fees;
@@ -686,11 +763,15 @@ class Alg_WC_Cost_of_Goods_Orders {
 			}
 			// Profit adjustments: Shipping
 			if ( $this->do_add_shipping_to_profit ) {
-				$profit += $order->get_shipping_total();
+				$_shipping    = apply_filters( 'alg_wc_cog_order_shipping_total', $order->get_shipping_total(), $order );
+				$profit      += $_shipping;
+				$total_price += $_shipping;
 			}
 			// Profit adjustments: Fees
 			if ( $this->do_add_fees_to_profit ) {
-				$profit += $order->get_total_fees();
+				$_fees        = apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_fees(), $order );
+				$profit      += $_fees;
+				$total_price += $_fees;
 			}
 		}
 
@@ -719,6 +800,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 		update_post_meta( $order_id, '_alg_wc_cog_order_extra_cost_from_meta',      $meta_fees );
 		// Totals
 		update_post_meta( $order_id, '_alg_wc_cog_order_profit',                    $profit );
+		update_post_meta( $order_id, '_alg_wc_cog_order_profit_percent',            ( 0 != $total_cost  ? ( $profit / $total_cost  * 100 ) : 0 ) );
+		update_post_meta( $order_id, '_alg_wc_cog_order_profit_margin',             ( 0 != $total_price ? ( $profit / $total_price * 100 ) : 0 ) );
+		update_post_meta( $order_id, '_alg_wc_cog_order_price',                     $total_price );
 		update_post_meta( $order_id, '_alg_wc_cog_order_cost',                      $total_cost );
 		update_post_meta( $order_id, '_alg_wc_cog_order_fees',                      $fees );
 

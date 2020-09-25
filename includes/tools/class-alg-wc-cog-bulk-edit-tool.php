@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -18,6 +18,7 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	 *
 	 * @version 1.4.0
 	 * @since   1.2.0
+	 * @todo    [now] [!] search: fix "Costs have been saved."
 	 */
 	function __construct() {
 		add_action( 'admin_menu',             array( $this, 'create_tool' ) );
@@ -76,6 +77,8 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	 * @version 1.4.0
 	 * @since   1.2.0
 	 * @see     https://wordpress.org/support/topic/you-should-add-posibility-to-edit-regular-price-and-sale-price/
+	 * @todo    [now] prices: `if ( $product = wc_get_product( $product_id ) )`
+	 * @todo    [now] prices: `$do_update_func`
 	 * @todo    [dev] nonce etc.
 	 */
 	function save_costs() {
@@ -213,10 +216,10 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	/**
 	 * display_tool.
 	 *
-	 * @version 2.0.0
+	 * @version 2.2.0
 	 * @since   1.2.0
+	 * @see     https://github.com/woocommerce/woocommerce/wiki/wc_get_products-and-WC_Product_Query
 	 * @todo    [dev] pagination (same in "Import" tool and "Stock" report)
-	 * @todo    [dev] use `wc_get_products()`
 	 * @todo    [maybe] better description here and in settings
 	 * @todo    [feature] [maybe] bulk edit order items meta
 	 */
@@ -245,72 +248,72 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 			);
 		}
 		$args = array(
-			'post_type'      => array( 'product', 'product_variation' ),
-			'post_status'    => 'any',
-			'posts_per_page' => -1,
-			'orderby'        => 'ID',
-			'order'          => 'ASC',
-			'fields'         => 'ids',
+			'limit'   => -1,
+			'orderby' => 'ID',
+			'order'   => 'ASC',
+			'return'  => 'ids',
 		);
-		$loop = new WP_Query( $args );
-		if ( $loop->have_posts() ) {
-			foreach ( $loop->posts as $product_id ) {
-				$value = get_post_meta( $product_id, '_alg_wc_cog_cost', true );
-				if ( $do_edit_prices ) {
-					$regular_price = get_post_meta( $product_id, '_regular_price', true );
-					$sale_price    = get_post_meta( $product_id, '_sale_price', true );
-				}
-				$input_field = '<input' .
-					' name="alg_wc_cog_bulk_edit_tool_costs[' . $product_id . ']"' .
+		$types = get_option( 'alg_wc_cog_bulk_edit_tool_product_types', array() );
+		if ( ! empty( $types ) ) {
+			$args['type'] = $types;
+		}
+		$products = wc_get_products( $args );
+		foreach ( $products as $product_id ) {
+			$value = get_post_meta( $product_id, '_alg_wc_cog_cost', true );
+			if ( $do_edit_prices ) {
+				$regular_price = get_post_meta( $product_id, '_regular_price', true );
+				$sale_price    = get_post_meta( $product_id, '_sale_price', true );
+			}
+			$input_field = '<input' .
+				' name="alg_wc_cog_bulk_edit_tool_costs[' . $product_id . ']"' .
+				' type="text"' .
+				' class="alg_wc_cog_bet_input short wc_input_price"' .
+				' initial-value="' . $value . '"' .
+				' value="'         . $value . '"' . '>';
+			if ( $do_edit_prices ) {
+				$input_regular_price = '<input' .
+					' name="alg_wc_cog_bulk_edit_tool_regular_price[' . $product_id . ']"' .
 					' type="text"' .
 					' class="alg_wc_cog_bet_input short wc_input_price"' .
-					' initial-value="' . $value . '"' .
-					' value="'         . $value . '"' . '>';
-				if ( $do_edit_prices ) {
-					$input_regular_price = '<input' .
-						' name="alg_wc_cog_bulk_edit_tool_regular_price[' . $product_id . ']"' .
-						' type="text"' .
-						' class="alg_wc_cog_bet_input short wc_input_price"' .
-						' initial-value="' . $regular_price . '"' .
-						' value="'         . $regular_price . '"' . '>';
-					$input_sale_price = '<input' .
-						' name="alg_wc_cog_bulk_edit_tool_sale_price[' . $product_id . ']"' .
-						' type="text"' .
-						' class="alg_wc_cog_bet_input short wc_input_price"' .
-						' initial-value="' . $sale_price . '"' .
-						' value="'         . $sale_price . '"' . '>';
-				}
-				if ( $do_manage_stock ) {
-					$stock_value  = ( '' === ( $stock = get_post_meta( $product_id, '_stock', true ) ) ? '' : floatval( $stock ) );
-					$stock_status = ( '' == ( $_stock_status = get_post_meta( $product_id, '_stock_status', true ) ) ? 'N/A' : $_stock_status );
-					$input_field_stock = '<input' .
-						' name="alg_wc_cog_bulk_edit_tool_stock[' . $product_id . ']"' .
-						' type="text"' .
-						' class="alg_wc_cog_bet_input short"' .
-						' initial-value="' . $stock_value . '"' .
-						' value="'         . $stock_value . '"' . '>';
-					$input_field_stock .= wc_help_tip( sprintf( __( 'Stock status: %s', 'cost-of-goods-for-woocommerce' ), $stock_status ) );
-				}
-				if ( $do_edit_prices ) {
-					$table_data[] = array(
-						'<a tabIndex="-1" target="_blank" href="' . admin_url( 'post.php?post=' . $product_id . '&action=edit' ) . '">' . $product_id . '</a>',
-						get_post_meta( $product_id, '_sku', true ),
-						'<a tabIndex="-1" target="_blank" href="' . get_the_permalink( $product_id ) . '">' . get_the_title( $product_id ) . '</a>',
-						$input_field,
-						$input_regular_price,
-						$input_sale_price,
-						( $do_manage_stock ? $input_field_stock : get_post_meta( $product_id, '_stock', true ) ),
-					);
-				} else {
-					$table_data[] = array(
-						'<a tabIndex="-1" target="_blank" href="' . admin_url( 'post.php?post=' . $product_id . '&action=edit' ) . '">' . $product_id . '</a>',
-						get_post_meta( $product_id, '_sku', true ),
-						'<a tabIndex="-1" target="_blank" href="' . get_the_permalink( $product_id ) . '">' . get_the_title( $product_id ) . '</a>',
-						$input_field,
-						get_post_meta( $product_id, '_price', true ),
-						( $do_manage_stock ? $input_field_stock : get_post_meta( $product_id, '_stock', true ) ),
-					);
-				}
+					' initial-value="' . $regular_price . '"' .
+					' value="'         . $regular_price . '"' . '>';
+				$input_sale_price = '<input' .
+					' name="alg_wc_cog_bulk_edit_tool_sale_price[' . $product_id . ']"' .
+					' type="text"' .
+					' class="alg_wc_cog_bet_input short wc_input_price"' .
+					' initial-value="' . $sale_price . '"' .
+					' value="'         . $sale_price . '"' . '>';
+			}
+			if ( $do_manage_stock ) {
+				$stock_value  = ( '' === ( $stock = get_post_meta( $product_id, '_stock', true ) ) ? '' : floatval( $stock ) );
+				$stock_status = ( '' == ( $_stock_status = get_post_meta( $product_id, '_stock_status', true ) ) ? 'N/A' : $_stock_status );
+				$input_field_stock = '<input' .
+					' name="alg_wc_cog_bulk_edit_tool_stock[' . $product_id . ']"' .
+					' type="text"' .
+					' class="alg_wc_cog_bet_input short"' .
+					' initial-value="' . $stock_value . '"' .
+					' value="'         . $stock_value . '"' . '>';
+				$input_field_stock .= wc_help_tip( sprintf( __( 'Stock status: %s', 'cost-of-goods-for-woocommerce' ), $stock_status ) );
+			}
+			if ( $do_edit_prices ) {
+				$table_data[] = array(
+					'<a tabIndex="-1" target="_blank" href="' . admin_url( 'post.php?post=' . $product_id . '&action=edit' ) . '">' . $product_id . '</a>',
+					get_post_meta( $product_id, '_sku', true ),
+					'<a tabIndex="-1" target="_blank" href="' . get_the_permalink( $product_id ) . '">' . get_the_title( $product_id ) . '</a>',
+					$input_field,
+					$input_regular_price,
+					$input_sale_price,
+					( $do_manage_stock ? $input_field_stock : get_post_meta( $product_id, '_stock', true ) ),
+				);
+			} else {
+				$table_data[] = array(
+					'<a tabIndex="-1" target="_blank" href="' . admin_url( 'post.php?post=' . $product_id . '&action=edit' ) . '">' . $product_id . '</a>',
+					get_post_meta( $product_id, '_sku', true ),
+					'<a tabIndex="-1" target="_blank" href="' . get_the_permalink( $product_id ) . '">' . get_the_title( $product_id ) . '</a>',
+					$input_field,
+					get_post_meta( $product_id, '_price', true ),
+					( $do_manage_stock ? $input_field_stock : get_post_meta( $product_id, '_stock', true ) ),
+				);
 			}
 		}
 		$save_button = '<p>' . '<input type="submit" name="alg_wc_cog_bulk_edit_tool_save_costs" class="button-primary" value="' .

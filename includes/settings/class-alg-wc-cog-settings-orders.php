@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings
  *
- * @version 2.1.1
+ * @version 2.2.0
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,9 +28,10 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.1.1
+	 * @version 2.2.0
 	 * @since   1.7.0
-	 * @todo    [now] Percent cost: fix desc?
+	 * @todo    [now] [!] desc: `profit_percent`, `profit_margin`: since v2.2.0
+	 * @todo    [now] [!] Percent cost: fix desc?
 	 * @todo    [dev] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [dev] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
 	 * @todo    [dev] [maybe] `alg_wc_cog_order_prepopulate_on_recalculate_order`: default to `yes`
@@ -66,10 +67,25 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Order profit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Profit', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_profit',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
+				'checkboxgroup' => 'start',
+			),
+			array(
+				'desc'     => __( 'Profit percent', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_columns_profit_percent',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+				'checkboxgroup' => '',
+			),
+			array(
+				'desc'     => __( 'Profit margin', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_columns_profit_margin',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+				'checkboxgroup' => 'end',
 			),
 			array(
 				'desc'     => __( 'Order statuses', 'cost-of-goods-for-woocommerce' ),
@@ -244,7 +260,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), get_woocommerce_currency() ),
+				'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), get_option( 'woocommerce_currency' ) ),
 				'type'     => 'number',
 				'id'       => 'alg_wc_cog_order_extra_cost_fixed',
 				'default'  => 0,

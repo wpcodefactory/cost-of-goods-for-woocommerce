@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Settings
  *
- * @version 2.1.0
+ * @version 2.2.0
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -16,7 +16,7 @@ class Alg_WC_Settings_Cost_of_Goods extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.1.0
+	 * @version 2.2.0
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -29,6 +29,7 @@ class Alg_WC_Settings_Cost_of_Goods extends WC_Settings_Page {
 		require_once( 'class-alg-wc-cog-settings-orders.php' );
 		require_once( 'class-alg-wc-cog-settings-gateways.php' );
 		require_once( 'class-alg-wc-cog-settings-shipping.php' );
+		require_once( 'class-alg-wc-cog-settings-currencies.php' );
 		require_once( 'class-alg-wc-cog-settings-tools.php' );
 		require_once( 'class-alg-wc-cog-settings-advanced.php' );
 	}
