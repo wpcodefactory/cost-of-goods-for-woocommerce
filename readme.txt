@@ -58,19 +58,21 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 
 == Changelog ==
 
-= 2.2.0 - 25/09/2020 =
+= 2.2.0 - 28/09/2020 =
 ~	* Dev - "Multicurrency" section added.
 ~!	* Dev - Orders - Admin Orders List Columns - "Profit percent" and "Profit margin" columns added.
 ~	* Dev - Orders - Displaying all COG data in default shop currency now (i.e. instead of in order currency).
 ~	* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_item_cost` - Order variable added to the filter's params.
 ~	* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_shipping_cost_fixed`, `alg_wc_cog_order_shipping_cost_percent`, `alg_wc_cog_order_gateway_cost_fixed`, `alg_wc_cog_order_gateway_cost_percent`, `alg_wc_cog_order_extra_cost_fixed`, `alg_wc_cog_order_extra_cost_percent`, `alg_wc_cog_order_total_for_pecentage_fees`, `alg_wc_cog_order_line_total`, `alg_wc_cog_order_extra_cost_from_meta`, `alg_wc_cog_order_shipping_total`, `alg_wc_cog_order_total_fees` filters added.
-~!	* Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to the CSV server export.
+~!	* Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to the CSV *server* export.
+~!	* Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to REST report orders schema.
 ~	* Dev - Tools & Reports - Product Bulk Edit Costs Tool - Code refactoring (now using `wc_get_products()` function).
 ~	* Dev - Tools & Reports - Product Bulk Edit Costs Tool - "Product types" option added.
 	* Dev - Compatibility - "WooCommerce Point of Sale" plugin (by "Webkul") compatibility added.
 ~	* Dev - Compatibility - "Multi Currency for WooCommerce" plugin (by "VillaTheme") compatibility added.
 ~	* Dev - Settings - Using unfiltered currency now, i.e. `get_option( 'woocommerce_currency' )` vs `get_woocommerce_currency()`.
 	* Dev - Core - `add_to_log()` function added.
+	* Dev - Core - `get_product_profit_html()` function added (for backward compatibility, e.g. for `wc-frontend-manager-ultimate` plugin).
 	* Dev - Code refactoring.
 	* Localization - Turkish (`tr_TR`) translation added.
 

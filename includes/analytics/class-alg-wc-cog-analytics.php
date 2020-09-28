@@ -43,7 +43,33 @@ class Alg_WC_Cost_of_Goods_Analytics {
 
 			add_filter( 'woocommerce_export_admin_orders_report_row_data',            array( $this, 'add_to_export_rows' ),    PHP_INT_MAX, 2 );
 			add_filter( 'woocommerce_admin_orders_report_export_column_names',        array( $this, 'add_to_export_columns' ), PHP_INT_MAX, 2 );
+
+			add_filter( 'woocommerce_rest_report_orders_schema',                      array( $this, 'add_order_extended_attributes_schema' ) );
 		}
+	}
+
+	/**
+	 * add_order_extended_attributes_schema.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 * @todo    [now] not sure if this really does anything useful?
+	 * @todo    [now] `float` or `string`?
+	 */
+	function add_order_extended_attributes_schema( $properties ) {
+		$properties['extended_info']['order_cost'] = array(
+			'type'        => 'float',
+			'readonly'    => true,
+			'context'     => array( 'view', 'edit' ),
+			'description' => __( 'Order cost.', 'cost-of-goods-for-woocommerce' ),
+		);
+		$properties['extended_info']['order_profit'] = array(
+			'type'        => 'float',
+			'readonly'    => true,
+			'context'     => array( 'view', 'edit' ),
+			'description' => __( 'Order profit.', 'cost-of-goods-for-woocommerce' ),
+		);
+		return $properties;
 	}
 
 	/**
@@ -51,7 +77,7 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	 *
 	 * @version 2.2.0
 	 * @since   2.2.0
-	 * @see     abstract-wc-csv-exporter.php
+	 * @see     \woocommerce\includes\export\abstract-wc-csv-exporter.php
 	 */
 	function add_to_export_columns( $columns, $exporter ) {
 		$columns['order_cost']   = __( 'Cost', 'cost-of-goods-for-woocommerce' );
@@ -64,7 +90,7 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	 *
 	 * @version 2.2.0
 	 * @since   2.2.0
-	 * @see     ReportCSVExporter.php
+	 * @see     \woocommerce\packages\woocommerce-admin\src\ReportCSVExporter.php
 	 */
 	function add_to_export_rows( $row, $item ) {
 		$row['order_cost']   = $item['order_cost'];

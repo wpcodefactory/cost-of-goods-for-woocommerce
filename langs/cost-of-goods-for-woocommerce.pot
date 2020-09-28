@@ -6,7 +6,15 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics.php:57
+#: includes/analytics/class-alg-wc-cog-analytics.php:64
+msgid "Order cost."
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics.php:70
+msgid "Order profit."
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics.php:83
 #: includes/class-alg-wc-cog-orders.php:243
 #: includes/class-alg-wc-cog-orders.php:283
 #: includes/class-alg-wc-cog-products.php:121
@@ -22,7 +30,7 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics.php:58
+#: includes/analytics/class-alg-wc-cog-analytics.php:84
 #: includes/class-alg-wc-cog-orders.php:244
 #: includes/class-alg-wc-cog-orders.php:293
 #: includes/class-alg-wc-cog-products.php:298

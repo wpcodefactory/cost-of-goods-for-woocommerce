@@ -60,6 +60,18 @@ class Alg_WC_Cost_of_Goods_Core {
 		}
 	}
 
+	/**
+	 * get_product_profit_html.
+	 *
+	 * For backward compatibility.
+	 *
+	 * @version 2.2.0
+	 * @since   2.2.0
+	 */
+	function get_product_profit_html( $product_id, $template = '%profit% (%profit_percent%)' ) {
+		return $this->products->get_product_profit_html( $product_id, $template );
+	}
+
 }
 
 endif;

@@ -33,7 +33,7 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.2.0-dev-20200925-0155';
+	public $version = '2.2.0-dev-20200928-1900';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class
