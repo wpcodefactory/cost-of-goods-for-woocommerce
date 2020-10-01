@@ -30,8 +30,8 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 	 *
 	 * @version 2.2.0
 	 * @since   2.2.0
-	 * @todo    [now] [!] `alg_wc_cog_currencies_wmc`: add link?
 	 * @todo    [next] exclude `$wc_currency` from `get_woocommerce_currencies()`?
+	 * @todo    [maybe] `alg_wc_cog_currencies_wmc`: add link to the plugin on wp.org?
 	 * @todo    [maybe] better desc
 	 */
 	function get_settings() {
@@ -87,9 +87,9 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 				'id'       => 'alg_wc_cog_currencies_advanced_options',
 			),
 			array(
-				'title'    => __( '"Multi Currency for WooCommerce" plugin by VillaTheme', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( '"Multi Currency for WooCommerce" plugin', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'When enabled, the plugin will try to get currency exchange rates from the "Multi Currency for WooCommerce" plugin automatically.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'When enabled, the plugin will try to get currency exchange rates from the "Multi Currency for WooCommerce" plugin (by VillaTheme) automatically.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_currencies_wmc',
 				'default'  => 'no',

@@ -166,7 +166,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	 *
 	 * @version 1.7.0
 	 * @since   1.7.0
-	 * @todo    [next] [maybe] use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`
+	 * @todo    [next] maybe use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`?
 	 * @todo    [maybe] `$cost_now`: round?
 	 */
 	function product_add_stock( $product_id, $stock, $cost ) {
@@ -435,8 +435,8 @@ class Alg_WC_Cost_of_Goods_Products {
 	 *
 	 * @version 2.1.0
 	 * @since   1.0.0
-	 * @todo    [dev] rethink `$product_id` (and search all code for `get_the_ID()`)
-	 * @todo    [feature] [maybe] min_profit
+	 * @todo    [later] rethink `$product_id` (and search all code for `get_the_ID()`)
+	 * @todo    [maybe] min_profit
 	 */
 	function add_cost_input() {
 		$product_id = get_the_ID();

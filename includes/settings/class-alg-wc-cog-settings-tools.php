@@ -31,10 +31,10 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	 *
 	 * @version 2.2.0
 	 * @since   1.4.0
+	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
 	 * @todo    [maybe] Orders report: Extra data: better description
 	 * @todo    [maybe] PHP memory limit: better description
-	 * @todo    [dev] better descriptions
 	 */
 	function get_settings() {
 

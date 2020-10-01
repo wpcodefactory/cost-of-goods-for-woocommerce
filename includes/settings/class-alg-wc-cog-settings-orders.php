@@ -30,13 +30,11 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	 *
 	 * @version 2.2.0
 	 * @since   1.7.0
-	 * @todo    [now] [!] desc: `profit_percent`, `profit_margin`: since v2.2.0
-	 * @todo    [now] [!] Percent cost: fix desc?
-	 * @todo    [dev] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
-	 * @todo    [dev] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
-	 * @todo    [dev] [maybe] `alg_wc_cog_order_prepopulate_on_recalculate_order`: default to `yes`
+	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
+	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
+	 * @todo    [maybe] `alg_wc_cog_order_prepopulate_on_recalculate_order`: default to `yes`
 	 * @todo    [docs] "Extra Costs: From Meta": better description
-	 * @todo    [docs] [maybe] "Extra Cost: Per Order": better description
+	 * @todo    [docs] "Extra Cost: Per Order": better description?
 	 */
 	function get_settings() {
 
@@ -45,7 +43,9 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'title'    => __( 'Admin Orders List Columns', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'desc'     => sprintf( __( 'This section lets you add custom columns to the WooCommerce admin %s.', 'cost-of-goods-for-woocommerce' ),
-					'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders list', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders list', 'cost-of-goods-for-woocommerce' ) . '</a>' ) . '<br>' .
+					sprintf( __( 'Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit.', 'cost-of-goods-for-woocommerce' ),
+						'"' . __( 'Profit percent', 'cost-of-goods-for-woocommerce' ) . '"', '"' . __( 'Profit margin', 'cost-of-goods-for-woocommerce' ) . '"' ),
 				'id'       => 'alg_wc_cog_orders_columns_options',
 			),
 			array(
@@ -131,6 +131,18 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'id'       => 'alg_wc_cog_orders_meta_box',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Order profit HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+					sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
+						'<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ) . '<br>' .
+					sprintf( __( 'Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit.', 'cost-of-goods-for-woocommerce' ),
+						'<code>%profit_percent%</code>', '<code>%profit_margin%</code>' ),
+				'desc_tip' => __( 'This is used in meta box.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+					__( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_profit_html_template',
+				'default'  => '%profit%',
+				'type'     => 'text',
 			),
 			array(
 				'title'    => __( 'Admin notice', 'cost-of-goods-for-woocommerce' ),
@@ -268,7 +280,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Percent from order total (excl. tax).', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Percent from order total.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'number',
 				'id'       => 'alg_wc_cog_order_extra_cost_percent',
 				'default'  => 0,

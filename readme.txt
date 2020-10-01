@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.5
-Stable tag: 2.1.2
+Stable tag: 2.2.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -36,10 +36,11 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 * View graphical [costs/profit](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#orders-report) and [stock](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#stock-report) **reports**.
 * Handle **multicurrency**.
 
-= Feedback =
+= More =
 
 * We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!
 * [Visit plugin site](https://wpfactory.com/item/cost-of-goods-for-woocommerce/).
+* If you wish to contribute – please visit [plugin GitHub repository](https://github.com/wpcodefactory/cost-of-goods-for-woocommerce).
 
 == Installation ==
 
@@ -58,23 +59,28 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 
 == Changelog ==
 
-= 2.2.0 - 28/09/2020 =
-~	* Dev - "Multicurrency" section added.
-~!	* Dev - Orders - Admin Orders List Columns - "Profit percent" and "Profit margin" columns added.
-~	* Dev - Orders - Displaying all COG data in default shop currency now (i.e. instead of in order currency).
-~	* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_item_cost` - Order variable added to the filter's params.
-~	* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_shipping_cost_fixed`, `alg_wc_cog_order_shipping_cost_percent`, `alg_wc_cog_order_gateway_cost_fixed`, `alg_wc_cog_order_gateway_cost_percent`, `alg_wc_cog_order_extra_cost_fixed`, `alg_wc_cog_order_extra_cost_percent`, `alg_wc_cog_order_total_for_pecentage_fees`, `alg_wc_cog_order_line_total`, `alg_wc_cog_order_extra_cost_from_meta`, `alg_wc_cog_order_shipping_total`, `alg_wc_cog_order_total_fees` filters added.
-~!	* Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to the CSV *server* export.
-~!	* Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to REST report orders schema.
-~	* Dev - Tools & Reports - Product Bulk Edit Costs Tool - Code refactoring (now using `wc_get_products()` function).
-~	* Dev - Tools & Reports - Product Bulk Edit Costs Tool - "Product types" option added.
-	* Dev - Compatibility - "WooCommerce Point of Sale" plugin (by "Webkul") compatibility added.
-~	* Dev - Compatibility - "Multi Currency for WooCommerce" plugin (by "VillaTheme") compatibility added.
-~	* Dev - Settings - Using unfiltered currency now, i.e. `get_option( 'woocommerce_currency' )` vs `get_woocommerce_currency()`.
-	* Dev - Core - `add_to_log()` function added.
-	* Dev - Core - `get_product_profit_html()` function added (for backward compatibility, e.g. for `wc-frontend-manager-ultimate` plugin).
-	* Dev - Code refactoring.
-	* Localization - Turkish (`tr_TR`) translation added.
+= 2.2.0 - 01/10/2020 =
+* Fix - Tools & Reports - Analytics - If order doesn't have cost/profit set, it's excluded from the report - this is fixed now.
+* Fix - Tools & Reports - Product Bulk Edit Costs Tool - Searching was saving product costs as well - this is fixed now.
+* Fix - Settings - Description fixed for all "Percent cost" options.
+* Dev - "Multicurrency" section added.
+* Dev - Orders - Admin Orders List Columns - "Profit percent" and "Profit margin" columns added.
+* Dev - Orders - Admin Order Edit - Meta box - "Order profit HTML template" option added.
+* Dev - Orders - Displaying all COG data in default shop currency now (i.e. instead of in order currency).
+* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_item_cost` - Order variable added to the filter's params.
+* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_shipping_cost_fixed`, `alg_wc_cog_order_shipping_cost_percent`, `alg_wc_cog_order_gateway_cost_fixed`, `alg_wc_cog_order_gateway_cost_percent`, `alg_wc_cog_order_extra_cost_fixed`, `alg_wc_cog_order_extra_cost_percent`, `alg_wc_cog_order_total_for_pecentage_fees`, `alg_wc_cog_order_line_total`, `alg_wc_cog_order_extra_cost_from_meta`, `alg_wc_cog_order_shipping_total`, `alg_wc_cog_order_total_fees` filters added.
+* Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to the CSV *server* export.
+* Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to REST report orders schema.
+* Dev - Tools & Reports - Product Bulk Edit Costs Tool - Code refactoring (now using `wc_get_products()` function etc.).
+* Dev - Tools & Reports - Product Bulk Edit Costs Tool - "Product types" option added.
+* Dev - Tools & Reports - Product Bulk Edit Costs Tool - "Search" button added.
+* Dev - Tools & Reports - Product Bulk Edit Costs Tool - "No products found" message added.
+* Dev - Compatibility - "WooCommerce Point of Sale" plugin (by "Webkul") compatibility added.
+* Dev - Compatibility - "Multi Currency for WooCommerce" plugin (by "VillaTheme") compatibility added.
+* Dev - Settings - Using unfiltered currency now, i.e. `get_option( 'woocommerce_currency' )` vs `get_woocommerce_currency()`.
+* Dev - Core - `get_product_profit_html()` function added (for backward compatibility, e.g. for `wc-frontend-manager-ultimate` plugin).
+* Dev - Code refactoring.
+* Localization - Turkish (`tr_TR`) translation added.
 
 = 2.1.2 - 17/09/2020 =
 * Plugin author updated.

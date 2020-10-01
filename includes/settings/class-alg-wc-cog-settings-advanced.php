@@ -30,7 +30,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	 *
 	 * @version 1.7.0
 	 * @since   1.7.0
-	 * @todo    [dev] "Force costs update on ...": better title and desc (3x)
+	 * @todo    [later] "Force costs update on ...": better title and desc (3x)
 	 */
 	function get_settings() {
 

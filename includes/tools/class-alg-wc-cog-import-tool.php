@@ -45,11 +45,11 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 	 *
 	 * @version 1.7.0
 	 * @since   1.0.0
-	 * @todo    [dev] use `wc_get_products()`
-	 * @todo    [dev] better description here and in settings
-	 * @todo    [dev] notice after import
-	 * @todo    [feature] add "import from file" option (CSV, XML etc.) (#12169)
-	 * @todo    [feature] [maybe] import order items meta
+	 * @todo    [later] use `wc_get_products()`
+	 * @todo    [later] better description here and in settings
+	 * @todo    [later] notice after import
+	 * @todo    [later] add "import from file" option (CSV, XML etc.) (#12169)
+	 * @todo    [maybe] import order items meta
 	 */
 	function import_tool() {
 		$perform_import = ( isset( $_POST['alg_wc_cog_import'] ) );

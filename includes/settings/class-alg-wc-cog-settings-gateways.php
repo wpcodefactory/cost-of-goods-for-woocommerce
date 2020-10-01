@@ -71,7 +71,7 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 				),
 				array(
 					'title'    => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip' => __( 'Percent from order total (excl. tax).', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip' => __( 'Percent from order total.', 'cost-of-goods-for-woocommerce' ),
 					'type'     => 'number',
 					'id'       => "alg_wc_cog_gateway_costs_percent[{$key}]",
 					'default'  => 0,

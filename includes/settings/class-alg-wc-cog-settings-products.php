@@ -30,8 +30,8 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	 *
 	 * @version 2.1.1
 	 * @since   1.7.0
-	 * @todo    [dev] Cost field label: use in quick and bulk edit
-	 * @todo    [dev] `alg_wc_cog_products_add_stock`: better description
+	 * @todo    [later] Cost field label: use in quick and bulk edit
+	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
 	 */
 	function get_settings() {
 

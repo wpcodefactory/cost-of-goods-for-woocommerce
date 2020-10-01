@@ -21,29 +21,34 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	 * @see     https://github.com/woocommerce/woocommerce-admin/tree/master/docs/examples/extensions
 	 * @see     https://woocommerce.wordpress.com/2020/02/20/extending-wc-admin-reports/
 	 * @todo    [next] caching, i.e. `woocommerce_analytics_orders_query_args` and `woocommerce_analytics_orders_stats_query_args`
-	 * @todo    [dev] columns: exporting (non server)
-	 * @todo    [dev] columns: sorting
-	 * @todo    [dev] remove `get_option( 'alg_wc_cog_analytics_orders', 'no' )`
+	 * @todo    [later] columns: exporting (non server)
+	 * @todo    [later] columns: sorting
+	 * @todo    [later] remove `get_option( 'alg_wc_cog_analytics_orders', 'no' )`?
 	 */
 	function __construct() {
 		if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders', 'no' ) ) {
 			add_action( 'admin_enqueue_scripts',                                      array( $this, 'register_script' ) );
 
+			// Join
 			add_filter( 'woocommerce_analytics_clauses_join_orders_subquery',         array( $this, 'add_join_subquery' ) );
 			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_total',      array( $this, 'add_join_subquery' ) );
 			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_interval',   array( $this, 'add_join_subquery' ) );
 
+			// Where
 			add_filter( 'woocommerce_analytics_clauses_where_orders_subquery',        array( $this, 'add_where_subquery' ) );
 			add_filter( 'woocommerce_analytics_clauses_where_orders_stats_total',     array( $this, 'add_where_subquery' ) );
 			add_filter( 'woocommerce_analytics_clauses_where_orders_stats_interval',  array( $this, 'add_where_subquery' ) );
 
+			// Select
 			add_filter( 'woocommerce_analytics_clauses_select_orders_subquery',       array( $this, 'add_select_subquery' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_orders_stats_total',    array( $this, 'add_select_subquery' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_orders_stats_interval', array( $this, 'add_select_subquery' ) );
 
+			// Export
 			add_filter( 'woocommerce_export_admin_orders_report_row_data',            array( $this, 'add_to_export_rows' ),    PHP_INT_MAX, 2 );
 			add_filter( 'woocommerce_admin_orders_report_export_column_names',        array( $this, 'add_to_export_columns' ), PHP_INT_MAX, 2 );
 
+			// Schema
 			add_filter( 'woocommerce_rest_report_orders_schema',                      array( $this, 'add_order_extended_attributes_schema' ) );
 		}
 	}
@@ -53,8 +58,7 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	 *
 	 * @version 2.2.0
 	 * @since   2.2.0
-	 * @todo    [now] not sure if this really does anything useful?
-	 * @todo    [now] `float` or `string`?
+	 * @todo    [next] not sure if this really does anything useful?
 	 */
 	function add_order_extended_attributes_schema( $properties ) {
 		$properties['extended_info']['order_cost'] = array(
@@ -101,13 +105,13 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	/**
 	 * add_join_subquery.
 	 *
-	 * @version 1.7.0
+	 * @version 2.2.0
 	 * @since   1.7.0
 	 */
 	function add_join_subquery( $clauses ) {
 		global $wpdb;
-		$clauses[] = "JOIN {$wpdb->postmeta} order_profit_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_profit_postmeta.post_id";
-		$clauses[] = "JOIN {$wpdb->postmeta} order_cost_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_cost_postmeta.post_id";
+		$clauses[] = "LEFT JOIN {$wpdb->postmeta} order_profit_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_profit_postmeta.post_id AND order_profit_postmeta.meta_key = '_alg_wc_cog_order_profit'";
+		$clauses[] = "LEFT JOIN {$wpdb->postmeta} order_cost_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_cost_postmeta.post_id AND order_cost_postmeta.meta_key = '_alg_wc_cog_order_cost'";
 		$clauses[] = "JOIN {$wpdb->postmeta} currency_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = currency_postmeta.post_id";
 		return $clauses;
 	}
@@ -115,12 +119,10 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	/**
 	 * add_where_subquery.
 	 *
-	 * @version 1.7.0
+	 * @version 2.2.0
 	 * @since   1.7.0
 	 */
 	function add_where_subquery( $clauses ) {
-		$clauses[] = "AND order_profit_postmeta.meta_key = '_alg_wc_cog_order_profit'";
-		$clauses[] = "AND order_cost_postmeta.meta_key = '_alg_wc_cog_order_cost'";
 		$clauses[] = "AND currency_postmeta.meta_key = '_order_currency'";
 		return $clauses;
 	}
@@ -128,12 +130,12 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	/**
 	 * add_select_subquery.
 	 *
-	 * @version 1.7.0
+	 * @version 2.2.0
 	 * @since   1.7.0
 	 */
 	function add_select_subquery( $clauses ) {
-		$clauses[] = ', order_profit_postmeta.meta_value AS order_profit';
-		$clauses[] = ', order_cost_postmeta.meta_value AS order_cost';
+		$clauses[] = ', IFNULL(order_profit_postmeta.meta_value, 0) AS order_profit';
+		$clauses[] = ', IFNULL(order_cost_postmeta.meta_value, 0) AS order_cost';
 		$clauses[] = ', currency_postmeta.meta_value AS currency';
 		return $clauses;
 	}
