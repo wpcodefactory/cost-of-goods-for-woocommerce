@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.1.1
+ * @version 2.3.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -433,7 +433,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_cost_input.
 	 *
-	 * @version 2.1.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 * @todo    [later] rethink `$product_id` (and search all code for `get_the_ID()`)
 	 * @todo    [maybe] min_profit
@@ -444,7 +444,7 @@ class Alg_WC_Cost_of_Goods_Products {
 			'id'          => '_alg_wc_cog_cost',
 			'value'       => wc_format_localized_price( get_post_meta( $product_id, '_alg_wc_cog_cost', true ) ),
 			'data_type'   => 'price',
-			'label'       => str_replace( '%currency_symbol%', get_woocommerce_currency_symbol(), $this->cost_field_template ),
+			'label'       => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->cost_field_template ),
 			'description' => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
 				( '' != ( $profit = $this->get_product_profit_html( $product_id, $this->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) ),
 		) );
@@ -469,7 +469,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_cost_input_variation.
 	 *
-	 * @version 2.1.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 */
 	function add_cost_input_variation( $loop, $variation_data, $variation ) {
@@ -477,7 +477,7 @@ class Alg_WC_Cost_of_Goods_Products {
 			'id'            => "variable_alg_wc_cog_cost_{$loop}",
 			'name'          => "variable_alg_wc_cog_cost[{$loop}]",
 			'value'         => wc_format_localized_price( isset( $variation_data['_alg_wc_cog_cost'][0] ) ? $variation_data['_alg_wc_cog_cost'][0] : '' ),
-			'label'         => str_replace( '%currency_symbol%', get_woocommerce_currency_symbol(), $this->cost_field_template ),
+			'label'         => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->cost_field_template ),
 			'data_type'     => 'price',
 			'wrapper_class' => 'form-row form-row-full',
 			'description'   => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),

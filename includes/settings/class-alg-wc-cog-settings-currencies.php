@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Currencies Section Settings
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   2.2.0
 	 * @todo    [next] exclude `$wc_currency` from `get_woocommerce_currencies()`?
 	 * @todo    [maybe] `alg_wc_cog_currencies_wmc`: add link to the plugin on wp.org?
@@ -63,7 +63,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 			),
 		);
 		$currencies  = get_option( 'alg_wc_cog_currencies', array() );
-		$wc_currency = get_option( 'woocommerce_currency' );
+		$wc_currency = alg_wc_cog()->core->get_default_shop_currency();
 		foreach ( $currencies as $currency ) {
 			$pair     = $wc_currency . $currency;
 			$settings = array_merge( $settings, array(

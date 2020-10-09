@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -90,7 +90,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'class'    => 'chosen_select',
 				'id'       => 'alg_wc_cog_bulk_edit_tool_product_types',
 				'default'  => array(),
-				'options'  => wc_get_product_types(),
+				'options'  => array_merge( wc_get_product_types(), array( 'variation' => __( 'Variations', 'woocommerce' ) ) ),
 			),
 			array(
 				'type'     => 'sectionend',
@@ -108,6 +108,14 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'type'     => 'text',
 				'id'       => 'alg_wc_cog_tool_key',
 				'default'  => '_wc_cog_cost',
+			),
+			array(
+				'title'    => __( 'Display table', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'If you have problems accessing the "Import Costs" page try to disable this option.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_import_tool_display_table',
+				'default'  => 'no',
 			),
 			array(
 				'type'     => 'sectionend',
@@ -225,8 +233,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			array(
 				'title'    => __( 'Orders', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Will add "Cost" and "Profit" columns to the "Analytics > Orders" report.', 'cost-of-goods-for-woocommerce' ) . '<br>' .
-					__( '<strong>Please note</strong> that if you enable this option, then only orders with calculated profit will be displayed in "Analytics > Orders" report.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Will add "Cost" and "Profit" columns to the "Analytics > Orders" report.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_analytics_orders',
 				'default'  => 'no',
 				'type'     => 'checkbox',

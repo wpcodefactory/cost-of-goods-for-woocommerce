@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -117,7 +117,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_extra_cost_meta_box.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.7.0
 	 * @todo    [maybe] better `$title`
 	 * @todo    [maybe] better styling
@@ -129,7 +129,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		foreach ( alg_wc_cog()->core->orders->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 			if ( $is_enabled ) {
 				$id    = 'alg_wc_cog_order_' . $fee_type . '_fee';
-				$title = ucfirst( $fee_type ) . ' ' . __( 'fee', 'cost-of-goods-for-woocommerce' ) . ' (' . get_woocommerce_currency_symbol() . ')';
+				$title = ucfirst( $fee_type ) . ' ' . __( 'fee', 'cost-of-goods-for-woocommerce' ) . ' (' . alg_wc_cog()->core->get_default_shop_currency_symbol() . ')';
 				$value = get_post_meta( get_the_ID(), '_' . $id, true );
 				$rows .= '<tr><td><label style="font-size:smaller;" for="' . $id . '">' . $title . '</label></td>' .
 					'<td><input name="' . $id . '" id="' . $id . '" type="number" step="0.0001" class="short wc_input_price" value="' . $value . '"></td></tr>';

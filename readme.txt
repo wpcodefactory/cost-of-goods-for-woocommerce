@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.5
-Stable tag: 2.2.0
+Stable tag: 2.3.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,21 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.3.0 - 08/10/2020 =
+* Fix - Products - Using unfiltered (i.e. default shop) currency symbol in product cost input now.
+* Fix - Orders - Using unfiltered (i.e. default shop) currency symbol in order item cost input and per order fees meta box now.
+* Fix - Tools & Reports - Orders report - Using unfiltered (i.e. default shop) currency symbol in chart now.
+* Fix - Tools & Reports - Product Bulk Edit Costs Tool - Product types - "Variations" product type added.
+* Dev - Tools & Reports - Product Import Costs Tool - Add background processing.
+* Dev - Tools & Reports - Product Import Costs Tool - Create "Display table" option.
+* Dev - Tools & Reports - Recalculate orders cost and profit - Add background processing.
+* Dev - Tools & Reports - Fix compatibility with "WooCommerce Order Status & Actions Manager" plugin by managing the `woocommerce_reports_order_statuses` filter.
+* Dev - Tools & Reports - Analytics - Settings description fixed.
+* Dev - Advanced - Background Processing - Background Add "Send email" option.
+* Dev - Advanced - Background Processing - Add "Email to" option.
+* Dev - Advanced - Background Processing - Add "Minimum amount" option.
+* Dev - Advanced - Background processing - Add `alg_wc_cog_bkg_process_email_params` filter.
 
 = 2.2.0 - 01/10/2020 =
 * Fix - Tools & Reports - Analytics - If order doesn't have cost/profit set, it's excluded from the report - this is fixed now.

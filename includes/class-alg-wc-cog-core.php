@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Core Class
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -16,7 +16,7 @@ class Alg_WC_Cost_of_Goods_Core {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.0.0
 	 * @todo    [next] add "delete all (products and/or orders) meta" tool
 	 * @todo    [next] add option to enter costs *with taxes*
@@ -44,8 +44,60 @@ class Alg_WC_Cost_of_Goods_Core {
 		$this->products       = require_once( 'class-alg-wc-cog-products.php' );
 		// Orders
 		$this->orders         = require_once( 'class-alg-wc-cog-orders.php' );
+		// Background process
+		add_action( 'plugins_loaded', array( $this, 'init_bkg_process' ), 9 );
 		// Core loaded
 		do_action( 'alg_wc_cog_core_loaded', $this );
+	}
+
+	/**
+	 * get_default_shop_currency.
+	 *
+	 * @version 2.3.0
+	 * @since   2.3.0
+	 * @todo    [now] `wc_price()`
+	 * @todo    [now] product profit and cost + multicurrency
+	 */
+	function get_default_shop_currency() {
+		return get_option( 'woocommerce_currency' );
+	}
+
+	/**
+	 * get_default_shop_currency_symbol.
+	 *
+	 * @version 2.3.0
+	 * @since   2.3.0
+	 */
+	function get_default_shop_currency_symbol() {
+		return get_woocommerce_currency_symbol( $this->get_default_shop_currency() );
+	}
+
+	/**
+	 * init_bkg_process.
+	 *
+	 * @version 2.3.0
+	 * @since   2.3.0
+	 */
+	function init_bkg_process() {
+		require_once( 'background-process/class-alg-wc-cog-bkg-process.php' );
+		add_filter( 'alg_wc_cog_bkg_process_email_params', array( $this, 'change_bkg_process_email_params' ) );
+		new Alg_WC_Cost_of_Goods_Bkg_Process();
+	}
+
+	/**
+	 * change_bkg_process_email_params.
+	 *
+	 * @version 2.3.0
+	 * @since   2.3.0
+	 *
+	 * @param $email_params
+	 *
+	 * @return mixed
+	 */
+	function change_bkg_process_email_params( $email_params ) {
+		$email_params['send_email_on_task_complete'] = 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' );
+		$email_params['send_to']                     = get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) );
+		return $email_params;
 	}
 
 	/**

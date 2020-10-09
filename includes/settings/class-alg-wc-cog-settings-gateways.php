@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Gateways Section Settings
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   1.5.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.5.0
 	 * @todo    [maybe] better section desc (same for `$order_extra_cost_settings` and "Shipping"): how to recalculate order's profit/cost (i.e. update order or use tool)
 	 */
@@ -63,7 +63,7 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 				),
 				array(
 					'title'    => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), get_option( 'woocommerce_currency' ) ),
+					'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), alg_wc_cog()->core->get_default_shop_currency() ),
 					'type'     => 'number',
 					'id'       => "alg_wc_cog_gateway_costs_fixed[{$key}]",
 					'default'  => 0,

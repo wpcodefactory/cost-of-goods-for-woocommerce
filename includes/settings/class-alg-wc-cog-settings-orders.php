@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -272,7 +272,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), get_option( 'woocommerce_currency' ) ),
+				'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), alg_wc_cog()->core->get_default_shop_currency() ),
 				'type'     => 'number',
 				'id'       => 'alg_wc_cog_order_extra_cost_fixed',
 				'default'  => 0,

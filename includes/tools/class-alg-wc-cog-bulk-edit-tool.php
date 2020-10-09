@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -217,7 +217,7 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	/**
 	 * display_tool.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.2.0
 	 * @see     https://github.com/woocommerce/woocommerce/wiki/wc_get_products-and-WC_Product_Query
 	 * @todo    [later] pagination (same in "Import" tool and "Stock" report)
@@ -248,16 +248,14 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 				__( 'Stock', 'cost-of-goods-for-woocommerce' ),
 			);
 		}
+		$types = get_option( 'alg_wc_cog_bulk_edit_tool_product_types', array() );
 		$args = array(
 			'limit'   => -1,
 			'orderby' => 'ID',
 			'order'   => 'ASC',
 			'return'  => 'ids',
+			'type'    => ( ! empty( $types ) ? $types : array_merge( array_keys( wc_get_product_types() ), array( 'variation' ) ) ),
 		);
-		$types = get_option( 'alg_wc_cog_bulk_edit_tool_product_types', array() );
-		if ( ! empty( $types ) ) {
-			$args['type'] = $types;
-		}
 		$products = wc_get_products( $args );
 		foreach ( $products as $product_id ) {
 			$value = get_post_meta( $product_id, '_alg_wc_cog_cost', true );

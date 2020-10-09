@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Shipping Section Settings
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   1.5.0
  * @author  WPFactory
  */
@@ -88,7 +88,7 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.5.0
 	 * @todo    [maybe] output "No available shipping methods." on empty `$shipping_methods`
 	 */
@@ -133,7 +133,7 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 				),
 				array(
 					'title'    => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), get_option( 'woocommerce_currency' ) ),
+					'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), alg_wc_cog()->core->get_default_shop_currency() ),
 					'type'     => 'number',
 					'id'       => "alg_wc_cog_shipping_costs_fixed[{$key}]",
 					'default'  => 0,

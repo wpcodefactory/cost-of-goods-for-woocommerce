@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.2.0
+ * @version 2.3.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -444,7 +444,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_cost_input_shop_order.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.0
 	 * @since   1.1.0
 	 */
 	function add_cost_input_shop_order( $item_id, $item, $product ) {
@@ -453,7 +453,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			$readonly = ( 'readonly' === $this->item_costs_option ? ' readonly' : '' );
 			echo '<p>' .
 				'<label for="alg_wc_cog_item_cost_' . $item_id . '">' . __( 'Cost of goods', 'cost-of-goods-for-woocommerce' ) .
-					' (' . get_woocommerce_currency_symbol() . ') ' . '</label>' .
+					' (' . alg_wc_cog()->core->get_default_shop_currency_symbol() . ') ' . '</label>' .
 				'<input name="alg_wc_cog_item_cost[' . $item_id . ']" id="alg_wc_cog_item_cost_' . $item_id . '" type="text" class="short wc_input_price" value="' .
 					wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' ). '"' . $readonly . '>' .
 			'</p>';
