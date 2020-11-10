@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class
  *
- * @version 2.3.0
+ * @version 2.3.1
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -16,21 +16,101 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.1
 	 * @since   1.2.0
 	 */
 	function __construct() {
-		add_action( 'admin_menu',             array( $this, 'create_tool' ) );
 		add_action( 'admin_init',             array( $this, 'save_costs' ) );
 		add_filter( 'woocommerce_screen_ids', array( $this, 'add_tool_to_wc_screen_ids' ) );
 		add_action( 'admin_enqueue_scripts',  array( $this, 'enqueue_scripts_and_styles' ) );
-		if ( isset( $_REQUEST['alg_wc_cog_search'] ) && '' !== $_REQUEST['alg_wc_cog_search'] ) {
-			if ( 'title' === get_option( 'alg_wc_cog_bulk_edit_tool_search_method', 'title' ) ) {
-				add_filter( 'posts_where',    array( $this, 'search_by_post_title' ), PHP_INT_MAX );
-			} else {
-				add_filter( 'pre_get_posts',  array( $this, 'search_products' ) );
-			}
+		add_action( 'admin_menu',             array( $this, 'create_wp_list_tool' ) );
+		add_action( 'set-screen-option',      array( $this, 'set_screen_option' ), 10, 3 );
+	}
+
+	/**
+	 * set_screen_option.
+	 *
+	 * @version 2.3.1
+	 * @since   2.3.1
+	 *
+	 * @param $status
+	 * @param $option
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	function set_screen_option($status, $option, $value){
+		if ( 'alg_wc_cog_bulk_edit_per_page' === $option ) {
+			return $value;
 		}
+		return $status;
+	}
+
+	/**
+	 * screen_option.
+	 *
+	 * @version 2.3.1
+	 * @since   2.3.1
+	 */
+	function screen_option() {
+		$option = 'per_page';
+		$args   = [
+			'label'   => __( 'Items per page', 'cost-of-goods-for-woocommerce' ),
+			'default' => 20,
+			'option'  => 'alg_wc_cog_bulk_edit_per_page'
+		];
+		add_screen_option( $option, $args );
+		require_once( 'class-alg-wc-cog-wplist-bulk-edit-tool.php' );
+		$this->wp_list_bulk_edit_tool = new Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool();
+	}
+
+	/**
+	 * create_wp_list_tool.
+	 *
+	 * @version 2.3.1
+	 * @since   2.3.1
+	 */
+	function create_wp_list_tool() {
+		$hook = add_submenu_page(
+			'tools.php',
+			__( 'Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ),
+			__( 'Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ),
+			'manage_woocommerce',
+			'bulk-edit-costs',
+			array( $this, 'display_wp_list_tool' )
+		);
+		add_action( "load-{$hook}", array( $this, 'screen_option' ) );
+	}
+
+	/**
+	 * display_wp_list_tool.
+	 *
+	 * @version 2.3.1
+	 * @since   2.3.1
+	 */
+	function display_wp_list_tool() {
+		$this->wp_list_bulk_edit_tool->prepare_items();
+		$save_button        = '<input style="position:relative;top:-2px;margin:0 0 0 10px" type="submit" name="alg_wc_cog_bulk_edit_tool_save_costs" class="page-title-action" value="' .
+		                      __( 'Save', 'cost-of-goods-for-woocommerce' ) . '">';
+		$save_button_style2 = '<input type="submit" name="alg_wc_cog_bulk_edit_tool_save_costs" class="button-primary" value="' .
+		                      __( 'Save', 'cost-of-goods-for-woocommerce' ) . '">';
+		?>
+		<form method="post" action="">
+			<div class="wrap">
+				<h1 class="wp-heading-inline"><?php _e( 'Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ) ?><?php echo $save_button; ?></h1>
+				<?php
+				echo '<p>' . __( 'Bulk edit products costs/prices/stock.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				     sprintf( __( 'Tool\'s options can be set in "%s" %s.', 'cost-of-goods-for-woocommerce' ),
+					     __( 'Cost of Goods for WooCommerce', 'cost-of-goods-for-woocommerce' ),
+					     '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=tools' ) . '">' .
+					     __( 'plugin settings', 'cost-of-goods-for-woocommerce' ) . '</a>');
+				?>
+				<?php $this->wp_list_bulk_edit_tool->search_box(__('Search','cost-of-goods-for-woocommerce'), 'alg_wc_cog_search'); ?>
+				<?php $this->wp_list_bulk_edit_tool->display(); ?>
+				<?php echo $save_button_style2; ?>
+			</div>
+		</form>
+		<?php
 	}
 
 	/**
@@ -62,7 +142,7 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	 *
 	 * for `wc_input_price` class.
 	 *
-	 * @version 1.2.0
+	 * @version 2.3.1
 	 * @since   1.2.0
 	 */
 	function add_tool_to_wc_screen_ids( $screen_ids ) {
@@ -81,12 +161,10 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	 * @todo    [maybe] output some error on ` ! ( $product = wc_get_product( $product_id ) )`?
 	 */
 	function save_costs() {
-
 		$do_edit_prices = ( 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_edit_prices', 'no' ) );
 		if ( $do_edit_prices ) {
 			$error_sale_price_ids = array();
 		}
-
 		if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_save_costs'] ) ) {
 			// Costs
 			if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_costs'] )&& is_array( $_POST['alg_wc_cog_bulk_edit_tool_costs'] ) ) {
@@ -169,186 +247,6 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	function admin_notice_sale_price_higher() {
 		echo '<div class="notice notice-error is-dismissible"><p><strong>' . sprintf( __( 'Sale price is higher than regular price: %s.', 'cost-of-goods-for-woocommerce' ),
 			implode( ', ', array_map( array( $this, 'get_the_title' ), $this->error_sale_price_ids ) ) ) . '</strong></p></div>';
-	}
-
-	/**
-	 * create_tool.
-	 *
-	 * @version 1.2.0
-	 * @since   1.2.0
-	 */
-	function create_tool() {
-		add_submenu_page(
-			'tools.php',
-			__( 'Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ),
-			__( 'Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ),
-			'manage_woocommerce',
-			'bulk-edit-costs',
-			array( $this, 'display_tool' )
-		);
-	}
-
-	/**
-	 * search_by_post_title.
-	 *
-	 * @version 2.2.0
-	 * @since   1.3.2
-	 */
-	function search_by_post_title( $where ) {
-		global $wpdb;
-		$where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( $wpdb->esc_like( $_REQUEST['alg_wc_cog_search'] ) ) . '%\'';
-		return $where;
-	}
-
-	/**
-	 * search_products.
-	 *
-	 * @version 2.2.0
-	 * @since   1.4.0
-	 */
-	function search_products( $query ) {
-		$data_store = WC_Data_Store::load( 'product' );
-		$ids        = $data_store->search_products( wc_clean( wp_unslash( $_REQUEST['alg_wc_cog_search'] ) ), '', true, true );
-		$post_in    = array_merge( $ids, array( 0 ) );
-		$query->set( 'post__in', $post_in );
-		return $query;
-	}
-
-	/**
-	 * display_tool.
-	 *
-	 * @version 2.3.0
-	 * @since   1.2.0
-	 * @see     https://github.com/woocommerce/woocommerce/wiki/wc_get_products-and-WC_Product_Query
-	 * @todo    [later] pagination (same in "Import" tool and "Stock" report)
-	 * @todo    [maybe] better description here and in settings
-	 * @todo    [maybe] bulk edit order items meta
-	 */
-	function display_tool() {
-		$do_manage_stock = ( 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_manage_stock', 'no' ) );
-		$do_edit_prices  = ( 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_edit_prices', 'no' ) );
-		$table_data      = array();
-		if ( $do_edit_prices ) {
-			$table_data[] = array(
-				__( 'Product ID', 'cost-of-goods-for-woocommerce' ),
-				__( 'SKU', 'cost-of-goods-for-woocommerce' ),
-				__( 'Title', 'cost-of-goods-for-woocommerce' ),
-				__( 'Cost', 'cost-of-goods-for-woocommerce' ),
-				__( 'Regular price', 'cost-of-goods-for-woocommerce' ),
-				__( 'Sale price', 'cost-of-goods-for-woocommerce' ),
-				__( 'Stock', 'cost-of-goods-for-woocommerce' ),
-			);
-		} else {
-			$table_data[] = array(
-				__( 'Product ID', 'cost-of-goods-for-woocommerce' ),
-				__( 'SKU', 'cost-of-goods-for-woocommerce' ),
-				__( 'Title', 'cost-of-goods-for-woocommerce' ),
-				__( 'Cost', 'cost-of-goods-for-woocommerce' ),
-				__( 'Price', 'cost-of-goods-for-woocommerce' ),
-				__( 'Stock', 'cost-of-goods-for-woocommerce' ),
-			);
-		}
-		$types = get_option( 'alg_wc_cog_bulk_edit_tool_product_types', array() );
-		$args = array(
-			'limit'   => -1,
-			'orderby' => 'ID',
-			'order'   => 'ASC',
-			'return'  => 'ids',
-			'type'    => ( ! empty( $types ) ? $types : array_merge( array_keys( wc_get_product_types() ), array( 'variation' ) ) ),
-		);
-		$products = wc_get_products( $args );
-		foreach ( $products as $product_id ) {
-			$value = get_post_meta( $product_id, '_alg_wc_cog_cost', true );
-			if ( $do_edit_prices ) {
-				$regular_price = get_post_meta( $product_id, '_regular_price', true );
-				$sale_price    = get_post_meta( $product_id, '_sale_price', true );
-			}
-			$input_field = '<input' .
-				' name="alg_wc_cog_bulk_edit_tool_costs[' . $product_id . ']"' .
-				' type="text"' .
-				' class="alg_wc_cog_bet_input short wc_input_price"' .
-				' initial-value="' . $value . '"' .
-				' value="'         . $value . '"' . '>';
-			if ( $do_edit_prices ) {
-				$input_regular_price = '<input' .
-					' name="alg_wc_cog_bulk_edit_tool_regular_price[' . $product_id . ']"' .
-					' type="text"' .
-					' class="alg_wc_cog_bet_input short wc_input_price"' .
-					' initial-value="' . $regular_price . '"' .
-					' value="'         . $regular_price . '"' . '>';
-				$input_sale_price = '<input' .
-					' name="alg_wc_cog_bulk_edit_tool_sale_price[' . $product_id . ']"' .
-					' type="text"' .
-					' class="alg_wc_cog_bet_input short wc_input_price"' .
-					' initial-value="' . $sale_price . '"' .
-					' value="'         . $sale_price . '"' . '>';
-			}
-			if ( $do_manage_stock ) {
-				$stock_value  = ( '' === ( $stock = get_post_meta( $product_id, '_stock', true ) ) ? '' : floatval( $stock ) );
-				$stock_status = ( '' == ( $_stock_status = get_post_meta( $product_id, '_stock_status', true ) ) ? 'N/A' : $_stock_status );
-				$input_field_stock = '<input' .
-					' name="alg_wc_cog_bulk_edit_tool_stock[' . $product_id . ']"' .
-					' type="text"' .
-					' class="alg_wc_cog_bet_input short"' .
-					' initial-value="' . $stock_value . '"' .
-					' value="'         . $stock_value . '"' . '>';
-				$input_field_stock .= wc_help_tip( sprintf( __( 'Stock status: %s', 'cost-of-goods-for-woocommerce' ), $stock_status ) );
-			}
-			if ( $do_edit_prices ) {
-				$table_data[] = array(
-					'<a tabIndex="-1" target="_blank" href="' . admin_url( 'post.php?post=' . $product_id . '&action=edit' ) . '">' . $product_id . '</a>',
-					get_post_meta( $product_id, '_sku', true ),
-					'<a tabIndex="-1" target="_blank" href="' . get_the_permalink( $product_id ) . '">' . get_the_title( $product_id ) . '</a>',
-					$input_field,
-					$input_regular_price,
-					$input_sale_price,
-					( $do_manage_stock ? $input_field_stock : get_post_meta( $product_id, '_stock', true ) ),
-				);
-			} else {
-				$table_data[] = array(
-					'<a tabIndex="-1" target="_blank" href="' . admin_url( 'post.php?post=' . $product_id . '&action=edit' ) . '">' . $product_id . '</a>',
-					get_post_meta( $product_id, '_sku', true ),
-					'<a tabIndex="-1" target="_blank" href="' . get_the_permalink( $product_id ) . '">' . get_the_title( $product_id ) . '</a>',
-					$input_field,
-					get_post_meta( $product_id, '_price', true ),
-					( $do_manage_stock ? $input_field_stock : get_post_meta( $product_id, '_stock', true ) ),
-				);
-			}
-		}
-		$save_button = '<p>' . '<input type="submit" name="alg_wc_cog_bulk_edit_tool_save_costs" class="button-primary" value="' .
-			__( 'Save all', 'cost-of-goods-for-woocommerce' ) . '">' . '</p>';
-		$search_input_title       = ( 'title' === get_option( 'alg_wc_cog_bulk_edit_tool_search_method', 'title' ) ?
-			__( 'Search by product title', 'cost-of-goods-for-woocommerce' ) : __( 'Search products', 'cost-of-goods-for-woocommerce' ) );
-		$search_input_placeholder = ( 'title' === get_option( 'alg_wc_cog_bulk_edit_tool_search_method', 'title' ) ?
-			__( 'Product title...', 'cost-of-goods-for-woocommerce' ) : __( 'Search...', 'cost-of-goods-for-woocommerce' ) );
-		$search_input = '<input style="float:right;min-width:300px;" type="text" name="alg_wc_cog_search"' .
-			' id="alg_wc_cog_search" title="' . $search_input_title . '"' .
-			' placeholder="' . $search_input_placeholder . '"' .
-			' value="' . ( isset( $_REQUEST['alg_wc_cog_search'] ) ? $_REQUEST['alg_wc_cog_search'] : '' ) . '">';
-		$search_form = '<form method="get" action="' . admin_url( 'tools.php' ). '">' .
-			'<input type="submit"  style="float:right;margin-left:5px;" id="alg_wc_cog_search_submit" class="button" value="' .
-				__( 'Search', 'cost-of-goods-for-woocommerce' ) . '">' .
-			$search_input .
-			'<input type="hidden" name="page" value="bulk-edit-costs">' .
-		'</form>';
-		$results = ( empty( $products ) ? '<p><em>' . __( 'No products found.', 'cost-of-goods-for-woocommerce' ) . '</em></p>' :
-			'<form method="post" action="">' .
-				$save_button .
-				alg_wc_cog_get_table_html( $table_data, array( 'table_heading_type' => 'horizontal', 'table_class' => 'widefat striped' ) ) .
-				$save_button .
-			'</form>' );
-		echo '<div class="wrap">' .
-			'<h1>' . __( 'Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ) . '</h1>' .
-			'<p>' . __( 'Bulk edit products costs/prices/stock.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-				sprintf( __( 'Tool\'s options can be set in "%s" %s.', 'cost-of-goods-for-woocommerce' ),
-					__( 'Cost of Goods for WooCommerce', 'cost-of-goods-for-woocommerce' ),
-					'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=tools' ) . '">' .
-						__( 'plugin settings', 'cost-of-goods-for-woocommerce' ) . '</a>'
-				) .
-			'</p>' .
-			$search_form .
-			$results .
-		'</div>';
 	}
 
 }

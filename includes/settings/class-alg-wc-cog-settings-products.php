@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings
  *
- * @version 2.1.1
+ * @version 2.3.1
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.1.1
+	 * @version 2.3.1
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -79,6 +79,21 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'text',
 			),
 			array(
+				'title'    => __( 'Cost field position', 'ean-for-woocommerce' ),
+				'desc_tip' => __( 'Manages where the Cost field will be displayed on the product edit page.', 'ean-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_product_cost_field_position',
+				'default'  => 'woocommerce_product_options_pricing',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'woocommerce_product_options_pricing'                => __( 'General > Pricing', 'ean-for-woocommerce' ),
+					'woocommerce_product_options_general_product_data'   => __( 'General', 'ean-for-woocommerce' ),
+					'woocommerce_product_options_inventory_product_data' => __( 'Inventory', 'ean-for-woocommerce' ),
+					'woocommerce_product_options_sku'                    => __( 'Inventory > SKU', 'ean-for-woocommerce' ),
+					'woocommerce_product_options_advanced'               => __( 'Advanced', 'ean-for-woocommerce' ),
+				),
+			),
+			array(
 				'title'    => __( 'Product profit HTML template', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
 					'<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ),
@@ -90,10 +105,10 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Adds "%s" meta box to the product edit page.', 'cost-of-goods-for-woocommerce' ),
-					__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ) . '<br>' .
-					__( 'This will automatically calculate new average cost of goods for the product, based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Add "%s" meta box to the product edit page.', 'cost-of-goods-for-woocommerce' ),
+					__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ),
+				'desc_tip' => __( 'This will automatically calculate new average cost of goods for the product, based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				              __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_add_stock',
 				'default'  => 'no',
 				'type'     => 'checkbox',

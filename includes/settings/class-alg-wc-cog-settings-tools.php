@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.3.0
+ * @version 2.3.1
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.1
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -217,6 +217,18 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 					'_alg_wc_cog_order_extra_cost_from_meta'   => __( 'Meta fees (all)', 'cost-of-goods-for-woocommerce' ),
 				),
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'title'    => __( 'Stock report', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Get price method', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'The mechanism used to get the product price.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_report_stock_price_method',
+				'default'  => array( 'default' ),
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'default'                          => __( 'Function', 'cost-of-goods-for-woocommerce' ),
+					'excluding_tax_with_price_from_db' => __( 'Function with meta', 'cost-of-goods-for-woocommerce' ),
+				),
 			),
 			array(
 				'type'     => 'sectionend',

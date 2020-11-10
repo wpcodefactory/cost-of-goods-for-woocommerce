@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.5
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,13 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.3.1 - 10/11/2020 =
+* Fix - Products - Improve "Add stock" description.
+* Dev - Products - General - Add "Cost field position" option.
+* Dev - Tools & Reports - Reports - Create "Stock report: Get price method" option.
+* Dev - Tools & Reports - Bulk Edit Costs Tool - Add pagination and column sorting.
+* WC tested up to: 4.6
 
 = 2.3.0 - 08/10/2020 =
 * Fix - Products - Using unfiltered (i.e. default shop) currency symbol in product cost input now.
@@ -293,5 +300,9 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-This is the first release of the plugin.
+= 2.3.1 =
+* Fix - Products - Improve "Add stock" description.
+* Dev - Products - General - Add "Cost field position" option.
+* Dev - Tools & Reports - Reports - Create "Stock report: Get price method" option.
+* Dev - Tools & Reports - Bulk Edit Costs Tool - Add pagination and column sorting.
+* WC tested up to: 4.6
