@@ -39,7 +39,7 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	 *
 	 * @return mixed
 	 */
-	function set_screen_option($status, $option, $value){
+	function set_screen_option( $status, $option, $value ) {
 		if ( 'alg_wc_cog_bulk_edit_per_page' === $option ) {
 			return $value;
 		}

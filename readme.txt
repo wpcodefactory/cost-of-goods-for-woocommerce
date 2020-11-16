@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.5
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,12 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.3.2 - 16/11/2020 =
+* Fix - Admin Products List Columns - Reduce priority on `manage_edit-product_columns` filter allowing third party solutions to change columns positions.
+* Fix - Admin Orders List Columns - Reduce priority on `manage_edit-shop_order_columns` filter allowing third party solutions to change columns positions.
+* Dev - Tools & Reports - Product Import Costs Tool - Add "Check key value" option.
+* Dev - Tools & Reports - Product Import Costs Tool - Add "Check if key exists" option.
 
 = 2.3.1 - 10/11/2020 =
 * Fix - Products - Improve "Add stock" description.
@@ -300,9 +306,8 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 
 == Upgrade Notice ==
 
-= 2.3.1 =
-* Fix - Products - Improve "Add stock" description.
-* Dev - Products - General - Add "Cost field position" option.
-* Dev - Tools & Reports - Reports - Create "Stock report: Get price method" option.
-* Dev - Tools & Reports - Bulk Edit Costs Tool - Add pagination and column sorting.
-* WC tested up to: 4.6
+= 2.3.2 =
+* Fix - Admin Products List Columns - Reduce priority on `manage_edit-product_columns` filter allowing third party solutions to change columns positions.
+* Fix - Admin Orders List Columns - Reduce priority on `manage_edit-shop_order_columns` filter allowing third party solutions to change columns positions.
+* Dev - Tools & Reports - Product Import Costs Tool - Add "Check key value" option.
+* Dev - Tools & Reports - Product Import Costs Tool - Add "Check if key exists" option.

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.3.1
+ * @version 2.3.2
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -47,7 +47,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.3.1
+	 * @version 2.3.2
 	 * @since   2.1.0
 	 */
 	function add_hooks() {
@@ -61,7 +61,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		add_action( 'woocommerce_product_options_general_product_data',          array( $this, 'add_cost_input_variable' ), PHP_INT_MAX );
 		// Products columns
 		if ( $this->is_column_profit || $this->is_column_cost ) {
-			add_filter( 'manage_edit-product_columns',                           array( $this, 'add_product_columns' ), PHP_INT_MAX );
+			add_filter( 'manage_edit-product_columns',                           array( $this, 'add_product_columns' ) );
 			add_action( 'manage_product_posts_custom_column',                    array( $this, 'render_product_columns' ), PHP_INT_MAX, 2 );
 			// Make columns sortable
 			if ( $this->is_columns_sorting ) {

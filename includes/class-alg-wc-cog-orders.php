@@ -142,7 +142,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			$this->is_column_cost || ( $this->is_columns_extra_cost_per_order && in_array( true, $this->is_order_extra_cost_per_order ) ) ||
 			$this->is_column_profit || $this->is_column_profit_percent || $this->is_column_profit_margin
 		) {
-			add_filter( 'manage_edit-shop_order_columns',               array( $this, 'add_order_columns' ), PHP_INT_MAX );
+			add_filter( 'manage_edit-shop_order_columns',               array( $this, 'add_order_columns' ) );
 			add_action( 'manage_shop_order_posts_custom_column',        array( $this, 'render_order_columns' ), PHP_INT_MAX, 2 );
 			// Make columns sortable
 			if ( $this->is_columns_sorting ) {

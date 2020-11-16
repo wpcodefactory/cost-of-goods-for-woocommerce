@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Import Tool Class
  *
- * @version 2.3.0
+ * @version 2.3.2
  * @since   1.1.0
  * @author  WPFactory
  */
@@ -61,7 +61,7 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 	/**
 	 * copy_product_meta.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.2
 	 * @since   2.3.0
 	 *
 	 * @param $product_id
@@ -69,6 +69,19 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 	 * @param string $to_key
 	 */
 	function copy_product_meta( $product_id, $from_key = '_wc_cog_cost', $to_key = '_alg_wc_cog_cost' ) {
+		if (
+			(
+				'yes' === get_option( 'alg_wc_cog_import_tool_check_key', 'yes' )
+				&& ! metadata_exists( 'post', $product_id, $from_key )
+			)
+			||
+			(
+				'yes' === get_option( 'alg_wc_cog_import_tool_check_value', 'yes' )
+				&& empty( get_post_meta( $product_id, $from_key, true ) )
+			)
+		) {
+			return;
+		}
 		$source_cost = get_post_meta( $product_id, $from_key, true );
 		update_post_meta( $product_id, $to_key, $source_cost );
 	}
