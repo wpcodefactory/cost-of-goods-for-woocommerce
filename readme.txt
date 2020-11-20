@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.5
-Stable tag: 2.3.2
+Stable tag: 2.3.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,10 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.3.3 - 20/11/2020 =
+* Fix - Localization - Move `load_plugin_textdomain` function to `init` call.
+* WC tested up to: 4.7
 
 = 2.3.2 - 16/11/2020 =
 * Fix - Admin Products List Columns - Reduce priority on `manage_edit-product_columns` filter allowing third party solutions to change columns positions.
@@ -306,8 +310,6 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 
 == Upgrade Notice ==
 
-= 2.3.2 =
-* Fix - Admin Products List Columns - Reduce priority on `manage_edit-product_columns` filter allowing third party solutions to change columns positions.
-* Fix - Admin Orders List Columns - Reduce priority on `manage_edit-shop_order_columns` filter allowing third party solutions to change columns positions.
-* Dev - Tools & Reports - Product Import Costs Tool - Add "Check key value" option.
-* Dev - Tools & Reports - Product Import Costs Tool - Add "Check if key exists" option.
+= 2.3.3 =
+* Fix - Localization - Move `load_plugin_textdomain` function to `init` call.
+* WC tested up to: 4.7

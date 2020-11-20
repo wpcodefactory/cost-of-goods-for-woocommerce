@@ -1,8 +1,8 @@
-#: cost-of-goods-for-woocommerce.php:150
+#: cost-of-goods-for-woocommerce.php:162
 msgid "Settings"
 msgstr ""
 
-#: cost-of-goods-for-woocommerce.php:153
+#: cost-of-goods-for-woocommerce.php:165
 msgid "Go Pro"
 msgstr ""
 

@@ -3,13 +3,13 @@
 Plugin Name: Cost of Goods for WooCommerce
 Plugin URI: https://wpfactory.com/item/cost-of-goods-for-woocommerce/
 Description: Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
-Version: 2.3.2
+Version: 2.3.3
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: cost-of-goods-for-woocommerce
 Domain Path: /langs
 Copyright: © 2020 WPFactory
-WC tested up to: 4.6
+WC tested up to: 4.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -33,7 +33,7 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.3.2';
+	public $version = '2.3.3';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class
@@ -61,7 +61,7 @@ final class Alg_WC_Cost_of_Goods {
 	/**
 	 * Alg_WC_Cost_of_Goods Constructor.
 	 *
-	 * @version 2.1.0
+	 * @version 2.3.3
 	 * @since   1.0.0
 	 * @access  public
 	 */
@@ -75,8 +75,8 @@ final class Alg_WC_Cost_of_Goods {
 			return;
 		}
 
-		// Set up localisation
-		load_plugin_textdomain( 'cost-of-goods-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
+		// Localization
+		add_action( 'init', array( $this, 'localize' ) );
 
 		// Pro
 		if ( 'cost-of-goods-for-woocommerce-pro.php' === basename( __FILE__ ) ) {
@@ -90,6 +90,18 @@ final class Alg_WC_Cost_of_Goods {
 		if ( is_admin() ) {
 			$this->admin();
 		}
+	}
+
+	/**
+	 * localize.
+	 *
+	 * @version 2.3.3
+	 * @since   2.3.3
+	 *
+	 */
+	function localize() {
+		// Set up localisation
+		load_plugin_textdomain( 'cost-of-goods-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
 	}
 
 	/**
