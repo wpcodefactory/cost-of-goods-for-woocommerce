@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class
  *
- * @version 2.3.0
+ * @version 2.3.4
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -30,10 +30,13 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * add_order_meta_box.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.4
 	 * @since   1.4.0
 	 */
 	function add_order_meta_box() {
+		if ( ! apply_filters( 'alg_wc_cog_create_order_meta_box_validation', true ) ) {
+			return;
+		}
 		if ( alg_wc_cog()->core->orders->is_order_meta_box ) {
 			add_meta_box( 'alg-wc-cog',
 				__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ),
@@ -100,10 +103,13 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * add_order_extra_cost_meta_box.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.4
 	 * @since   1.7.0
 	 */
 	function add_order_extra_cost_meta_box() {
+		if ( ! apply_filters( 'alg_wc_cog_create_order_meta_box_validation', true, 'extra_cost' ) ) {
+			return;
+		}
 		if ( in_array( true, alg_wc_cog()->core->orders->is_order_extra_cost_per_order ) ) {
 			add_meta_box( 'alg-wc-cog-extra-cost',
 				__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Extra costs', 'cost-of-goods-for-woocommerce' ),

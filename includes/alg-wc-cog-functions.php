@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions
  *
- * @version 2.1.0
+ * @version 2.3.4
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -120,5 +120,28 @@ if ( ! function_exists( 'alg_wc_cog_get_table_html' ) ) {
 		$html .= '</tbody>';
 		$html .= '</table>';
 		return $html;
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_is_user_allowed' ) ) {
+	/**
+	 * alg_wc_cog_is_user_allowed.
+	 *
+	 * @version 2.3.4
+	 * @since   2.3.4
+	 */
+	function alg_wc_cog_is_user_allowed( $user = null ) {
+		$user = ( null != $user ) ? $user : ( is_user_logged_in() ? wp_get_current_user() : null );
+		if (
+			! $user ||
+			in_array( 'administrator', $user->roles ) ||
+			empty( $allowed_user_roles = get_option( 'alg_wc_cog_allowed_user_roles', array() ) )
+		) {
+			return true;
+		}
+		if ( count( array_intersect( $allowed_user_roles, $user->roles ) ) > 0 ) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.3.0
+ * @version 2.3.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -180,10 +180,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * shop_order_sortable_columns.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.4
 	 * @since   1.7.0
 	 */
 	function shop_order_sortable_columns( $columns ) {
+		if ( ! apply_filters( 'alg_wc_cog_create_orders_columns_validation', true ) ) {
+			return $columns;
+		}
 		foreach ( $this->order_columns as $column_id => $column_title ) {
 			$columns[ $column_id ] = $this->get_order_column_key( $column_id );
 		}
@@ -222,11 +225,14 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_order_columns.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 * @todo    [next] add more columns (i.e. not only cost, per order fees, profit, profit percent and profit margin)
 	 */
 	function add_order_columns( $columns ) {
+		if ( ! apply_filters( 'alg_wc_cog_create_orders_columns_validation', true ) ) {
+			return $columns;
+		}
 		$this->order_columns = array();
 		if ( $this->is_column_cost ) {
 			$this->order_columns['cost'] = __( 'Cost', 'cost-of-goods-for-woocommerce' );
@@ -253,7 +259,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * render_order_columns.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 * @todo    [later] order status for the fee columns
 	 * @todo    [later] forecasted profit `$value = $line_total * $average_profit_margin`
@@ -261,6 +267,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 * @todo    [maybe] `if ( $order->get_prices_include_tax() ) { $line_total = $item['line_total'] + $item['line_tax']; }`
 	 */
 	function render_order_columns( $column, $order_id ) {
+		if ( ! apply_filters( 'alg_wc_cog_create_orders_columns_validation', true ) ) {
+			return;
+		}
 		if ( in_array( $column, array_keys( $this->order_columns ) ) ) {
 			$order_status = ( isset( $this->column_order_status[ $column ] ) ?  $this->column_order_status[ $column ] : array() );
 			if ( ! empty( $order_status ) && ( ! ( $order = wc_get_order( $order_id ) ) || ! $order->has_status( $order_status ) ) ) {

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Class
  *
- * @version 2.2.0
+ * @version 2.3.4
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -143,11 +143,16 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	/**
 	 * register_script.
 	 *
-	 * @version 1.7.1
+	 * @version 2.3.4
 	 * @since   1.7.0
 	 */
 	function register_script() {
-		if ( ! class_exists( 'Automattic\WooCommerce\Admin\Loader' ) || ! function_exists( 'wc_admin_is_registered_page' ) || ! \Automattic\WooCommerce\Admin\Loader::is_admin_page() ) {
+		if (
+			! class_exists( 'Automattic\WooCommerce\Admin\Loader' )
+			|| ! function_exists( 'wc_admin_is_registered_page' )
+			|| ! \Automattic\WooCommerce\Admin\Loader::is_admin_page()
+			|| ! apply_filters( 'alg_wc_cog_create_analytics_orders_validation', true )
+		) {
 			return;
 		}
 		wp_register_script(

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.3.2
+ * @version 2.3.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -85,10 +85,13 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_product_add_stock_meta_box.
 	 *
-	 * @version 2.1.0
+	 * @version 2.3.4
 	 * @since   1.7.0
 	 */
 	function add_product_add_stock_meta_box() {
+		if ( ! apply_filters( 'alg_wc_cog_create_product_meta_box_validation', true ) ) {
+			return;
+		}
 		if ( $this->is_add_stock ) {
 			if ( ( $product = wc_get_product( get_the_ID() ) ) && $product->is_type( 'simple' ) ) {
 				$tip = wc_help_tip( __( 'Enter values and "Update" the product.', 'cost-of-goods-for-woocommerce' ) . ' ' .
@@ -164,7 +167,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * product_add_stock.
 	 *
-	 * @version 1.7.0
+	 * @version 2.3.4
 	 * @since   1.7.0
 	 * @todo    [next] maybe use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`?
 	 * @todo    [maybe] `$cost_now`: round?
@@ -176,7 +179,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		}
 		$stock_now  = ( $stock_prev + $stock );
 		if ( 0 != $stock_now ) {
-			$cost_prev = get_post_meta( $product_id, '_alg_wc_cog_cost', true );
+			$cost_prev = $this->get_product_cost( $product_id );
 			if ( ! $cost_prev ) {
 				$cost_prev = 0;
 			}
@@ -260,11 +263,14 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * product_sortable_columns.
 	 *
-	 * @version 1.7.0
+	 * @version 2.3.4
 	 * @since   1.7.0
 	 * @todo    [next] add `profit` to the sortable columns
 	 */
 	function product_sortable_columns( $columns ) {
+		if ( ! apply_filters( 'alg_wc_cog_create_product_columns_validation', true ) ) {
+			return $columns;
+		}
 		foreach ( $this->product_columns as $column_id => $column_title ) {
 			if ( 'profit' != $column_id ) {
 				$columns[ $column_id ] = '_alg_wc_cog_' . $column_id;
@@ -286,10 +292,13 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_product_columns.
 	 *
-	 * @version 2.1.0
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 */
 	function add_product_columns( $columns ) {
+		if ( ! apply_filters( 'alg_wc_cog_create_product_columns_validation', true ) ) {
+			return $columns;
+		}
 		$this->product_columns = array();
 		if ( $this->is_column_cost ) {
 			$this->product_columns['cost']   = __( 'Cost', 'cost-of-goods-for-woocommerce' );
@@ -317,14 +326,23 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_cost.
 	 *
-	 * @version 2.1.1
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 */
-	function get_product_cost( $product_id ) {
-		if ( '' === ( $cost = get_post_meta( $product_id, '_alg_wc_cog_cost', true ) ) && $product_id && ( $product = wc_get_product( $product_id ) ) && ( $parent_id = $product->get_parent_id() ) ) {
+	function get_product_cost( $product_id, $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'check_parent_cost' => true, // Check parent id cost if cost from product id is empty
+		) );
+		if (
+			'' === ( $cost = get_post_meta( $product_id, '_alg_wc_cog_cost', true ) )
+			&& $args['check_parent_cost']
+			&& $product_id
+			&& ( $product = wc_get_product( $product_id ) )
+			&& ( $parent_id = $product->get_parent_id() )
+		) {
 			$cost = get_post_meta( $parent_id, '_alg_wc_cog_cost', true );
 		}
-		return apply_filters( 'alg_wc_cog_get_product_cost', str_replace( ',', '.', $cost ), $product_id );
+		return apply_filters( 'alg_wc_cog_get_product_cost', str_replace( ',', '.', $cost ), $product_id, isset( $parent_id ) ? $parent_id : null, $args );
 	}
 
 	/**
@@ -433,16 +451,19 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_cost_input.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 * @todo    [later] rethink `$product_id` (and search all code for `get_the_ID()`)
 	 * @todo    [maybe] min_profit
 	 */
 	function add_cost_input() {
+		if ( ! apply_filters( 'alg_wc_cog_create_product_meta_box_validation', true ) ) {
+			return;
+		}
 		$product_id = get_the_ID();
 		woocommerce_wp_text_input( array(
 			'id'          => '_alg_wc_cog_cost',
-			'value'       => wc_format_localized_price( get_post_meta( $product_id, '_alg_wc_cog_cost', true ) ),
+			'value'       => wc_format_localized_price( $this->get_product_cost( $product_id ) ),
 			'data_type'   => 'price',
 			'label'       => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->cost_field_template ),
 			'description' => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
@@ -469,14 +490,25 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_cost_input_variation.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 */
 	function add_cost_input_variation( $loop, $variation_data, $variation ) {
+		if ( ! apply_filters( 'alg_wc_cog_create_product_meta_box_validation', true ) ) {
+			return;
+		}
+		if (
+			! isset( $variation_data['_alg_wc_cog_cost'][0] ) ||
+			empty( $value = $variation_data['_alg_wc_cog_cost'][0] )
+		) {
+			$product           = wc_get_product( $variation->ID );
+			$parent_product_id = $product->get_parent_id();
+			$value             = $this->get_product_cost( $parent_product_id, array( 'check_parent_cost' => false ) );
+		}
 		woocommerce_wp_text_input( array(
 			'id'            => "variable_alg_wc_cog_cost_{$loop}",
 			'name'          => "variable_alg_wc_cog_cost[{$loop}]",
-			'value'         => wc_format_localized_price( isset( $variation_data['_alg_wc_cog_cost'][0] ) ? $variation_data['_alg_wc_cog_cost'][0] : '' ),
+			'value'         => wc_format_localized_price( $value ),
 			'label'         => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->cost_field_template ),
 			'data_type'     => 'price',
 			'wrapper_class' => 'form-row form-row-full',

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings
  *
- * @version 2.3.1
+ * @version 2.3.4
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.1
+	 * @version 2.3.4
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -146,6 +146,14 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'default'  => 'no',
 				'type'     => 'checkbox',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'name'     => __( 'Variable products', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Replace all variations', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'The cost field will replace the cost of all variations in case it\'s a variable product.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_quick_edit_replace_variations',
+				'default'  => 'no',
+				'type'     => 'checkbox'
 			),
 			array(
 				'type'     => 'sectionend',

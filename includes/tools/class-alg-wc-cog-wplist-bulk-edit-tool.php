@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class
  *
- * @version 2.3.1
+ * @version 2.3.4
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		 * @todo    [maybe] better description here and in settings
 		 * @todo    [maybe] bulk edit order items meta
 		 *
-		 * @version 2.3.1
+		 * @version 2.3.4
 		 * @since   2.3.1
 		 *
 		 * @param object $item
@@ -136,7 +136,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 					        ' value="'         . $sale_price . '"' . '>';
 					break;
 				case '_alg_wc_cog_cost':
-					$value  = get_post_meta( $item->get_id(), '_alg_wc_cog_cost', true );
+					$value = alg_wc_cog()->core->products->get_product_cost( $item->get_id() );
 					$result = '<input' .
 					          ' name="alg_wc_cog_bulk_edit_tool_costs[' . $item->get_id() . ']"' .
 					          ' type="text"' .

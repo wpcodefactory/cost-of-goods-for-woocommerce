@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class
  *
- * @version 2.3.1
+ * @version 2.3.4
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -67,10 +67,13 @@ class Alg_WC_Cost_of_Goods_Bulk_Edit_Tool {
 	/**
 	 * create_wp_list_tool.
 	 *
-	 * @version 2.3.1
+	 * @version 2.3.4
 	 * @since   2.3.1
 	 */
 	function create_wp_list_tool() {
+		if ( ! apply_filters( 'alg_wc_cog_create_edit_costs_tool_validation', true ) ) {
+			return;
+		}
 		$hook = add_submenu_page(
 			'tools.php',
 			__( 'Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ),

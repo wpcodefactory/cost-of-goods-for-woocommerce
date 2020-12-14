@@ -2,8 +2,8 @@
 Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
-Tested up to: 5.5
-Stable tag: 2.3.3
+Tested up to: 5.6
+Stable tag: 2.3.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -58,6 +58,24 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.3.4 - 14/12/2020 =
+* Fix - Display variation cost fields from the parent product in case the variation cost is empty.
+* Dev - Advanced - Compatibility - Add compatibility option with WP All Import plugin.
+* Dev - Advanced - Compatibility - WP All Import - Add "Convert to float" option.
+* Dev - Advanced - Compatibility - WP All Import - Add "Sanitize float number" option.
+* Dev - Advanced - Restriction - Add "Restrict by user role" option.
+* Dev - Products - Quick edit - Add "Replace all variations" option.
+* Dev - Tools & Reports - Add `alg_wc_cog_create_import_tool_validation` filter.
+* Dev - Tools & Reports - Add `alg_wc_cog_create_edit_costs_tool_validation` filter.
+* Dev - Tools & Reports - Add `alg_wc_cog_create_report_validation` filter.
+* Dev - Tools & Reports - Add `alg_wc_cog_create_analytics_orders_validation` filter.
+* Dev - Orders - Add `alg_wc_cog_create_orders_columns_validation` filter.
+* Dev - Orders - Add `alg_wc_cog_create_order_meta_box_validation` filter.
+* Dev - Products - Add `alg_wc_cog_create_product_columns_validation` filter.
+* Dev - Products - Add `alg_wc_cog_create_product_meta_box_validation` filter.
+* Dev - Add `alg_wc_cog_create_wc_settings_tab_validation` filter.
+* Tested up to: 5.6
 
 = 2.3.3 - 20/11/2020 =
 * Fix - Localization - Move `load_plugin_textdomain` function to `init` call.

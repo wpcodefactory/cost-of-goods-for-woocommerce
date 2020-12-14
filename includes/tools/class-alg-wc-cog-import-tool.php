@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Import Tool Class
  *
- * @version 2.3.2
+ * @version 2.3.4
  * @since   1.1.0
  * @author  WPFactory
  */
@@ -44,10 +44,13 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 	/**
 	 * create_import_tool.
 	 *
-	 * @version 1.0.0
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 */
 	function create_import_tool() {
+		if ( ! apply_filters( 'alg_wc_cog_create_import_tool_validation', true ) ) {
+			return;
+		}
 		add_submenu_page(
 			'tools.php',
 			__( 'Import Costs', 'cost-of-goods-for-woocommerce' ),
@@ -89,7 +92,7 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 	/**
 	 * import_tool.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 * @todo    [later] use `wc_get_products()`
 	 * @todo    [later] better description here and in settings
@@ -145,7 +148,7 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 					if ( $perform_import ) {
 						update_post_meta( $product_id, '_alg_wc_cog_cost', $source_cost );
 					}
-					$destination_cost = get_post_meta( $product_id, '_alg_wc_cog_cost', true );
+					$destination_cost = alg_wc_cog()->core->products->get_product_cost( $product_id );
 					$table_data[]     = array( $product_id, get_the_title( $product_id ), $source_cost, $destination_cost );
 				}
 			}

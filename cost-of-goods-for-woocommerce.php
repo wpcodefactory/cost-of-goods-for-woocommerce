@@ -3,7 +3,7 @@
 Plugin Name: Cost of Goods for WooCommerce
 Plugin URI: https://wpfactory.com/item/cost-of-goods-for-woocommerce/
 Description: Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
-Version: 2.3.3
+Version: 2.3.4
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: cost-of-goods-for-woocommerce
@@ -33,7 +33,7 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.3.3';
+	public $version = '2.3.4';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class
@@ -170,10 +170,13 @@ final class Alg_WC_Cost_of_Goods {
 	/**
 	 * Add Cost of Goods settings tab to WooCommerce settings.
 	 *
-	 * @version 2.1.0
+	 * @version 2.3.4
 	 * @since   1.0.0
 	 */
 	function add_woocommerce_settings_tab( $settings ) {
+		if ( ! apply_filters( 'alg_wc_cog_create_wc_settings_tab_validation', true ) ) {
+			return $settings;
+		}
 		$settings[] = require_once( 'includes/settings/class-alg-wc-settings-cog.php' );
 		return $settings;
 	}
