@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.3.4
+ * @version 2.3.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -47,7 +47,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.3.2
+	 * @version 2.3.5
 	 * @since   2.1.0
 	 */
 	function add_hooks() {
@@ -80,6 +80,27 @@ class Alg_WC_Cost_of_Goods_Products {
 		// Add product stock
 		add_action( 'add_meta_boxes',                                            array( $this, 'add_product_add_stock_meta_box' ) );
 		add_action( 'save_post_product',                                         array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
+		// Sanitize cog meta (_alg_wc_cog_cost)
+		add_filter( 'sanitize_post_meta_' . '_alg_wc_cog_cost',                  array( $this, 'sanitize_cog_meta' ) );
+	}
+
+	/**
+	 * sanitize_cog_meta.
+	 *
+	 * @see https://stackoverflow.com/a/4325608/1193038
+	 *
+	 * @version 2.3.5
+	 * @since   2.3.5
+	 *
+	 * @param $value
+	 *
+	 * @return mixed
+	 */
+	function sanitize_cog_meta( $value ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_products_sanitize_cog_meta', 'no' ) ) {
+			$value = str_replace( ',', '.', $value );
+		}
+		return $value;
 	}
 
 	/**
@@ -104,6 +125,38 @@ class Alg_WC_Cost_of_Goods_Products {
 				);
 			}
 		}
+	}
+
+	/**
+	 * get_add_stock_bulk_and_quick_edit_fields.
+	 *
+	 * @version 2.3.5
+	 * @since   2.3.5
+	 *
+	 * @todo Try to understand why the tip doesn't work on quick edit but does work on bulk edit.
+	 *
+	 * @return string
+	 */
+	function get_add_stock_bulk_and_quick_edit_fields() {
+		//$tip = wc_help_tip( __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ) );
+		ob_start();
+		?>
+		<br class="clear"/>
+		<h4 class="title" style="margin-bottom: 10px;"><?php echo __( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ?><?php //echo $tip; ?></h4>
+		<label>
+			<span class="title"><?php echo __( 'Stock', 'cost-of-goods-for-woocommerce' ) ?></span>
+			<span class="input-text-wrap">
+				<input name="_alg_wc_cog_add_stock_qb" id="_alg_wc_cog_add_stock_qb" class="short" type="number" min="0">
+			</span>
+		</label>
+		<label>
+			<span class="title"><?php echo __( 'Cost', 'cost-of-goods-for-woocommerce' ) ?></span>
+			<span class="input-text-wrap">
+				<input name="_alg_wc_cog_add_stock_cost_qb" id="_alg_wc_cog_add_stock_cost_qb" class="short wc_input_price" type="number" step="0.0001" min="0">
+			</span>
+		</label>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
@@ -399,7 +452,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_variable_product_html.
 	 *
-	 * @version 2.0.0
+	 * @version 2.3.5
 	 * @since   1.0.0
 	 * @todo    [maybe] use `get_available_variations()` instead of `get_children()`?
 	 */
@@ -418,8 +471,8 @@ class Alg_WC_Cost_of_Goods_Products {
 				$product_id_min = current( $product_ids );
 				$product_id_max = end(     $product_ids );
 			}
-			$min          = current( $data );
-			$max          = end( $data );
+			$min = (float) current( $data );
+			$max = (float) end( $data );
 			$placeholders = array();
 			if ( $min !== $max ) {
 				$placeholders[ "%{$profit_or_cost}%" ] = wc_format_price_range( $min, $max );
@@ -438,7 +491,7 @@ class Alg_WC_Cost_of_Goods_Products {
 			} else {
 				$placeholders[ "%{$profit_or_cost}%" ] = wc_price( $min );
 				if ( 'profit' === $profit_or_cost ) {
-					$cost                             = $this->get_product_cost( $product_id_min );
+					$cost                             = (float) $this->get_product_cost( $product_id_min );
 					$price                            = wc_get_price_excluding_tax( wc_get_product( $product_id_min ) );
 					$placeholders['%profit_percent%'] = sprintf( '%0.2f%%', ( 0 != $cost ? $min / $cost * 100 : '' ) );
 					$placeholders['%profit_margin%']  = sprintf( '%0.2f%%', ( 0 != $price && '' !== $min ? $min / $price * 100 : '' ) );

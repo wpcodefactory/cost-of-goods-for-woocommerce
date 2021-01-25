@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.3.4
+ * @version 2.3.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -109,7 +109,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.5
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -162,6 +162,56 @@ class Alg_WC_Cost_of_Goods_Orders {
 		}
 		// Compatibility: "WooCommerce PDF Invoices, Packing Slips, Delivery Notes & Shipping Labels" plugin
 		add_filter( 'wf_pklist_modify_meta_data',                       array( $this, 'wf_pklist_remove_cog_meta' ), PHP_INT_MAX );
+		// Add profit to admin email
+		add_action( 'woocommerce_email_order_meta',                     array( $this, 'woocommerce_email_order_meta' ), PHP_INT_MAX, 3 );
+	}
+
+	/**
+	 * woocommerce_email_order_meta.
+	 *
+	 * @version 2.3.5
+	 * @since   2.3.5
+	 *
+	 * @param $order_obj
+	 * @param $sent_to_admin
+	 * @param $plain_text
+	 */
+	function woocommerce_email_order_meta( $order_obj, $sent_to_admin, $plain_text ) {
+		if (
+			! $sent_to_admin
+			|| 'no' == get_option( 'alg_wc_cog_order_admin_new_order_email_profit_and_cost', 'no' )
+			|| empty( $order_id = $order_obj->get_id() )
+			|| empty( $order_profit = get_post_meta( $order_id, '_alg_wc_cog_order_profit', true ) )
+		) {
+			return;
+		}
+		$cost                = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'cost', true );
+		$profit              = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit', true );
+		$profit_percent      = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit_percent', true );
+		$profit_margin       = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit_margin', true );
+		$profit_template     = get_option( 'alg_wc_cog_orders_profit_html_template', '%profit%' );
+		$profit_placeholders = array(
+			'%profit%'         => $this->format_order_column_value( $profit, 'profit' ),
+			'%profit_percent%' => $this->format_order_column_value( $profit_percent, 'profit_percent' ),
+			'%profit_margin%'  => $this->format_order_column_value( $profit_margin, 'profit_margin' ),
+		);
+		$profit_html         = str_replace( array_keys( $profit_placeholders ), $profit_placeholders, $profit_template );
+		$table_args          = array(
+			'table_style'        => 'width:100%;margin-bottom: 40px',
+			'table_heading_type' => 'vertical',
+			'table_attributes'   => array( 'cellspacing' => 0, 'cellpadding' => 6, 'border' => 1 ),
+			'table_class'        => 'td',
+			'columns_styles'     => array( 'text-align' => 'right', 'border-left' => 0, 'border-top' => 0 ),
+			'columns_classes'    => array( 'td', 'td' ),
+		);
+		$table_data          = array(
+			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ), ( '' !== $cost ? '<span style="color:red;">' . wc_price( $cost ) . '</span>' : '' ) ),
+			array( __( 'Profit', 'cost-of-goods-for-woocommerce' ), ( '' !== $profit ? '<span style="color:green;">' . $profit_html . '</span>' : '' ) ),
+		);
+		?>
+		<h2><?php _e( 'Cost of goods', 'cost-of-goods-for-woocommerce' ) ?></h2>
+		<?php echo alg_wc_cog_get_table_html( $table_data, $table_args ); ?>
+		<?php
 	}
 
 	/**
@@ -491,7 +541,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.2.0
+	 * @version 2.3.5
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -525,11 +575,14 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$per_order_fees        = 0;
 		// Fees: Order extra cost: from meta (e.g. PayPal, Stripe etc.)
 		$meta_fees             = 0;
+		// Refund calculation
+		$refund_calc_method    = get_option( 'alg_wc_cog_order_refund_calculation_method', 'profit_by_netpayment_and_cost_difference' );
 		// Totals
 		$profit                = 0;
 		$total_cost            = 0;
 		$fees                  = 0;
 		$total_price           = 0;
+
 
 		// Calculations
 		if ( empty( $this->delay_calculations_status ) || $order->has_status( $this->delay_calculations_status ) ) {
@@ -560,7 +613,11 @@ class Alg_WC_Cost_of_Goods_Orders {
 				if ( '' != $cost ) {
 					$cost         = str_replace( ',', '.', $cost );
 					$line_cost    = $cost * $item['qty'];
-					$line_total   = apply_filters( 'alg_wc_cog_order_line_total', $item['line_total'], $order );
+					$item_line_total = $item['line_total'];
+					if ( 'profit_and_price_based_on_item_refunded_amount' == $refund_calc_method ) {
+						$item_line_total -= $order->get_total_refunded_for_item( $item_id );
+					}
+					$line_total   = apply_filters( 'alg_wc_cog_order_line_total', $item_line_total, $order );
 					$profit      += ( $line_total - $line_cost );
 					$items_cost  += $line_cost;
 					$total_price += $line_total;
@@ -659,15 +716,31 @@ class Alg_WC_Cost_of_Goods_Orders {
 			}
 			// Profit adjustments: Shipping
 			if ( $this->do_add_shipping_to_profit ) {
-				$_shipping    = apply_filters( 'alg_wc_cog_order_shipping_total', $order->get_shipping_total(), $order );
-				$profit      += $_shipping;
-				$total_price += $_shipping;
+				$_shipping    = (float) apply_filters( 'alg_wc_cog_order_shipping_total', $order->get_shipping_total(), $order );
+				$profit      += (float) $_shipping;
+				$total_price += (float) $_shipping;
 			}
 			// Profit adjustments: Fees
 			if ( $this->do_add_fees_to_profit ) {
 				$_fees        = apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_fees(), $order );
 				$profit      += $_fees;
 				$total_price += $_fees;
+			}
+			// Profit adjustment: Tax
+			if ( 'yes' === get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
+				$_tax        = apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_tax(), $order );
+				$profit      += $_tax;
+				$total_price += $_tax;
+			}
+			// Readjust profit on refunded orders
+			if ( 'profit_based_on_total_refunded' == $refund_calc_method ) {
+				$profit -= (float) apply_filters( 'alg_wc_cog_order_total_refunded', $order->get_total_refunded(), $order );
+			} elseif ( 'profit_by_netpayment_and_cost_difference' == $refund_calc_method ) {
+				$total_excluding_taxes = $order->get_total() - $order->get_total_tax();
+				$tax_percent           = 1 - ( $order->get_total_tax() / $total_excluding_taxes );
+				$net_payment           = apply_filters( 'alg_wc_cog_order_net_payment', $order->get_total() - $order->get_total_refunded() );
+				$net_payment           = 'yes' === get_option( 'alg_wc_cog_net_payment_inclusive_of_tax', 'no' ) ? $net_payment : $net_payment * $tax_percent;
+				$profit                = $net_payment - $total_cost;
 			}
 		}
 

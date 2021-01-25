@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings
  *
- * @version 2.3.4
+ * @version 2.3.5
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.4
+	 * @version 2.3.5
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -114,6 +114,14 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 			),
 			array(
+				'title'    => __( 'Sanitize cost meta', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Sanitize cost meta when updating the value', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Replaces comma by dots on the database.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_sanitize_cog_meta',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_products_options',
 			),
@@ -122,38 +130,56 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 		$product_quick_bulk_edit_settings = array(
 			array(
 				'title'    => __( 'Quick and Bulk Edit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable these options.',
+				'desc'     => apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to unlock disabled options.',
 					'<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_products_quick_bulk_edit_options',
 			),
 			array(
-				'title'    => __( 'Quick edit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Adds "Cost" field to product "%s".', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Cost field', 'cost-of-goods-for-woocommerce' ),
+				'desc' => sprintf( __( 'Add "Cost" field to product "%s"', 'cost-of-goods-for-woocommerce' ),
 					__( 'Quick Edit', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_quick_edit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+				'checkboxgroup'     => 'start',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
-				'title'    => __( 'Bulk edit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Adds "Cost" field to product "%s".', 'cost-of-goods-for-woocommerce' ),
+				'desc' => sprintf( __( 'Add "Cost" field to product "%s"', 'cost-of-goods-for-woocommerce' ),
 					__( 'Bulk Actions', 'cost-of-goods-for-woocommerce' ) . ' > ' . __( 'Edit', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_bulk_edit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+				'checkboxgroup'     => '',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
-				'name'     => __( 'Variable products', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Replace all variations', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'The cost field will replace the cost of all variations in case it\'s a variable product.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_quick_edit_replace_variations',
+				'desc'          => __( 'Replace all variations from the main variable product.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'      => __( 'The cost field from the main variable product will replace the cost of all variations.', 'cost-of-goods-for-woocommerce' ),
+				'id'            => 'alg_wc_cog_products_quick_edit_replace_variations',
+				'default'       => 'no',
+				'checkboxgroup' => 'end',
+				'type'          => 'checkbox'
+			),
+			array(
+				'title'    => __( '"Add stock" fields', 'cost-of-goods-for-woocommerce' ),
+				'desc' => sprintf( __( 'Add "Add stock" fields to product "%s"', 'cost-of-goods-for-woocommerce' ),
+					__( 'Quick Edit', 'cost-of-goods-for-woocommerce' ) ),
+				'id'       => 'alg_wc_cog_products_add_stock_quick_edit',
 				'default'  => 'no',
-				'type'     => 'checkbox'
+				'type'     => 'checkbox',
+				'checkboxgroup'     => 'start',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'desc' => sprintf( __( 'Add "Add stock" fields to product "%s"', 'cost-of-goods-for-woocommerce' ),
+					__( 'Bulk Actions', 'cost-of-goods-for-woocommerce' ) . ' > ' . __( 'Edit', 'cost-of-goods-for-woocommerce' ) ),
+				'id'       => 'alg_wc_cog_products_add_stock_bulk_edit',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+				'checkboxgroup'     => '',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
 				'type'     => 'sectionend',

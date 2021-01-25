@@ -1,15 +1,15 @@
-# Copyright (C) 2020 WPFactory
+# Copyright (C) 2021 WPFactory
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.3.4\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.3.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-12-14T15:11:59+01:00\n"
+"POT-Creation-Date: 2021-01-25T20:53:33+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -49,14 +49,16 @@ msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics.php:87
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:72
-#: includes/class-alg-wc-cog-orders.php:238
-#: includes/class-alg-wc-cog-products.php:124
-#: includes/class-alg-wc-cog-products.php:141
-#: includes/class-alg-wc-cog-products.php:227
-#: includes/class-alg-wc-cog-products.php:238
-#: includes/class-alg-wc-cog-products.php:249
-#: includes/class-alg-wc-cog-products.php:304
-#: includes/pro/class-alg-wc-cog-pro.php:341
+#: includes/class-alg-wc-cog-orders.php:208
+#: includes/class-alg-wc-cog-orders.php:288
+#: includes/class-alg-wc-cog-products.php:153
+#: includes/class-alg-wc-cog-products.php:177
+#: includes/class-alg-wc-cog-products.php:194
+#: includes/class-alg-wc-cog-products.php:280
+#: includes/class-alg-wc-cog-products.php:291
+#: includes/class-alg-wc-cog-products.php:302
+#: includes/class-alg-wc-cog-products.php:357
+#: includes/pro/class-alg-wc-cog-pro.php:404
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:112
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:184
 #: includes/analytics/build/index.js:230
@@ -65,8 +67,9 @@ msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics.php:88
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:73
-#: includes/class-alg-wc-cog-orders.php:248
-#: includes/class-alg-wc-cog-products.php:307
+#: includes/class-alg-wc-cog-orders.php:209
+#: includes/class-alg-wc-cog-orders.php:298
+#: includes/class-alg-wc-cog-products.php:360
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:114
 #: includes/settings/class-alg-wc-cog-settings-orders.php:70
 #: includes/analytics/build/index.js:233
@@ -83,8 +86,9 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:42
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:115
-#: includes/class-alg-wc-cog-products.php:100
-#: includes/settings/class-alg-wc-cog-settings-orders.php:299
+#: includes/class-alg-wc-cog-products.php:121
+#: includes/class-alg-wc-cog-products.php:145
+#: includes/settings/class-alg-wc-cog-settings-orders.php:371
 #: includes/settings/class-alg-wc-cog-settings-products.php:109
 #: includes/settings/class-alg-wc-settings-cog.php:24
 msgid "Cost of Goods"
@@ -120,17 +124,17 @@ msgid "Order fee (percent)"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:86
-#: includes/settings/class-alg-wc-cog-settings-orders.php:306
+#: includes/settings/class-alg-wc-cog-settings-orders.php:378
 msgid "Handling fee"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:87
-#: includes/settings/class-alg-wc-cog-settings-orders.php:314
+#: includes/settings/class-alg-wc-cog-settings-orders.php:386
 msgid "Shipping fee"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:88
-#: includes/settings/class-alg-wc-cog-settings-orders.php:322
+#: includes/settings/class-alg-wc-cog-settings-orders.php:394
 msgid "Payment fee"
 msgstr ""
 
@@ -143,7 +147,7 @@ msgid "Cost details"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:115
-#: includes/settings/class-alg-wc-cog-settings-orders.php:299
+#: includes/settings/class-alg-wc-cog-settings-orders.php:371
 msgid "Extra costs"
 msgstr ""
 
@@ -156,22 +160,23 @@ msgstr ""
 msgid "You are selling below the cost of goods."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:251
+#: includes/class-alg-wc-cog-orders.php:212
+#: includes/class-alg-wc-cog-orders.php:514
+#: includes/pro/class-alg-wc-cog-pro.php:538
+#: includes/pro/class-alg-wc-cog-pro.php:557
+msgid "Cost of goods"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:301
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 #: includes/settings/class-alg-wc-cog-settings-orders.php:77
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:254
+#: includes/class-alg-wc-cog-orders.php:304
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 #: includes/settings/class-alg-wc-cog-settings-orders.php:84
 msgid "Profit margin"
-msgstr ""
-
-#: includes/class-alg-wc-cog-orders.php:464
-#: includes/pro/class-alg-wc-cog-pro.php:475
-#: includes/pro/class-alg-wc-cog-pro.php:494
-msgid "Cost of goods"
 msgstr ""
 
 #: includes/class-alg-wc-cog-products.php:35
@@ -179,72 +184,74 @@ msgstr ""
 msgid "Cost (excl. tax) (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:97
+#: includes/class-alg-wc-cog-products.php:118
 msgid "Enter values and \"Update\" the product."
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:98
+#: includes/class-alg-wc-cog-products.php:119
 #: includes/settings/class-alg-wc-cog-settings-products.php:111
 msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to calculate new average cost of goods for the product."
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:100
+#: includes/class-alg-wc-cog-products.php:121
+#: includes/class-alg-wc-cog-products.php:145
 #: includes/settings/class-alg-wc-cog-settings-products.php:107
 #: includes/settings/class-alg-wc-cog-settings-products.php:109
 msgid "Add stock"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:120
-#: includes/class-alg-wc-cog-products.php:140
+#: includes/class-alg-wc-cog-products.php:147
+#: includes/class-alg-wc-cog-products.php:173
+#: includes/class-alg-wc-cog-products.php:193
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:111
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:185
 msgid "Stock"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:136
+#: includes/class-alg-wc-cog-products.php:189
 msgid "History"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:139
+#: includes/class-alg-wc-cog-products.php:192
 msgid "Date"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:469
-#: includes/class-alg-wc-cog-products.php:515
+#: includes/class-alg-wc-cog-products.php:522
+#: includes/class-alg-wc-cog-products.php:568
 msgid "Profit: %s"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:470
-#: includes/class-alg-wc-cog-products.php:516
+#: includes/class-alg-wc-cog-products.php:523
+#: includes/class-alg-wc-cog-products.php:569
 msgid "N/A"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:343
+#: includes/pro/class-alg-wc-cog-pro.php:406
 msgid "- No change -"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:420
+#: includes/pro/class-alg-wc-cog-pro.php:483
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:427
+#: includes/pro/class-alg-wc-cog-pro.php:490
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:430
+#: includes/pro/class-alg-wc-cog-pro.php:493
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:548
+#: includes/pro/class-alg-wc-cog-pro.php:611
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:550
+#: includes/pro/class-alg-wc-cog-pro.php:613
 #: includes/settings/class-alg-wc-cog-settings-tools.php:197
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:552
+#: includes/pro/class-alg-wc-cog-pro.php:615
 #: includes/settings/class-alg-wc-cog-settings-tools.php:198
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
@@ -549,11 +556,10 @@ msgstr ""
 #: includes/settings/class-alg-wc-cog-settings-orders.php:150
 #: includes/settings/class-alg-wc-cog-settings-orders.php:165
 #: includes/settings/class-alg-wc-cog-settings-orders.php:173
-#: includes/settings/class-alg-wc-cog-settings-orders.php:209
-#: includes/settings/class-alg-wc-cog-settings-orders.php:235
-#: includes/settings/class-alg-wc-cog-settings-orders.php:243
-#: includes/settings/class-alg-wc-cog-settings-products.php:132
-#: includes/settings/class-alg-wc-cog-settings-products.php:142
+#: includes/settings/class-alg-wc-cog-settings-orders.php:231
+#: includes/settings/class-alg-wc-cog-settings-orders.php:257
+#: includes/settings/class-alg-wc-cog-settings-orders.php:265
+#: includes/settings/class-alg-wc-cog-settings-orders.php:273
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:113
 #: includes/settings/class-alg-wc-cog-settings-tools.php:62
 #: includes/settings/class-alg-wc-cog-settings-tools.php:69
@@ -656,19 +662,19 @@ msgstr ""
 msgid "Makes fine adjustments when importing a cost value to <code>_alg_wc_cog_cost</code> meta using the <strong>WP All Import</strong> plugin."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:185
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:186
 msgid "Convert to float"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:186
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:187
 msgid "Converts numbers using a comma for the decimal point and a dot as the thousand separator to float, like <code>1.723,07</code> to <code>1723.07</code>."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:192
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:194
 msgid "Sanitize float number"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:193
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:195
 msgid "Removes all illegal characters from a float number, like currency values for example."
 msgstr ""
 
@@ -709,16 +715,16 @@ msgid "When enabled, the plugin will try to get currency exchange rates from the
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:24
-#: includes/settings/class-alg-wc-cog-settings-orders.php:267
-#: includes/settings/class-alg-wc-cog-settings-orders.php:297
-#: includes/settings/class-alg-wc-cog-settings-orders.php:332
-#: includes/settings/class-alg-wc-cog-settings-orders.php:347
+#: includes/settings/class-alg-wc-cog-settings-orders.php:339
+#: includes/settings/class-alg-wc-cog-settings-orders.php:369
+#: includes/settings/class-alg-wc-cog-settings-orders.php:404
+#: includes/settings/class-alg-wc-cog-settings-orders.php:419
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:24
 msgid "Extra Costs"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:24
-#: includes/settings/class-alg-wc-cog-settings-orders.php:219
+#: includes/settings/class-alg-wc-cog-settings-orders.php:241
 msgid "Payment Gateways"
 msgstr ""
 
@@ -731,10 +737,10 @@ msgid "Here you can add extra costs for your orders based on order's payment gat
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:40
-#: includes/settings/class-alg-wc-cog-settings-orders.php:202
-#: includes/settings/class-alg-wc-cog-settings-orders.php:269
-#: includes/settings/class-alg-wc-cog-settings-orders.php:300
-#: includes/settings/class-alg-wc-cog-settings-orders.php:351
+#: includes/settings/class-alg-wc-cog-settings-orders.php:224
+#: includes/settings/class-alg-wc-cog-settings-orders.php:341
+#: includes/settings/class-alg-wc-cog-settings-orders.php:372
+#: includes/settings/class-alg-wc-cog-settings-orders.php:423
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:100
 msgid "You will need to recalculate order's cost and profit after you change these settings."
 msgstr ""
@@ -744,25 +750,25 @@ msgid "Extra gateway costs"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:65
-#: includes/settings/class-alg-wc-cog-settings-orders.php:274
+#: includes/settings/class-alg-wc-cog-settings-orders.php:346
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:135
 msgid "Fixed cost"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:66
-#: includes/settings/class-alg-wc-cog-settings-orders.php:275
+#: includes/settings/class-alg-wc-cog-settings-orders.php:347
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:136
 msgid "In %s."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:73
-#: includes/settings/class-alg-wc-cog-settings-orders.php:282
+#: includes/settings/class-alg-wc-cog-settings-orders.php:354
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:143
 msgid "Percent cost"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:74
-#: includes/settings/class-alg-wc-cog-settings-orders.php:283
+#: includes/settings/class-alg-wc-cog-settings-orders.php:355
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:144
 msgid "Percent from order total."
 msgstr ""
@@ -781,7 +787,7 @@ msgid "This section lets you add custom columns to the WooCommerce admin %s."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:46
-#: includes/settings/class-alg-wc-cog-settings-orders.php:333
+#: includes/settings/class-alg-wc-cog-settings-orders.php:405
 msgid "orders list"
 msgstr ""
 
@@ -796,7 +802,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:53
 #: includes/settings/class-alg-wc-cog-settings-orders.php:130
-#: includes/settings/class-alg-wc-cog-settings-orders.php:330
+#: includes/settings/class-alg-wc-cog-settings-orders.php:402
 #: includes/settings/class-alg-wc-cog-settings-products.php:48
 #: includes/settings/class-alg-wc-cog-settings-products.php:55
 msgid "Add"
@@ -928,132 +934,212 @@ msgid "Save all item costs"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:200
-msgid "Calculations"
+msgid "Orders emails"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:201
-msgid "Here you can set some options for order cost and profit calculations."
+msgid "COG options regarding orders emails."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:206
+msgid "Admin new order email"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:207
+msgid "Display the order cost and profit on the admin new order email"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:222
+msgid "Calculations"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:223
+msgid "Here you can set some options for order cost and profit calculations."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:229
 msgid "Count empty cost lines"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:208
+#: includes/settings/class-alg-wc-cog-settings-orders.php:230
 msgid "Count empty cost items when calculating order cost and profit."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:215
+#: includes/settings/class-alg-wc-cog-settings-orders.php:237
 msgid "Order total for percentage fees"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:216
+#: includes/settings/class-alg-wc-cog-settings-orders.php:238
 msgid "Total to calculate all extra costs percentage fees from (%s)."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:218
-#: includes/settings/class-alg-wc-cog-settings-orders.php:267
+#: includes/settings/class-alg-wc-cog-settings-orders.php:240
+#: includes/settings/class-alg-wc-cog-settings-orders.php:339
 msgid "All Orders"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:220
+#: includes/settings/class-alg-wc-cog-settings-orders.php:242
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:24
 msgid "Shipping Methods"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:227
+#: includes/settings/class-alg-wc-cog-settings-orders.php:249
 msgid "Order subtotal excl. tax"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:228
+#: includes/settings/class-alg-wc-cog-settings-orders.php:250
 msgid "Order total excl. tax"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:229
+#: includes/settings/class-alg-wc-cog-settings-orders.php:251
 msgid "Order total incl. tax"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:233
+#: includes/settings/class-alg-wc-cog-settings-orders.php:255
 msgid "Shipping to profit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:234
+#: includes/settings/class-alg-wc-cog-settings-orders.php:256
 msgid "Adds order shipping cost to the order profit."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:241
+#: includes/settings/class-alg-wc-cog-settings-orders.php:263
 msgid "Fees to profit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:242
+#: includes/settings/class-alg-wc-cog-settings-orders.php:264
 msgid "Adds order fees to the order profit."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:249
+#: includes/settings/class-alg-wc-cog-settings-orders.php:271
+msgid "Taxes to profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:272
+msgid "Adds order taxes like VAT to the order profit."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:279
 msgid "Delay calculations"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:250
+#: includes/settings/class-alg-wc-cog-settings-orders.php:280
 msgid "Select order statuses to delay all order profit, cost etc. calculations until."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:251
+#: includes/settings/class-alg-wc-cog-settings-orders.php:281
 msgid "All values will be set to zero until the required order status is set."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:252
+#: includes/settings/class-alg-wc-cog-settings-orders.php:282
 msgid "Leave empty to calculate right away on new order."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:268
+#: includes/settings/class-alg-wc-cog-settings-orders.php:297
+msgid "Refunds"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:300
+msgid "It's necessary to add the %s status on %s option in order to see refunded orders on reports."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:301
+msgid "Refunded"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:302
+msgid "Tools & reports > Orders report: Order status"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:305
+msgid "Enable %s options to automatically calculate refund costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:306
+msgid "Advanced > Force costs update"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:308
+msgid "It's necessary to recalculate order's cost and profit after you change these settings."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:313
+msgid "Refund calculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:318
+msgid "Profit and price ignore refunds"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:319
+msgid "Calculate profit based on total refunded"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:320
+msgid "Calculate profit and price based on item refunded amount"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:321
+msgid "Calculate profit by the difference between Net Payment and Cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:325
+msgid "Net Payment inclusive of tax"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:326
+msgid "Include tax on Net Payment"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:340
 msgid "Here you can add extra costs for your orders, e.g. handling fees."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:297
-#: includes/settings/class-alg-wc-cog-settings-orders.php:305
-#: includes/settings/class-alg-wc-cog-settings-orders.php:313
-#: includes/settings/class-alg-wc-cog-settings-orders.php:321
-#: includes/settings/class-alg-wc-cog-settings-orders.php:332
+#: includes/settings/class-alg-wc-cog-settings-orders.php:369
+#: includes/settings/class-alg-wc-cog-settings-orders.php:377
+#: includes/settings/class-alg-wc-cog-settings-orders.php:385
+#: includes/settings/class-alg-wc-cog-settings-orders.php:393
+#: includes/settings/class-alg-wc-cog-settings-orders.php:404
 msgid "Per Order"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:298
+#: includes/settings/class-alg-wc-cog-settings-orders.php:370
 msgid "Adds \"%s\" meta box to admin order edit page."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:329
+#: includes/settings/class-alg-wc-cog-settings-orders.php:401
 msgid "Columns"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:331
+#: includes/settings/class-alg-wc-cog-settings-orders.php:403
 msgid "Will add \"%s\" columns to the WooCommerce admin %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:334
+#: includes/settings/class-alg-wc-cog-settings-orders.php:406
 msgid "One column per fee."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:347
+#: includes/settings/class-alg-wc-cog-settings-orders.php:419
 msgid "From Meta"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:348
+#: includes/settings/class-alg-wc-cog-settings-orders.php:420
 msgid "Adds extra costs from order meta."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:349
+#: includes/settings/class-alg-wc-cog-settings-orders.php:421
 msgid "E.g.: %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:356
+#: includes/settings/class-alg-wc-cog-settings-orders.php:428
 msgid "Meta keys"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:357
+#: includes/settings/class-alg-wc-cog-settings-orders.php:429
 msgid "Ignored if empty."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:358
+#: includes/settings/class-alg-wc-cog-settings-orders.php:430
 msgid "One meta key per line."
 msgstr ""
 
@@ -1105,45 +1191,61 @@ msgstr ""
 msgid "This will automatically calculate new average cost of goods for the product, based on new \"Stock\" and \"Cost\" values you enter."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:124
+#: includes/settings/class-alg-wc-cog-settings-products.php:117
+msgid "Sanitize cost meta"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:118
+msgid "Sanitize cost meta when updating the value"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:119
+msgid "Replaces comma by dots on the database."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:132
 msgid "Quick and Bulk Edit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:131
-msgid "Quick edit"
+#: includes/settings/class-alg-wc-cog-settings-products.php:139
+msgid "Cost field"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:133
-#: includes/settings/class-alg-wc-cog-settings-products.php:143
-msgid "Adds \"Cost\" field to product \"%s\"."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:134
-msgid "Quick Edit"
+#: includes/settings/class-alg-wc-cog-settings-products.php:140
+#: includes/settings/class-alg-wc-cog-settings-products.php:149
+msgid "Add \"Cost\" field to product \"%s\""
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:141
-msgid "Bulk edit"
+#: includes/settings/class-alg-wc-cog-settings-products.php:168
+msgid "Quick Edit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:144
+#: includes/settings/class-alg-wc-cog-settings-products.php:150
+#: includes/settings/class-alg-wc-cog-settings-products.php:177
 msgid "Bulk Actions"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:144
+#: includes/settings/class-alg-wc-cog-settings-products.php:150
+#: includes/settings/class-alg-wc-cog-settings-products.php:177
 msgid "Edit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:151
-msgid "Variable products"
+#: includes/settings/class-alg-wc-cog-settings-products.php:158
+msgid "Replace all variations from the main variable product."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:152
-msgid "Replace all variations"
+#: includes/settings/class-alg-wc-cog-settings-products.php:159
+msgid "The cost field from the main variable product will replace the cost of all variations."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:153
-msgid "The cost field will replace the cost of all variations in case it's a variable product."
+#: includes/settings/class-alg-wc-cog-settings-products.php:166
+msgid "\"Add stock\" fields"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:167
+#: includes/settings/class-alg-wc-cog-settings-products.php:176
+msgid "Add \"Add stock\" fields to product \"%s\""
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:98

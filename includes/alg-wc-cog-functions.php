@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions
  *
- * @version 2.3.4
+ * @version 2.3.5
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -87,7 +87,7 @@ if ( ! function_exists( 'alg_wc_cog_get_table_html' ) ) {
 	/**
 	 * alg_wc_cog_get_table_html.
 	 *
-	 * @version 1.4.0
+	 * @version 2.3.5
 	 * @since   1.0.0
 	 */
 	function alg_wc_cog_get_table_html( $data, $args = array() ) {
@@ -98,9 +98,18 @@ if ( ! function_exists( 'alg_wc_cog_get_table_html' ) ) {
 			'table_heading_type' => 'horizontal',
 			'columns_classes'    => array(),
 			'columns_styles'     => array(),
+			'table_attributes'   => array(),
 		), $args );
+		// Custom attribute handling.
+		$table_attributes = array();
+		if ( ! empty( $args['table_attributes'] ) ) {
+			foreach ( $args['table_attributes'] as $attribute => $attribute_value ) {
+				$table_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+			}
+		}
 		$html = '';
 		$html .= '<table' . ( '' == $args['table_class']  ? '' : ' class="' . $args['table_class'] . '"' ) .
+	         ' '.implode( ' ', $table_attributes ).
 			( '' == $args['table_style']  ? '' : ' style="' . $args['table_style'] . '"' ) . '>';
 		$html .= '<tbody>';
 		$row_styles = ( '' == $args['row_styles'] ? '' : ' style="' . $args['row_styles']  . '"' );

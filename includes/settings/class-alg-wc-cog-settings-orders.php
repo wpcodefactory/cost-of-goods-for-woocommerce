@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings
  *
- * @version 2.3.0
+ * @version 2.3.5
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.0
+	 * @version 2.3.5
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -195,6 +195,28 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 		);
 
+		$order_emails_settings = array(
+			array(
+				'title'    => __( 'Orders emails', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'COG options regarding orders emails.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'title',
+				'id'       => 'alg_wc_cog_order_emails_options',
+			),
+			array(
+				'title'             => __( 'Admin new order email', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Display the order cost and profit on the admin new order email', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_order_admin_new_order_email_profit_and_cost',
+				'default'           => 'no',
+				'desc_tip'          => apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this section.','<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ),
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'type'              => 'checkbox',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_cog_order_emails_options',
+			),
+		);
+
 		$order_calculation_settings = array(
 			array(
 				'title'    => __( 'Calculations', 'cost-of-goods-for-woocommerce' ),
@@ -246,6 +268,14 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'type'     => 'checkbox',
 			),
 			array(
+				'title'    => __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Adds order taxes like VAT to the order profit.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_order_taxes_to_profit',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
 				'title'    => __( 'Delay calculations', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'Select order statuses to delay all order profit, cost etc. calculations until.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 					__( 'All values will be set to zero until the required order status is set.', 'cost-of-goods-for-woocommerce' ) . ' ' .
@@ -259,6 +289,48 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_order_calculation_options',
+			),
+		);
+
+		$refunds_settings = array(
+			array(
+				'title' => __( 'Refunds', 'cost-of-goods-for-woocommerce' ),
+				'desc'  =>
+					sprintf(
+						__( "It's necessary to add the %s status on %s option in order to see refunded orders on reports.", 'cost-of-goods-for-woocommerce' ),
+						'<strong>' . __( 'Refunded', 'cost-of-goods-for-woocommerce' ) . '</strong>',
+						'<strong>' . __( 'Tools & reports > Orders report: Order status', 'cost-of-goods-for-woocommerce' ) . '</strong>'
+					) . '<br />' .
+					sprintf(
+						__( "Enable %s options to automatically calculate refund costs.", 'cost-of-goods-for-woocommerce' ),
+						'<strong>' . __( 'Advanced > Force costs update', 'cost-of-goods-for-woocommerce' ) . '</strong>'
+					) . '<br />' .
+					__( "It's necessary to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_refund_options',
+			),
+			array(
+				'title'    => __( 'Refund calculation', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_order_refund_calculation_method',
+				'default'  => 'profit_by_netpayment_and_cost_difference',
+				'type'     => 'radio',
+				'options'  => array(
+					'ignore_refunds'                                 => __( 'Profit and price ignore refunds', 'cost-of-goods-for-woocommerce' ),
+					'profit_based_on_total_refunded'                 => __( 'Calculate profit based on total refunded', 'cost-of-goods-for-woocommerce' ),
+					'profit_and_price_based_on_item_refunded_amount' => __( 'Calculate profit and price based on item refunded amount', 'cost-of-goods-for-woocommerce' ),
+					'profit_by_netpayment_and_cost_difference'       => __( 'Calculate profit by the difference between Net Payment and Cost', 'cost-of-goods-for-woocommerce' ),
+				)
+			),
+			array(
+				'title'    => __( 'Net Payment inclusive of tax', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Include tax on Net Payment', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_net_payment_inclusive_of_tax',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_cog_refund_options',
 			),
 		);
 
@@ -370,7 +442,9 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 		return array_merge(
 			$order_columns_settings,
 			$order_edit_settings,
+			$order_emails_settings,
 			$order_calculation_settings,
+			$refunds_settings,
 			$order_extra_cost_settings,
 			$order_extra_cost_per_order_settings,
 			$order_extra_cost_from_meta_settings

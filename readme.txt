@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.6
-Stable tag: 2.3.4
+Stable tag: 2.3.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +42,30 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 * [Visit plugin site](https://wpfactory.com/item/cost-of-goods-for-woocommerce/).
 * If you wish to contribute – please visit [plugin GitHub repository](https://github.com/wpcodefactory/cost-of-goods-for-woocommerce).
 
+== Frequently Asked Questions ==
+
+= What can I do if the cost field is not saving? =
+If even after clicking "Update" on the product edit page the cost field is not saving, please try to change this option:
+**- Cost field position**
+
+= What is the easiest way to export the full inventory (cost of all goods)? =
+Probably the easiest way of doing it would be through the default WooCommerce export, over:
+**- Products > All products > Export**
+
+= How do I bulk edit cost of goods for a specific product category? =
+First, you have to enable two options:
+
+- Products > Quick and Bulk Edit > Cost field > Add "Cost" field to product "Quick Edit"
+- Products > Quick and Bulk Edit > Cost field > Add "Cost" field to product "Bulk Actions > Edit"
+
+And then you can follow these steps:
+
+1. Access your products listing page
+2. Filter by the category
+3. Select all
+4. Click edit on "Bulk actions" dropdown
+5. Edit the field you want
+
 == Installation ==
 
 1. Upload the entire plugin folder to the `/wp-content/plugins/` directory.
@@ -58,6 +82,22 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.3.5 - 25/01/2021 =
+* Fix - Orders - Shipping to profit - PHP Warning.
+* Fix - Fix possible Uncaught TypeError when saving product costs.
+* Fix - Advanced - Compatibility - WP All Import - "Sanitize float number" option.
+* Dev - Orders - Refunds - Add "Refund calculation" option.
+* Dev - Orders - Refunds - Add "Net Payment inclusive of tax" option.
+* Dev - Calculations - Add "Taxes to profit" option.
+* Dev - Create `table_attributes` param for `$args` param from `alg_wc_cog_get_table_html()` function.
+* Dev - Orders - Create option to display the order cost and profit on the admin new order email.
+* Dev - Products - Add "Sanitize cog meta" option.
+* Dev - Products - Create "Add stock" fields option for quick and bulk edit actions.
+* WC tested up to: 4.9
+* Add question regarding cost fields not saving to FAQ.
+* Add question regarding to exporting cost of goods.
+* Add question regarding how to bulk edit a category.
 
 = 2.3.4 - 14/12/2020 =
 * Fix - Display variation cost fields from the parent product in case the variation cost is empty.
@@ -328,6 +368,5 @@ With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-good
 
 == Upgrade Notice ==
 
-= 2.3.3 =
-* Fix - Localization - Move `load_plugin_textdomain` function to `init` call.
-* WC tested up to: 4.7
+= 1.0.0 =
+* Initial Release.

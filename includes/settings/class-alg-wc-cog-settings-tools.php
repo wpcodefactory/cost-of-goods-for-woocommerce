@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.3.2
+ * @version 2.3.5
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.2
+	 * @version 2.3.5
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -207,7 +207,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'default'  => array( 'completed', 'processing', 'on-hold' ),
 				'type'     => 'multiselect',
 				'class'    => 'chosen_select',
-				'options'  => array_diff_key( $this->get_order_statuses(), array_flip( array( 'refunded', 'cancelled', 'failed' ) ) ),
+				'options'  => array_diff_key( $this->get_order_statuses(), array_flip( array( 'cancelled', 'failed' ) ) ),
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
@@ -218,22 +218,22 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'type'     => 'multiselect',
 				'class'    => 'chosen_select',
 				'options'  => array(
-					'_alg_wc_cog_order_items_cost'             => __( 'Item costs (excluding fees)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_fees'                   => __( 'Fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost'          => __( 'Shipping method fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost_fixed'    => __( 'Shipping method fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost_percent'  => __( 'Shipping method fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost'           => __( 'Gateway fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost_fixed'     => __( 'Gateway fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost_percent'   => __( 'Gateway fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost'             => __( 'Order fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_fixed'       => __( 'Order fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_percent'     => __( 'Order fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_per_order'   => __( 'Per order fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'handling' . '_fee' => __( 'Per order fees: Handling', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'shipping' . '_fee' => __( 'Per order fees: Shipping', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'payment' . '_fee'  => __( 'Per order fees: Payment', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_from_meta'   => __( 'Meta fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_items_cost'              => __( 'Item costs (excluding fees)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_fees'                    => __( 'Fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_cost'           => __( 'Shipping method fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_cost_fixed'     => __( 'Shipping method fees (fixed)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_cost_percent'   => __( 'Shipping method fees (percent)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_gateway_cost'            => __( 'Gateway fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_gateway_cost_fixed'      => __( 'Gateway fees (fixed)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_gateway_cost_percent'    => __( 'Gateway fees (percent)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost'              => __( 'Order fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost_fixed'        => __( 'Order fees (fixed)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost_percent'      => __( 'Order fees (percent)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost_per_order'    => __( 'Per order fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_' . 'handling' . '_fee'  => __( 'Per order fees: Handling', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_' . 'shipping' . '_fee'  => __( 'Per order fees: Shipping', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_' . 'payment' . '_fee'   => __( 'Per order fees: Payment', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost_from_meta'    => __( 'Meta fees (all)', 'cost-of-goods-for-woocommerce' ),
 				),
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
