@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.3.5
+ * @version 2.3.6
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -541,7 +541,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.3.5
+	 * @version 2.3.6
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -556,7 +556,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 		if ( ! $order ) {
 			return;
 		}
-
 		// Order items
 		$items_cost            = 0;
 		// Fees: Extra shipping method costs
@@ -582,8 +581,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$total_cost            = 0;
 		$fees                  = 0;
 		$total_price           = 0;
-
-
+		$order_total_refunded  = is_a( $order, 'WC_Order_Refund' ) ? $order->get_amount() : $order->get_total_refunded();
+		$order_total_refunded  = (float) apply_filters( 'alg_wc_cog_order_total_refunded', $order_total_refunded, $order );
 		// Calculations
 		if ( empty( $this->delay_calculations_status ) || $order->has_status( $this->delay_calculations_status ) ) {
 			// Order items
@@ -693,7 +692,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			}
 			// Fees: Order extra cost: per order
 			foreach ( $this->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
-				if ( $is_enabled && 0 != ( $fee = get_post_meta( $order_id, '_alg_wc_cog_order_' . $fee_type . '_fee', true ) ) ) {
+				if ( $is_enabled && 0 != ( (float) $fee = get_post_meta( $order_id, '_alg_wc_cog_order_' . $fee_type . '_fee', true ) ) ) {
 					$per_order_fees += $fee;
 				}
 			}
@@ -722,25 +721,25 @@ class Alg_WC_Cost_of_Goods_Orders {
 			}
 			// Profit adjustments: Fees
 			if ( $this->do_add_fees_to_profit ) {
-				$_fees        = apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_fees(), $order );
+				$_fees        = (float) apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_fees(), $order );
 				$profit      += $_fees;
 				$total_price += $_fees;
 			}
 			// Profit adjustment: Tax
 			if ( 'yes' === get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
-				$_tax        = apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_tax(), $order );
+				$_tax        = (float) apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_tax(), $order );
 				$profit      += $_tax;
 				$total_price += $_tax;
 			}
 			// Readjust profit on refunded orders
 			if ( 'profit_based_on_total_refunded' == $refund_calc_method ) {
-				$profit -= (float) apply_filters( 'alg_wc_cog_order_total_refunded', $order->get_total_refunded(), $order );
+				$profit -= $order_total_refunded;
 			} elseif ( 'profit_by_netpayment_and_cost_difference' == $refund_calc_method ) {
-				$total_excluding_taxes = $order->get_total() - $order->get_total_tax();
-				$tax_percent           = 1 - ( $order->get_total_tax() / $total_excluding_taxes );
-				$net_payment           = apply_filters( 'alg_wc_cog_order_net_payment', $order->get_total() - $order->get_total_refunded() );
-				$net_payment           = 'yes' === get_option( 'alg_wc_cog_net_payment_inclusive_of_tax', 'no' ) ? $net_payment : $net_payment * $tax_percent;
-				$profit                = $net_payment - $total_cost;
+				$the_total   = $order->get_total();
+				$tax_percent = $the_total > 0 ? 1 - ( $order->get_total_tax() / $the_total ) : 1;
+				$net_payment = apply_filters( 'alg_wc_cog_order_net_payment', $order->get_total() - $order_total_refunded );
+				$net_payment = 'yes' === get_option( 'alg_wc_cog_net_payment_inclusive_of_tax', 'no' ) ? $net_payment : $net_payment * $tax_percent;
+				$profit      = $net_payment - $total_cost;
 			}
 		}
 
