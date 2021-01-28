@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.3.6
+ * @version 2.3.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -541,7 +541,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.3.6
+	 * @version 2.3.7
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -575,7 +575,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		// Fees: Order extra cost: from meta (e.g. PayPal, Stripe etc.)
 		$meta_fees             = 0;
 		// Refund calculation
-		$refund_calc_method    = get_option( 'alg_wc_cog_order_refund_calculation_method', 'profit_by_netpayment_and_cost_difference' );
+		$refund_calc_method    = get_option( 'alg_wc_cog_order_refund_calculation_method', 'ignore_refunds' );
 		// Totals
 		$profit                = 0;
 		$total_cost            = 0;
@@ -732,14 +732,16 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$total_price += $_tax;
 			}
 			// Readjust profit on refunded orders
-			if ( 'profit_based_on_total_refunded' == $refund_calc_method ) {
-				$profit -= $order_total_refunded;
-			} elseif ( 'profit_by_netpayment_and_cost_difference' == $refund_calc_method ) {
-				$the_total   = $order->get_total();
-				$tax_percent = $the_total > 0 ? 1 - ( $order->get_total_tax() / $the_total ) : 1;
-				$net_payment = apply_filters( 'alg_wc_cog_order_net_payment', $order->get_total() - $order_total_refunded );
-				$net_payment = 'yes' === get_option( 'alg_wc_cog_net_payment_inclusive_of_tax', 'no' ) ? $net_payment : $net_payment * $tax_percent;
-				$profit      = $net_payment - $total_cost;
+			if ( $order_total_refunded > 0 ) {
+				if ( 'profit_based_on_total_refunded' == $refund_calc_method ) {
+					$profit -= $order_total_refunded;
+				} elseif ( 'profit_by_netpayment_and_cost_difference' == $refund_calc_method ) {
+					$the_total   = $order->get_total();
+					$tax_percent = $the_total > 0 ? 1 - ( $order->get_total_tax() / $the_total ) : 1;
+					$net_payment = apply_filters( 'alg_wc_cog_order_net_payment', $order->get_total() - $order_total_refunded );
+					$net_payment = 'yes' === get_option( 'alg_wc_cog_net_payment_inclusive_of_tax', 'no' ) ? $net_payment : $net_payment * $tax_percent;
+					$profit      = $net_payment - $total_cost;
+				}
 			}
 		}
 

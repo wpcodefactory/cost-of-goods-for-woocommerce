@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.6
-Stable tag: 2.3.6
+Stable tag: 2.3.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,6 +82,9 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.3.7 - 28/01/2021 =
+* Fix "Refund calculation" option.
 
 = 2.3.6 - 27/01/2021 =
 * Fix - Orders - Refunds - "Net Payment inclusive of tax" option.

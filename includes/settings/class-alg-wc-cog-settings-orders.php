@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings
  *
- * @version 2.3.5
+ * @version 2.3.7
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.5
+	 * @version 2.3.7
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -312,18 +312,19 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			array(
 				'title'    => __( 'Refund calculation', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_refund_calculation_method',
-				'default'  => 'profit_by_netpayment_and_cost_difference',
+				'default'  => 'ignore_refunds',
 				'type'     => 'radio',
 				'options'  => array(
-					'ignore_refunds'                                 => __( 'Profit and price ignore refunds', 'cost-of-goods-for-woocommerce' ),
-					'profit_based_on_total_refunded'                 => __( 'Calculate profit based on total refunded', 'cost-of-goods-for-woocommerce' ),
-					'profit_and_price_based_on_item_refunded_amount' => __( 'Calculate profit and price based on item refunded amount', 'cost-of-goods-for-woocommerce' ),
+					'ignore_refunds'                                 => __( 'Profit ignore refunds', 'cost-of-goods-for-woocommerce' ),
+					'profit_based_on_total_refunded'                 => __( 'Subtract total refunded from profit', 'cost-of-goods-for-woocommerce' ),
+					'profit_and_price_based_on_item_refunded_amount' => __( 'Subtract each item\'s refund amount from profit', 'cost-of-goods-for-woocommerce' ),
 					'profit_by_netpayment_and_cost_difference'       => __( 'Calculate profit by the difference between Net Payment and Cost', 'cost-of-goods-for-woocommerce' ),
 				)
 			),
 			array(
 				'title'    => __( 'Net Payment inclusive of tax', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Include tax on Net Payment', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Only works with %s.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Calculate profit by the difference between Net Payment and Cost', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
 				'id'       => 'alg_wc_cog_net_payment_inclusive_of_tax',
 				'default'  => 'no',
 				'type'     => 'checkbox',
