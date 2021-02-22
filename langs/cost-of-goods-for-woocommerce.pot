@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.3.7\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.3.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-01-28T16:14:53+01:00\n"
+"POT-Creation-Date: 2021-02-22T22:58:10+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -58,8 +58,8 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:291
 #: includes/class-alg-wc-cog-products.php:302
 #: includes/class-alg-wc-cog-products.php:357
-#: includes/pro/class-alg-wc-cog-pro.php:404
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:112
+#: includes/pro/class-alg-wc-cog-pro.php:471
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:113
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:184
 #: includes/analytics/build/index.js:230
 msgid "Cost"
@@ -70,7 +70,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders.php:209
 #: includes/class-alg-wc-cog-orders.php:298
 #: includes/class-alg-wc-cog-products.php:360
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:114
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:115
 #: includes/settings/class-alg-wc-cog-settings-orders.php:70
 #: includes/analytics/build/index.js:233
 msgid "Profit"
@@ -162,8 +162,8 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders.php:212
 #: includes/class-alg-wc-cog-orders.php:514
-#: includes/pro/class-alg-wc-cog-pro.php:538
-#: includes/pro/class-alg-wc-cog-pro.php:557
+#: includes/pro/class-alg-wc-cog-pro.php:605
+#: includes/pro/class-alg-wc-cog-pro.php:624
 msgid "Cost of goods"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:147
 #: includes/class-alg-wc-cog-products.php:173
 #: includes/class-alg-wc-cog-products.php:193
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:111
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:112
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:185
 msgid "Stock"
 msgstr ""
@@ -226,32 +226,32 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:406
+#: includes/pro/class-alg-wc-cog-pro.php:473
 msgid "- No change -"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:483
+#: includes/pro/class-alg-wc-cog-pro.php:550
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:490
+#: includes/pro/class-alg-wc-cog-pro.php:557
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:493
+#: includes/pro/class-alg-wc-cog-pro.php:560
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:611
+#: includes/pro/class-alg-wc-cog-pro.php:678
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:613
+#: includes/pro/class-alg-wc-cog-pro.php:680
 #: includes/settings/class-alg-wc-cog-settings-tools.php:197
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:615
+#: includes/pro/class-alg-wc-cog-pro.php:682
 #: includes/settings/class-alg-wc-cog-settings-tools.php:198
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
@@ -271,80 +271,85 @@ msgid "Product ID"
 msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:110
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:182
+msgid "SKU"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:111
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:183
 msgid "Title"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:113
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:114
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:191
 msgid "Price"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:115
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:155
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:180
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:116
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:158
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:183
 msgid "Total Cost"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:116
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:159
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:184
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:162
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:187
 msgid "Total Price"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:163
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:180
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:184
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:118
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:166
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:183
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:187
 msgid "Total Profit"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:147
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:150
 msgid "Total Stock"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:151
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:154
 msgid "Total Products"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:167
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:170
 msgid "Average Cost"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:171
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:174
 msgid "Average Price"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:175
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:178
 msgid "Average Profit"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:179
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:182
 msgid "Profit Percentage"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:183
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:186
 msgid "Profit Margin"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:196
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:199
 msgid "Only products with cost, price and stock are counted in report."
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:197
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:200
 msgid "All prices exclude tax."
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:198
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:201
 msgid "Totals"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:201
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:204
 #: includes/settings/class-alg-wc-cog-settings-products.php:24
 msgid "Products"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:205
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:208
 msgid "There are no products with cost, price and stock."
 msgstr ""
 
@@ -676,6 +681,18 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:195
 msgid "Removes all illegal characters from a float number, like currency values for example."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:202
+msgid "WPC Product Bundles for WooCommerce"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:203
+msgid "Enable compatibility with <a target=\"_blank\" href=\"%s\">WPC Product Bundles for WooCommerce</a>"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:204
+msgid "Excludes Smart bundle product type from stock and orders report."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:24
@@ -1655,10 +1672,6 @@ msgstr ""
 
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:160
 msgid "Stock status: %s"
-msgstr ""
-
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:182
-msgid "SKU"
 msgstr ""
 
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:188

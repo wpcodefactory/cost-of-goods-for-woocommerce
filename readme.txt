@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.6
-Stable tag: 2.3.7
+Stable tag: 2.3.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,6 +82,12 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.3.8 - 22/02/2021 =
+* Dev - Tools & Reports - Reports - Stock - Add SKU reference.
+* Dev - Advanced - Add compatibility with WPC bundle products for WooCommerce.
+* Dev - Developers - Create `alg_wc_cog_stock_report_args` filter.
+* WC tested up to: 5.0.
 
 = 2.3.7 - 28/01/2021 =
 * Fix "Refund calculation" option.

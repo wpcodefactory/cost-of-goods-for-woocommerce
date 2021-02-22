@@ -199,6 +199,16 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'checkboxgroup' => 'end',
 			),
 			array(
+				'title'             => __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => sprintf( __( 'Enable compatibility with <a target="_blank" href="%s">WPC Product Bundles for WooCommerce</a>', 'cost-of-goods-for-woocommerce' ), 'https://wordpress.org/plugins/woo-product-bundle/' ),
+				'desc_tip'          => ( $original_desc_tip = __( 'Excludes Smart bundle product type from stock and orders report.', 'cost-of-goods-for-woocommerce' ) )
+				                       . empty( $message = apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this option.', '<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ) ) ? $original_desc_tip . '<br />' . $message : $original_desc_tip,
+				'id'                => 'alg_wc_cog_wpc_product_bundle_for_wc',
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_advanced_compatibility',
 			),
