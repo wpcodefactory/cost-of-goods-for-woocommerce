@@ -269,7 +269,8 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Adds order taxes like VAT to the order profit.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Adds order taxes like VAT to the order profit.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				              sprintf( __( 'Will probably make more sense if %s option is <strong>including tax</strong>.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Products > Get price method', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
 				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_taxes_to_profit',
 				'default'  => 'no',

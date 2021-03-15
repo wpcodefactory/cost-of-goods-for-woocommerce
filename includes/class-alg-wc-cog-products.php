@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.3.5
+ * @version 2.3.9
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -399,6 +399,26 @@ class Alg_WC_Cost_of_Goods_Products {
 	}
 
 	/**
+	 * get_product_price.
+	 *
+	 * @version 2.3.9
+	 * @since   2.3.9
+	 *
+	 * @param $product
+	 * @param null $args
+	 *
+	 * @return mixed
+	 */
+	function get_product_price( $product, $args = null ) {
+		$args   = wp_parse_args( $args, array(
+			'method' => get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ),
+			'params' => array()
+		) );
+		$params = array_merge( array( $product ), $args['params'] );
+		return call_user_func_array( $args['method'], $params );
+	}
+
+	/**
 	 * get_product_cost_html.
 	 *
 	 * @version 2.0.0
@@ -416,19 +436,19 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_profit.
 	 *
-	 * @version 1.1.0
+	 * @version 2.3.9
 	 * @since   1.0.0
 	 * @todo    [next] maybe check if `wc_get_price_excluding_tax()` is numeric (e.g. maybe can return range)
 	 */
 	function get_product_profit( $product_id ) {
 		$product = wc_get_product( $product_id );
-		return ( '' === ( $cost = $this->get_product_cost( $product_id ) ) || '' === ( $price = wc_get_price_excluding_tax( $product ) ) ? '' : $price - $cost );
+		return ( '' === ( $cost = $this->get_product_cost( $product_id ) ) || '' === ( $price = $this->get_product_price( $product ) ) ? '' : $price - $cost );
 	}
 
 	/**
 	 * get_product_profit_html.
 	 *
-	 * @version 2.0.0
+	 * @version 2.3.9
 	 * @since   1.0.0
 	 */
 	function get_product_profit_html( $product_id, $template = '%profit% (%profit_percent%)' ) {
@@ -442,7 +462,7 @@ class Alg_WC_Cost_of_Goods_Products {
 				$placeholders = array(
 					'%profit%'         => wc_price( $profit ),
 					'%profit_percent%' => sprintf( '%0.2f%%', ( 0 != ( $cost  = $this->get_product_cost( $product_id ) ) ? $profit / $cost  * 100 : '' ) ),
-					'%profit_margin%'  => sprintf( '%0.2f%%', ( 0 != ( $price = wc_get_price_excluding_tax( $product ) ) ? $profit / $price * 100 : '' ) ),
+					'%profit_margin%'  => sprintf( '%0.2f%%', ( 0 != ( $price = $this->get_product_price( $product ) ) ? $profit / $price * 100 : '' ) ),
 				);
 				return str_replace( array_keys( $placeholders ), $placeholders, $template );
 			}
@@ -481,8 +501,8 @@ class Alg_WC_Cost_of_Goods_Products {
 					$cost_max                         = $this->get_product_cost( $product_id_max );
 					$profit_min                       = ( 0 != $cost_min ? $min / $cost_min * 100 : '' );
 					$profit_max                       = ( 0 != $cost_max ? $max / $cost_max * 100 : '' );
-					$price_min                        = wc_get_price_excluding_tax( wc_get_product( $product_id_min ) );
-					$price_max                        = wc_get_price_excluding_tax( wc_get_product( $product_id_max ) );
+					$price_min                        = $this->get_product_price( wc_get_product( $product_id_min ) );
+					$price_max                        = $this->get_product_price( wc_get_product( $product_id_max ) );
 					$margin_min                       = ( 0 != $price_min && '' !== $min ? $min / $price_min * 100 : '' );
 					$margin_max                       = ( 0 != $price_max && '' !== $max ? $max / $price_max * 100 : '' );
 					$placeholders['%profit_percent%'] = sprintf( '%0.2f%% &ndash; %0.2f%%', $profit_min, $profit_max );
@@ -492,7 +512,7 @@ class Alg_WC_Cost_of_Goods_Products {
 				$placeholders[ "%{$profit_or_cost}%" ] = wc_price( $min );
 				if ( 'profit' === $profit_or_cost ) {
 					$cost                             = (float) $this->get_product_cost( $product_id_min );
-					$price                            = wc_get_price_excluding_tax( wc_get_product( $product_id_min ) );
+					$price                            = $this->get_product_price( wc_get_product( $product_id_min ) );
 					$placeholders['%profit_percent%'] = sprintf( '%0.2f%%', ( 0 != $cost ? $min / $cost * 100 : '' ) );
 					$placeholders['%profit_margin%']  = sprintf( '%0.2f%%', ( 0 != $price && '' !== $min ? $min / $price * 100 : '' ) );
 				}
