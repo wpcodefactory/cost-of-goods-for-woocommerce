@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.3.5
+ * @version 2.4.0
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.5
+	 * @version 2.4.0
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -247,6 +247,19 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'options'  => array(
 					'default'                          => __( 'Function', 'cost-of-goods-for-woocommerce' ),
 					'excluding_tax_with_price_from_db' => __( 'Function with meta', 'cost-of-goods-for-woocommerce' ),
+				),
+			),
+			array(
+				'title'    => __( 'Stock report', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Meta query', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Query related to costs meta in order to get the products for the stock report.', 'cost-of-goods-for-woocommerce' ).'<br />'.
+				              sprintf( __( 'Use %s if some product doesn\'t show up on the stock report, probably if you have cost values below 1', 'cost-of-goods-for-woocommerce' ), '"' . __( 'CHAR type and not empty value', 'cost-of-goods-for-woocommerce' ) . '"' ),
+				'id'       => 'alg_wc_cog_report_stock_meta_query',
+				'default'  => array( 'default' ),
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'default'  => __( 'Default', 'cost-of-goods-for-woocommerce' ),
+					'currency_as_char_and_not_empty' => __( 'Currency as Char type and not empty', 'cost-of-goods-for-woocommerce' ),
 				),
 			),
 			array(

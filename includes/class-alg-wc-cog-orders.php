@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.3.9
+ * @version 2.4.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -39,7 +39,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * get_options.
 	 *
-	 * @version 2.2.0
+	 * @version 2.4.0
 	 * @since   2.1.0
 	 * @todo    [maybe] Fees: From Meta: no `trim`?
 	 */
@@ -58,8 +58,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 			$this->shipping_costs_percent             = get_option( 'alg_wc_cog_shipping_costs_percent', array() );
 		}
 		// Fees: All Orders
-		$this->order_extra_cost_fixed                 = get_option( 'alg_wc_cog_order_extra_cost_fixed',   0 );
-		$this->order_extra_cost_percent               = get_option( 'alg_wc_cog_order_extra_cost_percent', 0 );
+		$this->order_extra_cost_fixed                 = (float) get_option( 'alg_wc_cog_order_extra_cost_fixed',   0 );
+		$this->order_extra_cost_percent               = (float) get_option( 'alg_wc_cog_order_extra_cost_percent', 0 );
 		// Fees: Per Order
 		$this->is_order_extra_cost_per_order          = array(
 			'handling' => ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_per_order_handling_fee', 'no' ) ),
@@ -169,7 +169,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * woocommerce_email_order_meta.
 	 *
-	 * @version 2.3.5
+	 * @version 2.4.0
 	 * @since   2.3.5
 	 *
 	 * @param $order_obj
@@ -205,7 +205,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			'columns_classes'    => array( 'td', 'td' ),
 		);
 		$table_data          = array(
-			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ), ( '' !== $cost ? '<span style="color:red;">' . wc_price( $cost ) . '</span>' : '' ) ),
+			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ), ( '' !== $cost ? '<span style="color:red;">' . alg_wc_cog_format_cost( $cost ) . '</span>' : '' ) ),
 			array( __( 'Profit', 'cost-of-goods-for-woocommerce' ), ( '' !== $profit ? '<span style="color:green;">' . $profit_html . '</span>' : '' ) ),
 		);
 		?>

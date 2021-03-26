@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions
  *
- * @version 2.3.5
+ * @version 2.4.0
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -129,6 +129,26 @@ if ( ! function_exists( 'alg_wc_cog_get_table_html' ) ) {
 		$html .= '</tbody>';
 		$html .= '</table>';
 		return $html;
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_format_cost' ) ) {
+	/**
+	 * alg_wc_cog_format_cost.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 *
+	 * @param float $cost Raw price.
+	 * @param array $args
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_format_cost( $cost, $args = array() ) {
+		$args = wp_parse_args( $args, array(
+			'decimals' => get_option( 'alg_wc_cog_costs_decimals', wc_get_price_decimals() )
+		) );
+		return wc_price( $cost, $args );
 	}
 }
 

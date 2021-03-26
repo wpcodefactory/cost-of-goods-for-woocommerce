@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.3.9
+ * @version 2.4.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -162,7 +162,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * product_add_stock_meta_box.
 	 *
-	 * @version 1.7.0
+	 * @version 2.4.0
 	 * @since   1.7.0
 	 * @todo    [next] add option to delete all/selected history
 	 */
@@ -182,7 +182,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		if ( $history ) {
 			$history_rows = '';
 			foreach ( $history as $date => $record ) {
-				$history_rows .= '<tr><td>' . date( 'Y-m-d', $date ) . '</td><td>' . $record['stock'] . '</td><td>' . wc_price( $record['cost'] ) . '</td></tr>';
+				$history_rows .= '<tr><td>' . date( 'Y-m-d', $date ) . '</td><td>' . $record['stock'] . '</td><td>' . alg_wc_cog_format_cost( $record['cost'] ) . '</td></tr>';
 			}
 			$html .= '<hr>' .
 				'<details>' .
@@ -421,7 +421,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_cost_html.
 	 *
-	 * @version 2.0.0
+	 * @version 2.4.0
 	 * @since   1.0.0
 	 */
 	function get_product_cost_html( $product_id ) {
@@ -429,7 +429,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		if ( $product->is_type( 'variable' ) ) {
 			return $this->get_variable_product_html( $product_id, 'cost', '%cost%' );
 		} else {
-			return ( '' === ( $cost = $this->get_product_cost( $product_id ) ) ? '' : wc_price( $cost ) );
+			return ( '' === ( $cost = $this->get_product_cost( $product_id ) ) ? '' : alg_wc_cog_format_cost( $cost ) );
 		}
 	}
 

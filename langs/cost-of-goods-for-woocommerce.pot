@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.3.9\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-15T18:17:49+01:00\n"
+"POT-Creation-Date: 2021-03-26T03:41:16+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -280,7 +280,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-cog-settings-tools.php:118
 #: includes/settings/class-alg-wc-cog-settings-tools.php:126
 #: includes/settings/class-alg-wc-cog-settings-tools.php:134
-#: includes/settings/class-alg-wc-cog-settings-tools.php:266
+#: includes/settings/class-alg-wc-cog-settings-tools.php:279
 msgid "Enable"
 msgstr ""
 
@@ -533,7 +533,7 @@ msgid "Percent from order total."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:24
-#: includes/settings/class-alg-wc-cog-settings-tools.php:265
+#: includes/settings/class-alg-wc-cog-settings-tools.php:278
 msgid "Orders"
 msgstr ""
 
@@ -960,7 +960,7 @@ msgid "This is used in admin single product edit pages, and in admin products li
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:108
-msgid "Add \"%s\" meta box to the product edit page."
+msgid "Add \"%s\" meta box to the product edit page"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:110
@@ -972,76 +972,80 @@ msgid "Sanitize cost meta"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:118
-msgid "Sanitize cost meta when updating the value"
+msgid "Replace comma by dots when updating cost meta"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:119
-msgid "Replaces comma by dots on the database."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:125
+#: includes/settings/class-alg-wc-cog-settings-products.php:124
 #: includes/settings/class-alg-wc-cog-settings-tools.php:241
 msgid "Get price method"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:126
-msgid "When using the option including tax, it will make sense to enable the option %s."
+#: includes/settings/class-alg-wc-cog-settings-products.php:125
+msgid "When using this option including tax, it will make sense to enable the option %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:126
+#: includes/settings/class-alg-wc-cog-settings-products.php:125
 msgid "Orders > Calculations > Taxes to profit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:131
+#: includes/settings/class-alg-wc-cog-settings-products.php:130
 msgid "Get price excluding tax"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:132
+#: includes/settings/class-alg-wc-cog-settings-products.php:131
 msgid "Get price including tax"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:144
+#: includes/settings/class-alg-wc-cog-settings-products.php:136
+msgid "Cost decimals"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:137
+msgid "Number of decimal points shown in displayed costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:150
 msgid "Quick and Bulk Edit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:151
+#: includes/settings/class-alg-wc-cog-settings-products.php:157
 msgid "Cost field"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:152
-#: includes/settings/class-alg-wc-cog-settings-products.php:161
+#: includes/settings/class-alg-wc-cog-settings-products.php:158
+#: includes/settings/class-alg-wc-cog-settings-products.php:167
 msgid "Add \"Cost\" field to product \"%s\""
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:153
-#: includes/settings/class-alg-wc-cog-settings-products.php:180
+#: includes/settings/class-alg-wc-cog-settings-products.php:159
+#: includes/settings/class-alg-wc-cog-settings-products.php:186
 msgid "Quick Edit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:162
-#: includes/settings/class-alg-wc-cog-settings-products.php:189
+#: includes/settings/class-alg-wc-cog-settings-products.php:168
+#: includes/settings/class-alg-wc-cog-settings-products.php:195
 msgid "Bulk Actions"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:162
-#: includes/settings/class-alg-wc-cog-settings-products.php:189
+#: includes/settings/class-alg-wc-cog-settings-products.php:168
+#: includes/settings/class-alg-wc-cog-settings-products.php:195
 msgid "Edit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:170
-msgid "Replace all variations from the main variable product."
+#: includes/settings/class-alg-wc-cog-settings-products.php:176
+msgid "Replace all variations from the main variable product"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:171
+#: includes/settings/class-alg-wc-cog-settings-products.php:177
 msgid "The cost field from the main variable product will replace the cost of all variations."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:178
+#: includes/settings/class-alg-wc-cog-settings-products.php:184
 msgid "\"Add stock\" fields"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:179
-#: includes/settings/class-alg-wc-cog-settings-products.php:188
+#: includes/settings/class-alg-wc-cog-settings-products.php:185
+#: includes/settings/class-alg-wc-cog-settings-products.php:194
 msgid "Add \"Add stock\" fields to product \"%s\""
 msgstr ""
 
@@ -1328,6 +1332,7 @@ msgid "Meta fees (all)"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:241
+#: includes/settings/class-alg-wc-cog-settings-tools.php:253
 msgid "Stock report"
 msgstr ""
 
@@ -1343,11 +1348,35 @@ msgstr ""
 msgid "Function with meta"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:260
+#: includes/settings/class-alg-wc-cog-settings-tools.php:253
+msgid "Meta query"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:254
+msgid "Query related to costs meta in order to get the products for the stock report."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:255
+msgid "Use %s if some product doesn't show up on the stock report, probably if you have cost values below 1"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:255
+msgid "CHAR type and not empty value"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:261
+msgid "Default"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:262
+msgid "Currency as Char type and not empty"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:273
 msgid "Analytics"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:267
+#: includes/settings/class-alg-wc-cog-settings-tools.php:280
 msgid "Will add \"Cost\" and \"Profit\" columns to the \"Analytics > Orders\" report."
 msgstr ""
 

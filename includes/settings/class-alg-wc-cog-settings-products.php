@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings
  *
- * @version 2.3.9
+ * @version 2.4.0
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.9
+	 * @version 2.4.0
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -105,7 +105,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Add "%s" meta box to the product edit page.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Add "%s" meta box to the product edit page', 'cost-of-goods-for-woocommerce' ),
 					__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ),
 				'desc_tip' => __( 'This will automatically calculate new average cost of goods for the product, based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
 				              __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ),
@@ -115,15 +115,14 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( 'Sanitize cost meta', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Sanitize cost meta when updating the value', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Replaces comma by dots on the database.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Replace comma by dots when updating cost meta', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_sanitize_cog_meta',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
 			array(
 				'title'    => __( 'Get price method', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'When using the option including tax, it will make sense to enable the option %s.', 'cost-of-goods-for-woocommerce' ), __( 'Orders > Calculations > Taxes to profit', 'cost-of-goods-for-woocommerce' ) ),
+				'desc_tip' => sprintf( __( 'When using this option including tax, it will make sense to enable the option %s.', 'cost-of-goods-for-woocommerce' ), '"' . __( 'Orders > Calculations > Taxes to profit', 'cost-of-goods-for-woocommerce' ) . '"' ),
 				'id'       => 'alg_wc_cog_products_get_price_method',
 				'default'  => 'wc_get_price_excluding_tax',
 				'type'     => 'select',
@@ -132,6 +131,13 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 					'wc_get_price_including_tax' => __( 'Get price including tax', 'cost-of-goods-for-woocommerce' ),
 				),
 				'class'    => 'chosen_select',
+			),
+			array(
+				'title'    => __( 'Cost decimals', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Number of decimal points shown in displayed costs.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_costs_decimals',
+				'default'  => wc_get_price_decimals(),
+				'type'     => 'number',
 			),
 			array(
 				'type'     => 'sectionend',
@@ -167,7 +173,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
-				'desc'          => __( 'Replace all variations from the main variable product.', 'cost-of-goods-for-woocommerce' ),
+				'desc'          => __( 'Replace all variations from the main variable product', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip'      => __( 'The cost field from the main variable product will replace the cost of all variations.', 'cost-of-goods-for-woocommerce' ),
 				'id'            => 'alg_wc_cog_products_quick_edit_replace_variations',
 				'default'       => 'no',

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class
  *
- * @version 2.3.5
+ * @version 2.4.0
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -50,7 +50,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 2.3.5
+	 * @version 2.4.0
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
@@ -69,7 +69,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		$profit_html         = str_replace( array_keys( $profit_placeholders ), $profit_placeholders, $profit_template );
 		$table_args          = array( 'table_heading_type' => 'vertical', 'table_class' => 'widefat', 'columns_styles' => array( '', 'text-align:right;' ) );
 		$table_data          = array(
-			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ),   ( '' !== $cost   ? '<span style="color:red;">'   . wc_price( $cost ) . '</span>' : '' ) ),
+			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ),   ( '' !== $cost   ? '<span style="color:red;">'   . alg_wc_cog_format_cost( $cost ) . '</span>' : '' ) ),
 			array( __( 'Profit', 'cost-of-goods-for-woocommerce' ), ( '' !== $profit ? '<span style="color:green;">' . $profit_html      . '</span>' : '' ) ),
 		);
 		echo alg_wc_cog_get_table_html( $table_data, $table_args );
@@ -91,7 +91,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		foreach ( $cost_meta_keys as $key => $value ) {
 			$cost = get_post_meta( $order_id, $key, true );
 			if ( 0 != $cost ) {
-				$table_data[] = array( $value, wc_price( $cost ) );
+				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost ) );
 			}
 		}
 		if ( count( $table_data ) > 1 ) {

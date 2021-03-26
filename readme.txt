@@ -3,7 +3,7 @@ Contributors: wpcodefactory
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.7
-Stable tag: 2.3.9
+Stable tag: 2.4.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,6 +82,12 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.4.0 - 25/03/2021 =
+* Fix - Advanced - Openpos - Some info doesn't reflect the "Order types" option.
+* Fix - Orders - Extra Costs: All Orders - Unsupported operand types.
+* Dev - Tools & Reports - Reports - Add "Stock report: Meta query" option.
+* Dev - Products - Add "Cost decimals" option.
 
 = 2.3.9 - 15/03/2021 =
 * Dev - Advanced - Add compatibility with "Openpos - WooCommerce Point Of Sale" plugin allowing to manage POS orders on orders reports.
