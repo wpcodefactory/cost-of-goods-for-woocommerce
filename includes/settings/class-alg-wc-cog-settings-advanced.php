@@ -59,7 +59,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( 'Restrict by user role', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => empty( $message = apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this option.', '<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ) ) ? __( 'Allowed user roles.', 'cost-of-goods-for-woocommerce' ) : $message,
+				'desc'     => __( 'Allowed user roles.', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'Only the selected user roles will be able to see and edit plugin data.', 'cost-of-goods-for-woocommerce' )
 				              .' '. __( 'Leave it empty to show the plugin data for all user roles.', 'cost-of-goods-for-woocommerce' )
 				              .'<br />'. __( 'The administrator can\'t be blocked.', 'cost-of-goods-for-woocommerce' ),
@@ -174,8 +174,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'title'             => __( 'WP All Import', 'cost-of-goods-for-woocommerce' ),
 				'desc'              => sprintf( __( 'Enable compatibility with <a target="_blank" href="%s">WP All Import</a>', 'cost-of-goods-for-woocommerce' ), 'https://wordpress.org/plugins/wp-all-import/' ),
-				'desc_tip'          => ( $original_desc_tip = __( 'Makes fine adjustments when importing a cost value to <code>_alg_wc_cog_cost</code> meta using the <strong>WP All Import</strong> plugin.', 'cost-of-goods-for-woocommerce' ) )
-				                       . empty( $message = apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this option.', '<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ) ) ? $original_desc_tip . '<br />' . $message : $original_desc_tip,
+				'desc_tip'          => __( 'Makes fine adjustments when importing a cost value to <code>_alg_wc_cog_cost</code> meta using the <strong>WP All Import</strong> plugin.', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_wp_all_import',
 				'default'           => 'no',
 				'type'              => 'checkbox',
@@ -201,8 +200,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'title'             => __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ),
 				'desc'              => sprintf( __( 'Enable compatibility with <a target="_blank" href="%s">%s</a>', 'cost-of-goods-for-woocommerce' ), 'https://wordpress.org/plugins/woo-product-bundle/', __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ) ),
-				'desc_tip'          => ( $original_desc_tip = __( 'Excludes Smart bundle product type from stock and orders report.', 'cost-of-goods-for-woocommerce' ) )
-				                       . empty( $message = apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this option.', '<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ) ) ? $original_desc_tip . '<br />' . $message : $original_desc_tip,
+				'desc_tip'          => __( 'Excludes Smart bundle product type from stock and orders report.', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_wpc_product_bundle_for_wc',
 				'default'           => 'no',
 				'type'              => 'checkbox',
@@ -214,8 +212,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 					__( 'Enable compatibility with <a target="_blank" href="%s">%s</a> by <a href="%s" target="_blank">anhvnit</a> codenayon author.', 'cost-of-goods-for-woocommerce' ),
 					'https://codecanyon.net/item/openpos-a-complete-pos-plugins-for-woocomerce/22613341', __( 'Openpos - WooCommerce Point Of Sale', 'cost-of-goods-for-woocommerce' ), 'https://codecanyon.net/user/anhvnit'
 				),
-				'desc_tip'          => ( $original_desc_tip = __( 'Manages POS orders on orders reports.', 'cost-of-goods-for-woocommerce' ) )
-				                       . empty( $message = apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this option.', '<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ) ) ? $original_desc_tip . '<br />' . $message : $original_desc_tip,
+				'desc_tip'          => __( 'Manages POS orders on orders reports.', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_openpos_anhvnit',
 				'default'           => 'no',
 				'type'              => 'checkbox',

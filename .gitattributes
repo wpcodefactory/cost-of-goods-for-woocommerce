@@ -1,0 +1,10 @@
+.wordpress-org/ export-ignore
+.gitignore export-ignore
+includes/analytics/README.md export-ignore
+includes/analytics/package.json export-ignore
+includes/analytics/package-lock.json export-ignore
+includes/analytics/node_modules/
+includes/analytics/webpack.config.js
+includes/analytics/.prettierrc.json export-ignore
+includes/analytics/.gitignore export-ignore
+includes/analytics/.eslintrc.js export-ignore

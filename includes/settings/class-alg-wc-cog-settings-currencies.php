@@ -45,8 +45,6 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 			array(
 				'title'    => __( 'Multicurrency', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => '<strong>' . __( 'Enable section', 'cost-of-goods-for-woocommerce' ) . '</strong>',
-				'desc_tip' => apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this section.',
-					'<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ),
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_currencies_enabled',
 				'default'  => 'no',

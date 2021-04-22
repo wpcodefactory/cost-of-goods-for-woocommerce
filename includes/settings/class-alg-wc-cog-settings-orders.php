@@ -207,7 +207,6 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'desc'              => __( 'Display the order cost and profit on the admin new order email', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_order_admin_new_order_email_profit_and_cost',
 				'default'           => 'no',
-				'desc_tip'          => apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this section.','<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ),
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 				'type'              => 'checkbox',
 			),

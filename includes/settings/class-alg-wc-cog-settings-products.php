@@ -148,8 +148,6 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 		$product_quick_bulk_edit_settings = array(
 			array(
 				'title'    => __( 'Quick and Bulk Edit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to unlock disabled options.',
-					'<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_products_quick_bulk_edit_options',
 			),

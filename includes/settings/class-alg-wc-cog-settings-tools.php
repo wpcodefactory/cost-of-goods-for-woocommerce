@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.4.0
+ * @version 2.4.1
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.1
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -149,10 +149,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'title'    => __( 'Recalculate orders cost and profit', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Recalculate for all orders', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'Set items costs in all orders (overriding previous costs).', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( 'Enable the checkbox and "Save changes" to run the tool.', 'cost-of-goods-for-woocommerce' ) .
-					apply_filters( 'alg_wc_cog_settings', '<br>' . sprintf( 'You will need %s plugin to use this tool.',
-						'<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' .
-							'Cost of Goods for WooCommerce Pro' . '</a>' ) ),
+					__( 'Enable the checkbox and "Save changes" to run the tool.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_recalculate_orders_cost_and_profit_all',
 				'default'  => 'no',
@@ -161,10 +158,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			array(
 				'desc'     => __( 'Recalculate for orders with no costs', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'Set items costs in orders that do not have costs set.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( 'Enable the checkbox and "Save changes" to run the tool.', 'cost-of-goods-for-woocommerce' ) .
-					apply_filters( 'alg_wc_cog_settings', '<br>' . sprintf( 'You will need %s plugin to use this tool.',
-						'<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' .
-							'Cost of Goods for WooCommerce Pro' . '</a>' ) ),
+					__( 'Enable the checkbox and "Save changes" to run the tool.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_recalculate_orders_cost_and_profit_no_costs',
 				'default'  => 'no',
@@ -270,21 +264,31 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 
 		$analytics_settings = array(
 			array(
-				'title'    => __( 'Analytics', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_cog_analytics_options',
+				'title' => __( 'Analytics > Orders', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => sprintf( __( 'Options related to the orders reports from analytics, located at <a href="%s">"Analytics > Orders"</a>.', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wc-admin&path=%2Fanalytics%2Forders' ) ) . '<br />' .
+				           sprintf( __( 'If you can\'t see the values refreshed or have issues with the analytics page, please try to <a href="%s">clear analytics cache</a>.', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wc-status&tab=tools' ) ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_analytics_orders_options',
 			),
 			array(
-				'title'    => __( 'Orders', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Will add "Cost" and "Profit" columns to the "Analytics > Orders" report.', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Cost and Profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add "Cost" and "Profit" columns ', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_analytics_orders',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+				'checkboxgroup'=>'start'
+			),
+			array(
+				'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_analytics_orders_cost_profit_totals',
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'checkboxgroup'     => 'end',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
 				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_analytics_options',
+				'id'       => 'alg_wc_cog_analytics_orders_options',
 			),
 		);
 
