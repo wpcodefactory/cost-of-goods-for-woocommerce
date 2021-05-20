@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions
  *
- * @version 2.4.0
+ * @version 2.4.2
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -172,5 +172,30 @@ if ( ! function_exists( 'alg_wc_cog_is_user_allowed' ) ) {
 			return true;
 		}
 		return false;
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_array_to_string' ) ) {
+	/**
+	 * converts array to string.
+	 *
+	 * @version 2.4.2
+	 * @since   2.4.2
+	 *
+	 * @param $arr
+	 * @param array $args
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_array_to_string( $arr, $args = array() ) {
+		$args            = wp_parse_args( $args, array(
+			'glue'          => ', ',
+			'item_template' => '{value}' //  {key} and {value} allowed
+		) );
+		$transformed_arr = array_map( function ( $key, $value ) use ( $args ) {
+			$item = str_replace( array( '{key}', '{value}' ), array( $key, $value ), $args['item_template'] );
+			return $item;
+		}, array_keys( $arr ), $arr );
+		return implode( $args['glue'], $transformed_arr );
 	}
 }

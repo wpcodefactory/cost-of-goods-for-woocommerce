@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.4.0
+ * @version 2.4.2
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -541,7 +541,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.3.9
+	 * @version 2.4.2
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -611,6 +611,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 				}
 				if ( '' != $cost ) {
 					$cost         = str_replace( ',', '.', $cost );
+					$cost = (float) $cost;
 					$line_cost    = $cost * $item['qty'];
 					$item_line_total = $item['line_total'];
 					if ( 'profit_and_price_based_on_item_refunded_amount' == $refund_calc_method ) {

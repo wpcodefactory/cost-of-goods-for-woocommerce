@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings
  *
- * @version 2.4.0
+ * @version 2.4.2
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.2
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -37,7 +37,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 
 		$product_columns_settings = array(
 			array(
-				'title'    => __( 'Admin Products List Columns', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Admin products list columns', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'desc'     => sprintf( __( 'This section lets you add custom columns to WooCommerce admin %s.', 'cost-of-goods-for-woocommerce' ),
 					'<a href="' . admin_url( 'edit.php?post_type=product' ) . '">' . __( 'products list', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
@@ -45,17 +45,38 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( 'Product cost', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add product cost column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_columns_cost',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
 			array(
+				'desc'     => sprintf( __( 'Column width (%s)', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
+				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_columns_cost_width',
+				'default'  => '10',
+				'type'     => 'number',
+			),
+			array(
 				'title'    => __( 'Product profit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add product profit column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_columns_profit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => sprintf( __( 'Column width (%s)', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
+				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_columns_profit_width',
+				'default'  => '11',
+				'type'     => 'number',
+			),
+			array(
+				'title'    => __( 'Width unit', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Any CSS unit can be used, like px, %, ch, and so on...', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_columns_width_unit',
+				'default'  => '%',
+				'type'     => 'text',
 			),
 			array(
 				'type'     => 'sectionend',
@@ -65,7 +86,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 
 		$product_settings = array(
 			array(
-				'title'    => __( 'General Options', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'General options', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_products_options',
 			),
@@ -104,16 +125,6 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'text',
 			),
 			array(
-				'title'    => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Add "%s" meta box to the product edit page', 'cost-of-goods-for-woocommerce' ),
-					__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ),
-				'desc_tip' => __( 'This will automatically calculate new average cost of goods for the product, based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
-				              __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_add_stock',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
 				'title'    => __( 'Sanitize cost meta', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Replace comma by dots when updating cost meta', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_sanitize_cog_meta',
@@ -142,6 +153,67 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_products_options',
+			),
+		);
+
+		$add_stock_settings = array(
+			array(
+				'title' => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => __( 'This will automatically calculate new average cost of goods for the product, based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				           __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_add_stock_options',
+			),
+			array(
+				'title'    => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Add "%s" meta box to the product edit page', 'cost-of-goods-for-woocommerce' ),
+					__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ),
+				'id'       => 'alg_wc_cog_products_add_stock',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Cost calculation expression', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Available placeholders: ', 'cost-of-goods-for-woocommerce' ) .
+				              alg_wc_cog_array_to_string( array(
+					              'stock_prev',
+					              'cost_prev',
+					              'stock',
+					              'cost',
+					              'stock_now'
+				              ), array( 'item_template' => '<code>%{value}%</code>' ) ),
+				'desc_tip' => __( 'The expression used to calculate the new average cost of the product.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_add_stock_cost_calculation',
+				'default'  => '( %stock_prev% * %cost_prev% + %stock% * %cost% ) / %stock_now%',
+				'type'     => 'text',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'title'             => __( 'Empty cost field', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'The cost value considered when the field is empty', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'          => __( 'Use this option if you want to Add stock without worrying about filling the cost value.', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_products_add_stock_empty_cost_action',
+				'default'           => 'do_nothing',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'type'              => 'select',
+				'class'             => 'chosen_select',
+				'options' => array(
+					'do_nothing'       => __( 'Prevents calculation', 'cost-of-goods-for-woocommerce' ),
+					'use_last_cost'    => __( 'Uses last cost value from "Add stock" history', 'cost-of-goods-for-woocommerce' ),
+					'use_current_cost' => __( 'Uses current cost', 'cost-of-goods-for-woocommerce' ),
+				)
+			),
+			array(
+				'title'    => __( 'Negative stock', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Allow negative stock values', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'If enabled, the stock may also be reduced.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_add_stock_negative_stock',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'type' => 'sectionend',
+				'id'   => 'alg_wc_cog_add_stock_options',
 			),
 		);
 
@@ -204,8 +276,9 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 		);
 
 		return array_merge(
-			$product_columns_settings,
 			$product_settings,
+			$product_columns_settings,
+			$add_stock_settings,
 			$product_quick_bulk_edit_settings
 		);
 	}

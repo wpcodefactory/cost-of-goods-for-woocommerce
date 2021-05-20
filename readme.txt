@@ -83,9 +83,19 @@ And then you can follow these steps:
 
 == Changelog ==
 
+= 2.4.2 - 20/05/2021 =
+* Fix - Unsupported operand types: string * int on alg-wc-cog-orders.php:614 on PHP 8.
+* Fix - Unsupported operand types: float - string on PHP 8.
+* Dev - Products - Admin products list columns - Add "Column width" option for cost and profit.
+* Dev - Products - Admin products list columns - Add "Column width unit" option for cost and profit.
+* Dev - Products - Add stock - Add "Cost calculation expression" option.
+* Dev - Products - Add stock - Add "Empty cost field" option.
+* Dev - Products - Add stock - Add "Negative stock" option.
+* WC tested up to: 5.3.
+
 = 2.4.1 - 21/04/2021 =
-* Dev - Tools & Reports - Analytics > Orders - Add "Cost" and "Profit" totals to the report charts.
 * Fix - Tools & Reports - Analytics > Orders - Format "Cost" and "Profit" columns as currency.
+* Dev - Tools & Reports - Analytics > Orders - Add "Cost" and "Profit" totals to the report charts.
 * Add notice on settings page regarding pro version.
 * WC tested up to: 5.2.
 

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.4.0
+ * @version 2.4.2
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -47,7 +47,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.3.5
+	 * @version 2.4.2
 	 * @since   2.1.0
 	 */
 	function add_hooks() {
@@ -68,6 +68,7 @@ class Alg_WC_Cost_of_Goods_Products {
 				add_filter( 'manage_edit-product_sortable_columns',              array( $this, 'product_sortable_columns' ) );
 				add_action( 'pre_get_posts',                                     array( $this, 'product_pre_get_posts_order_by_column' ) );
 			}
+			add_action( 'admin_head-edit.php',                                   array( $this, 'handle_product_columns_style' ) );
 		}
 		// Products > Export (WooCommerce)
 		add_filter( 'woocommerce_product_export_column_names',                   array( $this, 'add_export_column' ) );
@@ -82,6 +83,33 @@ class Alg_WC_Cost_of_Goods_Products {
 		add_action( 'save_post_product',                                         array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
 		// Sanitize cog meta (_alg_wc_cog_cost)
 		add_filter( 'sanitize_post_meta_' . '_alg_wc_cog_cost',                  array( $this, 'sanitize_cog_meta' ) );
+	}
+
+	/**
+	 * handle_product_columns_style.
+	 *
+	 * @version 2.4.2
+	 * @since   2.4.2
+	 */
+	function handle_product_columns_style() {
+		global $post_type;
+		if ( 'product' !== $post_type ) {
+			return;
+		}
+		$width_unit         = get_option( 'alg_wc_cog_products_columns_width_unit', '%' );
+		$cost_width_style   = empty( $cost_width = get_option( 'alg_wc_cog_products_columns_cost_width', '10' ) ) ? '' : 'width:' . intval( $cost_width ) . $width_unit;
+		$profit_width_style = empty( $profit_width = get_option( 'alg_wc_cog_products_columns_profit_width', '10' ) ) ? '' : 'width:' . intval( $profit_width ) . $width_unit;
+		?>
+		<style>
+			.wp-list-table .column-cost {
+			<?php echo $cost_width_style; ?>
+			}
+
+			.wp-list-table .column-profit {
+			<?php echo $profit_width_style; ?>
+			}
+		</style>
+		<?php
 	}
 
 	/**
@@ -130,7 +158,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_add_stock_bulk_and_quick_edit_fields.
 	 *
-	 * @version 2.3.5
+	 * @version 2.4.2
 	 * @since   2.3.5
 	 *
 	 * @todo Try to understand why the tip doesn't work on quick edit but does work on bulk edit.
@@ -138,6 +166,8 @@ class Alg_WC_Cost_of_Goods_Products {
 	 * @return string
 	 */
 	function get_add_stock_bulk_and_quick_edit_fields() {
+		$negative_stock_allowed = 'yes' === get_option( 'alg_wc_cog_products_add_stock_negative_stock', 'no' );
+		$add_stock_input_min = $negative_stock_allowed ? '' : 'min="0"';
 		//$tip = wc_help_tip( __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ) );
 		ob_start();
 		?>
@@ -146,7 +176,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		<label>
 			<span class="title"><?php echo __( 'Stock', 'cost-of-goods-for-woocommerce' ) ?></span>
 			<span class="input-text-wrap">
-				<input name="_alg_wc_cog_add_stock_qb" id="_alg_wc_cog_add_stock_qb" class="short" type="number" min="0">
+				<input name="_alg_wc_cog_add_stock_qb" id="_alg_wc_cog_add_stock_qb" class="short" type="number" <?php echo $add_stock_input_min; ?>>
 			</span>
 		</label>
 		<label>
@@ -162,16 +192,19 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * product_add_stock_meta_box.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.2
 	 * @since   1.7.0
 	 * @todo    [next] add option to delete all/selected history
 	 */
 	function product_add_stock_meta_box( $post ) {
+		$negative_stock_allowed = 'yes' === get_option( 'alg_wc_cog_products_add_stock_negative_stock', 'no' );
+		$add_stock_input_min = $negative_stock_allowed ? '' : 'min="0"';
+
 		$html  = '';
 		$html .= '<table class="widefat striped"><tbody>' .
 				'<tr>' .
 					'<th><label for="alg_wc_cog_add_stock">' . __( 'Stock', 'cost-of-goods-for-woocommerce' ) . '</label></th>' .
-					'<td><input name="alg_wc_cog_add_stock" id="alg_wc_cog_add_stock" class="short" type="number" min="0"></td>' .
+					'<td><input name="alg_wc_cog_add_stock" id="alg_wc_cog_add_stock" class="short" type="number" '.$add_stock_input_min.'></td>' .
 				'</tr>' .
 				'<tr>' .
 					'<th><label for="alg_wc_cog_add_stock">' . __( 'Cost', 'cost-of-goods-for-woocommerce' ) . '</label></th>' .
@@ -203,13 +236,25 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * save_product_add_stock.
 	 *
-	 * @version 2.1.0
+	 * @version 2.4.2
 	 * @since   1.7.0
 	 * @todo    [next] handle variable products (also unset `$_POST['variable_stock']`)
 	 * @todo    [maybe] remove `$this->is_add_stock`
 	 */
 	function save_product_add_stock( $product_id, $post ) {
-		if ( $this->is_add_stock && ! empty( $_POST['alg_wc_cog_add_stock'] ) && ! empty( $_POST['alg_wc_cog_add_stock_cost'] ) ) {
+		if (
+			$this->is_add_stock
+			&& ! empty( $_POST['alg_wc_cog_add_stock'] )
+			&&
+			(
+				'do_nothing' !== ( $empty_cost_action = get_option( 'alg_wc_cog_products_add_stock_empty_cost_action', 'do_nothing' ) )
+				||
+				(
+					'do_nothing' === $empty_cost_action
+					&& ! empty( $_POST['alg_wc_cog_add_stock_cost'] )
+				)
+			)
+		) {
 			$this->product_add_stock( $product_id, floatval( $_POST['alg_wc_cog_add_stock'] ), floatval( $_POST['alg_wc_cog_add_stock_cost'] ) );
 			if ( isset( $_POST['_stock'] ) ) {
 				unset( $_POST['_stock'] );
@@ -218,25 +263,126 @@ class Alg_WC_Cost_of_Goods_Products {
 	}
 
 	/**
+	 * sanitize_math_expression.
+	 *
+	 * @version 2.4.2
+	 * @since   2.4.2
+	 *
+	 * @param $expression
+	 *
+	 * @return null|string|string[]
+	 */
+	function sanitize_math_expression( $expression ) {
+		// Remove whitespace from string.
+		$expression = preg_replace( '/\s+/', '', $expression );
+
+		// Trim invalid start/end characters.
+		$expression = rtrim( ltrim( $expression, "\t\n\r\0\x0B+*/" ), "\t\n\r\0\x0B+-*/" );
+		return $expression;
+	}
+
+	/**
+	 * get_add_stock_cost.
+	 *
+	 * @version 2.4.2
+	 * @since   2.4.2
+	 *
+	 * @param null $args
+	 *
+	 * @return bool|float
+	 */
+	function get_add_stock_cost( $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'cost'              => '',
+			'product_id'        => '',
+			'empty_cost_action' => get_option( 'alg_wc_cog_products_add_stock_empty_cost_action', 'do_nothing' )
+		) );
+		$cost = $args['cost'];
+		if ( empty( $cost ) ) {
+			switch ( $args['empty_cost_action'] ) {
+				case 'do_nothing':
+					$cost = false;
+					break;
+				case 'use_last_cost':
+					$history = get_post_meta( $args['product_id'], '_alg_wc_cog_cost_history', true );
+					if ( ! $history || ! is_array( $history ) ) {
+						$cost = false;
+					} else {
+						$cost = array_values( array_slice( $history, - 1 ) )[0]['cost'];
+					}
+					break;
+				case 'use_current_cost':
+					$cost = $this->get_product_cost( $args['product_id'] );
+					break;
+
+			}
+		}
+		return $cost;
+	}
+
+	/**
+	 * calculate_add_stock_cost.
+	 *
+	 * @version 2.4.2
+	 * @since   2.4.2
+	 *
+	 * @param null $args
+	 *
+	 * @return mixed
+	 */
+	function calculate_add_stock_cost( $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'product_id'           => '',
+			'template_variables'   => array(
+				'%stock_prev%' => '',
+				'%cost_prev%'  => '',
+				'%stock%'      => '',
+				'%cost%'       => '',
+				'%stock_now%'  => '',
+			),
+			'calculation_template' => get_option( 'alg_wc_cog_products_add_stock_cost_calculation', '( %stock_prev% * %cost_prev% + %stock% * %cost% ) / %stock_now%' )
+		) );
+		$template_variables = $args['template_variables'];
+		$cost_calculation_template = $args['calculation_template'];
+		$cost_calculation_template = $this->sanitize_math_expression( str_replace( array_keys( $template_variables ), $template_variables, $cost_calculation_template ) );
+		include_once WC()->plugin_path() . '/includes/libraries/class-wc-eval-math.php';
+		$cost_now = WC_Eval_Math::evaluate( $cost_calculation_template );
+		return $cost_now;
+	}
+
+	/**
 	 * product_add_stock.
 	 *
-	 * @version 2.3.4
+	 * @version 2.4.2
 	 * @since   1.7.0
 	 * @todo    [next] maybe use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`?
 	 * @todo    [maybe] `$cost_now`: round?
 	 */
 	function product_add_stock( $product_id, $stock, $cost ) {
+		$cost = $this->get_add_stock_cost( array(
+			'cost'       => $cost,
+			'product_id' => $product_id
+		) );
 		$stock_prev = get_post_meta( $product_id, '_stock', true );
 		if ( ! $stock_prev ) {
 			$stock_prev = 0;
 		}
 		$stock_now  = ( $stock_prev + $stock );
-		if ( 0 != $stock_now ) {
+		if ( 0 != $stock_now && false !== $cost) {
 			$cost_prev = $this->get_product_cost( $product_id );
 			if ( ! $cost_prev ) {
 				$cost_prev = 0;
 			}
-			$cost_now  = ( $stock_prev * $cost_prev + $stock * $cost ) / $stock_now;
+			$cost_now = $this->calculate_add_stock_cost( array(
+				'product_id'         => $product_id,
+				'template_variables' => array(
+					'%stock_prev%' => $stock_prev,
+					'%cost_prev%'  => $cost_prev,
+					'%stock%'      => $stock,
+					'%cost%'       => $cost,
+					'%stock_now%'  => $stock_now,
+				)
+			) );
 			update_post_meta( $product_id, '_alg_wc_cog_cost', $cost_now );
 			update_post_meta( $product_id, '_stock', $stock_now );
 			$history = get_post_meta( $product_id, '_alg_wc_cog_cost_history', true );
@@ -379,7 +525,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_cost.
 	 *
-	 * @version 2.3.4
+	 * @version 2.4.2
 	 * @since   1.0.0
 	 */
 	function get_product_cost( $product_id, $args = null ) {
@@ -395,7 +541,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		) {
 			$cost = get_post_meta( $parent_id, '_alg_wc_cog_cost', true );
 		}
-		return apply_filters( 'alg_wc_cog_get_product_cost', str_replace( ',', '.', $cost ), $product_id, isset( $parent_id ) ? $parent_id : null, $args );
+		return apply_filters( 'alg_wc_cog_get_product_cost', (float) str_replace( ',', '.', $cost ), $product_id, isset( $parent_id ) ? $parent_id : null, $args );
 	}
 
 	/**
