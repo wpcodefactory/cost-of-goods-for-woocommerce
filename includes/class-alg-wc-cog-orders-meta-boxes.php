@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class
  *
- * @version 2.4.0
+ * @version 2.4.3
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -50,7 +50,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 2.4.0
+	 * @version 2.4.3
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
@@ -76,17 +76,19 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		// Cost details
 		$table_data     = array();
 		$cost_meta_keys = array(
-			'_alg_wc_cog_order_items_cost'              => __( 'Item costs', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_shipping_cost_fixed'     => __( 'Shipping method fee (fixed)', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_shipping_cost_percent'   => __( 'Shipping method fee (percent)', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_gateway_cost_fixed'      => __( 'Gateway fee (fixed)', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_gateway_cost_percent'    => __( 'Gateway fee (percent)', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_extra_cost_fixed'        => __( 'Order fee (fixed)', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_extra_cost_percent'      => __( 'Order fee (percent)', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_' . 'handling' . '_fee'  => __( 'Handling fee', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_' . 'shipping' . '_fee'  => __( 'Shipping fee', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_' . 'payment' . '_fee'   => __( 'Payment fee', 'cost-of-goods-for-woocommerce' ),
-			'_alg_wc_cog_order_extra_cost_from_meta'    => __( 'Meta fees', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_items_cost'                    => __( 'Item costs', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_shipping_cost_fixed'           => __( 'Shipping method fee (fixed)', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_shipping_cost_percent'         => __( 'Shipping method fee (percent)', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_shipping_classes_cost_fixed'   => __( 'Shipping class fee (fixed)', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_shipping_classes_cost_percent' => __( 'Shipping class fee (percent)', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_gateway_cost_fixed'            => __( 'Gateway fee (fixed)', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_gateway_cost_percent'          => __( 'Gateway fee (percent)', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_extra_cost_fixed'              => __( 'Order fee (fixed)', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_extra_cost_percent'            => __( 'Order fee (percent)', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_' . 'handling' . '_fee'        => __( 'Handling fee', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_' . 'shipping' . '_fee'        => __( 'Shipping fee', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_' . 'payment' . '_fee'         => __( 'Payment fee', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_extra_cost_from_meta'          => __( 'Meta fees', 'cost-of-goods-for-woocommerce' ),
 		);
 		foreach ( $cost_meta_keys as $key => $value ) {
 			$cost = get_post_meta( $order_id, $key, true );

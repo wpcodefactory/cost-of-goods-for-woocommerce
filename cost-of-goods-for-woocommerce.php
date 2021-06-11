@@ -3,18 +3,20 @@
 Plugin Name: Cost of Goods for WooCommerce
 Plugin URI: https://wpfactory.com/item/cost-of-goods-for-woocommerce/
 Description: Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
-Version: 2.4.2
+Version: 2.4.3
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: cost-of-goods-for-woocommerce
 Domain Path: /langs
 Copyright: © 2021 WPFactory
-WC tested up to: 5.3
+WC tested up to: 5.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 
@@ -33,7 +35,7 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.4.2';
+	public $version = '2.4.3';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class
@@ -61,7 +63,7 @@ final class Alg_WC_Cost_of_Goods {
 	/**
 	 * Alg_WC_Cost_of_Goods Constructor.
 	 *
-	 * @version 2.3.3
+	 * @version 2.4.3
 	 * @since   1.0.0
 	 * @access  public
 	 */
@@ -80,7 +82,7 @@ final class Alg_WC_Cost_of_Goods {
 
 		// Pro
 		if ( 'cost-of-goods-for-woocommerce-pro.php' === basename( __FILE__ ) ) {
-			require_once( 'includes/pro/class-alg-wc-cog-pro.php' );
+			$this->pro = require_once( 'includes/pro/class-alg-wc-cog-pro.php' );
 		}
 
 		// Include required files
@@ -90,6 +92,25 @@ final class Alg_WC_Cost_of_Goods {
 		if ( is_admin() ) {
 			$this->admin();
 		}
+
+		// Generate documentation
+		add_filter( 'wpfpdh_documentation_params_' . plugin_basename( $this->get_filesystem_path() ), array( $this, 'handle_documentation_params' ), 10 );
+	}
+
+	/**
+	 * Handle documentation params managed by the WP Factory
+	 *
+	 * @version 2.4.3
+	 * @since   2.4.3
+	 *
+	 * @param $params
+	 *
+	 * @return mixed
+	 */
+	function handle_documentation_params( $params ) {
+		$params['wc_tab_id'] = 'alg_wc_cost_of_goods';
+		$params['pro_settings_filter'] = 'alg_wc_cog_settings';
+		return $params;
 	}
 
 	/**
@@ -211,6 +232,18 @@ final class Alg_WC_Cost_of_Goods {
 	 */
 	function plugin_path() {
 		return untrailingslashit( plugin_dir_path( __FILE__ ) );
+	}
+
+	/**
+	 * get_filesystem_path.
+	 *
+	 * @version 2.4.3
+	 * @since   2.4.3
+	 *
+	 * @return string
+	 */
+	function get_filesystem_path(){
+		return __FILE__;
 	}
 
 }

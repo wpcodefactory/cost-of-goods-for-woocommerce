@@ -83,6 +83,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		add_action( 'save_post_product',                                         array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
 		// Sanitize cog meta (_alg_wc_cog_cost)
 		add_filter( 'sanitize_post_meta_' . '_alg_wc_cog_cost',                  array( $this, 'sanitize_cog_meta' ) );
+	
 	}
 
 	/**
@@ -761,6 +762,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		}
 	}
 
+	
 }
 
 endif;

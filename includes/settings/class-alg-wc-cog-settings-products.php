@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings
  *
- * @version 2.4.2
+ * @version 2.4.3
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.2
+	 * @version 2.4.3
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -91,13 +91,16 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'id'       => 'alg_wc_cog_products_options',
 			),
 			array(
-				'title'    => __( 'Cost field label', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
+				'title'          => __( 'Cost field label', 'cost-of-goods-for-woocommerce' ),
+				'desc'           => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
 					'<code>' . implode( '</code>, <code>', array( '%currency_symbol%' ) ) . '</code>' ),
-				'desc_tip' => __( 'This is used in admin single product edit pages.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_product_cost_field_template',
-				'default'  => sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ),
-				'type'     => 'text',
+				'desc_tip'       => __( 'This is used in admin single product edit pages.', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_product_cost_field_template',
+				'default'        => sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ),
+				'type'           => 'text',
+				'wpfactory_desc' => array(
+					'description' => '{desc_tip}'
+				)
 			),
 			array(
 				'title'    => __( 'Cost field position', 'ean-for-woocommerce' ),
@@ -115,14 +118,17 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				),
 			),
 			array(
-				'title'    => __( 'Product profit HTML template', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
+				'title'          => __( 'Product profit HTML template', 'cost-of-goods-for-woocommerce' ),
+				'desc'           => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
 					'<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ),
-				'desc_tip' => __( 'This is used in admin single product edit pages, and in admin products list "Profit" column.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_product_profit_html_template',
-				'default'  => '%profit% (%profit_percent%)',
-				'type'     => 'text',
+				'desc_tip'       => __( 'This is used in admin single product edit pages, and in admin products list "Profit" column.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				                    __( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_product_profit_html_template',
+				'default'        => '%profit% (%profit_percent%)',
+				'type'           => 'text',
+				'wpfactory_desc' => array(
+					'description' => ''
+				)
 			),
 			array(
 				'title'    => __( 'Sanitize cost meta', 'cost-of-goods-for-woocommerce' ),
@@ -173,20 +179,23 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 			),
 			array(
-				'title'    => __( 'Cost calculation expression', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Available placeholders: ', 'cost-of-goods-for-woocommerce' ) .
-				              alg_wc_cog_array_to_string( array(
-					              'stock_prev',
-					              'cost_prev',
-					              'stock',
-					              'cost',
-					              'stock_now'
-				              ), array( 'item_template' => '<code>%{value}%</code>' ) ),
-				'desc_tip' => __( 'The expression used to calculate the new average cost of the product.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_add_stock_cost_calculation',
-				'default'  => '( %stock_prev% * %cost_prev% + %stock% * %cost% ) / %stock_now%',
-				'type'     => 'text',
+				'title'             => __( 'Cost calculation expression', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Available placeholders: ', 'cost-of-goods-for-woocommerce' ) .
+				                       alg_wc_cog_array_to_string( array(
+					                       'stock_prev',
+					                       'cost_prev',
+					                       'stock',
+					                       'cost',
+					                       'stock_now'
+				                       ), array( 'item_template' => '<code>%{value}%</code>' ) ),
+				'desc_tip'          => __( 'The expression used to calculate the new average cost of the product.', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_products_add_stock_cost_calculation',
+				'default'           => '( %stock_prev% * %cost_prev% + %stock% * %cost% ) / %stock_now%',
+				'type'              => 'text',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'wpfactory_desc'    => array(
+					'description' => '{desc_tip}'
+				)
 			),
 			array(
 				'title'             => __( 'Empty cost field', 'cost-of-goods-for-woocommerce' ),

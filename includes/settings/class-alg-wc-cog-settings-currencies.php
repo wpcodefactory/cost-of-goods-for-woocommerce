@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Currencies Section Settings
  *
- * @version 2.3.0
+ * @version 2.4.3
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -12,6 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Currencies' ) ) :
 
 class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Settings_Section {
+
+	/**
+	 * $auto_exchange_cron_output.
+	 *
+	 * @since   2.4.3
+	 *
+	 * @var string
+	 */
+	private static $auto_exchange_cron_output = '';
 
 	/**
 	 * Constructor.
@@ -28,7 +37,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.0
+	 * @version 2.4.3
 	 * @since   2.2.0
 	 * @todo    [next] exclude `$wc_currency` from `get_woocommerce_currencies()`?
 	 * @todo    [maybe] `alg_wc_cog_currencies_wmc`: add link to the plugin on wp.org?
@@ -93,11 +102,51 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 				'default'  => 'no',
 			),
 			array(
+				'title'    => __( 'Auto currencies rate from ExchangeRate-API', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Get currency exchange rates from <a href="%s" target="_blank">%s</a> automatically', 'cost-of-goods-for-woocommerce' ), 'https://www.exchangerate-api.com/docs/free', 'ExchangeRate-API' ),
+				'desc_tip' => __( 'The update will run once a day.', 'cost-of-goods-for-woocommerce' ) . '<span data-wpfactory-desc-hide>'.' ' . $this->get_auto_exchange_rate_cron_info().'</span>',
+				'type'     => 'checkbox',
+				'id'       => 'alg_wc_cog_auto_currency_rates',
+				'default'  => 'no',
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_currencies_advanced_options',
 			),
 		) );
 		return $settings;
+	}
+
+	/**
+	 * get_auto_exchange_rate_cron_info.
+	 *
+	 * @version 2.4.3
+	 * @since   2.4.3
+	 *
+	 * @return string
+	 */
+	function get_auto_exchange_rate_cron_info(){
+		$auto_exchange_option_enabled = 'yes' === get_option( 'alg_wc_cog_auto_currency_rates', 'no' );
+		if ( empty( self::$auto_exchange_cron_output ) ) {
+			$output = '';
+			if (
+				( ! $event_timestamp = wp_next_scheduled( 'alg_wc_cog_currency_rate_update' ) )
+				&& isset( $_POST['alg_wc_cog_auto_currency_rates'] )
+			) {
+				$output .= '<span style="font-weight: bold; color: green;">' . __( 'Please, reload the page to see the next scheduled event info.', 'cost-of-goods-for-woocommerce' ) . '</span>';
+			} elseif ( $event_timestamp && $auto_exchange_option_enabled ) {
+				$now                 = current_time( 'timestamp', true );
+				$pretty_time_missing = human_time_diff( $now, $event_timestamp );
+				$output              .= sprintf( __( 'Next event scheduled to %s', 'cost-of-goods-for-woocommerce' ), '<strong>' . get_date_from_gmt( date( 'Y-m-d H:i:s', $event_timestamp ), get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ) ) . '</strong>' );
+				$output              .= ' ' . '(' . $pretty_time_missing . ' left)';
+			}
+			self::$auto_exchange_cron_output = $output;
+		} else {
+			if ( ! $auto_exchange_option_enabled ) {
+				self::$auto_exchange_cron_output = '';
+			}
+		}
+		return self::$auto_exchange_cron_output;
 	}
 
 }

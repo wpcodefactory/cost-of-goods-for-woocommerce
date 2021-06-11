@@ -1,5 +1,6 @@
 .wordpress-org/ export-ignore
 .gitignore export-ignore
+composer.lock
 includes/analytics/README.md export-ignore
 includes/analytics/package.json export-ignore
 includes/analytics/package-lock.json export-ignore

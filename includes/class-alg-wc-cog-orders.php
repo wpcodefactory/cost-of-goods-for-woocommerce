@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.4.2
+ * @version 2.4.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -541,7 +541,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.4.2
+	 * @version 2.4.3
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -552,10 +552,22 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 * @todo    [recheck] `$do_update  = ( 0 != $cost );`
 	 */
 	function update_order_items_costs( $order_id, $is_new_order, $is_no_costs_only = false, $posted = false ) {
+		// Shipping classes
+		$is_shipping_classes_enabled = ( 'yes' === get_option( 'alg_wc_cog_shipping_classes_enabled', 'no' ) );
+		if ( $is_shipping_classes_enabled ) {
+			$shipping_classes_fixed_opt        = get_option( 'alg_wc_cog_shipping_class_costs_fixed', array() );
+			$shipping_classes_percent_opt      = get_option( 'alg_wc_cog_shipping_class_costs_percent', array() );
+		}
+		$shipping_class_cost_fixed_total   = 0;
+		$shipping_class_cost_percent_total = 0;
+		$shipping_classes_cost_total       = 0;
+		// Order
 		$order = wc_get_order( $order_id );
 		if ( ! $order ) {
 			return;
 		}
+		// Calculate quantity ignoring refunded items
+		$calculate_qty_excluding_refunds = 'yes' === get_option( 'alg_wc_cog_calculate_qty_excluding_refunds', 'no' );
 		// Order items
 		$items_cost            = 0;
 		// Fees: Extra shipping method costs
@@ -583,6 +595,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$total_price           = 0;
 		$order_total_refunded  = is_a( $order, 'WC_Order_Refund' ) ? $order->get_amount() : $order->get_total_refunded();
 		$order_total_refunded  = (float) apply_filters( 'alg_wc_cog_order_total_refunded', $order_total_refunded, $order );
+		do_action( 'alg_wc_cog_before_update_order_items_costs', $order );
 		// Calculations
 		if ( empty( $this->delay_calculations_status ) || $order->has_status( $this->delay_calculations_status ) ) {
 			// Order items
@@ -610,14 +623,15 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$cost = '0';
 				}
 				if ( '' != $cost ) {
-					$cost         = str_replace( ',', '.', $cost );
-					$cost = (float) $cost;
-					$line_cost    = $cost * $item['qty'];
+					$cost            = str_replace( ',', '.', $cost );
+					$cost            = (float) $cost;
+					$quantity        = $calculate_qty_excluding_refunds ? $item->get_quantity() + $order->get_qty_refunded_for_item( $item_id ) : $item->get_quantity();
+					$line_cost       = $cost * $quantity;
 					$item_line_total = $item['line_total'];
 					if ( 'profit_and_price_based_on_item_refunded_amount' == $refund_calc_method ) {
 						$item_line_total -= $order->get_total_refunded_for_item( $item_id );
 					}
-					$line_total   = apply_filters( 'alg_wc_cog_order_line_total', $item_line_total, $order );
+					$line_total  = apply_filters( 'alg_wc_cog_order_line_total', $item_line_total, $order );
 					$profit      += ( $line_total - $line_cost );
 					$items_cost  += $line_cost;
 					$total_price += $line_total;
@@ -649,6 +663,25 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$profit     -= $shipping_cost;
 				$total_cost += $shipping_cost;
 				$fees       += $shipping_cost;
+			}
+			// Fees: Extra shipping classes costs
+			if ( $is_shipping_classes_enabled ) {
+				if ( ! empty( $product_shipping_class_slug = $item->get_product()->get_shipping_class() ) ) {
+					$product_shipping_class_term = get_term_by( 'slug', $product_shipping_class_slug, 'product_shipping_class' );
+					// Fixed
+					if ( ! empty( $shipping_class_cost = $shipping_classes_fixed_opt[ $product_shipping_class_term->term_id ] ) ) {
+						$shipping_class_cost_fixed_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_fixed', $shipping_class_cost, $order, $product_shipping_class_term->term_id );
+					}
+					// Percent
+					if ( ! empty( $shipping_class_cost = $shipping_classes_percent_opt[ $product_shipping_class_term->term_id ] ) ) {
+						$shipping_cost_percent += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_percent', ( $item->get_total() * $shipping_class_cost / 100 ), $order, $product_shipping_class_term->term_id );
+					}
+				}
+
+				$shipping_classes_cost_total = ( $shipping_class_cost_fixed_total + $shipping_class_cost_percent_total );
+				$profit     -= $shipping_classes_cost_total;
+				$total_cost += $shipping_classes_cost_total;
+				$fees       += $shipping_classes_cost_total;
 			}
 			// Fees: Extra payment gateway costs
 			if ( $this->is_gateway_costs_enabled && method_exists( $order, 'get_payment_method' ) ) {
@@ -752,6 +785,10 @@ class Alg_WC_Cost_of_Goods_Orders {
 		update_post_meta( $order_id, '_alg_wc_cog_order_shipping_cost',             $shipping_cost );
 		update_post_meta( $order_id, '_alg_wc_cog_order_shipping_cost_fixed',       $shipping_cost_fixed );
 		update_post_meta( $order_id, '_alg_wc_cog_order_shipping_cost_percent',     $shipping_cost_percent );
+		// Fees: Extra shipping class costs
+		update_post_meta( $order_id, '_alg_wc_cog_order_shipping_classes_cost',         $shipping_classes_cost_total );
+		update_post_meta( $order_id, '_alg_wc_cog_order_shipping_classes_cost_fixed',   $shipping_class_cost_fixed_total );
+		update_post_meta( $order_id, '_alg_wc_cog_order_shipping_classes_cost_percent', $shipping_class_cost_percent_total );
 		// Fees: Extra payment gateway costs
 		update_post_meta( $order_id, '_alg_wc_cog_order_gateway_cost',              $gateway_cost );
 		update_post_meta( $order_id, '_alg_wc_cog_order_gateway_cost_fixed',        $gateway_cost_fixed );

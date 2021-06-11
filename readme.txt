@@ -1,9 +1,9 @@
 === Cost of Goods for WooCommerce ===
-Contributors: wpcodefactory
+Contributors: wpcodefactory, kerbhavik
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.7
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -83,6 +83,17 @@ And then you can follow these steps:
 
 == Changelog ==
 
+= 2.4.3 - 11/06/2021 =
+* Fix - Some products are empty on Cost of goods stock reports csv.
+* Dev - Orders - Refunds - Create option to calculate quantity by excluding refunded items.
+* Dev - Add "Extra costs: Shipping classes" admin section.
+* Dev - Add wpfactory promoting notice.
+* Dev - Add composer.
+* Dev - Multicurrency - Add "Auto Currencies Rate From exchangerate-api.com" option.
+* Dev - Advanced - Add compatibility with WooCommerce Product Add-ons.
+* Improve admin settings texts.
+* WC tested up to: 5.4.
+
 = 2.4.2 - 20/05/2021 =
 * Fix - Unsupported operand types: string * int on alg-wc-cog-orders.php:614 on PHP 8.
 * Fix - Unsupported operand types: float - string on PHP 8.
@@ -108,7 +119,8 @@ And then you can follow these steps:
 = 2.3.9 - 15/03/2021 =
 * Dev - Advanced - Add compatibility with "Openpos - WooCommerce Point Of Sale" plugin allowing to manage POS orders on orders reports.
 * Dev - Products - Add "get price method" option.
-* Tested up to: 5.7.
+* Dev - Advanced - Add compatibility with "Openpos - WooCommerce Point Of Sale" plugin allowing to manage POS orders on orders reports.
+* Dev - Add `alg_wc_cog_before_update_order_items_costs` hook.
 
 = 2.3.8 - 22/02/2021 =
 * Dev - Tools & Reports - Reports - Stock - Add SKU reference.

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Shipping Section Settings
  *
- * @version 2.3.0
+ * @version 2.4.3
  * @since   1.5.0
  * @author  WPFactory
  */
@@ -130,6 +130,9 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 					'title'    => $title,
 					'type'     => 'title',
 					'id'       => 'alg_wc_cog_shipping_' . $key,
+					'wpfactory_desc'      => array(
+						'hide' => true
+					)
 				),
 				array(
 					'title'    => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
@@ -138,18 +141,27 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 					'id'       => "alg_wc_cog_shipping_costs_fixed[{$key}]",
 					'default'  => 0,
 					'custom_attributes' => array( 'step' => '0.000001' ),
+					'wpfactory_desc'      => array(
+						'hide' => true
+					)
 				),
 				array(
-					'title'    => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip' => __( 'Percent from order total.', 'cost-of-goods-for-woocommerce' ),
-					'type'     => 'number',
-					'id'       => "alg_wc_cog_shipping_costs_percent[{$key}]",
-					'default'  => 0,
+					'title'             => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'Percent from order total.', 'cost-of-goods-for-woocommerce' ),
+					'type'              => 'number',
+					'id'                => "alg_wc_cog_shipping_costs_percent[{$key}]",
+					'default'           => 0,
 					'custom_attributes' => array( 'step' => '0.000001' ),
+					'wpfactory_desc'    => array(
+						'hide' => true
+					)
 				),
 				array(
-					'type'     => 'sectionend',
-					'id'       => 'alg_wc_cog_shipping_' . $key,
+					'type'           => 'sectionend',
+					'id'             => 'alg_wc_cog_shipping_' . $key,
+					'wpfactory_desc' => array(
+						'hide' => true
+					)
 				),
 			) );
 		}

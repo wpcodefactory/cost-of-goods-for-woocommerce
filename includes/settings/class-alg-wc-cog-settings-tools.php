@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.4.1
+ * @version 2.4.3
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.1
+	 * @version 2.4.3
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -185,12 +185,6 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'title'    => __( 'Reports', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_reports_options',
-				'desc'     => apply_filters( 'alg_wc_cog_settings', '<em>' . sprintf( 'You will need %s plugin to add the reports to "%s" and "%s".',
-						'<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' .
-							'Cost of Goods for WooCommerce Pro' . '</a>',
-						__( 'Reports > Orders > Cost of Goods', 'cost-of-goods-for-woocommerce' ),
-						__( 'Reports > Stock > Cost of Goods', 'cost-of-goods-for-woocommerce' )
-					) . '</em>', 'report' ),
 			),
 			array(
 				'title'    => __( 'Orders report', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Order status', 'cost-of-goods-for-woocommerce' ),
@@ -212,22 +206,25 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'type'     => 'multiselect',
 				'class'    => 'chosen_select',
 				'options'  => array(
-					'_alg_wc_cog_order_items_cost'              => __( 'Item costs (excluding fees)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_fees'                    => __( 'Fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost'           => __( 'Shipping method fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost_fixed'     => __( 'Shipping method fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost_percent'   => __( 'Shipping method fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost'            => __( 'Gateway fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost_fixed'      => __( 'Gateway fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost_percent'    => __( 'Gateway fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost'              => __( 'Order fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_fixed'        => __( 'Order fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_percent'      => __( 'Order fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_per_order'    => __( 'Per order fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'handling' . '_fee'  => __( 'Per order fees: Handling', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'shipping' . '_fee'  => __( 'Per order fees: Shipping', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'payment' . '_fee'   => __( 'Per order fees: Payment', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_from_meta'    => __( 'Meta fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_items_cost'                    => __( 'Item costs (excluding fees)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_fees'                          => __( 'Fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_cost'                 => __( 'Shipping method fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_cost_fixed'           => __( 'Shipping method fees (fixed)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_cost_percent'         => __( 'Shipping method fees (percent)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_classes_cost'         => __( 'Shipping classes fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_classes_cost_fixed'   => __( 'Shipping classes fees (fixed)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_classes_cost_percent' => __( 'Shipping classes fees (percent)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_gateway_cost'                  => __( 'Gateway fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_gateway_cost_fixed'            => __( 'Gateway fees (fixed)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_gateway_cost_percent'          => __( 'Gateway fees (percent)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost'                    => __( 'Order fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost_fixed'              => __( 'Order fees (fixed)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost_percent'            => __( 'Order fees (percent)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost_per_order'          => __( 'Per order fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_' . 'handling' . '_fee'        => __( 'Per order fees: Handling', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_' . 'shipping' . '_fee'        => __( 'Per order fees: Shipping', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_' . 'payment' . '_fee'         => __( 'Per order fees: Payment', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_extra_cost_from_meta'          => __( 'Meta fees (all)', 'cost-of-goods-for-woocommerce' ),
 				),
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
@@ -272,7 +269,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			),
 			array(
 				'title'    => __( 'Cost and Profit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add "Cost" and "Profit" columns ', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_analytics_orders',
 				'default'  => 'no',
 				'type'     => 'checkbox',

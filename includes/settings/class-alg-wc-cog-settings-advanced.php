@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Advanced Section Settings
  *
- * @version 2.3.4
+ * @version 2.4.1
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -44,7 +44,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.4
+	 * @version 2.4.1
 	 * @since   1.7.0
 	 * @todo    [later] "Force costs update on ...": better title and desc (3x)
 	 */
@@ -209,7 +209,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'title'             => __( 'Openpos - WooCommerce Point Of Sale(POS)', 'cost-of-goods-for-woocommerce' ),
 				'desc'              => sprintf(
-					__( 'Enable compatibility with <a target="_blank" href="%s">%s</a> by <a href="%s" target="_blank">anhvnit</a> codenayon author.', 'cost-of-goods-for-woocommerce' ),
+					__( 'Enable compatibility with <a target="_blank" href="%s">%s</a> by <a href="%s" target="_blank">anhvnit</a> codenayon author', 'cost-of-goods-for-woocommerce' ),
 					'https://codecanyon.net/item/openpos-a-complete-pos-plugins-for-woocomerce/22613341', __( 'Openpos - WooCommerce Point Of Sale', 'cost-of-goods-for-woocommerce' ), 'https://codecanyon.net/user/anhvnit'
 				),
 				'desc_tip'          => __( 'Manages POS orders on orders reports.', 'cost-of-goods-for-woocommerce' ),
@@ -229,6 +229,20 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 					'openpos_orders' => __( 'Openpos orders', 'cost-of-goods-for-woocommerce' )
 				),
 				'class'    => 'chosen_select',
+			),
+			array(
+				'title'             => __( 'Product Addons', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => sprintf(
+					__( 'Enable compatibility with <a target="_blank" href="%s">%s</a> by WooCommerce', 'cost-of-goods-for-woocommerce' ),
+					'https://woocommerce.com/products/product-add-ons/', __( 'Product Add-Ons', 'cost-of-goods-for-woocommerce' ) ),
+				'desc_tip'          => ( $original_desc_tip = __( 'Adds costs fields for the addons and creates an order meta with addons costs.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				                                              sprintf( __( 'It\'s necessary to add %s on %s option.', 'cost-of-goods-for-woocommerce' ), '<code>' . '_alg_wc_cog_pao_costs' . '</code>', '<strong>'.__( 'Orders > Extra Costs: From Meta', 'cost-of-goods-for-woocommerce' ).'</strong>' ). '<br />' .
+				                                               __( 'It\'s also necessary that addons do not change names once purchased.', 'cost-of-goods-for-woocommerce' ))
+				                                              . empty( $message = apply_filters( 'alg_wc_cog_settings', sprintf( 'You will need %s plugin to enable this option.', '<a target="_blank" href="https://wpfactory.com/item/cost-of-goods-for-woocommerce/">' . 'Cost of Goods for WooCommerce Pro' . '</a>' ) ) ) ? $original_desc_tip . '<br />' . $message : $original_desc_tip,
+				'id'                => 'alg_wc_cog_product_addons',
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
 				'type'     => 'sectionend',

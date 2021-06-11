@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings
  *
- * @version 2.3.7
+ * @version 2.4.3
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.7
+	 * @version 2.4.3
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -50,7 +50,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Order cost', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add cost column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_cost',
 				'default'  => 'no',
 				'type'     => 'checkbox',
@@ -67,21 +67,21 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Order profit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add profit column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_profit',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
 				'checkboxgroup' => 'start',
 			),
 			array(
-				'desc'     => __( 'Profit percent', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add profit percent column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_profit_percent',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 				'checkboxgroup' => '',
 			),
 			array(
-				'desc'     => __( 'Profit margin', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add profit margin column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_profit_margin',
 				'default'  => 'no',
 				'type'     => 'checkbox',
@@ -126,28 +126,29 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Meta box', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Adds "Cost of Goods" meta box to admin order edit page.', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add "Cost of Goods" meta box to admin order edit page', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_meta_box',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
 			),
 			array(
-				'desc'     => __( 'Order profit HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
-						'<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ) . '<br>' .
-					sprintf( __( 'Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit.', 'cost-of-goods-for-woocommerce' ),
-						'<code>%profit_percent%</code>', '<code>%profit_margin%</code>' ),
-				'desc_tip' => __( 'This is used in meta box.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_orders_profit_html_template',
-				'default'  => '%profit%',
-				'type'     => 'text',
+				'desc'           => __( 'Order profit HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				                    sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
+					                    '<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ) . '<br>' .
+				                    sprintf( __( 'Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit.', 'cost-of-goods-for-woocommerce' ),
+					                    '<code>%profit_percent%</code>', '<code>%profit_margin%</code>' ),
+				'desc_tip'       => __( 'This is used in meta box.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				                    __( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_orders_profit_html_template',
+				'default'        => '%profit%',
+				'type'           => 'text',
+				'wpfactory_desc' => array(
+					'description' => ''
+				)
 			),
 			array(
 				'title'    => __( 'Admin notice', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Adds notice to admin order edit page in case if order profit is below zero.', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add notice to admin order edit page in case if order profit is below zero', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_admin_notice',
 				'default'  => 'no',
 				'type'     => 'checkbox',
@@ -161,16 +162,14 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Fill in on add items', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Fills in item costs with the default costs when adding new items (i.e. "Add item(s) > Add product(s)").', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Fill in item costs with the default costs when adding new items (i.e. "Add item(s) > Add product(s)")', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_prepopulate_in_ajax',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
 			),
 			array(
 				'title'    => __( 'Save on item edit', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Saves item costs when editing order items (i.e. "Edit item > Save").', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Save item costs when editing order items (i.e. "Edit item > Save")', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_save_items_ajax',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
@@ -226,8 +225,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Count empty cost lines', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Count empty cost items when calculating order cost and profit.', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Count empty cost items when calculating order cost and profit', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_count_empty_costs',
 				'default'  => 'no',
 				'type'     => 'checkbox',
@@ -252,25 +250,22 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			),
 			array(
 				'title'    => __( 'Shipping to profit', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Adds order shipping cost to the order profit.', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add order shipping cost to the order profit', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_shipping_to_profit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
 			array(
 				'title'    => __( 'Fees to profit', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Adds order fees to the order profit.', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add  order fees to the order profit ', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_fees_to_profit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
 			array(
 				'title'    => __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Adds order taxes like VAT to the order profit.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
-				              sprintf( __( 'Will probably make more sense if %s option is <strong>including tax</strong>.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Products > Get price method', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Will probably make more sense if %s option is <strong>including tax</strong>.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Products > Get price method', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
+				'desc'     => __( 'Adds order taxes like VAT to the order profit.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_taxes_to_profit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
@@ -310,6 +305,14 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'id'    => 'alg_wc_cog_refund_options',
 			),
 			array(
+				'title'    => __( 'Item quantity', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Calculate quantity by excluding refunded items', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'This will affect both the profit and the cost.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_calculate_qty_excluding_refunds',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
 				'title'    => __( 'Refund calculation', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_refund_calculation_method',
 				'default'  => 'ignore_refunds',
@@ -344,12 +347,15 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'id'       => 'alg_wc_cog_order_extra_cost_options',
 			),
 			array(
-				'title'    => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), alg_wc_cog()->core->get_default_shop_currency() ),
-				'type'     => 'number',
-				'id'       => 'alg_wc_cog_order_extra_cost_fixed',
-				'default'  => 0,
+				'title'             => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'          => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), alg_wc_cog()->core->get_default_shop_currency() ),
+				'type'              => 'number',
+				'id'                => 'alg_wc_cog_order_extra_cost_fixed',
+				'default'           => 0,
 				'custom_attributes' => array( 'step' => '0.000001' ),
+				'wpfactory_desc'    => array(
+					'description' => ''
+				)
 			),
 			array(
 				'title'    => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
