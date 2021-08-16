@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.4.2
+ * @version 2.4.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -543,6 +543,28 @@ class Alg_WC_Cost_of_Goods_Products {
 			$cost = get_post_meta( $parent_id, '_alg_wc_cog_cost', true );
 		}
 		return apply_filters( 'alg_wc_cog_get_product_cost', (float) str_replace( ',', '.', $cost ), $product_id, isset( $parent_id ) ? $parent_id : null, $args );
+	}
+
+	/**
+	 * get_product_handling_fee.
+	 *
+	 * @version 2.4.5
+	 * @since   2.4.5
+	 */
+	function get_product_handling_fee( $product_id, $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'check_parent_handling_fee' => true, // Check parent id handling_fee if handling_fee from product id is empty
+		) );
+		if (
+			'' === ( $handling_fee = get_post_meta( $product_id, '_alg_wc_cog_handling_fee', true ) )
+			&& $args['check_parent_handling_fee']
+			&& $product_id
+			&& ( $product = wc_get_product( $product_id ) )
+			&& ( $parent_id = $product->get_parent_id() )
+		) {
+			$handling_fee = get_post_meta( $parent_id, '_alg_wc_cog_handling_fee', true );
+		}
+		return apply_filters( 'alg_wc_cog_get_product_handling_fee', (float) str_replace( ',', '.', $handling_fee ), $product_id, isset( $parent_id ) ? $parent_id : null, $args );
 	}
 
 	/**

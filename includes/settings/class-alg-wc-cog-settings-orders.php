@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings
  *
- * @version 2.4.3
+ * @version 2.4.5
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -122,7 +122,22 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 					'readonly' => __( 'Readonly', 'cost-of-goods-for-woocommerce' ),
 					'no'       => __( 'Disable', 'cost-of-goods-for-woocommerce' ),
 					'meta'     => __( 'Disable but show as standard meta', 'cost-of-goods-for-woocommerce' ),
+				),				
+			),
+			array(
+				'title'    => __( 'Item handling fees', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Adds handling fees inputs for each order item to admin order edit page.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_item_handling_fees',
+				'default'  => 'no',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'no'       => __( 'Disable', 'cost-of-goods-for-woocommerce' ),
+					'yes'      => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+					'readonly' => __( 'Readonly', 'cost-of-goods-for-woocommerce' ),
+					'meta'     => __( 'Disable but show as standard meta', 'cost-of-goods-for-woocommerce' ),
 				),
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
 				'title'    => __( 'Meta box', 'cost-of-goods-for-woocommerce' ),
@@ -132,19 +147,16 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'type'     => 'checkbox',
 			),
 			array(
-				'desc'           => __( 'Order profit HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-				                    sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
-					                    '<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ) . '<br>' .
-				                    sprintf( __( 'Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit.', 'cost-of-goods-for-woocommerce' ),
-					                    '<code>%profit_percent%</code>', '<code>%profit_margin%</code>' ),
-				'desc_tip'       => __( 'This is used in meta box.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-				                    __( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
-				'id'             => 'alg_wc_cog_orders_profit_html_template',
-				'default'        => '%profit%',
-				'type'           => 'text',
-				'wpfactory_desc' => array(
-					'description' => ''
-				)
+				'desc'     => __( 'Order profit HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				              sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
+					              '<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ) . '<br>' .
+				              sprintf( __( 'Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit.', 'cost-of-goods-for-woocommerce' ),
+					              '<code>%profit_percent%</code>', '<code>%profit_margin%</code>' ),
+				'desc_tip' => __( 'This is used in meta box.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				              __( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_profit_html_template',
+				'default'  => '%profit%',
+				'type'     => 'text'
 			),
 			array(
 				'title'    => __( 'Admin notice', 'cost-of-goods-for-woocommerce' ),

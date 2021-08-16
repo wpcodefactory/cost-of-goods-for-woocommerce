@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'bfdf5d94002459aed4700970e738b6952c998d9d',
+    'reference' => '8f9bc38b97ca0f1eafb7ab7a380bd812e2619aac',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'bfdf5d94002459aed4700970e738b6952c998d9d',
+      'reference' => '8f9bc38b97ca0f1eafb7ab7a380bd812e2619aac',
     ),
     'wpfactory/wpfactory-promoting-notice' => 
     array (

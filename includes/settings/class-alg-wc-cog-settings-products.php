@@ -56,6 +56,9 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'id'       => 'alg_wc_cog_products_columns_cost_width',
 				'default'  => '10',
 				'type'     => 'number',
+				'wpfactory_desc' => array(
+					'description' => __( 'Customize the product cost column width', 'cost-of-goods-for-woocommerce' )
+				),
 			),
 			array(
 				'title'    => __( 'Product profit', 'cost-of-goods-for-woocommerce' ),
@@ -70,6 +73,9 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'id'       => 'alg_wc_cog_products_columns_profit_width',
 				'default'  => '11',
 				'type'     => 'number',
+				'wpfactory_desc' => array(
+					'description' => __( 'Customize the product profit column width', 'cost-of-goods-for-woocommerce' )
+				),
 			),
 			array(
 				'title'    => __( 'Width unit', 'cost-of-goods-for-woocommerce' ),
@@ -94,7 +100,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'title'          => __( 'Cost field label', 'cost-of-goods-for-woocommerce' ),
 				'desc'           => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
 					'<code>' . implode( '</code>, <code>', array( '%currency_symbol%' ) ) . '</code>' ),
-				'desc_tip'       => __( 'This is used in admin single product edit pages.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'       => __( 'Customizes the cost field input label added to admin product pages.', 'cost-of-goods-for-woocommerce' ),
 				'id'             => 'alg_wc_cog_product_cost_field_template',
 				'default'        => sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ),
 				'type'           => 'text',
@@ -127,7 +133,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'default'        => '%profit% (%profit_percent%)',
 				'type'           => 'text',
 				'wpfactory_desc' => array(
-					'description' => ''
+					'description' => __( 'Customizes how the profit will be displayed.', 'cost-of-goods-for-woocommerce' ) . ' ' . '{desc}'
 				)
 			),
 			array(
@@ -146,6 +152,9 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'options'  => array(
 					'wc_get_price_excluding_tax' => __( 'Get price excluding tax', 'cost-of-goods-for-woocommerce' ),
 					'wc_get_price_including_tax' => __( 'Get price including tax', 'cost-of-goods-for-woocommerce' ),
+				),
+				'wpfactory_desc' => array(
+					'description' => __( 'Get price excluding or including tax.', 'cost-of-goods-for-woocommerce' ) . ' ' . '{desc}'
 				),
 				'class'    => 'chosen_select',
 			),

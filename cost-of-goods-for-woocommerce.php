@@ -3,28 +3,40 @@
 Plugin Name: Cost of Goods for WooCommerce
 Plugin URI: https://wpfactory.com/item/cost-of-goods-for-woocommerce/
 Description: Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
-Version: 2.4.4
+Version: 2.4.5
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: cost-of-goods-for-woocommerce
 Domain Path: /langs
 Copyright: © 2021 WPFactory
-WC tested up to: 5.4
+WC tested up to: 5.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-// Handle is_plugin_active function
-if ( ! function_exists( 'is_plugin_active' ) ) {
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+if ( ! function_exists( 'alg_wc_cog_is_plugin_active' ) ) {
+	/**
+	 * alg_wc_cog_is_plugin_active.
+	 *
+	 * @version 2.4.5
+	 * @since   2.4.5
+	 */
+	function alg_wc_cog_is_plugin_active( $plugin ) {
+		return ( function_exists( 'is_plugin_active' ) ? is_plugin_active( $plugin ) :
+			(
+				in_array( $plugin, apply_filters( 'active_plugins', ( array ) get_option( 'active_plugins', array() ) ) ) ||
+				( is_multisite() && array_key_exists( $plugin, ( array ) get_site_option( 'active_sitewide_plugins', array() ) ) )
+			)
+		);
+	}
 }
 
 // Check for active plugins
 if (
-	! is_plugin_active( 'woocommerce/woocommerce.php' ) ||
-	( 'cost-of-goods-for-woocommerce.php' === basename( __FILE__ ) && is_plugin_active( 'cost-of-goods-for-woocommerce-pro/cost-of-goods-for-woocommerce-pro.php' ) )
+	! alg_wc_cog_is_plugin_active( 'woocommerce/woocommerce.php' ) ||
+	( 'cost-of-goods-for-woocommerce.php' === basename( __FILE__ ) && alg_wc_cog_is_plugin_active( 'cost-of-goods-for-woocommerce-pro/cost-of-goods-for-woocommerce-pro.php' ) )
 ) {
 	return;
 }
@@ -51,7 +63,7 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.4.4';
+	public $version = '2.4.5';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class

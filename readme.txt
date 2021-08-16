@@ -1,9 +1,9 @@
 === Cost of Goods for WooCommerce ===
-Contributors: wpcodefactory, kerbhavik
+Contributors: wpcodefactory, kerbhavik, karzin
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
-Tested up to: 5.7
-Stable tag: 2.4.4
+Tested up to: 5.8
+Stable tag: 2.4.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,6 +82,17 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.4.5 - 16/08/2021 =
+* Fix - Check if order is from a `\WC_Order` type on `Alg_WC_Cost_of_Goods_Orders::update_order_items_costs()`.
+* Dev - Tools - Analytics - Stock - Create option to add cost and profit columns.
+* Dev - Tools - Analytics - Stock - Create option to add category column.
+* Dev - Tools - Analytics - Stock - Create option to add a cost of goods filter allowing for example to filter only products with costs.
+* Dev - Orders - Admin order edit - Create "Item handling fees" option.
+* Dev - Replace `is_plugin_active()` function.
+* Dev - Add github deploy setup.
+* WC tested up to: 5.5.
+* Tested up to: 5.8.
 
 = 2.4.4 - 14/06/2021 =
 * Fix - Free and pro plugins can't be active at the same time.

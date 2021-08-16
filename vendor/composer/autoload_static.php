@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitdbc845a8ca6167f17387544ffb213b82
+class ComposerStaticInitb28c800a59b98cddcb9ba614e7aff2d0
 {
     public static $files = array (
         '20872bbaff0e3115cc7db5ab4a7d607e' => __DIR__ . '/..' . '/wpfactory/wpfactory-promoting-notice/src/php/functions.php',
@@ -18,7 +18,7 @@ class ComposerStaticInitdbc845a8ca6167f17387544ffb213b82
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitdbc845a8ca6167f17387544ffb213b82::$classMap;
+            $loader->classMap = ComposerStaticInitb28c800a59b98cddcb9ba614e7aff2d0::$classMap;
 
         }, null, ClassLoader::class);
     }

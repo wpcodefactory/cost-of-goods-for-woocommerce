@@ -50,16 +50,17 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 2.4.3
+	 * @version 2.4.5
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
 	function render_order_meta_box( $post ) {
 		$order_id            = get_the_ID();
-		$cost                = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'cost',   true );
+		$cost                = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'cost', true );
+		$handling_fee        = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'handling_fee', true );
 		$profit              = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit', true );
 		$profit_percent      = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit_percent', true );
-		$profit_margin       = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit_margin',  true );
+		$profit_margin       = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit_margin', true );
 		$profit_template     = get_option( 'alg_wc_cog_orders_profit_html_template', '%profit%' );
 		$profit_placeholders = array(
 			'%profit%'         => alg_wc_cog()->core->orders->format_order_column_value( $profit,         'profit' ),
@@ -77,6 +78,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		$table_data     = array();
 		$cost_meta_keys = array(
 			'_alg_wc_cog_order_items_cost'                    => __( 'Item costs', 'cost-of-goods-for-woocommerce' ),
+			'_alg_wc_cog_order_items_handling_fee'            => __( 'Item handling fees', 'cost-of-goods-for-woocommerce' ),
 			'_alg_wc_cog_order_shipping_cost_fixed'           => __( 'Shipping method fee (fixed)', 'cost-of-goods-for-woocommerce' ),
 			'_alg_wc_cog_order_shipping_cost_percent'         => __( 'Shipping method fee (percent)', 'cost-of-goods-for-woocommerce' ),
 			'_alg_wc_cog_order_shipping_classes_cost_fixed'   => __( 'Shipping class fee (fixed)', 'cost-of-goods-for-woocommerce' ),
@@ -96,7 +98,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost ) );
 			}
 		}
-		if ( count( $table_data ) > 1 ) {
+		if ( count( $table_data ) > 0 ) {
 			echo '<h5>' . __( 'Cost details', 'cost-of-goods-for-woocommerce' ) . '</h5>';
 			echo alg_wc_cog_get_table_html( $table_data, $table_args );
 		}
