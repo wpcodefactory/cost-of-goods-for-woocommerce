@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.4.5
+ * @version 2.4.6
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -633,7 +633,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.4.5
+	 * @version 2.4.6
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -885,7 +885,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			// Fees: Order extra cost: per order
 			foreach ( $this->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 				if ( $is_enabled && 0 !== ( (float) $fee = get_post_meta( $order_id, '_alg_wc_cog_order_' . $fee_type . '_fee', true ) ) ) {
-					$per_order_fees += $fee;
+					$per_order_fees += (float) $fee;
 				}
 			}
 			if ( 0 !== $per_order_fees ) {

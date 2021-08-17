@@ -21,7 +21,7 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 	 */
 	function __construct() {
 		$this->id   = 'gateways';
-		$this->desc = __( 'Extra Costs', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Payment Gateways', 'cost-of-goods-for-woocommerce' );
+		$this->desc = __( 'Payment Gateways', 'cost-of-goods-for-woocommerce' );
 		parent::__construct();
 	}
 

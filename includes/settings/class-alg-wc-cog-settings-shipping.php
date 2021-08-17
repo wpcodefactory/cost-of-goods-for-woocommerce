@@ -21,7 +21,7 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 	 */
 	function __construct() {
 		$this->id   = 'shipping';
-		$this->desc = __( 'Extra Costs', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Shipping Methods', 'cost-of-goods-for-woocommerce' );
+		$this->desc = __( 'Shipping Methods', 'cost-of-goods-for-woocommerce' );
 		parent::__construct();
 	}
 

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Import Tool Class
  *
- * @version 2.3.4
+ * @version 2.4.6
  * @since   1.1.0
  * @author  WPFactory
  */
@@ -64,14 +64,20 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 	/**
 	 * copy_product_meta.
 	 *
-	 * @version 2.3.2
+	 * @version 2.4.6
 	 * @since   2.3.0
 	 *
-	 * @param $product_id
-	 * @param string $from_key
-	 * @param string $to_key
+	 * @param null $args
 	 */
-	function copy_product_meta( $product_id, $from_key = '_wc_cog_cost', $to_key = '_alg_wc_cog_cost' ) {
+	function copy_product_meta( $args = null ) {
+		$args       = wp_parse_args( $args, array(
+			'product_id' => '',
+			'from_key'   => get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' ),
+			'to_key'     => get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' )
+		) );
+		$product_id = $args['product_id'];
+		$from_key   = $args['from_key'];
+		$to_key     = $args['to_key'];
 		if (
 			(
 				'yes' === get_option( 'alg_wc_cog_import_tool_check_key', 'yes' )
@@ -92,7 +98,7 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 	/**
 	 * import_tool.
 	 *
-	 * @version 2.3.4
+	 * @version 2.4.6
 	 * @since   1.0.0
 	 * @todo    [later] use `wc_get_products()`
 	 * @todo    [later] better description here and in settings
@@ -102,17 +108,17 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 	 */
 	function import_tool() {
 		$perform_import            = ( isset( $_POST['alg_wc_cog_import'] ) );
-		$key                       = get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' );
+		$key_from                  = get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' );
+		$key_to                    = get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' );
 		$bkg_process_min_amount    = get_option( 'alg_wc_cog_bkg_process_min_amount', 100 );
 		$table_data                = array();
 		$alg_wc_cog_get_table_html = '';
-		$products                  = array();
 		$display_table             = 'yes' === get_option( 'alg_wc_cog_import_tool_display_table', 'no' );
 		$table_data[]              = array(
 			__( 'Product ID', 'cost-of-goods-for-woocommerce' ),
 			__( 'Product Title', 'cost-of-goods-for-woocommerce' ),
-			sprintf( __( 'Source %s', 'cost-of-goods-for-woocommerce' ), '<code>' . $key . '</code>' ),
-			sprintf( __( 'Destination %s', 'cost-of-goods-for-woocommerce' ), '<code>' . '_alg_wc_cog_cost' . '</code>' ),
+			sprintf( __( 'Source %s', 'cost-of-goods-for-woocommerce' ), '<code>' . $key_from . '</code>' ),
+			sprintf( __( 'Destination %s', 'cost-of-goods-for-woocommerce' ), '<code>' . $key_to . '</code>' ),
 		);
 		$args                      = array(
 			'post_type'              => array( 'product', 'product_variation' ),
@@ -126,41 +132,45 @@ class Alg_WC_Cost_of_Goods_Import_Tool {
 			'update_post_meta_cache' => false,
 			'cache_results'          => false
 		);
-
 		$loop                = new WP_Query( $args );
 		$perform_bkg_process = $perform_import && $loop->post_count >= $bkg_process_min_amount;
 
-		// Bkg Process
+		// Update values.
 		if ( $perform_bkg_process ) {
 			$this->import_tool_bkg_process->cancel_process();
 			if ( $loop->have_posts() ) {
 				foreach ( $loop->posts as $product_id ) {
-					$this->import_tool_bkg_process->push_to_queue( array( 'id' => $product_id, 'from_key' => $key, 'to_key' => '_alg_wc_cog_cost' ) );
+					$this->import_tool_bkg_process->push_to_queue( array( 'id' => $product_id, 'from_key' => $key_from, 'to_key' => $key_to ) );
 				}
 			}
 			$this->import_tool_bkg_process->save()->dispatch();
+		} else {
+			if ( $perform_import && $loop->have_posts() ) {
+				foreach ( $loop->posts as $product_id ) {
+					$this->copy_product_meta( array(
+						'product_id' => $product_id,
+						'from_key'   => $key_from,
+						'to_key'     => $key_to
+					) );
+				}
+			}
 		}
 
+		// Output.
 		if ( $display_table ) {
 			if ( $loop->have_posts() ) {
 				foreach ( $loop->posts as $product_id ) {
-					$source_cost = get_post_meta( $product_id, $key, true );
-					if ( $perform_import ) {
-						update_post_meta( $product_id, '_alg_wc_cog_cost', $source_cost );
+					$source_cost = get_post_meta( $product_id, $key_from, true );
+					if ( '_alg_wc_cog_cost' === $key_to ) {
+						$meta_value_to = alg_wc_cog()->core->products->get_product_cost( $product_id );
+					} else {
+						$meta_value_to = get_post_meta( $product_id, $key_to, true );
 					}
-					$destination_cost = alg_wc_cog()->core->products->get_product_cost( $product_id );
-					$table_data[]     = array( $product_id, get_the_title( $product_id ), $source_cost, $destination_cost );
+					$table_data[] = array( $product_id, get_the_title( $product_id ), $source_cost, $meta_value_to );
 				}
 			}
 			$alg_wc_cog_get_table_html = alg_wc_cog_get_table_html( $table_data, array( 'table_heading_type' => 'horizontal', 'table_class' => 'widefat striped' ) );
-		} elseif ( ! $perform_bkg_process ) {
-			if ( $loop->have_posts() ) {
-				foreach ( $loop->posts as $product_id ) {
-					$this->copy_product_meta( $product_id, $key, '_alg_wc_cog_cost' );
-				}
-			}
 		}
-
 		$button_form = '<form method="post" action="">' .
 				'<input type="submit" name="alg_wc_cog_import" class="button-primary" value="' . __( 'Import', 'cost-of-goods-for-woocommerce' ) . '"' .
 					' onclick="return confirm(\'' . __( 'Are you sure?', 'cost-of-goods-for-woocommerce' ) . '\')">' .

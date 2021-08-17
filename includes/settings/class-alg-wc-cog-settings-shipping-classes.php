@@ -21,7 +21,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 		 */
 		function __construct() {
 			$this->id   = 'shipping_classes';
-			$this->desc = __( 'Extra Costs', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Shipping classes', 'cost-of-goods-for-woocommerce' );
+			$this->desc = __( 'Shipping classes', 'cost-of-goods-for-woocommerce' );
 			parent::__construct();
 		}
 

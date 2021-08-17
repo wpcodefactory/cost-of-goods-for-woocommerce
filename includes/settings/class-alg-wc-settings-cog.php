@@ -33,6 +33,7 @@ class Alg_WC_Settings_Cost_of_Goods extends WC_Settings_Page {
 		require_once( 'class-alg-wc-cog-settings-currencies.php' );
 		require_once( 'class-alg-wc-cog-settings-tools.php' );
 		require_once( 'class-alg-wc-cog-settings-advanced.php' );
+		require_once( 'class-alg-wc-cog-settings-compatibility.php' );
 		// Create notice about pro
 		add_action( 'admin_init', array( $this, 'add_promoting_notice' ) );
 	}

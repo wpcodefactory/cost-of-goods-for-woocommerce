@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.4.5
+ * @version 2.4.6
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.5
+	 * @version 2.4.6
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -99,9 +99,9 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			array(
 				'title' => __( 'Product Import Costs Tool', 'cost-of-goods-for-woocommerce' ),
 				'type'  => 'title',
-				'desc'  => sprintf( __( 'A tool used to replace the cost meta %s value by some other meta value.', 'cost-of-goods-for-woocommerce' ), '<code>_alg_wc_cog_cost</code>' ) .
-				           '<br />' .
-				           sprintf( __( 'The Import tool is in %s.', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => __( 'A tool created with the purpose of importing the cost meta from another plugin by replacing the cost meta.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				           __( 'If you wish, you can use it on the opposite way by swapping the from and to keys.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'You can also use it with any other metas.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				           sprintf( __( 'You can find the Import tool at %s.', 'cost-of-goods-for-woocommerce' ),
 					           '<a href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Tools > Import Costs', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 				'id'    => 'alg_wc_cog_import_tool_options',
 			),
@@ -113,25 +113,29 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'default'  => '_wc_cog_cost',
 			),
 			array(
+				'title'    => __( 'Meta key replaced', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'text',
+				'id'       => 'alg_wc_cog_tool_key_to',
+				'default'  => '_alg_wc_cog_cost',
+			),
+			array(
 				'title'    => __( 'Check if key exists', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Only tries to replace the cost meta if the key exists.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Replace the meta value only if the from key exists', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_import_tool_check_key',
 				'default'  => 'yes',
 			),
 			array(
 				'title'    => __( 'Check key value', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Only tries to replace the cost meta value if the key value is not empty, null or zero.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Replace the meta value only if the from key value is not empty, null or zero', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_import_tool_check_value',
 				'default'  => 'yes',
 			),
 			array(
-				'title'    => __( 'Display table', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Table', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Display a table at the import page', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'If you have problems accessing the "Import Costs" page try to disable this option.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_import_tool_display_table',
 				'default'  => 'no',
