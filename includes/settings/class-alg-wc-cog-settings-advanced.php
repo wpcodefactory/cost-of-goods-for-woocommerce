@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Advanced Section Settings
  *
- * @version 2.4.1
+ * @version 2.4.7
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -44,7 +44,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.1
+	 * @version 2.4.7
 	 * @since   1.7.0
 	 * @todo    [later] "Force costs update on ...": better title and desc (3x)
 	 */
@@ -52,10 +52,10 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 
 		$advanced_settings = array(
 			array(
-				'title'    => __( 'Restriction', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Advanced options', 'cost-of-goods-for-woocommerce' ),
 				'desc' => '',
 				'type'     => 'title',
-				'id'       => 'alg_wc_cog_advanced_restriction_options',
+				'id'       => 'alg_wc_cog_advanced_options',
 			),
 			array(
 				'title'    => __( 'Restrict by user role', 'cost-of-goods-for-woocommerce' ),
@@ -71,41 +71,30 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_advanced_restriction_options',
+				'title'         => __( 'Force costs update', 'cost-of-goods-for-woocommerce' ),
+				'desc'          => __( 'Auto fill empty order items costs on order update', 'cost-of-goods-for-woocommerce' ),
+				'id'            => 'alg_wc_cog_orders_force_on_update',
+				'default'       => 'no',
+				'checkboxgroup' => 'start',
+				'type'          => 'checkbox',
 			),
 			array(
-				'title'    => __( 'Force costs update', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_cog_advanced_force_costs_update_options',
+				'desc'          => __( 'Auto fill empty order items costs on order status change', 'cost-of-goods-for-woocommerce' ),
+				'id'            => 'alg_wc_cog_orders_force_on_status',
+				'default'       => 'no',
+				'checkboxgroup' => '',
+				'type'          => 'checkbox',
 			),
 			array(
-				'title'    => __( 'Force costs update on order update', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Force empty order items cost update on each order update.', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_orders_force_on_update',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'Force costs update on order status change', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Force empty order items cost update on order status change.', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_orders_force_on_status',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'title'    => __( 'Force costs update on new order item', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Force empty order items cost update on new order item addition.', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_orders_force_on_new_item',
-				'default'  => 'no',
-				'type'     => 'checkbox',
+				'desc'          => __( 'Auto fill empty order items costs on new order item addition', 'cost-of-goods-for-woocommerce' ),
+				'id'            => 'alg_wc_cog_orders_force_on_new_item',
+				'default'       => 'no',
+				'checkboxgroup' => 'end',
+				'type'          => 'checkbox',
 			),
 			array(
 				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_advanced_force_costs_update_options',
+				'id'       => 'alg_wc_cog_advanced_options',
 			),
 			array(
 				'title'    => __( 'Columns sorting', 'cost-of-goods-for-woocommerce' ),

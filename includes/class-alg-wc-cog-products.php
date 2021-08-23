@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.4.5
+ * @version 2.4.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -570,7 +570,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_price.
 	 *
-	 * @version 2.3.9
+	 * @version 2.4.7
 	 * @since   2.3.9
 	 *
 	 * @param $product
@@ -580,11 +580,13 @@ class Alg_WC_Cost_of_Goods_Products {
 	 */
 	function get_product_price( $product, $args = null ) {
 		$args   = wp_parse_args( $args, array(
-			'method' => get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ),
-			'params' => array()
+			'method'               => get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ),
+			'params'               => array(),
+			'return_zero_if_empty' => false
 		) );
 		$params = array_merge( array( $product ), $args['params'] );
-		return call_user_func_array( $args['method'], $params );
+		$return = call_user_func_array( $args['method'], $params );
+		return $args['return_zero_if_empty'] && empty( $return ) ? 0 : $return;
 	}
 
 	/**
@@ -641,7 +643,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_variable_product_html.
 	 *
-	 * @version 2.3.5
+	 * @version 2.4.7
 	 * @since   1.0.0
 	 * @todo    [maybe] use `get_available_variations()` instead of `get_children()`?
 	 */
@@ -670,8 +672,8 @@ class Alg_WC_Cost_of_Goods_Products {
 					$cost_max                         = $this->get_product_cost( $product_id_max );
 					$profit_min                       = ( 0 != $cost_min ? $min / $cost_min * 100 : '' );
 					$profit_max                       = ( 0 != $cost_max ? $max / $cost_max * 100 : '' );
-					$price_min                        = $this->get_product_price( wc_get_product( $product_id_min ) );
-					$price_max                        = $this->get_product_price( wc_get_product( $product_id_max ) );
+					$price_min                        = $this->get_product_price( wc_get_product( $product_id_min ), array( 'return_zero_if_empty' => true ) );
+					$price_max                        = $this->get_product_price( wc_get_product( $product_id_max ), array( 'return_zero_if_empty' => true ) );
 					$margin_min                       = ( 0 != $price_min && '' !== $min ? $min / $price_min * 100 : '' );
 					$margin_max                       = ( 0 != $price_max && '' !== $max ? $max / $price_max * 100 : '' );
 					$placeholders['%profit_percent%'] = sprintf( '%0.2f%% &ndash; %0.2f%%', $profit_min, $profit_max );

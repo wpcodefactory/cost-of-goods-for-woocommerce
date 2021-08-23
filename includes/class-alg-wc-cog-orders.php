@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.4.6
+ * @version 2.4.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -112,7 +112,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.4.5
+	 * @version 2.4.7
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -120,20 +120,15 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 */
 	function add_hooks() {
 		// Order item costs: Force update
-		add_action( 'save_post_shop_order', array( $this, 'update_order_items_costs_save_post' ), 10, 3 );
+		add_action( 'save_post_shop_order', array( $this, 'update_order_items_costs_save_post' ), PHP_INT_MAX, 3 );
 		add_action( 'woocommerce_new_order_item', array( $this, 'update_order_items_costs_new_item' ), 10, 3 );
 		add_action( 'woocommerce_order_status_changed', array( $this, 'update_order_items_costs_order_status_changed' ), 10, 1 );
 		// Order item costs on order edit page
 		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'add_cost_input_shop_order' ), PHP_INT_MAX, 3 );
-		add_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), PHP_INT_MAX, 3 );
+		add_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), PHP_INT_MAX - 1, 3 );
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hide_cost_input_meta_shop_order' ), PHP_INT_MAX );
-		// Order item handling fee: Force update
-		add_action( 'save_post_shop_order', array( $this, 'update_order_items_handling_fees_save_post' ), 10, 3 );
-		add_action( 'woocommerce_new_order_item', array( $this, 'update_order_items_handling_fees_new_item' ), 10, 3 );
-		add_action( 'woocommerce_order_status_changed', array( $this, 'update_order_items_handling_fees_order_status_changed' ), 10, 1 );
 		// Order item handling fee on order edit page
 		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'add_handling_fee_input_shop_order' ), PHP_INT_MAX, 3 );
-		add_action( 'save_post_shop_order', array( $this, 'save_handling_fee_input_shop_order_save_post' ), PHP_INT_MAX, 3 );
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hide_handling_fee_input_meta_shop_order' ), PHP_INT_MAX );
 		// Admin new order (AJAX)
 		add_action( 'woocommerce_new_order_item', array( $this, 'new_order_item_ajax' ), PHP_INT_MAX, 3 );
@@ -433,54 +428,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 	}
 
 	/**
-	 * update_order_items_handling_fees_save_post.
-	 *
-	 * @version 2.4.5
-	 * @since   2.4.5
-	 */
-	function update_order_items_handling_fees_save_post( $post_id, $post, $update ) {
-		if ( $this->do_force_on_order_update && $update ) {
-			$this->update_order_items_costs( $post_id, true, true );
-		}
-	}
-
-	/**
-	 * update_order_items_handling_fees_new_item.
-	 *
-	 * @version 2.4.5
-	 * @since   2.4.5
-	 */
-	function update_order_items_handling_fees_new_item( $item_id, $item, $order_id ) {
-		if ( $this->do_force_on_new_item ) {
-			$this->update_order_items_costs( $order_id, true, true );
-		}
-	}
-
-	/**
-	 * update_order_items_handling_fees_order_status_changed.
-	 *
-	 * @version 2.4.5
-	 * @since   2.4.5
-	 */
-	function update_order_items_handling_fees_order_status_changed( $order_id ) {
-		if ( $this->do_force_on_status ) {
-			$this->update_order_items_costs( $order_id, true, true );
-		}
-	}
-
-	/**
-	 * save_handling_fee_input_shop_order_save_post.
-	 *
-	 * @version 2.4.5
-	 * @since   2.4.5
-	 */
-	function save_handling_fee_input_shop_order_save_post( $post_id, $post, $update ) {
-		if ( $this->do_force_on_order_update && $update ) {
-			$this->update_order_items_costs( $post_id, true, true );
-		}
-	}
-
-	/**
 	 * recalculate_order_ajax.
 	 *
 	 * @version 2.1.0
@@ -563,11 +510,15 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_cost_input_shop_order.
 	 *
-	 * @version 2.3.0
+	 * @version 2.4.7
 	 * @since   1.1.0
 	 */
 	function add_cost_input_shop_order( $item_id, $item, $product ) {
-		if ( in_array( $this->item_costs_option, array( 'yes', 'readonly' ) ) && 'WC_Order_Item_Product' === get_class( $item ) ) {
+		if (
+			in_array( $this->item_costs_option, array( 'yes', 'readonly' ) ) &&
+			'WC_Order_Item_Product' === get_class( $item ) &&
+			apply_filters( 'alg_wc_cog_add_cost_input_validation', true )
+		) {
 			$order    = $item->get_order();
 			$readonly = ( 'readonly' === $this->item_costs_option ? ' readonly' : '' );
 			echo '<p>' .
@@ -595,11 +546,15 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_handling_fee_input_shop_order.
 	 *
-	 * @version 2.4.5
+	 * @version 2.4.7
 	 * @since   2.4.5
 	 */
 	function add_handling_fee_input_shop_order( $item_id, $item, $product ) {
-		if ( in_array( $this->item_handling_fees_option, array( 'yes', 'readonly' ) ) && 'WC_Order_Item_Product' === get_class( $item ) ) {
+		if (
+			in_array( $this->item_handling_fees_option, array( 'yes', 'readonly' ) ) &&
+			'WC_Order_Item_Product' === get_class( $item ) &&
+			apply_filters( 'alg_wc_cog_add_handling_fee_input_validation', true )
+		) {
 			$order    = $item->get_order();
 			$readonly = ( 'readonly' === $this->item_handling_fees_option ? ' readonly' : '' );
 			echo '<p>' .
@@ -633,7 +588,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.4.6
+	 * @version 2.4.7
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -708,14 +663,10 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$cost      = ( isset( $posted['alg_wc_cog_item_cost'][ $item_id ] ) ? wc_clean( $posted['alg_wc_cog_item_cost'][ $item_id ] ) : false );
 					$do_update = ( isset( $posted['alg_wc_cog_item_cost'][ $item_id ] ) );
 				}
-				if ( in_array( $this->item_costs_option, array( 'yes', 'readonly' ) ) ) {
-					if ( $do_update ) {
-						wc_update_order_item_meta( $item_id, '_alg_wc_cog_item_cost', $cost );
-					} else {
-						$cost = wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' );
-					}
+				if ( $do_update ) {
+					wc_update_order_item_meta( $item_id, '_alg_wc_cog_item_cost', $cost );
 				} else {
-					$cost = '0';
+					$cost = wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' );
 				}
 				if ( $this->order_count_empty_costs && ! $cost ) {
 					$cost = '0';

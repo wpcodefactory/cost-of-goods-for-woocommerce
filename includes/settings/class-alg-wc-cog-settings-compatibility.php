@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 2.4.6
+ * @version 2.4.7
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 2.4.6
+		 * @version 2.4.7
 		 * @since   2.4.6
 		 */
 		function get_settings() {
@@ -108,6 +108,24 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					                                              __( 'It\'s also necessary that addons do not change names once purchased.', 'cost-of-goods-for-woocommerce' ) ),
 					'id'                => 'alg_wc_cog_product_addons',
 					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'title'             => __( 'Metorik', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => sprintf( __( 'Enable compatibility with <a target="_blank" href="%s">%s</a>', 'cost-of-goods-for-woocommerce' ),						'https://metorik.com/', __( 'Metorik', 'cost-of-goods-for-woocommerce' ) ),
+					'id'                => 'alg_wc_cog_metorik',
+					'default'           => 'no',
+					'checkboxgroup'     => 'start',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'desc'              => sprintf( __( 'Sync cost with %s meta', 'cost-of-goods-for-woocommerce' ), '<code>' . '_wc_cog_cost' . '</code>' ),
+					'desc_tip'          => sprintf( __( 'Everytime %s meta gets updated its value is copied to %s', 'cost-of-goods-for-woocommerce' ), '<code>' . '_alg_wc_cog_cost' . '</code>', '<code>' . '_wc_cog_cost' . '</code>' ),
+					'id'                => 'alg_wc_cog_metorik_sync_cost_with_wc_cog_cost',
+					'default'           => 'no',
+					'checkboxgroup'     => 'end',
 					'type'              => 'checkbox',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 				),

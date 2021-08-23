@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.4.6\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.4.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-08-17T21:01:34+02:00\n"
+"POT-Creation-Date: 2021-08-23T22:45:39+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -42,8 +42,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:251
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:77
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:73
-#: includes/class-alg-wc-cog-orders.php:220
-#: includes/class-alg-wc-cog-orders.php:300
+#: includes/class-alg-wc-cog-orders.php:215
+#: includes/class-alg-wc-cog-orders.php:295
 #: includes/class-alg-wc-cog-products.php:184
 #: includes/class-alg-wc-cog-products.php:211
 #: includes/class-alg-wc-cog-products.php:228
@@ -61,8 +61,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:287
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:78
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:74
-#: includes/class-alg-wc-cog-orders.php:221
-#: includes/class-alg-wc-cog-orders.php:310
+#: includes/class-alg-wc-cog-orders.php:216
+#: includes/class-alg-wc-cog-orders.php:305
 #: includes/class-alg-wc-cog-products.php:507
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/orders.js:39
@@ -173,22 +173,22 @@ msgstr ""
 msgid "You are selling below the cost of goods."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:224
-#: includes/class-alg-wc-cog-orders.php:574
+#: includes/class-alg-wc-cog-orders.php:219
+#: includes/class-alg-wc-cog-orders.php:525
 msgid "Cost of goods"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:313
+#: includes/class-alg-wc-cog-orders.php:308
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:316
+#: includes/class-alg-wc-cog-orders.php:311
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:606
+#: includes/class-alg-wc-cog-orders.php:561
 msgid "Handling Fee"
 msgstr ""
 
@@ -230,13 +230,13 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:711
-#: includes/class-alg-wc-cog-products.php:757
+#: includes/class-alg-wc-cog-products.php:713
+#: includes/class-alg-wc-cog-products.php:759
 msgid "Profit: %s"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:712
-#: includes/class-alg-wc-cog-products.php:758
+#: includes/class-alg-wc-cog-products.php:714
+#: includes/class-alg-wc-cog-products.php:760
 msgid "N/A"
 msgstr ""
 
@@ -245,7 +245,7 @@ msgid "Advanced"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:55
-msgid "Restriction"
+msgid "Advanced options"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:61
@@ -268,22 +268,31 @@ msgstr ""
 msgid "The administrator can't be blocked."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:78
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:74
 msgid "Force costs update"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:83
-msgid "Force costs update on order update"
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:75
+msgid "Auto fill empty order items costs on order update"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:84
-msgid "Force empty order items cost update on each order update."
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:82
+msgid "Auto fill empty order items costs on order status change"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:85
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:93
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:101
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:117
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:89
+msgid "Auto fill empty order items costs on new order item addition"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:100
+msgid "Columns sorting"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:105
+msgid "Sortable columns"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:106
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:98
 #: includes/settings/class-alg-wc-cog-settings-orders.php:121
 #: includes/settings/class-alg-wc-cog-settings-orders.php:136
@@ -293,79 +302,55 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:91
-msgid "Force costs update on order status change"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:92
-msgid "Force empty order items cost update on order status change."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:99
-msgid "Force costs update on new order item"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:100
-msgid "Force empty order items cost update on new order item addition."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:111
-msgid "Columns sorting"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:116
-msgid "Sortable columns"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:118
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:107
 msgid "Makes columns added to admin %s and %s lists <strong>sortable</strong>."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:119
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:108
 msgid "products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:120
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:109
 msgid "orders"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:127
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:116
 msgid "Exclude empty lines on sorting"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:138
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:127
 msgid "Background processing"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:143
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:132
 msgid "Minimum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:144
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:133
 msgid "The minimum amount of results from a query in order to trigger a background processing."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:144
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:133
 msgid "Only affects \"Import Costs\" tool and \"Order cost and profit Recalculation\" for the time being."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:150
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:139
 msgid "Send email"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:151
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:140
 msgid "Send an email when a background processing is complete"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:157
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:146
 msgid "Email to"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:158
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:147
 msgid "The email address that is going to receive the email when a background processing task is complete."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:158
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:147
 msgid "Requires the \"Send email\" option enabled in order to work."
 msgstr ""
 
@@ -411,6 +396,7 @@ msgid "WPC Product Bundles for WooCommerce"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:70
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:116
 msgid "Enable compatibility with <a target=\"_blank\" href=\"%s\">%s</a>"
 msgstr ""
 
@@ -476,6 +462,19 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:108
 msgid "It's also necessary that addons do not change names once purchased."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:115
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:116
+msgid "Metorik"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:124
+msgid "Sync cost with %s meta"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:125
+msgid "Everytime %s meta gets updated its value is copied to %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:33

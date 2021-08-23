@@ -3,7 +3,7 @@ Contributors: wpcodefactory, kerbhavik, karzin
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.8
-Stable tag: 2.4.6
+Stable tag: 2.4.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,7 +13,7 @@ Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
 
 **Cost of Goods for WooCommerce** plugin lets you save WooCommerce products purchase costs (i.e. cost of goods sold).
 
-= Main Features =
+### &#9989; Main Features: ###
 
 * Set **costs of goods** for your products.
 * For **variable products** costs can be saved for each variation separately or for all variations at once.
@@ -27,14 +27,26 @@ Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
 * Use **add stock** tool to automatically calculate average product cost.
 * And more...
 
-= Premium Version =
+### &#11088; Premium Version ###
 
 With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-goods-for-woocommerce/) you can:
 
 * Add "Cost" input field to product **bulk** and **quick edit**.
+* Add "Add stock" fields (stock and cost) to product **bulk** and **quick edit**.
 * **Recalculate orders cost and profit** (for all orders or only for orders with no costs).
 * View graphical [costs/profit](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#orders-report) and [stock](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#stock-report) **reports**.
+* View graphical reports for costs/profit on WooCommerce **Analytics > Orders** reports.
+* Enable costs/profit/category columns on WooCommerce **Analytics > Stock** reports.
 * Handle **multicurrency**.
+* Add extra costs for your orders based on order's payment gateway, shipping methods or product's shipping classes.
+* Count on some compatibility options with:
+  * [WP All Import](https://wordpress.org/plugins/wp-all-import/) plugin.
+  * [WPC Product Bundles for WooCommerce](https://wordpress.org/plugins/woo-product-bundle/) plugin.
+  * [Openpos - WooCommerce Point Of Sale](https://codecanyon.net/item/openpos-a-complete-pos-plugins-for-woocomerce/22613341) plugin.
+  * [Product Add-Ons](https://woocommerce.com/products/product-add-ons/) plugin.
+  * [Metorik](https://metorik.com/).
+* Count on support.
+* And more...
 
 = More =
 
@@ -83,8 +95,19 @@ And then you can follow these steps:
 
 == Changelog ==
 
+= 2.4.7 - 23/08/2021 =
+* Fix - Unsupported operand types error when there are variations with empty price.
+* Fix - Orders - Admin Order Edit - Item costs - Option is mandatory for calculating the order cost.
+* Fix - Advanced - Force costs update on order update doesn't work.
+* Fix - Advanced - Restrict by user role - Doesn't work for cost and handling fee input on admin order edit page.
+* Dev - Compatibility - Metorik - Add compatibility with Metorik.
+* Dev - Compatibility - Metorik - Add option to sync cost with `_wc_cog_cost meta`.
+* WC tested up to: 5.6.
+* Improve readme.
+* Add chinese translation.
+
 = 2.4.6 - 17/08/2021 =
-* Fix - Uncaught TypeError: Unsupported operand types: int + string in Alg_WC_Cost_of_Goods_Orders:888;
+* Fix - Uncaught TypeError: Unsupported operand types: int + string in `Alg_WC_Cost_of_Goods_Orders:888`.
 * Dev - Tools - Import - Create "Meta key replaced" option.
 * Add compatibility admin settings section.
 
