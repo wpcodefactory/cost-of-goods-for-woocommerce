@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.4.7\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.4.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-08-23T22:45:39+02:00\n"
+"POT-Creation-Date: 2021-09-13T19:04:06+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -39,7 +39,8 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:251
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:291
+#: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:77
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:73
 #: includes/class-alg-wc-cog-orders.php:215
@@ -54,11 +55,13 @@ msgstr ""
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:184
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/orders.js:33
+#: includes/analytics/src/modules/revenue.js:33
 #: includes/analytics/src/modules/stock.js:58
 msgid "Cost"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:287
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:327
+#: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:78
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:74
 #: includes/class-alg-wc-cog-orders.php:216
@@ -66,6 +69,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:507
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/orders.js:39
+#: includes/analytics/src/modules/revenue.js:39
 #: includes/analytics/src/modules/stock.js:64
 msgid "Profit"
 msgstr ""
@@ -217,7 +221,6 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:178
 #: includes/class-alg-wc-cog-products.php:207
 #: includes/class-alg-wc-cog-products.php:227
-#: includes/settings/class-alg-wc-cog-settings-tools.php:291
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:185
 msgid "Stock"
 msgstr ""
@@ -589,7 +592,6 @@ msgid "Percent from order total."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:24
-#: includes/settings/class-alg-wc-cog-settings-tools.php:275
 msgid "Orders"
 msgstr ""
 
@@ -1605,13 +1607,22 @@ msgstr ""
 msgid "If you can't see the values refreshed or have issues with the analytics page, please try to <a href=\"%s\">clear analytics cache</a>."
 msgstr ""
 
+#: includes/settings/class-alg-wc-cog-settings-tools.php:275
+msgid "Orders tab"
+msgstr ""
+
 #: includes/settings/class-alg-wc-cog-settings-tools.php:276
 #: includes/settings/class-alg-wc-cog-settings-tools.php:292
 msgid "Add \"Cost\" and \"Profit\" columns"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:283
+#: includes/settings/class-alg-wc-cog-settings-tools.php:326
 msgid "Add \"Cost\" and \"Profit\" totals to the report charts"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:291
+msgid "Stock tab"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:300
@@ -1624,6 +1635,14 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:309
 msgid "For now, allows to get only products with costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:317
+msgid "Revenue tab"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:318
+msgid "Add \"Cost\" and \"Profit\" totals columns"
 msgstr ""
 
 #: includes/settings/class-alg-wc-settings-cog.php:59
@@ -1767,11 +1786,13 @@ msgstr ""
 
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/orders.js:79
+#: includes/analytics/src/modules/revenue.js:79
 msgid "Costs total"
 msgstr ""
 
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/orders.js:84
+#: includes/analytics/src/modules/revenue.js:84
 msgid "Profit total"
 msgstr ""
 

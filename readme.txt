@@ -3,7 +3,7 @@ Contributors: wpcodefactory, kerbhavik, karzin
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.8
-Stable tag: 2.4.7
+Stable tag: 2.4.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,27 +25,30 @@ Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
 * Optionally add **notice** to admin order edit page in case if order **profit is below zero**.
 * Optionally set **order extra cost** (all orders or per order), extra **payment gateway costs** and extra **shipping method costs**.
 * Use **add stock** tool to automatically calculate average product cost.
+* See cost/profit columns on WooCommerce **Analytics > Orders** section.
 * And more...
 
-### &#11088; Premium Version ###
+### &#127942; Premium Version ###
 
-With [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-goods-for-woocommerce/) you can:
+**[Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-goods-for-woocommerce/)** features:
 
 * Add "Cost" input field to product **bulk** and **quick edit**.
 * Add "Add stock" fields (stock and cost) to product **bulk** and **quick edit**.
 * **Recalculate orders cost and profit** (for all orders or only for orders with no costs).
-* View graphical [costs/profit](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#orders-report) and [stock](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#stock-report) **reports**.
-* View graphical reports for costs/profit on WooCommerce **Analytics > Orders** reports.
-* Enable costs/profit/category columns on WooCommerce **Analytics > Stock** reports.
 * Handle **multicurrency**.
 * Add extra costs for your orders based on order's payment gateway, shipping methods or product's shipping classes.
-* Count on some compatibility options with:
+* Support.
+* View graphical [costs/profit](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#orders-report) and [stock](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#stock-report) **reports**.
+* Available reports on WooCommerce **Analytics** section:
+  *  See cost/profit including charts at **Analytics > Orders** tab.
+  *  See cost, profit and category columns at **Analytics > Stock** tab.
+  *  See cost/profit including charts at **Analytics > Revenue** tab.
+* **Compatibility** options with:
   * [WP All Import](https://wordpress.org/plugins/wp-all-import/) plugin.
   * [WPC Product Bundles for WooCommerce](https://wordpress.org/plugins/woo-product-bundle/) plugin.
   * [Openpos - WooCommerce Point Of Sale](https://codecanyon.net/item/openpos-a-complete-pos-plugins-for-woocomerce/22613341) plugin.
   * [Product Add-Ons](https://woocommerce.com/products/product-add-ons/) plugin.
   * [Metorik](https://metorik.com/).
-* Count on support.
 * And more...
 
 = More =
@@ -94,6 +97,11 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.4.8 - 13/09/2021 =
+* Dev - Tools - Analytics - Add option to add "Cost" and "Profit" totals columns to revenue tab.
+* Dev - Tools - Analytics - Add option to add "Cost" and "Profit" totals columns to the report chart from the revenue tab.
+* Improve readme.
 
 = 2.4.7 - 23/08/2021 =
 * Fix - Unsupported operand types error when there are variations with empty price.

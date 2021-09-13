@@ -272,7 +272,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'id'    => 'alg_wc_cog_analytics_orders_options',
 			),
 			array(
-				'title'    => __( 'Orders', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Orders tab', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_analytics_orders',
 				'default'  => 'no',
@@ -288,7 +288,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
-				'title'             => __( 'Stock', 'cost-of-goods-for-woocommerce' ),
+				'title'             => __( 'Stock tab', 'cost-of-goods-for-woocommerce' ),
 				'desc'              => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_cost_and_profit_enabled_on_analytics_stock',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
@@ -312,6 +312,23 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'default'           => 'no',
 				'checkboxgroup'     => 'end',
 				'type'              => 'checkbox',
+			),
+			array(
+				'title'             => __( 'Revenue tab', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Add "Cost" and "Profit" totals columns', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_cost_and_profit_column_on_analytics_revenue',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'checkboxgroup'     => 'start'
+			),
+			array(
+				'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_cost_and_profit_totals_on_analytics_revenue',
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'checkboxgroup'     => 'end',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
 				'type'     => 'sectionend',

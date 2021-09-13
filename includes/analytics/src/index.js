@@ -10,6 +10,10 @@
 import orders from './modules/orders';
 orders.init();
 
+// Revenue.
+import revenue from './modules/revenue';
+revenue.init();
+
 // Stock.
 import stock from './modules/stock';
 stock.init();

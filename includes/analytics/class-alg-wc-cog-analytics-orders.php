@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Orders.
  *
- * @version 2.4.5
+ * @version 2.4.8
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -16,7 +16,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.4.5
+		 * @version 2.4.8
 		 * @since   2.4.5
 		 *
 		 * @see     https://github.com/woocommerce/woocommerce-admin/tree/master/docs/examples/extensions
@@ -33,26 +33,30 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			add_filter( 'alg_wc_cog_analytics_localization_info', array( $this, 'add_analytics_localization_info' ) );
 
 			// Costs
-			add_filter( 'woocommerce_analytics_clauses_join_orders_subquery',         array( $this, 'add_costs_join_orders' ) );
-			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_total',      array( $this, 'add_costs_join_orders' ) );
-			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_interval',   array( $this, 'add_costs_join_orders' ) );
-			add_filter( 'woocommerce_analytics_clauses_select_orders_subquery',       array( $this, 'add_costs_select_orders_subquery' ) );
-			add_filter( 'woocommerce_analytics_clauses_select_orders_stats_total',    array( $this, 'add_costs_select_orders_stats_total' ) );
+			add_filter( 'woocommerce_analytics_clauses_join_orders_subquery', array( $this, 'add_costs_join_orders' ) );
+			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_total', array( $this, 'add_costs_join_orders' ) );
+			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_interval', array( $this, 'add_costs_join_orders' ) );
+			add_filter( 'woocommerce_analytics_clauses_select_orders_subquery', array( $this, 'add_costs_select_orders_subquery' ) );
+			add_filter( 'woocommerce_analytics_clauses_select_orders_stats_total', array( $this, 'add_costs_select_orders_stats_total' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_orders_stats_interval', array( $this, 'add_costs_select_orders_stats_total' ) );
-			add_filter( 'woocommerce_rest_reports_column_types',                      array( $this, 'add_costs_total_reports_column_types' ), 10 );
-			add_filter( 'woocommerce_export_admin_orders_report_row_data',            array( $this, 'add_costs_row_data_to_export' ),    PHP_INT_MAX, 2 );
-			add_filter( 'woocommerce_admin_orders_report_export_column_names',        array( $this, 'add_costs_columns_names_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_rest_reports_column_types', array( $this, 'add_costs_total_reports_column_types' ), 10 );
+			add_filter( 'woocommerce_export_admin_orders_report_row_data', array( $this, 'add_costs_row_data_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_admin_orders_report_export_column_names', array( $this, 'add_costs_columns_names_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'alg_wc_cog_analytics_orders_costs_total_validation', array( $this, 'add_costs_total_column_if_option_is_enabled' ) );
 
 			// Profit
-			add_filter( 'woocommerce_analytics_clauses_join_orders_subquery',         array( $this, 'add_profit_join_orders' ) );
-			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_total',      array( $this, 'add_profit_join_orders' ) );
-			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_interval',   array( $this, 'add_profit_join_orders' ) );
-			add_filter( 'woocommerce_analytics_clauses_select_orders_subquery',       array( $this, 'add_profit_select_orders_subquery' ) );
-			add_filter( 'woocommerce_analytics_clauses_select_orders_stats_total',    array( $this, 'add_profit_select_orders_stats_total' ) );
+			add_filter( 'woocommerce_analytics_clauses_join_orders_subquery', array( $this, 'add_profit_join_orders' ) );
+			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_total', array( $this, 'add_profit_join_orders' ) );
+			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_interval', array( $this, 'add_profit_join_orders' ) );
+			add_filter( 'woocommerce_analytics_clauses_select_orders_subquery', array( $this, 'add_profit_select_orders_subquery' ) );
+			add_filter( 'woocommerce_analytics_clauses_select_orders_stats_total', array( $this, 'add_profit_select_orders_stats_total' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_orders_stats_interval', array( $this, 'add_profit_select_orders_stats_total' ) );
-			add_filter( 'woocommerce_rest_reports_column_types',                      array( $this, 'add_profit_total_reports_column_types' ), 10 );
-			add_filter( 'woocommerce_export_admin_orders_report_row_data',            array( $this, 'add_profit_row_data_to_export' ),    PHP_INT_MAX, 2 );
-			add_filter( 'woocommerce_admin_orders_report_export_column_names',        array( $this, 'add_profit_columns_names_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_rest_reports_column_types', array( $this, 'add_profit_total_reports_column_types' ), 10 );
+			add_filter( 'woocommerce_export_admin_orders_report_row_data', array( $this, 'add_profit_row_data_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_admin_orders_report_export_column_names', array( $this, 'add_profit_columns_names_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'alg_wc_cog_analytics_orders_profit_total_validation', array( $this, 'add_profit_total_column_if_option_is_enabled' ) );
+
+			
 
 			// Test, Debug
 			// woocommerce_analytics_orders_stats_select_query
@@ -88,8 +92,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return mixed
 		 */
 		function add_analytics_localization_info( $info ) {
-			$info['cost_and_profit_totals_enabled']  = 'yes' === get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' );
-			$info['cost_and_profit_columns_enabled'] = 'yes' === get_option( 'alg_wc_cog_analytics_orders', 'no' );
+			$info['cost_and_profit_totals_enabled_on_orders']  = 'yes' === get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' );
+			$info['cost_and_profit_columns_enabled_on_orders'] = 'yes' === get_option( 'alg_wc_cog_analytics_orders', 'no' );
 			return $info;
 		}
 
@@ -111,7 +115,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_costs_select_orders_stats_total.
 		 *
-		 * @version 2.4.1
+		 * @version 2.4.8
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -119,15 +123,47 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return array
 		 */
 		function add_costs_select_orders_stats_total( $clauses ) {
-			if ( 'yes' !== get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' ) ) {
-				return $clauses;
+			if ( apply_filters( 'alg_wc_cog_analytics_orders_costs_total_validation', false ) ) {
+				$clauses[] = ', SUM(order_cost_postmeta.meta_value) AS costs_total';
 			}
-			$clauses[] = ', SUM(order_cost_postmeta.meta_value) AS costs_total';
-
 			// If we need to convert the currency
 			//$clauses[] = ', SUM(order_cost_postmeta.meta_value * COALESCE(NULLIF(REGEXP_REPLACE(REGEXP_SUBSTR(wpo.option_value, CONCAT(\'"\',\'USD\',currency_postmeta.meta_value,\'"\',\';(s|d):.+?:".*?(?=";)\')), CONCAT(\'"\',\'USD\',currency_postmeta.meta_value,\'"\',\';(s|d):.+?:"\'),\'\'),\'\'),1)) as costs_total';
 
 			return $clauses;
+		}
+
+		/**
+		 * add_costs_total_column_if_option_is_enabled.
+		 *
+		 * @version 2.4.8
+		 * @since   2.4.8
+		 *
+		 * @param $validation
+		 *
+		 * @return bool
+		 */
+		function add_costs_total_column_if_option_is_enabled( $validation ) {
+			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' ) ) {
+				$validation = true;
+			}
+			return $validation;
+		}
+
+		/**
+		 * add_profit_total_column_if_option_is_enabled.
+		 *
+		 * @version 2.4.8
+		 * @since   2.4.8
+		 *
+		 * @param $validation
+		 *
+		 * @return bool
+		 */
+		function add_profit_total_column_if_option_is_enabled($validation){
+			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' ) ) {
+				$validation = true;
+			}
+			return $validation;
 		}
 
 		/**
@@ -192,10 +228,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return array
 		 */
 		function add_profit_select_orders_stats_total( $clauses ) {
-			if ( 'yes' !== get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' ) ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_orders_profit_total_validation', false ) ) {
+				$clauses[] = ', SUM(order_profit_postmeta.meta_value) AS profit_total';
+			}
+
+			/*if ( 'yes' !== get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' ) ) {
 				return $clauses;
 			}
-			$clauses[] = ', SUM(order_profit_postmeta.meta_value) AS profit_total';
+			$clauses[] = ', SUM(order_profit_postmeta.meta_value) AS profit_total';*/
 
 			// If we need to convert the currency
 			//$clauses[] = ', SUM(order_profit_postmeta.meta_value * COALESCE(NULLIF(REGEXP_REPLACE(REGEXP_SUBSTR(wpo.option_value, CONCAT(\'"\',\'USD\',currency_postmeta.meta_value,\'"\',\';(s|d):.+?:".*?(?=";)\')), CONCAT(\'"\',\'USD\',currency_postmeta.meta_value,\'"\',\';(s|d):.+?:"\'),\'\'),\'\'),1)) as profit_total';
