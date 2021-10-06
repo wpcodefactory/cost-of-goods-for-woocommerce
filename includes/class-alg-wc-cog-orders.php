@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.4.7
+ * @version 2.4.9
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -112,7 +112,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.4.7
+	 * @version 2.4.9
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -137,7 +137,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		// Save order items (AJAX)
 		add_action( 'woocommerce_before_save_order_items', array( $this, 'save_order_items_ajax' ), PHP_INT_MAX, 2 );
 		// Save order items costs on new order
-		add_action( 'woocommerce_new_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
+		add_action( 'woocommerce_new_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX, 2 );
 		add_action( 'woocommerce_api_create_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 		add_action( 'woocommerce_cli_create_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 		add_action( 'kco_before_confirm_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
@@ -170,6 +170,31 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_filter( 'wf_pklist_modify_meta_data', array( $this, 'wf_pklist_remove_cog_meta' ), PHP_INT_MAX );
 		// Add profit to admin email
 		add_action( 'woocommerce_email_order_meta', array( $this, 'woocommerce_email_order_meta' ), PHP_INT_MAX, 3 );
+		// Adds cost of goods on orders placed by WooCommerce REST API.
+		add_action( 'woocommerce_rest_insert_shop_order_object', array( $this, 'trigger_woocommerce_new_order_on_new_order_via_rest' ), 10, 3 );
+	}
+
+	/**
+	 * Adds cost of goods on orders placed by WooCommerce REST API.
+	 *
+	 * Triggers `woocommerce_new_order` when a new order is created via rest api.
+	 *
+	 * @version 2.4.9
+	 * @since   2.4.9
+	 *
+	 * @see https://stackoverflow.com/a/60456545/1193038
+	 *
+	 * @param $object
+	 * @param $request
+	 * @param $is_creating
+	 */
+	function trigger_woocommerce_new_order_on_new_order_via_rest( $object, $request, $is_creating ) {
+		if ( ! $is_creating ) {
+			return;
+		}
+		$order_id = $object->get_id();
+		$wc_order = new WC_Order( $order_id );
+		do_action( 'woocommerce_new_order', $order_id, $wc_order );
 	}
 
 	/**
@@ -361,76 +386,101 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs_save_post.
 	 *
-	 * @version 1.6.0
+	 * @version 2.4.9
 	 * @since   1.6.0
 	 */
 	function update_order_items_costs_save_post( $post_id, $post, $update ) {
 		if ( $this->do_force_on_order_update && $update ) {
-			$this->update_order_items_costs( $post_id, true, true );
+			$this->update_order_items_costs( array(
+				'order_id'         => $post_id,
+				'is_new_order'     => true,
+				'is_no_costs_only' => true
+			) );
 		}
 	}
 
 	/**
 	 * update_order_items_costs_order_status_changed.
 	 *
-	 * @version 1.6.0
+	 * @version 2.4.9
 	 * @since   1.6.0
 	 */
 	function update_order_items_costs_order_status_changed( $order_id ) {
 		if ( $this->do_force_on_status ) {
-			$this->update_order_items_costs( $order_id, true, true );
+			$this->update_order_items_costs( array(
+				'order_id'         => $order_id,
+				'is_new_order'     => true,
+				'is_no_costs_only' => true
+			) );
 		}
 	}
 
 	/**
 	 * update_order_items_costs_new_item.
 	 *
-	 * @version 1.6.0
+	 * @version 2.4.9
 	 * @since   1.6.0
 	 */
 	function update_order_items_costs_new_item( $item_id, $item, $order_id ) {
 		if ( $this->do_force_on_new_item ) {
-			$this->update_order_items_costs( $order_id, true, true );
+			$this->update_order_items_costs( array(
+				'order_id'         => $order_id,
+				'is_new_order'     => true,
+				'is_no_costs_only' => true
+			) );
 		}
 	}
 
 	/**
 	 * save_cost_input_shop_order_save_post.
 	 *
-	 * @version 1.7.1
+	 * @version 2.4.9
 	 * @since   1.1.0
 	 */
 	function save_cost_input_shop_order_save_post( $post_id, $post, $update ) {
-		$this->update_order_items_costs( $post_id, false );
+		$this->update_order_items_costs( array(
+			'order_id'     => $post_id,
+			'is_new_order' => false,
+		) );
 	}
 
 	/**
 	 * save_cost_input_shop_order_new.
 	 *
-	 * @version 1.1.0
+	 * @version 2.4.9
 	 * @since   1.1.0
 	 */
 	function save_cost_input_shop_order_new( $post_id ) {
-		$this->update_order_items_costs( $post_id, true );
+		$args = array(
+			'is_new_order' => true,
+			'order_id'     => $post_id
+		);
+		if ( 2 == func_num_args() ) {
+			$args['order'] = func_get_arg( 1 );
+		}
+		$this->update_order_items_costs( $args );
 	}
 
 	/**
 	 * save_cost_input_shop_order_new_by_order.
 	 *
-	 * @version 2.2.0
+	 * @version 2.4.9
 	 * @since   2.2.0
 	 * @todo    [maybe] merge this with `save_cost_input_shop_order_new()`?
 	 */
 	function save_cost_input_shop_order_new_by_order( $order ) {
 		if ( is_a( $order, 'WC_Order' ) ) {
-			$this->update_order_items_costs( $order->get_id(), true );
+			$this->update_order_items_costs( array(
+				'order'        => $order,
+				'is_new_order' => true,
+			) );
 		}
 	}
 
 	/**
 	 * recalculate_order_ajax.
 	 *
-	 * @version 2.1.0
+	 * @version 2.4.9
 	 * @since   1.4.3
 	 * @todo    [maybe] save *and* fill in
 	 */
@@ -444,13 +494,26 @@ class Alg_WC_Cost_of_Goods_Orders {
 		) {
 			switch ( $this->recalculate_order_button_ajax ) {
 				case 'save':
-					$this->update_order_items_costs( $order_id, false, false, $items );
+					$this->update_order_items_costs( array(
+						'order_id'         => $order_id,
+						'is_new_order'     => false,
+						'is_no_costs_only' => false,
+						'posted'           => $items
+					) );
 					break;
 				case 'all':
-					$this->update_order_items_costs( $order_id, true, false );
+					$this->update_order_items_costs( array(
+						'order_id'         => $order_id,
+						'is_new_order'     => true,
+						'is_no_costs_only' => false,
+					) );
 					break;
 				default: // 'yes'
-					$this->update_order_items_costs( $order_id, true, true );
+					$this->update_order_items_costs( array(
+						'order_id'         => $order_id,
+						'is_new_order'     => true,
+						'is_no_costs_only' => true,
+					) );
 					break;
 			}
 		}
@@ -459,7 +522,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * save_order_items_ajax.
 	 *
-	 * @version 2.1.0
+	 * @version 2.4.9
 	 * @since   2.1.0
 	 */
 	function save_order_items_ajax( $order_id, $items ) {
@@ -470,7 +533,12 @@ class Alg_WC_Cost_of_Goods_Orders {
 			isset( $_POST['action'] ) && 'woocommerce_save_order_items' === $_POST['action'] &&
 			current_user_can( 'edit_shop_orders' )
 		) {
-			$this->update_order_items_costs( $order_id, false, false, $items );
+			$this->update_order_items_costs( array(
+				'order_id'         => $order_id,
+				'is_new_order'     => false,
+				'is_no_costs_only' => false,
+				'posted'           => $items
+			) );
 		}
 	}
 
@@ -588,7 +656,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.4.7
+	 * @version 2.4.9
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -598,7 +666,24 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 * @todo    [maybe] all extra costs: **per order item**
 	 * @todo    [recheck] `$do_update  = ( 0 != $cost );`
 	 */
-	function update_order_items_costs( $order_id, $is_new_order, $is_no_costs_only = false, $posted = false ) {
+	function update_order_items_costs( $args ) {
+		$args = wp_parse_args( $args, array(
+			'order'            => false,
+			'order_id'         => '',
+			'is_new_order'     => true,
+			'is_no_costs_only' => false,
+			'posted'           => false
+		) );
+		$order = $args['order'];
+		$is_new_order = $args['is_new_order'];
+		$is_no_costs_only = $args['is_no_costs_only'];
+		$posted = $args['posted'];
+		// Order
+		$order = ! empty( $order ) ? $order : wc_get_order( $args['order_id'] );
+		if ( ! $order || ! is_a( $order, '\WC_Order' ) ) {
+			return;
+		}
+		$order_id = $order->get_id();
 		// Shipping classes
 		$is_shipping_classes_enabled = ( 'yes' === get_option( 'alg_wc_cog_shipping_classes_enabled', 'no' ) );
 		if ( $is_shipping_classes_enabled ) {
@@ -608,11 +693,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$shipping_class_cost_fixed_total   = 0;
 		$shipping_class_cost_percent_total = 0;
 		$shipping_classes_cost_total       = 0;
-		// Order
-		$order = wc_get_order( $order_id );
-		if ( ! $order || ! is_a( $order, '\WC_Order' ) ) {
-			return;
-		}
 		// Calculate quantity ignoring refunded items
 		$calculate_qty_excluding_refunds = 'yes' === get_option( 'alg_wc_cog_calculate_qty_excluding_refunds', 'no' );
 		// Order items

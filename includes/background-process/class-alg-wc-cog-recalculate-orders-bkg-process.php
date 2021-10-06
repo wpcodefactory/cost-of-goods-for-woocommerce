@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Background Process - Recalculate Orders
  *
- * @version 2.3.0
+ * @version 2.4.9
  * @since   2.3.0
  * @author  WPFactory
  */
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Recalculate_Orders_Bkg_Process' ) ) :
 		}
 
 		/**
-		 * @version 2.3.0
+		 * @version 2.4.9
 		 * @since   2.3.0
 		 *
 		 * @param mixed $item
@@ -40,7 +40,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Recalculate_Orders_Bkg_Process' ) ) :
 		 */
 		protected function task( $item ) {
 			parent::task( $item );
-			alg_wc_cog()->core->orders->update_order_items_costs( $item['id'], true, $item['recalculate_for_orders_with_no_costs'] );
+			alg_wc_cog()->core->orders->update_order_items_costs( array(
+				'order_id'         => $item['id'],
+				'is_new_order'     => true,
+				'is_no_costs_only' => $item['recalculate_for_orders_with_no_costs'],
+			) );
 			return false;
 		}
 

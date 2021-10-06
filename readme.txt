@@ -3,7 +3,7 @@ Contributors: wpcodefactory, kerbhavik, karzin
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.8
-Stable tag: 2.4.8
+Stable tag: 2.4.9
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,11 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.4.9 - 06/10/2021 =
+* Fix - Add cost of goods on orders placed by WooCommerce REST API.
+* Dev - Improve `Alg_WC_Cost_of_Goods_Orders::update_order_items_costs()` function args.
+* WC tested up to: 5.7.
 
 = 2.4.8 - 13/09/2021 =
 * Dev - Tools - Analytics - Add option to add "Cost" and "Profit" totals columns to revenue tab.
