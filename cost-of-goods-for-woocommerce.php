@@ -3,7 +3,7 @@
 Plugin Name: Cost of Goods for WooCommerce
 Plugin URI: https://wpfactory.com/item/cost-of-goods-for-woocommerce/
 Description: Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
-Version: 2.5.0
+Version: 2.5.1
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: cost-of-goods-for-woocommerce
@@ -63,7 +63,8 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.5.0';
+
+	public $version = '2.5.1';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class

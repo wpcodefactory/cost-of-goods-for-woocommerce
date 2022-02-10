@@ -1,7 +1,7 @@
 /**
  * Analytics.
  *
- * @version 2.4.5
+ * @version 2.5.1
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -17,3 +17,7 @@ revenue.init();
 // Stock.
 import stock from './modules/stock';
 stock.init();
+
+// Products.
+import products from './modules/products';
+products.init();

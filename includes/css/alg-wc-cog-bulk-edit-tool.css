@@ -1,14 +1,38 @@
 /**
  * alg-wc-cog-bulk-edit-tool.css.
  *
- * @version 1.3.4
+ * @version 2.5.1
  * @since   1.3.3
  */
 
 .alg_wc_cog_bet_active_row {
-	background-color: #fefbcc !important;
+    background-color: #fefbcc !important;
 }
 
 .alg_wc_cog_bet_modified_row {
-	background-color: #dffecc !important;
+    background-color: #dffecc !important;
+}
+
+.alg_wc_cog_bulk_edit p.search-box {
+    float: left;
+    margin: 0;
+    vertical-align: top;
+}
+
+.alg_wc_cog_bulk_edit .tablenav.top {
+    clear: none;
+    float: right;
+    vertical-align: top;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-top: 0;
+}
+
+.alg_wc_cog_notice {
+    display: none;
+}
+
+.form-action .spinner {
+    float: none;
+    margin: -3px 0 0 10px;
 }

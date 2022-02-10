@@ -30,6 +30,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bkg_Process' ) ) :
 		}
 
 		/**
+		 * get_action_label.
+		 *
 		 * @version 2.3.0
 		 * @since   2.3.0
 		 *
@@ -104,6 +106,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bkg_Process' ) ) :
 		}
 
 		/**
+		 * get_email_template.
+		 *
 		 * @version 2.3.0
 		 * @since   2.3.0
 		 *
@@ -131,6 +135,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bkg_Process' ) ) :
 		}
 
 		/**
+		 * get_email_subject.
+		 *
 		 * @version 2.3.0
 		 * @since   2.3.0
 		 *
@@ -143,6 +149,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bkg_Process' ) ) :
 		}
 
 		/**
+		 * get_email_heading.
+		 *
 		 * @version 2.3.0
 		 * @since   2.3.0
 		 *
@@ -155,7 +163,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bkg_Process' ) ) :
 		}
 
 		/**
-		 * get_email_sending_params.
+		 * get_email_params.
 		 *
 		 * @version 2.3.0
 		 * @since   2.3.0
@@ -188,7 +196,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bkg_Process' ) ) :
 		}
 
 		/**
-		 * init_task.
+		 * save.
 		 *
 		 * @version 2.3.0
 		 * @since   2.3.0

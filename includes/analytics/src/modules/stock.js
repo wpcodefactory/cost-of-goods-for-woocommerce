@@ -1,8 +1,6 @@
 /**
  * Cost of Goods for WooCommerce - Analytics > Stock (WooCommerce Admin) Report.
  *
- * @see https://github.com/woocommerce/woocommerce-admin/blob/main/client/analytics/report/orders/config.js#L50-L62
- *
  */
 
 import {addFilter} from '@wordpress/hooks';

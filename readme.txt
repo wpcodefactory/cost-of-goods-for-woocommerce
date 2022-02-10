@@ -1,9 +1,9 @@
 === Cost of Goods for WooCommerce ===
-Contributors: wpcodefactory, kerbhavik, karzin
+Contributors: wpcodefactory, karzin, kerbhavik, jaedm97
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
-Tested up to: 5.8
-Stable tag: 2.5.0
+Tested up to: 5.9
+Stable tag: 2.5.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,15 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.5.1 - 10/02/2022 =
+* Fix - Reports - Stock - Cost of goods - Products having costs and prices with decimal places after zero don't get displayed on the report.
+* Dev - Tools - Bulk edit costs - Add "by price" and "by profit" sections.
+* Dev - Tools - Bulk edit costs - By price - Add option to define the costs from a percentage of product prices.
+* Dev - Tools - Bulk edit costs - By profit - Add option to define the costs according to a profit percentage.
+* Dev - Tools - Analytics - Add option to add "Cost" and "Profit" columns to products tab.
+* Dev - Tools - Analytics - Add option to add "Cost" and "Profit" totals to products tab.
+* Tested up to: 5.9
 
 = 2.5.0 - 19/01/2022 =
 * WC tested up to: 6.1.

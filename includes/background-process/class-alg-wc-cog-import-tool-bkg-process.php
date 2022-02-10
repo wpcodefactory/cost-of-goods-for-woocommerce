@@ -21,6 +21,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool_Bkg_Process' ) ) :
 		protected $action = 'alg_wc_cog_import_tool';
 
 		/**
+		 * get_action_label.
+		 *
 		 * @version 2.3.0
 		 * @since   2.3.0
 		 *
@@ -31,6 +33,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool_Bkg_Process' ) ) :
 		}
 
 		/**
+		 * task.
+		 *
 		 * @version 2.4.6
 		 * @since   2.3.0
 		 *

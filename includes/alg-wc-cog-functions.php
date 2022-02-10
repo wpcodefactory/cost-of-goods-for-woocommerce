@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions
  *
- * @version 2.4.2
+ * @version 2.5.1
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -197,5 +197,19 @@ if ( ! function_exists( 'alg_wc_cog_array_to_string' ) ) {
 			return $item;
 		}, array_keys( $arr ), $arr );
 		return implode( $args['glue'], $transformed_arr );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_get_blocked_options_message' ) ) {
+	/**
+	 * alg_wc_cog_get_blocked_options_message.
+	 *
+	 * @version 2.5.1
+	 * @since   2.5.1
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_get_blocked_options_message() {
+		return sprintf( __( 'Disabled options can be unlocked using <a href="%s" target="_blank"><strong>%s</strong></a>', 'cost-of-goods-for-woocommerce' ), 'https://wpfactory.com/item/cost-of-goods-for-woocommerce/', __( 'Cost of Goods for WooCommerce Pro', 'cost-of-goods-for-woocommerce' ) );
 	}
 }

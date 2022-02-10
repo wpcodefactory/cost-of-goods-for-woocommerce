@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings
  *
- * @version 2.4.6
+ * @version 2.5.1
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.6
+	 * @version 2.5.1
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -288,6 +288,23 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
+				'title'             => __( 'Products tab', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_cost_and_profit_column_on_products_tab',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'checkboxgroup'     => 'start'
+			),
+			array(
+				'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_cost_and_profit_totals_on_products_tab',
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'checkboxgroup'     => 'end',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
 				'title'             => __( 'Stock tab', 'cost-of-goods-for-woocommerce' ),
 				'desc'              => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_cost_and_profit_enabled_on_analytics_stock',
@@ -306,7 +323,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			),
 			array(
 				'desc'              => __( 'Add filter allowing to restrict the query', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip'          => __( 'For now, allows to get only products with costs.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'          => __( 'For now, it allows to get only products with costs.', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_filter_enabled_on_analytics_stock',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 				'default'           => 'no',

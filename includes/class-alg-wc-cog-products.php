@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.4.7
+ * @version 2.5.1
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -47,43 +47,75 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.4.2
+	 * @version 2.5.1
 	 * @since   2.1.0
 	 */
 	function add_hooks() {
 		// Cost input on admin product page (simple product)
 		add_action( get_option( 'alg_wc_cog_product_cost_field_position', 'woocommerce_product_options_pricing' ), array( $this, 'add_cost_input' ) );
-		add_action( 'woocommerce_bookings_after_display_cost',                   array( $this, 'add_cost_input' ) );
-		add_action( 'save_post_product',                                         array( $this, 'save_cost_input' ), PHP_INT_MAX, 2 );
+		add_action( 'woocommerce_bookings_after_display_cost', array( $this, 'add_cost_input' ) );
+		add_action( 'save_post_product', array( $this, 'save_cost_input' ), PHP_INT_MAX, 2 );
 		// Cost input on admin product page (variable product)
-		add_action( 'woocommerce_variation_options_pricing',                     array( $this, 'add_cost_input_variation' ), 10, 3 );
-		add_action( 'woocommerce_save_product_variation',                        array( $this, 'save_cost_input_variation' ), PHP_INT_MAX, 2 );
-		add_action( 'woocommerce_product_options_general_product_data',          array( $this, 'add_cost_input_variable' ), PHP_INT_MAX );
+		add_action( 'woocommerce_variation_options_pricing', array( $this, 'add_cost_input_variation' ), 10, 3 );
+		add_action( 'woocommerce_save_product_variation', array( $this, 'save_cost_input_variation' ), PHP_INT_MAX, 2 );
+		add_action( 'woocommerce_product_options_general_product_data', array( $this, 'add_cost_input_variable' ), PHP_INT_MAX );
 		// Products columns
 		if ( $this->is_column_profit || $this->is_column_cost ) {
-			add_filter( 'manage_edit-product_columns',                           array( $this, 'add_product_columns' ) );
-			add_action( 'manage_product_posts_custom_column',                    array( $this, 'render_product_columns' ), PHP_INT_MAX, 2 );
+			add_filter( 'manage_edit-product_columns', array( $this, 'add_product_columns' ) );
+			add_action( 'manage_product_posts_custom_column', array( $this, 'render_product_columns' ), PHP_INT_MAX, 2 );
 			// Make columns sortable
 			if ( $this->is_columns_sorting ) {
-				add_filter( 'manage_edit-product_sortable_columns',              array( $this, 'product_sortable_columns' ) );
-				add_action( 'pre_get_posts',                                     array( $this, 'product_pre_get_posts_order_by_column' ) );
+				add_filter( 'manage_edit-product_sortable_columns', array( $this, 'product_sortable_columns' ) );
+				add_action( 'pre_get_posts', array( $this, 'product_pre_get_posts_order_by_column' ) );
 			}
-			add_action( 'admin_head-edit.php',                                   array( $this, 'handle_product_columns_style' ) );
+			add_action( 'admin_head-edit.php', array( $this, 'handle_product_columns_style' ) );
 		}
 		// Products > Export (WooCommerce)
-		add_filter( 'woocommerce_product_export_column_names',                   array( $this, 'add_export_column' ) );
-		add_filter( 'woocommerce_product_export_product_default_columns',        array( $this, 'add_export_column' ) );
+		add_filter( 'woocommerce_product_export_column_names', array( $this, 'add_export_column' ) );
+		add_filter( 'woocommerce_product_export_product_default_columns', array( $this, 'add_export_column' ) );
 		add_filter( 'woocommerce_product_export_product_column_alg_wc_cog_cost', array( $this, 'add_export_data' ), 10, 2 );
 		// Products > Import (WooCommerce)
-		add_filter( 'woocommerce_csv_product_import_mapping_options',            array( $this, 'add_import_mapping_option' ) );
-		add_filter( 'woocommerce_csv_product_import_mapping_default_columns',    array( $this, 'set_import_mapping_option_default' ) );
-		add_filter( 'woocommerce_product_importer_parsed_data',                  array( $this, 'parse_import_data' ), 10, 2 );
+		add_filter( 'woocommerce_csv_product_import_mapping_options', array( $this, 'add_import_mapping_option' ) );
+		add_filter( 'woocommerce_csv_product_import_mapping_default_columns', array( $this, 'set_import_mapping_option_default' ) );
+		add_filter( 'woocommerce_product_importer_parsed_data', array( $this, 'parse_import_data' ), 10, 2 );
 		// Add product stock
-		add_action( 'add_meta_boxes',                                            array( $this, 'add_product_add_stock_meta_box' ) );
-		add_action( 'save_post_product',                                         array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
+		add_action( 'add_meta_boxes', array( $this, 'add_product_add_stock_meta_box' ) );
+		add_action( 'save_post_product', array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
 		// Sanitize cog meta (_alg_wc_cog_cost)
-		add_filter( 'sanitize_post_meta_' . '_alg_wc_cog_cost',                  array( $this, 'sanitize_cog_meta' ) );
-	
+		add_filter( 'sanitize_post_meta_' . '_alg_wc_cog_cost', array( $this, 'sanitize_cog_meta' ) );
+		// Save profit
+		add_action( 'updated_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
+		add_action( 'added_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
+		add_action( 'deleted_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
+	}
+
+	/**
+	 * Save profit on post meta everytime the cost or price is updated on product.
+	 *
+	 * @version 2.5.1
+	 * @since   2.5.1
+	 *
+	 * @param $meta_id
+	 * @param $post_id
+	 * @param $meta_key
+	 * @param $meta_value
+	 */
+	function save_profit_on_postmeta( $meta_id, $post_id, $meta_key, $meta_value ) {
+		if (
+			in_array( $meta_key, array(
+				'_alg_wc_cog_cost',
+				'_price',
+				'_sale_price',
+			) ) &&
+			is_a( $product = wc_get_product( $post_id ), 'WC_Product' )
+		) {
+			$profit = (float) $this->get_product_profit( $post_id );
+			$cost   = (float) $this->get_product_cost( $post_id );
+			$price  = (float) $this->get_product_price( $product );
+			update_post_meta( $post_id, '_alg_wc_cog_profit', $profit );
+			update_post_meta( $post_id, '_alg_wc_cog_profit_percent', ( 0 != $cost ? ( $profit / $cost * 100 ) : 0 ) );
+			update_post_meta( $post_id, '_alg_wc_cog_profit_margin', ( 0 != $price ? ( $profit / $price * 100 ) : 0 ) );
+		}
 	}
 
 	/**
@@ -784,6 +816,73 @@ class Alg_WC_Cost_of_Goods_Products {
 		if ( isset( $_POST['variable_alg_wc_cog_cost'][ $i ] ) ) {
 			update_post_meta( $variation_id, '_alg_wc_cog_cost', wc_clean( $_POST['variable_alg_wc_cog_cost'][ $i ] ) );
 		}
+	}
+
+	/**
+	 * update_product_price.
+	 *
+	 * @version 2.5.1
+	 * @since   2.5.1
+	 *
+	 * @param null $args
+	 *
+	 * @return bool
+	 */
+	function update_product_cost_by_percentage( $args = null ) {
+		$args              = wp_parse_args( $args, array(
+			'product_id'        => '',
+			'percentage'        => 100,
+			'update_type'       => 'price', // profit | price
+			'update_variations' => true
+		) );
+		$percentage        = $args['percentage'];
+		$product_id        = $args['product_id'];
+		$product           = wc_get_product( $product_id );
+		$update_variations = $args['update_variations'];
+		$update_type       = $args['update_type'];
+		if ( ! is_a( $product, 'WC_Product' ) ) {
+			return false;
+		}
+		update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $this->calculate_product_cost_by_percentage( $product->get_price(), $percentage, $update_type ) );
+		if (
+			$update_variations &&
+			$product->is_type( 'variable' ) && $product instanceof WC_Product_Variable
+		) {
+			foreach ( $product->get_available_variations() as $variation ) {
+				$variation_id  = isset( $variation['variation_id'] ) ? $variation['variation_id'] : '';
+				$display_price = isset( $variation['display_price'] ) ? $variation['display_price'] : '';
+				if ( empty( $variation_id ) || empty( $display_price ) ) {
+					continue;
+				}
+				update_post_meta( $variation_id, '_alg_wc_cog_cost', $this->calculate_product_cost_by_percentage( $display_price, $percentage, $update_type ) );
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * calculate_product_cost.
+	 *
+	 * @version 2.5.1
+	 * @since   2.5.1
+	 *
+	 * @param $price
+	 * @param $percentage
+	 * @param string $method price | profit
+	 *
+	 * @return float|int
+	 */
+	function calculate_product_cost_by_percentage( $price, $percentage, $method ) {
+		if ( empty( $price ) ) {
+			return 0;
+		}
+		if ( 'profit' === $method ) {
+			// Profit percent.
+			return $price / ( ( 100 + $percentage ) / 100 );
+			// Profit marging.
+			//return $price - ( ( $price * $percentage ) / 100 );
+		}
+		return ( $price * $percentage ) / 100;
 	}
 
 	
