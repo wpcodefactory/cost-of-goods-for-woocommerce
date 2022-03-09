@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class
  *
- * @version 2.5.1
+ * @version 2.5.2
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -602,7 +602,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_price.
 	 *
-	 * @version 2.4.7
+	 * @version 2.5.2
 	 * @since   2.3.9
 	 *
 	 * @param $product
@@ -618,7 +618,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		) );
 		$params = array_merge( array( $product ), $args['params'] );
 		$return = call_user_func_array( $args['method'], $params );
-		return $args['return_zero_if_empty'] && empty( $return ) ? 0 : $return;
+		return $args['return_zero_if_empty'] && empty( $return ) ? 0 : (float) $return;
 	}
 
 	/**
