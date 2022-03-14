@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.4.9
+ * @version 2.5.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -68,11 +68,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 			'shipping' => ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_per_order_shipping_fee', 'no' ) ),
 			'payment'  => ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_per_order_payment_fee', 'no' ) ),
 		);
-		// Fees: From Meta
-		$this->order_extra_cost_from_meta = get_option( 'alg_wc_cog_order_extra_cost_from_meta', '' );
-		if ( '' != $this->order_extra_cost_from_meta ) {
-			$this->order_extra_cost_from_meta = array_map( 'trim', explode( PHP_EOL, $this->order_extra_cost_from_meta ) );
-		}
 		// Calculations
 		$this->order_extra_cost_percent_total = get_option( 'alg_wc_cog_order_extra_cost_percent_total', 'subtotal_excl_tax' );
 		$this->order_count_empty_costs        = ( 'yes' === get_option( 'alg_wc_cog_order_count_empty_costs', 'no' ) );
@@ -112,7 +107,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.4.9
+	 * @version 2.5.3
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -169,7 +164,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		// Compatibility: "WooCommerce PDF Invoices, Packing Slips, Delivery Notes & Shipping Labels" plugin
 		add_filter( 'wf_pklist_modify_meta_data', array( $this, 'wf_pklist_remove_cog_meta' ), PHP_INT_MAX );
 		// Add profit to admin email
-		add_action( 'woocommerce_email_order_meta', array( $this, 'woocommerce_email_order_meta' ), PHP_INT_MAX, 3 );
+		add_action( 'woocommerce_email_order_meta', array( $this, 'woocommerce_email_order_meta' ), PHP_INT_MAX, 2 );
 		// Adds cost of goods on orders placed by WooCommerce REST API.
 		add_action( 'woocommerce_rest_insert_shop_order_object', array( $this, 'trigger_woocommerce_new_order_on_new_order_via_rest' ), 10, 3 );
 	}
@@ -200,14 +195,14 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * woocommerce_email_order_meta.
 	 *
-	 * @version 2.4.5
+	 * @version 2.5.3
 	 * @since   2.3.5
 	 *
 	 * @param $order_obj
 	 * @param $sent_to_admin
 	 * @param $plain_text
 	 */
-	function woocommerce_email_order_meta( $order_obj, $sent_to_admin, $plain_text ) {
+	function woocommerce_email_order_meta( $order_obj, $sent_to_admin ) {
 		if (
 			! $sent_to_admin
 			|| 'no' == get_option( 'alg_wc_cog_order_admin_new_order_email_profit_and_cost', 'no' )
@@ -656,7 +651,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.4.9
+	 * @version 2.5.3
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -684,6 +679,11 @@ class Alg_WC_Cost_of_Goods_Orders {
 			return;
 		}
 		$order_id = $order->get_id();
+		// Fees: From Meta
+		$this->order_extra_cost_from_meta = get_option( 'alg_wc_cog_order_extra_cost_from_meta', '' );
+		if ( '' != $this->order_extra_cost_from_meta ) {
+			$this->order_extra_cost_from_meta = array_map( 'trim', explode( PHP_EOL, $this->order_extra_cost_from_meta ) );
+		}
 		// Shipping classes
 		$is_shipping_classes_enabled = ( 'yes' === get_option( 'alg_wc_cog_shipping_classes_enabled', 'no' ) );
 		if ( $is_shipping_classes_enabled ) {
@@ -927,7 +927,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 			// Fees: Order extra cost: from meta (e.g. PayPal, Stripe etc.)
 			if ( '' !== $this->order_extra_cost_from_meta ) {
 				foreach ( $this->order_extra_cost_from_meta as $meta_key ) {
-					$fee       = get_post_meta( $order_id, $meta_key, true );
+					$meta_keys_splitted = $meta_keys_splitted_original = explode( '.', $meta_key );
+					$final_meta_key  = $meta_keys_splitted_original[0];
+					$post_meta_value = $fee = get_post_meta( $order_id, $final_meta_key, true );
+					if ( is_array( $post_meta_value ) ) {
+						array_shift( $meta_keys_splitted );
+						$fee = $this->get_array_value_by_dynamic_keys( $meta_keys_splitted, $post_meta_value );
+					}
 					$meta_fees += apply_filters( 'alg_wc_cog_order_extra_cost_from_meta', floatval( $fee ), $order );
 				}
 				if ( 0 !== $meta_fees ) {
@@ -1002,6 +1008,31 @@ class Alg_WC_Cost_of_Goods_Orders {
 		update_post_meta( $order_id, '_alg_wc_cog_order_price', $total_price );
 		update_post_meta( $order_id, '_alg_wc_cog_order_cost', $total_cost );
 		update_post_meta( $order_id, '_alg_wc_cog_order_fees', $fees );
+	}
+
+	/**
+	 * get_array_value_by_dynamic_keys.
+	 *
+	 * If you have an array like ['a'=>['b'=>['c'=>'the_value']]], you can get the value you want with dynamic keys like ['a','b','c'].
+	 *
+	 * @version 2.5.3
+	 * @since   2.5.3
+	 *
+	 * @param $dynamic_keys
+	 * @param $array
+	 * @param int $key_level
+	 *
+	 * @return mixed
+	 */
+	function get_array_value_by_dynamic_keys( $dynamic_keys, $array, $key_level = 0 ) {
+		for ( $i = $key_level; $i < count( $dynamic_keys ); $i ++ ) {
+			foreach ( $array as $k => $v ) {
+				if ( $k === $dynamic_keys[ $i ] ) {
+					$i ++;
+					return is_array( $v ) ? $this->get_array_value_by_dynamic_keys( $dynamic_keys, $v, $i ) : $v;
+				}
+			}
+		}
 	}
 }
 

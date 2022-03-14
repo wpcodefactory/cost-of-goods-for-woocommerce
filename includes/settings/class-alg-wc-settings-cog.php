@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Settings
  *
- * @version 2.4.3
+ * @version 2.5.3
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -16,7 +16,7 @@ class Alg_WC_Settings_Cost_of_Goods extends WC_Settings_Page {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.4.3
+	 * @version 2.5.3
 	 * @since   1.0.0
 	 */
 	function __construct() {
@@ -36,6 +36,28 @@ class Alg_WC_Settings_Cost_of_Goods extends WC_Settings_Page {
 		require_once( 'class-alg-wc-cog-settings-compatibility.php' );
 		// Create notice about pro
 		add_action( 'admin_init', array( $this, 'add_promoting_notice' ) );
+		// Sanitize raw parameter
+		add_filter( 'woocommerce_admin_settings_sanitize_option', array( $this, 'sanitize_raw_parameter' ), 10, 3 );
+	}
+
+	/**
+	 * sanitize_raw_parameter.
+	 *
+	 * @version 2.5.3
+	 * @since   2.5.3
+	 *
+	 * @param $value
+	 * @param $option
+	 * @param $raw_value
+	 *
+	 * @return mixed|string
+	 */
+	function sanitize_raw_parameter( $value, $option, $raw_value ) {
+		if ( ! isset( $option['alg_wc_cog_raw'] ) || empty( $option['alg_wc_cog_raw'] ) ) {
+			return $value;
+		}
+		$new_value = wp_kses_post( trim( $raw_value ) );
+		return $new_value;
 	}
 
 	/**

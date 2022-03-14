@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.5.2\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.5.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-03-09T16:02:02+01:00\n"
+"POT-Creation-Date: 2022-03-14T15:26:43+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -43,7 +43,7 @@ msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><
 msgstr ""
 
 #: includes/alg-wc-cog-functions.php:213
-#: includes/settings/class-alg-wc-settings-cog.php:59
+#: includes/settings/class-alg-wc-settings-cog.php:81
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr ""
 
@@ -51,8 +51,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:77
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:73
-#: includes/class-alg-wc-cog-orders.php:240
-#: includes/class-alg-wc-cog-orders.php:320
+#: includes/class-alg-wc-cog-orders.php:235
+#: includes/class-alg-wc-cog-orders.php:315
 #: includes/class-alg-wc-cog-products.php:216
 #: includes/class-alg-wc-cog-products.php:243
 #: includes/class-alg-wc-cog-products.php:260
@@ -76,8 +76,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:78
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:74
-#: includes/class-alg-wc-cog-orders.php:241
-#: includes/class-alg-wc-cog-orders.php:330
+#: includes/class-alg-wc-cog-orders.php:236
+#: includes/class-alg-wc-cog-orders.php:325
 #: includes/class-alg-wc-cog-products.php:539
 #: includes/analytics/build/index.js:286
 #: includes/analytics/build/index.js:375
@@ -192,27 +192,27 @@ msgstr ""
 msgid "fee"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:87
+#: includes/class-alg-wc-cog-orders.php:82
 #: includes/settings/class-alg-wc-cog-settings-orders.php:171
 msgid "You are selling below the cost of goods."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:244
-#: includes/class-alg-wc-cog-orders.php:593
+#: includes/class-alg-wc-cog-orders.php:239
+#: includes/class-alg-wc-cog-orders.php:588
 msgid "Cost of goods"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:333
+#: includes/class-alg-wc-cog-orders.php:328
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:336
+#: includes/class-alg-wc-cog-orders.php:331
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:629
+#: includes/class-alg-wc-cog-orders.php:624
 msgid "Handling Fee"
 msgstr ""
 
@@ -574,7 +574,7 @@ msgstr ""
 #: includes/settings/class-alg-wc-cog-settings-orders.php:234
 #: includes/settings/class-alg-wc-cog-settings-orders.php:357
 #: includes/settings/class-alg-wc-cog-settings-orders.php:391
-#: includes/settings/class-alg-wc-cog-settings-orders.php:442
+#: includes/settings/class-alg-wc-cog-settings-orders.php:443
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:40
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:100
 msgid "You will need to recalculate order's cost and profit after you change these settings."
@@ -1019,15 +1019,23 @@ msgstr ""
 msgid "E.g.: %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:447
-msgid "Meta keys"
+#: includes/settings/class-alg-wc-cog-settings-orders.php:442
+msgid "You can also use dots to access serialized array metas. E.g.: Get fees from %s:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:442
+msgid "PayPal Payments"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:448
-msgid "Ignored if empty."
+msgid "Meta keys"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:449
+msgid "Ignored if empty."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:450
 msgid "One meta key per line."
 msgstr ""
 
@@ -1671,32 +1679,32 @@ msgstr ""
 msgid "Add \"Cost\" and \"Profit\" totals columns"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:60
+#: includes/settings/class-alg-wc-settings-cog.php:82
 msgid "Disabled options can be unlocked using <a href=\"%pro_version_url%\" target=\"_blank\"><strong>%pro_version_title%</strong></a>"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:61
+#: includes/settings/class-alg-wc-settings-cog.php:83
 msgid "Upgrade to Pro version"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:77
+#: includes/settings/class-alg-wc-settings-cog.php:99
 msgid "Reset Settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:82
+#: includes/settings/class-alg-wc-settings-cog.php:104
 msgid "Reset section settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:83
+#: includes/settings/class-alg-wc-settings-cog.php:105
 msgid "Reset"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:84
+#: includes/settings/class-alg-wc-settings-cog.php:106
 msgid "Enable the checkbox and save changes to reset the settings."
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:112
-#: includes/settings/class-alg-wc-settings-cog.php:127
+#: includes/settings/class-alg-wc-settings-cog.php:134
+#: includes/settings/class-alg-wc-settings-cog.php:149
 msgid "Your settings have been reset."
 msgstr ""
 
