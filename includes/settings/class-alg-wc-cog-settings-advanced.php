@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Advanced Section Settings
  *
- * @version 2.4.7
+ * @version 2.5.4
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -44,7 +44,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.7
+	 * @version 2.5.4
 	 * @since   1.7.0
 	 * @todo    [later] "Force costs update on ...": better title and desc (3x)
 	 */
@@ -88,6 +88,14 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'desc'          => __( 'Auto fill empty order items costs on new order item addition', 'cost-of-goods-for-woocommerce' ),
 				'id'            => 'alg_wc_cog_orders_force_on_new_item',
+				'default'       => 'no',
+				'checkboxgroup' => '',
+				'type'          => 'checkbox',
+			),
+			array(
+				'desc'          => __( 'Auto fill empty order items costs on order meta update', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'      => __( 'Only triggers with meta not starting with <code>_alg_wc_cog</code>.', 'cost-of-goods-for-woocommerce' ),
+				'id'            => 'alg_wc_cog_orders_force_on_order_meta_update',
 				'default'       => 'no',
 				'checkboxgroup' => 'end',
 				'type'          => 'checkbox',

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings
  *
- * @version 2.5.3
+ * @version 2.5.4
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.5.3
+	 * @version 2.5.4
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -439,23 +439,24 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'desc'  => __( 'Adds extra costs from order meta.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 				           sprintf( __( 'E.g.: %s.', 'cost-of-goods-for-woocommerce' ),
 					           implode( ', ', array( 'Stripe: ' . '<code>_stripe_fee</code>', 'PayPal: ' . '<code>PayPal Transaction Fee</code>' ) ) ) . '<br />' .
-				           sprintf( __( 'You can also use dots to access serialized array metas. E.g.: Get fees from %s:', 'cost-of-goods-for-woocommerce' ), '<a href="https://woocommerce.com/pt-br/products/woocommerce-paypal-payments/" target="_blank">' . __( 'PayPal Payments', 'cost-of-goods-for-woocommerce' ) . '</a>' ) . ' ' . '<code>_ppcp_paypal_fees.paypal_fee.value</code>.' . '<br />' .
-				           __( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
+				           '- ' . sprintf( __( 'You can also use dots to access serialized array metas. E.g.: Get fees from %s:', 'cost-of-goods-for-woocommerce' ), '<a href="https://woocommerce.com/pt-br/products/woocommerce-paypal-payments/" target="_blank">' . __( 'PayPal Payments', 'cost-of-goods-for-woocommerce' ) . '</a>' ) . ' ' . '<code>_ppcp_paypal_fees.paypal_fee.value</code>.' . '<br />' .
+				           '- ' . __( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				           '- ' . sprintf( __( "If you have issues, please try to enable the %s options.", 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Advanced > Force costs update', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
 				'type'  => 'title',
 				'id'    => 'alg_wc_cog_order_extra_cost_from_meta_options',
 			),
 			array(
-				'title'          => __( 'Meta keys', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip'       => __( 'Ignored if empty.', 'cost-of-goods-for-woocommerce' ),
-				'desc'           => __( 'One meta key per line.', 'cost-of-goods-for-woocommerce' ),
-				'id'             => 'alg_wc_cog_order_extra_cost_from_meta',
-				'default'        => '',
-				'type'           => 'textarea',
-				'css'            => 'height:100px;',
+				'title'    => __( 'Meta keys', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Ignored if empty.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'One meta key per line.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_order_extra_cost_from_meta',
+				'default'  => '',
+				'type'     => 'textarea',
+				'css'      => 'height:100px;',
 			),
 			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_order_extra_cost_from_meta_options',
+				'type' => 'sectionend',
+				'id'   => 'alg_wc_cog_order_extra_cost_from_meta_options',
 			),
 		);
 

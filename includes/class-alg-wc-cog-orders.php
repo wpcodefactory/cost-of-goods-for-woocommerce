@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class
  *
- * @version 2.5.3
+ * @version 2.5.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -107,7 +107,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.5.3
+	 * @version 2.5.4
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -118,6 +118,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'save_post_shop_order', array( $this, 'update_order_items_costs_save_post' ), PHP_INT_MAX, 3 );
 		add_action( 'woocommerce_new_order_item', array( $this, 'update_order_items_costs_new_item' ), 10, 3 );
 		add_action( 'woocommerce_order_status_changed', array( $this, 'update_order_items_costs_order_status_changed' ), 10, 1 );
+		add_action( 'added_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
+		add_action( 'updated_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
+		add_action( 'deleted_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
 		// Order item costs on order edit page
 		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'add_cost_input_shop_order' ), PHP_INT_MAX, 3 );
 		add_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), PHP_INT_MAX - 1, 3 );
@@ -376,6 +379,31 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 */
 	function get_order_column_key( $column ) {
 		return ( in_array( $column, array( 'cost', 'profit', 'profit_percent', 'profit_margin' ) ) ? '_alg_wc_cog_order_' . $column : '_alg_wc_cog_order_' . $column . '_fee' );
+	}
+
+	/**
+	 * update_order_item_costs_on_order_meta_update.
+	 *
+	 * @version 2.5.4
+	 * @since   1.5.4
+	 *
+	 * @param $meta_id
+	 * @param $post_id
+	 * @param $meta_key
+	 * @param $meta_value
+	 */
+	function update_order_item_costs_on_order_meta_update( $meta_id, $post_id, $meta_key, $meta_value ) {
+		if (
+			'yes' === get_option( 'alg_wc_cog_orders_force_on_order_meta_update', 'no' ) &&
+			'shop_order' === get_post_type( $post_id ) &&
+			'_alg_wc_cog' !== substr( $meta_key, 0, 11 )
+		) {
+			$this->update_order_items_costs( array(
+				'order_id'         => $post_id,
+				'is_new_order'     => true,
+				'is_no_costs_only' => true
+			) );
+		}
 	}
 
 	/**

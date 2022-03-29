@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.9
-Stable tag: 2.5.3
+Stable tag: 2.5.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -98,7 +98,12 @@ And then you can follow these steps:
 
 == Changelog ==
 
+= 2.5.4 - 29/03/2022 =
+* Dev - Advanced - Force costs update - Create option to auto fill empty order items costs on order meta update.
+* Fix - Recalculate orders cost and profit - Order ID is not passed when recalculation doesn't run via background processing.
+
 = 2.5.3 - 14/03/2022 =
+* Fix - Orders - Admin new order email - Too few arguments to function `Alg_WC_Cost_of_Goods_Orders::woocommerce_email_order_meta()` when used with the "Woo Custom Emails" plugin.
 * Fix - Orders - Admin new order email - Too few arguments to function `Alg_WC_Cost_of_Goods_Orders::woocommerce_email_order_meta()` when used with the "Woo Custom Emails" plugin.
 * Fix - Products - Add stock - Improve method used to update stock. From `update_post_meta()` to `wc_update_product_stock()`.
 * Dev - Orders - Extra Costs: From Meta - Use dots to access serialized array metas.
