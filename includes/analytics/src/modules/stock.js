@@ -1,13 +1,18 @@
 /**
  * Cost of Goods for WooCommerce - Analytics > Stock (WooCommerce Admin) Report.
  *
+ * @see https://github.com/woocommerce/woocommerce-admin/issues/4348.
+ * @todo Add cost and profit totals on summary.
+ *
  */
 
 import {addFilter} from '@wordpress/hooks';
 import {__} from '@wordpress/i18n';
 import CurrencyFactory from '@woocommerce/currency';
+import Formatting from "./formatting";
 
 const storeCurrency = CurrencyFactory(wcSettings.currency);
+Formatting.setStoreCurrency(storeCurrency);
 
 let stock = {
 	init: function () {
@@ -98,6 +103,27 @@ let stock = {
 					}
 					return newRow;
 				});
+				/*const costsTotal = reportTableData.items.data.reduce((sum, item) => {
+					return sum + item.product_cost;
+				}, 0);
+				const profitTotal = reportTableData.items.data.reduce((sum, item) => {
+					return sum + item.product_profit;
+				}, 0);
+				const priceTotal = reportTableData.items.data.reduce((sum, item) => {
+					return sum + item.product_price;
+				}, 0);
+				const newSummary = [
+					...reportTableData.summary,
+					{
+						label: 'Cost',
+						value: storeCurrency.formatAmount(costsTotal),
+					},
+					{
+						label: 'Profit',
+						value: Formatting.formatProfit(alg_wc_cog_analytics_obj.profit_template,costsTotal,profitTotal,priceTotal),
+					},
+				];
+				reportTableData.summary = newSummary;*/
 				reportTableData.headers = newHeaders;
 				reportTableData.rows = newRows;
 				return reportTableData;

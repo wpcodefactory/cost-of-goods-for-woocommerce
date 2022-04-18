@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Products.
  *
- * @version 2.5.1
+ * @version 2.5.5
  * @since   2.5.1
  * @author  WPFactory
  */
@@ -43,7 +43,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_costs_total_to_select_products_stats_total.
 		 *
-		 * @version 2.5.1
+		 * @version 2.5.5
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -51,8 +51,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 * @return array
 		 */
 		function add_costs_total_to_select_products_stats_total( $clauses ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_totals_on_products_tab', 'no' ) ) {
-				$clauses[] = ', SUM(alg_cog_oimc.meta_value) AS costs_total';
+			if ( apply_filters( 'alg_wc_cog_analytics_product_cost_totals', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_totals_on_products_tab', 'no' ) ) ) {
+				$clauses[] = ', SUM(alg_cog_oimc.meta_value * product_qty) AS costs_total';
 			}
 			return $clauses;
 		}
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_profit_total_to_select_products_stats_total.
 		 *
-		 * @version 2.5.1
+		 * @version 2.5.5
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -68,9 +68,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 * @return array
 		 */
 		function add_profit_total_to_select_products_stats_total( $clauses ) {
-			global $wpdb;
-			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_totals_on_products_tab', 'no' ) ) {
-				$clauses[] = ", SUM(IFNULL({$wpdb->prefix}wc_order_product_lookup.product_net_revenue - alg_cog_oimc.meta_value, 0)) AS profit_total";
+			if ( apply_filters( 'alg_wc_cog_analytics_product_profit_totals', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_totals_on_products_tab', 'no' ) ) ) {
+				$clauses[] = ", SUM(wp_wc_order_product_lookup.product_net_revenue - alg_cog_oimc.meta_value * product_qty) AS profit_total";
 			}
 			return $clauses;
 		}
@@ -86,7 +85,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 * @return array
 		 */
 		function add_profit_to_select_products( $clauses ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_product_profit_select', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
 				$clauses[] = ', profit';
 			}
 			return $clauses;
@@ -95,7 +94,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_profit_to_select_products_subquery.
 		 *
-		 * @version 2.5.1
+		 * @version 2.5.5
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -103,9 +102,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 * @return array
 		 */
 		function add_profit_to_select_products_subquery( $clauses ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_product_profit_subquery', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
 				global $wpdb;
-				$clauses[] = ", SUM(IFNULL({$wpdb->prefix}wc_order_product_lookup.product_net_revenue - alg_cog_oimc.meta_value, 0)) AS profit";
+				$clauses[] = ", IFNULL((SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue) - SUM(alg_cog_oimc.meta_value * product_qty)), 0) AS profit";
 			}
 			return $clauses;
 		}
@@ -113,7 +112,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_costs_to_join_products.
 		 *
-		 * @version 2.5.1
+		 * @version 2.5.5
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -121,7 +120,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 * @return array
 		 */
 		function add_costs_to_join_products( $clauses ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_product_cost_join', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
 				global $wpdb;
 				$clauses[] = "LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta alg_cog_oimc ON {$wpdb->prefix}wc_order_product_lookup.order_item_id = alg_cog_oimc.order_item_id AND alg_cog_oimc.meta_key = '_alg_wc_cog_item_cost'";
 			}
@@ -131,7 +130,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_costs_to_select_products_subquery.
 		 *
-		 * @version 2.5.1
+		 * @version 2.5.5
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -139,8 +138,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 * @return array
 		 */
 		function add_costs_to_select_products_subquery( $clauses ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) {
-				$clauses[] = ', SUM(IFNULL(alg_cog_oimc.meta_value, 0)) AS cost';
+			if ( apply_filters( 'alg_wc_cog_analytics_product_cost_select_subquery', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
+				$clauses[] = ', SUM(IFNULL(alg_cog_oimc.meta_value * product_qty, 0)) AS cost';
 			}
 			return $clauses;
 		}
@@ -148,7 +147,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_costs_to_select_products.
 		 *
-		 * @version 2.5.1
+		 * @version 2.5.5
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -156,7 +155,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 * @return array
 		 */
 		function add_costs_to_select_products( $clauses ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_product_cost_select', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
 				$clauses[] = ', cost';
 			}
 			return $clauses;
@@ -165,7 +164,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_analytics_localization_info.
 		 *
-		 * @version 2.5.1
+		 * @version 2.5.5
 		 * @since   2.5.1
 		 *
 		 * @param $info
@@ -173,8 +172,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 * @return mixed
 		 */
 		function add_analytics_localization_info( $info ) {
-			$info['cost_and_profit_totals_enabled_on_products']  = 'yes' === get_option( 'alg_wc_cog_cost_and_profit_totals_on_products_tab', 'no' );
-			$info['cost_and_profit_columns_enabled_on_products'] = 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' );
+			$info['product_cost_and_profit_totals_enabled']  = 'yes' === get_option( 'alg_wc_cog_cost_and_profit_totals_on_products_tab', 'no' );
+			$info['product_cost_and_profit_columns_enabled'] = 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' );
 			return $info;
 		}
 

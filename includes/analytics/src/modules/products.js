@@ -6,8 +6,9 @@
 import {addFilter} from '@wordpress/hooks';
 import {__} from '@wordpress/i18n';
 import CurrencyFactory from '@woocommerce/currency';
-
+import Formatting from './formatting.js';
 const storeCurrency = CurrencyFactory(wcSettings.currency);
+Formatting.setStoreCurrency(storeCurrency);
 
 let products = {
 	init: function () {
@@ -16,12 +17,13 @@ let products = {
 			'woocommerce_admin_report_table',
 			'cost-of-goods-for-woocommerce',
 			(reportTableData) => {
+				const urlParams = new URLSearchParams(window.location.search);
 				if (
 					reportTableData.endpoint !== 'products' ||
 					!reportTableData.items ||
 					!reportTableData.items.data ||
 					!reportTableData.items.data.length ||
-					!alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_products
+					(!alg_wc_cog_analytics_obj.product_cost_and_profit_columns_enabled && urlParams.get('path') === '/analytics/products')
 				) {
 					return reportTableData;
 				}
@@ -42,7 +44,6 @@ let products = {
 				];
 				const newRows = reportTableData.rows.map((row, index) => {
 					const item = reportTableData.items.data[index];
-					console.log(item);
 					const newRow = [
 						...row,
 						{
@@ -58,6 +59,14 @@ let products = {
 					];
 					return newRow;
 				});
+				const newSummary = [
+					...reportTableData.summary,
+					{
+						label: 'Profit',
+						value: Formatting.formatProfit(alg_wc_cog_analytics_obj.profit_template,reportTableData.totals.costs_total,reportTableData.totals.profit_total,reportTableData.totals.net_revenue),
+					},
+				];
+				reportTableData.summary = newSummary;
 				reportTableData.rows = newRows;
 				reportTableData.headers = newHeaders;
 
@@ -72,7 +81,7 @@ let products = {
 			'woocommerce_admin_products_report_charts',
 			'cost-of-goods-for-woocommerce',
 			(charts) => {
-				if (alg_wc_cog_analytics_obj.cost_and_profit_totals_enabled_on_products) {
+				if (alg_wc_cog_analytics_obj.product_cost_and_profit_totals_enabled) {
 					charts = [...charts,
 						{
 							key: 'costs_total',

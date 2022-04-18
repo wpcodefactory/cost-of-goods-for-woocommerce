@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Stock.
  *
- * @version 2.4.5
+ * @version 2.5.5
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -14,10 +14,21 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 	class Alg_WC_Cost_of_Goods_Analytics_Stock {
 
 		/**
+		 * $consider_stock_for_calculation.
+		 *
+		 * @since 2.5.5
+		 *
+		 * @var null
+		 */
+		protected $consider_stock_for_calculation = null;
+
+		/**
 		 * Constructor.
 		 *
 		 * @version 2.4.5
 		 * @since   2.4.5
+		 *
+		 * @todo Add cost and profit totals on summary.
 		 *		
 		 */
 		function __construct() {
@@ -111,11 +122,26 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		}
 
 		/**
+		 * consider_stock_for_calculation.
+		 *
+		 * @version 2.5.5
+		 * @since   2.5.5
+		 *
+		 * @return mixed
+		 */
+		function consider_stock_for_calculation() {
+			if ( null === $this->consider_stock_for_calculation ) {
+				$this->consider_stock_for_calculation = 'yes' === get_option( 'alg_wc_cog_analytics_stock_considers_stock', 'yes' );
+			}
+			return $this->consider_stock_for_calculation;
+		}
+
+		/**
 		 * get_column_values.
 		 *
 		 * @see \Automattic\WooCommerce\Admin\API\Reports\Stock\Controller::prepare_item_for_response()
 		 *
-		 * @version 2.4.5
+		 * @version 2.5.5
 		 * @since   2.4.5
 		 *
 		 * @param WP_REST_Response $response
@@ -131,6 +157,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 			) {
 				$response->data['product_cost']   = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
 				$response->data['product_profit'] = alg_wc_cog()->core->products->get_product_profit( $product->get_id() );
+				$response->data['product_price']  = (float) $product->get_price();
+				if ( $this->consider_stock_for_calculation() ) {
+					if ( $response->data['stock_quantity'] > 0 ) {
+						$response->data['product_cost']   *= $response->data['stock_quantity'];
+						$response->data['product_profit'] *= $response->data['stock_quantity'];
+						$response->data['product_price']  *= $response->data['stock_quantity'];
+					}
+				}
 			}
 			// Category
 			if (

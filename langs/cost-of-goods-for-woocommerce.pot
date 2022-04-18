@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.5.4\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.5.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-03-29T20:11:38+02:00\n"
+"POT-Creation-Date: 2022-04-19T01:56:09+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:291
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:77
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:88
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:73
 #: includes/class-alg-wc-cog-orders.php:238
 #: includes/class-alg-wc-cog-orders.php:318
@@ -61,38 +61,34 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:481
 #: includes/class-alg-wc-cog-products.php:536
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:184
-#: includes/analytics/build/index.js:281
-#: includes/analytics/build/index.js:370
-#: includes/analytics/build/index.js:460
-#: includes/analytics/build/index.js:579
-#: includes/analytics/src/modules/orders.js:33
-#: includes/analytics/src/modules/products.js:31
-#: includes/analytics/src/modules/revenue.js:31
-#: includes/analytics/src/modules/stock.js:56
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/categories.js:32
+#: includes/analytics/src/modules/orders.js:35
+#: includes/analytics/src/modules/products.js:33
+#: includes/analytics/src/modules/revenue.js:32
+#: includes/analytics/src/modules/stock.js:61
 msgid "Cost"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:327
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:78
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:89
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:74
 #: includes/class-alg-wc-cog-orders.php:239
 #: includes/class-alg-wc-cog-orders.php:328
 #: includes/class-alg-wc-cog-products.php:539
-#: includes/analytics/build/index.js:286
-#: includes/analytics/build/index.js:375
-#: includes/analytics/build/index.js:465
-#: includes/analytics/build/index.js:585
-#: includes/analytics/src/modules/orders.js:39
-#: includes/analytics/src/modules/products.js:37
-#: includes/analytics/src/modules/revenue.js:37
-#: includes/analytics/src/modules/stock.js:62
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/categories.js:38
+#: includes/analytics/src/modules/orders.js:41
+#: includes/analytics/src/modules/products.js:39
+#: includes/analytics/src/modules/revenue.js:38
+#: includes/analytics/src/modules/stock.js:67
 msgid "Profit"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:82
-#: includes/analytics/build/index.js:595
-#: includes/analytics/src/modules/stock.js:71
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:93
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/stock.js:76
 msgid "Category"
 msgstr ""
 
@@ -1655,12 +1651,14 @@ msgstr ""
 #: includes/settings/class-alg-wc-cog-settings-tools.php:276
 #: includes/settings/class-alg-wc-cog-settings-tools.php:292
 #: includes/settings/class-alg-wc-cog-settings-tools.php:309
+#: includes/settings/class-alg-wc-cog-settings-tools.php:343
 msgid "Add \"Cost\" and \"Profit\" columns"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:283
 #: includes/settings/class-alg-wc-cog-settings-tools.php:300
-#: includes/settings/class-alg-wc-cog-settings-tools.php:343
+#: includes/settings/class-alg-wc-cog-settings-tools.php:317
+#: includes/settings/class-alg-wc-cog-settings-tools.php:334
 msgid "Add \"Cost\" and \"Profit\" totals to the report charts"
 msgstr ""
 
@@ -1669,27 +1667,35 @@ msgid "Products tab"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:308
-msgid "Stock tab"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:317
-msgid "Add \"Category\" column"
+msgid "Categories tab"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:325
-msgid "Add filter allowing to restrict the query"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:326
-msgid "For now, it allows to get only products with costs."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:334
 msgid "Revenue tab"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:335
+#: includes/settings/class-alg-wc-cog-settings-tools.php:326
 msgid "Add \"Cost\" and \"Profit\" totals columns"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:342
+msgid "Stock tab"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:351
+msgid "Take stock into consideration for cost and profit calculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:359
+msgid "Add \"Category\" column"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:367
+msgid "Add filter allowing to restrict the query"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:368
+msgid "For now, it allows to get only products with costs."
 msgstr ""
 
 #: includes/settings/class-alg-wc-settings-cog.php:82
@@ -1911,35 +1917,33 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: includes/analytics/build/index.js:317
-#: includes/analytics/build/index.js:407
-#: includes/analytics/build/index.js:496
-#: includes/analytics/src/modules/orders.js:79
-#: includes/analytics/src/modules/products.js:79
-#: includes/analytics/src/modules/revenue.js:77
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/categories.js:86
+#: includes/analytics/src/modules/orders.js:89
+#: includes/analytics/src/modules/products.js:88
+#: includes/analytics/src/modules/revenue.js:86
 msgid "Costs total"
 msgstr ""
 
-#: includes/analytics/build/index.js:321
-#: includes/analytics/build/index.js:411
-#: includes/analytics/build/index.js:500
-#: includes/analytics/src/modules/orders.js:84
-#: includes/analytics/src/modules/products.js:84
-#: includes/analytics/src/modules/revenue.js:82
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/categories.js:91
+#: includes/analytics/src/modules/orders.js:94
+#: includes/analytics/src/modules/products.js:93
+#: includes/analytics/src/modules/revenue.js:91
 msgid "Profit total"
 msgstr ""
 
-#: includes/analytics/build/index.js:549
-#: includes/analytics/src/modules/stock.js:24
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/stock.js:29
 msgid "Cost of Goods filter"
 msgstr ""
 
-#: includes/analytics/build/index.js:556
-#: includes/analytics/src/modules/stock.js:29
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/stock.js:34
 msgid "Disabled"
 msgstr ""
 
-#: includes/analytics/build/index.js:559
-#: includes/analytics/src/modules/stock.js:30
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/stock.js:35
 msgid "Products with cost"
 msgstr ""

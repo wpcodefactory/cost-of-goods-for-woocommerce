@@ -6,8 +6,9 @@
 import {addFilter} from '@wordpress/hooks';
 import {__} from '@wordpress/i18n';
 import CurrencyFactory from '@woocommerce/currency';
-
+import Formatting from './formatting.js';
 const storeCurrency = CurrencyFactory(wcSettings.currency);
+Formatting.setStoreCurrency(storeCurrency);
 
 let orders = {
 	init: function () {
@@ -57,6 +58,14 @@ let orders = {
 					];
 					return newRow;
 				});
+				const newSummary = [
+					...reportTableData.summary,
+					{
+						label: 'Profit',
+						value: Formatting.formatProfit(alg_wc_cog_analytics_obj.profit_template,reportTableData.totals.costs_total,reportTableData.totals.profit_total,reportTableData.totals.net_revenue),
+					},
+				];
+				reportTableData.summary = newSummary;
 				reportTableData.headers = newHeaders;
 				reportTableData.rows = newRows;
 				return reportTableData;

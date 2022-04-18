@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Class.
  *
- * @version 2.5.1
+ * @version 2.5.5
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -16,7 +16,7 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.5.1
+	 * @version 2.5.5
 	 * @since   1.7.0
 	 *
 	 */
@@ -34,12 +34,15 @@ class Alg_WC_Cost_of_Goods_Analytics {
 
 		// Analytics > Products.
 		require_once('class-alg-wc-cog-analytics-products.php');
+
+		// Analytics > Products.
+		require_once('class-alg-wc-cog-analytics-categories.php');
 	}
 
 	/**
 	 * register_script.
 	 *
-	 * @version 2.4.5
+	 * @version 2.5.5
 	 * @since   1.7.0
 	 */
 	function register_script() {
@@ -65,7 +68,7 @@ class Alg_WC_Cost_of_Goods_Analytics {
 		);
 		wp_enqueue_script( 'alg-wc-cost-of-goods-analytics-report' );
 		wp_localize_script( 'alg-wc-cost-of-goods-analytics-report', 'alg_wc_cog_analytics_obj',
-			apply_filters( 'alg_wc_cog_analytics_localization_info', array() )
+			apply_filters( 'alg_wc_cog_analytics_localization_info', array( 'profit_template' => get_option( 'alg_wc_cog_product_profit_html_template', '%profit% (%profit_percent%)' ) ) )
 		);
 	}
 
