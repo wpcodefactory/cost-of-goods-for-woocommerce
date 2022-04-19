@@ -98,6 +98,9 @@ And then you can follow these steps:
 
 == Changelog ==
 
+= 2.5.6 - 19/04/2022 =
+* Dev - Remove `package-lock.json`.
+
 = 2.5.5 - 18/04/2022 =
 * Fix - Tools - Analytics - Products tab does not take quantity into consideration.
 * Fix - Tools - Analytics - Profit total from products tab is just calculating from totals.
