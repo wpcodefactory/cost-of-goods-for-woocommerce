@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.9
-Stable tag: 2.5.5
+Stable tag: 2.5.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -98,8 +98,9 @@ And then you can follow these steps:
 
 == Changelog ==
 
-= 2.5.6 - 19/04/2022 =
+= 2.5.6 - 10/05/2022 =
 * Dev - Remove `package-lock.json`.
+* Dev - Sync `_alg_wc_cog_cost` meta between different languages while using Polylang/WPML.
 
 = 2.5.5 - 18/04/2022 =
 * Fix - Tools - Analytics - Products tab does not take quantity into consideration.
