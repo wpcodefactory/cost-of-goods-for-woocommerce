@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 2.4.7
+ * @version 2.5.7
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -28,14 +28,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 2.4.7
+		 * @version 2.5.7
 		 * @since   2.4.6
 		 */
 		function get_settings() {
-			$settings = array(
+			$compatibility_opts = array(
 				array(
 					'title'    => __( 'Compatibility options', 'cost-of-goods-for-woocommerce' ),
-					'desc'  => __( 'Compatibility with third party plugins or solutions.', 'emails-verification-for-woocommerce' ),
+					'desc'  => __( 'Compatibility with third party plugins or solutions.', 'cost-of-goods-for-woocommerce' ),
 					'type'     => 'title',
 					'id'       => 'alg_wc_cog_compatibility_options',
 				),
@@ -134,7 +134,28 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'       => 'alg_wc_cog_compatibility_options',
 				),
 			);
-			return $settings;
+			$atum_opts = array(
+				array(
+					'title' => __( 'ATUM Inventory Management for WooCommerce', 'cost-of-goods-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/atum-stock-manager-for-woocommerce/" target="_blank">' . __( 'ATUM Inventory Management for WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'id'    => 'alg_wc_cog_compatibility_atum_options',
+				),
+				array(
+					'title'             => __( 'Product import costs tool', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => sprintf( __( 'Use function from %s plugin to copy the cost meta', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'ATUM', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
+					'desc_tip'          => sprintf( __( 'The %s option will be ignored', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Key to import from', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
+					'id'                => 'alg_wc_cog_comp_atum_get_cost_function_enabled',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_atum_options',
+				),
+			);
+			return array_merge( $compatibility_opts, $atum_opts );
 		}
 
 	}

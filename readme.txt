@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 5.9
-Stable tag: 2.5.6
+Stable tag: 2.5.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,15 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.5.7 - 23/05/2022 =
+* Dev - Compatibility - ATUM - New option: "Use function from ATUM plugin to copy the cost meta".
+* Dev - Tools - Product import costs tool - Create `alg_wc_cog_copy_product_meta_args` filter.
+* Dev - Tools - Product import costs tool - Create `alg_wc_cog_can_copy_cost` filter.
+* Dev - Tools - Product Import Costs Tool - Improve `copy_product_meta()` function.
+* Dev - Move compatibility code to an exclusive class.
+* Dev - Add "Bulk edit costs" and "Import costs" to plugin action links.
+* WC tested up to: 6.5.
 
 = 2.5.6 - 10/05/2022 =
 * Dev - Remove `package-lock.json`.

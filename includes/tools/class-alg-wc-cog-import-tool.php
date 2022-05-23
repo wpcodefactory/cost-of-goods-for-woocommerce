@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Import Tool Class
+ * Cost of Goods for WooCommerce - Import Tool Class.
  *
- * @version 2.4.6
+ * @version 2.5.7
  * @since   1.1.0
  * @author  WPFactory
  */
@@ -66,42 +66,69 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 			);
 		}
 
-
 		/**
 		 * copy_product_meta.
 		 *
-		 * @param null $args
-		 *
+		 * @version 2.5.7
 		 * @since   2.3.0
 		 *
-		 * @version 2.4.6
+		 * @param null $args
 		 */
 		function copy_product_meta( $args = null ) {
-			$args       = wp_parse_args( $args, array(
-				'product_id' => '',
-				'from_key'   => get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' ),
-				'to_key'     => get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' )
+			$args                   = wp_parse_args( $args, array(
+				'product_id'             => '',
+				'from_key'               => get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' ),
+				'to_key'                 => get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' ),
+				'get_cost_function'      => 'get_post_meta',
+				'get_cost_function_args' => null
 			) );
+			$args = apply_filters( 'alg_wc_cog_copy_product_meta_args', $args );
 			$product_id = $args['product_id'];
-			$from_key   = $args['from_key'];
-			$to_key     = $args['to_key'];
-			if (
-				(
-					'yes' === get_option( 'alg_wc_cog_import_tool_check_key', 'yes' )
-					&& ! metadata_exists( 'post', $product_id, $from_key )
-				)
-				||
-				(
-					'yes' === get_option( 'alg_wc_cog_import_tool_check_value', 'yes' )
-					&& empty( get_post_meta( $product_id, $from_key, true ) )
-				)
-			) {
-				return;
+			$to_key = $args['to_key'];
+			$from_key = $args['from_key'];
+			$get_cost_function = $args['get_cost_function'];
+			$get_cost_function_args = $args['get_cost_function_args'];
+			if ( is_null( $get_cost_function_args ) ) {
+				$get_cost_function_args = array( $product_id, $from_key, true );
 			}
-			$source_cost = get_post_meta( $product_id, $from_key, true );
-			update_post_meta( $product_id, $to_key, $source_cost );
+			$source_cost = call_user_func_array( $get_cost_function, $get_cost_function_args );
+			if ( $this->can_copy_cost( $source_cost, $args ) ) {
+				update_post_meta( $product_id, $to_key, $source_cost );
+			}
 		}
 
+		/**
+		 * can_update_cost.
+		 *
+		 * @version 2.5.7
+		 * @since   2.5.7
+		 *
+		 * @param $source_cost
+		 * @param $args
+		 *
+		 * @return bool
+		 */
+		protected function can_copy_cost( $source_cost, $args ) {
+			$product_id        = $args['product_id'];
+			$from_key          = $args['from_key'];
+			$get_cost_function = $args['get_cost_function'];
+			$can_update        = true;
+			if (
+				(
+					'get_post_meta' === $get_cost_function &&
+					'yes' === get_option( 'alg_wc_cog_import_tool_check_key', 'yes' ) &&
+					! metadata_exists( 'post', $product_id, $from_key )
+				) ||
+				(
+					'yes' === get_option( 'alg_wc_cog_import_tool_check_value', 'yes' )
+					&& empty( $source_cost )
+				)
+			) {
+				$can_update = false;
+			}
+			$can_update = apply_filters( 'alg_wc_cog_can_copy_cost', $can_update, $source_cost, $args );
+			return $can_update;
+		}
 
 		/**
 		 * import_tool.
@@ -185,7 +212,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 			               '</form>';
 			$html        = '<div class="wrap">' .
 			               '<h1>' . __( 'Costs Import', 'cost-of-goods-for-woocommerce' ) . '</h1>' .
-			               '<p>' . __( 'Import products costs to "Cost of Goods for WooCommerce" plugin.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+			               '<p>' . sprintf( __( 'Import products costs to "Cost of Goods for WooCommerce" plugin by copying the meta from %s to %s.', 'cost-of-goods-for-woocommerce' ), '<code>' . get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' ) . '</code>', '<code>' . get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' ) . '</code>' ) . ' ' .
 			               sprintf( __( 'Tool\'s options can be set in %s.', 'cost-of-goods-for-woocommerce' ),
 				               '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=tools' ) . '">' . __( 'plugin settings', 'cost-of-goods-for-woocommerce' ) . '</a>'
 			               ) . '</p>' .

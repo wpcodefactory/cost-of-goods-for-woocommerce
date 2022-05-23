@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.5.6\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.5.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-05-10T18:34:04+02:00\n"
+"POT-Creation-Date: 2022-05-23T20:27:22+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -389,6 +389,10 @@ msgstr ""
 msgid "Compatibility options"
 msgstr ""
 
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:38
+msgid "Compatibility with third party plugins or solutions."
+msgstr ""
+
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:43
 msgid "WP All Import"
 msgstr ""
@@ -502,6 +506,36 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:125
 msgid "Everytime %s meta gets updated its value is copied to %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:139
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:141
+msgid "ATUM Inventory Management for WooCommerce"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:141
+msgid "Compatibility with %s plugin."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:145
+msgid "Product import costs tool"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:146
+msgid "Use function from %s plugin to copy the cost meta"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:146
+msgid "ATUM"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:147
+msgid "The %s option will be ignored"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:147
+#: includes/settings/class-alg-wc-cog-settings-tools.php:109
+msgid "Key to import from"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:33
@@ -1397,10 +1431,6 @@ msgstr ""
 msgid "Tools > Import Costs"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:109
-msgid "Key to import from"
-msgstr ""
-
 #: includes/settings/class-alg-wc-cog-settings-tools.php:110
 msgid "The meta key used to replace the cost meta value."
 msgstr ""
@@ -1434,7 +1464,7 @@ msgid "Display a table at the import page"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:139
-msgid "If you have problems accessing the \"Import Costs\" page try to disable this option."
+msgid "If you have problems accessing the \"Import Costs\" page try disabling this option."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:148
@@ -1852,44 +1882,44 @@ msgstr ""
 msgid "Import Costs"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:126
+#: includes/tools/class-alg-wc-cog-import-tool.php:153
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:181
 msgid "Product ID"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:127
+#: includes/tools/class-alg-wc-cog-import-tool.php:154
 msgid "Product Title"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:128
+#: includes/tools/class-alg-wc-cog-import-tool.php:155
 msgid "Source %s"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:129
+#: includes/tools/class-alg-wc-cog-import-tool.php:156
 msgid "Destination %s"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:183
+#: includes/tools/class-alg-wc-cog-import-tool.php:210
 msgid "Import"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:184
+#: includes/tools/class-alg-wc-cog-import-tool.php:211
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:187
+#: includes/tools/class-alg-wc-cog-import-tool.php:214
 msgid "Costs Import"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:188
-msgid "Import products costs to \"Cost of Goods for WooCommerce\" plugin."
+#: includes/tools/class-alg-wc-cog-import-tool.php:215
+msgid "Import products costs to \"Cost of Goods for WooCommerce\" plugin by copying the meta from %s to %s."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:189
+#: includes/tools/class-alg-wc-cog-import-tool.php:216
 msgid "Tool's options can be set in %s."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:190
+#: includes/tools/class-alg-wc-cog-import-tool.php:217
 msgid "plugin settings"
 msgstr ""
 

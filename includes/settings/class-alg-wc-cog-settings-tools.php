@@ -136,7 +136,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'title'    => __( 'Table', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'desc'     => __( 'Display a table at the import page', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'If you have problems accessing the "Import Costs" page try to disable this option.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'If you have problems accessing the "Import Costs" page try disabling this option.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_import_tool_display_table',
 				'default'  => 'no',
 			),
