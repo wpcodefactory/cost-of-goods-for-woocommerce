@@ -1,9 +1,9 @@
 === Cost of Goods for WooCommerce ===
-Contributors: wpcodefactory, karzin, kerbhavik, jaedm97
+Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
-Tested up to: 5.9
-Stable tag: 2.5.7
+Tested up to: 6.0
+Stable tag: 2.5.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,11 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.5.8 - 03/06/2022 =
+* Fix - Shipping classes costs are not getting calculated.
+* Fix - PHP Deprecated: Function is_admin_page.
+* Tested up to: 6.0.
 
 = 2.5.7 - 23/05/2022 =
 * Dev - Compatibility - ATUM - New option: "Use function from ATUM plugin to copy the cost meta".

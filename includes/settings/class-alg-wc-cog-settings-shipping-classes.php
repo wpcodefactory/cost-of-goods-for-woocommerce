@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Shipping classes Settings
+ * Cost of Goods for WooCommerce - Shipping classes Settings.
  *
- * @version 2.4.3
+ * @version 2.5.8
  * @since   2.4.3
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 2.4.3
+		 * @version 2.5.8
 		 * @since   2.4.3
 		 * @todo    [maybe] better section desc (same for `$order_extra_cost_settings` and "Shipping"): how to recalculate order's profit/cost (i.e. update order or use tool)
 		 */
@@ -75,7 +75,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 					),
 					array(
 						'title'    => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
-						'desc_tip' => __( 'Percent from product total.', 'cost-of-goods-for-woocommerce' ),
+						'desc_tip' => __( 'Percent from product total. E.g.: If you want <code>50%</code> from product total you can set it as 50.', 'cost-of-goods-for-woocommerce' ),
 						'type'     => 'number',
 						'id'       => "alg_wc_cog_shipping_class_costs_percent[{$key}]",
 						'default'  => 0,

@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Orders Class
+ * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 2.5.4
+ * @version 2.5.8
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -384,7 +384,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_item_costs_on_order_meta_update.
 	 *
-	 * @version 2.5.4
+	 * @version 2.5.8
 	 * @since   1.5.4
 	 *
 	 * @param $meta_id
@@ -396,7 +396,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 		if (
 			'yes' === get_option( 'alg_wc_cog_orders_force_on_order_meta_update', 'no' ) &&
 			'shop_order' === get_post_type( $post_id ) &&
-			'_alg_wc_cog' !== substr( $meta_key, 0, 11 )
+			'_alg_wc_cog' !== substr( $meta_key, 0, 11 ) &&
+			! in_array( $meta_key, array( '_edit_lock' ) )
 		) {
 			$this->update_order_items_costs( array(
 				'order_id'         => $post_id,
@@ -679,7 +680,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.5.3
+	 * @version 2.5.8
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -827,6 +828,25 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$profit             -= $line_handling_fee;
 					$items_handling_fee += $line_handling_fee;
 				}
+				// Fees: Extra shipping classes costs.
+				if ( $is_shipping_classes_enabled ) {
+					if ( ! empty( $item ) && ! empty( $product_shipping_class_slug = $item->get_product()->get_shipping_class() ) ) {
+						$product_shipping_class_term = get_term_by( 'slug', $product_shipping_class_slug, 'product_shipping_class' );
+						if ( ! empty( $shipping_class_cost = $shipping_classes_fixed_opt[ $product_shipping_class_term->term_id ] ) ) {
+							$shipping_class_cost_fixed_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_fixed', $shipping_class_cost, $order, $product_shipping_class_term->term_id );
+						}
+						// Percent
+						if ( ! empty( $shipping_class_cost = $shipping_classes_percent_opt[ $product_shipping_class_term->term_id ] ) ) {
+							$shipping_class_cost_percent_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_percent', ( $item->get_total() * $shipping_class_cost / 100 ), $order, $product_shipping_class_term->term_id );
+						}
+					}
+					$shipping_classes_cost_total = ( $shipping_class_cost_fixed_total + $shipping_class_cost_percent_total );
+				}
+			}
+			if ( $is_shipping_classes_enabled ) {
+				$profit     -= $shipping_classes_cost_total;
+				$total_cost += $shipping_classes_cost_total;
+				$fees       += $shipping_classes_cost_total;
 			}
 			// calculate total cost
 			if ( 0 !== $items_cost ) {
@@ -866,25 +886,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$profit        -= $shipping_cost;
 				$total_cost    += $shipping_cost;
 				$fees          += $shipping_cost;
-			}
-			// Fees: Extra shipping classes costs
-			if ( $is_shipping_classes_enabled ) {
-				if ( ! empty( $product_shipping_class_slug = WC()->shipping->get_shipping_classes() ) ) {
-					$product_shipping_class_term = get_term_by( 'slug', $product_shipping_class_slug, 'product_shipping_class' );
-					// Fixed
-					if ( ! empty( $shipping_class_cost = $shipping_classes_fixed_opt[ $product_shipping_class_term->term_id ] ) ) {
-						$shipping_class_cost_fixed_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_fixed', $shipping_class_cost, $order, $product_shipping_class_term->term_id );
-					}
-					// Percent
-					if ( ! empty( $shipping_class_cost = $shipping_classes_percent_opt[ $product_shipping_class_term->term_id ] ) ) {
-						$shipping_cost_percent += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_percent', ( $item->get_total() * $shipping_class_cost / 100 ), $order, $product_shipping_class_term->term_id );
-					}
-				}
-
-				$shipping_classes_cost_total = ( $shipping_class_cost_fixed_total + $shipping_class_cost_percent_total );
-				$profit                      -= $shipping_classes_cost_total;
-				$total_cost                  += $shipping_classes_cost_total;
-				$fees                        += $shipping_classes_cost_total;
 			}
 			// Fees: Extra payment gateway costs
 			if ( $this->is_gateway_costs_enabled && method_exists( $order, 'get_payment_method' ) ) {
