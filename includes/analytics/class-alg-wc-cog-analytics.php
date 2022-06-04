@@ -47,10 +47,9 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	 */
 	function register_script() {
 		if (
-			! class_exists( 'Automattic\WooCommerce\Admin\Loader' )
-			|| ! function_exists( 'wc_admin_is_registered_page' )
-			|| ! \Automattic\WooCommerce\Admin\PageController::is_admin_page()
-			|| ! apply_filters( 'alg_wc_cog_create_analytics_orders_validation', true )
+			! function_exists( 'wc_admin_is_registered_page' ) ||
+			! ( isset( $_GET['page'] ) && 'wc-admin' === $_GET['page'] ) ||
+			! apply_filters( 'alg_wc_cog_create_analytics_orders_validation', true )
 		) {
 			return;
 		}
