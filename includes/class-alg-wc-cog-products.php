@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Products Class
+ * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.5.3
+ * @version 2.6.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -386,21 +386,28 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * product_add_stock.
 	 *
-	 * @version 2.5.3
+	 * @version 2.6.0
 	 * @since   1.7.0
 	 * @todo    [next] maybe use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`?
 	 * @todo    [maybe] `$cost_now`: round?
+	 *
+	 * @param $product_id
+	 * @param $stock
+	 * @param $cost
+	 *
+	 * @return bool|mixed
 	 */
 	function product_add_stock( $product_id, $stock, $cost ) {
 		$cost = $this->get_add_stock_cost( array(
 			'cost'       => $cost,
 			'product_id' => $product_id
 		) );
-		$stock_prev = get_post_meta( $product_id, '_stock', true );
-		if ( ! $stock_prev ) {
+		$stock = (int) $stock;
+		$stock_prev = (int) get_post_meta( $product_id, '_stock', true );
+		if ( ! $stock_prev || '' === $stock_prev ) {
 			$stock_prev = 0;
 		}
-		$stock_now  = ( $stock_prev + $stock );
+		$stock_now = (int) ( $stock_prev + $stock );
 		if ( 0 != $stock_now && false !== $cost) {
 			$cost_prev = $this->get_product_cost( $product_id );
 			if ( ! $cost_prev ) {
@@ -416,8 +423,14 @@ class Alg_WC_Cost_of_Goods_Products {
 					'%stock_now%'  => $stock_now,
 				)
 			) );
+			// Update Stock.
 			update_post_meta( $product_id, '_alg_wc_cog_cost', $cost_now );
-			wc_update_product_stock( $product_id, $stock_now );
+			$stock_operation = $this->calculate_update_stock_operation( $product_id, $stock_now );
+			wc_update_product_stock( $product_id, $stock, $stock_operation );
+			if ( 'set' === $stock_operation ) {
+				update_post_meta( $product_id, '_stock', $stock_now );
+			}
+			// Update History.
 			$history = get_post_meta( $product_id, '_alg_wc_cog_cost_history', true );
 			if ( ! $history ) {
 				$history = array();
@@ -427,6 +440,30 @@ class Alg_WC_Cost_of_Goods_Products {
 			return $cost_now;
 		}
 		return false;
+	}
+
+	/**
+	 * calculate_update_stock_operation.
+	 *
+	 * @version 2.6.0
+	 * @since   2.6.0
+	 *
+	 * @param $product_id
+	 * @param $new_stock
+	 *
+	 * @return string
+	 */
+	function calculate_update_stock_operation( $product_id, $new_stock ) {
+		$operation  = 'set';
+		$stock_prev = get_post_meta( $product_id, '_stock', true );
+		if ( ! $stock_prev || '' === $stock_prev ) {
+			$operation = 'set';
+		} elseif ( (int) $new_stock > (int) $stock_prev ) {
+			$operation = 'increase';
+		} elseif ( (int) $new_stock < (int) $stock_prev ) {
+			$operation = 'decrease';
+		}
+		return $operation;
 	}
 
 	/**

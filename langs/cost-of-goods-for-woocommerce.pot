@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.5.9\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-04T14:51:50+02:00\n"
+"POT-Creation-Date: 2022-06-14T04:50:22+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -56,10 +56,10 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:216
 #: includes/class-alg-wc-cog-products.php:243
 #: includes/class-alg-wc-cog-products.php:260
-#: includes/class-alg-wc-cog-products.php:459
-#: includes/class-alg-wc-cog-products.php:470
-#: includes/class-alg-wc-cog-products.php:481
-#: includes/class-alg-wc-cog-products.php:536
+#: includes/class-alg-wc-cog-products.php:496
+#: includes/class-alg-wc-cog-products.php:507
+#: includes/class-alg-wc-cog-products.php:518
+#: includes/class-alg-wc-cog-products.php:573
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:184
 #: includes/analytics/build/index.js:286
 #: includes/analytics/build/index.js:415
@@ -80,7 +80,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:74
 #: includes/class-alg-wc-cog-orders.php:239
 #: includes/class-alg-wc-cog-orders.php:328
-#: includes/class-alg-wc-cog-products.php:539
+#: includes/class-alg-wc-cog-products.php:576
 #: includes/analytics/build/index.js:291
 #: includes/analytics/build/index.js:420
 #: includes/analytics/build/index.js:519
@@ -257,13 +257,13 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:745
-#: includes/class-alg-wc-cog-products.php:791
+#: includes/class-alg-wc-cog-products.php:782
+#: includes/class-alg-wc-cog-products.php:828
 msgid "Profit: %s"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products.php:746
-#: includes/class-alg-wc-cog-products.php:792
+#: includes/class-alg-wc-cog-products.php:783
+#: includes/class-alg-wc-cog-products.php:829
 msgid "N/A"
 msgstr ""
 

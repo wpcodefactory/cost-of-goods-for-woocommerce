@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 2.5.9
+Stable tag: 2.6.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,9 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.6.0 - 13/06/2022 =
+* Fix - Products - Add stock - Stock being saved as float sometimes causes errors in stock changing calculations.
 
 = 2.5.9 - 04/06/2022 =
 * Fix - Error: Call to undefined method Automattic\\WooCommerce\\Admin\\PageController::is_admin_page().
