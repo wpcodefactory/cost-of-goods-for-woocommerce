@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 2.5.7
+ * @version 2.6.1
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 2.5.7
+		 * @version 2.6.1
 		 * @since   2.4.6
 		 */
 		function get_settings() {
@@ -64,15 +64,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'default'       => 'no',
 					'type'          => 'checkbox',
 					'checkboxgroup' => 'end',
-				),
-				array(
-					'title'             => __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => sprintf( __( 'Enable compatibility with <a target="_blank" href="%s">%s</a>', 'cost-of-goods-for-woocommerce' ), 'https://wordpress.org/plugins/woo-product-bundle/', __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ) ),
-					'desc_tip'          => __( 'Excludes Smart bundle product type from stock and orders report.', 'cost-of-goods-for-woocommerce' ),
-					'id'                => 'alg_wc_cog_wpc_product_bundle_for_wc',
-					'default'           => 'no',
-					'type'              => 'checkbox',
-					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 				),
 				array(
 					'title'             => __( 'Openpos - WooCommerce Point Of Sale(POS)', 'cost-of-goods-for-woocommerce' ),
@@ -134,6 +125,45 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'       => 'alg_wc_cog_compatibility_options',
 				),
 			);
+			$wpc_product_bundle_opts = array(
+				array(
+					'title' => __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/woo-product-bundle/" target="_blank">' . __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'id'    => 'alg_wc_cog_compatibility_wpcpb_options',
+				),
+				array(
+					'title'             => __( 'WooCommerce reports', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => sprintf( __( 'Exclude Smart bundle product type from %s and %s report', 'cost-of-goods-for-woocommerce' ), '<a href="'.admin_url('admin.php?page=wc-reports&tab=stock&report=alg_cost_of_goods_stock').'">'.__( 'stock', 'cost-of-goods-for-woocommerce' ).'</a>', '<a href="'.admin_url('admin.php?page=wc-reports&tab=orders&report=alg_cost_of_goods').'">'.__( 'orders', 'cost-of-goods-for-woocommerce' ).'</a>' ),
+					'id'                => 'alg_wc_cog_wpc_product_bundle_for_wc',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'title'             => __( 'Cost calculation', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Calculate Smart bundle cost from its items', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'The cost will be calculated automatically when the bundle product price is updated.', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_wpcpb_calculate_cost_from_bundle_items',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'checkboxgroup'     => 'start',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'desc'              => __( 'Exclude Smart bundle cost from order item', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'This option should be probably enabled if the above option is.', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_wpcpb_exclude_bundle_cost_from_order_item',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'checkboxgroup'     => 'end',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_wpcpb_options',
+				),
+			);
 			$atum_opts = array(
 				array(
 					'title' => __( 'ATUM Inventory Management for WooCommerce', 'cost-of-goods-for-woocommerce' ),
@@ -155,7 +185,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_atum_options',
 				),
 			);
-			return array_merge( $compatibility_opts, $atum_opts );
+			return array_merge( $compatibility_opts, $wpc_product_bundle_opts, $atum_opts );
 		}
 
 	}

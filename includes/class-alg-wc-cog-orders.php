@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 2.5.8
+ * @version 2.6.1
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -680,7 +680,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.5.8
+	 * @version 2.6.1
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -830,7 +830,11 @@ class Alg_WC_Cost_of_Goods_Orders {
 				}
 				// Fees: Extra shipping classes costs.
 				if ( $is_shipping_classes_enabled ) {
-					if ( ! empty( $item ) && ! empty( $product_shipping_class_slug = $item->get_product()->get_shipping_class() ) ) {
+					if (
+						! empty( $item ) &&
+						is_a( $item->get_product(), 'WC_Product' ) &&
+						! empty( $product_shipping_class_slug = $item->get_product()->get_shipping_class() )
+					) {
 						$product_shipping_class_term = get_term_by( 'slug', $product_shipping_class_slug, 'product_shipping_class' );
 						if ( ! empty( $shipping_class_cost = $shipping_classes_fixed_opt[ $product_shipping_class_term->term_id ] ) ) {
 							$shipping_class_cost_fixed_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_fixed', $shipping_class_cost, $order, $product_shipping_class_term->term_id );
