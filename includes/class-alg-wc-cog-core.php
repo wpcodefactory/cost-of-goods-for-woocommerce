@@ -93,7 +93,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		 * @since   2.5.1
 		 */
 		function init_bulk_costs_tool(){
-			// Bulk Edit tool
+			// Bulk Edit tools
 			$this->bulk_edit_tool = require_once( 'tools/class-alg-wc-cog-bulk-edit-tool.php' );
 		}
 

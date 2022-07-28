@@ -3,7 +3,7 @@
 Plugin Name: Cost of Goods for WooCommerce
 Plugin URI: https://wpfactory.com/item/cost-of-goods-for-woocommerce/
 Description: Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
-Version: 2.6.2
+Version: 2.6.3
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: cost-of-goods-for-woocommerce
@@ -63,8 +63,7 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-
-	public $version = '2.6.2';
+	public $version = '2.6.3';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class
@@ -179,7 +178,7 @@ final class Alg_WC_Cost_of_Goods {
 	/**
 	 * Show action links on the plugin screen.
 	 *
-	 * @version 2.5.7
+	 * @version 2.6.3
 	 * @since   1.0.0
 	 * @param   mixed $links
 	 * @return  array
@@ -192,7 +191,8 @@ final class Alg_WC_Cost_of_Goods {
 				__( 'Go Pro', 'cost-of-goods-for-woocommerce' ) . '</a>';
 		}
 		$custom_links[] = '<a href="' . admin_url( 'tools.php?page=bulk-edit-costs' ) . '">' . __( 'Bulk edit costs', 'woocommerce' ) . '</a>';
-		$custom_links[] = '<a href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Import costs', 'woocommerce' ) . '</a>';
+		$custom_links[] = '<a href="' . admin_url( 'tools.php?page=bulk-edit-prices' ) . '">' . __( 'Bulk edit prices', 'woocommerce' ) . '</a>';
+		//$custom_links[] = '<a href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Import costs', 'woocommerce' ) . '</a>';
 		return array_merge( $custom_links, $links );
 	}
 

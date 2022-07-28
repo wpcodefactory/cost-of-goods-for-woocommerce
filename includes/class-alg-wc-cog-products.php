@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.6.0
+ * @version 2.6.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -856,9 +856,55 @@ class Alg_WC_Cost_of_Goods_Products {
 	}
 
 	/**
+	 * Update product price by product cost.
+	 *
+	 * @version 2.6.3
+	 * @since   2.6.3
+	 *
+	 * @param array $args
+	 *
+	 * @return bool
+	 */
+    function update_product_price_by_percentage( $args = array() ) {
+        $args			= wp_parse_args( $args,
+			array(
+				'type'				=> 'profit',
+				'affected_field'	=> 'regular_price',
+			)
+		);
+		$product_id		= isset( $args['product_id'] ) ? $args['product_id'] : '';
+		$percentage		= isset( $args['percentage'] ) ? $args['percentage'] : '';
+		$affected_field	= isset( $args['affected_field'] ) ? $args['affected_field'] : '';
+		$type			= isset( $args['type'] ) ? $args['type'] : '';
+		$product		= wc_get_product( $product_id );
+	    $product_cost   = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
+		$new_price		= 0;
+		// If invalid product or product cost then return false
+		if ( empty( $product_cost ) || 0 == $product_cost ) {
+			return false;
+		}
+		// Calculate price by cost
+		if ( 'profit' == $type ) {
+			$new_price = $product_cost + ( $product_cost * ( $percentage / 100 ) );
+		}
+		// If no new price, then return false
+		if ( 0 >= $new_price ) {
+			return false;
+		}
+		if ( 'sale_price' == $affected_field ) {
+			$product->set_sale_price( $new_price );
+		} else {
+			$product->set_regular_price( $new_price );
+		}
+		$product->save();
+
+		return true;
+    }
+
+	/**
 	 * update_product_price.
 	 *
-	 * @version 2.5.1
+	 * @version 2.6.3
 	 * @since   2.5.1
 	 *
 	 * @param null $args
@@ -866,10 +912,10 @@ class Alg_WC_Cost_of_Goods_Products {
 	 * @return bool
 	 */
 	function update_product_cost_by_percentage( $args = null ) {
-		$args              = wp_parse_args( $args, array(
+        $args              = wp_parse_args( $args, array(
 			'product_id'        => '',
 			'percentage'        => 100,
-			'update_type'       => 'price', // profit | price
+			'update_type'       => 'costs_price', // costs_profit | costs_price
 			'update_variations' => true
 		) );
 		$percentage        = $args['percentage'];
@@ -900,12 +946,12 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * calculate_product_cost.
 	 *
-	 * @version 2.5.1
+	 * @version 2.6.3
 	 * @since   2.5.1
 	 *
 	 * @param $price
 	 * @param $percentage
-	 * @param string $method price | profit
+	 * @param string $method costs_price | costs_profit
 	 *
 	 * @return float|int
 	 */
@@ -913,7 +959,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		if ( empty( $price ) ) {
 			return 0;
 		}
-		if ( 'profit' === $method ) {
+		if ( 'costs_profit' === $method ) {
 			// Profit percent.
 			return $price / ( ( 100 + $percentage ) / 100 );
 			// Profit marging.
@@ -922,7 +968,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		return ( $price * $percentage ) / 100;
 	}
 
-	
+
 }
 
 endif;

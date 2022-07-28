@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 2.6.1
+ * @version 2.6.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -170,6 +170,24 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'woocommerce_email_order_meta', array( $this, 'woocommerce_email_order_meta' ), PHP_INT_MAX, 2 );
 		// Adds cost of goods on orders placed by WooCommerce REST API.
 		add_action( 'woocommerce_rest_insert_shop_order_object', array( $this, 'trigger_woocommerce_new_order_on_new_order_via_rest' ), 10, 3 );
+	}
+
+	/**
+	 * get_new_order_hooks_for_cost_updating.
+	 *
+	 * @version 2.6.3
+	 * @since   2.6.3
+	 *
+	 * @return array
+	 */
+	function get_new_order_hooks_for_cost_updating() {
+		return array(
+			'woocommerce_new_order'                => 'woocommerce_new_order',
+			'woocommerce_api_create_order'         => 'woocommerce_api_create_order',
+			'woocommerce_cli_create_order'         => 'woocommerce_cli_create_order',
+			'kco_before_confirm_order'             => 'kco_before_confirm_order',
+			'woocommerce_checkout_order_processed' => 'woocommerce_checkout_order_processed',
+		);
 	}
 
 	/**
@@ -471,18 +489,20 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * save_cost_input_shop_order_new.
 	 *
-	 * @version 2.4.9
+	 * @version 2.6.3
 	 * @since   1.1.0
 	 */
 	function save_cost_input_shop_order_new( $post_id ) {
-		$args = array(
-			'is_new_order' => true,
-			'order_id'     => $post_id
-		);
-		if ( 2 == func_num_args() ) {
-			$args['order'] = func_get_arg( 1 );
+		if ( in_array( current_filter(), get_option( 'alg_wc_cog_new_order_hooks_for_cost_update', array_keys( $this->get_new_order_hooks_for_cost_updating() ) ) ) ) {
+			$args = array(
+				'is_new_order' => true,
+				'order_id'     => $post_id
+			);
+			if ( 2 == func_num_args() ) {
+				$args['order'] = func_get_arg( 1 );
+			}
+			$this->update_order_items_costs( $args );
 		}
-		$this->update_order_items_costs( $args );
 	}
 
 	/**
@@ -680,7 +700,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.6.1
+	 * @version 2.6.2
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -718,6 +738,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 		if ( $is_shipping_classes_enabled ) {
 			$shipping_classes_fixed_opt   = get_option( 'alg_wc_cog_shipping_class_costs_fixed', array() );
 			$shipping_classes_percent_opt = get_option( 'alg_wc_cog_shipping_class_costs_percent', array() );
+			$shipping_classes_term_ids_used  = array();
+			$shipping_classes_fixed_cost_calculation = get_option( 'alg_wc_cog_shipping_classes_fixed_cost_calculation', 'per_product' );
 		}
 		$shipping_class_cost_fixed_total   = 0;
 		$shipping_class_cost_percent_total = 0;
@@ -837,12 +859,18 @@ class Alg_WC_Cost_of_Goods_Orders {
 					) {
 						$product_shipping_class_term = get_term_by( 'slug', $product_shipping_class_slug, 'product_shipping_class' );
 						if ( ! empty( $shipping_class_cost = $shipping_classes_fixed_opt[ $product_shipping_class_term->term_id ] ) ) {
-							$shipping_class_cost_fixed_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_fixed', $shipping_class_cost, $order, $product_shipping_class_term->term_id );
+							if (
+								'per_product' === $shipping_classes_fixed_cost_calculation ||
+								( 'per_shipping_class' === $shipping_classes_fixed_cost_calculation && ! in_array( $product_shipping_class_term->term_id, $shipping_classes_term_ids_used ) )
+							) {
+								$shipping_class_cost_fixed_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_fixed', $shipping_class_cost, $order, $product_shipping_class_term->term_id );
+							}
 						}
 						// Percent
 						if ( ! empty( $shipping_class_cost = $shipping_classes_percent_opt[ $product_shipping_class_term->term_id ] ) ) {
 							$shipping_class_cost_percent_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_percent', ( $item->get_total() * $shipping_class_cost / 100 ), $order, $product_shipping_class_term->term_id );
 						}
+						$shipping_classes_term_ids_used[] = $product_shipping_class_term->term_id;
 					}
 					$shipping_classes_cost_total = ( $shipping_class_cost_fixed_total + $shipping_class_cost_percent_total );
 				}

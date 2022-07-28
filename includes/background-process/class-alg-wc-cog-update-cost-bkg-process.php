@@ -46,12 +46,12 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Update_Cost_Bkg_Process' ) ) :
 			$product_id  = isset( $item['product_id'] ) ? $item['product_id'] : '';
 			$percentage  = isset( $item['percentage'] ) ? $item['percentage'] : '';
 			$update_type = isset( $item['update_type'] ) ? $item['update_type'] : '';
-			alg_wc_cog()->core->products->update_product_cost_by_percentage(array(
+			alg_wc_cog()->core->products->update_product_cost_by_percentage( array(
 				'product_id'        => $product_id,
 				'percentage'        => $percentage,
 				'update_type'       => $update_type, // profit | price
 				'update_variations' => true
-			));
+			) );
 			return false;
 		}
 	}

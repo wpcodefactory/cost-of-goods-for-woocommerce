@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Advanced Section Settings
+ * Cost of Goods for WooCommerce - Advanced Section Settings.
  *
- * @version 2.5.4
+ * @version 2.6.3
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -44,7 +44,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.5.4
+	 * @version 2.6.3
 	 * @since   1.7.0
 	 * @todo    [later] "Force costs update on ...": better title and desc (3x)
 	 */
@@ -99,6 +99,15 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'default'       => 'no',
 				'checkboxgroup' => 'end',
 				'type'          => 'checkbox',
+			),
+			array(
+				'title'   => __( 'Costs update hooks', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Hooks from new orders that will trigger cost update.', 'cost-of-goods-for-woocommerce' ),
+				'id'      => 'alg_wc_cog_new_order_hooks_for_cost_update',
+				'type'    => 'multiselect',
+				'class'   => 'chosen_select',
+				'default' => array_keys( alg_wc_cog()->core->orders->get_new_order_hooks_for_cost_updating() ),
+				'options' => alg_wc_cog()->core->orders->get_new_order_hooks_for_cost_updating()
 			),
 			array(
 				'type'     => 'sectionend',

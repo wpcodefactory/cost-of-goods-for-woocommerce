@@ -1,7 +1,7 @@
 /**
  * alg-wc-cog-bulk-edit-tool.js.
  *
- * @version 2.5.1
+ * @version 2.6.3
  * @since   1.3.3
  * @author  WPFactory
  */
@@ -19,6 +19,7 @@
 
         let bulkEditForm = $(this),
             bulkEditFormType = bulkEditForm.data('type'),
+            bulkEditToolType = bulkEditForm.data('tool-type'),
             bulkEditFormSpinner = bulkEditForm.find('.spinner'),
             bulkEditFormNotice = $('.alg_wc_cog_notice');
 
@@ -33,9 +34,10 @@
                 context: this,
                 url: algWcCog.ajaxURL,
                 data: {
-                    'action': 'alg_wc_cog_update_cost',
+                    'action': 'alg_wc_cog_update_product_data',
                     'form_data': bulkEditForm.serialize(),
                     'update_type': bulkEditFormType,
+                    'tool_type': bulkEditToolType,
                 },
                 success: function (response) {
 					// Hiding the spinner
