@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.6.3
+ * @version 2.6.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -32,7 +32,6 @@ class Alg_WC_Cost_of_Goods_Products {
 	 */
 	function get_options() {
 		// Templates
-		$this->cost_field_template                    = get_option( 'alg_wc_cog_product_cost_field_template', sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ) );
 		$this->product_profit_html_template           = get_option( 'alg_wc_cog_product_profit_html_template', '%profit% (%profit_percent%)' );
 		// Add stock
 		$this->is_add_stock                           = ( 'yes' === get_option( 'alg_wc_cog_products_add_stock', 'no' ) );
@@ -47,18 +46,11 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.5.1
+	 * @version 2.6.4
 	 * @since   2.1.0
 	 */
 	function add_hooks() {
-		// Cost input on admin product page (simple product)
-		add_action( get_option( 'alg_wc_cog_product_cost_field_position', 'woocommerce_product_options_pricing' ), array( $this, 'add_cost_input' ) );
-		add_action( 'woocommerce_bookings_after_display_cost', array( $this, 'add_cost_input' ) );
-		add_action( 'save_post_product', array( $this, 'save_cost_input' ), PHP_INT_MAX, 2 );
-		// Cost input on admin product page (variable product)
-		add_action( 'woocommerce_variation_options_pricing', array( $this, 'add_cost_input_variation' ), 10, 3 );
-		add_action( 'woocommerce_save_product_variation', array( $this, 'save_cost_input_variation' ), PHP_INT_MAX, 2 );
-		add_action( 'woocommerce_product_options_general_product_data', array( $this, 'add_cost_input_variable' ), PHP_INT_MAX );
+
 		// Products columns
 		if ( $this->is_column_profit || $this->is_column_cost ) {
 			add_filter( 'manage_edit-product_columns', array( $this, 'add_product_columns' ) );
@@ -83,7 +75,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		add_action( 'save_post_product', array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
 		// Sanitize cog meta (_alg_wc_cog_cost)
 		add_filter( 'sanitize_post_meta_' . '_alg_wc_cog_cost', array( $this, 'sanitize_cog_meta' ) );
-		// Save profit
+		// Save profit.
 		add_action( 'updated_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
 		add_action( 'added_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
 		add_action( 'deleted_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
@@ -186,40 +178,6 @@ class Alg_WC_Cost_of_Goods_Products {
 				);
 			}
 		}
-	}
-
-	/**
-	 * get_add_stock_bulk_and_quick_edit_fields.
-	 *
-	 * @version 2.4.2
-	 * @since   2.3.5
-	 *
-	 * @todo Try to understand why the tip doesn't work on quick edit but does work on bulk edit.
-	 *
-	 * @return string
-	 */
-	function get_add_stock_bulk_and_quick_edit_fields() {
-		$negative_stock_allowed = 'yes' === get_option( 'alg_wc_cog_products_add_stock_negative_stock', 'no' );
-		$add_stock_input_min = $negative_stock_allowed ? '' : 'min="0"';
-		//$tip = wc_help_tip( __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ) );
-		ob_start();
-		?>
-		<br class="clear"/>
-		<h4 class="title" style="margin-bottom: 10px;"><?php echo __( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ?><?php //echo $tip; ?></h4>
-		<label>
-			<span class="title"><?php echo __( 'Stock', 'cost-of-goods-for-woocommerce' ) ?></span>
-			<span class="input-text-wrap">
-				<input name="_alg_wc_cog_add_stock_qb" id="_alg_wc_cog_add_stock_qb" class="short" type="number" <?php echo $add_stock_input_min; ?>>
-			</span>
-		</label>
-		<label>
-			<span class="title"><?php echo __( 'Cost', 'cost-of-goods-for-woocommerce' ) ?></span>
-			<span class="input-text-wrap">
-				<input name="_alg_wc_cog_add_stock_cost_qb" id="_alg_wc_cog_add_stock_cost_qb" class="short wc_input_price" type="number" step="0.0001" min="0">
-			</span>
-		</label>
-		<?php
-		return ob_get_clean();
 	}
 
 	/**
@@ -762,123 +720,31 @@ class Alg_WC_Cost_of_Goods_Products {
 	}
 
 	/**
-	 * add_cost_input.
-	 *
-	 * @version 2.3.4
-	 * @since   1.0.0
-	 * @todo    [later] rethink `$product_id` (and search all code for `get_the_ID()`)
-	 * @todo    [maybe] min_profit
-	 */
-	function add_cost_input() {
-		if ( ! apply_filters( 'alg_wc_cog_create_product_meta_box_validation', true ) ) {
-			return;
-		}
-		$product_id = get_the_ID();
-		woocommerce_wp_text_input( array(
-			'id'          => '_alg_wc_cog_cost',
-			'value'       => wc_format_localized_price( $this->get_product_cost( $product_id ) ),
-			'data_type'   => 'price',
-			'label'       => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->cost_field_template ),
-			'description' => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
-				( '' != ( $profit = $this->get_product_profit_html( $product_id, $this->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) ),
-		) );
-	}
-
-	/**
-	 * add_cost_input_variable.
-	 *
-	 * @version 1.0.1
-	 * @since   1.0.0
-	 * @todo    [fix] this is not showing when creating *new* variable product
-	 * @todo    [maybe] move this to "Inventory" tab
-	 */
-	function add_cost_input_variable() {
-		if ( ( $product = wc_get_product() ) && $product->is_type( 'variable' ) ) {
-			echo '<div class="options_group show_if_variable">';
-			$this->add_cost_input();
-			echo '</div>';
-		}
-	}
-
-	/**
-	 * add_cost_input_variation.
-	 *
-	 * @version 2.3.4
-	 * @since   1.0.0
-	 */
-	function add_cost_input_variation( $loop, $variation_data, $variation ) {
-		if ( ! apply_filters( 'alg_wc_cog_create_product_meta_box_validation', true ) ) {
-			return;
-		}
-		if (
-			! isset( $variation_data['_alg_wc_cog_cost'][0] ) ||
-			empty( $value = $variation_data['_alg_wc_cog_cost'][0] )
-		) {
-			$product           = wc_get_product( $variation->ID );
-			$parent_product_id = $product->get_parent_id();
-			$value             = $this->get_product_cost( $parent_product_id, array( 'check_parent_cost' => false ) );
-		}
-		woocommerce_wp_text_input( array(
-			'id'            => "variable_alg_wc_cog_cost_{$loop}",
-			'name'          => "variable_alg_wc_cog_cost[{$loop}]",
-			'value'         => wc_format_localized_price( $value ),
-			'label'         => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->cost_field_template ),
-			'data_type'     => 'price',
-			'wrapper_class' => 'form-row form-row-full',
-			'description'   => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
-				( '' != ( $profit = $this->get_product_profit_html( $variation->ID, $this->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) ),
-		) );
-	}
-
-	/**
-	 * save_cost_input.
-	 *
-	 * @version 1.7.0
-	 * @since   1.0.0
-	 * @todo    [next] maybe pre-calculate and save `_alg_wc_cog_profit` (same in `save_cost_input_variation()`)
-	 */
-	function save_cost_input( $product_id, $__post ) {
-		if ( isset( $_POST['_alg_wc_cog_cost'] ) ) {
-			update_post_meta( $product_id, '_alg_wc_cog_cost', wc_clean( $_POST['_alg_wc_cog_cost'] ) );
-		}
-	}
-
-	/**
-	 * save_cost_input_variation.
-	 *
-	 * @version 1.1.0
-	 * @since   1.0.0
-	 */
-	function save_cost_input_variation( $variation_id, $i ) {
-		if ( isset( $_POST['variable_alg_wc_cog_cost'][ $i ] ) ) {
-			update_post_meta( $variation_id, '_alg_wc_cog_cost', wc_clean( $_POST['variable_alg_wc_cog_cost'][ $i ] ) );
-		}
-	}
-
-	/**
 	 * Update product price by product cost.
 	 *
-	 * @version 2.6.3
+	 * @version 2.6.4
 	 * @since   2.6.3
 	 *
 	 * @param array $args
 	 *
 	 * @return bool
 	 */
-    function update_product_price_by_percentage( $args = array() ) {
-        $args			= wp_parse_args( $args,
-			array(
-				'type'				=> 'profit',
-				'affected_field'	=> 'regular_price',
-			)
-		);
-		$product_id		= isset( $args['product_id'] ) ? $args['product_id'] : '';
-		$percentage		= isset( $args['percentage'] ) ? $args['percentage'] : '';
-		$affected_field	= isset( $args['affected_field'] ) ? $args['affected_field'] : '';
-		$type			= isset( $args['type'] ) ? $args['type'] : '';
-		$product		= wc_get_product( $product_id );
-	    $product_cost   = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
-		$new_price		= 0;
+	function update_product_price_by_percentage( $args = array() ) {
+		$args           = wp_parse_args( $args, array(
+			'product_id'     => '',
+			'percentage'     => '',
+			'rounding'       => '',
+			'type'           => 'profit',
+			'affected_field' => 'regular_price',
+		) );
+		$product_id     = $args['product_id'];
+		$percentage     = $args['percentage'];
+		$rounding       = $args['rounding'];
+		$affected_field = $args['affected_field'];
+		$type           = isset( $args['type'] ) ? $args['type'] : '';
+		$product        = wc_get_product( $product_id );
+		$product_cost   = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
+		$new_price      = 0;
 		// If invalid product or product cost then return false
 		if ( empty( $product_cost ) || 0 == $product_cost ) {
 			return false;
@@ -891,6 +757,12 @@ class Alg_WC_Cost_of_Goods_Products {
 		if ( 0 >= $new_price ) {
 			return false;
 		}
+
+		// Rounding.
+		if ( ! empty( $rounding ) ) {
+			$new_price = 'round' === $rounding ? round( $new_price ) : ( 'round_up' === $rounding ? ceil( $new_price ) : floor( $new_price ) );
+		}
+
 		if ( 'sale_price' == $affected_field ) {
 			$product->set_sale_price( $new_price );
 		} else {
@@ -899,7 +771,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		$product->save();
 
 		return true;
-    }
+	}
 
 	/**
 	 * update_product_price.
@@ -912,7 +784,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	 * @return bool
 	 */
 	function update_product_cost_by_percentage( $args = null ) {
-        $args              = wp_parse_args( $args, array(
+		$args              = wp_parse_args( $args, array(
 			'product_id'        => '',
 			'percentage'        => 100,
 			'update_type'       => 'costs_price', // costs_profit | costs_price

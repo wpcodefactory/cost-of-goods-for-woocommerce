@@ -60,7 +60,7 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 					'title'          => $gateway->title,
 					'type'           => 'title',
 					'id'             => 'alg_wc_cog_gateway_' . $key,
-					'wpfactory_desc' => array(
+					'wpfse_data' => array(
 						'hide' => true
 					)
 				),
@@ -71,7 +71,7 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 					'id'                => "alg_wc_cog_gateway_costs_fixed[{$key}]",
 					'default'           => 0,
 					'custom_attributes' => array( 'step' => '0.000001' ),
-					'wpfactory_desc'    => array(
+					'wpfse_data'    => array(
 						'hide' => true
 					)
 				),
@@ -82,14 +82,14 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 					'id'                => "alg_wc_cog_gateway_costs_percent[{$key}]",
 					'default'           => 0,
 					'custom_attributes' => array( 'step' => '0.000001' ),
-					'wpfactory_desc'    => array(
+					'wpfse_data'    => array(
 						'hide' => true
 					)
 				),
 				array(
 					'type'           => 'sectionend',
 					'id'             => 'alg_wc_cog_gateway_' . $key,
-					'wpfactory_desc' => array(
+					'wpfse_data' => array(
 						'hide' => true
 					)
 				),

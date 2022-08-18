@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 2.6.3
+Stable tag: 2.6.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,11 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.6.4 - 18/08/2022 =
+* Dev - Tools - Bulk edit prices - Add rounding option.
+* Reorganize admin products settings.
+* WC tested up to: 6.8.
 
 = 2.6.3 - 28/07/2022 =
 * Dev - Tools - Add Bulk edit prices page.

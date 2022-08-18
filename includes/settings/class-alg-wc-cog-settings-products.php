@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Products Section Settings
+ * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 2.4.3
+ * @version 2.6.4
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.3
+	 * @version 2.6.4
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -56,7 +56,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'id'       => 'alg_wc_cog_products_columns_cost_width',
 				'default'  => '10',
 				'type'     => 'number',
-				'wpfactory_desc' => array(
+				'wpfse_data' => array(
 					'description' => __( 'Customize the product cost column width', 'cost-of-goods-for-woocommerce' )
 				),
 			),
@@ -73,7 +73,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'id'       => 'alg_wc_cog_products_columns_profit_width',
 				'default'  => '11',
 				'type'     => 'number',
-				'wpfactory_desc' => array(
+				'wpfse_data' => array(
 					'description' => __( 'Customize the product profit column width', 'cost-of-goods-for-woocommerce' )
 				),
 			),
@@ -92,39 +92,12 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 
 		$product_settings = array(
 			array(
-				'title'    => __( 'General options', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'General product options', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_products_options',
 			),
 			array(
-				'title'          => __( 'Cost field label', 'cost-of-goods-for-woocommerce' ),
-				'desc'           => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
-					'<code>' . implode( '</code>, <code>', array( '%currency_symbol%' ) ) . '</code>' ),
-				'desc_tip'       => __( 'Customizes the cost field input label added to admin product pages.', 'cost-of-goods-for-woocommerce' ),
-				'id'             => 'alg_wc_cog_product_cost_field_template',
-				'default'        => sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ),
-				'type'           => 'text',
-				'wpfactory_desc' => array(
-					'description' => '{desc_tip}'
-				)
-			),
-			array(
-				'title'    => __( 'Cost field position', 'ean-for-woocommerce' ),
-				'desc_tip' => __( 'Manages where the Cost field will be displayed on the product edit page.', 'ean-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_product_cost_field_position',
-				'default'  => 'woocommerce_product_options_pricing',
-				'type'     => 'select',
-				'class'    => 'chosen_select',
-				'options'  => array(
-					'woocommerce_product_options_pricing'                => __( 'General > Pricing', 'ean-for-woocommerce' ),
-					'woocommerce_product_options_general_product_data'   => __( 'General', 'ean-for-woocommerce' ),
-					'woocommerce_product_options_inventory_product_data' => __( 'Inventory', 'ean-for-woocommerce' ),
-					'woocommerce_product_options_sku'                    => __( 'Inventory > SKU', 'ean-for-woocommerce' ),
-					'woocommerce_product_options_advanced'               => __( 'Advanced', 'ean-for-woocommerce' ),
-				),
-			),
-			array(
-				'title'          => __( 'Product profit HTML template', 'cost-of-goods-for-woocommerce' ),
+				'title'          => __( 'Profit HTML template', 'cost-of-goods-for-woocommerce' ),
 				'desc'           => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
 					'<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ),
 				'desc_tip'       => __( 'This is used in admin single product edit pages, and in admin products list "Profit" column.', 'cost-of-goods-for-woocommerce' ) . ' ' .
@@ -132,7 +105,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'id'             => 'alg_wc_cog_product_profit_html_template',
 				'default'        => '%profit% (%profit_percent%)',
 				'type'           => 'text',
-				'wpfactory_desc' => array(
+				'wpfse_data' => array(
 					'description' => __( 'Customizes how the profit will be displayed.', 'cost-of-goods-for-woocommerce' ) . ' ' . '{desc}'
 				)
 			),
@@ -153,7 +126,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 					'wc_get_price_excluding_tax' => __( 'Get price excluding tax', 'cost-of-goods-for-woocommerce' ),
 					'wc_get_price_including_tax' => __( 'Get price including tax', 'cost-of-goods-for-woocommerce' ),
 				),
-				'wpfactory_desc' => array(
+				'wpfse_data' => array(
 					'description' => __( 'Get price excluding or including tax.', 'cost-of-goods-for-woocommerce' ) . ' ' . '{desc}'
 				),
 				'class'    => 'chosen_select',
@@ -168,6 +141,48 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_products_options',
+			),
+		);
+
+		$cost_input_settings = array(
+			array(
+				'title' => __( 'Cost field options', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_cost_field_options',
+			),
+			array(
+				'title'          => __( 'Cost field label', 'cost-of-goods-for-woocommerce' ),
+				'desc'           => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
+					'<code>' . implode( '</code>, <code>', array( '%currency_symbol%' ) ) . '</code>' ),
+				'desc_tip'       => __( 'Customizes the cost field input label added to admin product pages.', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_product_cost_field_template',
+				'default'        => sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ),
+				'type'           => 'text',
+				'wpfse_data' => array(
+					'description' => '{desc_tip}'
+				),
+				'wpfse_data' => array(
+					'desc' => '{{desc_tip}}'
+				)
+			),
+			array(
+				'title'    => __( 'Cost field position', 'ean-for-woocommerce' ),
+				'desc_tip' => __( 'Manages where the Cost field will be displayed on the product edit page.', 'ean-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_product_cost_field_position',
+				'default'  => 'woocommerce_product_options_pricing',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'woocommerce_product_options_pricing'                => __( 'General > Pricing', 'ean-for-woocommerce' ),
+					'woocommerce_product_options_general_product_data'   => __( 'General', 'ean-for-woocommerce' ),
+					'woocommerce_product_options_inventory_product_data' => __( 'Inventory', 'ean-for-woocommerce' ),
+					'woocommerce_product_options_sku'                    => __( 'Inventory > SKU', 'ean-for-woocommerce' ),
+					'woocommerce_product_options_advanced'               => __( 'Advanced', 'ean-for-woocommerce' ),
+				),
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_cog_cost_field_options',
 			),
 		);
 
@@ -202,7 +217,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'default'           => '( %stock_prev% * %cost_prev% + %stock% * %cost% ) / %stock_now%',
 				'type'              => 'text',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'wpfactory_desc'    => array(
+				'wpfse_data'    => array(
 					'description' => '{desc_tip}'
 				)
 			),
@@ -295,6 +310,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 
 		return array_merge(
 			$product_settings,
+			$cost_input_settings,
 			$product_columns_settings,
 			$add_stock_settings,
 			$product_quick_bulk_edit_settings

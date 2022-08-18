@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.6.3
+ * @version 2.6.4
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Update costs on Ajax for bulk edit tools.
 		 *
-		 * @version 2.5.1
+		 * @version 2.6.4
 		 * @since   2.5.1
 		 */
 		function ajax_update_product_data() {
@@ -87,6 +87,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			}
 			$percentage       = isset( $form_data['percentage'] ) ? sanitize_text_field( $form_data['percentage'] ) : '';
 			$affected_field   = isset( $form_data['affected_field'] ) ? $form_data['affected_field'] : 'regular_price';
+			$rounding         = isset( $form_data['rounding'] ) ? $form_data['rounding'] : '';
 			$product_category = isset( $form_data['product_category'] ) ? $form_data['product_category'] : '';
 			$product_category = is_array( $product_category ) ? $product_category : array();
 			$product_category = array_map( 'esc_attr', $product_category );
@@ -116,9 +117,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 	            'products'      => $posts,
                 'bkg_process'   => count( $posts ) >= $bkg_process_min_amount,
                 'options'       => array(
-	                'percentage'        => $percentage,
-	                'update_type'       => $update_type,
-	                'affected_field'    => $affected_field,
+	                'percentage'     => $percentage,
+	                'update_type'    => $update_type,
+	                'affected_field' => $affected_field,
+	                'rounding'       => $rounding,
                 ),
             );
 
@@ -136,7 +138,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Bulk update product prices
 		 *
-		 * @version 2.6.1
+		 * @version 2.6.4
 		 * @since   2.6.1
 		 *
 		 * @param array $args
@@ -144,10 +146,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @return string
 		 */
         function bulk_update_prices( $args = array() ) {
-	        $products       = isset( $args['products'] ) ? (array) $args['products'] : array();
-	        $bkg_process    = isset( $args['bkg_process'] ) && $args['bkg_process'];
-	        $options        = isset( $args['options'] ) ? (array) $args['options'] : array();
-	        $message        = __( 'Successfully updated product prices.', 'cost-of-goods-for-woocommerce' );
+	        $args = wp_parse_args( $args, array(
+		        'products'    => array(),
+		        'bkg_process' => false,
+		        'options'     => array(),
+	        ) );
+	        $products    = $args['products'];
+	        $bkg_process = $args['bkg_process'];
+	        $options     = $args['options'];
+	        $message     = __( 'Successfully updated product prices.', 'cost-of-goods-for-woocommerce' );
 
 	        if( $bkg_process ) {
 		        $message = __( 'Product prices are being updated via background processing.', 'cost-of-goods-for-woocommerce' );
@@ -212,7 +219,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Manually Section.
 		 *
-		 * @version 2.6.3
+		 * @version 2.6.4
 		 * @since   2.6.1
 		 */
 		function display_bulk_edit_prices_profit() {
@@ -232,15 +239,26 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         </p>
                     </td>
                 </tr>
+	            <tr>
+		            <th scope="row"><label for="cost_rounding"><?php esc_html_e( 'Rounding', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+		            <td>
+			            <select id="rounding" name="rounding">
+				            <option value=""><?php esc_html_e( 'Do not round', 'cost-of-goods-for-woocommerce' ); ?></option>
+				            <option value="round"><?php esc_html_e( 'Round', 'cost-of-goods-for-woocommerce' ); ?></option>
+				            <option value="round_up"><?php esc_html_e( 'Round up', 'cost-of-goods-for-woocommerce' ); ?></option>
+				            <option value="round_down"><?php esc_html_e( 'Round down', 'cost-of-goods-for-woocommerce' ); ?></option>
+			            </select>
+		            </td>
+	            </tr>
                 <tr>
-                    <th scope="row"><label for="cost-percentage"><?php esc_html_e( 'Profit percentage (%)', 'cost-of-goods-for-woocommerce' ); ?></label></th>
-                    <td>
-                        <input id="cost-percentage" name="percentage" step="0.01" min="0" type="number" required placeholder="">
-                        <p class="description">
-	                        <?php esc_html_e( 'Products prices will be set according to the profit percentage you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ); ?><br />
-                        </p>
-                    </td>
-                </tr>
+		            <th scope="row"><label for="cost-percentage"><?php esc_html_e( 'Profit percentage (%)', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+		            <td>
+			            <input id="cost-percentage" name="percentage" step="0.01" min="0" type="number" required placeholder="">
+			            <p class="description">
+				            <?php esc_html_e( 'Products prices will be set according to the profit percentage you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ); ?><br />
+			            </p>
+		            </td>
+	            </tr>
                 <tr>
                     <th scope="row"><label for="product-category"><?php esc_html_e( 'Filter by category', 'cost-of-goods-for-woocommerce' ); ?></label></th>
                     <td>
@@ -454,7 +472,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Return navigation items.
 		 *
-		 * @version 2.6.1
+		 * @version 2.6.4
 		 * @since   2.5.1
 		 *
 		 * @return mixed|void
@@ -481,7 +499,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				),
 				'costs_price'       => array(
 					'label'           => esc_html__( 'By Price', 'cost-of-goods-for-woocommerce' ),
-					'desc'            => esc_html__( 'Here you can set the product costs from the product prices.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+					'desc'            => esc_html__( 'Set the product costs from the product prices.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
 					                     esc_html__( 'Variations costs will also be updated accordingly.', 'cost-of-goods-for-woocommerce' ),
 					'save_btn_bottom' => sprintf( '<input type="submit" class="button-primary" value="%s">', esc_html__( 'Update Costs', 'cost-of-goods-for-woocommerce' ) ),
 					'form_class'      => 'bulk-edit-costs ajax-submission',
@@ -489,7 +507,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				),
 				'costs_profit'      => array(
 					'label'           => esc_html__( 'By Profit', 'cost-of-goods-for-woocommerce' ),
-					'desc'            => esc_html__( 'Here you can set the product costs according to the profit you want to achieve.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+					'desc'            => esc_html__( 'Set the product costs according to the profit you want to achieve.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
 					                     esc_html__( 'Variations costs will also be updated accordingly.', 'cost-of-goods-for-woocommerce' ),
 					'save_btn_bottom' => sprintf( '<input type="submit" class="button-primary" value="%s">', esc_html__( 'Update Costs', 'cost-of-goods-for-woocommerce' ) ),
 					'form_class'      => 'bulk-edit-costs ajax-submission',
@@ -503,7 +521,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 					'save_btn_bottom' => sprintf( '<input type="submit" name="alg_wc_cog_bulk_edit_tool_save_costs" class="button-primary" value="%s">',
 						esc_html__( 'Update prices', 'cost-of-goods-for-woocommerce' )
 					),
-					'desc'            => esc_html__( 'Here you can set the product prices according to the cost.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+					'desc'            => esc_html__( 'Set the product prices according to the cost.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
 					                     esc_html__( 'Variations prices will also be updated accordingly.', 'cost-of-goods-for-woocommerce' ),
 					'form_class'      => 'bulk-edit-prices ajax-submission',
 					'callback'        => 'display_bulk_edit_prices_profit',

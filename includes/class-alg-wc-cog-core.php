@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Core Class
+ * Cost of Goods for WooCommerce - Core Class.
  *
- * @version 2.5.1
+ * @version 2.6.4
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -18,7 +18,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.5.1
+		 * @version 2.6.4
 		 * @since   1.0.0
 		 * @todo    [next] add "delete all (products and/or orders) meta" tool
 		 * @todo    [next] add option to enter costs *with taxes*
@@ -42,6 +42,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 			$this->import_tool = require_once( 'tools/class-alg-wc-cog-import-tool.php' );
 			// Products
 			$this->products = require_once( 'class-alg-wc-cog-products.php' );
+			// Cost inputs
+			$this->cost_inputs = require_once( 'class-alg-wc-cog-cost-inputs.php' );
 			// Orders
 			$this->orders = require_once( 'class-alg-wc-cog-orders.php' );
 			// Background process

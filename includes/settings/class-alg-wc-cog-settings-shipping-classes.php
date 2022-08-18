@@ -81,7 +81,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 						'id'                => "alg_wc_cog_shipping_class_costs_fixed[{$key}]",
 						'default'           => 0,
 						'custom_attributes' => array( 'step' => '0.000001' ),
-						'wpfactory_desc'    => array(
+						'wpfse_data'    => array(
 							'description' => ''
 						)
 					),

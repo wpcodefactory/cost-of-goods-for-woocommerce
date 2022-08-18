@@ -365,7 +365,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'id'                => 'alg_wc_cog_order_extra_cost_fixed',
 				'default'           => 0,
 				'custom_attributes' => array( 'step' => '0.000001' ),
-				'wpfactory_desc'    => array(
+				'wpfse_data'    => array(
 					'description' => ''
 				)
 			),
