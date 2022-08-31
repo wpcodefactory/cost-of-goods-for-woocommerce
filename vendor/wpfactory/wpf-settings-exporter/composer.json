@@ -1,0 +1,20 @@
+{
+  "name": "wpfactory/wpf-settings-exporter",
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist"
+  },
+  "require": {
+    "timber/timber": "1.*"
+  },
+  "replace": {
+  },
+  "extra": {
+  },
+  "autoload": {
+    "classmap": [
+      "src/php/"
+    ],
+    "files": ["vendor/autoload.php"]
+  }
+}

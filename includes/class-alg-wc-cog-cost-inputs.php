@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 2.6.4
+ * @version 2.6.5
  * @since   2.6.4
  * @author  WPFactory
  */
@@ -41,14 +41,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 2.6.4
+		 * @version 2.6.5
 		 * @since   2.6.4
 		 */
 		function add_hooks(){
 			// Cost input on admin product page (simple product)
 			add_action( get_option( 'alg_wc_cog_product_cost_field_position', 'woocommerce_product_options_pricing' ), array( $this, 'add_cost_input' ) );
 			add_action( 'woocommerce_bookings_after_display_cost', array( $this, 'add_cost_input' ) );
-			add_action( 'save_post_product', array( $this, 'save_cost_input' ), PHP_INT_MAX, 2 );
+			add_action( 'save_post_product', array( $this, 'save_cost_input' ), PHP_INT_MAX - 2, 2 );
 			// Cost input on admin product page (variable product)
 			add_action( 'woocommerce_variation_options_pricing', array( $this, 'add_cost_input_variation' ), 10, 3 );
 			add_action( 'woocommerce_save_product_variation', array( $this, 'save_cost_input_variation' ), PHP_INT_MAX, 2 );

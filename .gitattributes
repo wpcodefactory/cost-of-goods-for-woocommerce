@@ -11,3 +11,7 @@ includes/analytics/webpack.config.js
 includes/analytics/.prettierrc.json export-ignore
 includes/analytics/.gitignore export-ignore
 includes/analytics/.eslintrc.js export-ignore
+# WPF Settings Exporter
+vendor/wpfactory/wpf-settings-exporter export-ignore
+# GIT - Release version
+/git-tag.sh export-ignore

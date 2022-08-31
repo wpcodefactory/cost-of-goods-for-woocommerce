@@ -47,7 +47,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 		$settings = array(
 			array(
 				'title'    => __( 'Multicurrency', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Here you can set currency exchange rates for your orders in non-default shop currency, i.e. order cost and profit will be converted to the default shop currency according to these rates.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Set currency exchange rates for your orders in non-default shop currency, i.e. order cost and profit will be converted to the default shop currency according to these rates.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_currencies_options',
 			),
@@ -58,6 +58,9 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 				'id'       => 'alg_wc_cog_currencies_enabled',
 				'default'  => 'no',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'wpfse_data'    => array(
+					'hide' => true
+				)
 			),
 			array(
 				'title'    => __( 'Currencies', 'cost-of-goods-for-woocommerce' ),
@@ -67,6 +70,9 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 				'id'       => 'alg_wc_cog_currencies',
 				'default'  => array(),
 				'options'  => get_woocommerce_currencies(),
+				'wpfse_data'    => array(
+					'hide' => true
+				)
 			),
 		);
 		$currencies  = get_option( 'alg_wc_cog_currencies', array() );
@@ -80,6 +86,9 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 					'id'       => "alg_wc_cog_currencies_rates[{$pair}]",
 					'default'  => 0,
 					'custom_attributes' => array( 'step' => '0.000001' ),
+					'wpfse_data'    => array(
+						'hide' => true
+					)
 				),
 			) );
 		}

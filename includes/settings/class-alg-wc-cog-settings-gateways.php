@@ -36,7 +36,7 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 		$settings = array(
 			array(
 				'title'    => __( 'Extra Payment Gateway Costs', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( "Here you can add extra costs for your orders based on order's payment gateway.", 'cost-of-goods-for-woocommerce' ) . ' ' .
+				'desc'     => __( "Add extra costs for your orders based on order's payment gateway.", 'cost-of-goods-for-woocommerce' ) . ' ' .
 					__( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_gateways',
@@ -47,6 +47,9 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_gateway_costs_enabled',
 				'default'  => 'no',
+				'wpfse_data'    => array(
+					'hide' => true
+				)
 			),
 			array(
 				'type'     => 'sectionend',

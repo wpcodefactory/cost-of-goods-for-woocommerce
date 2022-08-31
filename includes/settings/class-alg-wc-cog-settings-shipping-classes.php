@@ -36,7 +36,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 			$settings = array(
 				array(
 					'title'    => __( 'Extra shipping classes costs', 'cost-of-goods-for-woocommerce' ),
-					'desc'     => __( "Here you can add extra costs for your orders based on product's shipping classes.", 'cost-of-goods-for-woocommerce' ) . ' ' .
+					'desc'     => __( "Add extra costs for your orders based on product's shipping classes.", 'cost-of-goods-for-woocommerce' ) . ' ' .
 					              __( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
 					'type'     => 'title',
 					'id'       => 'alg_wc_cog_shipping_classes',
@@ -48,6 +48,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 					'id'                => 'alg_wc_cog_shipping_classes_enabled',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 					'default'           => 'no',
+					'wpfse_data' => array(
+						'hide' => true
+					)
 				),
 				array(
 					'title'             => __( 'Fixed cost calculation', 'cost-of-goods-for-woocommerce' ),
@@ -73,6 +76,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 						'title'    => $shipping_class,
 						'type'     => 'title',
 						'id'       => 'alg_wc_cog_shipping_class_' . $key,
+						'wpfse_data' => array(
+							'hide' => true
+						)
 					),
 					array(
 						'title'             => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
@@ -82,7 +88,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 						'default'           => 0,
 						'custom_attributes' => array( 'step' => '0.000001' ),
 						'wpfse_data'    => array(
-							'description' => ''
+							'hide' => true
 						)
 					),
 					array(
@@ -92,6 +98,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 						'id'       => "alg_wc_cog_shipping_class_costs_percent[{$key}]",
 						'default'  => 0,
 						'custom_attributes' => array( 'step' => '0.000001' ),
+						'wpfse_data' => array(
+							'hide' => true
+						)
 					),
 					array(
 						'type'     => 'sectionend',

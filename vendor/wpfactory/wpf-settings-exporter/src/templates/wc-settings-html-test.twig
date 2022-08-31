@@ -1,0 +1,66 @@
+{% include 'html-header.twig' %}
+
+<body>
+
+{# Navigation #}
+{% for section_id, settings_kit in full_settings %}
+	<div>
+		<h4>{{ wpfse_section_label(section_id) }}</h4> {# Section #}
+		<ul>
+			{% for setting in settings_kit %}
+				{% if setting.type == 'title' and wpfse_option_attr(setting,'hide') != true %} {# Sub-section #}
+					<li>
+						<a href="#{{ wpfse_section_label(section_id) | sanitize }}-{{ setting.title | sanitize }}">{{ setting.title }}</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+{% endfor %}
+
+{# <hr/> #}
+
+{# Settings #}
+{% for section_id, settings_kit in full_settings %}
+	<div>
+		{# <h4><i class="fa-solid fa-circle-chevron-right"></i> {{ wpfse_section_label(section_id) }}</h4> #} {# Section #}
+		<hr/>
+
+		{% for setting in settings_kit %}
+			{% if wpfse_option_attr(setting,'hide') != true %}
+				{% if setting.type == 'title' %} {# Sub-section #}
+					<h4 id="{{ wpfse_section_label(section_id) | sanitize }}-{{ setting.title | sanitize }}">
+						<i class="fa-solid fa-circle-chevron-right"></i> {{ setting.title }}
+					</h4>
+					<dl>
+					{% if setting.desc %}
+						<p>{{ setting.desc | wpfse_remove_local_links }}</p>
+					{% endif %}
+				{% elseif setting.type!='sectionend' %}
+					{% set opt_title = wpfse_option_attr(setting,'title') %}
+					{% set opt_desc = wpfse_option_attr(setting,'desc') %}
+					{% set opt_desc_tip = wpfse_option_attr(setting,'desc_tip') %}
+					{% if opt_title %} {# Settings with title #}
+						<dt>{{ opt_title }}</dt>
+						{% if opt_desc %}
+							<dd>{{ wpfse_option_icon(setting) }} {{ opt_desc | wpfse_remove_local_links }}</dd>
+						{% elseif opt_desc_tip %}
+							<dd>{{ wpfse_option_icon(setting) }} {{ opt_desc_tip | wpfse_remove_local_links }}</dd>
+						{% endif %}
+					{% else %} {# Settings without title #}
+						{% if opt_desc %}
+							<dd>{{ wpfse_option_icon(setting) }} {{ opt_desc | wpfse_remove_local_links }}</dd>
+						{% endif %}
+					{% endif %}
+				{% else %}
+					</dl>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+
+	</div>
+{% endfor %}
+
+
+</body>
+</html>
