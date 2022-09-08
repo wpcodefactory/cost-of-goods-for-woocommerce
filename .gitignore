@@ -2,3 +2,6 @@ idea
 .idea/*
 node_modules/
 package-lock.json
+# WPF Documentor
+vendor/wpfactory/wpf-settings-exporter
+vendor/wpfactory/wpf-documentor
