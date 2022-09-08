@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.6.4
+ * @version 2.6.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -490,18 +490,15 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * product_sortable_columns.
 	 *
-	 * @version 2.3.4
+	 * @version 2.6.7
 	 * @since   1.7.0
-	 * @todo    [next] add `profit` to the sortable columns
 	 */
 	function product_sortable_columns( $columns ) {
 		if ( ! apply_filters( 'alg_wc_cog_create_product_columns_validation', true ) ) {
 			return $columns;
 		}
 		foreach ( $this->product_columns as $column_id => $column_title ) {
-			if ( 'profit' != $column_id ) {
-				$columns[ $column_id ] = '_alg_wc_cog_' . $column_id;
-			}
+			$columns[ $column_id ] = '_alg_wc_cog_' . $column_id;
 		}
 		return $columns;
 	}

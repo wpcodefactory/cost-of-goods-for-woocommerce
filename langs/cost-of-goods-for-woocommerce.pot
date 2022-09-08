@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: Cost of Goods for WooCommerce 2.6.6\n"
+"Project-Id-Version: Cost of Goods for WooCommerce 2.6.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-08T17:17:47+02:00\n"
+"POT-Creation-Date: 2022-09-09T00:30:38+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -38,11 +38,11 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
-#: includes/alg-wc-cog-functions.php:213
+#: includes/alg-wc-cog-functions.php:218
 msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
 msgstr ""
 
-#: includes/alg-wc-cog-functions.php:213
+#: includes/alg-wc-cog-functions.php:218
 #: includes/settings/class-alg-wc-settings-cog.php:81
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr ""
@@ -58,7 +58,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:454
 #: includes/class-alg-wc-cog-products.php:465
 #: includes/class-alg-wc-cog-products.php:476
-#: includes/class-alg-wc-cog-products.php:531
+#: includes/class-alg-wc-cog-products.php:528
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:184
 #: includes/analytics/build/index.js:286
 #: includes/analytics/build/index.js:415
@@ -79,7 +79,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:74
 #: includes/class-alg-wc-cog-orders.php:257
 #: includes/class-alg-wc-cog-orders.php:346
-#: includes/class-alg-wc-cog-products.php:534
+#: includes/class-alg-wc-cog-products.php:531
 #: includes/analytics/build/index.js:291
 #: includes/analytics/build/index.js:420
 #: includes/analytics/build/index.js:519

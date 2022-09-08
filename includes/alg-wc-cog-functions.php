@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Functions
+ * Cost of Goods for WooCommerce - Functions.
  *
- * @version 2.5.1
+ * @version 2.6.7
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -27,7 +27,7 @@ if ( ! function_exists( 'alg_wc_cog_pre_get_posts_order_by_column' ) ) {
 	/**
 	 * alg_wc_cog_pre_get_posts_order_by_column.
 	 *
-	 * @version 2.1.0
+	 * @version 2.6.7
 	 * @since   1.7.0
 	 */
 	function alg_wc_cog_pre_get_posts_order_by_column( $query, $post_type, $do_exclude_empty_lines ) {
@@ -36,6 +36,11 @@ if ( ! function_exists( 'alg_wc_cog_pre_get_posts_order_by_column' ) ) {
 			isset( $query->query['post_type'] ) && $post_type === $query->query['post_type'] &&
 			isset( $query->is_admin ) && 1 == $query->is_admin
 		) {
+			switch ( $orderby ) {
+				case '_alg_wc_cog_profit':
+					$orderby = '_alg_wc_cog_profit_percent';
+					break;
+			}
 			$key_fragment = '_alg_wc_cog_';
 			if ( $key_fragment === substr( $orderby, 0, strlen( $key_fragment ) ) ) {
 				if ( $do_exclude_empty_lines ) {
