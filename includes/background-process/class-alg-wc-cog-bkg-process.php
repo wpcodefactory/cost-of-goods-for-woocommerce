@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Background Process
+ * Cost of Goods for WooCommerce - Background Process.
  *
- * @version 2.3.0
+ * @version 2.6.8
  * @since   2.3.0
  * @author  WPFactory
  */
@@ -10,6 +10,13 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } // Exit if accessed directly
+
+if ( ! class_exists( 'WP_Async_Request', false ) ) {
+	include_once dirname( WC_PLUGIN_FILE ) . '/includes/libraries/wp-async-request.php';
+}
+if ( ! class_exists( 'WP_Background_Process', false ) ) {
+	include_once dirname( WC_PLUGIN_FILE ) . '/includes/libraries/wp-background-process.php';
+}
 
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bkg_Process' ) ) :
 

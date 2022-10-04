@@ -5,3 +5,4 @@ package-lock.json
 # WPF Documentor
 vendor/wpfactory/wpf-settings-exporter
 vendor/wpfactory/wpf-documentor
+wpf-documentor
