@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 2.6.8
+Stable tag: 2.6.9
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,10 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.6.9 - 20/10/2022 =
+* Fix - Bulk edit costs - Disabled screen options are being displayed on the page after "Apply" button is clicked.
+* WC tested up to: 7.0.
 
 = 2.6.8 - 03/10/2022 =
 * Fix - Error: Class WP_Background_Process not found.

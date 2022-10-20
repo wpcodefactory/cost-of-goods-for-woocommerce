@@ -1,6 +1,6 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class
+ * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
  * @version 2.3.4
  * @since   2.3.1
@@ -18,7 +18,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		/**
 		 * prepare_items.
 		 *
-		 * @version 2.3.1
+		 * @version 2.6.9
 		 * @since   2.3.1
 		 */
 		public function prepare_items() {
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 			}
 			// Columns
 			$columns               = $this->get_columns();
-			$hidden                = $this->get_hidden_columns();
+			$hidden                = get_hidden_columns( $this->screen );
 			$sortable              = $this->get_sortable_columns();
 			$this->_column_headers = array( $columns, $hidden, $sortable );
 			// Query args
@@ -220,17 +220,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 			return $sortable_columns;
 		}
 
-		/**
-		 * Define which columns are hidden
-		 *
-		 * @version 2.3.1
-		 * @since   2.3.1
-		 *
-		 * @return Array
-		 */
-		public function get_hidden_columns() {
-			return array();
-		}
 	}
 
 endif;
