@@ -110,13 +110,6 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				)
 			),
 			array(
-				'title'    => __( 'Sanitize cost meta', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Replace comma by dots when updating cost meta', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_sanitize_cog_meta',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
 				'title'    => __( 'Get price method', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => sprintf( __( 'When using this option including tax, it will make sense to enable the option %s.', 'cost-of-goods-for-woocommerce' ), '"' . __( 'Orders > Calculations > Taxes to profit', 'cost-of-goods-for-woocommerce' ) . '"' ),
 				'id'       => 'alg_wc_cog_products_get_price_method',
@@ -308,12 +301,40 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 		);
 
+		$cost_sanitization_opts = array(
+			array(
+				'title' => __( 'Cost sanitization', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_cost_sanitization_options',
+			),
+			array(
+				'title'    => __( 'Cost update', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Replace comma by dots when updating cost meta', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_sanitize_cog_meta',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Cost import', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Get only the cost number when using the %s', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'edit.php?post_type=product&page=product_importer' ) . '">' . __( 'WooCommerce Importer', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+				'desc_tip' => __( 'Useful if you want to ignore price symbols from the CSV when importing.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_import_csv_get_only_cost_number',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'type' => 'sectionend',
+				'id'   => 'alg_wc_cog_cost_sanitization_options',
+			),
+		);
+
 		return array_merge(
 			$product_settings,
 			$cost_input_settings,
 			$product_columns_settings,
 			$add_stock_settings,
-			$product_quick_bulk_edit_settings
+			$product_quick_bulk_edit_settings,
+			$cost_sanitization_opts
 		);
 	}
 
