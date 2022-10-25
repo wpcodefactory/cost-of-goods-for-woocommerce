@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 2.7.0\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 2.7.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-22T00:51:17+02:00\n"
+"POT-Creation-Date: 2022-10-25T04:10:31+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -59,7 +59,7 @@ msgstr ""
 #: includes/pro/class-alg-wc-cog-pro.php:421
 #: includes/pro/class-alg-wc-cog-pro.php:750
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:111
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:184
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:272
 #: includes/analytics/build/index.js:286
 #: includes/analytics/build/index.js:415
 #: includes/analytics/build/index.js:514
@@ -262,7 +262,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:217
 #: includes/pro/class-alg-wc-cog-pro.php:744
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:110
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:185
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:273
 msgid "Stock"
 msgstr ""
 
@@ -312,22 +312,22 @@ msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:107
 #: includes/tools/class-alg-wc-cog-import-tool.php:153
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:181
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:269
 msgid "Product ID"
 msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:108
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:182
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:270
 msgid "SKU"
 msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:109
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:183
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:271
 msgid "Title"
 msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:112
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:191
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:279
 msgid "Price"
 msgstr ""
 
@@ -2132,196 +2132,196 @@ msgstr ""
 msgid "Your settings have been reset."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:86
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:105
 msgid "Something went wrong! Please try again."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:96
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:115
 msgid "Invalid percentage or category."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:157
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:176
 msgid "Successfully updated product prices."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:160
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:179
 msgid "Product prices are being updated via background processing."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:161
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:199
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:180
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:218
 msgid "An email is going to be sent to %s when the task is completed."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:195
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:214
 msgid "Successfully updated product costs."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:198
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:217
 msgid "Product costs are being updated via background processing."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:231
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:250
 msgid "Affected field"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:234
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:253
 msgid "Regular Price"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:235
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:254
 msgid "Sale Price"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:238
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:257
 msgid "The selected field will be updated on all the products."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:243
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:262
 msgid "Rounding"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:246
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:265
 msgid "Do not round"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:247
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:266
 msgid "Round"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:248
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:267
 msgid "Round up"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:249
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:268
 msgid "Round down"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:254
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:292
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:273
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:311
 msgid "Profit percentage (%)"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:258
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:277
 msgid "Products prices will be set according to the profit percentage you'd like to achieve based on the current product costs."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:263
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:301
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:340
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:282
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:320
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:359
 msgid "Filter by category"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:265
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:303
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:342
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:284
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:322
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:361
 msgid "Search for a category&hellip;"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:271
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:309
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:348
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:290
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:328
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:367
 msgid "Select only the categories you want to edit. Leave it empty to update all products."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:296
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:315
 msgid "Products costs will be set according to the profit percentage you'd like to achieve based on the current product prices."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:330
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:349
 msgid "Price percentage (%)"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:334
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:353
 msgid "Product costs will be defined from a percentage of product prices."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:335
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:354
 msgid "Most probably you should use a number between 0 and 100."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:365
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:385
 msgid "Search"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:404
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:591
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:592
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:424
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:617
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:618
 msgid "Bulk Edit Costs"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:409
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:601
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:602
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:429
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:627
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:628
 msgid "Bulk Edit Prices"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:487
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:513
 msgid "Manually"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:489
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:492
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:515
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:518
 msgid "Save"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:494
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:520
 msgid "Bulk edit products costs/prices/stock. Tools options can be set in \"<strong>Cost of Goods for WooCommerce</strong>\" <a href=\"%s\">plugin settings</a>"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:501
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:527
 msgid "By Price"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:502
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:528
 msgid "Set the product costs from the product prices."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:503
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:511
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:529
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:537
 msgid "Variations costs will also be updated accordingly."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:504
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:512
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:530
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:538
 msgid "Update Costs"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:509
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:517
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:535
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:543
 msgid "By Profit"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:510
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:536
 msgid "Set the product costs according to the profit you want to achieve."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:519
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:522
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:545
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:548
 msgid "Update prices"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:524
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:550
 msgid "Set the product prices according to the cost."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:525
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:551
 msgid "Variations prices will also be updated accordingly."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:570
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:596
 msgid "Items per page"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:629
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:655
 msgid "Are you really want to update?"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:723
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:749
 msgid "Data have been saved."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:743
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:769
 msgid "Sale price is higher than regular price: %s."
 msgstr ""
 
@@ -2366,15 +2366,15 @@ msgstr ""
 msgid "plugin settings"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:160
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:248
 msgid "Stock status: %s"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:188
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:276
 msgid "Regular price"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:189
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:277
 msgid "Sale price"
 msgstr ""
 

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 2.3.4
+ * @version 2.7.1
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -79,10 +79,98 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 			$products = wc_get_products( $args );
 			$this->set_pagination_args( [
 				'total_items' => $products->total, //WE have to calculate the total number of items
-				'per_page'    => $per_page, //WE have to determine how many items to show on a page
+				'per_page'    => count( $products->products ), //WE have to determine how many items to show on a page
 				'total_pages' => $products->max_num_pages,
 			] );
 			$this->items = $products->products;
+		}
+
+		/**
+		 * fix_paged_query_string_on_search_change.
+		 *
+		 * @version 2.7.1
+		 * @since   2.7.1
+		 */
+		function fix_paged_query_string_on_search_change() {
+			if ( ! session_id() ) {
+				session_start();
+			}
+
+			if (
+				isset( $_GET['paged'] ) &&
+				1 !== (int) $_GET['paged'] &&
+				isset( $_GET['s'] ) &&
+				! empty( $current_search = $_GET['s'] ) &&
+				(
+					( ! isset( $_SESSION['alg_wc_cog_bulk_edit_cost_search'] ) || empty( $referer_search = $_SESSION['alg_wc_cog_bulk_edit_cost_search'] ) ) ||
+					$referer_search != $current_search
+				)
+			) {
+				wp_safe_redirect( add_query_arg( array(
+					'paged' => 1,
+				) ) );
+				exit;
+			}
+			$_SESSION['alg_wc_cog_bulk_edit_cost_search'] = isset( $_GET['s'] ) ? $_GET['s'] : '';
+		}
+
+		/**
+		 * An internal method that sets all the necessary pagination arguments.
+		 *
+		 * @version 2.7.1
+		 * @since   2.7.1
+		 *
+		 * @param array|string $args
+		 */
+		protected function set_pagination_args( $args ) {
+			parent::set_pagination_args( $args );
+			$this->fix_paged_query_string_on_search_change();
+		}
+
+		/**
+		 * Displays the table.
+		 *
+		 * @see WP_List_Table::display()
+		 *
+		 * @version 2.7.1
+		 * @since   2.7.1
+		 */
+		function display() {
+			$singular = $this->_args['singular'];
+
+			$this->display_tablenav( 'top' );
+
+			$this->screen->render_screen_reader_content( 'heading_list' );
+
+			?>
+
+			</form><form method="post">
+			<table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
+				<thead>
+				<tr>
+					<?php $this->print_column_headers(); ?>
+				</tr>
+				</thead>
+
+				<tbody id="the-list"
+					<?php
+					if ( $singular ) {
+						echo " data-wp-lists='list:$singular'";
+					}
+					?>
+				>
+				<?php $this->display_rows_or_placeholder(); ?>
+				</tbody>
+
+				<tfoot>
+				<tr>
+					<?php $this->print_column_headers( false ); ?>
+				</tr>
+				</tfoot>
+
+			</table>
+			<?php
+			$this->display_tablenav( 'bottom' );
 		}
 
 		/**

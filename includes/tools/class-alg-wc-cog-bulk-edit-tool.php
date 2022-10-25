@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.6.4
+ * @version 2.7.1
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -54,6 +54,25 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			add_action( 'wp_ajax_alg_wc_cog_update_product_data', array( $this, 'ajax_update_product_data' ) );
 			// Bkg Process
 			add_action( 'plugins_loaded', array( $this, 'init_bkg_process' ) );
+			// Remove query args.
+			add_action( 'admin_init', array( $this, 'remove_query_args' ) );
+		}
+
+		/**
+		 * remove_query_args.
+		 *
+		 * @version 2.7.1
+		 * @since   2.7.1
+		 *
+		 */
+		function remove_query_args() {
+			if (
+				isset( $_GET['page'] ) &&
+				'bulk-edit-costs' === $_GET['page'] &&
+				! empty( $_GET['_wp_http_referer'] )
+			) {
+				wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
+			}
 		}
 
 		/**
@@ -361,6 +380,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @since   2.5.1
 		 */
 		function display_bulk_edit_costs_manually() {
+			echo '<form method="get"><input type="hidden" name="page" value="bulk-edit-costs"/>';
 			$this->wp_list_bulk_edit_tool->prepare_items();
 			$this->wp_list_bulk_edit_tool->search_box( __( 'Search', 'cost-of-goods-for-woocommerce' ), 'alg_wc_cog_search' );
 			$this->wp_list_bulk_edit_tool->display();
@@ -435,8 +455,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				);
 			}
 
+			$container_elem_type = 'form';
+			if ( ! isset( $_GET['section'] ) || 'costs_manually' === $_GET['section'] ) {
+				$container_elem_type = 'div';
+				echo '</form>';
+			}
+
 			// Wrap up section content
-			printf( '<div class="notice is-dismissible alg_wc_cog_notice"><p></p></div><form method="post" action="" class="bulk-edit-form %s" data-type="%s" data-tool-type="%s"><div class="wrap alg_wc_cog_bulk_edit">%s</div></form>',
+			printf( '<div class="notice is-dismissible alg_wc_cog_notice"><p></p></div><'.$container_elem_type.' method="post" action="" class="bulk-edit-form %s" data-type="%s" data-tool-type="%s"><div class="wrap alg_wc_cog_bulk_edit">%s</div></'.$container_elem_type.'>',
 				$this->get_current_section( 'form_class' ),
 				$this->get_current_section( 'id' ),
                 $tool_type,

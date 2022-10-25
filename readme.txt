@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.0
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,10 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.7.1 - 24/10/2022 =
+* Fix - Bulk edit costs - Paged parameter overrides search change.
+* Fix - Bulk edit costs - Search is using post method.
 
 = 2.7.0 - 21/10/2022 =
 * Dev - Products - Cost sanitization - New option: Get only the cost number when using the WooCommerce Importer.
