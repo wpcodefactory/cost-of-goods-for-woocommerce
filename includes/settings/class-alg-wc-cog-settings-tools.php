@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Tools Section Settings
+ * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 2.5.1
+ * @version 2.7.2
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.5.1
+	 * @version 2.7.2
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -38,7 +38,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	 */
 	function get_settings() {
 
-		$tools_settings = array(
+		$bulk_edit_costs_opts = array(
 			array(
 				'title'    => __( 'Product Bulk Edit Costs Tool', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
@@ -93,9 +93,19 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'options'  => array_merge( wc_get_product_types(), array( 'variation' => __( 'Variations', 'woocommerce' ) ) ),
 			),
 			array(
+				'title'    => __( 'Costs', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Show profit as cost field description', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'id'       => 'alg_wc_cog_bulk_edit_tool_profit_on_cost_desc',
+				'default'  => 'no',
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_bulk_edit_tool_options',
 			),
+		);
+
+		$import_tools_opts = array(
 			array(
 				'title' => __( 'Product Import Costs Tool', 'cost-of-goods-for-woocommerce' ),
 				'type'  => 'title',
@@ -144,6 +154,9 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_import_tool_options',
 			),
+		);
+
+		$order_tools_opts = array(
 			array(
 				'title'    => __( 'Orders Tools', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
@@ -379,7 +392,9 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 		);
 
 		return array_merge(
-			$tools_settings,
+			$bulk_edit_costs_opts,
+			$import_tools_opts,
+			$order_tools_opts,
 			$reports_settings,
 			$analytics_settings
 		);

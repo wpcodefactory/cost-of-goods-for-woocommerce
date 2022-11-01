@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 2.7.1
+ * @version 2.7.2
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -169,6 +169,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 				</tfoot>
 
 			</table>
+			<style>
+				.alg-wc-cog-cost-description {
+					display: inline-block
+				}
+			</style>
 			<?php
 			$this->display_tablenav( 'bottom' );
 		}
@@ -179,7 +184,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		 * @todo    [maybe] better description here and in settings
 		 * @todo    [maybe] bulk edit order items meta
 		 *
-		 * @version 2.3.4
+		 * @version 2.7.2
 		 * @since   2.3.1
 		 *
 		 * @param object $item
@@ -224,13 +229,19 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 					        ' value="'         . $sale_price . '"' . '>';
 					break;
 				case '_alg_wc_cog_cost':
-					$value = alg_wc_cog()->core->products->get_product_cost( $item->get_id() );
+					$show_profit = 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_profit_on_cost_desc', 'no' );
+					$value       = alg_wc_cog()->core->products->get_product_cost( $item->get_id() );
+					if ( $show_profit ) {
+						$profit_html = sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ), ( '' != ( $profit = alg_wc_cog()->core->products->get_product_profit_html( $item->get_id(), alg_wc_cog()->core->products->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) );
+					} else {
+						$profit_html = '';
+					}
 					$result = '<input' .
 					          ' name="alg_wc_cog_bulk_edit_tool_costs[' . $item->get_id() . ']"' .
 					          ' type="text"' .
 					          ' class="alg_wc_cog_bet_input short wc_input_price"' .
 					          ' initial-value="' . $value . '"' .
-					          ' value="' . $value . '"' . '>';
+					          ' value="' . $value . '"' . '>'.'<span class="alg-wc-cog-cost-description">'.$profit_html.'</span>';
 					break;
 				case '_stock':
 					if ( 'yes' !== get_option( 'alg_wc_cog_bulk_edit_tool_manage_stock', 'no' ) ) {
