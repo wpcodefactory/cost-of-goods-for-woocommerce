@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
-Tested up to: 6.0
-Stable tag: 2.7.2
+Tested up to: 6.1
+Stable tag: 2.7.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,12 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.7.3 - 03/11/2022 =
+* Dev - Tools & Reports - Bulk edit costs - Add tags column.
+* Dev - Tools & Reports - Bulk edit costs - By price - New option: Filter by tags.
+* Dev - Tools & Reports - Bulk edit costs - By profit - New option: Filter by tags.
+* Tested up to: 6.1.
 
 = 2.7.2 - 01/11/2022 =
 * Dev - Tools & Reports - Bulk edit costs - Costs - New option: Show profit as cost field description.

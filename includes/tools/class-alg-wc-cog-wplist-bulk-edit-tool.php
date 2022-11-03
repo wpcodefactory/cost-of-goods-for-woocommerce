@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 2.7.2
+ * @version 2.7.3
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -18,30 +18,31 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		/**
 		 * prepare_items.
 		 *
-		 * @version 2.6.9
+		 * @version 2.7.3
 		 * @since   2.3.1
 		 */
 		public function prepare_items() {
 			if ( ! empty( $this->items ) ) {
 				return;
 			}
-			// Columns
+			// Columns.
 			$columns               = $this->get_columns();
 			$hidden                = get_hidden_columns( $this->screen );
 			$sortable              = $this->get_sortable_columns();
 			$this->_column_headers = array( $columns, $hidden, $sortable );
-			// Query args
+			// Query args.
 			$types    = get_option( 'alg_wc_cog_bulk_edit_tool_product_types', array() );
 			$per_page = $this->get_items_per_page( 'alg_wc_cog_bulk_edit_per_page', 20 );
 			$args     = array(
 				'paginate'       => true,
+				'tax_query'     => array(),
 				'posts_per_page' => $per_page,
 				'paged'          => isset( $_GET['paged'] ) ? filter_var( $_GET['paged'], FILTER_SANITIZE_NUMBER_INT ) : 1,
 				'orderby'        => 'ID',
 				'order'          => isset( $_GET['order'] ) ? strtoupper( sanitize_text_field( $_GET['order'] ) ) : 'ASC',
 				'type'           => ( ! empty( $types ) ? $types : array_merge( array_keys( wc_get_product_types() ), array( 'variation' ) ) ),
 			);
-			// Search
+			// Search.
 			if ( isset( $_REQUEST['s'] ) && ! empty( $search_query = $_REQUEST['s'] ) ) {
 				if ( 'title' === get_option( 'alg_wc_cog_bulk_edit_tool_search_method', 'title' ) ) {
 					$args['s'] = wc_clean( wp_unslash( $search_query ) );
@@ -52,8 +53,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 					$args['include'] = $post_in;
 				}
 			}
-
-			// Orderby
+			// Tax query - Product tag.
+			if ( isset( $_GET['product_tag'] ) && ! empty( $product_tag = sanitize_text_field( $_GET['product_tag'] ) ) ) {
+				$args['tax_query'][] = array(
+					'taxonomy' => 'product_tag',
+					'terms'    => array( esc_attr( $product_tag ) ),
+					'field'    => 'slug',
+				);
+			}
+			// Orderby.
 			if (
 				isset( $_GET['orderby'] ) &&
 				! empty( $orderby = $_GET['orderby'] )
@@ -75,7 +83,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 						break;
 				}
 			}
-			// Data
+			// Data.
 			$products = wc_get_products( $args );
 			$this->set_pagination_args( [
 				'total_items' => $products->total, //WE have to calculate the total number of items
@@ -132,7 +140,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		 *
 		 * @see WP_List_Table::display()
 		 *
-		 * @version 2.7.1
+		 * @version 2.7.2
 		 * @since   2.7.1
 		 */
 		function display() {
@@ -184,7 +192,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		 * @todo    [maybe] better description here and in settings
 		 * @todo    [maybe] bulk edit order items meta
 		 *
-		 * @version 2.7.2
+		 * @version 2.7.3
 		 * @since   2.3.1
 		 *
 		 * @param object $item
@@ -243,6 +251,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 					          ' initial-value="' . $value . '"' .
 					          ' value="' . $value . '"' . '>'.'<span class="alg-wc-cog-cost-description">'.$profit_html.'</span>';
 					break;
+				case '_tags':
+					add_filter( 'term_link', function ( $termlink, $term, $taxonomy ) {
+						if ( 'product_tag' === $taxonomy ) {
+							$termlink = admin_url( 'tools.php?page=bulk-edit-costs&section=costs_manually&product_tag=' . $term->slug );
+						}
+						return $termlink;
+					}, 10, 3 );
+					echo wc_get_product_tag_list( $item->get_id() );
+					break;
 				case '_stock':
 					if ( 'yes' !== get_option( 'alg_wc_cog_bulk_edit_tool_manage_stock', 'no' ) ) {
 						$result = $item->get_stock_quantity();
@@ -282,6 +299,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 				'title'            => __( 'Title', 'cost-of-goods-for-woocommerce' ),
 				'_alg_wc_cog_cost' => __( 'Cost', 'cost-of-goods-for-woocommerce' ),
 				'_stock'           => __( 'Stock', 'cost-of-goods-for-woocommerce' ),
+				'_tags'            => __( 'Tags', 'cost-of-goods-for-woocommerce' ),
 			];
 			if ( $do_edit_prices ) {
 				$new_cols['_regular_price'] = __( 'Regular price', 'cost-of-goods-for-woocommerce' );

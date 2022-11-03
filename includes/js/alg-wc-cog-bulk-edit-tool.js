@@ -1,7 +1,7 @@
 /**
  * alg-wc-cog-bulk-edit-tool.js.
  *
- * @version 2.6.3
+ * @version 2.7.3
  * @since   1.3.3
  * @author  WPFactory
  */
@@ -86,6 +86,47 @@
             }
         });
     });
+
+    // Json search product tags
+	$(':input.wc-tag-search').filter(':not(.enhanced)').each(function () {
+		var return_format = $(this).data('return_id') ? 'id' : 'slug';
+		var select2_args = $.extend({
+			allowClear: $(this).data('allow_clear') ? true : false,
+			placeholder: $(this).data('placeholder'),
+			minimumInputLength: $(this).data('minimum_input_length') ? $(this).data('minimum_input_length') : 3,
+			escapeMarkup: function (m) {
+				return m;
+			},
+			ajax: {
+				url: wc_enhanced_select_params.ajax_url,
+				dataType: 'json',
+				delay: 250,
+				data: function (params) {
+					return {
+						term: params.term,
+						action: 'alg_wc_cog_json_search_tags',
+						security: wc_enhanced_select_params.search_categories_nonce
+					};
+				},
+				processResults: function (data) {
+					var terms = [];
+					if (data) {
+						$.each(data, function (id, term) {
+							terms.push({
+								id: 'id' === return_format ? term.term_id : term.slug,
+								text: term.formatted_name
+							});
+						});
+					}
+					return {
+						results: terms
+					};
+				},
+				cache: true
+			}
+		}, '');
+		$(this).selectWoo(select2_args).addClass('enhanced');
+	});
 
 })(jQuery, window, document);
 
