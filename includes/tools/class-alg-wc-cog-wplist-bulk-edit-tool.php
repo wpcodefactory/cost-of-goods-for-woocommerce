@@ -179,7 +179,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 			</table>
 			<style>
 				.alg-wc-cog-cost-description {
-					display: inline-block
+					display: block;
 				}
 			</style>
 			<?php

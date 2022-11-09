@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.7.3
+ * @version 2.7.4
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -482,7 +482,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * display_wp_list_tool.
 		 *
-		 * @version 2.6.1
+		 * @version 2.7.4
 		 * @since   2.3.1
 		 */
 		function display_bulk_edit_tools() {
@@ -524,7 +524,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			}
 
 			$container_elem_type = 'form';
-			if ( ! isset( $_GET['section'] ) || 'costs_manually' === $_GET['section'] ) {
+			if (
+				( isset( $_GET['page'] ) && 'bulk-edit-costs' === $_GET['page'] ) &&
+				( ! isset( $_GET['section'] ) || 'costs_manually' === $_GET['section'] )
+			) {
 				$container_elem_type = 'div';
 				echo '</form>';
 			}
@@ -579,9 +582,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			$bulk_edit_sections = array(
 				'costs_manually'    => array(
 					'label'           => esc_html__( 'Manually', 'cost-of-goods-for-woocommerce' ),
-					'save_btn_top'    => sprintf( '<input style="position:relative;top:-2px;margin:0 0 0 10px" type="submit" name="alg_wc_cog_bulk_edit_tool_save_costs" class="page-title-action" value="%s">',
-						esc_html__( 'Save', 'cost-of-goods-for-woocommerce' )
-					),
+					'save_btn_top'    => '',
 					'save_btn_bottom' => sprintf( '<input type="submit" name="alg_wc_cog_bulk_edit_tool_save_costs" class="button-primary" value="%s">',
 						esc_html__( 'Save', 'cost-of-goods-for-woocommerce' )
 					),
