@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Products.
  *
- * @version 2.7.5
+ * @version 2.7.6
  * @since   2.5.1
  * @author  WPFactory
  */
@@ -60,7 +60,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_profit_total_to_select_products_stats_total.
 		 *
-		 * @version 2.7.5
+		 * @version 2.7.6
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		function add_profit_total_to_select_products_stats_total( $clauses ) {
 			if ( apply_filters( 'alg_wc_cog_analytics_product_profit_totals', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_totals_on_products_tab', 'no' ) ) ) {
 				global $wpdb;
-				$clauses[] = ", SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue – alg_cog_oimc.meta_value * product_qty) AS profit_total";
+				$clauses[] = ", SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue - alg_cog_oimc.meta_value * product_qty) AS profit_total";
 			}
 			return $clauses;
 		}
