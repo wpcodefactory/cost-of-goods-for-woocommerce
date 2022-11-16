@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.7.4
+ * @version 2.7.7
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -290,7 +290,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Manually Section.
 		 *
-		 * @version 2.7.3
+		 * @version 2.7.7
 		 * @since   2.6.1
 		 */
 		function display_bulk_edit_prices_profit() {
@@ -341,6 +341,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         </p>
                     </td>
                 </tr>
+	            <tr>
+		            <th scope="row"><label for="product-tag"><?php esc_html_e( 'Filter by tag(s)', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+		            <td>
+			            <select <?php echo esc_attr( $disabled ); ?> class="wc-tag-search" multiple="multiple" style="width: 50%;" id="product-tag" name="product_tag[]" data-placeholder="<?php esc_attr_e( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_tags">
+			            </select>
+			            <p class="description">
+				            <?php esc_html_e( 'Select only the tag(s) you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
+				            <?php echo ( ! empty( $blocked_text ) ) ? '<br />' . $blocked_text : ''; ?>
+			            </p>
+		            </td>
+	            </tr>
             </table>
 			<?php
 		}
