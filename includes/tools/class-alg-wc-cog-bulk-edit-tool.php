@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.7.7
+ * @version 2.7.8
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -290,7 +290,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Manually Section.
 		 *
-		 * @version 2.7.7
+		 * @version 2.7.8
 		 * @since   2.6.1
 		 */
 		function display_bulk_edit_prices_profit() {
@@ -333,7 +333,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                 <tr>
                     <th scope="row"><label for="product-category"><?php esc_html_e( 'Filter by category', 'cost-of-goods-for-woocommerce' ); ?></label></th>
                     <td>
-                        <select  <?php echo esc_attr( $disabled ); ?> class="wc-category-search" multiple="multiple" style="width: 50%;" id="product-category" name="product_category[]" data-placeholder="<?php esc_attr_e( 'Search for a category&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_categories">
+                        <select data-return_id="id" <?php echo esc_attr( $disabled ); ?> class="wc-category-search" multiple="multiple" style="width: 50%;" id="product-category" name="product_category[]" data-placeholder="<?php esc_attr_e( 'Search for a category&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_categories">
                         </select>
                         <p class="description">
 				            <?php esc_html_e( 'Select only the categories you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
@@ -344,7 +344,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 	            <tr>
 		            <th scope="row"><label for="product-tag"><?php esc_html_e( 'Filter by tag(s)', 'cost-of-goods-for-woocommerce' ); ?></label></th>
 		            <td>
-			            <select <?php echo esc_attr( $disabled ); ?> class="wc-tag-search" multiple="multiple" style="width: 50%;" id="product-tag" name="product_tag[]" data-placeholder="<?php esc_attr_e( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_tags">
+			            <select data-return_id="id" <?php echo esc_attr( $disabled ); ?> class="wc-tag-search" multiple="multiple" style="width: 50%;" id="product-tag" name="product_tag[]" data-placeholder="<?php esc_attr_e( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_tags">
 			            </select>
 			            <p class="description">
 				            <?php esc_html_e( 'Select only the tag(s) you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
@@ -359,7 +359,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Profit Section.
 		 *
-		 * @version 2.7.3
+		 * @version 2.7.8
 		 * @since   2.5.1
 		 */
 		function display_bulk_edit_costs_profit() {
@@ -379,7 +379,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                 <tr>
                     <th scope="row"><label for="product-category"><?php esc_html_e( 'Filter by category', 'cost-of-goods-for-woocommerce' ); ?></label></th>
                     <td>
-                        <select <?php echo esc_attr( $disabled ); ?> class="wc-category-search" multiple="multiple" style="width: 50%;" id="product-category" name="product_category[]" data-placeholder="<?php esc_attr_e( 'Search for a category&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_categories">
+                        <select data-return_id="id" <?php echo esc_attr( $disabled ); ?> class="wc-category-search" multiple="multiple" style="width: 50%;" id="product-category" name="product_category[]" data-placeholder="<?php esc_attr_e( 'Search for a category&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_categories">
 							<?php foreach ( get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false ) ) as $product_cat ) : ?>
                                 <option value="<?php echo esc_attr( $product_cat->term_id ); ?>"><?php echo esc_html( $product_cat->name ); ?></option>
 							<?php endforeach; ?>
@@ -393,7 +393,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 	            <tr>
 		            <th scope="row"><label for="product-tag"><?php esc_html_e( 'Filter by tag(s)', 'cost-of-goods-for-woocommerce' ); ?></label></th>
 		            <td>
-			            <select <?php echo esc_attr( $disabled ); ?> class="wc-tag-search" multiple="multiple" style="width: 50%;" id="product-tag" name="product_tag[]" data-placeholder="<?php esc_attr_e( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_tags">
+			            <select data-return_id="id" <?php echo esc_attr( $disabled ); ?> class="wc-tag-search" multiple="multiple" style="width: 50%;" id="product-tag" name="product_tag[]" data-placeholder="<?php esc_attr_e( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_tags">
 			            </select>
 			            <p class="description">
 				            <?php esc_html_e( 'Select only the tag(s) you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
@@ -429,7 +429,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                 <tr>
                     <th scope="row"><label for="product-category"><?php esc_html_e( 'Filter by category', 'cost-of-goods-for-woocommerce' ); ?></label></th>
                     <td>
-                        <select <?php echo esc_attr( $disabled ); ?> class="wc-category-search" multiple="multiple" style="width: 50%;" id="product-category" name="product_category[]" data-placeholder="<?php esc_attr_e( 'Search for a category&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_categories">
+                        <select data-return_id="id" <?php echo esc_attr( $disabled ); ?> class="wc-category-search" multiple="multiple" style="width: 50%;" id="product-category" name="product_category[]" data-placeholder="<?php esc_attr_e( 'Search for a category&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_categories">
                         </select>
                         <p class="description">
 	                        <?php esc_html_e( 'Select only the categories you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
@@ -440,7 +440,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 	            <tr>
 		            <th scope="row"><label for="product-tag"><?php esc_html_e( 'Filter by tag(s)', 'cost-of-goods-for-woocommerce' ); ?></label></th>
 		            <td>
-			            <select <?php echo esc_attr( $disabled ); ?> class="wc-tag-search" multiple="multiple" style="width: 50%;" id="product-tag" name="product_tag[]" data-placeholder="<?php esc_attr_e( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_tags">
+			            <select data-return_id="id" <?php echo esc_attr( $disabled ); ?> class="wc-tag-search" multiple="multiple" style="width: 50%;" id="product-tag" name="product_tag[]" data-placeholder="<?php esc_attr_e( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ); ?>" data-action="json_search_tags">
 			            </select>
 			            <p class="description">
 				            <?php esc_html_e( 'Select only the tag(s) you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
@@ -757,7 +757,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * save_costs.
 		 *
-		 * @version 2.2.0
+		 * @version 2.7.8
 		 * @since   1.2.0
 		 * @see     https://wordpress.org/support/topic/you-should-add-posibility-to-edit-regular-price-and-sale-price/
 		 * @todo    [next] prices: `$do_update_func`
@@ -770,13 +770,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				$error_sale_price_ids = array();
 			}
 			if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_save_costs'] ) ) {
-				// Manually
+				// Manually.
 				if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_costs'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_costs'] ) ) {
 					foreach ( $_POST['alg_wc_cog_bulk_edit_tool_costs'] as $product_id => $cost_value ) {
 						update_post_meta( sanitize_key( $product_id ), '_alg_wc_cog_cost', sanitize_text_field( $cost_value ) );
 					}
 				}
-				// Prices
+				// Prices.
 				if ( $do_edit_prices ) {
 					if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_regular_price'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_regular_price'] ) ) {
 						$regular_prices = wc_clean( $_POST['alg_wc_cog_bulk_edit_tool_regular_price'] );
@@ -801,7 +801,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 						}
 					}
 				}
-				// Stock
+				// Stock.
 				if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_stock'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_stock'] ) ) {
 					$do_update_func = ( 'func' === get_option( 'alg_wc_cog_bulk_edit_tool_manage_stock_method', 'meta' ) );
 					foreach ( $_POST['alg_wc_cog_bulk_edit_tool_stock'] as $product_id => $stock_value ) {
@@ -813,7 +813,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 						}
 					}
 				}
-				// Notices
+				// Tags update.
+				if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_product_tag'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_product_tag'] ) ) {
+					foreach ( $_POST['alg_wc_cog_bulk_edit_tool_product_tag'] as $product_id => $tag_ids ) {
+						$tag_ids = array_map( 'intval', $tag_ids );
+						wp_set_post_terms( $product_id, $tag_ids, 'product_tag');
+					}
+				}
+				// Notices.
 				add_action( 'admin_notices', array( $this, 'admin_notice_costs_saved' ) );
 				if ( $do_edit_prices && count( $error_sale_price_ids ) ) {
 					$this->error_sale_price_ids = $error_sale_price_ids;

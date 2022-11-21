@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 2.7.2
+ * @version 2.7.8
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.7.2
+	 * @version 2.7.8
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -47,7 +47,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'id'       => 'alg_wc_cog_bulk_edit_tool_options',
 			),
 			array(
-				'title'    => __( 'Search products', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Product search', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'select',
 				'class'    => 'chosen_select',
 				'id'       => 'alg_wc_cog_bulk_edit_tool_search_method',
@@ -55,32 +55,6 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'options'  => array(
 					'title' => __( 'Search by title', 'cost-of-goods-for-woocommerce' ),
 					'all'   => __( 'Search all', 'cost-of-goods-for-woocommerce' ),
-				),
-			),
-			array(
-				'title'    => __( 'Edit prices', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'checkbox',
-				'id'       => 'alg_wc_cog_bulk_edit_tool_edit_prices',
-				'default'  => 'no',
-			),
-			array(
-				'title'    => __( 'Manage stock', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'checkbox',
-				'id'       => 'alg_wc_cog_bulk_edit_tool_manage_stock',
-				'default'  => 'no',
-			),
-			array(
-				'title'    => __( 'Stock update method', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Ignored unless "Manage stock" checkbox is enabled above.', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'select',
-				'class'    => 'chosen_select',
-				'id'       => 'alg_wc_cog_bulk_edit_tool_manage_stock_method',
-				'default'  => 'meta',
-				'options'  => array(
-					'meta' => __( 'Update product meta', 'cost-of-goods-for-woocommerce' ),
-					'func' => __( 'Use product functions', 'cost-of-goods-for-woocommerce' ),
 				),
 			),
 			array(
@@ -93,11 +67,44 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'options'  => array_merge( wc_get_product_types(), array( 'variation' => __( 'Variations', 'woocommerce' ) ) ),
 			),
 			array(
+				'title'    => __( 'Prices', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Edit prices', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'id'       => 'alg_wc_cog_bulk_edit_tool_edit_prices',
+				'default'  => 'no',
+			),
+			array(
+				'title'    => __( 'Tags', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Edit tags', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'id'       => 'alg_wc_cog_bulk_edit_tool_edit_tags',
+				'default'  => 'no',
+			),
+			array(
 				'title'    => __( 'Costs', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Show profit as cost field description', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_bulk_edit_tool_profit_on_cost_desc',
 				'default'  => 'no',
+			),
+			array(
+				'title'    => __( 'Stock', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Manage stock', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'id'       => 'alg_wc_cog_bulk_edit_tool_manage_stock',
+				'default'  => 'no',
+			),
+			array(
+				'title'    => __( 'Stock update method', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Ignored unless "Manage stock" checkbox is enabled.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'id'       => 'alg_wc_cog_bulk_edit_tool_manage_stock_method',
+				'default'  => 'meta',
+				'options'  => array(
+					'meta' => __( 'Update product meta', 'cost-of-goods-for-woocommerce' ),
+					'func' => __( 'Use product functions', 'cost-of-goods-for-woocommerce' ),
+				),
 			),
 			array(
 				'type'     => 'sectionend',

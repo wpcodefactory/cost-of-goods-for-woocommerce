@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 2.7.3
+ * @version 2.7.8
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -14,6 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 
 	class Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool extends \WP_List_Table {
+
+		/**
+		 * $need_to_edit_tags.
+		 *
+		 * @since 2.7.8
+		 *
+		 * @var null
+		 */
+		protected $need_to_edit_tags = null;
 
 		/**
 		 * prepare_items.
@@ -187,12 +196,50 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		}
 
 		/**
+		 * get_tags_edit_field.
+		 *
+		 * @version 2.7.8
+		 * @since   2.7.8
+		 *
+		 * @param $post_id
+		 *
+		 * @return false|string
+		 */
+		function get_tags_edit_field( $post_id ) {
+			ob_start();
+			echo '<select data-return_id="id" class="wc-tag-search" multiple="multiple" style="width: 50%;" id="alg_wc_cog_bulk_edit_tool_product_tag" name="alg_wc_cog_bulk_edit_tool_product_tag[' . esc_attr( $post_id ) . '][]" data-placeholder="' . esc_attr( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ) . '" data-action="json_search_tags">';
+			$term_list = wp_get_post_terms( $post_id, 'product_tag', array( 'fields' => 'all' ) );
+			foreach ( $term_list as $term ) {
+				echo '<option value="' . esc_attr( $term->term_id ) . '"' . selected( true, true, false ) . '>' . esc_html( wp_strip_all_tags( $term->name ) ) . '</option>';
+			}
+			echo '</select>';
+			$output = ob_get_contents();
+			ob_end_clean();
+			return $output;
+		}
+
+		/**
+		 * need_to_edit_tags.
+		 *
+		 * @version 2.7.8
+		 * @since   2.7.8
+		 *
+		 * @return bool|null
+		 */
+		function need_to_edit_tags() {
+			if ( is_null( $this->need_to_edit_tags ) ) {
+				$this->need_to_edit_tags = 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_edit_tags', 'no' );
+			}
+			return $this->need_to_edit_tags;
+		}
+
+		/**
 		 * column_default.
 		 *
 		 * @todo    [maybe] better description here and in settings
 		 * @todo    [maybe] bulk edit order items meta
 		 *
-		 * @version 2.7.3
+		 * @version 2.7.8
 		 * @since   2.3.1
 		 *
 		 * @param object $item
@@ -258,7 +305,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 						}
 						return $termlink;
 					}, 10, 3 );
-					echo wc_get_product_tag_list( $item->get_id() );
+					if ( $this->need_to_edit_tags() ) {
+						echo $this->get_tags_edit_field( $item->get_id() );
+					}
+					echo '<div class="alg-wc-cog-product-tags">' . wc_get_product_tag_list( $item->get_id() ) . '</div>';
 					break;
 				case '_stock':
 					if ( 'yes' !== get_option( 'alg_wc_cog_bulk_edit_tool_manage_stock', 'no' ) ) {
@@ -285,7 +335,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		/**
 		 * get_columns.
 		 *
-		 * @version 2.3.1
+		 * @version 2.7.8
 		 * @since   2.3.1
 		 *
 		 * @return array

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 2.6.4
+ * @version 2.7.8
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.6.4
+	 * @version 2.7.8
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -116,8 +116,9 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'default'  => 'wc_get_price_excluding_tax',
 				'type'     => 'select',
 				'options'  => array(
-					'wc_get_price_excluding_tax' => __( 'Get price excluding tax', 'cost-of-goods-for-woocommerce' ),
-					'wc_get_price_including_tax' => __( 'Get price including tax', 'cost-of-goods-for-woocommerce' ),
+					'wc_get_price_excluding_tax'   => __( 'Get price excluding tax', 'cost-of-goods-for-woocommerce' ),
+					'wc_get_price_including_tax'   => __( 'Get price including tax', 'cost-of-goods-for-woocommerce' ),
+					'alg_wc_cog_get_regular_price' => __( 'Get regular price', 'cost-of-goods-for-woocommerce' ),
 				),
 				'wpfse_data' => array(
 					'description' => __( 'Get price excluding or including tax.', 'cost-of-goods-for-woocommerce' ) . ' ' . '{desc}'
