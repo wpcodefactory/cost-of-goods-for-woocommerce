@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.7.0
+ * @version 2.7.9
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -740,47 +740,47 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * Update product price by product cost.
 	 *
-	 * @version 2.6.4
+	 * @version 2.7.9
 	 * @since   2.6.3
 	 *
 	 * @param array $args
 	 *
 	 * @return bool
 	 */
-	function update_product_price_by_percentage( $args = array() ) {
-		$args           = wp_parse_args( $args, array(
-			'product_id'     => '',
-			'percentage'     => '',
-			'rounding'       => '',
-			'type'           => 'profit',
-			'affected_field' => 'regular_price',
+	function update_product_price_by_profit( $args = array() ) {
+		$args            = wp_parse_args( $args, array(
+			'product_id'      => '',
+			'percentage'      => '',
+			'absolute_profit' => '',
+			'rounding'        => '',
+			'affected_field'  => 'regular_price',
 		) );
-		$product_id     = $args['product_id'];
-		$percentage     = $args['percentage'];
-		$rounding       = $args['rounding'];
-		$affected_field = $args['affected_field'];
-		$type           = isset( $args['type'] ) ? $args['type'] : '';
-		$product        = wc_get_product( $product_id );
-		$product_cost   = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
-		$new_price      = 0;
+		$product_id      = $args['product_id'];
+		$percentage      = $args['percentage'];
+		$absolute_profit = $args['absolute_profit'];
+		$rounding        = $args['rounding'];
+		$affected_field  = $args['affected_field'];
+		$product         = wc_get_product( $product_id );
+		$product_cost    = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
+		$new_price       = 0;
 		// If invalid product or product cost then return false
 		if ( empty( $product_cost ) || 0 == $product_cost ) {
 			return false;
 		}
-		// Calculate price by cost
-		if ( 'profit' == $type ) {
+		// Calculate price by cost.
+		if ( ! empty( $percentage ) ) {
 			$new_price = $product_cost + ( $product_cost * ( $percentage / 100 ) );
+		} elseif ( ! empty( $absolute_profit ) ) {
+			$new_price = $product_cost + $absolute_profit;
 		}
 		// If no new price, then return false
 		if ( 0 >= $new_price ) {
 			return false;
 		}
-
 		// Rounding.
 		if ( ! empty( $rounding ) ) {
 			$new_price = 'round' === $rounding ? round( $new_price ) : ( 'round_up' === $rounding ? ceil( $new_price ) : floor( $new_price ) );
 		}
-
 		if ( 'sale_price' == $affected_field ) {
 			$product->set_sale_price( $new_price );
 		} else {

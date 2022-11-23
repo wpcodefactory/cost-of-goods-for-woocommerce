@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.7.8
+ * @version 2.7.9
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Update costs on Ajax for bulk edit tools.
 		 *
-		 * @version 2.7.3
+		 * @version 2.7.9
 		 * @since   2.5.1
 		 */
 		function ajax_update_product_data() {
@@ -144,12 +144,25 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			if ( isset( $form_data["_nonce_{$update_type}_val"] ) && ! wp_verify_nonce( $form_data["_nonce_{$update_type}_val"], "_nonce_{$update_type}_action" ) ) {
 				wp_send_json_error( esc_html__( 'Something went wrong! Please try again.', 'cost-of-goods-for-woocommerce' ) );
 			}
-			$percentage       = isset( $form_data['percentage'] ) ? sanitize_text_field( $form_data['percentage'] ) : '';
+			$percentage       = isset( $form_data['percentage'] ) ? (float) sanitize_text_field( $form_data['percentage'] ) : '';
+			$absolute_profit  = isset( $form_data['absolute_profit'] ) ? (float) sanitize_text_field( $form_data['absolute_profit'] ) : '';
 			$affected_field   = isset( $form_data['affected_field'] ) ? $form_data['affected_field'] : 'regular_price';
 			$rounding         = isset( $form_data['rounding'] ) ? $form_data['rounding'] : '';
-			// If empty percentage do not proceed
-			if ( empty( $percentage ) || empty( $update_type ) ) {
-				wp_send_json_error( esc_html__( 'Invalid percentage or category.', 'cost-of-goods-for-woocommerce' ) );
+			// Requirements.
+			if ( empty( $update_type ) ) {
+				wp_send_json_error( esc_html__( 'Some error has occurred. Please, try again.', 'cost-of-goods-for-woocommerce' ) );
+			}
+			if ( 'update_costs' === $tool_type ) {
+				if ( empty( $percentage ) ) {
+					wp_send_json_error( esc_html__( 'Invalid percentage.', 'cost-of-goods-for-woocommerce' ) );
+				}
+			} else {
+				if (
+					( empty( $percentage ) && empty( $absolute_profit ) ) ||
+					( ! empty( $percentage ) && ! empty( $absolute_profit ) )
+				) {
+					wp_send_json_error( esc_html__( 'It\'s necessary to set the profit percentage or the absolute profit.', 'cost-of-goods-for-woocommerce' ) );
+				}
 			}
 			$query_args = array(
 				'post_type'      => 'product',
@@ -165,7 +178,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			if ( ! empty( $product_category ) && is_array( $product_category ) ) {
 				$query_args['tax_query'][] = array(
 					'taxonomy' => 'product_cat',
-					'field'    => 'slug',
+					'field'    => 'term_id',
 					'terms'    => $product_category,
 					'operator' => 'IN',
 				);
@@ -177,7 +190,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			if ( ! empty( $product_tag ) && is_array( $product_tag ) ) {
 				$query_args['tax_query'][] = array(
 					'taxonomy' => 'product_tag',
-					'field'    => 'slug',
+					'field'    => 'term_id',
 					'terms'    => $product_tag,
 					'operator' => 'IN',
 				);
@@ -188,18 +201,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 	            'products'      => $posts,
                 'bkg_process'   => count( $posts ) >= $bkg_process_min_amount,
                 'options'       => array(
-	                'percentage'     => $percentage,
-	                'update_type'    => $update_type,
-	                'affected_field' => $affected_field,
-	                'rounding'       => $rounding,
+	                'percentage'      => $percentage,
+	                'absolute_profit' => $absolute_profit,
+	                'update_type'     => $update_type,
+	                'affected_field'  => $affected_field,
+	                'rounding'        => $rounding,
                 ),
             );
-
             // For bulk update - costs
             if( 'update_costs' === $tool_type ) {
 	            wp_send_json_success( $this->bulk_update_costs( $args ) );
             }
-
             // For bulk update - prices
 			if( 'update_prices' === $tool_type ) {
 				wp_send_json_success( $this->bulk_update_prices( $args ) );
@@ -209,45 +221,41 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Bulk update product prices
 		 *
-		 * @version 2.6.4
+		 * @version 2.7.9
 		 * @since   2.6.1
 		 *
 		 * @param array $args
 		 *
 		 * @return string
 		 */
-        function bulk_update_prices( $args = array() ) {
-	        $args = wp_parse_args( $args, array(
-		        'products'    => array(),
-		        'bkg_process' => false,
-		        'options'     => array(),
-	        ) );
-	        $products    = $args['products'];
-	        $bkg_process = $args['bkg_process'];
-	        $options     = $args['options'];
-	        $message     = __( 'Successfully updated product prices.', 'cost-of-goods-for-woocommerce' );
-
-	        if( $bkg_process ) {
-		        $message = __( 'Product prices are being updated via background processing.', 'cost-of-goods-for-woocommerce' );
-		        $message .= 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ? ' '.sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) ) : '';
-		        $this->update_price_bkg_process->cancel_process();
-	        }
-
-	        foreach ( $products as $product_id ) {
-		        $_options = wp_parse_args( $options, array( 'product_id' => $product_id ) );
-		        if( $bkg_process ) {
-			        $this->update_price_bkg_process->push_to_queue( $_options );
-		        } else {
-			        alg_wc_cog()->core->products->update_product_price_by_percentage( $_options );
-		        }
-	        }
-
-	        if( $bkg_process ) {
-		        $this->update_price_bkg_process->save()->dispatch();
-	        }
-
-	        return esc_html( $message );
-        }
+		function bulk_update_prices( $args = array() ) {
+			$args = wp_parse_args( $args, array(
+				'products'    => array(),
+				'bkg_process' => false,
+				'options'     => array(),
+			) );
+			$products    = $args['products'];
+			$bkg_process = $args['bkg_process'];
+			$options     = $args['options'];
+			$message     = __( 'Successfully updated product prices.', 'cost-of-goods-for-woocommerce' );
+			if ( $bkg_process ) {
+				$message = __( 'Product prices are being updated via background processing.', 'cost-of-goods-for-woocommerce' );
+				$message .= 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ? ' ' . sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) ) : '';
+				$this->update_price_bkg_process->cancel_process();
+			}
+			foreach ( $products as $product_id ) {
+				$_options = wp_parse_args( $options, array( 'product_id' => $product_id ) );
+				if ( $bkg_process ) {
+					$this->update_price_bkg_process->push_to_queue( $_options );
+				} else {
+					alg_wc_cog()->core->products->update_product_price_by_profit( $_options );
+				}
+			}
+			if ( $bkg_process ) {
+				$this->update_price_bkg_process->save()->dispatch();
+			}
+			return esc_html( $message );
+		}
 
 		/**
          * Bulk update product costs
@@ -290,7 +298,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Manually Section.
 		 *
-		 * @version 2.7.8
+		 * @version 2.7.9
 		 * @since   2.6.1
 		 */
 		function display_bulk_edit_prices_profit() {
@@ -322,11 +330,22 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		            </td>
 	            </tr>
                 <tr>
-		            <th scope="row"><label for="cost-percentage"><?php esc_html_e( 'Profit percentage (%)', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+		            <th scope="row"><label for="profit-percentage"><?php esc_html_e( 'Profit percentage (%)', 'cost-of-goods-for-woocommerce' ); ?></label></th>
 		            <td>
-			            <input id="cost-percentage" name="percentage" step="0.01" min="0" type="number" required placeholder="">
+			            <input id="profit-percentage" name="percentage" step="0.01" min="0" type="number" placeholder="">
 			            <p class="description">
-				            <?php esc_html_e( 'Products prices will be set according to the profit percentage you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ); ?><br />
+				            <?php echo wp_kses_post( 'Products prices will be set according to the profit <strong>percentage</strong> you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ); ?><br />
+				            <?php echo wp_kses_post( sprintf( 'Example: If set as <code>10</code>, a product costing <code>%s</code> will have its price changed to <code>%s</code>.', wc_price( 50 ), wc_price( 55 ) ), 'cost-of-goods-for-woocommerce' ); ?>
+			            </p>
+		            </td>
+	            </tr>
+	            <tr>
+		            <th scope="row"><label for="absolute-profit"><?php esc_html_e( 'Profit', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+		            <td>
+			            <input id="absolute-profit" name="absolute_profit" step="0.01" min="0" type="number" placeholder="">
+			            <p class="description">
+				            <?php echo wp_kses_post( 'Products prices will be set according to the <strong>absolute</strong> profit you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ); ?><br />
+				            <?php echo wp_kses_post( sprintf( 'Example: If set as <code>10</code>, a product costing <code>%s</code> will have its price changed to <code>%s</code>.', wc_price( 50 ), wc_price( 60 ) ), 'cost-of-goods-for-woocommerce' ); ?>
 			            </p>
 		            </td>
 	            </tr>
