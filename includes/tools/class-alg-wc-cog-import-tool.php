@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Import Tool Class.
  *
- * @version 2.5.7
+ * @version 2.8.0
  * @since   1.1.0
  * @author  WPFactory
  */
@@ -24,13 +24,37 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.3.0
+		 * @version 2.8.0
 		 * @since   1.1.0
 		 */
 		function __construct() {
 			add_action( 'admin_menu', array( $this, 'create_import_tool' ) );
 			// Bkg Process
 			add_action( 'plugins_loaded', array( $this, 'init_bkg_process' ) );
+			// Run copy tool on WooCommerce import.
+			add_action( 'woocommerce_product_import_inserted_product_object', array( $this, 'run_copy_tool_on_wc_import' ), 10, 2 );
+		}
+
+		/**
+		 * run_copy_tool_on_wc_import.
+		 *
+		 * @version 2.8.0
+		 * @since   2.8.0
+		 *
+		 * @param $product
+		 * @param $data
+		 */
+		function run_copy_tool_on_wc_import( $product, $data ) {
+			if (
+				'yes' === get_option( 'alg_wc_cog_import_tool_sync_wc_import', 'no' ) &&
+				is_a( $product, 'WC_Product' )
+			) {
+				$this->copy_product_meta( array(
+					'product_id' => $product->get_id(),
+					'from_key'   => get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' ),
+					'to_key'     => get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' ),
+				) );
+			}
 		}
 
 		/**
@@ -41,7 +65,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		 */
 		function init_bkg_process() {
 			require_once( alg_wc_cog()->plugin_path() . '/includes/background-process/class-alg-wc-cog-import-tool-bkg-process.php' );
-
 			$this->import_tool_bkg_process = new Alg_WC_Cost_of_Goods_Import_Tool_Bkg_Process();
 		}
 

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 2.7.8
+ * @version 2.8.0
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -29,7 +29,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.7.8
+	 * @version 2.8.0
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -148,6 +148,14 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'desc'     => __( 'Replace the meta value only if the from key value is not empty, null or zero', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_import_tool_check_value',
 				'default'  => 'yes',
+			),
+			array(
+				'title'    => __( 'WooCommerce Import', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'checkbox',
+				'desc'     => sprintf( __( 'Sync with %s from WooCommerce', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'edit.php?post_type=product&page=product_importer' ) . '" target="_blank">' . __( 'Product Importer', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+				'desc_tip' => __( 'If enabled, our tool will run automatically along with the CSV/TXT import.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_import_tool_sync_wc_import',
+				'default'  => 'no',
 			),
 			array(
 				'title'    => __( 'Table', 'cost-of-goods-for-woocommerce' ),
