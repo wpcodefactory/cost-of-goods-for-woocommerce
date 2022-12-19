@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 2.8.0
+ * @version 2.8.1
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -12,6 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Tools' ) ) :
 
 class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_Section {
+
+	/**
+	 * @version 2.8.1
+	 * @since   2.8.1
+	 *
+	 * @var string
+	 */
+	private static $run_import_tool_cron_output = '';
 
 	/**
 	 * Constructor.
@@ -24,6 +32,40 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 		$this->id   = 'tools';
 		$this->desc = __( 'Tools & Reports', 'cost-of-goods-for-woocommerce' );
 		parent::__construct();
+	}
+
+	/**
+	 * get_import_tool_cron_info.
+	 *
+	 * @version 2.8.1
+	 * @since   2.8.1
+	 *
+	 * @return string
+	 */
+	function get_import_tool_cron_info() {
+		$run_import_tool_cron = 'yes' === get_option( 'alg_wc_cog_import_tool_cron', 'no' );
+		if ( empty( self::$run_import_tool_cron_output ) ) {
+			$output = '';
+			if (
+				( ! $event_timestamp = wp_next_scheduled( 'alg_wc_cog_run_import_tool' ) ) &&
+				isset( $_POST['alg_wc_cog_import_tool_cron'] )
+			) {
+				$output = '<br />';
+				$output .= '<span style="font-weight: bold; color: green;">' . __( 'Please, reload the page to see the next scheduled event info.', 'cost-of-goods-for-woocommerce' ) . '</span>';
+			} elseif ( $event_timestamp && $run_import_tool_cron ) {
+				$output              = '<br />';
+				$now                 = current_time( 'timestamp', true );
+				$pretty_time_missing = human_time_diff( $now, $event_timestamp );
+				$output              .= sprintf( __( 'Next event scheduled to %s', 'cost-of-goods-for-woocommerce' ), '<strong>' . get_date_from_gmt( date( 'Y-m-d H:i:s', $event_timestamp ), get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ) ) . '</strong>' );
+				$output              .= ' ' . '(' . $pretty_time_missing . ' left)';
+			}
+			self::$run_import_tool_cron_output = $output;
+		} else {
+			if ( ! $run_import_tool_cron ) {
+				self::$run_import_tool_cron_output = '';
+			}
+		}
+		return self::$run_import_tool_cron_output;
 	}
 
 	/**
@@ -158,12 +200,34 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'default'  => 'no',
 			),
 			array(
-				'title'    => __( 'Table', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Import page table', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'desc'     => __( 'Display a table at the import page', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'If you have problems accessing the "Import Costs" page try disabling this option.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_import_tool_display_table',
 				'default'  => 'no',
+			),
+			array(
+				'title'    => __( 'Run automatically', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Run the import tool automatically as a recurring event', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Runs the tool based on the frequency option below.', 'cost-of-goods-for-woocommerce' ) )
+				              . $this->get_import_tool_cron_info(),
+				'type'     => 'checkbox',
+				'id'       => 'alg_wc_cog_import_tool_cron',
+				'default'  => 'no',
+			),
+			array(
+				'desc'     => __( 'Frequency', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'select',
+				'desc_tip' => __( 'If the frequency is changed after the Run automatically option is enabled, it will be necessary to disable and enable it again to see the frequency updated.', 'cost-of-goods-for-woocommerce' ),
+				'options'  => array(
+					'hourly'     => __( 'Hourly', 'cost-of-goods-for-woocommerce' ),
+					'daily'      => __( 'Daily', 'cost-of-goods-for-woocommerce' ),
+					'twicedaily' => __( 'Twice daily', 'cost-of-goods-for-woocommerce' ),
+					'weekly'     => __( 'Weekly', 'cost-of-goods-for-woocommerce' ),
+				),
+				'id'       => 'alg_wc_cog_import_tool_cron_frequency',
+				'default'  => 'daily',
 			),
 			array(
 				'type'     => 'sectionend',

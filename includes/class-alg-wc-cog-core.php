@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Core Class.
  *
- * @version 2.6.4
+ * @version 2.8.1
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -18,7 +18,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.6.4
+		 * @version 2.8.1
 		 * @since   1.0.0
 		 * @todo    [next] add "delete all (products and/or orders) meta" tool
 		 * @todo    [next] add option to enter costs *with taxes*
@@ -36,6 +36,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		 * @todo    [maybe] add option to change meta keys prefix (i.e. `_alg_wc_cog`)
 		 */
 		function __construct() {
+			// Background process
+			$this->init_bkg_process();
 			// Analytics
 			require_once( 'analytics/class-alg-wc-cog-analytics.php' );
 			// Import tool
@@ -46,10 +48,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 			$this->cost_inputs = require_once( 'class-alg-wc-cog-cost-inputs.php' );
 			// Orders
 			$this->orders = require_once( 'class-alg-wc-cog-orders.php' );
-			// Background process
-			add_action( 'plugins_loaded', array( $this, 'init_bkg_process' ), 8 );
 			// Bulk costs tool
-			add_action( 'plugins_loaded', array( $this, 'init_bulk_costs_tool' ), 9 );
+			$this->init_bulk_costs_tool();
 			// Core loaded
 			do_action( 'alg_wc_cog_core_loaded', $this );
 		}

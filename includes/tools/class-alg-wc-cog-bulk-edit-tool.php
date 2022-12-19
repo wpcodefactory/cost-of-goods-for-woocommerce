@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.7.9
+ * @version 2.8.1
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.7.3
+		 * @version 2.8.1
 		 * @since   1.2.0
 		 */
 		function __construct() {
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			add_action( 'set-screen-option', array( $this, 'set_screen_option' ), 10, 3 );
 			add_action( 'wp_ajax_alg_wc_cog_update_product_data', array( $this, 'ajax_update_product_data' ) );
 			// Bkg Process
-			add_action( 'plugins_loaded', array( $this, 'init_bkg_process' ) );
+			$this->init_bkg_process();
 			// Remove query args.
 			add_action( 'admin_init', array( $this, 'remove_query_args' ) );
 			// Json search tags.

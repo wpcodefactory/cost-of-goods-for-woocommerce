@@ -3,13 +3,13 @@
 Plugin Name: Cost of Goods for WooCommerce
 Plugin URI: https://wpfactory.com/item/cost-of-goods-for-woocommerce/
 Description: Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
-Version: 2.8.0
+Version: 2.8.1
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: cost-of-goods-for-woocommerce
 Domain Path: /langs
 Copyright: © 2022 WPFactory
-WC tested up to: 7.1
+WC tested up to: 7.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -63,7 +63,7 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '2.8.0';
+	public $version = '2.8.1';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class
@@ -89,14 +89,12 @@ final class Alg_WC_Cost_of_Goods {
 	}
 
 	/**
-	 * Alg_WC_Cost_of_Goods Constructor.
+	 * Initializes.
 	 *
-	 * @version 2.4.4
-	 * @since   1.0.0
-	 * @access  public
+	 * @version 2.8.1
+	 * @since   2.8.1
 	 */
-	function __construct() {
-
+	function init(){
 		// Localization
 		add_action( 'init', array( $this, 'localize' ) );
 
@@ -192,7 +190,6 @@ final class Alg_WC_Cost_of_Goods {
 		}
 		$custom_links[] = '<a href="' . admin_url( 'tools.php?page=bulk-edit-costs' ) . '">' . __( 'Bulk edit costs', 'woocommerce' ) . '</a>';
 		$custom_links[] = '<a href="' . admin_url( 'tools.php?page=bulk-edit-prices' ) . '">' . __( 'Bulk edit prices', 'woocommerce' ) . '</a>';
-		//$custom_links[] = '<a href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Import costs', 'woocommerce' ) . '</a>';
 		return array_merge( $custom_links, $links );
 	}
 
@@ -271,4 +268,24 @@ if ( ! function_exists( 'alg_wc_cog' ) ) {
 	}
 }
 
-alg_wc_cog();
+// Initializes the plugin.
+add_action( 'plugins_loaded', function () {
+	$cog = alg_wc_cog();
+	$cog->init();
+} );
+
+// Custom deactivation/activation hooks.
+$activation_hook   = 'alg_wc_cog_on_activation';
+$deactivation_hook = 'alg_wc_cog_on_deactivation';
+register_activation_hook( __FILE__, function () use ( $activation_hook ) {
+	add_option( $activation_hook, 'yes' );
+} );
+register_deactivation_hook( __FILE__, function () use ( $deactivation_hook ) {
+	do_action( $deactivation_hook );
+} );
+add_action( 'admin_init', function () use ( $activation_hook ) {
+	if ( is_admin() && get_option( $activation_hook ) === 'yes' ) {
+		delete_option( $activation_hook );
+		do_action( $activation_hook );
+	}
+} );

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Import Tool Class.
  *
- * @version 2.8.0
+ * @version 2.8.1
  * @since   1.1.0
  * @author  WPFactory
  */
@@ -24,15 +24,79 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.8.0
+		 * @version 2.8.1
 		 * @since   1.1.0
 		 */
 		function __construct() {
 			add_action( 'admin_menu', array( $this, 'create_import_tool' ) );
 			// Bkg Process
-			add_action( 'plugins_loaded', array( $this, 'init_bkg_process' ) );
+			$this->init_bkg_process();
 			// Run copy tool on WooCommerce import.
 			add_action( 'woocommerce_product_import_inserted_product_object', array( $this, 'run_copy_tool_on_wc_import' ), 10, 2 );
+			// Run import tool automatically based on cron.
+			add_action( 'update_option_' . 'alg_wc_cog_import_tool_cron', array( $this, 'handle_auto_import_cron_event' ), 10, 2 );
+			add_action( 'add_option_' . 'alg_wc_cog_import_tool_cron', array( $this, 'handle_auto_import_cron_event_on_db_option_update' ), 10, 2 );
+			add_action( 'alg_wc_cog_on_activation', array( $this, 'handle_auto_import_cron_event_on_plugin_switch' ) );
+			add_action( 'alg_wc_cog_on_deactivation', array( $this, 'handle_auto_import_cron_event_on_plugin_switch' ) );
+			add_action( 'alg_wc_cog_run_import_tool', array( $this, 'run_import_tool_by_cron' ) );
+		}
+
+		/**
+		 * run_import_tool_by_cron.
+		 *
+		 * @version 2.8.1
+		 * @since   2.8.1
+		 */
+		function run_import_tool_by_cron() {
+			$this->import_tool( array(
+				'perform_import' => true,
+				'display_output' => false
+			) );
+		}
+
+		/**
+		 * handle_auto_import_cron_event_on_plugin_switch.
+		 *
+		 * @version 2.8.1
+		 * @since   2.8.1
+		 */
+		function handle_auto_import_cron_event_on_plugin_switch() {
+			if ( false !== strpos( current_filter(), 'deactivation' ) ) {
+				$this->handle_auto_import_cron_event( '', 'off' );
+			} else {
+				$this->handle_auto_import_cron_event( '', get_option( 'alg_wc_cog_import_tool_cron', 'no' ) );
+			}
+		}
+
+		/**
+		 * handle_auto_import_cron_event_on_db_option_update.
+		 *
+		 * @version 2.8.1
+		 * @since   2.8.1
+		 *
+		 * @param $option_name
+		 * @param $option_value
+		 */
+		function handle_auto_import_cron_event_on_db_option_update( $option_name, $option_value ) {
+			$this->handle_auto_import_cron_event( '', $option_value );
+		}
+
+		/**
+		 * schedule_delete_unverified_users_cron.
+		 *
+		 * @version 2.8.1
+		 * @since   2.8.1
+		 */
+		function handle_auto_import_cron_event( $old_value, $value ) {
+			if ( 'yes' === $value ) {
+				if ( ! wp_next_scheduled( 'alg_wc_cog_run_import_tool' ) ) {
+					wp_schedule_event( time(), get_option( 'alg_wc_cog_import_tool_cron_frequency', 'daily' ), 'alg_wc_cog_run_import_tool' );
+				}
+			} else {
+				if ( $time = wp_next_scheduled( 'alg_wc_cog_run_import_tool' ) ) {
+					wp_unschedule_event( $time, 'alg_wc_cog_run_import_tool' );
+				}
+			}
 		}
 
 		/**
@@ -164,8 +228,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		 * @todo    [later] add "import from file" option (CSV, XML etc.) (#12169)
 		 * @todo    [maybe] import order items meta
 		 */
-		function import_tool() {
-			$perform_import            = ( isset( $_POST['alg_wc_cog_import'] ) );
+		function import_tool( $args = null ) {
+			$args = wp_parse_args( $args, array(
+				'perform_import' => isset( $_POST['alg_wc_cog_import'] ),
+				'display_output' => true
+			) );
+			$perform_import            = $args['perform_import'];
+			$display_output            = $args['display_output'];
 			$key_from                  = get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' );
 			$key_to                    = get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' );
 			$bkg_process_min_amount    = get_option( 'alg_wc_cog_bkg_process_min_amount', 100 );
@@ -215,7 +284,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 			}
 
 			// Output.
-			if ( $display_table ) {
+			if ( $display_output && $display_table ) {
 				if ( $loop->have_posts() ) {
 					foreach ( $loop->posts as $product_id ) {
 						$source_cost = get_post_meta( $product_id, $key_from, true );
