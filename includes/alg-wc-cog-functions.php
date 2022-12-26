@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 2.7.8
+ * @version 2.8.2
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -234,5 +234,57 @@ if ( ! function_exists( 'alg_wc_cog_get_regular_price' ) ) {
 			$regular_price = $product->get_regular_price();
 		}
 		return $regular_price;
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_get_html_table_structure' ) ) {
+	/**
+	 * alg_wc_cog_get_html_table_structure.
+	 *
+	 * @version 2.8.2
+	 * @since   2.8.2
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_get_html_table_structure( $args = null ) {
+		// Args.
+		$args          = wp_parse_args( $args, array(
+			'table_classes'    => array(),
+			'table_attributes' => array(),
+			'cols'             => array(),
+			'rows'             => array()
+		) );
+		$cols          = $args['cols'];
+		$rows          = $args['rows'];
+		$table_classes = $args['table_classes'];
+		// Table classes.
+		$table_classes_html = ! empty( $table_classes ) ? ' class="' . implode( " ", $table_classes ) . '"' : '';
+		// Table attributes.
+		$table_attributes      = $args['table_attributes'];
+		$table_attributes_html = array();
+		if ( ! empty( $args['table_attributes'] ) ) {
+			foreach ( $args['table_attributes'] as $attribute => $attribute_value ) {
+				$table_attributes_html[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+			}
+		}
+		$html_table = '<table' . $table_classes_html . ' ' . implode( ' ', $table_attributes_html ) . '>';
+		// Thead.
+		$html_table .= '<thead><tr>';
+		foreach ( $cols as $col_id => $col_label ) {
+			$html_table .= '<th>' . $col_label . '</th>';
+		}
+		$html_table .= '</tr></thead>';
+		// Tbody.
+		$html_table .= '<tbody>';
+		foreach ( $rows as $rows_content ) {
+			$html_table .= '<tr>';
+			foreach ( $rows_content['val_by_col'] as $col_value ) {
+				$html_table .= '<td>' . $col_value . '</td>';
+			}
+			$html_table .= '</tr>';
+		}
+		$html_table .= '</tbody>';
+		$html_table .= '</table>';
+		return $html_table;
 	}
 }

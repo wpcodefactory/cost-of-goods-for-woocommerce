@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 2.6.3
+ * @version 2.8.2
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -700,7 +700,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.6.2
+	 * @version 2.8.2
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -874,6 +874,22 @@ class Alg_WC_Cost_of_Goods_Orders {
 					}
 					$shipping_classes_cost_total = ( $shipping_class_cost_fixed_total + $shipping_class_cost_percent_total );
 				}
+				$order_item_values = apply_filters( 'alg_wc_cog_update_order_item_values', array(
+					'profit'      => $profit,
+					'total_price' => $total_price,
+					'total_cost'  => $total_cost,
+					'fees'        => $fees,
+				), array(
+					'item'         => $item,
+					'item_id'      => $item_id,
+					'do_update'    => $do_update,
+					'is_new_order' => $is_new_order,
+					'order'        => $order,
+				) );
+				$profit            = $order_item_values['profit'];
+				$total_price       = $order_item_values['profit'];
+				$total_cost        = $order_item_values['total_cost'];
+				$fees              = $order_item_values['fees'];
 			}
 			if ( $is_shipping_classes_enabled ) {
 				$profit     -= $shipping_classes_cost_total;
@@ -1069,6 +1085,11 @@ class Alg_WC_Cost_of_Goods_Orders {
 		update_post_meta( $order_id, '_alg_wc_cog_order_price', $total_price );
 		update_post_meta( $order_id, '_alg_wc_cog_order_cost', $total_cost );
 		update_post_meta( $order_id, '_alg_wc_cog_order_fees', $fees );
+		do_action( 'alg_wc_cog_after_update_order_item_values', array(
+			'order_id' => $order_id,
+			'order'    => $order,
+		) );
+
 	}
 
 	/**

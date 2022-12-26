@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 2.6.1
+ * @version 2.8.2
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 2.6.1
+		 * @version 2.8.2
 		 * @since   2.4.6
 		 */
 		function get_settings() {
@@ -38,32 +38,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'desc'  => __( 'Compatibility with third party plugins or solutions.', 'cost-of-goods-for-woocommerce' ),
 					'type'     => 'title',
 					'id'       => 'alg_wc_cog_compatibility_options',
-				),
-				array(
-					'title'             => __( 'WP All Import', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => sprintf( __( 'Enable compatibility with <a target="_blank" href="%s">WP All Import</a>', 'cost-of-goods-for-woocommerce' ), 'https://wordpress.org/plugins/wp-all-import/' ),
-					'desc_tip'          => __( 'Makes fine adjustments when importing a cost value to <code>_alg_wc_cog_cost</code> meta using the <strong>WP All Import</strong> plugin.', 'cost-of-goods-for-woocommerce' ),
-					'id'                => 'alg_wc_cog_wp_all_import',
-					'default'           => 'no',
-					'type'              => 'checkbox',
-					'checkboxgroup'     => 'start',
-					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				),
-				array(
-					'desc'          => __( 'Convert to float', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip'      => __( 'Converts numbers using a comma for the decimal point and a dot as the thousand separator to float, like <code>1.723,07</code> to <code>1723.07</code>.', 'cost-of-goods-for-woocommerce' ),
-					'id'            => 'alg_wc_cog_wp_all_import_convert_to_float',
-					'default'       => 'no',
-					'type'          => 'checkbox',
-					'checkboxgroup' => '',
-				),
-				array(
-					'desc'          => __( 'Sanitize float number', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip'      => __( 'Removes all illegal characters from a float number, like currency values for example.', 'cost-of-goods-for-woocommerce' ),
-					'id'            => 'alg_wc_cog_wp_all_import_sanitize_float',
-					'default'       => 'no',
-					'type'          => 'checkbox',
-					'checkboxgroup' => 'end',
 				),
 				array(
 					'title'             => __( 'Openpos - WooCommerce Point Of Sale(POS)', 'cost-of-goods-for-woocommerce' ),
@@ -103,26 +77,58 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 				),
 				array(
-					'title'             => __( 'Metorik', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => sprintf( __( 'Enable compatibility with <a target="_blank" href="%s">%s</a>', 'cost-of-goods-for-woocommerce' ),						'https://metorik.com/', __( 'Metorik', 'cost-of-goods-for-woocommerce' ) ),
-					'id'                => 'alg_wc_cog_metorik',
-					'default'           => 'no',
-					'checkboxgroup'     => 'start',
-					'type'              => 'checkbox',
-					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				),
-				array(
-					'desc'              => sprintf( __( 'Sync cost with %s meta', 'cost-of-goods-for-woocommerce' ), '<code>' . '_wc_cog_cost' . '</code>' ),
-					'desc_tip'          => sprintf( __( 'Everytime %s meta gets updated its value is copied to %s', 'cost-of-goods-for-woocommerce' ), '<code>' . '_alg_wc_cog_cost' . '</code>', '<code>' . '_wc_cog_cost' . '</code>' ),
-					'id'                => 'alg_wc_cog_metorik_sync_cost_with_wc_cog_cost',
-					'default'           => 'no',
-					'checkboxgroup'     => 'end',
-					'type'              => 'checkbox',
-					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				),
-				array(
 					'type'     => 'sectionend',
 					'id'       => 'alg_wc_cog_compatibility_options',
+				),
+			);
+			$metorik_opts = array(
+				array(
+					'title' => __( 'Metorik', 'cost-of-goods-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://metorik.com/" target="_blank">' . __( 'Metorik', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'id'    => 'alg_wc_cog_compatibility_metorik_options',
+				),
+				array(
+					'title'             => __( 'Sync cost', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => sprintf( __( 'Sync cost with %s meta', 'cost-of-goods-for-woocommerce' ), '<code>' . '_wc_cog_cost' . '</code>' ),
+					'desc_tip'          => sprintf( __( 'Everytime %s meta gets updated its value is copied to %s.', 'cost-of-goods-for-woocommerce' ), '<code>' . '_alg_wc_cog_cost' . '</code>', '<code>' . '_wc_cog_cost' . '</code>' ),
+					'id'                => 'alg_wc_cog_metorik_sync_cost_with_wc_cog_cost',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_metorik_options',
+				),
+			);
+			$wp_all_import_opts = array(
+				array(
+					'title' => __( 'WP All Import', 'cost-of-goods-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/wp-all-import/" target="_blank">' . __( 'WP All Import', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'id'    => 'alg_wc_cog_compatibility_wp_all_import_options',
+				),
+				array(
+					'title'             => __( 'Numbers with commas', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Convert numbers with commas to dots', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'Example: <code>1723,07</code> changes to <code>1723.07</code>.', 'cost-of-goods-for-woocommerce' ),
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'id'                => 'alg_wc_cog_wp_all_import_convert_to_float',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+				),
+				array(
+					'title'             => __( 'Sanitize float number', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Remove all illegal characters from a float number, like currency values for example', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_wp_all_import_sanitize_float',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'default'           => 'no',
+					'type'              => 'checkbox',
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_wp_all_import_options',
 				),
 			);
 			$wpc_product_bundle_opts = array(
@@ -174,8 +180,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 				array(
 					'title'             => __( 'Product import costs tool', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => sprintf( __( 'Use function from %s plugin to copy the cost meta', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'ATUM', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
-					'desc_tip'          => sprintf( __( 'The %s option will be ignored', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Key to import from', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
+					'desc_tip'          => sprintf( __( 'The %s option will be ignored.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Key to import from', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
 					'id'                => 'alg_wc_cog_comp_atum_get_cost_function_enabled',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'title'             => __( 'Cost sync', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Change cost of goods every time the purchase price is updated in ATUM', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => sprintf( __( 'The %s meta will be changed every time the %s column is updated.', 'cost-of-goods-for-woocommerce' ), '<code>' . __( '_alg_wc_cog_cost', 'cost-of-goods-for-woocommerce' ) . '</code>', '<code>' . __( 'purchase_price', 'cost-of-goods-for-woocommerce' ) . '</code>' ),
+					'id'                => 'alg_wc_cog_comp_atum_get_sync_purchase_price_with_cost',
 					'default'           => 'no',
 					'type'              => 'checkbox',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
@@ -185,7 +200,29 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_atum_options',
 				),
 			);
-			return array_merge( $compatibility_opts, $wpc_product_bundle_opts, $atum_opts );
+			$wc_food_opts = array(
+				array(
+					'title' => __( 'WooCommerce Food', 'cost-of-goods-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://exthemes.net/woocommerce-food/" target="_blank">' . __( 'WooCommerce Food', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'id'    => 'alg_wc_cog_compatibility_wc_food_options',
+				),
+				array(
+					'title'             => __( 'Food costs', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Add fixed costs to food options', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'A metabox is going to be created on the admin products page and on the global food options.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+					                       __( 'For now, all the options costs will be "quantity based" calculated.', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_comp_wc_food_fixed_options_costs',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_wc_food_options',
+				),
+			);
+			return array_merge( $compatibility_opts, $metorik_opts, $wp_all_import_opts, $wpc_product_bundle_opts, $atum_opts, $wc_food_opts );
 		}
 
 	}

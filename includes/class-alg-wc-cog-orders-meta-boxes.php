@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Orders Meta Boxes Class
+ * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 2.4.3
+ * @version 2.8.2
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -50,7 +50,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 2.4.5
+	 * @version 2.8.2
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
@@ -92,6 +92,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 			'_alg_wc_cog_order_' . 'payment' . '_fee'         => __( 'Payment fee', 'cost-of-goods-for-woocommerce' ),
 			'_alg_wc_cog_order_extra_cost_from_meta'          => __( 'Meta fees', 'cost-of-goods-for-woocommerce' ),
 		);
+		$cost_meta_keys = apply_filters( 'alg_wc_cog_cost_meta_keys', $cost_meta_keys );
 		foreach ( $cost_meta_keys as $key => $value ) {
 			$cost = get_post_meta( $order_id, $key, true );
 			if ( 0 != $cost ) {

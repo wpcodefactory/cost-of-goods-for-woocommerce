@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 2.7.8
+ * @version 2.8.2
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,68 +28,12 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.7.8
+	 * @version 2.8.2
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
 	 */
 	function get_settings() {
-
-		$product_columns_settings = array(
-			array(
-				'title'    => __( 'Admin products list columns', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'title',
-				'desc'     => sprintf( __( 'This section lets you add custom columns to WooCommerce admin %s.', 'cost-of-goods-for-woocommerce' ),
-					'<a href="' . admin_url( 'edit.php?post_type=product' ) . '">' . __( 'products list', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
-				'id'       => 'alg_wc_cog_products_columns_options',
-			),
-			array(
-				'title'    => __( 'Product cost', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add product cost column', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_columns_cost',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'desc'     => sprintf( __( 'Column width (%s)', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
-				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_columns_cost_width',
-				'default'  => '10',
-				'type'     => 'number',
-				'wpfse_data' => array(
-					'description' => __( 'Customize the product cost column width', 'cost-of-goods-for-woocommerce' )
-				),
-			),
-			array(
-				'title'    => __( 'Product profit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add product profit column', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_columns_profit',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-			),
-			array(
-				'desc'     => sprintf( __( 'Column width (%s)', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
-				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_columns_profit_width',
-				'default'  => '11',
-				'type'     => 'number',
-				'wpfse_data' => array(
-					'description' => __( 'Customize the product profit column width', 'cost-of-goods-for-woocommerce' )
-				),
-			),
-			array(
-				'title'    => __( 'Width unit', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Any CSS unit can be used, like px, %, ch, and so on...', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_columns_width_unit',
-				'default'  => '%',
-				'type'     => 'text',
-			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_products_columns_options',
-			),
-		);
-
 		$product_settings = array(
 			array(
 				'title'    => __( 'General product options', 'cost-of-goods-for-woocommerce' ),
@@ -177,6 +121,88 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_cost_field_options',
+			),
+		);
+
+		$product_columns_settings = array(
+			array(
+				'title'    => __( 'Admin products list columns', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'title',
+				'desc'     => sprintf( __( 'This section lets you add custom columns to WooCommerce admin %s.', 'cost-of-goods-for-woocommerce' ),
+					'<a href="' . admin_url( 'edit.php?post_type=product' ) . '">' . __( 'products list', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+				'id'       => 'alg_wc_cog_products_columns_options',
+			),
+			array(
+				'title'    => __( 'Product cost', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add product cost column', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_columns_cost',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => sprintf( __( 'Column width (%s)', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
+				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_columns_cost_width',
+				'default'  => '10',
+				'type'     => 'number',
+				'wpfse_data' => array(
+					'description' => __( 'Customize the product cost column width', 'cost-of-goods-for-woocommerce' )
+				),
+			),
+			array(
+				'title'    => __( 'Product profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add product profit column', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_columns_profit',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => sprintf( __( 'Column width (%s)', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
+				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_columns_profit_width',
+				'default'  => '11',
+				'type'     => 'number',
+				'wpfse_data' => array(
+					'description' => __( 'Customize the product profit column width', 'cost-of-goods-for-woocommerce' )
+				),
+			),
+			array(
+				'title'    => __( 'Width unit', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Any CSS unit can be used, like px, %, ch, and so on...', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_products_columns_width_unit',
+				'default'  => '%',
+				'type'     => 'text',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_cog_products_columns_options',
+			),
+		);
+
+		$cost_archive_opts = array(
+			array(
+				'title' => __( 'Cost archive', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => __( 'Save a history of product costs each time they get updated.', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_cost_archive_options',
+			),
+			array(
+				'title'          => __( 'Cost archive', 'cost-of-goods-for-woocommerce' ),
+				'desc'           => __( 'Save cost archive', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_save_cost_archive',
+				'default'        => 'no',
+				'type'           => 'checkbox',
+			),
+			array(
+				'title'          => __( 'Meta box', 'cost-of-goods-for-woocommerce' ),
+				'desc'           => __( 'Enable a cost archive meta box on admin product page', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_cost_archive_metabox',
+				'default'        => 'no',
+				'type'           => 'checkbox',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id'       => 'alg_wc_cog_cost_archive_options',
 			),
 		);
 
@@ -333,6 +359,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			$product_settings,
 			$cost_input_settings,
 			$product_columns_settings,
+			$cost_archive_opts,
 			$add_stock_settings,
 			$product_quick_bulk_edit_settings,
 			$cost_sanitization_opts

@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,15 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.8.2 - 26/12/2022 =
+* Dev - Refactor "Add Stock" feature in a new class.
+* Dev - Products - Cost archive - New option: Save archive.
+* Dev - Products - Cost archive - New option: Enable a cost archive meta box.
+* Dev - Compatibility - ATUM - New option: Change cost of goods every time the purchase price is updated in ATUM.
+* Dev - Compatibility - WC Foods - New option: Add fixed costs to food options.
+* Dev - New filters: `alg_wc_cog_cost_meta_keys`, `alg_wc_cog_update_order_item_values`, `alg_wc_cog_food_options_fixed_costs_total`.
+* Dev - New actions: `alg_wc_cog_after_update_order_item_values`.
 
 = 2.8.1 - 19/12/2022 =
 * Dev - Improve the way of initializing the main class.

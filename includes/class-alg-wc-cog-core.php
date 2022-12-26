@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Core Class.
  *
- * @version 2.8.1
+ * @version 2.8.2
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -18,7 +18,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.8.1
+		 * @version 2.8.2
 		 * @since   1.0.0
 		 * @todo    [next] add "delete all (products and/or orders) meta" tool
 		 * @todo    [next] add option to enter costs *with taxes*
@@ -36,21 +36,25 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		 * @todo    [maybe] add option to change meta keys prefix (i.e. `_alg_wc_cog`)
 		 */
 		function __construct() {
-			// Background process
+			// Background process.
 			$this->init_bkg_process();
-			// Analytics
+			// Analytics.
 			require_once( 'analytics/class-alg-wc-cog-analytics.php' );
-			// Import tool
+			// Import tool.
 			$this->import_tool = require_once( 'tools/class-alg-wc-cog-import-tool.php' );
-			// Products
+			// Products.
 			$this->products = require_once( 'class-alg-wc-cog-products.php' );
-			// Cost inputs
+			// Products - Add Stock.
+			$this->products_add_stock = require_once( 'class-alg-wc-cog-products-add-stock.php' );
+			// Products - Cost archive.
+			$this->products_cost_archive = require_once( 'class-alg-wc-cog-products-cost-archive.php' );
+			// Cost inputs.
 			$this->cost_inputs = require_once( 'class-alg-wc-cog-cost-inputs.php' );
-			// Orders
+			// Orders.
 			$this->orders = require_once( 'class-alg-wc-cog-orders.php' );
-			// Bulk costs tool
+			// Bulk costs tool.
 			$this->init_bulk_costs_tool();
-			// Core loaded
+			// Core loaded.
 			do_action( 'alg_wc_cog_core_loaded', $this );
 		}
 
