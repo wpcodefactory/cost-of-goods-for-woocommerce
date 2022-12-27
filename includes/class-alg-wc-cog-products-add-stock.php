@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 2.8.2
+ * @version 2.8.3
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -181,7 +181,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * product_add_stock.
 		 *
-		 * @version 2.6.0
+		 * @version 2.8.3
 		 * @since   1.7.0
 		 * @todo    [next] maybe use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`?
 		 * @todo    [maybe] `$cost_now`: round?
@@ -221,7 +221,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				// Update Stock.
 				update_post_meta( $product_id, '_alg_wc_cog_cost', $cost_now );
 				$stock_operation = $this->calculate_update_stock_operation( $product_id, $stock_now );
-				wc_update_product_stock( $product_id, $stock, $stock_operation );
+				wc_update_product_stock( $product_id, abs( $stock ), $stock_operation );
 				if ( 'set' === $stock_operation ) {
 					update_post_meta( $product_id, '_stock', $stock_now );
 				}
