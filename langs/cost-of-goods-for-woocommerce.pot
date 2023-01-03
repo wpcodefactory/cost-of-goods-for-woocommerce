@@ -1,15 +1,15 @@
-# Copyright (C) 2022 WPFactory
+# Copyright (C) 2023 WPFactory
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 2.8.3\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 2.8.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-12-27T15:47:08+01:00\n"
+"POT-Creation-Date: 2023-01-03T23:24:51+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -56,8 +56,8 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:213
 #: includes/class-alg-wc-cog-products.php:224
 #: includes/class-alg-wc-cog-products.php:276
-#: includes/pro/class-alg-wc-cog-pro.php:421
-#: includes/pro/class-alg-wc-cog-pro.php:750
+#: includes/pro/class-alg-wc-cog-pro.php:420
+#: includes/pro/class-alg-wc-cog-pro.php:749
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:111
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:350
 #: includes/analytics/build/index.js:286
@@ -136,7 +136,7 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:42
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:120
-#: includes/pro/class-alg-wc-cog-pro.php:742
+#: includes/pro/class-alg-wc-cog-pro.php:741
 #: includes/settings/class-alg-wc-cog-settings-orders.php:390
 #: includes/settings/class-alg-wc-cog-settings-products.php:220
 #: includes/settings/class-alg-wc-settings-cog.php:24
@@ -224,8 +224,8 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders.php:260
 #: includes/class-alg-wc-cog-orders.php:637
-#: includes/pro/class-alg-wc-cog-pro.php:559
-#: includes/pro/class-alg-wc-cog-pro.php:578
+#: includes/pro/class-alg-wc-cog-pro.php:558
+#: includes/pro/class-alg-wc-cog-pro.php:577
 msgid "Cost of goods"
 msgstr ""
 
@@ -253,7 +253,7 @@ msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to c
 msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:68
-#: includes/pro/class-alg-wc-cog-pro.php:742
+#: includes/pro/class-alg-wc-cog-pro.php:741
 #: includes/settings/class-alg-wc-cog-settings-products.php:211
 #: includes/settings/class-alg-wc-cog-settings-products.php:218
 #: includes/settings/class-alg-wc-cog-settings-products.php:220
@@ -262,7 +262,7 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:120
 #: includes/class-alg-wc-cog-products-add-stock.php:140
-#: includes/pro/class-alg-wc-cog-pro.php:744
+#: includes/pro/class-alg-wc-cog-pro.php:743
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:110
 #: includes/settings/class-alg-wc-cog-settings-tools.php:133
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:351
@@ -312,35 +312,35 @@ msgstr ""
 msgid "Food costs"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro-wc-food-compatibility.php:258
+#: includes/pro/class-alg-wc-cog-pro-wc-food-compatibility.php:259
 msgid "Option(s) costs"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:423
+#: includes/pro/class-alg-wc-cog-pro.php:422
 msgid "- No change -"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:504
+#: includes/pro/class-alg-wc-cog-pro.php:503
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:511
+#: includes/pro/class-alg-wc-cog-pro.php:510
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:514
+#: includes/pro/class-alg-wc-cog-pro.php:513
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:632
+#: includes/pro/class-alg-wc-cog-pro.php:631
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:634
+#: includes/pro/class-alg-wc-cog-pro.php:633
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:636
+#: includes/pro/class-alg-wc-cog-pro.php:635
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
 
