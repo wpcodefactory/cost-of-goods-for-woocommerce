@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 2.8.2
+ * @version 2.8.5
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.8.2
+	 * @version 2.8.5
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -348,6 +348,26 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'id'       => 'alg_wc_cog_import_csv_get_only_cost_number',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Product export', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Convert cost to number', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'If disabled it will be parsed as string.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_product_export_csv_convert_cost_to_number',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Dots and commas operation when exporting the product cost.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_product_export_csv_dots_and_commas_operation',
+				'default'  => 'no',
+				'type'     => 'select',
+				'options'  => array(
+					'comma-to-dot' => __( 'Convert commas to dots', 'cost-of-goods-for-woocommerce' ),
+					'dot-to-comma' => __( 'Convert dots to commas', 'cost-of-goods-for-woocommerce' ),
+					'none' => __( 'None', 'cost-of-goods-for-woocommerce' ),
+				),
+				'class'    => 'chosen_select',
 			),
 			array(
 				'type' => 'sectionend',

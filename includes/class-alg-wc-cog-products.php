@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.8.2
+ * @version 2.8.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -228,11 +228,16 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_export_data.
 	 *
-	 * @version 1.5.1
+	 * @version 2.8.5
 	 * @since   1.5.1
 	 */
 	function add_export_data( $value, $product ) {
-		return $this->get_product_cost( $product->get_id() );
+		$cost = $this->get_product_cost( $product->get_id(), array(
+			'convert_to_number'         => 'yes' === $convert_cost_to_number = get_option( 'alg_wc_cog_product_export_csv_convert_cost_to_number', 'yes' ),
+			'dots_and_commas_operation' => get_option( 'alg_wc_cog_product_export_csv_dots_and_commas_operation', 'comma-to-dot' )
+		) );
+		$cost = $convert_cost_to_number ? $cost : (string) $cost;
+		return $cost;
 	}
 
 	/**
@@ -298,13 +303,17 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_cost.
 	 *
-	 * @version 2.4.2
+	 * @version 2.8.5
 	 * @since   1.0.0
 	 */
 	function get_product_cost( $product_id, $args = null ) {
 		$args = wp_parse_args( $args, array(
-			'check_parent_cost' => true, // Check parent id cost if cost from product id is empty
+			'check_parent_cost'         => true, // Check parent id cost if cost from product id is empty
+			'dots_and_commas_operation' => 'comma-to-dot', // comma-to-dot | dot-to-comma | none
+			'convert_to_number'         => true
 		) );
+		$dots_and_commas_operation = $args['dots_and_commas_operation'];
+		$convert_to_number = $args['convert_to_number'];
 		if (
 			'' === ( $cost = get_post_meta( $product_id, '_alg_wc_cog_cost', true ) )
 			&& $args['check_parent_cost']
@@ -314,7 +323,13 @@ class Alg_WC_Cost_of_Goods_Products {
 		) {
 			$cost = get_post_meta( $parent_id, '_alg_wc_cog_cost', true );
 		}
-		return apply_filters( 'alg_wc_cog_get_product_cost', (float) str_replace( ',', '.', $cost ), $product_id, isset( $parent_id ) ? $parent_id : null, $args );
+		if ( 'comma-to-dot' === $dots_and_commas_operation ) {
+			$cost = str_replace( ',', '.', $cost );
+		} elseif ( 'dot-to-comma' === $dots_and_commas_operation ) {
+			$cost = str_replace( '.', ',', (string) $cost );
+		}
+		$cost = $convert_to_number ? (float) $cost : $cost;
+		return apply_filters( 'alg_wc_cog_get_product_cost', $cost, $product_id, isset( $parent_id ) ? $parent_id : null, $args );
 	}
 
 	/**
