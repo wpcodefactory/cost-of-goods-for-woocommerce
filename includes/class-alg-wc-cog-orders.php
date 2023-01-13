@@ -887,7 +887,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 					'order'        => $order,
 				) );
 				$profit            = $order_item_values['profit'];
-				$total_price       = $order_item_values['profit'];
+				$total_price       = $order_item_values['total_price'];
 				$total_cost        = $order_item_values['total_cost'];
 				$fees              = $order_item_values['fees'];
 			}

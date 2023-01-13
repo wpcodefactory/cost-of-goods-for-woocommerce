@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 2.8.5
+Stable tag: 2.8.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,10 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.8.6 - 13/01/2023 =
+* Fix - Orders - Profit margin calculated in a wrong way.
+* WC tested up to: 7.3.
 
 = 2.8.5 - 10/01/2023 =
 * Dev - Products - Cost sanitization - Product export - New option: Convert cost to number.
