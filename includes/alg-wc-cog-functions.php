@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 2.8.2
+ * @version 2.8.7
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -286,5 +286,40 @@ if ( ! function_exists( 'alg_wc_cog_get_html_table_structure' ) ) {
 		$html_table .= '</tbody>';
 		$html_table .= '</table>';
 		return $html_table;
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_get_cost_subtracting_tax_rate' ) ) {
+	/**
+	 * get_cost_subtracting_tax_rate.
+	 *
+	 * @version 2.8.7
+	 * @since   2.8.7
+	 *
+	 * @param null $args
+	 *
+	 * @return float|bool
+	 */
+	function alg_wc_cog_get_cost_subtracting_tax_rate( $args = null ) {
+		$args       = wp_parse_args( $args, array(
+			'product_id' => '',
+			'cost'       => '',
+		) );
+		$cost       = (float) $args['cost'];
+		$product_id = intval( $args['product_id'] );
+		$product    = wc_get_product( $product_id );
+		$tax        = new WC_Tax();
+		if ( ! is_a( $product, 'WC_Product' ) ) {
+			return false;
+		}
+		if (
+			'none' === $product->get_tax_status() ||
+			empty( $rates = $tax->get_rates_for_tax_class( $product->get_tax_class() ) ) ||
+			empty( $tax_rate = array_shift( $rates ) ) ||
+			! property_exists( $tax_rate, 'tax_rate' )
+		) {
+			return $cost;
+		}
+		return $cost / ( 1 + ( $tax_rate->tax_rate / 100 ) );
 	}
 }

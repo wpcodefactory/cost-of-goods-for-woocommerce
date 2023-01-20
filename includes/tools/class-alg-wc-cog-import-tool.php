@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Import Tool Class.
  *
- * @version 2.8.1
+ * @version 2.8.7
  * @since   1.1.0
  * @author  WPFactory
  */
@@ -156,29 +156,31 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		/**
 		 * copy_product_meta.
 		 *
-		 * @version 2.5.7
+		 * @version 2.8.7
 		 * @since   2.3.0
 		 *
 		 * @param null $args
 		 */
 		function copy_product_meta( $args = null ) {
-			$args                   = wp_parse_args( $args, array(
+			$args = wp_parse_args( $args, array(
 				'product_id'             => '',
 				'from_key'               => get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' ),
 				'to_key'                 => get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' ),
 				'get_cost_function'      => 'get_post_meta',
-				'get_cost_function_args' => null
+				'get_cost_function_args' => null,
+				'source_value'           => null
 			) );
-			$args = apply_filters( 'alg_wc_cog_copy_product_meta_args', $args );
-			$product_id = $args['product_id'];
-			$to_key = $args['to_key'];
-			$from_key = $args['from_key'];
-			$get_cost_function = $args['get_cost_function'];
+			$args                   = apply_filters( 'alg_wc_cog_copy_product_meta_args', $args );
+			$product_id             = $args['product_id'];
+			$to_key                 = $args['to_key'];
+			$from_key               = $args['from_key'];
+			$get_cost_function      = $args['get_cost_function'];
 			$get_cost_function_args = $args['get_cost_function_args'];
+			$source_value           = $args['source_value'];
 			if ( is_null( $get_cost_function_args ) ) {
 				$get_cost_function_args = array( $product_id, $from_key, true );
 			}
-			$source_cost = call_user_func_array( $get_cost_function, $get_cost_function_args );
+			$source_cost = is_null( $source_value ) ? call_user_func_array( $get_cost_function, $get_cost_function_args ) : $source_value;
 			if ( $this->can_copy_cost( $source_cost, $args ) ) {
 				update_post_meta( $product_id, $to_key, $source_cost );
 			}

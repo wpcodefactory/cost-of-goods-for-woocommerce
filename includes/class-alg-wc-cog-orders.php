@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 2.8.2
+ * @version 2.8.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -700,7 +700,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.8.2
+	 * @version 2.8.7
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -891,6 +891,20 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$total_cost        = $order_item_values['total_cost'];
 				$fees              = $order_item_values['fees'];
 			}
+			$order_values = apply_filters( 'alg_wc_cog_update_order_values', array(
+				'profit'      => $profit,
+				'total_price' => $total_price,
+				'total_cost'  => $total_cost,
+				'fees'        => $fees,
+			), array(
+				'is_new_order' => $is_new_order,
+				'order'        => $order,
+				'order_id'     => $order_id,
+			) );
+			$profit            = $order_values['profit'];
+			$total_price       = $order_values['total_price'];
+			$total_cost        = $order_values['total_cost'];
+			$fees              = $order_values['fees'];
 			if ( $is_shipping_classes_enabled ) {
 				$profit     -= $shipping_classes_cost_total;
 				$total_cost += $shipping_classes_cost_total;

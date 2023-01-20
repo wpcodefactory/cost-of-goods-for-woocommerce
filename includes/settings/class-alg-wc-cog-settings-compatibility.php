@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 2.8.2
+ * @version 2.8.7
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -12,6 +12,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 
 	class Alg_WC_Cost_of_Goods_Settings_Compatibility extends Alg_WC_Cost_of_Goods_Settings_Section {
+
+		/** $auto_exchange_cron_output.
+		 *
+		 * @since   2.4.3
+		 *
+		 * @var string
+		 */
+		private static $auto_exchange_cron_output = '';
 
 		/**
 		 * Constructor.
@@ -28,7 +36,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 2.8.2
+		 * @version 2.8.7
 		 * @since   2.4.6
 		 */
 		function get_settings() {
@@ -79,6 +87,47 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 				array(
 					'type'     => 'sectionend',
 					'id'       => 'alg_wc_cog_compatibility_options',
+				),
+			);
+			$curcy_multicurrency_opts = array(
+				array(
+					'title' => __( 'CURCY – Multi Currency for WooCommerce', 'cost-of-goods-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/woo-multi-currency/" target="_blank">' . __( 'CURCY – Multi Currency for WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'id'    => 'alg_wc_cog_compatibility_curcy_options',
+				),
+				array(
+					'title'             => __( 'Multicurrency order calculation', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => sprintf( __( 'Get currency rates from CURCY plugin instead of the %s option', 'cost-of-goods-for-woocommerce' ), '<a target="_blank" href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=currencies' ) . '">' . __( 'Multicurrency > Order calculation', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'type'              => 'checkbox',
+					'id'                => 'alg_wc_cog_currencies_wmc',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'default'           => 'no',
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_curcy_options',
+				),
+			);
+			$exchangerateapi_opts = array(
+				array(
+					'title' => __( 'ExchangeRate-API', 'cost-of-goods-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s.', 'cost-of-goods-for-woocommerce' ), '<a href="https://www.exchangerate-api.com/docs/free" target="_blank">' . __( 'ExchangeRate-API', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'id'    => 'alg_wc_cog_compatibility_exchangerateapi_options',
+				),
+				array(
+					'title'             => __( 'Multicurrency order calculation', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => sprintf( __( 'Get currency rates from %s instead of the %s option', 'cost-of-goods-for-woocommerce' ), '<a href="https://www.exchangerate-api.com/docs/free" target="_blank">' . __( 'ExchangeRate-API', 'cost-of-goods-for-woocommerce' ) . '</a>' , '<a target="_blank" href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=currencies' ) . '">' . __( 'Multicurrency > Order calculation', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'desc_tip'          => __( 'The update will run once a day.', 'cost-of-goods-for-woocommerce' ) . '<span data-wpfactory-desc-hide>'.' ' . $this->get_auto_exchange_rate_cron_info().'</span>',
+					'id'                => 'alg_wc_cog_auto_currency_rates',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_exchangerateapi_options',
 				),
 			);
 			$metorik_opts = array(
@@ -178,8 +227,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'    => 'alg_wc_cog_compatibility_atum_options',
 				),
 				array(
-					'title'             => __( 'Product import costs tool', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => sprintf( __( 'Use function from %s plugin to copy the cost meta', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'ATUM', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
+					'title'             => __( 'Import costs tool', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => sprintf( __( 'Copy cost from %s plugin while using the %s tool', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'ATUM', 'cost-of-goods-for-woocommerce' ) . '</strong>', '<a target="_blank" href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Import costs', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'desc_tip'          => sprintf( __( 'The %s option will be ignored.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Key to import from', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
 					'id'                => 'alg_wc_cog_comp_atum_get_cost_function_enabled',
 					'default'           => 'no',
@@ -191,6 +240,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'desc'              => __( 'Change cost of goods every time the purchase price is updated in ATUM', 'cost-of-goods-for-woocommerce' ),
 					'desc_tip'          => sprintf( __( 'The %s meta will be changed every time the %s column is updated.', 'cost-of-goods-for-woocommerce' ), '<code>' . __( '_alg_wc_cog_cost', 'cost-of-goods-for-woocommerce' ) . '</code>', '<code>' . __( 'purchase_price', 'cost-of-goods-for-woocommerce' ) . '</code>' ),
 					'id'                => 'alg_wc_cog_comp_atum_get_sync_purchase_price_with_cost',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'title'             => __( 'Taxes', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Subtract taxes from ATUM cost while using the "Import" or "Cost sync" options', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'The highest priority tax rate will be used, and only on taxable products.', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_comp_atum_subtract_atum_taxes',
 					'default'           => 'no',
 					'type'              => 'checkbox',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
@@ -222,7 +280,48 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_wc_food_options',
 				),
 			);
-			return array_merge( $compatibility_opts, $metorik_opts, $wp_all_import_opts, $wpc_product_bundle_opts, $atum_opts, $wc_food_opts );
+			return array_merge(
+				$compatibility_opts,
+				$curcy_multicurrency_opts,
+				$exchangerateapi_opts,
+				$metorik_opts,
+				$wp_all_import_opts,
+				$wpc_product_bundle_opts,
+				$atum_opts,
+				$wc_food_opts
+			);
+		}
+
+		/**
+		 * get_auto_exchange_rate_cron_info.
+		 *
+		 * @version 2.4.3
+		 * @since   2.4.3
+		 *
+		 * @return string
+		 */
+		function get_auto_exchange_rate_cron_info(){
+			$auto_exchange_option_enabled = 'yes' === get_option( 'alg_wc_cog_auto_currency_rates', 'no' );
+			if ( empty( self::$auto_exchange_cron_output ) ) {
+				$output = '';
+				if (
+					( ! $event_timestamp = wp_next_scheduled( 'alg_wc_cog_currency_rate_update' ) )
+					&& isset( $_POST['alg_wc_cog_auto_currency_rates'] )
+				) {
+					$output .= '<span style="font-weight: bold; color: green;">' . __( 'Please, reload the page to see the next scheduled event info.', 'cost-of-goods-for-woocommerce' ) . '</span>';
+				} elseif ( $event_timestamp && $auto_exchange_option_enabled ) {
+					$now                 = current_time( 'timestamp', true );
+					$pretty_time_missing = human_time_diff( $now, $event_timestamp );
+					$output              .= sprintf( __( 'Next event scheduled to %s', 'cost-of-goods-for-woocommerce' ), '<strong>' . get_date_from_gmt( date( 'Y-m-d H:i:s', $event_timestamp ), get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ) ) . '</strong>' );
+					$output              .= ' ' . '(' . $pretty_time_missing . ' left)';
+				}
+				self::$auto_exchange_cron_output = $output;
+			} else {
+				if ( ! $auto_exchange_option_enabled ) {
+					self::$auto_exchange_cron_output = '';
+				}
+			}
+			return self::$auto_exchange_cron_output;
 		}
 
 	}

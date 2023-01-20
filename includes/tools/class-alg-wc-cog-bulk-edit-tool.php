@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.8.1
+ * @version 2.8.7
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -298,7 +298,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Manually Section.
 		 *
-		 * @version 2.7.9
+		 * @version 2.8.7
 		 * @since   2.6.1
 		 */
 		function display_bulk_edit_prices_profit() {
@@ -334,8 +334,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		            <td>
 			            <input id="profit-percentage" name="percentage" step="0.01" min="0" type="number" placeholder="">
 			            <p class="description">
-				            <?php echo wp_kses_post( 'Products prices will be set according to the profit <strong>percentage</strong> you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ); ?><br />
-				            <?php echo wp_kses_post( sprintf( 'Example: If set as <code>10</code>, a product costing <code>%s</code> will have its price changed to <code>%s</code>.', wc_price( 50 ), wc_price( 55 ) ), 'cost-of-goods-for-woocommerce' ); ?>
+				            <?php echo wp_kses_post( __( 'Products prices will be set according to the profit <strong>percentage</strong> you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ) ); ?><br/>
+				            <?php echo wp_kses_post( sprintf( __( 'Example: If set as <code>10</code>, a product costing <code>%s</code> will have its price changed to <code>%s</code>.' ), wc_price( 50 ), wc_price( 55 ), 'cost-of-goods-for-woocommerce' ) ); ?>
 			            </p>
 		            </td>
 	            </tr>
@@ -344,8 +344,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		            <td>
 			            <input id="absolute-profit" name="absolute_profit" step="0.01" min="0" type="number" placeholder="">
 			            <p class="description">
-				            <?php echo wp_kses_post( 'Products prices will be set according to the <strong>absolute</strong> profit you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ); ?><br />
-				            <?php echo wp_kses_post( sprintf( 'Example: If set as <code>10</code>, a product costing <code>%s</code> will have its price changed to <code>%s</code>.', wc_price( 50 ), wc_price( 60 ) ), 'cost-of-goods-for-woocommerce' ); ?>
+				            <?php echo wp_kses_post( __( 'Products prices will be set according to the <strong>absolute</strong> profit you\'d like to achieve based on the current product costs.', 'cost-of-goods-for-woocommerce' ) ); ?><br/>
+				            <?php echo wp_kses_post( sprintf( __( 'Example: If set as <code>10</code>, a product costing <code>%s</code> will have its price changed to <code>%s</code>.' ), wc_price( 50 ), wc_price( 60 ), 'cost-of-goods-for-woocommerce' ) ); ?>
 			            </p>
 		            </td>
 	            </tr>
@@ -776,7 +776,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * save_costs.
 		 *
-		 * @version 2.7.8
+		 * @version 2.8.7
 		 * @since   1.2.0
 		 * @see     https://wordpress.org/support/topic/you-should-add-posibility-to-edit-regular-price-and-sale-price/
 		 * @todo    [next] prices: `$do_update_func`
@@ -784,11 +784,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @todo    [maybe] output some error on ` ! ( $product = wc_get_product( $product_id ) )`?
 		 */
 		function save_costs() {
-            $do_edit_prices = ( 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_edit_prices', 'no' ) );
-			if ( $do_edit_prices ) {
-				$error_sale_price_ids = array();
-			}
-			if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_save_costs'] ) ) {
+			if (
+				isset( $_POST['alg_wc_cog_bulk_edit_tool_save_costs'] ) &&
+				isset( $_POST['_nonce_costs_manually_val'] ) &&
+				wp_verify_nonce( $_REQUEST['_nonce_costs_manually_val'], '_nonce_costs_manually_action' ) &&
+				current_user_can( 'manage_options' )
+			) {
+				// Do edit prices.
+				$do_edit_prices = ( 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_edit_prices', 'no' ) );
+				if ( $do_edit_prices ) {
+					$error_sale_price_ids = array();
+				}
 				// Manually.
 				if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_costs'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_costs'] ) ) {
 					foreach ( $_POST['alg_wc_cog_bulk_edit_tool_costs'] as $product_id => $cost_value ) {

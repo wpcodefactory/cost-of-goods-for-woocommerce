@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Currencies Section Settings
+ * Cost of Goods for WooCommerce - Currencies Section Settings.
  *
- * @version 2.4.3
+ * @version 2.8.7
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -12,15 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Currencies' ) ) :
 
 class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Settings_Section {
-
-	/**
-	 * $auto_exchange_cron_output.
-	 *
-	 * @since   2.4.3
-	 *
-	 * @var string
-	 */
-	private static $auto_exchange_cron_output = '';
 
 	/**
 	 * Constructor.
@@ -37,125 +28,133 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.3
+	 * @version 2.8.7
 	 * @since   2.2.0
 	 * @todo    [next] exclude `$wc_currency` from `get_woocommerce_currencies()`?
 	 * @todo    [maybe] `alg_wc_cog_currencies_wmc`: add link to the plugin on wp.org?
 	 * @todo    [maybe] better desc
 	 */
 	function get_settings() {
-		$settings = array(
+		// Multicurrency order calculation.
+		$multicurrency_order_calculation_opts = array(
 			array(
-				'title'    => __( 'Multicurrency', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Set currency exchange rates for your orders in non-default shop currency, i.e. order cost and profit will be converted to the default shop currency according to these rates.', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_cog_currencies_options',
+				'title' => __( 'Order calculation', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => __( 'Calculate cost and profit from orders in non-default shop currency based on custom exchange rates.', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_currencies_options',
 			),
 			array(
-				'title'    => __( 'Multicurrency', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => '<strong>' . __( 'Enable section', 'cost-of-goods-for-woocommerce' ) . '</strong>',
-				'type'     => 'checkbox',
-				'id'       => 'alg_wc_cog_currencies_enabled',
-				'default'  => 'no',
+				'title'             => __( 'Order calculation', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Calculate order cost and profit based on custom exchange rates', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'          => __( 'Cost and profit will be converted to the shop base currency.', 'cost-of-goods-for-woocommerce' ),
+				'type'              => 'checkbox',
+				'id'                => 'alg_wc_cog_currencies_enabled',
+				'default'           => 'no',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'wpfse_data'    => array(
+				'wpfse_data'        => array(
 					'hide' => true
 				)
 			),
 			array(
-				'title'    => __( 'Currencies', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Choose currencies you want to set exchange rates for, and "Save changes" - new settings fields will be displayed.', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'multiselect',
-				'class'    => 'chosen_select',
-				'id'       => 'alg_wc_cog_currencies',
-				'default'  => array(),
-				'options'  => get_woocommerce_currencies(),
-				'wpfse_data'    => array(
+				'title'      => __( 'Currencies', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'   => __( 'Choose currencies you want to set exchange rates for, and "Save changes" - new settings fields will be displayed.', 'cost-of-goods-for-woocommerce' ),
+				'type'       => 'multiselect',
+				'class'      => 'chosen_select',
+				'id'         => 'alg_wc_cog_currencies',
+				'default'    => array(),
+				'options'    => get_woocommerce_currencies(),
+				'wpfse_data' => array(
 					'hide' => true
 				)
 			),
 		);
-		$currencies  = get_option( 'alg_wc_cog_currencies', array() );
-		$wc_currency = alg_wc_cog()->core->get_default_shop_currency();
+		$currencies                           = get_option( 'alg_wc_cog_currencies', array() );
+		$wc_currency                          = alg_wc_cog()->core->get_default_shop_currency();
 		foreach ( $currencies as $currency ) {
-			$pair     = $wc_currency . $currency;
-			$settings = array_merge( $settings, array(
+			$pair                                 = $wc_currency . $currency;
+			$multicurrency_order_calculation_opts = array_merge( $multicurrency_order_calculation_opts, array(
 				array(
-					'title'    => $pair,
-					'type'     => 'number',
-					'id'       => "alg_wc_cog_currencies_rates[{$pair}]",
-					'default'  => 0,
+					'title'             => $pair,
+					'type'              => 'number',
+					'id'                => "alg_wc_cog_currencies_rates[{$pair}]",
+					'default'           => 0,
 					'custom_attributes' => array( 'step' => '0.000001' ),
-					'wpfse_data'    => array(
+					'wpfse_data'        => array(
 						'hide' => true
 					)
 				),
 			) );
 		}
-		$settings = array_merge( $settings, array(
+		$multicurrency_order_calculation_opts[] = array(
+			'type' => 'sectionend',
+			'id'   => 'alg_wc_cog_currencies_options',
+		);
+		// Currency costs.
+		$currency_cost_opts = array(
 			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_currencies_options',
+				'title' => __( 'Currencies costs', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => __( 'Add extra costs based on the order currency.', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_currencies_costs_options',
 			),
 			array(
-				'title'    => __( 'Advanced Options', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_cog_currencies_advanced_options',
+				'title'             => __( 'Currencies costs', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Add extra costs based on the order currency', 'cost-of-goods-for-woocommerce' ),
+				'type'              => 'checkbox',
+				'id'                => 'alg_wc_cog_currencies_costs_enabled',
+				'default'           => 'no',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'wpfse_data'        => array(
+					'hide' => true
+				)
 			),
 			array(
-				'title'    => __( '"Multi Currency for WooCommerce" plugin', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'When enabled, the plugin will try to get currency exchange rates from the "Multi Currency for WooCommerce" plugin (by VillaTheme) automatically.', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'checkbox',
-				'id'       => 'alg_wc_cog_currencies_wmc',
-				'default'  => 'no',
+				'title'      => __( 'Currencies', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'   => __( 'Choose currencies you want to add costs for, and "Save changes" - new settings fields will be displayed.', 'cost-of-goods-for-woocommerce' ),
+				'type'       => 'multiselect',
+				'class'      => 'chosen_select',
+				'id'         => 'alg_wc_cog_currencies_costs_currencies',
+				'default'    => array(),
+				'options'    => get_woocommerce_currencies(),
+				'wpfse_data' => array(
+					'hide' => true
+				)
 			),
-			array(
-				'title'    => __( 'Auto currencies rate from ExchangeRate-API', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Get currency exchange rates from <a href="%s" target="_blank">%s</a> automatically', 'cost-of-goods-for-woocommerce' ), 'https://www.exchangerate-api.com/docs/free', 'ExchangeRate-API' ),
-				'desc_tip' => __( 'The update will run once a day.', 'cost-of-goods-for-woocommerce' ) . '<span data-wpfactory-desc-hide>'.' ' . $this->get_auto_exchange_rate_cron_info().'</span>',
-				'type'     => 'checkbox',
-				'id'       => 'alg_wc_cog_auto_currency_rates',
-				'default'  => 'no',
-			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_currencies_advanced_options',
-			),
-		) );
-		return $settings;
-	}
 
-	/**
-	 * get_auto_exchange_rate_cron_info.
-	 *
-	 * @version 2.4.3
-	 * @since   2.4.3
-	 *
-	 * @return string
-	 */
-	function get_auto_exchange_rate_cron_info(){
-		$auto_exchange_option_enabled = 'yes' === get_option( 'alg_wc_cog_auto_currency_rates', 'no' );
-		if ( empty( self::$auto_exchange_cron_output ) ) {
-			$output = '';
-			if (
-				( ! $event_timestamp = wp_next_scheduled( 'alg_wc_cog_currency_rate_update' ) )
-				&& isset( $_POST['alg_wc_cog_auto_currency_rates'] )
-			) {
-				$output .= '<span style="font-weight: bold; color: green;">' . __( 'Please, reload the page to see the next scheduled event info.', 'cost-of-goods-for-woocommerce' ) . '</span>';
-			} elseif ( $event_timestamp && $auto_exchange_option_enabled ) {
-				$now                 = current_time( 'timestamp', true );
-				$pretty_time_missing = human_time_diff( $now, $event_timestamp );
-				$output              .= sprintf( __( 'Next event scheduled to %s', 'cost-of-goods-for-woocommerce' ), '<strong>' . get_date_from_gmt( date( 'Y-m-d H:i:s', $event_timestamp ), get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ) ) . '</strong>' );
-				$output              .= ' ' . '(' . $pretty_time_missing . ' left)';
-			}
-			self::$auto_exchange_cron_output = $output;
-		} else {
-			if ( ! $auto_exchange_option_enabled ) {
-				self::$auto_exchange_cron_output = '';
-			}
+		);
+		$currencies = get_option( 'alg_wc_cog_currencies_costs_currencies', array() );
+		foreach ( $currencies as $currency ) {
+			$currency_cost_opts = array_merge( $currency_cost_opts, array(
+				array(
+					'title'             => $currency . __( ' - Fixed cost', 'cost-of-goods-for-woocommerce' ),
+					'type'              => 'number',
+					'id'                => "alg_wc_cog_currencies_costs_fixed[{$currency}]",
+					'default'           => 0,
+					'custom_attributes' => array( 'step' => '0.000001' ),
+					'wpfse_data'        => array(
+						'hide' => true
+					)
+				),
+				array(
+					'title'             => $currency . __( ' - Percent cost', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'Percent from order total. E.g.: If you want to add a cost of <code>50%</code> from order total you can set it as 50.', 'cost-of-goods-for-woocommerce' ),
+					'type'              => 'number',
+					'id'                => "alg_wc_cog_currencies_costs_percent[{$currency}]",
+					'default'           => 0,
+					'custom_attributes' => array( 'step' => '0.000001' ),
+					'wpfse_data'        => array(
+						'hide' => true
+					)
+				),
+			) );
 		}
-		return self::$auto_exchange_cron_output;
+		$currency_cost_opts[] = array(
+			'type' => 'sectionend',
+			'id'   => 'alg_wc_cog_currencies_costs_options',
+		);
+		return array_merge( $multicurrency_order_calculation_opts, $currency_cost_opts );
+
+
 	}
 
 }
