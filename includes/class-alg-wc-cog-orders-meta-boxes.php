@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 2.8.2
+ * @version 2.8.8
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -13,10 +13,12 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Orders_Meta_Boxes' ) ) :
 
 class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 
+	protected $order_cost_values = array();
+
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.2.0
+	 * @version 2.8.8
 	 * @since   2.2.0
 	 */
 	function __construct() {
@@ -25,6 +27,75 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		// Order extra cost: per order
 		add_action( 'add_meta_boxes',       array( $this, 'add_order_extra_cost_meta_box' ) );
 		add_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 10, 2 );
+		// Manual order cost.
+		add_filter( 'alg_wc_cog_order_cost', array( $this, 'save_order_cost_manually' ) );
+		add_filter( 'alg_wc_cog_order_profit', array( $this, 'calculate_profit_from_manual_cost' ) );
+		add_filter( 'alg_wc_cog_order_metabox_cost_value_html', array( $this, 'replace_order_metabox_cost_by_input' ), 10, 2 );
+	}
+
+	/**
+	 * replace_cost_from_order_metabox_by_input.
+	 *
+	 * @version 2.8.8
+	 * @since   2.8.8
+	 *
+	 * @param $cost_value_html
+	 * @param $cost
+	 *
+	 * @return string
+	 */
+	function replace_order_metabox_cost_by_input( $cost_value_html, $cost ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_edit_order_cost_manually', 'no' ) ) {
+			$cost_value_html = '<input style="color:red;" type="number" step="0.000001" name="alg_wc_cog_order_cost_input" id="" value="' . esc_attr( $cost ) . '"/>';
+		}
+		return $cost_value_html;
+	}
+
+	/**
+	 * calculate_profit_from_manual_cost.
+	 *
+	 * @version 2.8.8
+	 * @since   2.8.8
+	 *
+	 * @param $profit
+	 *
+	 * @return mixed
+	 */
+	function calculate_profit_from_manual_cost( $profit ) {
+		if (
+			'yes' === get_option( 'alg_wc_cog_edit_order_cost_manually', 'no' ) &&
+			! empty( $this->order_cost_values ) &&
+			isset( $this->order_cost_values['automatic'] ) &&
+			$this->order_cost_values['manual']
+		) {
+			$cost_difference = $this->order_cost_values['automatic'] - $this->order_cost_values['manual'];
+			$profit          += $cost_difference;
+		}
+		return $profit;
+	}
+
+	/**
+	 * save_order_cost_manually.
+	 *
+	 * @version 2.8.8
+	 * @since   2.8.8
+	 *
+	 * @param $order_cost
+	 *
+	 * @return float
+	 */
+	function save_order_cost_manually( $order_cost ) {
+		if (
+			'yes' === get_option( 'alg_wc_cog_edit_order_cost_manually', 'no' ) &&
+			isset( $_POST['alg_wc_cog_order_cost_input'] ) &&
+			'' !== ( $order_cost_input = $_POST['alg_wc_cog_order_cost_input'] ) &&
+			(float) $order_cost !== (float) $order_cost_input
+		) {
+			$this->order_cost_values['automatic'] = $order_cost;
+			$this->order_cost_values['manual']    = (float) $order_cost_input;
+			$order_cost = (float) $order_cost_input;
+		}
+		return $order_cost;
 	}
 
 	/**
@@ -50,7 +121,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 2.8.2
+	 * @version 2.8.8
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
@@ -69,8 +140,9 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		);
 		$profit_html         = str_replace( array_keys( $profit_placeholders ), $profit_placeholders, $profit_template );
 		$table_args          = array( 'table_heading_type' => 'vertical', 'table_class' => 'widefat', 'columns_styles' => array( '', 'text-align:right;' ) );
+		$cost_html           = apply_filters( 'alg_wc_cog_order_metabox_cost_value_html', alg_wc_cog_format_cost( $cost ), $cost, $order_id );
 		$table_data          = array(
-			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ),   ( '' !== $cost   ? '<span style="color:red;">'   . alg_wc_cog_format_cost( $cost ) . '</span>' : '' ) ),
+			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ),   ( '' !== $cost   ? '<span style="color:red;">'   . $cost_html . '</span>' : '' ) ),
 			array( __( 'Profit', 'cost-of-goods-for-woocommerce' ), ( '' !== $profit ? '<span style="color:green;">' . $profit_html      . '</span>' : '' ) ),
 		);
 		echo alg_wc_cog_get_table_html( $table_data, $table_args );

@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 2.8.7
+Stable tag: 2.8.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,13 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.8.8 - 25/01/2023 =
+* Fix - Bulk edit tool - Change access control check from `manage_options` to `manage_woocommerce`.
+* Fix - Multicurrency - Currencies costs - Profit does not change.
+* Dev - Orders - Calculations - New option: Shipping to profit - Percentage.
+* Dev - Orders - Admin order edit - Meta box - New option: Allow editing the total order cost value by adding a cost input.
+* Dev - New filters - `alg_wc_cog_order_cost`, `alg_wc_cog_order_profit`, `alg_wc_cog_order_metabox_cost_value_html`.
 
 = 2.8.7 - 20/01/2023 =
 * Fix - Implement access control and nonce check on Bulk edit tool.

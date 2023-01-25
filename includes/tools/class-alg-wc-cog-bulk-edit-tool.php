@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.8.7
+ * @version 2.8.8
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -776,7 +776,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * save_costs.
 		 *
-		 * @version 2.8.7
+		 * @version 2.8.8
 		 * @since   1.2.0
 		 * @see     https://wordpress.org/support/topic/you-should-add-posibility-to-edit-regular-price-and-sale-price/
 		 * @todo    [next] prices: `$do_update_func`
@@ -788,7 +788,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				isset( $_POST['alg_wc_cog_bulk_edit_tool_save_costs'] ) &&
 				isset( $_POST['_nonce_costs_manually_val'] ) &&
 				wp_verify_nonce( $_REQUEST['_nonce_costs_manually_val'], '_nonce_costs_manually_action' ) &&
-				current_user_can( 'manage_options' )
+				current_user_can( 'manage_woocommerce' )
 			) {
 				// Do edit prices.
 				$do_edit_prices = ( 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_edit_prices', 'no' ) );

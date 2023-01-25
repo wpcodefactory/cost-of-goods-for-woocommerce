@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Orders Section Settings
+ * Cost of Goods for WooCommerce - Orders Section Settings.
  *
- * @version 2.5.4
+ * @version 2.8.8
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.5.4
+	 * @version 2.8.8
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -140,11 +140,20 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
-				'title'    => __( 'Meta box', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add "Cost of Goods" meta box to admin order edit page', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_orders_meta_box',
-				'default'  => 'yes',
-				'type'     => 'checkbox',
+				'title'         => __( 'Meta box', 'cost-of-goods-for-woocommerce' ),
+				'desc'          => __( 'Add "Cost of Goods" meta box to admin order edit page', 'cost-of-goods-for-woocommerce' ),
+				'id'            => 'alg_wc_cog_orders_meta_box',
+				'default'       => 'yes',
+				'checkboxgroup' => 'start',
+				'type'          => 'checkbox',
+			),
+			array(
+				'desc'          => __( 'Allow editing the total order cost value by adding a cost input', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'      => sprintf(__( 'Leaving it empty will recalculate the cost. Setting it as %s will remove the cost.', 'cost-of-goods-for-woocommerce' ),'<code>0</code>'),
+				'id'            => 'alg_wc_cog_edit_order_cost_manually',
+				'default'       => 'no',
+				'checkboxgroup' => 'end',
+				'type'          => 'checkbox',
 			),
 			array(
 				'desc'     => __( 'Order profit HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' .
@@ -266,6 +275,13 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'id'       => 'alg_wc_cog_order_shipping_to_profit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Shipping to profit - Percentage.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf(__( 'If you want to move %s of the shipping value to profit, set it as %s', 'cost-of-goods-for-woocommerce' ),'100%','<code>100</code>'),
+				'id'       => 'alg_wc_cog_order_shipping_to_profit_percentage',
+				'default'  => '100',
+				'type'     => 'number',
 			),
 			array(
 				'title'    => __( 'Fees to profit', 'cost-of-goods-for-woocommerce' ),
