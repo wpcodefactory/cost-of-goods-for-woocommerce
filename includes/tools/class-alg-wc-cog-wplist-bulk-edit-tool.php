@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 2.7.8
+ * @version 2.8.9
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -239,7 +239,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		 * @todo    [maybe] better description here and in settings
 		 * @todo    [maybe] bulk edit order items meta
 		 *
-		 * @version 2.7.8
+		 * @version 2.8.9
 		 * @since   2.3.1
 		 *
 		 * @param object $item
@@ -258,7 +258,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 					$result = $item->get_sku();
 					break;
 				case 'title':
-					$result = '<a href="' . $item->get_permalink() . '">' . $item->get_title() . '</a>';
+					$result = '<a href="' . $item->get_permalink() . '">' . $item->get_formatted_name() . '</a>';
 					break;
 				case '_price':
 					$result = $item->get_price();
