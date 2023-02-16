@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 2.8.9
+Stable tag: 2.9.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -98,6 +98,12 @@ And then you can follow these steps:
 
 == Changelog ==
 
+= 2.9.0 - 16/02/2023 =
+* Fix - Bulk update prices - Variations are not getting updated.
+* Dev - Orders - Calculations - Display "Shipping", "Fees" and "Taxes to profit" on order meta box as extra profit.
+* Dev - New filters: `alg_wc_cog_extra_profit_meta_keys`.
+* WC tested up to: 7.4.
+
 = 2.8.9 - 06/02/2023 =
 * Add German translation.
 * Fix - Compatibility - ATUM - Taxes option is not working well.
@@ -141,7 +147,7 @@ And then you can follow these steps:
 * Dev - Compatibility - ATUM - New option: Change cost of goods every time the purchase price is updated in ATUM.
 * Dev - Compatibility - WC Foods - New option: Add fixed costs to food options.
 * Dev - New filters: `alg_wc_cog_cost_meta_keys`, `alg_wc_cog_update_order_item_values`, `alg_wc_cog_food_options_fixed_costs_total`.
-* Dev - New actions: `alg_wc_cog_after_update_order_item_values`.
+* Dev - New actions: `alg_wc_cog_update_order_values_action`.
 
 = 2.8.1 - 19/12/2022 =
 * Dev - Improve the way of initializing the main class.

@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 2.8.9\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 2.9.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-06T18:09:25+01:00\n"
+"POT-Creation-Date: 2023-02-16T15:35:19+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -48,16 +48,16 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:88
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:145
-#: includes/class-alg-wc-cog-orders.php:274
-#: includes/class-alg-wc-cog-orders.php:354
+#: includes/class-alg-wc-cog-orders.php:382
+#: includes/class-alg-wc-cog-orders.php:462
 #: includes/class-alg-wc-cog-products-add-stock.php:124
 #: includes/class-alg-wc-cog-products-add-stock.php:141
 #: includes/class-alg-wc-cog-products.php:202
 #: includes/class-alg-wc-cog-products.php:213
 #: includes/class-alg-wc-cog-products.php:224
 #: includes/class-alg-wc-cog-products.php:281
-#: includes/pro/class-alg-wc-cog-pro.php:425
-#: includes/pro/class-alg-wc-cog-pro.php:754
+#: includes/pro/class-alg-wc-cog-pro.php:426
+#: includes/pro/class-alg-wc-cog-pro.php:755
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:111
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:350
 #: includes/analytics/build/index.js:286
@@ -77,8 +77,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:89
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:146
-#: includes/class-alg-wc-cog-orders.php:275
-#: includes/class-alg-wc-cog-orders.php:364
+#: includes/class-alg-wc-cog-orders.php:383
+#: includes/class-alg-wc-cog-orders.php:472
 #: includes/class-alg-wc-cog-products.php:284
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:113
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:343
@@ -135,8 +135,8 @@ msgid "N/A"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:113
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:192
-#: includes/pro/class-alg-wc-cog-pro.php:746
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:206
+#: includes/pro/class-alg-wc-cog-pro.php:747
 #: includes/settings/class-alg-wc-cog-settings-orders.php:406
 #: includes/settings/class-alg-wc-cog-settings-products.php:220
 #: includes/settings/class-alg-wc-settings-cog.php:24
@@ -208,38 +208,61 @@ msgstr ""
 msgid "Cost details"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:192
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:189
+msgid "Extra profit details"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:206
 #: includes/settings/class-alg-wc-cog-settings-orders.php:406
 msgid "Extra costs"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:215
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:229
 msgid "fee"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:81
+#: includes/class-alg-wc-cog-orders.php:80
 #: includes/settings/class-alg-wc-cog-settings-orders.php:180
 msgid "You are selling below the cost of goods."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:278
-#: includes/class-alg-wc-cog-orders.php:655
-#: includes/pro/class-alg-wc-cog-pro.php:563
-#: includes/pro/class-alg-wc-cog-pro.php:582
+#: includes/class-alg-wc-cog-orders.php:194
+#: includes/settings/class-alg-wc-cog-settings-orders.php:294
+msgid "Taxes to profit"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:232
+#: includes/settings/class-alg-wc-cog-settings-orders.php:287
+msgid "Fees to profit"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:271
+#: includes/settings/class-alg-wc-cog-settings-orders.php:273
+msgid "Shipping to profit"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:273
+msgid "Shipping to profit (%s)"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:386
+#: includes/class-alg-wc-cog-orders.php:763
+#: includes/pro/class-alg-wc-cog-pro.php:564
+#: includes/pro/class-alg-wc-cog-pro.php:583
 msgid "Cost of goods"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:367
+#: includes/class-alg-wc-cog-orders.php:475
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:370
+#: includes/class-alg-wc-cog-orders.php:478
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:691
+#: includes/class-alg-wc-cog-orders.php:799
 msgid "Handling Fee"
 msgstr ""
 
@@ -253,7 +276,7 @@ msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to c
 msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:68
-#: includes/pro/class-alg-wc-cog-pro.php:746
+#: includes/pro/class-alg-wc-cog-pro.php:747
 #: includes/settings/class-alg-wc-cog-settings-products.php:211
 #: includes/settings/class-alg-wc-cog-settings-products.php:218
 #: includes/settings/class-alg-wc-cog-settings-products.php:220
@@ -262,7 +285,7 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:120
 #: includes/class-alg-wc-cog-products-add-stock.php:140
-#: includes/pro/class-alg-wc-cog-pro.php:748
+#: includes/pro/class-alg-wc-cog-pro.php:749
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:110
 #: includes/settings/class-alg-wc-cog-settings-tools.php:133
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:351
@@ -322,31 +345,31 @@ msgstr ""
 msgid "Option(s) costs"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:427
+#: includes/pro/class-alg-wc-cog-pro.php:428
 msgid "- No change -"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:508
+#: includes/pro/class-alg-wc-cog-pro.php:509
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:515
+#: includes/pro/class-alg-wc-cog-pro.php:516
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:518
+#: includes/pro/class-alg-wc-cog-pro.php:519
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:636
+#: includes/pro/class-alg-wc-cog-pro.php:637
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:638
+#: includes/pro/class-alg-wc-cog-pro.php:639
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:640
+#: includes/pro/class-alg-wc-cog-pro.php:641
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
 
@@ -1337,7 +1360,7 @@ msgid "Calculations"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:242
-msgid "Here you can set some options for order cost and profit calculations."
+msgid "Define options for order cost and profit calc    ulations."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:248
@@ -1378,10 +1401,6 @@ msgstr ""
 msgid "Order total incl. tax"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:273
-msgid "Shipping to profit"
-msgstr ""
-
 #: includes/settings/class-alg-wc-cog-settings-orders.php:274
 msgid "Add order shipping cost to the order profit"
 msgstr ""
@@ -1394,16 +1413,8 @@ msgstr ""
 msgid "If you want to move %s of the shipping value to profit, set it as %s"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:287
-msgid "Fees to profit"
-msgstr ""
-
 #: includes/settings/class-alg-wc-cog-settings-orders.php:288
 msgid "Add  order fees to the order profit "
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:294
-msgid "Taxes to profit"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:295

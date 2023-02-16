@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.8.5
+ * @version 2.9.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -482,7 +482,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * Update product price by product cost.
 	 *
-	 * @version 2.7.9
+	 * @version 2.9.0
 	 * @since   2.6.3
 	 *
 	 * @param array $args
@@ -490,22 +490,37 @@ class Alg_WC_Cost_of_Goods_Products {
 	 * @return bool
 	 */
 	function update_product_price_by_profit( $args = array() ) {
-		$args            = wp_parse_args( $args, array(
-			'product_id'      => '',
-			'percentage'      => '',
-			'absolute_profit' => '',
-			'rounding'        => '',
-			'affected_field'  => 'regular_price',
+		$args = wp_parse_args( $args, array(
+			'product_id'        => '',
+			'percentage'        => '',
+			'absolute_profit'   => '',
+			'rounding'          => '',
+			'affected_field'    => 'regular_price',
+			'update_variations' => true
 		) );
-		$product_id      = $args['product_id'];
-		$percentage      = $args['percentage'];
-		$absolute_profit = $args['absolute_profit'];
-		$rounding        = $args['rounding'];
-		$affected_field  = $args['affected_field'];
-		$product         = wc_get_product( $product_id );
-		$product_cost    = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
-		$new_price       = 0;
-		// If invalid product or product cost then return false
+		$product_id        = $args['product_id'];
+		$percentage        = $args['percentage'];
+		$absolute_profit   = $args['absolute_profit'];
+		$rounding          = $args['rounding'];
+		$affected_field    = $args['affected_field'];
+		$update_variations = $args['update_variations'];
+		$product           = wc_get_product( $product_id );
+		$product_cost      = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
+		$new_price         = 0;
+		// Update variations recursively.
+		if (
+			$update_variations &&
+			$product->is_type( 'variable' ) && $product instanceof WC_Product_Variable
+		) {
+			foreach ( $product->get_available_variations() as $variation ) {
+				if ( ! empty( $variation_id = isset( $variation['variation_id'] ) ? $variation['variation_id'] : '' ) ) {
+					$new_args               = $args;
+					$new_args['product_id'] = $variation_id;
+					$this->update_product_price_by_profit( $new_args );
+				}
+			}
+		}
+		// If invalid product or product cost then return false.
 		if ( empty( $product_cost ) || 0 == $product_cost ) {
 			return false;
 		}
@@ -515,7 +530,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		} elseif ( ! empty( $absolute_profit ) ) {
 			$new_price = $product_cost + $absolute_profit;
 		}
-		// If no new price, then return false
+		// If no new price, then return false.
 		if ( 0 >= $new_price ) {
 			return false;
 		}
@@ -529,7 +544,6 @@ class Alg_WC_Cost_of_Goods_Products {
 			$product->set_regular_price( $new_price );
 		}
 		$product->save();
-
 		return true;
 	}
 

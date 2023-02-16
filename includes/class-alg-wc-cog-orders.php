@@ -41,7 +41,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * get_options.
 	 *
-	 * @version 2.8.8
+	 * @version 2.9.0
 	 * @since   2.1.0
 	 * @todo    [maybe] Fees: From Meta: no `trim`?
 	 */
@@ -71,7 +71,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 		// Calculations
 		$this->order_extra_cost_percent_total = get_option( 'alg_wc_cog_order_extra_cost_percent_total', 'subtotal_excl_tax' );
 		$this->order_count_empty_costs        = ( 'yes' === get_option( 'alg_wc_cog_order_count_empty_costs', 'no' ) );
-		$this->do_add_fees_to_profit          = ( 'yes' === get_option( 'alg_wc_cog_order_fees_to_profit', 'no' ) );
 		$this->delay_calculations_status      = get_option( 'alg_wc_cog_orders_delay_calculations_status', array() );
 		// Admin Order Edit
 		$this->item_costs_option             = get_option( 'alg_wc_cog_orders_item_costs', 'yes' );
@@ -171,12 +170,117 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'woocommerce_rest_insert_shop_order_object', array( $this, 'trigger_woocommerce_new_order_on_new_order_via_rest' ), 10, 3 );
 		// Shipping to profit.
 		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'add_order_shipping_cost_to_profit' ), 10, 2 );
+		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_shipping_to_profit_meta_key_to_order_cmb' ) );
+		// Fees to profit.
+		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'add_order_fees_to_profit' ), 10, 2 );
+		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_fees_to_profit_meta_key_to_order_cmb' ) );
+		// Taxes to profit.
+		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'add_order_taxes_to_profit' ), 10, 2 );
+		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_taxes_to_profit_meta_key_to_order_cmb' ) );
+	}
+
+	/**
+	 * add_fees_to_profit_meta_key_to_order_cmb.
+	 *
+	 * @version 2.9.0
+	 * @since   2.9.0
+	 *
+	 * @param $meta_keys
+	 *
+	 * @return mixed
+	 */
+	function add_taxes_to_profit_meta_key_to_order_cmb( $meta_keys ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
+			$meta_keys['_alg_wc_cog_order_taxes_extra_profit'] = __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' );
+		}
+		return $meta_keys;
 	}
 
 	/**
 	 * add_order_shipping_cost_to_profit.
 	 *
-	 * @version 2.8.8
+	 * @version 2.9.0
+	 * @since   2.9.0
+	 */
+	function add_order_taxes_to_profit( $order_values, $order_info ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
+			$order                       = $order_info['order'];
+			$fees                        = (float) apply_filters( 'alg_wc_cog_order_total_taxes', $order->get_total_tax(), $order );
+			$shipping_to_profit          = (float) $fees * ( (float) get_option( 'alg_wc_cog_order_shipping_to_profit_percentage', 100 ) / 100 );
+			$order_values['profit']      += (float) $shipping_to_profit;
+			$order_values['total_price'] += (float) $shipping_to_profit;
+			update_post_meta( $order->get_id(), '_alg_wc_cog_order_taxes_extra_profit', $shipping_to_profit );
+		} else {
+			$order = $order_info['order'];
+			delete_post_meta( $order->get_id(), '_alg_wc_cog_order_taxes_extra_profit' );
+		}
+		return $order_values;
+	}
+
+	/**
+	 * add_fees_to_profit_meta_key_to_order_cmb.
+	 *
+	 * @version 2.9.0
+	 * @since   2.9.0
+	 *
+	 * @param $meta_keys
+	 *
+	 * @return mixed
+	 */
+	function add_fees_to_profit_meta_key_to_order_cmb( $meta_keys ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_order_fees_to_profit', 'no' ) ) {
+			$meta_keys['_alg_wc_cog_order_fees_extra_profit'] = __( 'Fees to profit', 'cost-of-goods-for-woocommerce' );
+		}
+		return $meta_keys;
+	}
+
+	/**
+	 * add_order_shipping_cost_to_profit.
+	 *
+	 * @version 2.9.0
+	 * @since   2.9.0
+	 */
+	function add_order_fees_to_profit( $order_values, $order_info ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_order_fees_to_profit', 'no' ) ) {
+			$order                       = $order_info['order'];
+			$fees                        = (float) apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_fees(), $order );
+			$shipping_to_profit          = (float) $fees * ( (float) get_option( 'alg_wc_cog_order_shipping_to_profit_percentage', 100 ) / 100 );
+			$order_values['profit']      += (float) $shipping_to_profit;
+			$order_values['total_price'] += (float) $shipping_to_profit;
+			update_post_meta( $order->get_id(), '_alg_wc_cog_order_fees_extra_profit', $shipping_to_profit );
+		} else {
+			$order = $order_info['order'];
+			delete_post_meta( $order->get_id(), '_alg_wc_cog_order_fees_extra_profit' );
+		}
+		return $order_values;
+	}
+
+	/**
+	 * add_shipping_to_profit_meta_key_to_order_cmb.
+	 *
+	 * @version 2.9.0
+	 * @since   2.9.0
+	 *
+	 * @param $meta_keys
+	 *
+	 * @return mixed
+	 */
+	function add_shipping_to_profit_meta_key_to_order_cmb( $meta_keys ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_order_shipping_to_profit', 'no' ) ) {
+			$percentage = get_option( 'alg_wc_cog_order_shipping_to_profit_percentage', 100 );
+			$text       = __( 'Shipping to profit', 'cost-of-goods-for-woocommerce' );
+			if ( (float) 100 !== (float) $percentage ) {
+				$text = sprintf( __( 'Shipping to profit (%s)', 'cost-of-goods-for-woocommerce' ), $percentage . '%' );
+			}
+			$meta_keys['_alg_wc_cog_order_shipping_extra_profit'] = $text;
+		}
+		return $meta_keys;
+	}
+
+	/**
+	 * add_order_shipping_cost_to_profit.
+	 *
+	 * @version 2.9.0
 	 * @since   2.8.8
 	 */
 	function add_order_shipping_cost_to_profit( $order_values, $order_info ) {
@@ -186,6 +290,10 @@ class Alg_WC_Cost_of_Goods_Orders {
 			$shipping_to_profit          = (float) $shipping_total * ( (float) get_option( 'alg_wc_cog_order_shipping_to_profit_percentage', 100 ) / 100 );
 			$order_values['profit']      += (float) $shipping_to_profit;
 			$order_values['total_price'] += (float) $shipping_to_profit;
+			update_post_meta( $order->get_id(), '_alg_wc_cog_order_shipping_extra_profit', $shipping_to_profit );
+		} else {
+			$order = $order_info['order'];
+			delete_post_meta( $order->get_id(), '_alg_wc_cog_order_shipping_extra_profit' );
 		}
 		return $order_values;
 	}
@@ -1051,18 +1159,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$fees       += $meta_fees;
 				}
 			}
-			// Profit adjustments: Fees
-			if ( $this->do_add_fees_to_profit ) {
-				$_fees       = (float) apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_fees(), $order );
-				$profit      += $_fees;
-				$total_price += $_fees;
-			}
-			// Profit adjustment: Tax
-			if ( 'yes' === get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
-				$_tax        = (float) apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_tax(), $order );
-				$profit      += $_tax;
-				$total_price += $_tax;
-			}
 			// Readjust profit on refunded orders
 			if ( $order_total_refunded > 0 ) {
 				if ( 'profit_based_on_total_refunded' === $refund_calc_method ) {
@@ -1114,7 +1210,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		update_post_meta( $order_id, '_alg_wc_cog_order_price', $total_price );
 		update_post_meta( $order_id, '_alg_wc_cog_order_cost', $total_cost );
 		update_post_meta( $order_id, '_alg_wc_cog_order_fees', $fees );
-		do_action( 'alg_wc_cog_after_update_order_item_values', array(
+		do_action( 'alg_wc_cog_update_order_values_action', array(
 			'order_id' => $order_id,
 			'order'    => $order,
 		) );

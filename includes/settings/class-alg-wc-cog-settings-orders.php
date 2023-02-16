@@ -239,7 +239,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 		$order_calculation_settings = array(
 			array(
 				'title'    => __( 'Calculations', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Here you can set some options for order cost and profit calculations.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				'desc'     => __( 'Define options for order cost and profit calc    ulations.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 					__( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_order_calculation_options',

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 2.8.8
+ * @version 2.9.0
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -121,7 +121,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 2.8.8
+	 * @version 2.9.0
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
@@ -173,6 +173,20 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		}
 		if ( count( $table_data ) > 0 ) {
 			echo '<h5>' . __( 'Cost details', 'cost-of-goods-for-woocommerce' ) . '</h5>';
+			echo alg_wc_cog_get_table_html( $table_data, $table_args );
+		}
+		// Extra profit details.
+		$table_data             = array();
+		$extra_profit_meta_keys = array(); // Example: '_alg_wc_cog_order_shipping_extra_profit'] = __( 'Shipping to profit', 'cost-of-goods-for-woocommerce' );
+		$extra_profit_meta_keys = apply_filters( 'alg_wc_cog_extra_profit_meta_keys', $extra_profit_meta_keys );
+		foreach ( $extra_profit_meta_keys as $key => $value ) {
+			$cost = get_post_meta( $order_id, $key, true );
+			if ( 0 != $cost && ! empty( $cost ) ) {
+				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost ) );
+			}
+		}
+		if ( count( $table_data ) > 0 ) {
+			echo '<h5>' . __( 'Extra profit details', 'cost-of-goods-for-woocommerce' ) . '</h5>';
 			echo alg_wc_cog_get_table_html( $table_data, $table_args );
 		}
 	}
