@@ -824,9 +824,29 @@ class Alg_WC_Cost_of_Goods_Orders {
 	}
 
 	/**
+	 * get_shipping_total_for_percentage_fees.
+	 *
+	 * @version 2.9.1
+	 * @since   2.9.1
+	 *
+	 * @param $order
+	 *
+	 * @return mixed
+	 */
+	function get_shipping_total_for_percentage_fees( $order ) {
+		$total = $order->get_shipping_total() - $order->get_shipping_tax();
+		switch ( get_option( 'alg_wc_cog_shipping_total_percent_calculation', 'total_excl_tax' ) ) {
+			case 'total_incl_tax':
+				$total = $order->get_shipping_total();
+				break;
+		}
+		return apply_filters( 'alg_wc_cog_shipping_total_for_pecentage_fees', $total, $order );
+	}
+
+	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.8.8
+	 * @version 2.9.1
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1060,7 +1080,11 @@ class Alg_WC_Cost_of_Goods_Orders {
 					// Percent
 					if ( ! empty( $this->shipping_costs_percent[ $shipping_method_id ] ) ) {
 						if ( ! isset( $order_total ) ) {
-							$order_total = $this->get_order_total_for_pecentage_fees( $order );
+							if ( 'order_total' === ( $shipping_percent_cost_source = get_option( 'alg_wc_cog_shipping_percent_cost_source', 'order_total' ) ) ) {
+								$order_total = $this->get_order_total_for_pecentage_fees( $order );
+							} elseif ( 'shipping_total' === $shipping_percent_cost_source ) {
+								$order_total = $this->get_shipping_total_for_percentage_fees( $order );
+							}
 						}
 						$shipping_cost_percent += apply_filters(
 							'alg_wc_cog_order_shipping_cost_percent',

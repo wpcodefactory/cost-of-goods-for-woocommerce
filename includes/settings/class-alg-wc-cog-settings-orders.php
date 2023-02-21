@@ -252,8 +252,9 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'type'     => 'checkbox',
 			),
 			array(
-				'title'    => __( 'Order total for percentage fees', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Total to calculate all extra costs percentage fees from (%s).', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Order total', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'The way taxes will be considered when calculating order total on percentage costs.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Total to calculate all extra costs percentage costs from (%s).', 'cost-of-goods-for-woocommerce' ),
 					'"' . implode( '", "', array(
 						__( 'All Orders', 'cost-of-goods-for-woocommerce' ),
 						__( 'Payment Gateways', 'cost-of-goods-for-woocommerce' ),

@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Shipping Section Settings
+ * Cost of Goods for WooCommerce - Shipping Section Settings.
  *
- * @version 2.4.3
+ * @version 2.9.1
  * @since   1.5.0
  * @author  WPFactory
  */
@@ -86,9 +86,27 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 	}
 
 	/**
+	 * get_percent_cost_source_string.
+	 *
+	 * @version 2.9.1
+	 * @since   2.9.1
+	 *
+	 * @return string
+	 */
+	function get_percent_cost_source_string() {
+		$string = '';
+		if ( 'order_total' === ( $option = get_option( 'alg_wc_cog_shipping_percent_cost_source', 'order_total' ) ) ) {
+			$string = __( 'order total', 'cost-of-goods-for-woocommerce' );
+		} elseif ( 'shipping_total' === $option ) {
+			$string = __( 'shipping total', 'cost-of-goods-for-woocommerce' );
+		}
+		return $string;
+	}
+
+	/**
 	 * get_settings.
 	 *
-	 * @version 2.3.0
+	 * @version 2.9.1
 	 * @since   1.5.0
 	 * @todo    [maybe] output "No available shipping methods." on empty `$shipping_methods`
 	 */
@@ -116,6 +134,30 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_shipping_use_shipping_instance',
 				'default'  => 'no',
+			),
+			array(
+				'title'    => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Percent cost source.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'select',
+				'id'       => 'alg_wc_cog_shipping_percent_cost_source',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'order_total'    => __( 'Order total', 'cost-of-goods-for-woocommerce' ),
+					'shipping_total' => __( 'Shipping total', 'cost-of-goods-for-woocommerce' ),
+				),
+				'default'  => 'order_total',
+			),
+			array(
+				'desc'     => __( 'The way taxes will be considered when calculating shipping total on percent costs.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Needs %s option set as %s.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Percent cost', 'cost-of-goods-for-woocommerce' ) . '</strong>', '<code>' . __( 'Shipping total', 'cost-of-goods-for-woocommerce' ) . '</code>' ),
+				'type'     => 'select',
+				'id'       => 'alg_wc_cog_shipping_total_percent_calculation',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'total_excl_tax'    => __( 'Shipping total excl. tax', 'cost-of-goods-for-woocommerce' ),
+					'total_incl_tax'    => __( 'Shipping total incl. tax', 'cost-of-goods-for-woocommerce' ),
+				),
+				'default'  => 'total_excl_tax',
 			),
 			array(
 				'type'     => 'sectionend',
@@ -147,7 +189,7 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 				),
 				array(
 					'title'             => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip'          => __( 'Percent from order total.', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => sprintf( __( 'Percent from %s.', 'cost-of-goods-for-woocommerce' ), $this->get_percent_cost_source_string() ),
 					'type'              => 'number',
 					'id'                => "alg_wc_cog_shipping_costs_percent[{$key}]",
 					'default'           => 0,
