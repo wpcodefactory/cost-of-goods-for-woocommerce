@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 2.8.1
+ * @version 2.9.2
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -71,7 +71,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.8.0
+	 * @version 2.9.2
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -237,13 +237,13 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 
 		$order_tools_opts = array(
 			array(
-				'title'    => __( 'Orders Tools', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Orders recalculation tool', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_orders_tools_options',
 			),
 			array(
-				'title'    => __( 'Recalculate orders cost and profit', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Recalculate for all orders', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Recalculate orders', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Recalculate cost and profit for all orders', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'Set items costs in all orders (overriding previous costs).', 'cost-of-goods-for-woocommerce' ) . ' ' .
 					__( 'Enable the checkbox and "Save changes" to run the tool.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
@@ -252,12 +252,46 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
-				'desc'     => __( 'Recalculate for orders with no costs', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Recalculate no cost orders', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Recalculate cost and profit for orders with no costs', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'Set items costs in orders that do not have costs set.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 					__( 'Enable the checkbox and "Save changes" to run the tool.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_recalculate_orders_cost_and_profit_no_costs',
 				'default'  => 'no',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'title'    => 'Date',
+				'desc'     => __( 'After.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Recalculate cost and profit for orders after a specific date.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'datetime-local',
+				'id'       => 'alg_wc_cog_recalculate_orders_cost_and_profit_after',
+				'css'      => 'width:398px;',
+				'default'  => '',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'desc'     => __( 'Before.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Recalculate cost and profit for orders before a specific date.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'datetime-local',
+				'id'       => 'alg_wc_cog_recalculate_orders_cost_and_profit_before',
+				'css'      => 'width:398px;',
+				'default'  => '',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'desc'     => __( 'Date type.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'select',
+				'id'       => 'alg_wc_cog_recalculate_orders_cost_and_profit_date_type',
+				'default'  => '',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'date_created'   => __( 'Date created', 'cost-of-goods-for-woocommerce' ),
+					'date_modified'  => __( 'Date modified', 'cost-of-goods-for-woocommerce' ),
+					'date_completed' => __( 'Date completed', 'cost-of-goods-for-woocommerce' ),
+					'date_paid'      => __( 'Date paid', 'cost-of-goods-for-woocommerce' ),
+				),
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(

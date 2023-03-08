@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.1
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,11 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.9.2 - 08/03/2023 =
+* Dev - Tools - Recalculation - Date - New option: After date.
+* Dev - Tools - Recalculation - Date - New option: Before date.
+* Dev - Tools - Recalculation - Date - New option: Date type.
 
 = 2.9.1 - 21/02/2023 =
 * Dev - Shipping - Percent cost - New option: Percent cost source.
