@@ -98,6 +98,9 @@ And then you can follow these steps:
 
 == Changelog ==
 
+= 2.9.3 - 10/03/2023 =
+* Dev - Products - Cost archive - New option: Use REGEXP_SUBSTR function to get the dates.
+
 = 2.9.2 - 08/03/2023 =
 * Dev - Tools - Recalculation - Date - New option: After date.
 * Dev - Tools - Recalculation - Date - New option: Before date.

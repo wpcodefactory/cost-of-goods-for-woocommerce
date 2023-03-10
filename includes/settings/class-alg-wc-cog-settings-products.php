@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 2.8.5
+ * @version 2.9.3
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.8.5
+	 * @version 2.9.3
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -191,6 +191,14 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'desc'           => __( 'Save cost archive', 'cost-of-goods-for-woocommerce' ),
 				'id'             => 'alg_wc_cog_save_cost_archive',
 				'default'        => 'no',
+				'type'           => 'checkbox',
+			),
+			array(
+				'title'          => __( 'MySQL', 'cost-of-goods-for-woocommerce' ),
+				'desc'           => sprintf( __( 'Use %s function to get the dates', 'cost-of-goods-for-woocommerce' ), '<code>REGEXP_SUBSTR</code>' ),
+				'desc_tip'       => __( 'Disable if the archive does not work. Note: If disabled, the performance will be slower.', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_save_cost_archive_mysql_regexp_substr',
+				'default'        => 'yes',
 				'type'           => 'checkbox',
 			),
 			array(

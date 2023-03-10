@@ -62,7 +62,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * get_product_cost_archive.
 		 *
-		 * @version 2.8.2
+		 * @version 2.9.3
 		 * @since   2.8.2
 		 *
 		 * @param null $args
@@ -78,19 +78,38 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 			$order      = strtoupper( $args['order'] );
 			$orderby    = $args['orderby'];
 			$product_id = intval( $args['product_id'] );
+			$use_mysql_regexp_substr = 'yes' === get_option( 'alg_wc_cog_save_cost_archive_mysql_regexp_substr', 'yes' );
 			global $wpdb;
-			$query = "
-			SELECT meta_value, FROM_UNIXTIME(REGEXP_SUBSTR(meta_value,'(?<=update_date\";i:).+?(?=;)')) AS update_datetime
-			FROM {$wpdb->postmeta}
-			WHERE post_id = %d AND meta_key = %s
-			";
-			if ( ! empty( $orderby ) ) {
-				$query .= "ORDER BY {$orderby} {$order}";
+			if ( $use_mysql_regexp_substr ) {
+				$query = "
+					SELECT meta_value, FROM_UNIXTIME(REGEXP_SUBSTR(meta_value,'(?<=update_date\";i:).+?(?=;)')) AS update_datetime
+					FROM {$wpdb->postmeta}
+					WHERE post_id = %d AND meta_key = %s
+				";
+				if ( ! empty( $orderby ) ) {
+					$query .= "ORDER BY {$orderby} {$order}";
+				}
+			} else {
+				$query = "
+					SELECT meta_value
+					FROM {$wpdb->postmeta}
+					WHERE post_id = %d AND meta_key = %s
+				";
 			}
 			$results          = $wpdb->get_results(
 				$wpdb->prepare( $query, $product_id, '_alg_wc_cog_cost_archive' ),
 				ARRAY_A
 			);
+			if ( ! $use_mysql_regexp_substr ) {
+				foreach ( $results as $key => $result ) {
+					$results[ $key ]['update_datetime'] = wp_date( "Y-m-d H:i:s", unserialize( $result['meta_value'] )['update_date'] );
+				}
+				if ( 'update_datetime' === $orderby && 'desc' === strtolower( $order ) ) {
+					usort( $results, function ( $a, $b ) {
+						return new DateTime( $b['update_datetime'] ) <=> new DateTime( $a['update_datetime'] );
+					} );
+				}
+			}
 			$filtered_results = array();
 			foreach ( $results as $result ) {
 				$arr                    = unserialize( $result['meta_value'] );
