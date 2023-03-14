@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Cost archive.
  *
- * @version 2.8.2
+ * @version 2.9.3
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * product_add_stock_meta_box.
 		 *
-		 * @version 2.8.2
+		 * @version 2.9.3
 		 * @since   2.8.2
 		 * @todo    [next] add option to delete all/selected history
 		 */
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 				foreach ( $product_cost_archive as $cost_info ) {
 					$table_rows[] = array(
 						'val_by_col' => array(
-							wp_date( 'Y-m-d H:i:s', $cost_info['update_date'] ),
+							wp_date( get_option( 'alg_wc_cog_save_cost_archive_date_format', 'Y-m-d' ), $cost_info['update_date'] ),
 							alg_wc_cog_format_cost( $cost_info['prev_cost_value'] ),
 							alg_wc_cog_format_cost( $cost_info['new_cost_value'] )
 						)

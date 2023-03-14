@@ -194,18 +194,25 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'           => 'checkbox',
 			),
 			array(
+				'title'          => __( 'Meta box', 'cost-of-goods-for-woocommerce' ),
+				'desc'           => __( 'Enable a cost archive meta box on admin product page', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_cost_archive_metabox',
+				'default'        => 'no',
+				'type'           => 'checkbox',
+			),
+			array(
+				'title'          => __( 'Date format', 'cost-of-goods-for-woocommerce' ),
+				'desc'           => sprintf( __( 'Example: <a target="_blank" href="%s">Y-m-d H:i:s</a>', 'cost-of-goods-for-woocommerce' ), 'https://www.php.net/manual/en/datetime.format.php' ),
+				'id'             => 'alg_wc_cog_save_cost_archive_date_format',
+				'default'        => 'Y-m-d',
+				'type'           => 'text',
+			),
+			array(
 				'title'          => __( 'MySQL', 'cost-of-goods-for-woocommerce' ),
 				'desc'           => sprintf( __( 'Use %s function to get the dates', 'cost-of-goods-for-woocommerce' ), '<code>REGEXP_SUBSTR</code>' ),
 				'desc_tip'       => __( 'Disable if the archive does not work. Note: If disabled, the performance will be slower.', 'cost-of-goods-for-woocommerce' ),
 				'id'             => 'alg_wc_cog_save_cost_archive_mysql_regexp_substr',
 				'default'        => 'yes',
-				'type'           => 'checkbox',
-			),
-			array(
-				'title'          => __( 'Meta box', 'cost-of-goods-for-woocommerce' ),
-				'desc'           => __( 'Enable a cost archive meta box on admin product page', 'cost-of-goods-for-woocommerce' ),
-				'id'             => 'alg_wc_cog_cost_archive_metabox',
-				'default'        => 'no',
 				'type'           => 'checkbox',
 			),
 			array(
