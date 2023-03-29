@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
-Tested up to: 6.1
-Stable tag: 2.9.2
+Tested up to: 6.2
+Stable tag: 2.9.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -98,9 +98,15 @@ And then you can follow these steps:
 
 == Changelog ==
 
-= 2.9.3 - 14/03/2023 =
+= 2.9.3 - 29/03/2023 =
+* Fix - Reports - Stock - Cost of Goods - Products registered with price/cost starting with comma or dot won't be displayed on report.
 * Dev - Products - Cost archive - New option: Use REGEXP_SUBSTR function to get the dates.
 * Dev - Products - Cost archive - New option: Date format.
+* Dev - Tools - Reports - Extra data - Add shipping to profit.
+* Dev - Tools - Reports - Extra data - Add fees to profit.
+* Dev - Tools - Reports - Extra data - Add taxes to profit.
+* WC tested up to: 7.5.
+* Tested up to: 6.2.
 
 = 2.9.2 - 08/03/2023 =
 * Dev - Tools - Recalculation - Date - New option: After date.

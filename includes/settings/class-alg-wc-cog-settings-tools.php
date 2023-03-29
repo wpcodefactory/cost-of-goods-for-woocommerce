@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 2.9.2
+ * @version 2.9.3
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -71,7 +71,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.9.2
+	 * @version 2.9.3
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -355,6 +355,9 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 					'_alg_wc_cog_order_' . 'shipping' . '_fee'        => __( 'Per order fees: Shipping', 'cost-of-goods-for-woocommerce' ),
 					'_alg_wc_cog_order_' . 'payment' . '_fee'         => __( 'Per order fees: Payment', 'cost-of-goods-for-woocommerce' ),
 					'_alg_wc_cog_order_extra_cost_from_meta'          => __( 'Meta fees (all)', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_shipping_extra_profit'         => __( 'Shipping to profit', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_fees_extra_profit'             => __( 'Fees to profit', 'cost-of-goods-for-woocommerce' ),
+					'_alg_wc_cog_order_taxes_extra_profit'            => __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' ),
 				),
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),

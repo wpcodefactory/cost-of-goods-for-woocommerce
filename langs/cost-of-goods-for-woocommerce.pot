@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 2.9.3-dev\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 2.9.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-03-14T19:19:12+01:00\n"
+"POT-Creation-Date: 2023-03-29T21:23:29+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -58,7 +58,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:281
 #: includes/pro/class-alg-wc-cog-pro.php:427
 #: includes/pro/class-alg-wc-cog-pro.php:784
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:111
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:350
 #: includes/analytics/build/index.js:286
 #: includes/analytics/build/index.js:415
@@ -80,7 +80,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders.php:383
 #: includes/class-alg-wc-cog-orders.php:472
 #: includes/class-alg-wc-cog-products.php:284
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:113
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:343
 #: includes/analytics/build/index.js:291
 #: includes/analytics/build/index.js:420
@@ -228,16 +228,19 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders.php:194
 #: includes/settings/class-alg-wc-cog-settings-orders.php:295
+#: includes/settings/class-alg-wc-cog-settings-tools.php:360
 msgid "Taxes to profit"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders.php:232
 #: includes/settings/class-alg-wc-cog-settings-orders.php:288
+#: includes/settings/class-alg-wc-cog-settings-tools.php:359
 msgid "Fees to profit"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders.php:271
 #: includes/settings/class-alg-wc-cog-settings-orders.php:274
+#: includes/settings/class-alg-wc-cog-settings-tools.php:358
 msgid "Shipping to profit"
 msgstr ""
 
@@ -286,7 +289,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-products-add-stock.php:120
 #: includes/class-alg-wc-cog-products-add-stock.php:140
 #: includes/pro/class-alg-wc-cog-pro.php:778
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:110
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-tools.php:133
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:351
 msgid "Stock"
@@ -381,92 +384,92 @@ msgstr ""
 msgid "export"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:107
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
 #: includes/tools/class-alg-wc-cog-import-tool.php:247
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:347
 msgid "Product ID"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:108
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:118
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:348
 msgid "SKU"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:109
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:119
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:349
 msgid "Title"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:112
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:122
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:358
 msgid "Price"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:114
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:156
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:181
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:124
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:166
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:191
 msgid "Total Cost"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:115
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:160
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:185
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:125
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:170
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:195
 msgid "Total Price"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:116
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:164
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:181
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:185
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:126
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:174
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:191
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:195
 msgid "Total Profit"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:148
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:158
 msgid "Total Stock"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:152
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:162
 msgid "Total Products"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:168
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:178
 msgid "Average Cost"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:172
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:182
 msgid "Average Price"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:176
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:186
 msgid "Average Profit"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:180
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:190
 msgid "Profit Percentage"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:184
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:194
 msgid "Profit Margin"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:197
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:207
 msgid "Only products with cost, price and stock are counted in report."
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:198
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:208
 msgid "All prices exclude tax."
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:199
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:209
 msgid "Totals"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:202
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:212
 #: includes/settings/class-alg-wc-cog-settings-products.php:24
 msgid "Products"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:206
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:216
 msgid "There are no products with cost, price and stock."
 msgstr ""
 
@@ -614,17 +617,41 @@ msgstr ""
 msgid "Meta fees amount"
 msgstr ""
 
+#: includes/pro/reports/class-wc-report-alg-cog.php:168
+msgid "%s shipping to profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:170
+msgid "Shipping to profit amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:174
+msgid "%s fees to profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:176
+msgid "Fees to profit amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:180
+msgid "%s taxes to profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:182
+msgid "Taxes to profit amount"
+msgstr ""
+
 #. translators: %s: average sales
-#: includes/pro/reports/class-wc-report-alg-cog.php:254
+#: includes/pro/reports/class-wc-report-alg-cog.php:272
 msgid "%s average daily profit"
 msgstr ""
 
 #. translators: %s: average sales
-#: includes/pro/reports/class-wc-report-alg-cog.php:262
+#: includes/pro/reports/class-wc-report-alg-cog.php:280
 msgid "%s average monthly profit"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:341
+#: includes/pro/reports/class-wc-report-alg-cog.php:359
 msgid "Average profit"
 msgstr ""
 
@@ -1617,7 +1644,7 @@ msgid "Customizes how the profit will be displayed."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:57
-#: includes/settings/class-alg-wc-cog-settings-tools.php:362
+#: includes/settings/class-alg-wc-cog-settings-tools.php:365
 msgid "Get price method"
 msgstr ""
 
@@ -2393,110 +2420,110 @@ msgstr ""
 msgid "Meta fees (all)"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:362
-#: includes/settings/class-alg-wc-cog-settings-tools.php:374
+#: includes/settings/class-alg-wc-cog-settings-tools.php:365
+#: includes/settings/class-alg-wc-cog-settings-tools.php:377
 msgid "Stock report"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:363
+#: includes/settings/class-alg-wc-cog-settings-tools.php:366
 msgid "The mechanism used to get the product price."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:369
+#: includes/settings/class-alg-wc-cog-settings-tools.php:372
 msgid "Function"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:370
+#: includes/settings/class-alg-wc-cog-settings-tools.php:373
 msgid "Function with meta"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:374
+#: includes/settings/class-alg-wc-cog-settings-tools.php:377
 msgid "Meta query"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:375
+#: includes/settings/class-alg-wc-cog-settings-tools.php:378
 msgid "Query related to costs meta in order to get the products for the stock report."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:376
+#: includes/settings/class-alg-wc-cog-settings-tools.php:379
 msgid "Use %s if some product doesn't show up on the stock report, probably if you have cost values below 1"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:376
+#: includes/settings/class-alg-wc-cog-settings-tools.php:379
 msgid "CHAR type and not empty value"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:382
+#: includes/settings/class-alg-wc-cog-settings-tools.php:385
 msgid "Default"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:383
+#: includes/settings/class-alg-wc-cog-settings-tools.php:386
 msgid "Currency as Char type and not empty"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:394
+#: includes/settings/class-alg-wc-cog-settings-tools.php:397
 msgid "Analytics"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:395
+#: includes/settings/class-alg-wc-cog-settings-tools.php:398
 msgid "Options related to <a href=\"%s\">WooCommerce Analytics</a>."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:396
+#: includes/settings/class-alg-wc-cog-settings-tools.php:399
 msgid "If you can't see the values refreshed or have issues with the analytics page, please try to <a href=\"%s\">clear analytics cache</a>."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:401
+#: includes/settings/class-alg-wc-cog-settings-tools.php:404
 msgid "Orders tab"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:402
-#: includes/settings/class-alg-wc-cog-settings-tools.php:418
-#: includes/settings/class-alg-wc-cog-settings-tools.php:435
-#: includes/settings/class-alg-wc-cog-settings-tools.php:469
+#: includes/settings/class-alg-wc-cog-settings-tools.php:405
+#: includes/settings/class-alg-wc-cog-settings-tools.php:421
+#: includes/settings/class-alg-wc-cog-settings-tools.php:438
+#: includes/settings/class-alg-wc-cog-settings-tools.php:472
 msgid "Add \"Cost\" and \"Profit\" columns"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:409
-#: includes/settings/class-alg-wc-cog-settings-tools.php:426
-#: includes/settings/class-alg-wc-cog-settings-tools.php:443
-#: includes/settings/class-alg-wc-cog-settings-tools.php:460
+#: includes/settings/class-alg-wc-cog-settings-tools.php:412
+#: includes/settings/class-alg-wc-cog-settings-tools.php:429
+#: includes/settings/class-alg-wc-cog-settings-tools.php:446
+#: includes/settings/class-alg-wc-cog-settings-tools.php:463
 msgid "Add \"Cost\" and \"Profit\" totals to the report charts"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:417
+#: includes/settings/class-alg-wc-cog-settings-tools.php:420
 msgid "Products tab"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:434
+#: includes/settings/class-alg-wc-cog-settings-tools.php:437
 msgid "Categories tab"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:451
+#: includes/settings/class-alg-wc-cog-settings-tools.php:454
 msgid "Revenue tab"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:452
+#: includes/settings/class-alg-wc-cog-settings-tools.php:455
 msgid "Add \"Cost\" and \"Profit\" totals columns"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:468
+#: includes/settings/class-alg-wc-cog-settings-tools.php:471
 msgid "Stock tab"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:477
+#: includes/settings/class-alg-wc-cog-settings-tools.php:480
 msgid "Take stock into consideration for cost and profit calculation"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:485
+#: includes/settings/class-alg-wc-cog-settings-tools.php:488
 msgid "Add \"Category\" column"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:493
+#: includes/settings/class-alg-wc-cog-settings-tools.php:496
 msgid "Add filter allowing to restrict the query"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:494
+#: includes/settings/class-alg-wc-cog-settings-tools.php:497
 msgid "For now, it allows to get only products with costs."
 msgstr ""
 
