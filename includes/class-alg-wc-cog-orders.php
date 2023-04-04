@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 2.8.8
+ * @version 2.9.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -14,6 +14,229 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Orders' ) ) :
 
 class Alg_WC_Cost_of_Goods_Orders {
+
+	/**
+	 * Is gateway costs enabled.
+	 *
+	 * @since 2.9.4
+	 */
+	public $is_gateway_costs_enabled;
+
+	/**
+	 * Gateway costs fixed.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $gateway_costs_fixed;
+
+	/**
+	 * Gateway costs percent.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $gateway_costs_percent;
+
+	/**
+	 * Is shipping costs enabled.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_shipping_costs_enabled;
+
+	/**
+	 * Shipping use instances.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $shipping_use_instances;
+
+	/**
+	 * Shipping costs fixed.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $shipping_costs_fixed;
+
+	/**
+	 * Shipping costs percent.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $shipping_costs_percent;
+
+	/**
+	 * Order extra cost fixed.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $order_extra_cost_fixed;
+
+	/**
+	 * Order extra cost percent.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $order_extra_cost_percent;
+
+	/**
+	 * Is order extra cost per order.
+	 * @since 2.9.4.
+	 */
+	public $is_order_extra_cost_per_order;
+
+	/**
+	 * Order extra cost percent total.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $order_extra_cost_percent_total;
+
+	/**
+	 * Order count empty costs.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $order_count_empty_costs;
+
+	/**
+	 * Delay calculations status.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $delay_calculations_status;
+
+	/**
+	 * Item costs option.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $item_costs_option;
+
+	/**
+	 * Item handling fees option.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $item_handling_fees_option;
+
+	/**
+	 * Is order meta box.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_order_meta_box;
+
+	/**
+	 * Is admin notice.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_admin_notice;
+
+	/**
+	 * Admin notice text.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $admin_notice_text;
+
+	/**
+	 * Is add item ajax.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_add_item_ajax;
+
+	/**
+	 * Is save order items ajax.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_save_order_items_ajax;
+
+	/**
+	 * Recalculate order button ajax.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $recalculate_order_button_ajax;
+
+	/**
+	 * Do force on order update.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $do_force_on_order_update;
+
+	/**
+	 * Do force on status.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $do_force_on_status;
+
+	/**
+	 * Do force on new item
+	 *
+	 * @since 2.9.4.
+	 */
+	public $do_force_on_new_item;
+
+	/**
+	 * Is column cost.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_column_cost;
+
+	/**
+	 * Is column profit.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_column_profit;
+
+	/**
+	 * Is column profit percent.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_column_profit_percent;
+
+	/**
+	 * Is column profit margin.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_column_profit_margin;
+
+	/**
+	 * Is columns extra cost per order.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_columns_extra_cost_per_order;
+
+	/**
+	 * Column order status.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $column_order_status;
+
+	/**
+	 * Is columns sorting.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_columns_sorting;
+
+	/**
+	 * Is column sorting exclude empty lines.
+	 *
+	 * @since 2.9.4.
+	 */
+	public $is_columns_sorting_exclude_empty_lines;
 
 	/**
 	 * Constructor.

@@ -1,8 +1,8 @@
 <?php
 /**
- * Cost of Goods for WooCommerce - Section Settings
+ * Cost of Goods for WooCommerce - Section Settings.
  *
- * @version 1.7.0
+ * @version 2.9.4
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -12,6 +12,20 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Section' ) ) :
 
 class Alg_WC_Cost_of_Goods_Settings_Section {
+
+	/**
+	 * ID.
+	 *
+	 * @since 2.9.4
+	 */
+	public $id;
+
+	/**
+	 * Description.
+	 *
+	 * @since 2.9.4
+	 */
+	public $desc;
 
 	/**
 	 * Constructor.

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.9.0
+ * @version 2.9.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -12,6 +12,48 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products' ) ) :
 
 class Alg_WC_Cost_of_Goods_Products {
+
+	/**
+	 * Product profit html template.
+	 *
+	 * @since 2.9.4
+	 */
+	public $product_profit_html_template;
+
+	/**
+	 * Is column cost.
+	 *
+	 * @since 2.9.4
+	 */
+	public $is_column_cost;
+
+	/**
+	 * Is column profit.
+	 *
+	 * @since 2.9.4
+	 */
+	public $is_column_profit;
+
+	/**
+	 * Is columns sorting.
+	 *
+	 * @since 2.9.4
+	 */
+	public $is_columns_sorting;
+
+	/**
+	 * Is column sorting exclude empty lines.
+	 *
+	 * @since 2.9.4
+	 */
+	public $is_columns_sorting_exclude_empty_lines;
+
+	/**
+	 * Products columns.
+	 *
+	 * @since 2.9.4
+	 */
+	public $product_columns;
 
 	/**
 	 * Constructor.
@@ -430,7 +472,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_variable_product_html.
 	 *
-	 * @version 2.4.7
+	 * @version 2.9.4
 	 * @since   1.0.0
 	 * @todo    [maybe] use `get_available_variations()` instead of `get_children()`?
 	 */
@@ -455,8 +497,8 @@ class Alg_WC_Cost_of_Goods_Products {
 			if ( $min !== $max ) {
 				$placeholders[ "%{$profit_or_cost}%" ] = wc_format_price_range( $min, $max );
 				if ( 'profit' === $profit_or_cost ) {
-					$cost_min                         = $this->get_product_cost( $product_id_min );
-					$cost_max                         = $this->get_product_cost( $product_id_max );
+					$cost_min                         = (float) $this->get_product_cost( $product_id_min );
+					$cost_max                         = (float) $this->get_product_cost( $product_id_max );
 					$profit_min                       = ( 0 != $cost_min ? $min / $cost_min * 100 : '' );
 					$profit_max                       = ( 0 != $cost_max ? $max / $cost_max * 100 : '' );
 					$price_min                        = $this->get_product_price( wc_get_product( $product_id_min ), array( 'return_zero_if_empty' => true ) );

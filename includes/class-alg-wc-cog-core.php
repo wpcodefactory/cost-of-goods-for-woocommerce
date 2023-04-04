@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Core Class.
  *
- * @version 2.8.2
+ * @version 2.9.4
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -14,6 +14,69 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 
 	class Alg_WC_Cost_of_Goods_Core {
+
+		/**
+		 * Import tool
+		 *
+		 * @since 2.9.4
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Import_Tool
+		 */
+		public $import_tool;
+
+		/**
+		 * Products.
+		 *
+		 * @since 2.9.4
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Products
+		 */
+		public $products;
+
+		/**
+		 * Add stock feature.
+		 *
+		 * @since 2.9.4
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Products_Add_Stock
+		 */
+		public $products_add_stock;
+
+		/**
+		 * Cost Archive.
+		 *
+		 * @since 2.9.4
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Products_Cost_Archive
+		 */
+		public $products_cost_archive;
+
+		/**
+		 * Costs input.
+		 *
+		 * @since 2.9.4
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Cost_Inputs
+		 */
+		public $cost_inputs;
+
+		/**
+		 * Orders.
+		 *
+		 * @since 2.9.4
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Orders
+		 */
+		public $orders;
+
+		/**
+		 * Bulk edit tool.
+		 *
+		 * @since 2.9.4
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Bulk_Edit_Tool;
+		 */
+		public $bulk_edit_tool;
 
 		/**
 		 * Constructor.

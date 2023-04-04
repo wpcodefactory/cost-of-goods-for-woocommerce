@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 2.6.5
+ * @version 2.9.4
  * @since   2.6.4
  * @author  WPFactory
  */
@@ -14,6 +14,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 
 	class Alg_WC_Cost_of_Goods_Cost_Inputs {
+
+		/**
+		 * Cost field template.
+		 *
+		 * @since 2.9.4
+		 *
+		 * @var string
+		 */
+		public $cost_field_template;
 
 		/**
 		 *

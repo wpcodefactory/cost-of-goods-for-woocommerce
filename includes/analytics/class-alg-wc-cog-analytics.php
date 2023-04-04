@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Class.
  *
- * @version 2.6.3
+ * @version 2.9.4
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -12,6 +12,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics' ) ) :
 
 class Alg_WC_Cost_of_Goods_Analytics {
+
+	/**
+	 * Orders.
+	 *
+	 * @since 2.9.4
+	 *
+	 * @var mixed Alg_WC_Cost_of_Goods_Analytics_Orders
+	 */
+	public $orders;
 
 	/**
 	 * Constructor.
