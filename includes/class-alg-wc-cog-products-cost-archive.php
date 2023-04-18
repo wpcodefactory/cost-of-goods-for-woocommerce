@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Cost archive.
  *
- * @version 2.9.3
+ * @version 2.9.5
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -65,9 +65,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		 * @version 2.9.3
 		 * @since   2.8.2
 		 *
-		 * @param null $args
+		 * @param $args
 		 *
 		 * @return array
+		 * @throws Exception
 		 */
 		function get_product_cost_archive( $args = null ) {
 			$args       = wp_parse_args( $args, array(
@@ -122,7 +123,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * product_add_stock_meta_box.
 		 *
-		 * @version 2.9.3
+		 * @version 2.9.5
 		 * @since   2.8.2
 		 * @todo    [next] add option to delete all/selected history
 		 */
@@ -133,6 +134,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 			$product_cost_archive = $this->get_product_cost_archive( array(
 				'product_id' => $post->ID
 			) );
+			//$sanitize_cost
 			if ( empty( $product_cost_archive ) ) {
 				echo '<p>'.__( 'There isn\'t a cost archive for this product yet.', 'cost-of-goods-for-woocommerce' ).'</p>';
 				echo '<p>' . sprintf( __( 'Please, check if the option %s is enabled and then update the cost.', 'cost-of-goods-for-woocommerce' ), '<strong><a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods' ) . '">' . __( 'Products > Cost archive > Save cost archive', 'cost-of-goods-for-woocommerce' ) . '</a></strong>' ) . '</p>';
@@ -143,12 +145,21 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 					'new_cost_value'  => __( 'New cost', 'cost-of-goods-for-woocommerce' ),
 				);
 				$table_rows    = array();
+				$dots_and_commas_operation = 'comma-to-dot';
 				foreach ( $product_cost_archive as $cost_info ) {
+					$prev_cost = alg_wc_cog_sanitize_number( array(
+						'number'                    => $cost_info['prev_cost_value'],
+						'dots_and_commas_operation' => $dots_and_commas_operation
+					) );
+					$new_cost_value = alg_wc_cog_sanitize_number( array(
+						'number'                    => $cost_info['new_cost_value'],
+						'dots_and_commas_operation' => $dots_and_commas_operation
+					) );
 					$table_rows[] = array(
 						'val_by_col' => array(
 							wp_date( get_option( 'alg_wc_cog_save_cost_archive_date_format', 'Y-m-d' ), $cost_info['update_date'] ),
-							alg_wc_cog_format_cost( $cost_info['prev_cost_value'] ),
-							alg_wc_cog_format_cost( $cost_info['new_cost_value'] )
+							alg_wc_cog_format_cost( $prev_cost ),
+							alg_wc_cog_format_cost( $new_cost_value )
 						)
 					);
 				}

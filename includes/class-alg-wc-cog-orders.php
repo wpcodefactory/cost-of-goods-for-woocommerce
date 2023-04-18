@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 2.9.4
+ * @version 2.9.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1069,7 +1069,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 2.9.1
+	 * @version 2.9.5
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1201,7 +1201,10 @@ class Alg_WC_Cost_of_Goods_Orders {
 				// calculate total profit, cost, handling fee per order items.
 				$quantity = $calculate_qty_excluding_refunds ? $item->get_quantity() + $order->get_qty_refunded_for_item( $item_id ) : $item->get_quantity();
 				if ( '' !== $cost || '' !== $handling_fee ) {
-					$cost            = str_replace( ',', '.', $cost );
+					$cost = alg_wc_cog_sanitize_number( array(
+						'number'                    => $cost,
+						'dots_and_commas_operation' => 'comma-to-dot'
+					) );
 					$cost            = (float) $cost;
 					$line_cost       = $cost * $quantity;
 					$item_line_total = $item['line_total'];
@@ -1213,7 +1216,10 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$items_cost  += $line_cost;
 					$total_price += $line_total;
 					// handling fee.
-					$handling_fee       = str_replace( ',', '.', $handling_fee );
+					$handling_fee = alg_wc_cog_sanitize_number( array(
+						'number'                    => $handling_fee,
+						'dots_and_commas_operation' => 'comma-to-dot'
+					) );
 					$handling_fee       = (float) $handling_fee;
 					$line_handling_fee  = $handling_fee * $quantity;
 					$profit             -= $line_handling_fee;

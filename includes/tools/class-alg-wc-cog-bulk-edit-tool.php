@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.8.8
+ * @version 2.9.5
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -24,20 +24,39 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 
         /**
 		 * Tool prices page's slug.
+         *
+         * @since 2.9.5
 		 *
 		 * @var string
 		 */
 		private $page_slug_prices = 'bulk-edit-prices';
 
 		/**
+		 * Update costs bkg process.
+		 *
+		 * @since 2.9.5
+         *
 		 * @var Alg_WC_Cost_of_Goods_Update_Cost_Bkg_Process
 		 */
 		public $update_cost_bkg_process;
 
         /**
+         * Update prices bkg process.
+         *
+         * @since 2.9.5
+         *
 		 * @var Alg_WC_Cost_of_Goods_Update_Price_Bkg_Process
 		 */
 		public $update_price_bkg_process;
+
+		/**
+         * Update variation costs bkg process.
+         *
+         * @since 2.9.5
+         *
+		 * @var Alg_WC_Cost_of_Goods_Update_Variation_Costs_Bkg_Process
+		 */
+		public $update_variation_costs_bkg_process;
 
 		/**
 		 * Constructor.
@@ -118,20 +137,22 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * init_bkg_process.
 		 *
-		 * @version 2.6.3
+		 * @version 2.9.5
 		 * @since   2.5.1
 		 */
 		function init_bkg_process() {
 			require_once( alg_wc_cog()->plugin_path() . '/includes/background-process/class-alg-wc-cog-update-cost-bkg-process.php' );
 			require_once( alg_wc_cog()->plugin_path() . '/includes/background-process/class-alg-wc-cog-update-price-bkg-process.php' );
-			$this->update_cost_bkg_process = new Alg_WC_Cost_of_Goods_Update_Cost_Bkg_Process();
-			$this->update_price_bkg_process = new Alg_WC_Cost_of_Goods_Update_Price_Bkg_Process();
+			require_once( alg_wc_cog()->plugin_path() . '/includes/background-process/class-alg-wc-cog-update-variation-costs-bkg-process.php' );
+			$this->update_cost_bkg_process            = new Alg_WC_Cost_of_Goods_Update_Cost_Bkg_Process();
+			$this->update_price_bkg_process           = new Alg_WC_Cost_of_Goods_Update_Price_Bkg_Process();
+			$this->update_variation_costs_bkg_process = new Alg_WC_Cost_of_Goods_Update_Variation_Costs_Bkg_Process();
 		}
 
 		/**
 		 * Update costs on Ajax for bulk edit tools.
 		 *
-		 * @version 2.7.9
+		 * @version 2.9.5
 		 * @since   2.5.1
 		 */
 		function ajax_update_product_data() {
@@ -144,16 +165,19 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			if ( isset( $form_data["_nonce_{$update_type}_val"] ) && ! wp_verify_nonce( $form_data["_nonce_{$update_type}_val"], "_nonce_{$update_type}_action" ) ) {
 				wp_send_json_error( esc_html__( 'Something went wrong! Please try again.', 'cost-of-goods-for-woocommerce' ) );
 			}
-			$percentage       = isset( $form_data['percentage'] ) ? (float) sanitize_text_field( $form_data['percentage'] ) : '';
-			$absolute_profit  = isset( $form_data['absolute_profit'] ) ? (float) sanitize_text_field( $form_data['absolute_profit'] ) : '';
-			$affected_field   = isset( $form_data['affected_field'] ) ? $form_data['affected_field'] : 'regular_price';
-			$rounding         = isset( $form_data['rounding'] ) ? $form_data['rounding'] : '';
+			$percentage             = isset( $form_data['percentage'] ) ? (float) sanitize_text_field( $form_data['percentage'] ) : '';
+			$absolute_profit        = isset( $form_data['absolute_profit'] ) ? (float) sanitize_text_field( $form_data['absolute_profit'] ) : '';
+			$affected_field         = isset( $form_data['affected_field'] ) ? $form_data['affected_field'] : 'regular_price';
+			$rounding               = isset( $form_data['rounding'] ) ? $form_data['rounding'] : '';
+			$costs_filter           = sanitize_text_field( isset( $form_data['costs_filter'] ) ? $form_data['costs_filter'] : 'ignore_costs' );
+			$update_variation_costs = filter_var( isset( $form_data['update_variation_costs'] ) ? $form_data['update_variation_costs'] : false, FILTER_VALIDATE_BOOLEAN );
+			$empty_variation_costs_required = filter_var( isset( $form_data['empty_variation_costs_required'] ) ? $form_data['empty_variation_costs_required'] : false, FILTER_VALIDATE_BOOLEAN );
 			// Requirements.
 			if ( empty( $update_type ) ) {
 				wp_send_json_error( esc_html__( 'Some error has occurred. Please, try again.', 'cost-of-goods-for-woocommerce' ) );
 			}
 			if ( 'update_costs' === $tool_type ) {
-				if ( empty( $percentage ) ) {
+				if ( isset( $form_data['percentage'] ) && empty( $percentage ) ) {
 					wp_send_json_error( esc_html__( 'Invalid percentage.', 'cost-of-goods-for-woocommerce' ) );
 				}
 			} else {
@@ -171,6 +195,28 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				'fields'         => 'ids',
 				'tax_query'      => array()
 			);
+			if ( $update_variation_costs ) {
+				$query_args['post_type'] = 'product_variation';
+				if ( $empty_variation_costs_required ) {
+					$query_args['meta_query'] = array(
+						'relation' => 'OR',
+						array(
+							'key'     => '_alg_wc_cog_cost',
+							'value'   => 0,
+							'compare' => '==',
+						),
+						array(
+							'key'     => '_alg_wc_cog_cost',
+							'value'   => '',
+							'compare' => '==',
+						),
+						array(
+							'key'     => '_alg_wc_cog_cost',
+							'compare' => 'NOT EXISTS',
+						),
+					);
+				}
+			}
 			// Product Category.
 			$product_category = isset( $form_data['product_category'] ) ? $form_data['product_category'] : '';
 			$product_category = is_array( $product_category ) ? $product_category : array();
@@ -197,101 +243,103 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			}
             $posts                  = get_posts( $query_args );
 			$bkg_process_min_amount = get_option( 'alg_wc_cog_bkg_process_min_amount', 100 );
-            $args                   = array(
-	            'products'      => $posts,
-                'bkg_process'   => count( $posts ) >= $bkg_process_min_amount,
-                'options'       => array(
-	                'percentage'      => $percentage,
-	                'absolute_profit' => $absolute_profit,
-	                'update_type'     => $update_type,
-	                'affected_field'  => $affected_field,
-	                'rounding'        => $rounding,
-                ),
-            );
+			$args                   = array(
+				'products'    => $posts,
+				'bkg_process' => count( $posts ) >= $bkg_process_min_amount,
+				'options'     => array(
+					'costs_filter'    => $costs_filter,
+					'percentage'      => $percentage,
+					'absolute_profit' => $absolute_profit,
+					'update_type'     => $update_type,
+					'affected_field'  => $affected_field,
+					'rounding'        => $rounding,
+				),
+			);
             // For bulk update - costs
             if( 'update_costs' === $tool_type ) {
-	            wp_send_json_success( $this->bulk_update_costs( $args ) );
+	            if ( ! $update_variation_costs ) {
+		            $bkg_process_progress_msg = __( 'Product costs are being updated via background processing.', 'cost-of-goods-for-woocommerce' );
+		            $bkg_process_progress_msg .= 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ? ' ' . sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) ) : '';
+		            wp_send_json_success( $this->bulk_update_products( $args, array(
+			            'bkg_process_obj'          => $this->update_cost_bkg_process,
+			            'success_msg'              => __( 'Successfully updated product costs.', 'cost-of-goods-for-woocommerce' ),
+			            'bkg_process_progress_msg' => $bkg_process_progress_msg,
+			            'no_bkg_process_function'  => 'update_product_cost_by_percentage',
+		            ) ) );
+	            } else {
+		            $bkg_process_progress_msg = __( 'Variation costs are being updated via background processing.', 'cost-of-goods-for-woocommerce' );
+		            $bkg_process_progress_msg .= 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ? ' ' . sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) ) : '';
+		            wp_send_json_success( $this->bulk_update_products( $args, array(
+			            'bkg_process_obj'          => $this->update_variation_costs_bkg_process,
+			            'success_msg'              => __( 'Successfully updated variation costs.', 'cost-of-goods-for-woocommerce' ),
+			            'bkg_process_progress_msg' => $bkg_process_progress_msg,
+			            'no_bkg_process_function'  => 'update_variation_cost_from_parent',
+		            ) ) );
+	            }
             }
             // For bulk update - prices
 			if( 'update_prices' === $tool_type ) {
-				wp_send_json_success( $this->bulk_update_prices( $args ) );
+				$bkg_process_progress_msg = __( 'Product prices are being updated via background processing.', 'cost-of-goods-for-woocommerce' );
+				$bkg_process_progress_msg .= 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ? ' ' . sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) ) : '';
+				wp_send_json_success( $this->bulk_update_products( $args, array(
+					'bkg_process_obj'          => $this->update_price_bkg_process,
+					'success_msg'              => __( 'Successfully updated product prices.', 'cost-of-goods-for-woocommerce' ),
+					'bkg_process_progress_msg' => $bkg_process_progress_msg,
+					'no_bkg_process_function'  => 'update_product_cost_by_percentage',
+				) ) );
 			}
 		}
 
 		/**
-		 * Bulk update product prices
-		 *
-		 * @version 2.7.9
-		 * @since   2.6.1
-		 *
-		 * @param array $args
+         * bulk_update_products.
+         *
+         * @version 2.9.5
+         * @since   2.9.5
+         *
+		 * @param $update_args
+		 * @param $function_args
 		 *
 		 * @return string
 		 */
-		function bulk_update_prices( $args = array() ) {
-			$args = wp_parse_args( $args, array(
+		function bulk_update_products( $update_args = array(), $function_args = array() ) {
+			$update_args = wp_parse_args( $update_args, array(
 				'products'    => array(),
 				'bkg_process' => false,
 				'options'     => array(),
 			) );
-			$products    = $args['products'];
-			$bkg_process = $args['bkg_process'];
-			$options     = $args['options'];
-			$message     = __( 'Successfully updated product prices.', 'cost-of-goods-for-woocommerce' );
+			$products    = $update_args['products'];
+			$bkg_process = $update_args['bkg_process'];
+			$options     = $update_args['options'];
+			$function_args = wp_parse_args( $function_args, array(
+				'bkg_process_obj'          => null,
+				'success_msg'              => __( 'Successfully updated product prices.', 'cost-of-goods-for-woocommerce' ),
+				'bkg_process_progress_msg' => __( 'Product prices are being updated via background processing.', 'cost-of-goods-for-woocommerce' ),
+				'no_bkg_process_function'  => 'update_product_price_by_profit',
+				'no_bkg_process_obj'       => alg_wc_cog()->core->products
+			) );
+			$message = $function_args['success_msg'];
+            $bkg_process_obj = $function_args['bkg_process_obj'];
+            $no_bkg_process_function = $function_args['no_bkg_process_function'];
+			$no_bkg_process_obj = $function_args['no_bkg_process_obj'];
 			if ( $bkg_process ) {
-				$message = __( 'Product prices are being updated via background processing.', 'cost-of-goods-for-woocommerce' );
-				$message .= 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ? ' ' . sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) ) : '';
-				$this->update_price_bkg_process->cancel_process();
+				$message = $function_args['bkg_process_progress_msg'];
+				call_user_func( array( $bkg_process_obj, "cancel_process" ) );
 			}
 			foreach ( $products as $product_id ) {
 				$_options = wp_parse_args( $options, array( 'product_id' => $product_id ) );
 				if ( $bkg_process ) {
-					$this->update_price_bkg_process->push_to_queue( $_options );
+					call_user_func_array( array( $bkg_process_obj, "push_to_queue" ), array( $_options ) );
 				} else {
-					alg_wc_cog()->core->products->update_product_price_by_profit( $_options );
+					call_user_func_array( array( $no_bkg_process_obj, $no_bkg_process_function ), array( $_options ) );
 				}
 			}
 			if ( $bkg_process ) {
-				$this->update_price_bkg_process->save()->dispatch();
+				call_user_func( array( $bkg_process_obj, "save" ) );
+				call_user_func( array( $bkg_process_obj, "dispatch" ) );
 			}
-			return esc_html( $message );
-		}
-
-		/**
-         * Bulk update product costs
-         *
-		 * @version 2.6.1
-		 * @since   2.6.1
-         *
-		 * @param array $args
-		 *
-		 * @return string
-		 */
-		function bulk_update_costs( $args = array() ) {
-			$products    = isset( $args['products'] ) ? (array) $args['products'] : array();
-			$bkg_process = isset( $args['bkg_process'] ) && $args['bkg_process'];
-			$options     = isset( $args['options'] ) ? (array) $args['options'] : array();
-			$message     = __( 'Successfully updated product costs.', 'cost-of-goods-for-woocommerce' );
-
-			if ( $bkg_process ) {
-				$message = __( 'Product costs are being updated via background processing.', 'cost-of-goods-for-woocommerce' );
-				$message .= 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ? ' ' . sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) ) : '';
-				$this->update_cost_bkg_process->cancel_process();
-			}
-
-			foreach ( $products as $product_id ) {
-				$_options = wp_parse_args( $options, array( 'product_id' => $product_id ) );
-				if ( $bkg_process ) {
-					$this->update_cost_bkg_process->push_to_queue( $_options );
-				} else {
-					alg_wc_cog()->core->products->update_product_cost_by_percentage( $_options );
-				}
-			}
-
-			if ( $bkg_process ) {
-				$this->update_cost_bkg_process->save()->dispatch();
-			}
-
+			if ( empty( $products ) ) {
+				$message = __( 'It is not necessary to update any products.', 'cost-of-goods-for-woocommerce' );
+            }
 			return esc_html( $message );
 		}
 
@@ -376,9 +424,39 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		}
 
 		/**
+         * display_bulk_edit_variations.
+         *
+		 * @version 2.9.5
+		 * @since   2.9.5
+         *
+		 * @return void
+		 */
+		function display_bulk_edit_variations() {
+			?>
+
+            <input type="hidden" name="update_variation_costs" value="yes">
+            <table class="form-table" role="presentation">
+                <tr>
+                    <th scope="row"><label for="empty_variation_costs_required"><?php esc_html_e( 'Undefined costs', 'cost-of-goods-for-woocommerce' ); ?></label>
+                    </th>
+                    <td>
+                        <label class="description">
+                            <input id="price-empty_variation_costs_required" name="empty_variation_costs_required" type="checkbox" checked>
+							<?php esc_html_e( 'Only update variations with empty costs or set as zero', 'cost-of-goods-for-woocommerce' ); ?>
+                        </label>
+                        <p class="description">
+		                    <?php esc_html_e( 'If disabled, will update all variations, including the ones with costs already set.', 'cost-of-goods-for-woocommerce' ); ?>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+			<?php
+		}
+
+		/**
 		 * Display content for Profit Section.
 		 *
-		 * @version 2.7.8
+		 * @version 2.9.5
 		 * @since   2.5.1
 		 */
 		function display_bulk_edit_costs_profit() {
@@ -420,6 +498,19 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			            </p>
 		            </td>
 	            </tr>
+                <tr>
+                    <th scope="row"><label for="costs_filter"><?php esc_html_e( 'Filter by cost', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+                    <td>
+                        <select class="wc-enhanced-select" <?php echo esc_attr( $disabled ); ?> data-return_id="id" <?php echo esc_attr( $disabled ); ?> id="costs_filter" name="costs_filter">
+                            <option value="ignore_costs"><?php esc_html_e( 'Update products regardless of their current cost', 'cost-of-goods-for-woocommerce' ); ?></option>
+                            <option value="products_without_costs"><?php esc_html_e( 'Update products with no costs set, including zero or empty', 'cost-of-goods-for-woocommerce' ); ?></option>
+                            <option value="products_with_costs"><?php esc_html_e( 'Update products with costs already set', 'cost-of-goods-for-woocommerce' ); ?></option>
+                        </select>
+                        <p class="description">
+	                        <?php echo ( ! empty( $blocked_text ) ) ? $blocked_text : ''; ?>
+                        </p>
+                    </td>
+                </tr>
             </table>
 			<?php
 		}
@@ -427,7 +518,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Price Section.
 		 *
-		 * @version 2.7.3
+		 * @version 2.9.5
 		 * @since   2.5.1
 		 */
 		function display_bulk_edit_costs_price() {
@@ -467,6 +558,19 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			            </p>
 		            </td>
 	            </tr>
+                <tr>
+                    <th scope="row"><label for="costs_filter"><?php esc_html_e( 'Filter by cost', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+                    <td>
+                        <select class="wc-enhanced-select" <?php echo esc_attr( $disabled ); ?> data-return_id="id" <?php echo esc_attr( $disabled ); ?> id="costs_filter" name="costs_filter">
+                            <option value="ignore_costs"><?php esc_html_e( 'Update products regardless of their current cost', 'cost-of-goods-for-woocommerce' ); ?></option>
+                            <option value="products_without_costs"><?php esc_html_e( 'Update products with no costs set, including zero or empty', 'cost-of-goods-for-woocommerce' ); ?></option>
+                            <option value="products_with_costs"><?php esc_html_e( 'Update products with costs already set', 'cost-of-goods-for-woocommerce' ); ?></option>
+                        </select>
+                        <p class="description">
+				            <?php echo ( ! empty( $blocked_text ) ) ? $blocked_text : ''; ?>
+                        </p>
+                    </td>
+                </tr>
             </table>
 			<?php
 		}
@@ -637,6 +741,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 					'save_btn_bottom' => sprintf( '<input type="submit" class="button-primary" value="%s">', esc_html__( 'Update Costs', 'cost-of-goods-for-woocommerce' ) ),
 					'form_class'      => 'bulk-edit-costs ajax-submission',
 					'callback'        => 'display_bulk_edit_costs_profit',
+				),
+				'costs_variations'      => array(
+					'label'           => esc_html__( 'Variations', 'cost-of-goods-for-woocommerce' ),
+					'desc'            => esc_html__( 'Set or update the variations to have the same cost value as their parent products.', 'cost-of-goods-for-woocommerce' ),
+					'save_btn_bottom' => sprintf( '<input type="submit" class="button-primary" value="%s">', esc_html__( 'Update Costs', 'cost-of-goods-for-woocommerce' ) ),
+					'form_class'      => 'bulk-edit-costs ajax-submission',
+					'callback'        => 'display_bulk_edit_variations',
 				),
 				'prices_profit'   => array(
 					'label'           => esc_html__( 'By Profit', 'cost-of-goods-for-woocommerce' ),

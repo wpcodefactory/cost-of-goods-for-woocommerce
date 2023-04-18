@@ -91,9 +91,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 			);
 			$curcy_multicurrency_opts = array(
 				array(
-					'title' => __( 'CURCY – Multi Currency for WooCommerce', 'cost-of-goods-for-woocommerce' ),
+					'title' => __( 'CURCY - Multi Currency for WooCommerce', 'cost-of-goods-for-woocommerce' ),
 					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/woo-multi-currency/" target="_blank">' . __( 'CURCY – Multi Currency for WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/woo-multi-currency/" target="_blank">' . __( 'CURCY - Multi Currency for WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'id'    => 'alg_wc_cog_compatibility_curcy_options',
 				),
 				array(

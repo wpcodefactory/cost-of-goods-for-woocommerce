@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 2.8.7
+ * @version 2.9.5
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -216,6 +216,36 @@ if ( ! function_exists( 'alg_wc_cog_get_blocked_options_message' ) ) {
 	 */
 	function alg_wc_cog_get_blocked_options_message() {
 		return sprintf( __( 'Disabled options can be unlocked using <a href="%s" target="_blank"><strong>%s</strong></a>', 'cost-of-goods-for-woocommerce' ), 'https://wpfactory.com/item/cost-of-goods-for-woocommerce/', __( 'Cost of Goods for WooCommerce Pro', 'cost-of-goods-for-woocommerce' ) );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_sanitize_number' ) ) {
+
+	/**
+	 * alg_wc_cog_sanitize_number.
+	 *
+	 * @version 2.9.5
+	 * @since   2.9.5
+	 *
+	 * @param $args
+	 *
+	 * @return numeric
+	 */
+	function alg_wc_cog_sanitize_number( $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'number'                    => 0,
+			'dots_and_commas_operation' => 'comma-to-dot', // comma-to-dot | dot-to-comma | none
+		) );
+		$args = apply_filters( 'alg_wc_cog_sanitize_number_args', $args );
+		$number = $args['number'];
+		$dots_and_commas_operation = $args['dots_and_commas_operation'];
+		if ( 'comma-to-dot' === $dots_and_commas_operation ) {
+			$number = str_replace( ',', '.', $number );
+		} elseif ( 'dot-to-comma' === $dots_and_commas_operation ) {
+			$number = str_replace( '.', ',', (string) $number );
+		}
+
+		return $number;
 	}
 }
 

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.9.4
+ * @version 2.9.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -179,7 +179,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	 *
 	 * @see https://stackoverflow.com/a/4325608/1193038
 	 *
-	 * @version 2.3.5
+	 * @version 2.9.5
 	 * @since   2.3.5
 	 *
 	 * @param $value
@@ -188,8 +188,12 @@ class Alg_WC_Cost_of_Goods_Products {
 	 */
 	function sanitize_cog_meta( $value ) {
 		if ( 'yes' === get_option( 'alg_wc_cog_products_sanitize_cog_meta', 'no' ) ) {
-			$value = str_replace( ',', '.', $value );
+			$value = alg_wc_cog_sanitize_number( array(
+				'number'                    => $value,
+				'dots_and_commas_operation' => 'comma-to-dot'
+			) );
 		}
+
 		return $value;
 	}
 
@@ -345,7 +349,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_cost.
 	 *
-	 * @version 2.8.5
+	 * @version 2.9.5
 	 * @since   1.0.0
 	 */
 	function get_product_cost( $product_id, $args = null ) {
@@ -365,11 +369,10 @@ class Alg_WC_Cost_of_Goods_Products {
 		) {
 			$cost = get_post_meta( $parent_id, '_alg_wc_cog_cost', true );
 		}
-		if ( 'comma-to-dot' === $dots_and_commas_operation ) {
-			$cost = str_replace( ',', '.', $cost );
-		} elseif ( 'dot-to-comma' === $dots_and_commas_operation ) {
-			$cost = str_replace( '.', ',', (string) $cost );
-		}
+		$cost = alg_wc_cog_sanitize_number( array(
+			'number'                    => $cost,
+			'dots_and_commas_operation' => $dots_and_commas_operation
+		) );
 		$cost = $convert_to_number ? (float) $cost : $cost;
 		return apply_filters( 'alg_wc_cog_get_product_cost', $cost, $product_id, isset( $parent_id ) ? $parent_id : null, $args );
 	}
@@ -590,9 +593,31 @@ class Alg_WC_Cost_of_Goods_Products {
 	}
 
 	/**
+     * update_variation_cost_from_parent.
+     *
+	 * @version 2.9.5
+	 * @since   2.9.5
+     *
+	 * @param $args
+	 *
+	 * @return void
+	 */
+	function update_variation_cost_from_parent( $args = null ) {
+		$args       = wp_parse_args( $args, array(
+			'product_id' => '',
+		) );
+		$product_id = $args['product_id'];
+		$product    = wc_get_product( $product_id );
+		$parent_id  = $product->get_parent_id();
+		update_post_meta( $product_id, '_alg_wc_cog_cost', $this->get_product_cost( $parent_id, array(
+			'check_parent_cost' => false
+		) ) );
+	}
+
+	/**
 	 * update_product_price.
 	 *
-	 * @version 2.6.3
+	 * @version 2.9.5
 	 * @since   2.5.1
 	 *
 	 * @param null $args
@@ -602,6 +627,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	function update_product_cost_by_percentage( $args = null ) {
 		$args              = wp_parse_args( $args, array(
 			'product_id'        => '',
+			'costs_filter'      => 'ignore_costs', // ignore_costs, products_without_costs, products_with_costs
 			'percentage'        => 100,
 			'update_type'       => 'costs_price', // costs_profit | costs_price
 			'update_variations' => true
@@ -611,10 +637,13 @@ class Alg_WC_Cost_of_Goods_Products {
 		$product           = wc_get_product( $product_id );
 		$update_variations = $args['update_variations'];
 		$update_type       = $args['update_type'];
+        $costs_filter      = $args['costs_filter'];
 		if ( ! is_a( $product, 'WC_Product' ) ) {
 			return false;
 		}
-		update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $this->calculate_product_cost_by_percentage( $product->get_price(), $percentage, $update_type ) );
+		if ( $this->can_update_product_cost_based_on_costs_filter( $product_id, $costs_filter ) ) {
+			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $this->calculate_product_cost_by_percentage( $product->get_price(), $percentage, $update_type ) );
+		}
 		if (
 			$update_variations &&
 			$product->is_type( 'variable' ) && $product instanceof WC_Product_Variable
@@ -625,10 +654,36 @@ class Alg_WC_Cost_of_Goods_Products {
 				if ( empty( $variation_id ) || empty( $display_price ) ) {
 					continue;
 				}
-				update_post_meta( $variation_id, '_alg_wc_cog_cost', $this->calculate_product_cost_by_percentage( $display_price, $percentage, $update_type ) );
+				if ( $this->can_update_product_cost_based_on_costs_filter( $variation_id, $costs_filter ) ) {
+					update_post_meta( $variation_id, '_alg_wc_cog_cost', $this->calculate_product_cost_by_percentage( $display_price, $percentage, $update_type ) );
+				}
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * can_update_product_cost.
+	 *
+	 * @version 2.9.5
+	 * @since   2.9.5
+     *
+	 * @param $product_id
+	 * @param $costs_filter
+	 *
+	 * @return bool
+	 */
+	function can_update_product_cost_based_on_costs_filter( $product_id, $costs_filter ): bool {
+		$can_update   = false;
+		if (
+			( 'products_without_costs' === $costs_filter && empty( $this->get_product_cost( $product_id, array( 'check_parent_cost' => false ) ) ) ) ||
+			( 'products_with_costs' === $costs_filter && ! empty( $this->get_product_cost( $product_id, array( 'check_parent_cost' => false ) ) ) ) ||
+			( 'ignore_costs' === $costs_filter )
+		) {
+			$can_update = true;
+		}
+
+		return $can_update;
 	}
 
 	/**
