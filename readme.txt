@@ -3,7 +3,7 @@ Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.2
-Stable tag: 2.9.5
+Stable tag: 2.9.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,10 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 2.9.6 - 18/04/2023 =
+* Fix - `class-alg-wc-cog-products.php:456` - Call to a member function is_type() on bool.
+* WC tested up to: 7.6.
 
 = 2.9.5 - 17/04/2023 =
 * Fix - Products - Cost archive - New price column doesn't take decimals into account.

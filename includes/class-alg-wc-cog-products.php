@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.9.5
+ * @version 2.9.6
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -451,24 +451,29 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_profit_html.
 	 *
-	 * @version 2.3.9
+	 * @version 2.9.6
 	 * @since   1.0.0
 	 */
 	function get_product_profit_html( $product_id, $template = '%profit% (%profit_percent%)' ) {
 		$product = wc_get_product( $product_id );
-		if ( $product->is_type( 'variable' ) ) {
-			return $this->get_variable_product_html( $product_id, 'profit', $template );
-		} else {
-			if ( '' === ( $profit = $this->get_product_profit( $product_id ) ) ) {
-				return '';
+		if ( is_a( $product, 'WC_Product' ) ) {
+			if ( $product->is_type( 'variable' ) ) {
+				return $this->get_variable_product_html( $product_id, 'profit', $template );
 			} else {
-				$placeholders = array(
-					'%profit%'         => wc_price( $profit ),
-					'%profit_percent%' => sprintf( '%0.2f%%', ( 0 != ( $cost  = $this->get_product_cost( $product_id ) ) ? $profit / $cost  * 100 : '' ) ),
-					'%profit_margin%'  => sprintf( '%0.2f%%', ( 0 != ( $price = $this->get_product_price( $product ) ) ? $profit / $price * 100 : '' ) ),
-				);
-				return str_replace( array_keys( $placeholders ), $placeholders, $template );
+				if ( '' === ( $profit = $this->get_product_profit( $product_id ) ) ) {
+					return '';
+				} else {
+					$placeholders = array(
+						'%profit%'         => wc_price( $profit ),
+						'%profit_percent%' => sprintf( '%0.2f%%', ( 0 != ( $cost = $this->get_product_cost( $product_id ) ) ? $profit / $cost * 100 : '' ) ),
+						'%profit_margin%'  => sprintf( '%0.2f%%', ( 0 != ( $price = $this->get_product_price( $product ) ) ? $profit / $price * 100 : '' ) ),
+					);
+
+					return str_replace( array_keys( $placeholders ), $placeholders, $template );
+				}
 			}
+		} else {
+			return '';
 		}
 	}
 
