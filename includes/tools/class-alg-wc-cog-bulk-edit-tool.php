@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.9.5
+ * @version 2.9.7
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -152,7 +152,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Update costs on Ajax for bulk edit tools.
 		 *
-		 * @version 2.9.5
+		 * @version 2.9.7
 		 * @since   2.5.1
 		 */
 		function ajax_update_product_data() {
@@ -285,7 +285,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 					'bkg_process_obj'          => $this->update_price_bkg_process,
 					'success_msg'              => __( 'Successfully updated product prices.', 'cost-of-goods-for-woocommerce' ),
 					'bkg_process_progress_msg' => $bkg_process_progress_msg,
-					'no_bkg_process_function'  => 'update_product_cost_by_percentage',
+					'no_bkg_process_function'  => 'update_product_price_by_profit',
 				) ) );
 			}
 		}
