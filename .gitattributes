@@ -3,9 +3,12 @@
 .github export-ignore
 README.md export-ignore
 composer.lock export-ignore
+# Analytics
 includes/analytics/README.md export-ignore
 includes/analytics/package.json export-ignore
 includes/analytics/package-lock.json export-ignore
+includes/analytics/package-lock.json export-ignore
+includes/analytics/pnpm-lock.yaml export-ignore
 includes/analytics/node_modules/
 includes/analytics/webpack.config.js
 includes/analytics/.prettierrc.json export-ignore

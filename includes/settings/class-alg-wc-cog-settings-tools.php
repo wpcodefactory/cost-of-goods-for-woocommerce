@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 2.9.3
+ * @version 2.9.8
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -71,7 +71,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.9.3
+	 * @version 2.9.8
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -411,6 +411,15 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			array(
 				'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_analytics_orders_cost_profit_totals',
+				'default'           => 'no',
+				'type'              => 'checkbox',
+				'checkboxgroup'     => '',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'desc'              => __( 'Add columns for individual elements from the costs total', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'          => __( 'Adds items, shipping, gateway, shipping classes and extra costs.', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_analytics_orders_individual_costs',
 				'default'           => 'no',
 				'type'              => 'checkbox',
 				'checkboxgroup'     => 'end',

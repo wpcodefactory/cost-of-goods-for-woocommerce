@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Orders.
  *
- * @version 2.4.8
+ * @version 2.9.8
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -56,8 +56,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			add_filter( 'woocommerce_admin_orders_report_export_column_names', array( $this, 'add_profit_columns_names_to_export' ), PHP_INT_MAX, 2 );
 			add_filter( 'alg_wc_cog_analytics_orders_profit_total_validation', array( $this, 'add_profit_total_column_if_option_is_enabled' ) );
 
-			
-
 			// Test, Debug
 			// woocommerce_analytics_orders_stats_select_query
 			// woocommerce_analytics_orders_stats_query_args
@@ -84,7 +82,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_analytics_localization_info.
 		 *
-		 * @version 2.4.5
+		 * @version 2.9.8
 		 * @since   2.4.5
 		 *
 		 * @param $info
@@ -94,6 +92,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		function add_analytics_localization_info( $info ) {
 			$info['cost_and_profit_totals_enabled_on_orders']  = 'yes' === get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' );
 			$info['cost_and_profit_columns_enabled_on_orders'] = 'yes' === get_option( 'alg_wc_cog_analytics_orders', 'no' );
+			$info['individual_order_costs_enabled']            = 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' );
+
 			return $info;
 		}
 
@@ -169,7 +169,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_costs_select_orders_subquery.
 		 *
-		 * @version 2.4.1
+		 * @version 2.9.8
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -180,13 +180,21 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders', 'no' ) ) {
 				$clauses[] = ', IFNULL(order_cost_postmeta.meta_value, 0) AS order_cost';
 			}
+
+			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
+				$clauses[] = ', IFNULL(items_cost_pm.meta_value, 0) AS items_cost';
+				$clauses[] = ', IFNULL(shipping_cost_pm.meta_value, 0) AS shipping_cost';
+				$clauses[] = ', IFNULL(gateway_cost_pm.meta_value, 0) AS gateway_cost';
+				$clauses[] = ', IFNULL(extra_cost_per_orders_pm.meta_value, 0) + IFNULL(extra_cost_all_orders_pm.meta_value, 0) + IFNULL(extra_cost_from_meta_pm.meta_value, 0) AS extra_cost';
+				$clauses[] = ', IFNULL(shipping_classes_cost_pm.meta_value, 0) AS shipping_classes_cost';
+			}
 			return $clauses;
 		}
 
 		/**
 		 * add_costs_join_orders.
 		 *
-		 * @version 2.4.1
+		 * @version 2.9.8
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -197,6 +205,16 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			global $wpdb;
 			$clauses[] = "LEFT JOIN {$wpdb->postmeta} order_cost_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_cost_postmeta.post_id AND order_cost_postmeta.meta_key = '_alg_wc_cog_order_cost'";
 
+			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} items_cost_pm ON {$wpdb->prefix}wc_order_stats.order_id = items_cost_pm.post_id AND items_cost_pm.meta_key = '_alg_wc_cog_order_items_cost'";
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} shipping_cost_pm ON {$wpdb->prefix}wc_order_stats.order_id = shipping_cost_pm.post_id AND shipping_cost_pm.meta_key = '_alg_wc_cog_order_shipping_cost'";
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} gateway_cost_pm ON {$wpdb->prefix}wc_order_stats.order_id = gateway_cost_pm.post_id AND gateway_cost_pm.meta_key = '_alg_wc_cog_order_gateway_cost'";
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} extra_cost_per_orders_pm ON {$wpdb->prefix}wc_order_stats.order_id = extra_cost_per_orders_pm.post_id AND extra_cost_per_orders_pm.meta_key = '_alg_wc_cog_order_extra_cost_per_order'";
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} extra_cost_all_orders_pm ON {$wpdb->prefix}wc_order_stats.order_id = extra_cost_all_orders_pm.post_id AND extra_cost_all_orders_pm.meta_key = '_alg_wc_cog_order_extra_cost'";
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} extra_cost_from_meta_pm ON {$wpdb->prefix}wc_order_stats.order_id = extra_cost_from_meta_pm.post_id AND extra_cost_from_meta_pm.meta_key = '_alg_wc_cog_order_extra_cost_from_meta'";
+				$clauses[] = "LEFT JOIN {$wpdb->postmeta} shipping_classes_cost_pm ON {$wpdb->prefix}wc_order_stats.order_id = shipping_classes_cost_pm.post_id AND shipping_classes_cost_pm.meta_key = '_alg_wc_cog_order_shipping_classes_cost'";
+
+			}
 			// If we need to get something fron the options database
 			//$clauses[] = "JOIN {$wpdb->options} wpo ON option_name LIKE '%alg_wc_cog_currencies_rates%'";
 			return $clauses;
