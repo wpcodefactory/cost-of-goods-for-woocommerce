@@ -402,7 +402,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_price.
 	 *
-	 * @version 2.5.2
+	 * @version 2.9.9
 	 * @since   2.3.9
 	 *
 	 * @param $product
@@ -411,6 +411,19 @@ class Alg_WC_Cost_of_Goods_Products {
 	 * @return mixed
 	 */
 	function get_product_price( $product, $args = null ) {
+
+		// Check if $product is a valid product object. If not, try loading it.
+		if ( !( $product instanceof WC_Product ) ) {
+			$product_id = $product;
+			$product = wc_get_product( $product_id );
+			
+			// If it's still not a valid product object, log an error and return false
+			if ( !( $product instanceof WC_Product ) ) {
+				error_log( "Invalid product ID: $product_id" );
+				return false; // or you might return a default value instead
+			}
+		}
+
 		$args   = wp_parse_args( $args, array(
 			'method'               => get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ),
 			'params'               => array(),
@@ -419,6 +432,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		$params = array_merge( array( $product ), $args['params'] );
 		$return = call_user_func_array( $args['method'], $params );
 		return $args['return_zero_if_empty'] && empty( $return ) ? 0 : (float) $return;
+
 	}
 
 	/**
