@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 2.9.8\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-05-16T16:37:36+02:00\n"
+"POT-Creation-Date: 2023-06-13T23:03:40+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -44,7 +44,37 @@ msgstr ""
 msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:309
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:99
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:36
+msgid "Items cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:100
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:42
+msgid "Shipping cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:101
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:48
+msgid "Gateway cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:102
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:54
+msgid "Extra cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:103
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:60
+msgid "Shipping classes cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:359
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:88
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:145
@@ -69,7 +99,7 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:345
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:395
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:89
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:146
@@ -2888,31 +2918,6 @@ msgstr ""
 
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:356
 msgid "Sale price"
-msgstr ""
-
-#: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:36
-msgid "Items cost"
-msgstr ""
-
-#: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:42
-msgid "Shipping cost"
-msgstr ""
-
-#: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:48
-msgid "Gateway cost"
-msgstr ""
-
-#: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:54
-msgid "Extra cost"
-msgstr ""
-
-#: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:60
-msgid "Shipping classes cost"
 msgstr ""
 
 #: includes/analytics/build/index.js:1

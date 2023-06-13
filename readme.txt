@@ -1,9 +1,9 @@
 === Cost of Goods for WooCommerce ===
-Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder
+Contributors: wpcodefactory, karzin, kerbhavik, jaedm97, algoritmika, anbinder, omardabbas, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.2
-Stable tag: 2.9.8
+Stable tag: 3.0.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,12 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.0.0 - 13/06/2023 =
+* Dev - Tools - Analytics - Orders - Individual elements should be present on the CSV.
+
+= 2.9.9 - 25/05/2023 =
+* Update function Alg_WC_Cost_of_Goods_Products() ->get_product_price() with condition if product object exist or not .
 
 = 2.9.8 - 16/05/2023 =
 * Fix - Analytics - Update dependencies.
