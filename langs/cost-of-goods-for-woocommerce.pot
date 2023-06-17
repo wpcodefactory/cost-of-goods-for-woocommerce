@@ -10,7 +10,27 @@ msgstr ""
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:309
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:99
+msgid "Items cost"
+msgstr ""
+
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:100
+msgid "Shipping cost"
+msgstr ""
+
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:101
+msgid "Gateway cost"
+msgstr ""
+
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:102
+msgid "Extra cost"
+msgstr ""
+
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:103
+msgid "Shipping classes cost"
+msgstr ""
+
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:359
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-revenue.php:47
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-stock.php:88
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\class-alg-wc-cog-orders-meta-boxes.php:145
@@ -30,7 +50,7 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:345
+#: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-orders.php:395
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-revenue.php:48
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\analytics\class-alg-wc-cog-analytics-stock.php:89
 #: E:\xampp\htdocs\wpfactory-local\wp-content\plugins\cost-of-goods-for-woocommerce-pro\includes\class-alg-wc-cog-orders-meta-boxes.php:146

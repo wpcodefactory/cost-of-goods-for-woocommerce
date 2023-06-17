@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Orders.
  *
- * @version 2.9.8
+ * @version 3.0.0
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -16,8 +16,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.4.8
-		 * @since   2.4.5
+		 * @version 3.0.0
+		 * @since   3.0.0
 		 *
 		 * @see     https://github.com/woocommerce/woocommerce-admin/tree/master/docs/examples/extensions
 		 * @see     https://woocommerce.wordpress.com/2020/02/20/extending-wc-admin-reports/
@@ -56,6 +56,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			add_filter( 'woocommerce_admin_orders_report_export_column_names', array( $this, 'add_profit_columns_names_to_export' ), PHP_INT_MAX, 2 );
 			add_filter( 'alg_wc_cog_analytics_orders_profit_total_validation', array( $this, 'add_profit_total_column_if_option_is_enabled' ) );
 
+			// Individual Costs export
+			add_filter( 'woocommerce_export_admin_orders_report_row_data', array( $this, 'add_individual_costs_row_data_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_admin_orders_report_export_column_names', array( $this, 'add_individual_costs_columns_names_to_export' ), PHP_INT_MAX, 2 );
+
 			// Test, Debug
 			// woocommerce_analytics_orders_stats_select_query
 			// woocommerce_analytics_orders_stats_query_args
@@ -78,6 +82,52 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			error_log(print_r($param,true));
 			return $param;
 		}*/
+
+		/**
+		 * add_individual_costs_columns_names_to_export.
+		 *
+		 * @version 3.0.0
+		 * @since   3.0.0
+		 *
+		 * @param $columns
+		 * @param $exporter
+		 *
+		 * @return mixed
+		 */
+		function add_individual_costs_columns_names_to_export( $columns, $exporter ) {
+			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
+				$columns['items_cost']            = __( 'Items cost', 'cost-of-goods-for-woocommerce' );
+				$columns['shipping_cost']         = __( 'Shipping cost', 'cost-of-goods-for-woocommerce' );
+				$columns['gateway_cost']          = __( 'Gateway cost', 'cost-of-goods-for-woocommerce' );
+				$columns['extra_cost']            = __( 'Extra cost', 'cost-of-goods-for-woocommerce' );
+				$columns['shipping_classes_cost'] = __( 'Shipping classes cost', 'cost-of-goods-for-woocommerce' );
+			}
+
+			return $columns;
+		}
+
+		/**
+		 * add_individual_costs_row_data_to_export.
+		 *
+		 * @version 3.0.0
+		 * @since   3.0.0
+		 *
+		 * @param $row
+		 * @param $item
+		 *
+		 * @return mixed
+		 */
+		function add_individual_costs_row_data_to_export( $row, $item ) {
+			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
+				$row['items_cost']            = $item['items_cost'];
+				$row['shipping_cost']         = $item['shipping_cost'];
+				$row['gateway_cost']          = $item['gateway_cost'];
+				$row['extra_cost']            = $item['extra_cost'];
+				$row['shipping_classes_cost'] = $item['shipping_classes_cost'];
+			}
+
+			return $row;
+		}
 
 		/**
 		 * add_analytics_localization_info.
