@@ -455,8 +455,12 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'title' => __( 'Extra Costs', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'From Meta', 'cost-of-goods-for-woocommerce' ),
 				'desc'  => __( 'Adds extra costs from order meta.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 				           sprintf( __( 'E.g.: %s.', 'cost-of-goods-for-woocommerce' ),
-					           implode( ', ', array( 'Stripe: ' . '<code>_stripe_fee</code>', 'PayPal: ' . '<code>PayPal Transaction Fee</code>' ) ) ) . '<br />' .
+					           implode( ', ', array(
+						           'Stripe: ' . '<code>_stripe_fee</code>',
+						           'PayPal: ' . '<code>PayPal Transaction Fee</code>'
+					           ) ) ) . '<br />' .
 				           '- ' . sprintf( __( 'You can also use dots to access serialized array metas. E.g.: Get fees from %s:', 'cost-of-goods-for-woocommerce' ), '<a href="https://woocommerce.com/pt-br/products/woocommerce-paypal-payments/" target="_blank">' . __( 'PayPal Payments', 'cost-of-goods-for-woocommerce' ) . '</a>' ) . ' ' . '<code>_ppcp_paypal_fees.paypal_fee.value</code>.' . '<br />' .
+				           '- ' . sprintf( __( 'The <a href="%s">"Payment Plugins for Stripe"</a> requires the "Display Stripe Fee" option to be enabled in the Advanced Settings in order to add the %s meta.', 'cost-of-goods-for-woocommerce' ), 'https://wordpress.org/plugins/woo-stripe-payment/', '<code>_stripe_fee</code>' ) . '<br />' .
 				           '- ' . __( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ) . '<br />' .
 				           '- ' . sprintf( __( "If you have issues, please try to enable the %s options.", 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Advanced > Force costs update', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
 				'type'  => 'title',

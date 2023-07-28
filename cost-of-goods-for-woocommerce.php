@@ -3,13 +3,13 @@
 Plugin Name: Cost of Goods for WooCommerce
 Plugin URI: https://wpfactory.com/item/cost-of-goods-for-woocommerce/
 Description: Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
-Version: 3.0.1
+Version: 3.0.2
 Author: WPFactory
 Author URI: https://wpfactory.com
 Text Domain: cost-of-goods-for-woocommerce
 Domain Path: /langs
 Copyright: © 2023 WPFactory
-WC tested up to: 7.8
+WC tested up to: 7.9
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
@@ -72,7 +72,7 @@ final class Alg_WC_Cost_of_Goods {
 	 * @var   string
 	 * @since 1.0.0
 	 */
-	public $version = '3.0.1';
+	public $version = '3.0.2';
 
 	/**
 	 * @var   Alg_WC_Cost_of_Goods The single instance of the class
@@ -109,12 +109,15 @@ final class Alg_WC_Cost_of_Goods {
 	/**
 	 * Initializes.
 	 *
-	 * @version 2.8.1
+	 * @version 3.0.2
 	 * @since   2.8.1
 	 */
 	function init(){
 		// Localization
 		add_action( 'init', array( $this, 'localize' ) );
+
+		// Declare compatibility with custom order tables for WooCommerce
+		add_action( 'before_woocommerce_init', array( $this, 'declare_compatibility_with_hpos' ) );
 
 		// Pro
 		if ( 'cost-of-goods-for-woocommerce-pro.php' === basename( __FILE__ ) ) {
@@ -159,6 +162,20 @@ final class Alg_WC_Cost_of_Goods {
 	function localize() {
 		// Set up localisation
 		load_plugin_textdomain( 'cost-of-goods-for-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
+	}
+
+	/**
+	 * declare_compatibility_with_hpos.
+	 *
+	 * @version 3.0.2
+	 * @since   3.0.2
+	 *
+	 * @see     https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#declaring-extension-incompatibility
+	 */
+	function declare_compatibility_with_hpos() {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
 	}
 
 	/**

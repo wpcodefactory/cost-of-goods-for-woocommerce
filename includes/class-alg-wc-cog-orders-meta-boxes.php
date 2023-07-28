@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 2.9.0
+ * @version 3.0.2
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -101,19 +101,21 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * add_order_meta_box.
 	 *
-	 * @version 2.3.4
+	 * @version 3.0.2
 	 * @since   1.4.0
 	 */
 	function add_order_meta_box() {
 		if ( ! apply_filters( 'alg_wc_cog_create_order_meta_box_validation', true ) ) {
 			return;
 		}
+		$screen = alg_wc_cog()->core->orders->get_shop_order_screen_id();
 		if ( alg_wc_cog()->core->orders->is_order_meta_box ) {
 			add_meta_box( 'alg-wc-cog',
 				__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ),
 				array( $this, 'render_order_meta_box' ),
-				'shop_order',
-				'side'
+				$screen,
+				'side',
+				'high'
 			);
 		}
 	}
@@ -121,22 +123,23 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 2.9.0
+	 * @version 3.0.2
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
 	function render_order_meta_box( $post ) {
 		$order_id            = get_the_ID();
-		$cost                = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'cost', true );
-		$handling_fee        = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'handling_fee', true );
-		$profit              = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit', true );
-		$profit_percent      = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit_percent', true );
-		$profit_margin       = get_post_meta( $order_id, '_alg_wc_cog_order_' . 'profit_margin', true );
+		$order               = wc_get_order( $order_id );
+		$cost                = $order->get_meta( '_alg_wc_cog_order_' . 'cost', true );
+		$handling_fee        = $order->get_meta( '_alg_wc_cog_order_' . 'handling_fee', true );
+		$profit              = $order->get_meta( '_alg_wc_cog_order_' . 'profit', true );
+		$profit_percent      = $order->get_meta( '_alg_wc_cog_order_' . 'profit_percent', true );
+		$profit_margin       = $order->get_meta( '_alg_wc_cog_order_' . 'profit_margin', true );
 		$profit_template     = get_option( 'alg_wc_cog_orders_profit_html_template', '%profit%' );
 		$profit_placeholders = array(
-			'%profit%'         => alg_wc_cog()->core->orders->format_order_column_value( $profit,         'profit' ),
+			'%profit%'         => alg_wc_cog()->core->orders->format_order_column_value( $profit, 'profit' ),
 			'%profit_percent%' => alg_wc_cog()->core->orders->format_order_column_value( $profit_percent, 'profit_percent' ),
-			'%profit_margin%'  => alg_wc_cog()->core->orders->format_order_column_value( $profit_margin,  'profit_margin' ),
+			'%profit_margin%'  => alg_wc_cog()->core->orders->format_order_column_value( $profit_margin, 'profit_margin' ),
 		);
 		$profit_html         = str_replace( array_keys( $profit_placeholders ), $profit_placeholders, $profit_template );
 		$table_args          = array( 'table_heading_type' => 'vertical', 'table_class' => 'widefat', 'columns_styles' => array( '', 'text-align:right;' ) );
@@ -166,7 +169,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		);
 		$cost_meta_keys = apply_filters( 'alg_wc_cog_cost_meta_keys', $cost_meta_keys );
 		foreach ( $cost_meta_keys as $key => $value ) {
-			$cost = get_post_meta( $order_id, $key, true );
+			$cost = $order->get_meta( $key, true );
 			if ( 0 != $cost ) {
 				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost ) );
 			}
@@ -180,7 +183,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		$extra_profit_meta_keys = array(); // Example: '_alg_wc_cog_order_shipping_extra_profit'] = __( 'Shipping to profit', 'cost-of-goods-for-woocommerce' );
 		$extra_profit_meta_keys = apply_filters( 'alg_wc_cog_extra_profit_meta_keys', $extra_profit_meta_keys );
 		foreach ( $extra_profit_meta_keys as $key => $value ) {
-			$cost = get_post_meta( $order_id, $key, true );
+			$cost = $order->get_meta( $key, true );
 			if ( 0 != $cost && ! empty( $cost ) ) {
 				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost ) );
 			}
@@ -194,7 +197,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * add_order_extra_cost_meta_box.
 	 *
-	 * @version 2.3.4
+	 * @version 3.0.2
 	 * @since   1.7.0
 	 */
 	function add_order_extra_cost_meta_box() {
@@ -202,11 +205,13 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 			return;
 		}
 		if ( in_array( true, alg_wc_cog()->core->orders->is_order_extra_cost_per_order ) ) {
+			$screen = alg_wc_cog()->core->orders->get_shop_order_screen_id();
 			add_meta_box( 'alg-wc-cog-extra-cost',
 				__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Extra costs', 'cost-of-goods-for-woocommerce' ),
 				array( $this, 'render_order_extra_cost_meta_box' ),
-				'shop_order',
-				'side'
+				$screen,
+				'side',
+				'high'
 			);
 		}
 	}
@@ -238,7 +243,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * save_order_extra_cost.
 	 *
-	 * @version 2.2.0
+	 * @version 3.0.2
 	 * @since   1.7.0
 	 */
 	function save_order_extra_cost( $order_id, $post ) {
@@ -248,7 +253,9 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 					$id = 'alg_wc_cog_order_' . $fee_type . '_fee';
 					if ( isset( $_POST[ $id ] ) ) {
 						$value = floatval( $_POST[ $id ] );
-						update_post_meta( $order_id, '_' . $id, $value );
+						$order = wc_get_order( $order_id );
+						$order->update_meta_data( '_' . $id, $value );
+						$order->save();
 					}
 				}
 			}
