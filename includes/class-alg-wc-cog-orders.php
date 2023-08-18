@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.0.2
+ * @version 3.0.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -226,6 +226,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 * @since 2.9.4.
 	 */
 	public $column_order_status;
+
+	/**
+	 * Order columns.
+	 *
+	 * @since 3.0.3.
+	 */
+	public $order_columns;
 
 	/**
 	 * Is columns sorting.
@@ -710,7 +717,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 *
 	 * @version 2.1.0
 	 * @since   1.7.0
-     *
+	 *
 	 * @todo    Most probably we can remove this after HPOS is officially released.
 	 *
 	 */
