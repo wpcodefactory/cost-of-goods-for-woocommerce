@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 3.0.2
+ * @version 3.0.5
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -243,11 +243,12 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * save_order_extra_cost.
 	 *
-	 * @version 3.0.2
+	 * @version 3.0.5
 	 * @since   1.7.0
 	 */
 	function save_order_extra_cost( $order_id, $post ) {
 		if ( in_array( true, alg_wc_cog()->core->orders->is_order_extra_cost_per_order ) ) {
+			remove_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 10 );
 			foreach ( alg_wc_cog()->core->orders->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 				if ( $is_enabled ) {
 					$id = 'alg_wc_cog_order_' . $fee_type . '_fee';
@@ -259,6 +260,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 					}
 				}
 			}
+			add_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 10, 2 );
 		}
 	}
 
