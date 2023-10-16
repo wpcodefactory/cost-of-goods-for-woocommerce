@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 3.0.7
+Stable tag: 3.0.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,9 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.0.8 - 16/10/2023 =
+* Fix - Error message: CustomOrdersTableController is not being managed by the container.
 
 = 3.0.7 - 10/10/2023 =
 * Fix - Products - Quick and bulk edit - "Replace all variations from the main variable product" does not work if "Hide out of stock items from the catalog" is enabled.

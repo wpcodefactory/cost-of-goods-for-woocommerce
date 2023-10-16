@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.0.3
+ * @version 3.0.8
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -760,13 +760,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 *
 	 * @link    https://github.com/woocommerce/woocommerce/wiki/High-Performance-Order-Storage-Upgrade-Recipe-Book#audit-for-order-administration-screen-functions
 	 *
-	 * @version 3.0.2
+	 * @version 3.0.8
 	 * @since   3.0.2
 	 *
 	 * @return string
 	 */
 	function get_shop_order_screen_id() {
-		return wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+		return class_exists( '\Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController' ) && wc_get_container()->get( CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
 			? wc_get_page_screen_id( 'shop-order' )
 			: 'shop_order';
 	}
