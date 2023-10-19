@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.0.9\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-10-19T03:29:02+02:00\n"
+"POT-Creation-Date: 2023-10-19T20:16:01+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -79,10 +79,10 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders.php:787
 #: includes/class-alg-wc-cog-products-add-stock.php:124
 #: includes/class-alg-wc-cog-products-add-stock.php:141
-#: includes/class-alg-wc-cog-products.php:248
-#: includes/class-alg-wc-cog-products.php:259
-#: includes/class-alg-wc-cog-products.php:270
+#: includes/class-alg-wc-cog-products.php:305
+#: includes/class-alg-wc-cog-products.php:316
 #: includes/class-alg-wc-cog-products.php:327
+#: includes/class-alg-wc-cog-products.php:384
 #: includes/pro/class-alg-wc-cog-pro.php:457
 #: includes/pro/class-alg-wc-cog-pro.php:814
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
@@ -103,7 +103,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:149
 #: includes/class-alg-wc-cog-orders.php:678
 #: includes/class-alg-wc-cog-orders.php:797
-#: includes/class-alg-wc-cog-products.php:330
+#: includes/class-alg-wc-cog-products.php:387
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:391
 #: includes/analytics/build/index.js:1
@@ -1965,6 +1965,43 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:383
 msgid "None"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:395
+msgid "Shortcodes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:401
+msgid "Displays the product profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:403
+#: includes/settings/class-alg-wc-cog-settings-products.php:415
+msgid "Product ID."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:403
+#: includes/settings/class-alg-wc-cog-settings-products.php:415
+msgid "If empty, will try to get the current product id."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:404
+msgid "Profit template."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:404
+#: includes/settings/class-alg-wc-cog-settings-products.php:405
+#: includes/settings/class-alg-wc-cog-settings-products.php:416
+msgid "Default:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:405
+#: includes/settings/class-alg-wc-cog-settings-products.php:416
+msgid "HTML template."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:413
+msgid "Displays the product cost"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:24

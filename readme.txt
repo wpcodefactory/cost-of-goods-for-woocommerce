@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
 Requires at least: 4.4
 Tested up to: 6.3
-Stable tag: 3.0.9
+Stable tag: 3.1.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,10 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.1.0 - 19/10/2023 =
+* Dev - Shortcodes - New shortcode: `[alg_wc_cog_product_profit]`.
+* Dev - Shortcodes - New shortcode: `[alg_wc_cog_product_cost]`.
 
 = 3.0.9 - 18/10/2023 =
 * Fix - Analytics - Cost and Profit columns are not present in Products CSV sent by email.

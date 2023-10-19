@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 2.9.3
+ * @version 3.1.0
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.9.3
+	 * @version 3.1.0
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -390,6 +390,41 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 		);
 
+		$shortcode_opts = array(
+			array(
+				'title' => __( 'Shortcodes', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_product_shortcode_opts',
+			),
+			array(
+				'title'    => '[alg_wc_cog_product_profit]',
+				'desc'     => __( 'Displays the product profit', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => 'Params: <br />' . alg_wc_cog_array_to_string( array(
+						'product_id'      => __( 'Product ID.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'If empty, will try to get the current product id.', 'cost-of-goods-for-woocommerce' ),
+						'profit_template' => __( 'Profit template.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'Default:', 'cost-of-goods-for-woocommerce' ) . ' <code>' . _wp_specialchars( get_option( 'alg_wc_cog_product_profit_html_template', '%profit% (%profit_percent%)' ) ) . '</code>.',
+						'html_template'   => __( 'HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'Default:', 'cost-of-goods-for-woocommerce' ) . ' <code>' . _wp_specialchars( '<span class="alg-wc-cog-product-profit">{content}</span>' ) . '</code>.',
+					), array( 'item_template' => '<li><code>{key}</code> - {value}', 'glue' => '<br /></li>' ) ),
+				'id'       => 'alg_wc_cog_shortcode_product_profit',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => '[alg_wc_cog_product_cost]',
+				'desc'     => __( 'Displays the product cost', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => 'Params: <br />' . alg_wc_cog_array_to_string( array(
+						'product_id'      => __( 'Product ID.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'If empty, will try to get the current product id.', 'cost-of-goods-for-woocommerce' ),
+						'html_template'   => __( 'HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'Default:', 'cost-of-goods-for-woocommerce' ) . ' <code>' . _wp_specialchars( '<span class="alg-wc-cog-product-cost">{content}</span>' ) . '</code>.',
+					), array( 'item_template' => '<li><code>{key}</code> - {value}', 'glue' => '<br /></li>' ) ),
+				'id'       => 'alg_wc_cog_shortcode_product_cost',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'type' => 'sectionend',
+				'id'   => 'alg_wc_cog_product_shortcode_opts',
+			),
+		);
+
 		return array_merge(
 			$product_settings,
 			$cost_input_settings,
@@ -397,7 +432,8 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			$cost_archive_opts,
 			$add_stock_settings,
 			$product_quick_bulk_edit_settings,
-			$cost_sanitization_opts
+			$cost_sanitization_opts,
+			$shortcode_opts
 		);
 	}
 

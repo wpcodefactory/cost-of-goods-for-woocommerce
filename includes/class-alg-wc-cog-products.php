@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 2.9.6
+ * @version 3.1.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -86,11 +86,10 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 2.8.2
+	 * @version 3.1.0
 	 * @since   2.1.0
 	 */
 	function add_hooks() {
-
 		// Products columns
 		if ( $this->is_column_profit || $this->is_column_cost ) {
 			add_filter( 'manage_edit-product_columns', array( $this, 'add_product_columns' ) );
@@ -116,6 +115,64 @@ class Alg_WC_Cost_of_Goods_Products {
 		add_action( 'updated_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
 		add_action( 'added_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
 		add_action( 'deleted_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
+		// Shortcodes.
+		add_shortcode( 'alg_wc_cog_product_profit', array( $this, 'sc_alg_wc_cog_product_profit' ) );
+		add_shortcode( 'alg_wc_cog_product_cost', array( $this, 'sc_alg_wc_cog_product_cost' ) );
+	}
+
+	/**
+	 * alg_wc_cog_product_cost.
+	 *
+	 * @version 3.1.0
+	 * @since   3.1.0
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	function sc_alg_wc_cog_product_cost( $atts ) {
+		if ( 'no' === get_option( 'alg_wc_cog_shortcode_product_cost', 'no' ) ) {
+			return '[alg_wc_cog_product_cost]';
+		}
+		$atts          = shortcode_atts( array(
+			'product_id'    => get_the_ID(),
+			'html_template' => '<span class="alg-wc-cog-product-cost">{content}</span>',
+		), $atts, 'alg_wc_cog_product_cost' );
+		$product_id    = intval( $atts['product_id'] );
+		$html_template = $atts['html_template'];
+		$array_from_to = array(
+			'{content}' => $this->get_product_cost_html( $product_id )
+		);
+
+		return str_replace( array_keys( $array_from_to ), $array_from_to, $html_template );
+	}
+
+	/**
+	 * @version 3.1.0
+	 * @since   3.1.0
+	 *
+	 * @param $atts
+	 *
+	 * @return string
+	 */
+	function sc_alg_wc_cog_product_profit( $atts ) {
+		if ( 'no' === get_option( 'alg_wc_cog_shortcode_product_profit', 'no' ) ) {
+			return '[alg_wc_cog_product_profit]';
+		}
+		$atts = shortcode_atts( array(
+			'product_id'      => get_the_ID(),
+			'profit_template' => ! is_null( $this->product_profit_html_template ) ? $this->product_profit_html_template : get_option( 'alg_wc_cog_product_profit_html_template', '%profit% (%profit_percent%)' ),
+			'html_template'   => '<span class="alg-wc-cog-product-profit">{content}</span>',
+		), $atts, 'alg_wc_cog_product_profit' );
+
+		$product_id      = intval( $atts['product_id'] );
+		$profit_template = sanitize_text_field( $atts['profit_template'] );
+		$html_template   = $atts['html_template'];
+		$array_from_to   = array(
+			'{content}' => $this->get_product_profit_html( $product_id, $profit_template ),
+		);
+
+		return str_replace( array_keys( $array_from_to ), $array_from_to, $html_template );
 	}
 
 	/**
