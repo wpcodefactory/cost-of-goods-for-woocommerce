@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Products.
  *
- * @version 2.7.6
+ * @version 3.0.9
  * @since   2.5.1
  * @author  WPFactory
  */
@@ -16,7 +16,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 2.5.1
+		 * @version 3.0.9
 		 * @since   2.5.1
 		 *
 		 */
@@ -29,15 +29,91 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 			add_filter( 'woocommerce_analytics_clauses_join_products_stats_interval', array( $this, 'add_costs_to_join_products' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_products', array( $this, 'add_costs_to_select_products' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_products_subquery', array( $this, 'add_costs_to_select_products_subquery' ) );
+			add_filter( 'woocommerce_export_admin_products_report_row_data', array( $this, 'add_costs_row_data_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_admin_products_report_export_column_names', array( $this, 'add_costs_columns_names_to_export' ), PHP_INT_MAX, 2 );
 			// Costs total
 			add_filter( 'woocommerce_analytics_clauses_select_products_stats_total', array( $this, 'add_costs_total_to_select_products_stats_total' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_products_stats_interval', array( $this, 'add_costs_total_to_select_products_stats_total' ) );
 			// Profit
 			add_filter( 'woocommerce_analytics_clauses_select_products', array( $this, 'add_profit_to_select_products' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_products_subquery', array( $this, 'add_profit_to_select_products_subquery' ) );
+			add_filter( 'woocommerce_export_admin_products_report_row_data', array( $this, 'add_profit_row_data_to_export' ), PHP_INT_MAX, 2 );
+			add_filter( 'woocommerce_admin_products_report_export_column_names', array( $this, 'add_profit_columns_names_to_export' ), PHP_INT_MAX, 2 );
 			// Profit total
 			add_filter( 'woocommerce_analytics_clauses_select_products_stats_total', array( $this, 'add_profit_total_to_select_products_stats_total' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_products_stats_interval', array( $this, 'add_profit_total_to_select_products_stats_total' ) );
+		}
+
+		/**
+		 * add_profit_row_data_to_export.
+		 *
+		 * @version 3.0.9
+		 * @since   3.0.9
+		 *
+		 * @param $row
+		 * @param $item
+		 *
+		 * @return mixed
+		 */
+		function add_costs_row_data_to_export( $row, $item ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_product_profit_select', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
+				$row['cost'] = $item['cost'];
+			}
+			return $row;
+		}
+
+		/**
+		 * add_profit_columns_names_to_export.
+		 *
+		 * @version 3.0.9
+		 * @since   3.0.9
+		 *
+		 * @param $columns
+		 * @param $exporter
+		 *
+		 * @return mixed
+		 */
+		function add_costs_columns_names_to_export( $columns, $exporter ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_product_profit_select', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
+				$columns['cost'] = __( 'Cost', 'cost-of-goods-for-woocommerce' );
+			}
+			return $columns;
+		}
+
+		/**
+		 * add_profit_row_data_to_export.
+		 *
+		 * @version 3.0.9
+		 * @since   3.0.9
+		 *
+		 * @param $row
+		 * @param $item
+		 *
+		 * @return mixed
+		 */
+		function add_profit_row_data_to_export( $row, $item ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_product_profit_select', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
+				$row['profit'] = $item['profit'];
+			}
+			return $row;
+		}
+
+		/**
+		 * add_profit_columns_names_to_export.
+		 *
+		 * @version 3.0.9
+		 * @since   3.0.9
+		 *
+		 * @param $columns
+		 * @param $exporter
+		 *
+		 * @return mixed
+		 */
+		function add_profit_columns_names_to_export( $columns, $exporter ) {
+			if ( apply_filters( 'alg_wc_cog_analytics_product_profit_select', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
+				$columns['profit'] = __( 'Profit', 'cost-of-goods-for-woocommerce' );
+			}
+			return $columns;
 		}
 
 		/**
