@@ -1,61 +1,310 @@
-=== Cost of Goods for WooCommerce ===
+=== Cost of Goods Sold (COGS): Cost & Profit Calculator for WooCommerce ===
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
-Tags: woocommerce, cost, cost of goods, cog, cost of goods sold, cogs, woo commerce
-Requires at least: 4.4
+Tags: woocommerce, cost, cost of goods, profit, profit calculator
+Requires at least: 6.1
 Tested up to: 6.3
-Stable tag: 3.1.0
+Stable tag: 3.1.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Save product purchase costs (cost of goods) in WooCommerce. Beautifully.
+Unlock detailed insights into products profitability, calculate COGS & profit margins, and get a better financial analytics insights with our Cost of Goods Sold (COGS) plugin
 
 == Description ==
 
-**Cost of Goods for WooCommerce** plugin lets you save WooCommerce products purchase costs (i.e. cost of goods sold).
+> “Best Plugin There is For Woocommerce Profit Calculation: I cannot believe how amazing this plugin really is! I don’t normally write reviews, but I have tested a couple of plugins to calculate profit etc. But this is by far the best. There are many options to choose from and once you get it all set, it works wonders. Also Pablo from support has been great! Thank you so much in abundance.” – ⭐⭐⭐⭐⭐  [shahican](https://wordpress.org/support/topic/best-plugin-there-is-for-woocommerce-profit-calculation/)
 
-### &#9989; Main Features: ###
+Every WooCommerce store owner recognizes the significance of understanding their financial health, but pinpointing exact metrics like Cost of Goods Sold (COGS) can often be a complex chore with the default WooCommerce settings.
 
-* Set **costs of goods** for your products.
-* For **variable products** costs can be saved for each variation separately or for all variations at once.
-* Add (sortable) product/order cost/profit **admin columns** to the WooCommerce products and orders lists.
-* **Import and export** product costs from and to a **CSV file** with standard WooCommerce Import and Export tools.
-* Included **bulk edit costs tool** allows you to bulk edit all products costs, prices and stock from a single page.
-* **Import costs tool** is available if you need to import costs from another product metas.
-* Optionally add "Cost of Goods" **meta box** to admin order edit page.
-* Optionally add **notice** to admin order edit page in case if order **profit is below zero**.
-* Optionally set **order extra cost** (all orders or per order), extra **payment gateway costs** and extra **shipping method costs**.
-* Use **add stock** tool to automatically calculate average product cost.
-* See cost/profit columns on WooCommerce **Analytics > Orders** section.
-* And more...
+As stores expand, the urgency for comprehensive financial insights, analytics, and reports becomes paramount, there's a rising need for a precise tool tailored for this purpose, and that's why we have built this plugin for a simple reason:
 
-### &#127942; Premium Version ###
+**Give you a full control over your Cost of Goods & Financial Reporting**
 
-**[Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-goods-for-woocommerce/)** features:
+So whether for a product, category, or the whole store, and for a specific period, a month, quarter, or any time frame you can think of, our plugin will give you a holistic overview of financial reporting for your WooCommerce store.
 
-* Add "Cost" input field to product **bulk** and **quick edit**.
-* Add "Add stock" fields (stock and cost) to product **bulk** and **quick edit**.
-* **Recalculate orders cost and profit** (for all orders or only for orders with no costs).
-* Handle **multicurrency**.
-* Add extra costs for your orders based on order's payment gateway, shipping methods or product's shipping classes.
-* Support.
-* View graphical [costs/profit](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#orders-report) and [stock](https://wpfactory.com/item/cost-of-goods-for-woocommerce/#stock-report) **reports**.
-* Available reports on WooCommerce **Analytics** section:
-  *  See cost/profit including charts at **Analytics > Orders** tab.
-  *  See cost, profit and category columns at **Analytics > Stock** tab.
-  *  See cost/profit including charts at **Analytics > Revenue** tab.
-* **Compatibility** options with:
-  * [WP All Import](https://wordpress.org/plugins/wp-all-import/) plugin.
-  * [WPC Product Bundles for WooCommerce](https://wordpress.org/plugins/woo-product-bundle/) plugin.
-  * [Openpos - WooCommerce Point Of Sale](https://codecanyon.net/item/openpos-a-complete-pos-plugins-for-woocomerce/22613341) plugin.
-  * [Product Add-Ons](https://woocommerce.com/products/product-add-ons/) plugin.
-  * [Metorik](https://metorik.com/).
-* And more...
+Whether you sell simple products or a wide range of variations, this plugin calculates COGS with precision and offers actionable insights.
 
-= More =
+**In a nutshell, this what you'll expect to get in this plugin:**
 
-* We are open to your suggestions and feedback. Thank you for using or trying out one of our plugins!
-* [Visit plugin site](https://wpfactory.com/item/cost-of-goods-for-woocommerce/).
-* If you wish to contribute – please visit [plugin GitHub repository](https://github.com/wpcodefactory/cost-of-goods-for-woocommerce).
+* **Customizable Product Costs:** Define the costs of goods for each of your products to track profitability accurately
+
+* **Versatile Costs for Variable Products:** Assign costs either to each individual variation or to all variations collectively, offering flexibility based on your product range
+
+* **Enhanced Admin Visibility:** Add sortable columns in the WooCommerce admin section, providing insights into product/order cost and profit directly in product and order lists
+
+* **Smooth Data Import/Export:** Effortlessly integrate product costs via CSV files, utilizing the standard WooCommerce Import and Export tools
+
+* **Bulk Edit Functionality:** Modify product costs, prices, and stock in bulk from a dedicated page, streamlining inventory management
+
+* **Import from Other Metas:** With the specialized import tool, bring in costs from other product metas to ensure consistent pricing data
+
+* **Optional Order Meta Box:** Integrate a “Cost of Goods” meta box in the admin order edit page for deeper cost insights at the order level
+
+* **Profit Warning:** Receive a notification on the admin order edit page when a particular order's profit dips below zero, ensuring vigilant monitoring
+
+* **Flexible Order Costs:** Define additional costs either universally across all orders or on a per-order basis. This includes specifying extra payment gateway costs and shipping method costs
+
+* **Automatic Average Cost Calculation:** Utilize the add stock tool to auto-calculate the average product cost, reducing manual computations
+
+* **Analytics Integration:** Benefit from the inclusion of cost/profit columns directly in the WooCommerce Analytics > Orders section for a quick financial overview
+
+---
+
+#### Useful Links ####
+* [**Plugin Main Page**](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Plugin Main Page**")
+* [**Plugin Support Forum**](https://wpfactory.com/support/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Plugin Support Forum**")
+* [**Documentation & How to**](https://wpfactory.com/docs/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Documentation & How to**")
+
+___
+## 🤝 Recommended By##
+
+* [WPGlob: Best WooCommerce Pricing Plugins for WordPress 2023](https://wpglob.com/best-woocommerce-pricing-plugins-for-wordpress-2022/ "WPGlob: Best WooCommerce Pricing Plugins for WordPress 2023")
+
+* [PPWP Pro: Easy Way to Track Cost of Goods in WooCommerce Stores](https://passwordprotectwp.com/cost-of-goods-for-woocommerce/ "PPWP Pro: Easy Way to Track Cost of Goods in WooCommerce Stores")
+
+* [WooCommerce Features: Best WooCommerce Cost of Goods Plugins for Tracking Profit](https://removewcfeatures.com/woocommerce-cost-of-goods/#cost-of-goods-for-woocommerce "WooCommerce Features: Best WooCommerce Cost of Goods Plugins for Tracking Profit")
+
+* [Download Free WP: Top Cost of Goods for WooCommerce](https://downloadfreewpplugins.com/wordpress/cost-of-goods-for-woocommerce/ "Download Free WP: Top Cost of Goods for WooCommerce")
+
+* [WPFavs: Best COGS Plugin](https://wpfavs.com/single-plugin-page?slug=cost-of-goods-for-woocommerce "WPFavs: Best COGS Plugin")
+
+* [LearnWoo: Best WooCommerce Reporting and Analytics Plugins](https://learnwoo.com/woocommerce-reporting-and-analytics-plugins/ "LearnWoo: Best WooCommerce Reporting and Analytics Plugins")
+
+---
+
+## 🚀 Main Features: FREE Version##
+
+### 🚀 Product Cost of Goods Sold (COGS) Management ###
+
+#### 🚀 Cost of Goods Sold (COGS) & Profit Calculation ####
+
+* Create a cost field for every simple product, variable, or variation to properly calculate profit
+
+* Select to calculate profit based on the price with tax, without tax, or regular price
+
+* Show & customize profit text, select to show profit, profit percentage, profit margin, or any mix of these values
+
+* Get detailed figures by selecting how many decimal points to show in cost field for accurate reporting
+
+* Select cost field location from different placements, you can insert in product page in General tab, pricing section, Inventory & SKU, or Advanced tab
+
+* Show product cost & product profit in WooCommerce Admin list to have a general overview, as well as allowing to sort by cost & profit for all products at once
+
+#### 🚀 Save Historical Data for Cost of Goods ####
+
+By preserving past cost data, this feature enables businesses to track how the cost structure of their products has evolved, providing a clear window into shifts in supplier pricing, manufacturing costs, or other contributing factors. 
+
+Such historical data becomes invaluable when analyzing profitability trends, forecasting future expenses, and making informed pricing decisions.
+
+### 🚀 Order Cost of Goods Sold (COGS) & Profit Management ###
+
+#### 🚀 Calculate Cost & Profit by Order ####
+
+* Show Profit & Cost of Goods Sold fields in WooCommerce admin orders list to easily track cost & profit per order
+
+* For accurate reporting, select which order statuses to show costs values
+
+* For Profit, select what columns to add, include any of profit, profit percentage, profit margin values to the orders columns
+
+* ِAdd items cost field to order **edit ** page either as editable or just readonly
+
+* Re-adjust order costs even after order is processed if cost changed, for a better & accurate reporting
+
+* Edit order by items, or for the whole order at once
+
+* Enable notification in order edit page in case order profit is below zero
+
+* Import items costs when adding items to orders (in order edit page)
+
+#### 🚀 Total Order Cost & Profit Calculation ####
+
+* Define options for order cost and profit calculations based on your financial standards
+
+* Select to calculate order costs to be either subtotal including tax, total including tax, or total excluding tax
+
+* Select to calculate order shipping costs in order profit (by percentage, i.e. including part of shipping cost or all of it)
+
+* Add order fees to order profit
+
+* Adds order taxes to the order profit
+
+* Select when to calculate order profit based on order status
+
+#### 🚀 Refunded Orders Cost & Profit Calculation ####
+
+* Calculate orders quantity by excluding refunded items
+
+* Select to calculate refunds from many options: Profits ignoring refunds, subtract total refunded items from profit, subtract each item's refund amount from profit, or go further and calculate profit by the difference between Net Payment and Cost
+
+* Select to include tax on Net Payment
+
+#### 🚀 Orders Extra Costs ####
+
+* Insert a fixed or percentage (from total order) extra cost to be added to all orders
+
+* Choose to include meta box on order edit page to calculate extra costs like: Handling fees, Shipping Fees, or Payment fees (by order)
+
+* Add extra costs by order meta (like Stripe & PayPal transaction fees)
+
+### 🚀 Payment Gateways Cost Management ###
+
+* Add fixed costs and/or percentage costs to orders based on the payment gateway which processed the order
+
+* Works on default payment gateways (CoD, Direct transfers, CC) as well as any extra custom gateway used on your store
+
+### 🚀 Shipping Methods Cost Management ###
+
+* Calculate extra costs associated with each shipping method by fixed and/or percentage cost
+
+* Use shipping methods instances (with shipping zones) instead of shipping methods
+
+* Works on all shipping methods available on your store
+
+### 🚀 Costs Bulk Edit Tools ###
+
+Navigating the financial aspects of a WooCommerce store can often be complex, especially when it comes to making widespread changes to product costs. 
+
+Our plugin seamlessly addresses this challenge, introducing free tools that empower store owners to apply bulk changes to product costs, without the usual hassles, using these methods:
+
+* **Manual Edits:** Dive into the details by manually editing the cost, regular price, sale price, stock, and even tags for each product
+
+* **By Price:** Modify product costs based on a set percentage, offering a more uniform approach to price alterations
+
+* **By Profit:** Add a specific percentage to ensure profitability is maintained or optimized across the board
+
+### 🚀 Bulk Change Prices by Costs & Desired Profit ###
+
+Once you set product costs, you can use our built-in tool to change product prices based on a desired profit, either by a fixed amount or profit perecentageز
+
+### 🚀 Import & Export Costs ###
+
+* Import and export product costs from and to a CSV file with standard WooCommerce Import and Export tools
+
+* You can also use our import tool if you need to import costs from another product metas 
+
+### 🚀 More Advanced Options ###
+
+* Replace comma by dots when updating cost meta
+
+* Create a new meta box on product page to calculate stock & cost per each stock received
+
+* View history of Stock & Cost snapshots
+
+* Unlimited costs update hooks that can be used to trigger cost update
+
+___ 
+## 🏆 Do More: PRO Version ##
+
+Everything highlighted above —and much more— is accessible in the complimentary version. However, for those seeking to elevate their experience and dive deeper, we offer the upgraded [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme) plugin.
+
+Opt for the Pro version and discover a collection of more features, such as:
+
+### 🏆 Advanced Bulk Edits  ###
+
+* Add Cost field to product bulk and quick edit
+
+* Add "Add stock" fields (stock and cost) to product bulk and quick edit
+
+### 🏆 Include Cost & Profit in Emails ###
+
+Opt in and include the order cost and profit on the admin new order email
+
+### 🏆 Include Shipping Classes Costs ###
+
+* Add extra costs for your orders based on product’s shipping classes
+
+* Select fixed cost calculations per product, or per shipping class
+
+### 🏆 Handle Multi-Currencies Stores ###
+
+* Calculate order cost and profit based on custom exchange rates (Cost and profit will be converted to the shop base currency)
+
+* Add extra costs based on the order currency
+
+### 🏆 Orders Recalculation Tool ###
+
+* Recalculate cost and profit for all orders
+
+* Select to only recalculate cost and profit for orders with no costs
+
+* Recalculate cost and profit for orders within specific time frame
+
+### 🏆 Cost & Profit Data in WooCommerce Analytics Reports ###
+
+* Add cost & profit to the report charts (Analytics > Orders tab)
+
+* Add cost, profit & category columns to the report charts (Analytics > Stock tab)
+
+* Add cost & profit including charts to the report charts (Analytics > Revenue tab)
+
+* View visualized graphical costs/profit and stock reports.
+
+### 🏆 Advanced Compatibility Options ###
+
+The plugin works seamlessly with tons of plugins, but for advanced harmony with some popular plugins, the plugin has advanced & tailored compatibility options with:
+
+* [**Openpos - WooCommerce Point Of Sale (POS):**](https://codecanyon.net/item/openpos-a-complete-pos-plugins-for-woocomerce/22613341 "**Openpos - WooCommerce Point Of Sale (POS):**") Manages POS orders on orders reports
+
+* [**Product Add-Ons by WooCommerce:**](https://woocommerce.com/products/product-add-ons/ "**Product Add-Ons by WooCommerce:**") Adds costs fields for the addons and creates an order meta with addons costs
+
+* [**CURCY - Multi Currency for WooCommerce:**](https://wordpress.org/plugins/woo-multi-currency/ "**CURCY - Multi Currency for WooCommerce:**") Get currency rates from CURCY plugin instead of the Multicurrency > Order calculation option
+
+* [**ExchangeRate-API:**](https://www.exchangerate-api.com/docs/free "**ExchangeRate-API:**") Get currency rates from ExchangeRate-API instead of the Multicurrency > Order calculation option
+
+* [**Metorik:**](https://metorik.com/ "**Metorik:**") Sync cost with _wc_cog_cost meta
+
+* [**WP All Import:**](https://wordpress.org/plugins/wp-all-import/ "**WP All Import:**") Convert numbers with commas to dots & Remove all invalid characters from a float number, like currency values
+
+* [**WPC Product Bundles for WooCommerce:**](https://wordpress.org/plugins/woo-product-bundle/ "**WPC Product Bundles for WooCommerce:**") Exclude Smart bundle product type from stock and orders report & properly handle Smart bundle cost from its items
+
+* [**ATUM Inventory Management for WooCommerce:**](https://wordpress.org/plugins/atum-stock-manager-for-woocommerce/ "**ATUM Inventory Management for WooCommerce:**") Copy & sync costs from ATUM and properly handle taxes on import
+
+* [**WooCommerce Food:**](https://exthemes.net/woocommerce-food/ "**WooCommerce Food:**") Add fixed costs to food options
+
+### 🏆 Premium Support  ###
+
+And much more.
+
+## What's Next? Check More Plugins by WPFactory##
+
+If you're enjoying our plugin, we'd love for you to explore our other offerings. WPFactory has a diverse range of plugins tailored to enhance your experience. 
+
+Dive in and discover more tools to empower your WooCommerce Store!
+
+
+* [**Min Max Step Quantity**](https://wpfactory.com/item/product-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Min Max Step Quantity**"): Define a min max, step and default quantity for products, show a dropdown, quantities on archive/categories pages, use decimal quantities, and much more on WooCommerce stores (**[Try our Free version](https://wordpress.org/plugins/product-quantity-for-woocommerce/ "Try our Free version")**)
+
+* [**Cost of Goods for WooCommerce**](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Cost of Goods WooCommerce**"): Make informed decisions to maximize profits, correctly calculate Cost of Goods Sold (COGS) for your WooCommerce store and enhance your financial management capabilities (**[Try our Free version](https://wordpress.org/plugins/cost-of-goods-for-woocommerce/ "Try our Free version")**)
+
+* [**Maximum Products per User**](https://wpfactory.com/item/maximum-products-per-user-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Maximum Products per User**"): Set personalized purchase limits for your customers, define maximum product quantities, catered to specific user roles & selected date range (**[Try our Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Try our Free version")**)
+
+* [**Order Minimum/Maximum Amount**](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Order Minimum/Maximum Amount**"): Set tailored minimum and maximum order thresholds, by sum, quantity, weight, or volume, customize limits by user role, specific user, product category, shipping method, payment gateway, or even by currency (**Try our Free version](https://wordpress.org/plugins/order-minimum-amount-for-woocommerce/ "Try our Free version")**)
+
+* [**EU/UK VAT Manager for WooCommerce**](https://wpfactory.com/item/eu-vat-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**EU/UK VAT Manager for WooCommerce**"): Streamline your WooCommerce store’s EU/UK VAT compliance effortlessly, automate VAT settings, validation (VIES), and how to apply taxes, ensuring a seamless and compliant customer experience (**[Try our Free version](https://wordpress.org/plugins/eu-vat-for-woocommerce/ "Try our Free version")**)
+
+* [**Email Verification for WooCommerce**](https://wpfactory.com/item/email-verification-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Email Verification for WooCommerce**"): Enhance WooCommerce security and credibility with Email Verification best plugin. Ensure genuine customer interactions, eliminate spam, and elevate email marketing efficiency (**[Try our Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Try our Free version")**)
+
+* [**Free Shipping Over Amount for WooCommerce**](https://wpfactory.com/item/amount-left-free-shipping-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Free Shipping Over Amount for WooCommerce**"): WooCommerce Advanced Free Shipping plugin, use our plugin to quality customers for free shipping when they spend specific amount, by showing a bar on remaining amounts they need to spend to qualify for free shipping (**[Try our Free version](https://wordpress.org/plugins/amount-left-free-shipping-woocommerce/ "Try our Free version")**)
+
+* [**Dynamic Pricing & Bulk Quantity Discounts**](https://wpfactory.com/item/product-price-by-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Dynamic Pricing & Bulk Quantity Discounts**"): Create and manage advanced dynamic pricing and bulk discount rules for WooCommerce, encouraging bulk purchases and driving your sales to new heights (**[Try our Free version](https://wordpress.org/plugins/wholesale-pricing-woocommerce/ "Try our Free version")**)
+
+
+## ❤️ User Testimonials: See What Others Are Saying!##
+
+> “The support is super fast and amazing.
+Plugin also is great and work really smooth and nice.” – ⭐⭐⭐⭐⭐ [Sina Arzany](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
+
+> “Amazingly fast support, added a feature that we needed to work without any delay. Incredible service.
+
+Plug-in does exactly what we need it to do.” – ⭐⭐⭐⭐⭐ [Scott](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
+
+> “Excellent plugin with so much functionality but yet so easy to use to keep track of profit at an order level!
+
+Great work team!” – ⭐⭐⭐⭐⭐ [Tye](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
+
+> “BestMUST have plugin: If you need to have a control under the costs of the products you sell, this plugin is a must have. It works perfectly without any conflict with other plugins.
+
+Also I would like to point out the support of this plugin. They are always willing to help you and answering any question you could have. TOP TOP TOP” – ⭐⭐⭐⭐⭐ [betcazador](https://wordpress.org/support/topic/must-have-plugin-394/)
+
 
 == Frequently Asked Questions ==
 
@@ -83,9 +332,27 @@ And then you can follow these steps:
 
 == Installation ==
 
-1. Upload the entire plugin folder to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the "Plugins" menu in WordPress.
-3. Start by visiting plugin settings at "WooCommerce > Settings > Cost of Goods".
+**Follow these simplified steps to get your plugin up and running:**
+
+**From the WordPress Admin Panel:**
+1. Navigate to “Plugins” > “Add New”.
+2. Use the search bar and find the plugin using the exact name.
+3. Click “Install Now” for the desired plugin.
+4. Once the installation is finished, and click “Activate”.
+
+**Manual Installation Using FTP:**
+1. Download the desired plugin from WordPress.org.
+2. Using your preferred FTP client, upload the entire plugin folder to the /wp-content/plugins/ directory of your WordPress installation.
+3. Go to “Plugins” > “Installed Plugins” in your dashboard and click “Activate”.
+
+**Manual download & upload from the WordPress Admin Panel:**
+1. Download the desired plugin in a ZIP format.
+2. On your site, navigate to “Plugins” > “Add New” and click the “Upload Plugin” button.
+3. Choose the downloaded plugin file and click “Install Now.”
+4. After the installation is complete, click “Activate”.
+
+**Post-Activation:**
+Once activated, access the plugin's settings by navigating to “WooCommerce > Settings” and look for the relevant tab.
 
 == Screenshots ==
 
@@ -97,6 +364,9 @@ And then you can follow these steps:
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.1.1 - 20/10/2023 =
+* Fix - Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool->fix_paged_query_string_on_search_change() with cookies. 
 
 = 3.1.0 - 19/10/2023 =
 * Dev - Shortcodes - New shortcode: `[alg_wc_cog_product_profit]`.
