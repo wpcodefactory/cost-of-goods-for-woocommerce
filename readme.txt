@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.3
-Stable tag: 3.1.1
+Stable tag: 3.1.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -364,6 +364,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.1.2 - 28/10/2023 =
+* Dev - New Option "Per Item" Under Extra shipping classes costs > Fixed cost calculation.
 
 = 3.1.1 - 20/10/2023 =
 * Fix - Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool->fix_paged_query_string_on_search_change() with cookies. 

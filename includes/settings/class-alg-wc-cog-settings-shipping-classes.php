@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Shipping classes Settings.
  *
- * @version 2.6.2
+ * @version 3.1.2
  * @since   2.4.3
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 2.6.2
+		 * @version 3.1.2
 		 * @since   2.4.3
 		 * @todo    [maybe] better section desc (same for `$order_extra_cost_settings` and "Shipping"): how to recalculate order's profit/cost (i.e. update order or use tool)
 		 */
@@ -62,6 +62,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 					'options'           => array(
 						'per_product'        => __( 'Per product', 'cost-of-goods-for-woocommerce' ),
 						'per_shipping_class' => __( 'Per shipping class', 'cost-of-goods-for-woocommerce' ),
+						'per_item_in_shipping_class' => __( 'Per item', 'cost-of-goods-for-woocommerce' ),
 					)
 				),
 				array(

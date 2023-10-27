@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.0.8
+ * @version 3.1.2
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1219,7 +1219,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.0.2
+	 * @version 3.1.2
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1389,6 +1389,11 @@ class Alg_WC_Cost_of_Goods_Orders {
 								( 'per_shipping_class' === $shipping_classes_fixed_cost_calculation && ! in_array( $product_shipping_class_term->term_id, $shipping_classes_term_ids_used ) )
 							) {
 								$shipping_class_cost_fixed_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_fixed', $shipping_class_cost, $order, $product_shipping_class_term->term_id );
+							} else if ( 'per_item_in_shipping_class' === $shipping_classes_fixed_cost_calculation ) {
+								
+								$shipping_class_cost_per_item = $shipping_class_cost * $item->get_quantity();
+								$shipping_class_cost_fixed_total += (float) apply_filters( 'alg_wc_cog_order_shipping_class_cost_fixed', $shipping_class_cost_per_item, $order, $product_shipping_class_term->term_id );
+								
 							}
 						}
 						// Percent
