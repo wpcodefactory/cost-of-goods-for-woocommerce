@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Advanced Section Settings.
  *
- * @version 2.6.3
+ * @version 3.1.3
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -44,30 +44,30 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.6.3
+	 * @version 3.1.3
 	 * @since   1.7.0
 	 * @todo    [later] "Force costs update on ...": better title and desc (3x)
 	 */
 	function get_settings() {
 
-		$advanced_settings = array(
+		$general_opts = array(
 			array(
-				'title'    => __( 'Advanced options', 'cost-of-goods-for-woocommerce' ),
-				'desc' => '',
-				'type'     => 'title',
-				'id'       => 'alg_wc_cog_advanced_options',
+				'title' => __( 'Advanced options', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => '',
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_advanced_options',
 			),
 			array(
-				'title'    => __( 'Restrict by user role', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Allowed user roles.', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Only the selected user roles will be able to see and edit plugin data.', 'cost-of-goods-for-woocommerce' )
-				              .' '. __( 'Leave it empty to show the plugin data for all user roles.', 'cost-of-goods-for-woocommerce' )
-				              .'<br />'. __( 'The administrator can\'t be blocked.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_allowed_user_roles',
-				'default'  => array(),
-				'type'     => 'multiselect',
-				'class'    => 'chosen_select',
-				'options'  => $this->get_allowed_user_roles_option(),
+				'title'             => __( 'Restrict by user role', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Allowed user roles.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'          => __( 'Only the selected user roles will be able to see and edit plugin data.', 'cost-of-goods-for-woocommerce' )
+				                       . ' ' . __( 'Leave it empty to show the plugin data for all user roles.', 'cost-of-goods-for-woocommerce' )
+				                       . '<br />' . __( 'The administrator can\'t be blocked.', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_allowed_user_roles',
+				'default'           => array(),
+				'type'              => 'multiselect',
+				'class'             => 'chosen_select',
+				'options'           => $this->get_allowed_user_roles_option(),
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
@@ -110,9 +110,19 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'options' => alg_wc_cog()->core->orders->get_new_order_hooks_for_cost_updating()
 			),
 			array(
+				'title'         => __( 'Meta data', 'cost-of-goods-for-woocommerce' ),
+				'desc'          => __( 'Avoid empty order meta data from being saved to database', 'cost-of-goods-for-woocommerce' ),
+				'id'            => 'alg_wc_cog_avoid_empty_order_metadata_saving',
+				'default'       => 'yes',
+				'type'          => 'checkbox',
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_advanced_options',
 			),
+		);
+
+		$cols_sorting_opts = array(
 			array(
 				'title'    => __( 'Columns sorting', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
@@ -140,6 +150,9 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_advanced_columns_sorting_options',
 			),
+		);
+
+		$bkg_process_opts = array(
 			array(
 				'title'    => __( 'Background processing', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
@@ -171,11 +184,9 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_advanced_bkg_process_options',
 			),
-
-
 		);
 
-		return $advanced_settings;
+		return array_merge( $general_opts, $cols_sorting_opts, $bkg_process_opts );
 	}
 
 }

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 3.0.5
+ * @version 3.1.3
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -123,7 +123,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 3.0.2
+	 * @version 3.1.3
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
@@ -170,7 +170,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		$cost_meta_keys = apply_filters( 'alg_wc_cog_cost_meta_keys', $cost_meta_keys );
 		foreach ( $cost_meta_keys as $key => $value ) {
 			$cost = $order->get_meta( $key, true );
-			if ( 0 != $cost ) {
+			if ( ! empty( $cost ) && 0 != $cost ) {
 				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost ) );
 			}
 		}

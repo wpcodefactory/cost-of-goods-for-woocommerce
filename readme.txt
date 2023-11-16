@@ -2,8 +2,8 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
-Tested up to: 6.3
-Stable tag: 3.1.2
+Tested up to: 6.4
+Stable tag: 3.1.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -364,6 +364,10 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.1.3 - 16/11/2023 =
+* Tested up to: 6.4.
+* Dev - Advanced - Create new option to avoid saving empty order metadata.
 
 = 3.1.2 - 28/10/2023 =
 * Dev - New Option "Per Item" Under Extra shipping classes costs > Fixed cost calculation.

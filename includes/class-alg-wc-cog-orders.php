@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.1.2
+ * @version 3.1.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -338,7 +338,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 3.0.2
+	 * @version 3.1.3
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -420,6 +420,30 @@ class Alg_WC_Cost_of_Goods_Orders {
 		// Taxes to profit.
 		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'add_order_taxes_to_profit' ), 10, 2 );
 		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_taxes_to_profit_meta_key_to_order_cmb' ) );
+		// Avoid empty order metadata saving.
+		add_filter( 'woocommerce_before_order_object_save', array( $this, 'avoid_empty_order_metadata_saving' ), 10, 2 );
+    }
+
+	/**
+	 * avoid_empty_order_metadata_saving.
+	 *
+	 * @version 3.1.3
+	 * @since   3.1.3
+	 *
+	 * @param   WC_Abstract_Order  $order
+	 * @param                      $data_store
+	 *
+	 * @return void
+	 */
+	function avoid_empty_order_metadata_saving( WC_Abstract_Order $order, $data_store ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_avoid_empty_order_metadata_saving', 'yes' ) ) {
+			/* @var $meta_data WC_Meta_Data */
+			foreach ( $order->get_meta_data() as $meta_data ) {
+				if ( empty( $meta_data->get_data()['value'] ) ) {
+					$order->delete_meta_data( $meta_data->get_data()['key'] );
+				}
+			}
+		}
 	}
 
 	/**

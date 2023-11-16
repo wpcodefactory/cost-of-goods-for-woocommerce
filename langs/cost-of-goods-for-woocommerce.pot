@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.0\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-10-19T20:16:01+02:00\n"
+"POT-Creation-Date: 2023-11-16T19:59:13+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -75,8 +75,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:88
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:148
-#: includes/class-alg-wc-cog-orders.php:677
-#: includes/class-alg-wc-cog-orders.php:787
+#: includes/class-alg-wc-cog-orders.php:701
+#: includes/class-alg-wc-cog-orders.php:811
 #: includes/class-alg-wc-cog-products-add-stock.php:124
 #: includes/class-alg-wc-cog-products-add-stock.php:141
 #: includes/class-alg-wc-cog-products.php:305
@@ -86,7 +86,7 @@ msgstr ""
 #: includes/pro/class-alg-wc-cog-pro.php:457
 #: includes/pro/class-alg-wc-cog-pro.php:814
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:350
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:368
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/categories.js:32
 #: includes/analytics/src/modules/orders.js:20
@@ -101,8 +101,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:89
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:149
-#: includes/class-alg-wc-cog-orders.php:678
-#: includes/class-alg-wc-cog-orders.php:797
+#: includes/class-alg-wc-cog-orders.php:702
+#: includes/class-alg-wc-cog-orders.php:821
 #: includes/class-alg-wc-cog-products.php:387
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:391
@@ -148,13 +148,13 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-cost-inputs.php:86
 #: includes/class-alg-wc-cog-cost-inputs.php:141
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:290
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:308
 msgid "Profit: %s"
 msgstr ""
 
 #: includes/class-alg-wc-cog-cost-inputs.php:87
 #: includes/class-alg-wc-cog-cost-inputs.php:142
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:290
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:308
 msgid "N/A"
 msgstr ""
 
@@ -250,46 +250,46 @@ msgstr ""
 msgid "You are selling below the cost of goods."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:485
+#: includes/class-alg-wc-cog-orders.php:509
 #: includes/settings/class-alg-wc-cog-settings-orders.php:295
 #: includes/settings/class-alg-wc-cog-settings-tools.php:360
 msgid "Taxes to profit"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:524
+#: includes/class-alg-wc-cog-orders.php:548
 #: includes/settings/class-alg-wc-cog-settings-orders.php:288
 #: includes/settings/class-alg-wc-cog-settings-tools.php:359
 msgid "Fees to profit"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:564
+#: includes/class-alg-wc-cog-orders.php:588
 #: includes/settings/class-alg-wc-cog-settings-orders.php:274
 #: includes/settings/class-alg-wc-cog-settings-tools.php:358
 msgid "Shipping to profit"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:566
+#: includes/class-alg-wc-cog-orders.php:590
 msgid "Shipping to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:681
-#: includes/class-alg-wc-cog-orders.php:1136
+#: includes/class-alg-wc-cog-orders.php:705
+#: includes/class-alg-wc-cog-orders.php:1160
 #: includes/pro/class-alg-wc-cog-pro.php:623
 #: includes/pro/class-alg-wc-cog-pro.php:642
 msgid "Cost of goods"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:800
+#: includes/class-alg-wc-cog-orders.php:824
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:803
+#: includes/class-alg-wc-cog-orders.php:827
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:1172
+#: includes/class-alg-wc-cog-orders.php:1196
 msgid "Handling Fee"
 msgstr ""
 
@@ -315,7 +315,7 @@ msgstr ""
 #: includes/pro/class-alg-wc-cog-pro.php:808
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-tools.php:133
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:351
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:369
 msgid "Stock"
 msgstr ""
 
@@ -414,22 +414,22 @@ msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
 #: includes/tools/class-alg-wc-cog-import-tool.php:247
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:347
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:365
 msgid "Product ID"
 msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:118
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:348
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:366
 msgid "SKU"
 msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:119
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:349
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:367
 msgid "Title"
 msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:122
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:358
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:376
 msgid "Price"
 msgstr ""
 
@@ -743,71 +743,79 @@ msgstr ""
 msgid "Hooks from new orders that will trigger cost update."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:117
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:113
+msgid "Meta data"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:114
+msgid "Avoid empty order meta data from being saved to database"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:127
 msgid "Columns sorting"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:122
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:132
 msgid "Sortable columns"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:123
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:133
 #: includes/settings/class-alg-wc-cog-settings-orders.php:121
 #: includes/settings/class-alg-wc-cog-settings-orders.php:136
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:131
 msgid "Enable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:124
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:134
 msgid "Makes columns added to admin %s and %s lists <strong>sortable</strong>."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:125
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:135
 msgid "products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:126
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:136
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:192
 msgid "orders"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:133
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:143
 msgid "Exclude empty lines on sorting"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:144
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:157
 msgid "Background processing"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:149
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:162
 msgid "Minimum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:150
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:163
 msgid "The minimum amount of results from a query in order to trigger a background processing."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:150
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:163
 msgid "Only affects \"Import Costs\" tool and \"Order cost and profit Recalculation\" for the time being."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:156
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:169
 msgid "Send email"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:157
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:170
 msgid "Send an email when a background processing is complete"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:163
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:176
 msgid "Email to"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:164
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:177
 msgid "The email address that is going to receive the email when a background processing task is complete."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:164
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:177
 msgid "Requires the \"Send email\" option enabled in order to work."
 msgstr ""
 
@@ -1186,21 +1194,21 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:71
 #: includes/settings/class-alg-wc-cog-settings-orders.php:379
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:84
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:85
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:180
 msgid "Fixed cost"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:72
 #: includes/settings/class-alg-wc-cog-settings-orders.php:380
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:85
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:86
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:181
 msgid "In %s."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:82
 #: includes/settings/class-alg-wc-cog-settings-orders.php:390
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:95
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:96
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:139
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:152
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:191
@@ -2037,7 +2045,11 @@ msgstr ""
 msgid "Per shipping class"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:96
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:65
+msgid "Per item"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:97
 msgid "Percent from product total. E.g.: If you want <code>50%</code> from product total you can set it as 50."
 msgstr ""
 
@@ -2147,7 +2159,7 @@ msgid "Edit prices"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:119
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:352
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:370
 msgid "Tags"
 msgstr ""
 
@@ -2951,15 +2963,15 @@ msgstr ""
 msgid "plugin settings"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:326
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:344
 msgid "Stock status: %s"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:355
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:373
 msgid "Regular price"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:356
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:374
 msgid "Sale price"
 msgstr ""
 
