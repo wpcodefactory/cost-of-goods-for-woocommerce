@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 3.1.3
+ * @version 3.1.4
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -123,13 +123,16 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 3.1.3
+	 * @version 3.1.4
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
 	function render_order_meta_box( $post ) {
-		$order_id            = get_the_ID();
-		$order               = wc_get_order( $order_id );
+		$order_id = ! empty( $post->ID ) ? $post->ID : get_the_ID();
+		$order    = wc_get_order( $order_id );
+		if ( ! is_a( $order, 'WC_Order' ) ) {
+			return;
+		}
 		$cost                = $order->get_meta( '_alg_wc_cog_order_' . 'cost', true );
 		$handling_fee        = $order->get_meta( '_alg_wc_cog_order_' . 'handling_fee', true );
 		$profit              = $order->get_meta( '_alg_wc_cog_order_' . 'profit', true );

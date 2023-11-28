@@ -110,8 +110,8 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'options' => alg_wc_cog()->core->orders->get_new_order_hooks_for_cost_updating()
 			),
 			array(
-				'title'         => __( 'Meta data', 'cost-of-goods-for-woocommerce' ),
-				'desc'          => __( 'Avoid empty order meta data from being saved to database', 'cost-of-goods-for-woocommerce' ),
+				'title'         => __( 'Metadata', 'cost-of-goods-for-woocommerce' ),
+				'desc'          => __( 'Avoid empty order metadata from being saved to database', 'cost-of-goods-for-woocommerce' ),
 				'id'            => 'alg_wc_cog_avoid_empty_order_metadata_saving',
 				'default'       => 'yes',
 				'type'          => 'checkbox',

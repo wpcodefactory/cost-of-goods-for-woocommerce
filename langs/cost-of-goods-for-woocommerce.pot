@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.3\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-16T19:59:13+01:00\n"
+"POT-Creation-Date: 2023-11-29T00:02:10+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -74,7 +74,7 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:78
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:88
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:148
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:151
 #: includes/class-alg-wc-cog-orders.php:701
 #: includes/class-alg-wc-cog-orders.php:811
 #: includes/class-alg-wc-cog-products-add-stock.php:124
@@ -100,7 +100,7 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:114
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:89
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:149
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:152
 #: includes/class-alg-wc-cog-orders.php:702
 #: includes/class-alg-wc-cog-orders.php:821
 #: includes/class-alg-wc-cog-products.php:387
@@ -159,7 +159,7 @@ msgid "N/A"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:114
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:210
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:213
 #: includes/pro/class-alg-wc-cog-pro.php:806
 #: includes/settings/class-alg-wc-cog-settings-orders.php:407
 #: includes/settings/class-alg-wc-cog-settings-products.php:235
@@ -167,81 +167,81 @@ msgstr ""
 msgid "Cost of Goods"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:155
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:158
 #: includes/settings/class-alg-wc-cog-settings-orders.php:114
 msgid "Item costs"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:156
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:159
 #: includes/settings/class-alg-wc-cog-settings-orders.php:128
 msgid "Item handling fees"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:157
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:160
 msgid "Shipping method fee (fixed)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:158
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:161
 msgid "Shipping method fee (percent)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:159
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:162
 msgid "Shipping class fee (fixed)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:160
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:163
 msgid "Shipping class fee (percent)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:161
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:164
 msgid "Gateway fee (fixed)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:162
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:165
 msgid "Gateway fee (percent)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:163
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:166
 msgid "Order fee (fixed)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:164
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:167
 msgid "Order fee (percent)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:165
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:168
 #: includes/settings/class-alg-wc-cog-settings-orders.php:414
 msgid "Handling fee"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:166
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:169
 #: includes/settings/class-alg-wc-cog-settings-orders.php:422
 msgid "Shipping fee"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:167
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:170
 #: includes/settings/class-alg-wc-cog-settings-orders.php:430
 msgid "Payment fee"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:168
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:171
 msgid "Meta fees"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:178
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:181
 msgid "Cost details"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:192
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:195
 msgid "Extra profit details"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:210
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:213
 #: includes/settings/class-alg-wc-cog-settings-orders.php:407
 msgid "Extra costs"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:234
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:237
 msgid "fee"
 msgstr ""
 
@@ -744,11 +744,11 @@ msgid "Hooks from new orders that will trigger cost update."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:113
-msgid "Meta data"
+msgid "Metadata"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:114
-msgid "Avoid empty order meta data from being saved to database"
+msgid "Avoid empty order metadata from being saved to database"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:127
