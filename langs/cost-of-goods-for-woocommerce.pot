@@ -2,21 +2,21 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.5\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-29T00:38:50+01:00\n"
+"POT-Creation-Date: 2023-12-08T19:55:58+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
 
 #. Plugin Name of the plugin
 #: includes/alg-wc-cog-functions.php:218
-#: includes/settings/class-alg-wc-settings-cog.php:81
+#: includes/settings/class-alg-wc-settings-cog.php:82
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr ""
 
@@ -1495,7 +1495,7 @@ msgid "Products > Get price method"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:297
-msgid "Adds order taxes like VAT to the order profit."
+msgid "Add order taxes like VAT to the order profit"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:303
@@ -1975,43 +1975,6 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:395
-msgid "Shortcodes"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:401
-msgid "Displays the product profit"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:403
-#: includes/settings/class-alg-wc-cog-settings-products.php:415
-msgid "Product ID."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:403
-#: includes/settings/class-alg-wc-cog-settings-products.php:415
-msgid "If empty, will try to get the current product id."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:404
-msgid "Profit template."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:404
-#: includes/settings/class-alg-wc-cog-settings-products.php:405
-#: includes/settings/class-alg-wc-cog-settings-products.php:416
-msgid "Default:"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:405
-#: includes/settings/class-alg-wc-cog-settings-products.php:416
-msgid "HTML template."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:413
-msgid "Displays the product cost"
-msgstr ""
-
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:24
 msgid "Shipping classes"
 msgstr ""
@@ -2112,6 +2075,47 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:192
 msgid "Percent from %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:26
+msgid "Shortcodes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:58
+msgid "Product shortcodes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:64
+msgid "Displays the product profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:66
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:78
+msgid "Product ID."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:66
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:78
+msgid "If empty, will try to get the current product id."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:67
+msgid "Profit template."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:67
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:68
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:79
+msgid "Default:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:68
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:79
+msgid "HTML template."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:76
+msgid "Displays the product cost"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:33
@@ -2616,32 +2620,32 @@ msgstr ""
 msgid "For now, it allows to get only products with costs."
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:82
+#: includes/settings/class-alg-wc-settings-cog.php:83
 msgid "Disabled options can be unlocked using <a href=\"%pro_version_url%\" target=\"_blank\"><strong>%pro_version_title%</strong></a>"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:83
+#: includes/settings/class-alg-wc-settings-cog.php:84
 msgid "Upgrade to Pro version"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:99
+#: includes/settings/class-alg-wc-settings-cog.php:100
 msgid "Reset Settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:104
+#: includes/settings/class-alg-wc-settings-cog.php:105
 msgid "Reset section settings"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:105
+#: includes/settings/class-alg-wc-settings-cog.php:106
 msgid "Reset"
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:106
+#: includes/settings/class-alg-wc-settings-cog.php:107
 msgid "Enable the checkbox and save changes to reset the settings."
 msgstr ""
 
-#: includes/settings/class-alg-wc-settings-cog.php:134
-#: includes/settings/class-alg-wc-settings-cog.php:149
+#: includes/settings/class-alg-wc-settings-cog.php:135
+#: includes/settings/class-alg-wc-settings-cog.php:150
 msgid "Your settings have been reset."
 msgstr ""
 

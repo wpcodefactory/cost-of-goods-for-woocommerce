@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.1.3
+ * @version 3.1.6
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -832,7 +832,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * render_order_columns.
 	 *
-	 * @version 3.0.2
+	 * @version 3.1.6
 	 * @since   1.0.0
 	 * @todo    [later] order status for the fee columns
 	 * @todo    [later] forecasted profit `$value = $line_total * $average_profit_margin`
@@ -843,7 +843,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		if ( ! apply_filters( 'alg_wc_cog_create_orders_columns_validation', true ) ) {
 			return;
 		}
-		if ( in_array( $column, array_keys( $this->order_columns ) ) ) {
+		if ( is_array( $this->order_columns ) && in_array( $column, array_keys( $this->order_columns ) ) ) {
 			$order_status = ( isset( $this->column_order_status[ $column ] ) ? $this->column_order_status[ $column ] : array() );
 			if ( ! empty( $order_status ) && ( ! ( $order = wc_get_order( $order_id ) ) || ! $order->has_status( $order_status ) ) ) {
 				return;

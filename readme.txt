@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.4
-Stable tag: 3.1.5
+Stable tag: 3.1.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -364,6 +364,10 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.1.6 - 08/12/2023 =
+* Fix - "PHP Fatal error: Uncaught TypeError: array_keys(): Argument #1 ($array) must be of type array, null given in `Alg_WC_Cost_of_Goods_Orders`".
+* Dev - Move product shortcodes settings to its own section.
 
 = 3.1.5 - 28/11/2023 =
 * Fix - Update stock triggers the error "Call to undefined method `Alg_WC_Cost_of_Goods_Products::product_add_stock()`".
