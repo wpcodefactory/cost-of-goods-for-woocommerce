@@ -220,7 +220,6 @@ if ( ! function_exists( 'alg_wc_cog_get_blocked_options_message' ) ) {
 }
 
 if ( ! function_exists( 'alg_wc_cog_sanitize_number' ) ) {
-
 	/**
 	 * alg_wc_cog_sanitize_number.
 	 *

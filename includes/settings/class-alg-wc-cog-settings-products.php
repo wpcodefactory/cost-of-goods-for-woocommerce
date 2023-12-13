@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 3.1.6
+ * @version 3.1.7
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.1.6
+	 * @version 3.1.7
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -140,7 +140,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 			),
 			array(
-				'desc'     => sprintf( __( 'Column width (%s)', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
+				'desc'     => sprintf( __( 'Column width (%s).', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
 				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_columns_cost_width',
 				'default'  => '10',
@@ -157,7 +157,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 			),
 			array(
-				'desc'     => sprintf( __( 'Column width (%s)', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
+				'desc'     => sprintf( __( 'Column width (%s).', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
 				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_columns_profit_width',
 				'default'  => '11',
@@ -201,11 +201,23 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'           => 'checkbox',
 			),
 			array(
-				'title'          => __( 'Date format', 'cost-of-goods-for-woocommerce' ),
-				'desc'           => sprintf( __( 'Example: <a target="_blank" href="%s">Y-m-d H:i:s</a>', 'cost-of-goods-for-woocommerce' ), 'https://www.php.net/manual/en/datetime.format.php' ),
-				'id'             => 'alg_wc_cog_save_cost_archive_date_format',
-				'default'        => 'Y-m-d',
-				'type'           => 'text',
+				'title'   => __( 'Date', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Date format.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				             __( 'Example:', 'cost-of-goods-for-woocommerce' ) . ' ' . '<code>Y-m-d H:i:s</code>.' . ' ' .
+				             sprintf( __( '<a target="_blank" href="%s">See format options.</a>', 'cost-of-goods-for-woocommerce' ), 'https://www.php.net/manual/en/datetime.format.php' ),
+				'id'      => 'alg_wc_cog_save_cost_archive_date_format',
+				'default' => 'Y-m-d',
+				'type'    => 'text',
+			),
+			array(
+				'desc'    => __( 'Date order.', 'cost-of-goods-for-woocommerce' ),
+				'options' => array(
+					'asc'  => __( 'Ascending', 'cost-of-goods-for-woocommerce' ),
+					'desc' => __( 'Descending', 'cost-of-goods-for-woocommerce' ),
+				),
+				'id'      => 'alg_wc_cog_cost_archive_date_order',
+				'default' => 'desc',
+				'type'    => 'select',
 			),
 			array(
 				'title'          => __( 'MySQL', 'cost-of-goods-for-woocommerce' ),
@@ -224,14 +236,15 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 		$add_stock_settings = array(
 			array(
 				'title' => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
-				'desc'  => __( 'This will automatically calculate new average cost of goods for the product, based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				'desc'  => __( 'Calculate new average cost of goods for the product based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 				           __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ),
 				'type'  => 'title',
 				'id'    => 'alg_wc_cog_add_stock_options',
 			),
 			array(
 				'title'    => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Add "%s" meta box to the product edit page', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Enable "Add stock" feature', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'A meta box "%s" will be added to the product edit page.', 'cost-of-goods-for-woocommerce' ),
 					__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_add_stock',
 				'default'  => 'no',
@@ -258,7 +271,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'             => __( 'Empty cost field', 'cost-of-goods-for-woocommerce' ),
-				'desc'              => __( 'The cost value considered when the field is empty', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'The cost value considered when the field is empty.', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip'          => __( 'Use this option if you want to Add stock without worrying about filling the cost value.', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_products_add_stock_empty_cost_action',
 				'default'           => 'do_nothing',
@@ -270,6 +283,25 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 					'use_last_cost'    => __( 'Uses last cost value from "Add stock" history', 'cost-of-goods-for-woocommerce' ),
 					'use_current_cost' => __( 'Uses current cost', 'cost-of-goods-for-woocommerce' ),
 				)
+			),
+			array(
+				'title'   => __( 'History date', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'History date format.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				             __( 'Example:', 'cost-of-goods-for-woocommerce' ) . ' ' . '<code>Y-m-d H:i:s</code>.' . ' ' .
+				             sprintf( __( '<a target="_blank" href="%s">See format options.</a>', 'cost-of-goods-for-woocommerce' ), 'https://www.php.net/manual/en/datetime.format.php' ),
+				'id'             => 'alg_wc_cog_products_add_stock_history_date_format',
+				'default'        => 'Y-m-d',
+				'type'           => 'text',
+			),
+			array(
+				'desc'    => __( 'History date order.', 'cost-of-goods-for-woocommerce' ),
+				'options' => array(
+					'asc'  => __( 'Ascending', 'cost-of-goods-for-woocommerce' ),
+					'desc' => __( 'Descending', 'cost-of-goods-for-woocommerce' ),
+				),
+				'id'      => 'alg_wc_cog_products_add_stock_history_date_order',
+				'default' => 'desc',
+				'type'    => 'select',
 			),
 			array(
 				'title'    => __( 'Negative stock', 'cost-of-goods-for-woocommerce' ),

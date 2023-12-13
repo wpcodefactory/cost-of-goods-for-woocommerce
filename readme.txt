@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.4
-Stable tag: 3.1.6
+Stable tag: 3.1.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -364,6 +364,15 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.1.7 - 13/12/2023 =
+* Fix - Cost archive - Cost data is updated even when previous and current values are the same.
+* Fix - It's possible to use the "Add stock" feature even with the product "Stock management" disabled.
+* Dev - Make "Add stock" feature available for variations.
+* Dev - Create "Add stock" history date format option.
+* Dev - Create "Add stock" history date order option.
+* Dev - Make "Cost archive" feature available for variations.
+* Dev - Create "Cost archive" date order option.
 
 = 3.1.6 - 08/12/2023 =
 * Fix - "PHP Fatal error: Uncaught TypeError: array_keys(): Argument #1 ($array) must be of type array, null given in `Alg_WC_Cost_of_Goods_Orders`".
