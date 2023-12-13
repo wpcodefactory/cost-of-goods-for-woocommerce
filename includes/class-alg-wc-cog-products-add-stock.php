@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.1.7
+ * @version 3.1.8
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -25,12 +25,12 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.1.7
+		 * @version 3.1.8
 		 * @since   2.8.2
 		 */
 		function __construct() {
 			// Add product stock
-			add_action( 'add_meta_boxes', array( $this, 'add_product_add_stock_meta_box' ) );
+			add_action( 'add_meta_boxes', array( $this, 'add_product_add_stock_meta_box' ), 10, 2 );
 			add_action( 'save_post_product', array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
 			add_action( 'admin_head', array( $this, 'create_add_stock_style' ) );
 			add_action( 'wp_ajax_get_add_stock_history_table', array( $this, 'get_add_stock_history_table_ajax' ) );
@@ -54,28 +54,27 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * add_product_add_stock_meta_box.
 		 *
-		 * @version 3.1.7
+		 * @version 3.1.8
 		 * @since   1.7.0
 		 */
-		function add_product_add_stock_meta_box() {
+		function add_product_add_stock_meta_box( $post_type, $post ) {
 			if ( ! apply_filters( 'alg_wc_cog_create_product_meta_box_validation', true ) ) {
 				return;
 			}
-			if ( $this->is_add_stock_enabled() ) {
-				if (
-					( $product = wc_get_product( get_the_ID() ) ) &&
-					$product->is_type( 'simple' ) || $product->is_type( 'variable' )
-				) {
-					$tip = wc_help_tip( __( 'Enter values and "Update" the product.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					                    __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ) );
-					add_meta_box( 'alg-wc-cog-add-stock',
-						//__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) . $tip,
-						__( 'Add stock', 'cost-of-goods-for-woocommerce' ) . $tip,
-						array( $this, 'product_add_stock_meta_box' ),
-						'product',
-						'side'
-					);
-				}
+			if (
+				$post &&
+				is_a( $product = wc_get_product( $post->ID ), 'WC_Product' ) &&
+				$this->is_add_stock_enabled() &&
+				( $product->is_type( 'simple' ) || $product->is_type( 'variable' ) )
+			) {
+				$tip = wc_help_tip( __( 'Enter values and "Update" the product.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				                    __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ) );
+				add_meta_box( 'alg-wc-cog-add-stock',
+					__( 'Add stock', 'cost-of-goods-for-woocommerce' ) . $tip,
+					array( $this, 'product_add_stock_meta_box' ),
+					'product',
+					'side'
+				);
 			}
 		}
 

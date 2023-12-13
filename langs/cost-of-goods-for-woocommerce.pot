@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.7\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.1.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-13T04:17:51+01:00\n"
+"POT-Creation-Date: 2023-12-13T13:29:25+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -77,8 +77,8 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:151
 #: includes/class-alg-wc-cog-orders.php:701
 #: includes/class-alg-wc-cog-orders.php:811
-#: includes/class-alg-wc-cog-products-add-stock.php:352
-#: includes/class-alg-wc-cog-products-add-stock.php:405
+#: includes/class-alg-wc-cog-products-add-stock.php:351
+#: includes/class-alg-wc-cog-products-add-stock.php:404
 #: includes/class-alg-wc-cog-products.php:305
 #: includes/class-alg-wc-cog-products.php:316
 #: includes/class-alg-wc-cog-products.php:327
@@ -293,11 +293,11 @@ msgstr ""
 msgid "Handling Fee"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:69
+#: includes/class-alg-wc-cog-products-add-stock.php:70
 msgid "Enter values and \"Update\" the product."
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:70
+#: includes/class-alg-wc-cog-products-add-stock.php:71
 #: includes/settings/class-alg-wc-cog-settings-products.php:240
 msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to calculate new average cost of goods for the product."
 msgstr ""
@@ -310,8 +310,8 @@ msgstr ""
 msgid "Add stock"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:348
-#: includes/class-alg-wc-cog-products-add-stock.php:404
+#: includes/class-alg-wc-cog-products-add-stock.php:347
+#: includes/class-alg-wc-cog-products-add-stock.php:403
 #: includes/pro/class-alg-wc-cog-pro.php:812
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-tools.php:133
@@ -319,29 +319,29 @@ msgstr ""
 msgid "Stock"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:369
+#: includes/class-alg-wc-cog-products-add-stock.php:368
 msgid "History"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:403
+#: includes/class-alg-wc-cog-products-add-stock.php:402
 #: includes/settings/class-alg-wc-cog-settings-products.php:204
 msgid "Date"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:444
+#: includes/class-alg-wc-cog-products-add-stock.php:443
 msgid "Variation history"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:451
+#: includes/class-alg-wc-cog-products-add-stock.php:450
 #: includes/class-alg-wc-cog-products-cost-archive.php:295
 msgid "Select variation"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:530
+#: includes/class-alg-wc-cog-products-add-stock.php:529
 msgid "If no variation is selected, the parent product will be updated."
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:531
+#: includes/class-alg-wc-cog-products-add-stock.php:530
 msgid "Update variation(s)"
 msgstr ""
 
