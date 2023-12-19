@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 2.8.7
+ * @version 3.1.9
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 2.8.7
+		 * @version 3.1.9
 		 * @since   2.4.6
 		 */
 		function get_settings() {
@@ -280,6 +280,34 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_wc_food_options',
 				),
 			);
+			$wc_measurement_price_calculator_opts = array(
+				array(
+					'title' => __( 'WooCommerce Measurement Price Calculator', 'cost-of-goods-for-woocommerce' ),
+					'type'  => 'title',
+					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://woo.com/document/measurement-price-calculator/" target="_blank">' . __( 'WooCommerce Measurement Price Calculator', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'id'    => 'alg_wc_cog_compatibility_wc_measurement_price_calc_options',
+				),
+				array(
+					'title'             => __( 'Cost', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Adjust the cost of goods sold according to the product measurement', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_comp_wcmpc_adjust_cost_by_measure',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'title'             => __( 'Cost field label placeholder', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => sprintf(__( 'Add the placeholder %s to the %s option', 'cost-of-goods-for-woocommerce' ), '<code>%measurement_unit%</code>','<a href="'.admin_url('admin.php?page=wc-settings&tab=alg_wc_cost_of_goods').'">'.__('cost field label').'</a>'),
+					'id'                => 'alg_wc_cog_comp_wcmpc_add_measurement_unit_placeholder_to_cost_label',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_wc_measurement_price_calc_options',
+				),
+			);
 			return array_merge(
 				$compatibility_opts,
 				$curcy_multicurrency_opts,
@@ -288,7 +316,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 				$wp_all_import_opts,
 				$wpc_product_bundle_opts,
 				$atum_opts,
-				$wc_food_opts
+				$wc_food_opts,
+				$wc_measurement_price_calculator_opts
 			);
 		}
 

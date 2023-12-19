@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.1.6
+ * @version 3.1.9
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1243,7 +1243,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.1.2
+	 * @version 3.1.9
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1328,7 +1328,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 				if ( $is_new_order ) {
 					if ( ! $is_no_costs_only || '' === wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' ) ) {
 						$product_id = ( ! empty( $item['variation_id'] ) ? $item['variation_id'] : $item['product_id'] );
-						$cost       = apply_filters( 'alg_wc_cog_order_item_cost', alg_wc_cog()->core->products->get_product_cost( $product_id ), $product_id );
+						$cost       = apply_filters( 'alg_wc_cog_order_item_cost', alg_wc_cog()->core->products->get_product_cost( $product_id ), $product_id, $item_id, $item );
 						$do_update  = ( 0 !== $cost );
 					} else {
 						$do_update = false;

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 2.9.4
+ * @version 3.1.9
  * @since   2.6.4
  * @author  WPFactory
  */
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 		/**
 		 * add_cost_input.
 		 *
-		 * @version 2.3.4
+		 * @version 3.1.9
 		 * @since   1.0.0
 		 * @todo    [later] rethink `$product_id` (and search all code for `get_the_ID()`)
 		 * @todo    [maybe] min_profit
@@ -78,16 +78,33 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 			}
 			$product_id = get_the_ID();
 			if ( apply_filters( 'alg_wc_cog_add_cost_input_validation', true, $product_id ) ) {
+				$label_from_to = $this->get_cost_input_label_placeholders( $product_id );
 				woocommerce_wp_text_input( array(
 					'id'          => '_alg_wc_cog_cost',
 					'value'       => wc_format_localized_price( alg_wc_cog()->core->products->get_product_cost( $product_id ) ),
 					'data_type'   => 'price',
-					'label'       => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->cost_field_template ),
+					'label'       => str_replace( array_keys( $label_from_to ), $label_from_to, $this->cost_field_template ),
 					'description' => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
 						( '' != ( $profit = alg_wc_cog()->core->products->get_product_profit_html( $product_id, alg_wc_cog()->core->products->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) ),
 				) );
 			}
 			do_action( 'alg_wc_cog_cost_input', $product_id );
+		}
+
+		/**
+		 * get_cost_input_label_placeholders.
+		 *
+		 * @version 3.1.9
+		 * @since   3.1.9
+		 *
+		 * @param $product_id
+		 *
+		 * @return mixed|null
+		 */
+		function get_cost_input_label_placeholders( $product_id = null ) {
+			return apply_filters( 'alg_wc_cog_cost_input_label_placeholders', array(
+				'%currency_symbol%' => alg_wc_cog()->core->get_default_shop_currency_symbol()
+			), $product_id );
 		}
 
 		/**

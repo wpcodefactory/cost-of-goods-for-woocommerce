@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 3.1.7
+ * @version 3.1.9
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.1.7
+	 * @version 3.1.9
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -89,13 +89,17 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'id'    => 'alg_wc_cog_cost_field_options',
 			),
 			array(
-				'title'          => __( 'Cost field label', 'cost-of-goods-for-woocommerce' ),
-				'desc'           => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
-					'<code>' . implode( '</code>, <code>', array( '%currency_symbol%' ) ) . '</code>' ),
-				'desc_tip'       => __( 'Customizes the cost field input label added to admin product pages.', 'cost-of-goods-for-woocommerce' ),
-				'id'             => 'alg_wc_cog_product_cost_field_template',
-				'default'        => sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ),
-				'type'           => 'text',
+				'title'      => __( 'Cost field label', 'cost-of-goods-for-woocommerce' ),
+				'desc'       => __( 'Placeholders:', 'cost-of-goods-for-woocommerce' ) . ' ' . alg_wc_cog_array_to_string(
+						alg_wc_cog()->core->cost_inputs->get_cost_input_label_placeholders( null ), array(
+							'item_template' => '<code>{key}</code>',
+							'glue'          => ','
+						)
+					) . '.',
+				'desc_tip'   => __( 'Customizes the cost field input label added to admin product pages.', 'cost-of-goods-for-woocommerce' ),
+				'id'         => 'alg_wc_cog_product_cost_field_template',
+				'default'    => sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ),
+				'type'       => 'text',
 				'wpfse_data' => array(
 					'description' => '{desc_tip}'
 				),
