@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.1.9
+ * @version 3.2.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -249,6 +249,15 @@ class Alg_WC_Cost_of_Goods_Orders {
 	public $is_columns_sorting_exclude_empty_lines;
 
 	/**
+	 * $avoid_empty_order_metadata_saving.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @var null
+	 */
+	protected $avoid_empty_order_metadata_saving = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @version 2.2.0
@@ -427,23 +436,44 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * avoid_empty_order_metadata_saving.
 	 *
-	 * @version 3.1.3
+	 * @version 3.2.0
 	 * @since   3.1.3
 	 *
 	 * @param   WC_Abstract_Order  $order
 	 * @param                      $data_store
 	 *
-	 * @return void
+	 * @return  WC_Abstract_Order
 	 */
 	function avoid_empty_order_metadata_saving( WC_Abstract_Order $order, $data_store ) {
-		if ( 'yes' === get_option( 'alg_wc_cog_avoid_empty_order_metadata_saving', 'yes' ) ) {
+		if ( $this->need_to_avoid_empty_order_metadata_saving() ) {
 			/* @var $meta_data WC_Meta_Data */
 			foreach ( $order->get_meta_data() as $meta_data ) {
-				if ( empty( $meta_data->get_data()['value'] ) ) {
+				if (
+					substr( $meta_data->get_data()['key'], 0, 12 ) === "_alg_wc_cog_" &&
+					empty( $meta_data->get_data()['value'] )
+                ) {
 					$order->delete_meta_data( $meta_data->get_data()['key'] );
 				}
 			}
 		}
+
+		return $order;
+	}
+
+	/**
+	 * need_to_avoid_empty_order_metadata_saving.
+	 *
+	 * @version 3.2.0
+	 * @since   3.2.0
+	 *
+	 * @return bool|null
+	 */
+	function need_to_avoid_empty_order_metadata_saving() {
+		if ( is_null( $this->avoid_empty_order_metadata_saving ) ) {
+			$this->avoid_empty_order_metadata_saving = 'yes' === get_option( 'alg_wc_cog_avoid_empty_order_metadata_saving', 'yes' );
+		}
+
+		return $this->avoid_empty_order_metadata_saving;
 	}
 
 	/**
