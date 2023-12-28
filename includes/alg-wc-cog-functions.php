@@ -2,8 +2,8 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 2.9.5
- * @since   1.4.0
+ * @version 3.2.1
+ * @since   3.2.1
  * @author  WPFactory
  */
 
@@ -350,5 +350,27 @@ if ( ! function_exists( 'alg_wc_cog_get_cost_subtracting_tax_rate' ) ) {
 			return $cost;
 		}
 		return $cost / ( 1 + ( $tax_rate->tax_rate / 100 ) );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_generate_wpdb_prepare_placeholders_from_array' ) ) {
+	/**
+	 * alg_wc_cog_generate_wpdb_prepare_placeholders_from_array.
+	 *
+	 * @link https://stackoverflow.com/a/72147500/1193038
+	 *
+	 * @version 3.2.1
+	 * @since   3.2.1
+	 *
+	 * @param $array
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_generate_wpdb_prepare_placeholders_from_array( $array ) {
+		$placeholders = array_map( function ( $item ) {
+			return is_string( $item ) ? '%s' : ( is_float( $item ) ? '%f' : ( is_int( $item ) ? '%d' : '' ) );
+		}, $array );
+
+		return '(' . join( ',', $placeholders ) . ')';
 	}
 }
