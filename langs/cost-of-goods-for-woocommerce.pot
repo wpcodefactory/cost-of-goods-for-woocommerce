@@ -1,15 +1,15 @@
-# Copyright (C) 2023 WPFactory
+# Copyright (C) 2024 WPFactory
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.2.1\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.2.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-29T00:58:50+01:00\n"
+"POT-Creation-Date: 2024-01-03T17:35:13+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -73,7 +73,7 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:379
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:78
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:262
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:281
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:151
 #: includes/class-alg-wc-cog-orders.php:731
 #: includes/class-alg-wc-cog-orders.php:841
@@ -100,7 +100,7 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:415
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:114
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:263
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:282
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:152
 #: includes/class-alg-wc-cog-orders.php:732
 #: includes/class-alg-wc-cog-orders.php:851
@@ -116,7 +116,7 @@ msgstr ""
 msgid "Profit"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:267
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:286
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/stock.js:76
 msgid "Category"

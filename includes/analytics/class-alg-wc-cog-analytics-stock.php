@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Stock.
  *
- * @version 3.2.1
+ * @version 3.2.2
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.2.1
+		 * @version 3.2.2
 		 * @since   2.4.5
 		 *
 		 * @todo Add cost and profit totals on summary.
@@ -48,6 +48,25 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 			add_action( 'woocommerce_new_product', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
 			add_action( 'update_option_woocommerce_notify_low_stock_amount', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
 			add_action( 'update_option_woocommerce_notify_no_stock_amount', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
+			add_action( 'admin_init', array( $this, 'clear_stock_cost_and_profit_totals_cache_on_clear_analytics_cache' ) );
+		}
+
+		/**
+		 * clear_stock_cost_and_profit_totals_cache_on_clear_analytics_cache.
+		 *
+		 * @version 3.2.2
+		 * @since   3.2.2
+		 *
+		 * @return void
+		 */
+		function clear_stock_cost_and_profit_totals_cache_on_clear_analytics_cache() {
+			if (
+				isset( $_GET['page'] ) && 'wc-status' === $_GET['page'] &&
+				isset( $_GET['tab'] ) && 'tools' === $_GET['tab'] &&
+				isset( $_GET['action'] ) && 'clear_woocommerce_analytics_cache' === $_GET['action']
+			) {
+				$this->clear_stock_cost_and_profit_totals_cache();
+			}
 		}
 
 		/**
@@ -113,7 +132,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		/**
 		 * get_total_cost_and_profit_from_database.
 		 *
-		 * @version 3.2.1
+		 * @version 3.2.2
 		 * @since   3.2.1
 		 *
 		 * @param $post_ids
@@ -124,7 +143,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 			global $wpdb;
 
 			$query = "
-			SELECT COUNT(DISTINCT posts.ID) as total_products, SUM(alg_wc_cog_cost_pm.meta_value) AS cost, SUM(alg_wc_cog_cost_pm.meta_value * IFNULL(stock_pm.meta_value, 1)) AS cost_with_qty, SUM(alg_wc_cog_profit_pm.meta_value) AS profit, SUM(alg_wc_cog_profit_pm.meta_value * IFNULL(stock_pm.meta_value, 1)) AS profit_with_qty, SUM(IFNULL(stock_pm.meta_value, 1)) AS stock
+			SELECT COUNT(DISTINCT posts.ID) as total_products, SUM(alg_wc_cog_cost_pm.meta_value) AS cost, SUM(alg_wc_cog_cost_pm.meta_value * IF(stock_pm.meta_value = 0 or stock_pm.meta_value IS null, 1, stock_pm.meta_value)) AS cost_with_qty, SUM(alg_wc_cog_profit_pm.meta_value) AS profit, SUM(alg_wc_cog_profit_pm.meta_value * IF(stock_pm.meta_value = 0 or stock_pm.meta_value IS null, 1, stock_pm.meta_value)) AS profit_with_qty, SUM(IF(stock_pm.meta_value = 0 or stock_pm.meta_value IS null, 1, stock_pm.meta_value)) AS stock
 			FROM {$wpdb->posts} posts
 			LEFT JOIN {$wpdb->postmeta} alg_wc_cog_cost_pm ON posts.ID = alg_wc_cog_cost_pm.post_id and alg_wc_cog_cost_pm.meta_key = '_alg_wc_cog_cost'
 			LEFT JOIN {$wpdb->postmeta} alg_wc_cog_profit_pm ON posts.ID = alg_wc_cog_profit_pm.post_id and alg_wc_cog_profit_pm.meta_key = '_alg_wc_cog_profit'
