@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Currencies Section Settings.
  *
- * @version 2.8.7
+ * @version 3.2.3
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -38,15 +38,16 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 		// Multicurrency order calculation.
 		$multicurrency_order_calculation_opts = array(
 			array(
-				'title' => __( 'Order calculation', 'cost-of-goods-for-woocommerce' ),
-				'desc'  => __( 'Calculate cost and profit from orders in non-default shop currency based on custom exchange rates.', 'cost-of-goods-for-woocommerce' ),
+				'title' => __( 'Multi-currency management', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => sprintf( __( 'Calculate %s from orders in non-default shop currency based on custom exchange rates.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'profit', 'cost-of-goods-for-woocommerce' ) . '</strong>' ). ' ' .
+				           __( 'The order profit will be calculated in the default shop base currency.', 'cost-of-goods-for-woocommerce' )	,
 				'type'  => 'title',
 				'id'    => 'alg_wc_cog_currencies_options',
 			),
 			array(
-				'title'             => __( 'Order calculation', 'cost-of-goods-for-woocommerce' ),
-				'desc'              => __( 'Calculate order cost and profit based on custom exchange rates', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip'          => __( 'Cost and profit will be converted to the shop base currency.', 'cost-of-goods-for-woocommerce' ),
+				'title'             => __( 'Multi-currency management', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => sprintf( __( 'Enable %s feature', 'cost-of-goods-for-woocommerce' ), strtolower( __( 'Multi-currency management', 'cost-of-goods-for-woocommerce' ) ) ),
+				//'desc_tip'          => __( 'The order profit will be calculated in the default shop base currency.', 'cost-of-goods-for-woocommerce' ),
 				'type'              => 'checkbox',
 				'id'                => 'alg_wc_cog_currencies_enabled',
 				'default'           => 'no',
@@ -92,7 +93,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 		// Currency costs.
 		$currency_cost_opts = array(
 			array(
-				'title' => __( 'Currencies costs', 'cost-of-goods-for-woocommerce' ),
+				'title' => __( 'Currency costs', 'cost-of-goods-for-woocommerce' ),
 				'desc'  => __( 'Add extra costs based on the order currency.', 'cost-of-goods-for-woocommerce' ),
 				'type'  => 'title',
 				'id'    => 'alg_wc_cog_currencies_costs_options',

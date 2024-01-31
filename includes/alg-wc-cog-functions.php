@@ -153,6 +153,7 @@ if ( ! function_exists( 'alg_wc_cog_format_cost' ) ) {
 		$args = wp_parse_args( $args, array(
 			'decimals' => get_option( 'alg_wc_cog_costs_decimals', wc_get_price_decimals() )
 		) );
+
 		return wc_price( $cost, $args );
 	}
 }

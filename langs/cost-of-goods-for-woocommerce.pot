@@ -2,20 +2,20 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.2.2\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.2.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-03T17:35:13+01:00\n"
+"POT-Creation-Date: 2024-01-31T23:44:43+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-#: includes/alg-wc-cog-functions.php:218
+#: includes/alg-wc-cog-functions.php:219
 #: includes/settings/class-alg-wc-settings-cog.php:82
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr ""
@@ -36,7 +36,7 @@ msgstr ""
 msgid "https://wpfactory.com"
 msgstr ""
 
-#: includes/alg-wc-cog-functions.php:218
+#: includes/alg-wc-cog-functions.php:219
 msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
 msgstr ""
 
@@ -83,8 +83,8 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:316
 #: includes/class-alg-wc-cog-products.php:327
 #: includes/class-alg-wc-cog-products.php:384
-#: includes/pro/class-alg-wc-cog-pro.php:461
-#: includes/pro/class-alg-wc-cog-pro.php:818
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:111
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:189
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:291
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:368
@@ -161,7 +161,7 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:114
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:213
-#: includes/pro/class-alg-wc-cog-pro.php:810
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
 #: includes/settings/class-alg-wc-cog-settings-orders.php:407
 #: includes/settings/class-alg-wc-cog-settings-products.php:252
 #: includes/settings/class-alg-wc-settings-cog.php:24
@@ -275,8 +275,8 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders.php:735
 #: includes/class-alg-wc-cog-orders.php:1190
-#: includes/pro/class-alg-wc-cog-pro.php:627
-#: includes/pro/class-alg-wc-cog-pro.php:646
+#: includes/pro/class-alg-wc-cog-pro.php:452
+#: includes/pro/class-alg-wc-cog-pro.php:471
 msgid "Cost of goods"
 msgstr ""
 
@@ -304,7 +304,7 @@ msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to c
 msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:73
-#: includes/pro/class-alg-wc-cog-pro.php:810
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
 #: includes/settings/class-alg-wc-cog-settings-products.php:242
 #: includes/settings/class-alg-wc-cog-settings-products.php:249
 #: includes/settings/class-alg-wc-cog-settings-products.php:252
@@ -313,7 +313,7 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:347
 #: includes/class-alg-wc-cog-products-add-stock.php:403
-#: includes/pro/class-alg-wc-cog-pro.php:812
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:105
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-tools.php:133
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:369
@@ -385,9 +385,12 @@ msgid "Go Pro"
 msgstr ""
 
 #: includes/pro/class-alg-wc-cog-pro-extra-currencies-costs.php:54
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:95
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:101
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:102
 msgid "Currencies costs"
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:192
+msgid "- No change -"
 msgstr ""
 
 #: includes/pro/class-alg-wc-cog-pro-wc-food-compatibility.php:74
@@ -399,31 +402,27 @@ msgstr ""
 msgid "Option(s) costs"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:463
-msgid "- No change -"
-msgstr ""
-
-#: includes/pro/class-alg-wc-cog-pro.php:572
+#: includes/pro/class-alg-wc-cog-pro.php:397
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:579
+#: includes/pro/class-alg-wc-cog-pro.php:404
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:582
+#: includes/pro/class-alg-wc-cog-pro.php:407
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:700
+#: includes/pro/class-alg-wc-cog-pro.php:525
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:702
+#: includes/pro/class-alg-wc-cog-pro.php:527
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:704
+#: includes/pro/class-alg-wc-cog-pro.php:529
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
 
@@ -1151,52 +1150,61 @@ msgid "Multicurrency"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:41
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:47
-msgid "Order calculation"
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:48
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:49
+msgid "Multi-currency management"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:42
-msgid "Calculate cost and profit from orders in non-default shop currency based on custom exchange rates."
+msgid "Calculate %s from orders in non-default shop currency based on custom exchange rates."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:48
-msgid "Calculate order cost and profit based on custom exchange rates"
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:42
+msgid "profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:43
+msgid "The order profit will be calculated in the default shop base currency."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:49
-msgid "Cost and profit will be converted to the shop base currency."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:59
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:112
-msgid "Currencies"
+msgid "Enable %s feature"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:60
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:113
+msgid "Currencies"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:61
 msgid "Choose currencies you want to set exchange rates for, and \"Save changes\" - new settings fields will be displayed."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:96
+msgid "Currency costs"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:97
 msgid "Add extra costs based on the order currency."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:102
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:103
 msgid "Add extra costs based on the order currency"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:113
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:114
 msgid "Choose currencies you want to add costs for, and \"Save changes\" - new settings fields will be displayed."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:129
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:130
 msgid " - Fixed cost"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:139
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:140
 msgid " - Percent cost"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:140
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:141
 msgid "Percent from order total. E.g.: If you want to add a cost of <code>50%</code> from order total you can set it as 50."
 msgstr ""
 
