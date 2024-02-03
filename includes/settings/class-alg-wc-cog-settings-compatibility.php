@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 3.1.9
+ * @version 3.2.4
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -36,66 +36,51 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.1.9
+		 * @version 3.2.4
 		 * @since   2.4.6
 		 */
 		function get_settings() {
-			$compatibility_opts = array(
+
+			$wp_syncsheets_opts = array(
+				$this->get_default_compatibility_title_option( array(
+					'title' => __( 'WPSyncSheets', 'cost-of-goods-for-woocommerce' ),
+					'link'  => 'https://wordpress.org/plugins/wpsyncsheets-woocommerce/',
+					'type'  => 'plugin',
+					'id'    => 'alg_wc_cog_compatibility_wpsyncsheets_options',
+				) ),
 				array(
-					'title'    => __( 'Compatibility options', 'cost-of-goods-for-woocommerce' ),
-					'desc'  => __( 'Compatibility with third party plugins or solutions.', 'cost-of-goods-for-woocommerce' ),
-					'type'     => 'title',
-					'id'       => 'alg_wc_cog_compatibility_options',
-				),
-				array(
-					'title'             => __( 'Openpos - WooCommerce Point Of Sale(POS)', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => sprintf(
-						__( 'Enable compatibility with <a target="_blank" href="%s">%s</a> by <a href="%s" target="_blank">anhvnit</a> codenayon author', 'cost-of-goods-for-woocommerce' ),
-						'https://codecanyon.net/item/openpos-a-complete-pos-plugins-for-woocomerce/22613341', __( 'Openpos - WooCommerce Point Of Sale', 'cost-of-goods-for-woocommerce' ), 'https://codecanyon.net/user/anhvnit'
-					),
-					'desc_tip'          => __( 'Manages POS orders on orders reports.', 'cost-of-goods-for-woocommerce' ),
-					'id'                => 'alg_wc_cog_openpos_anhvnit',
-					'default'           => 'no',
+					'title'             => __( 'Order export', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Export order cost to sheet', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => sprintf( __( 'It\'s necessary to enable the new "%s" column on <a href="%s">Order Settings</a>.' ), __( 'Cost', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wpsyncsheets-for-woocommerce&tab=order-settings' ) ),
 					'type'              => 'checkbox',
+					'id'                => 'alg_wc_cog_comp_wpsyncsheets_export_order_cost',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				),
-				array(
-					'desc'     => __( 'Order types in reports.', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip' => __( 'If empty will show common and openpos orders combined.', 'cost-of-goods-for-woocommerce' ),
-					'id'       => 'alg_wc_cog_openpos_anhvnit_report_order_type',
-					'default'  => array(),
-					'type'     => 'multiselect',
-					'options'  => array(
-						'common_orders'  => __( 'Common orders', 'cost-of-goods-for-woocommerce' ),
-						'openpos_orders' => __( 'Openpos orders', 'cost-of-goods-for-woocommerce' )
-					),
-					'class'    => 'chosen_select',
-				),
-				array(
-					'title'             => __( 'Product Addons', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => sprintf(
-						__( 'Enable compatibility with <a target="_blank" href="%s">%s</a> by WooCommerce', 'cost-of-goods-for-woocommerce' ),
-						'https://woocommerce.com/products/product-add-ons/', __( 'Product Add-Ons', 'cost-of-goods-for-woocommerce' ) ),
-					'desc_tip'          => ( $original_desc_tip = __( 'Adds costs fields for the addons and creates an order meta with addons costs.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
-					                                              sprintf( __( 'It\'s necessary to add %s on %s option.', 'cost-of-goods-for-woocommerce' ), '<code>' . '_alg_wc_cog_pao_costs' . '</code>', '<strong>' . __( 'Orders > Extra Costs: From Meta', 'cost-of-goods-for-woocommerce' ) . '</strong>' ) . '<br />' .
-					                                              __( 'It\'s also necessary that addons do not change names once purchased.', 'cost-of-goods-for-woocommerce' ) ),
-					'id'                => 'alg_wc_cog_product_addons',
+					'checkboxgroup' => 'start',
 					'default'           => 'no',
-					'type'              => 'checkbox',
-					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 				),
 				array(
-					'type'     => 'sectionend',
-					'id'       => 'alg_wc_cog_compatibility_options',
+					//'title'             => __( 'Order export', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Export order profit to sheet', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => sprintf( __( 'It\'s necessary to enable the new "%s" column on <a href="%s">Order Settings</a>.' ), __( 'Profit', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wpsyncsheets-for-woocommerce&tab=order-settings' ) ),
+					'type'              => 'checkbox',
+					'id'                => 'alg_wc_cog_comp_wpsyncsheets_export_order_profit',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'checkboxgroup' => 'end',
+					'default'           => 'no',
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_wpsyncsheets_options',
 				),
 			);
+
 			$curcy_multicurrency_opts = array(
-				array(
+				$this->get_default_compatibility_title_option( array(
 					'title' => __( 'CURCY - Multi Currency for WooCommerce', 'cost-of-goods-for-woocommerce' ),
-					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/woo-multi-currency/" target="_blank">' . __( 'CURCY - Multi Currency for WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'link'  => 'https://wordpress.org/plugins/woo-multi-currency/',
+					'type'  => 'plugin',
 					'id'    => 'alg_wc_cog_compatibility_curcy_options',
-				),
+				) ),
 				array(
 					'title'             => __( 'Multicurrency order calculation', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => sprintf( __( 'Get currency rates from CURCY plugin instead of the %s option', 'cost-of-goods-for-woocommerce' ), '<a target="_blank" href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=currencies' ) . '">' . __( 'Multicurrency > Order calculation', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
@@ -109,13 +94,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_curcy_options',
 				),
 			);
+
 			$exchangerateapi_opts = array(
-				array(
+				$this->get_default_compatibility_title_option( array(
 					'title' => __( 'ExchangeRate-API', 'cost-of-goods-for-woocommerce' ),
-					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s.', 'cost-of-goods-for-woocommerce' ), '<a href="https://www.exchangerate-api.com/docs/free" target="_blank">' . __( 'ExchangeRate-API', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'link'  => 'https://www.exchangerate-api.com/docs/free',
+					'type'  => 'plugin',
 					'id'    => 'alg_wc_cog_compatibility_exchangerateapi_options',
-				),
+				) ),
 				array(
 					'title'             => __( 'Multicurrency order calculation', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => sprintf( __( 'Get currency rates from %s instead of the %s option', 'cost-of-goods-for-woocommerce' ), '<a href="https://www.exchangerate-api.com/docs/free" target="_blank">' . __( 'ExchangeRate-API', 'cost-of-goods-for-woocommerce' ) . '</a>' , '<a target="_blank" href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=currencies' ) . '">' . __( 'Multicurrency > Order calculation', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
@@ -130,13 +116,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_exchangerateapi_options',
 				),
 			);
+
 			$metorik_opts = array(
-				array(
+				$this->get_default_compatibility_title_option( array(
 					'title' => __( 'Metorik', 'cost-of-goods-for-woocommerce' ),
-					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://metorik.com/" target="_blank">' . __( 'Metorik', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'link'  => 'https://metorik.com/',
+					'type'  => 'plugin',
 					'id'    => 'alg_wc_cog_compatibility_metorik_options',
-				),
+				) ),
 				array(
 					'title'             => __( 'Sync cost', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => sprintf( __( 'Sync cost with %s meta', 'cost-of-goods-for-woocommerce' ), '<code>' . '_wc_cog_cost' . '</code>' ),
@@ -151,13 +138,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_metorik_options',
 				),
 			);
+
 			$wp_all_import_opts = array(
-				array(
+				$this->get_default_compatibility_title_option( array(
 					'title' => __( 'WP All Import', 'cost-of-goods-for-woocommerce' ),
-					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/wp-all-import/" target="_blank">' . __( 'WP All Import', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'link'  => 'https://wordpress.org/plugins/wp-all-import/',
+					'type'  => 'plugin',
 					'id'    => 'alg_wc_cog_compatibility_wp_all_import_options',
-				),
+				) ),
 				array(
 					'title'             => __( 'Numbers with commas', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => __( 'Convert numbers with commas to dots', 'cost-of-goods-for-woocommerce' ),
@@ -180,13 +168,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_wp_all_import_options',
 				),
 			);
+
 			$wpc_product_bundle_opts = array(
-				array(
+				$this->get_default_compatibility_title_option( array(
 					'title' => __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ),
-					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/woo-product-bundle/" target="_blank">' . __( 'WPC Product Bundles for WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'link'  => 'https://wordpress.org/plugins/woo-product-bundle/',
+					'type'  => 'plugin',
 					'id'    => 'alg_wc_cog_compatibility_wpcpb_options',
-				),
+				) ),
 				array(
 					'title'             => __( 'WooCommerce reports', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => sprintf( __( 'Exclude Smart bundle product type from %s and %s report', 'cost-of-goods-for-woocommerce' ), '<a href="'.admin_url('admin.php?page=wc-reports&tab=stock&report=alg_cost_of_goods_stock').'">'.__( 'stock', 'cost-of-goods-for-woocommerce' ).'</a>', '<a href="'.admin_url('admin.php?page=wc-reports&tab=orders&report=alg_cost_of_goods').'">'.__( 'orders', 'cost-of-goods-for-woocommerce' ).'</a>' ),
@@ -219,13 +208,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_wpcpb_options',
 				),
 			);
+
 			$atum_opts = array(
-				array(
+				$this->get_default_compatibility_title_option( array(
 					'title' => __( 'ATUM Inventory Management for WooCommerce', 'cost-of-goods-for-woocommerce' ),
-					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://wordpress.org/plugins/atum-stock-manager-for-woocommerce/" target="_blank">' . __( 'ATUM Inventory Management for WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'link'  => 'https://wordpress.org/plugins/atum-stock-manager-for-woocommerce/',
+					'type'  => 'plugin',
 					'id'    => 'alg_wc_cog_compatibility_atum_options',
-				),
+				) ),
 				array(
 					'title'             => __( 'Import costs tool', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => sprintf( __( 'Copy cost from %s plugin while using the %s tool', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'ATUM', 'cost-of-goods-for-woocommerce' ) . '</strong>', '<a target="_blank" href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Import costs', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
@@ -258,13 +248,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_atum_options',
 				),
 			);
+
 			$wc_food_opts = array(
-				array(
+				$this->get_default_compatibility_title_option( array(
 					'title' => __( 'WooCommerce Food', 'cost-of-goods-for-woocommerce' ),
-					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://exthemes.net/woocommerce-food/" target="_blank">' . __( 'WooCommerce Food', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'link'  => 'https://exthemes.net/woocommerce-food/',
+					'type'  => 'plugin',
 					'id'    => 'alg_wc_cog_compatibility_wc_food_options',
-				),
+				) ),
 				array(
 					'title'             => __( 'Food costs', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => __( 'Add fixed costs to food options', 'cost-of-goods-for-woocommerce' ),
@@ -280,13 +271,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_wc_food_options',
 				),
 			);
+
 			$wc_measurement_price_calculator_opts = array(
-				array(
+				$this->get_default_compatibility_title_option( array(
 					'title' => __( 'WooCommerce Measurement Price Calculator', 'cost-of-goods-for-woocommerce' ),
-					'type'  => 'title',
-					'desc'  => sprintf( __( 'Compatibility with %s plugin.', 'cost-of-goods-for-woocommerce' ), '<a href="https://woo.com/document/measurement-price-calculator/" target="_blank">' . __( 'WooCommerce Measurement Price Calculator', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'link'  => 'https://woo.com/document/measurement-price-calculator/',
+					'type'  => 'plugin',
 					'id'    => 'alg_wc_cog_compatibility_wc_measurement_price_calc_options',
-				),
+				) ),
 				array(
 					'title'             => __( 'Cost', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => __( 'Adjust the cost of goods sold according to the product measurement', 'cost-of-goods-for-woocommerce' ),
@@ -308,8 +300,58 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'id'   => 'alg_wc_cog_compatibility_wc_measurement_price_calc_options',
 				),
 			);
+
+			$openpos_opts = array(
+				$this->get_default_compatibility_title_option( array(
+					'title' => __( 'Openpos - WooCommerce Point Of Sale(POS)', 'cost-of-goods-for-woocommerce' ),
+					'link'  => 'https://codecanyon.net/item/openpos-a-complete-pos-plugins-for-woocomerce/22613341',
+					'type'  => 'plugin',
+					'id'    => 'alg_wc_cog_openpos_compatibility_options',
+				) ),
+				array(
+					'title'    => __( 'Order types', 'cost-of-goods-for-woocommerce' ),
+					'desc'     => __( 'Order types in reports.', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip' => __( 'If empty will show common and openpos orders combined.', 'cost-of-goods-for-woocommerce' ),
+					'id'       => 'alg_wc_cog_openpos_anhvnit_report_order_type',
+					'default'  => array(),
+					'type'     => 'multiselect',
+					'options'  => array(
+						'common_orders'  => __( 'Common orders', 'cost-of-goods-for-woocommerce' ),
+						'openpos_orders' => __( 'Openpos orders', 'cost-of-goods-for-woocommerce' )
+					),
+					'class'    => 'chosen_select',
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_openpos_compatibility_options',
+				),
+			);
+
+			$product_addons_opts = array(
+				$this->get_default_compatibility_title_option( array(
+					'title' => __( 'Product Addons', 'cost-of-goods-for-woocommerce' ),
+					'link'  => 'https://woocommerce.com/products/product-add-ons/',
+					'type'  => 'plugin',
+					'id'    => 'alg_wc_cog_product_addons_compatibility_options',
+				) ),
+				array(
+					'title'             => __( 'Addons', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Add costs fields for the addons and create an order meta with addons costs.', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => sprintf( __( 'It\'s necessary to add %s on %s option.', 'cost-of-goods-for-woocommerce' ), '<code>' . '_alg_wc_cog_pao_costs' . '</code>', '<strong>' . __( 'Orders > Extra Costs: From Meta', 'cost-of-goods-for-woocommerce' ) . '</strong>' ) . '<br />' .
+					                       __( 'It\'s also necessary that addons do not change names once purchased.', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_product_addons',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_product_addons_compatibility_options',
+				),
+			);
+
 			return array_merge(
-				$compatibility_opts,
+				$wp_syncsheets_opts,
 				$curcy_multicurrency_opts,
 				$exchangerateapi_opts,
 				$metorik_opts,
@@ -317,7 +359,41 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 				$wpc_product_bundle_opts,
 				$atum_opts,
 				$wc_food_opts,
-				$wc_measurement_price_calculator_opts
+				$wc_measurement_price_calculator_opts,
+				$openpos_opts,
+				$product_addons_opts,
+			);
+		}
+
+		/**
+		 * get_default_compatibility_title_option.
+		 *
+		 * @version 3.2.4
+		 * @since   3.2.4
+		 *
+		 * @param $args
+		 *
+		 * @return array
+		 */
+		function get_default_compatibility_title_option( $args = null ) {
+			$args = wp_parse_args( $args, array(
+				'link'  => '',
+				'title' => '',
+				'type'  => 'plugin', // plugin | theme
+				'id'    => '',
+			) );
+
+			$product_type = 'plugin' === $args['type'] ? __( 'plugin', 'cost-of-goods-for-woocommerce' ) : __( 'theme', 'cost-of-goods-for-woocommerce' );
+
+			return array(
+				'title' => $args['title'],
+				'type'  => 'title',
+				'desc'  => sprintf(
+					__( 'Compatibility with %s %s.', 'cost-of-goods-for-woocommerce' ),
+					'<a href="' . esc_url( $args['link'] ) . '" target="_blank">' . esc_html( $args['title'] ) . '</a>',
+					$product_type
+				),
+				'id'    => $args['id']
 			);
 		}
 

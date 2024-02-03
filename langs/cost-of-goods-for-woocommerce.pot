@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.2.3\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.2.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-01-31T23:44:43+01:00\n"
+"POT-Creation-Date: 2024-02-03T20:20:18+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -83,10 +83,12 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:316
 #: includes/class-alg-wc-cog-products.php:327
 #: includes/class-alg-wc-cog-products.php:384
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:49
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:111
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:189
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:291
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:283
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:368
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/categories.js:32
@@ -105,7 +107,9 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders.php:732
 #: includes/class-alg-wc-cog-orders.php:851
 #: includes/class-alg-wc-cog-products.php:387
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:64
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:391
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/categories.js:38
@@ -384,6 +388,15 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wc-food.php:74
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:260
+msgid "Food costs"
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wc-food.php:264
+msgid "Option(s) costs"
+msgstr ""
+
 #: includes/pro/class-alg-wc-cog-pro-extra-currencies-costs.php:54
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:102
 msgid "Currencies costs"
@@ -391,15 +404,6 @@ msgstr ""
 
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:192
 msgid "- No change -"
-msgstr ""
-
-#: includes/pro/class-alg-wc-cog-pro-wc-food-compatibility.php:74
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:269
-msgid "Food costs"
-msgstr ""
-
-#: includes/pro/class-alg-wc-cog-pro-wc-food-compatibility.php:264
-msgid "Option(s) costs"
 msgstr ""
 
 #: includes/pro/class-alg-wc-cog-pro.php:397
@@ -797,7 +801,7 @@ msgid "products"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:136
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:192
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:181
 msgid "orders"
 msgstr ""
 
@@ -845,302 +849,288 @@ msgstr ""
 msgid "Compatibility"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:45
-msgid "Compatibility options"
-msgstr ""
-
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:46
-msgid "Compatibility with third party plugins or solutions."
+msgid "WPSyncSheets"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:51
-msgid "Openpos - WooCommerce Point Of Sale(POS)"
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:52
+msgid "Order export"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:53
-msgid "Enable compatibility with <a target=\"_blank\" href=\"%s\">%s</a> by <a href=\"%s\" target=\"_blank\">anhvnit</a> codenayon author"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
-msgid "Openpos - WooCommerce Point Of Sale"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:56
-msgid "Manages POS orders on orders reports."
+msgid "Export order cost to sheet"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:63
-msgid "Order types in reports."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:64
-msgid "If empty will show common and openpos orders combined."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:69
-msgid "Common orders"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:70
-msgid "Openpos orders"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:75
-msgid "Product Addons"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:77
-msgid "Enable compatibility with <a target=\"_blank\" href=\"%s\">%s</a> by WooCommerce"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:78
-msgid "Product Add-Ons"
+msgid "Export order profit to sheet"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:79
-msgid "Adds costs fields for the addons and creates an order meta with addons costs."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:80
-msgid "It's necessary to add %s on %s option."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:80
-msgid "Orders > Extra Costs: From Meta"
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:81
-msgid "It's also necessary that addons do not change names once purchased."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:94
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:96
 msgid "CURCY - Multi Currency for WooCommerce"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:96
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:137
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:158
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:187
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:226
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:265
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:287
-msgid "Compatibility with %s plugin."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:100
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:120
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:85
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:106
 msgid "Multicurrency order calculation"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:101
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:86
 msgid "Get currency rates from CURCY plugin instead of the %s option"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:101
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:121
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:86
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:107
 msgid "Multicurrency > Order calculation"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:114
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:116
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:121
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:100
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:107
 msgid "ExchangeRate-API"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:116
-msgid "Compatibility with %s."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:121
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:107
 msgid "Get currency rates from %s instead of the %s option"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:122
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:108
 msgid "The update will run once a day."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:135
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:137
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:122
 msgid "Metorik"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:141
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:128
 msgid "Sync cost"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:142
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:129
 msgid "Sync cost with %s meta"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:143
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:130
 msgid "Everytime %s meta gets updated its value is copied to %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:156
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:158
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:144
 msgid "WP All Import"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:162
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:150
 msgid "Numbers with commas"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:163
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:151
 msgid "Convert numbers with commas to dots"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:164
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:152
 msgid "Example: <code>1723,07</code> changes to <code>1723.07</code>."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:171
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:159
 msgid "Sanitize float number"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:172
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:160
 msgid "Remove all illegal characters from a float number, like currency values for example"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:185
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:187
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:174
 msgid "WPC Product Bundles for WooCommerce"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:191
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:180
 msgid "WooCommerce reports"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:192
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:181
 msgid "Exclude Smart bundle product type from %s and %s report"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:192
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:181
 msgid "stock"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:199
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:188
 msgid "Cost calculation"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:200
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:189
 msgid "Calculate Smart bundle cost from its items"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:201
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:190
 msgid "The cost will be calculated automatically when the bundle product price is updated."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:209
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:198
 msgid "Exclude Smart bundle cost from order item"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:210
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:199
 msgid "This option should be probably enabled if the above option is."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:224
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:226
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:214
 msgid "ATUM Inventory Management for WooCommerce"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:230
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:220
 msgid "Import costs tool"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:221
 msgid "Copy cost from %s plugin while using the %s tool"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:221
 msgid "ATUM"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:221
 msgid "Import costs"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:232
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:222
 msgid "The %s option will be ignored."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:232
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:222
 #: includes/settings/class-alg-wc-cog-settings-tools.php:168
 msgid "Key to import from"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:239
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:229
 msgid "Cost sync"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:240
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:230
 msgid "Change cost of goods every time the purchase price is updated in ATUM"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:241
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
 msgid "The %s meta will be changed every time the %s column is updated."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:241
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
 msgid "_alg_wc_cog_cost"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:241
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
 msgid "purchase_price"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:248
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:238
 msgid "Taxes"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:249
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:239
 msgid "Subtract taxes from ATUM cost while using the \"Import\" or \"Cost sync\" options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:250
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:240
 msgid "The highest priority tax rate will be used, and only on taxable products."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:263
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:265
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:254
 msgid "WooCommerce Food"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:270
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:261
 msgid "Add fixed costs to food options"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:271
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:262
 msgid "A metabox is going to be created on the admin products page and on the global food options."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:272
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:263
 msgid "For now, all the options costs will be \"quantity based\" calculated."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:285
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:287
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:277
 msgid "WooCommerce Measurement Price Calculator"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:292
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:284
 msgid "Adjust the cost of goods sold according to the product measurement"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:299
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:291
 msgid "Cost field label placeholder"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:300
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:292
 msgid "Add the placeholder %s to the %s option"
 msgstr ""
 
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:306
+msgid "Openpos - WooCommerce Point Of Sale(POS)"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:312
+msgid "Order types"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:313
+msgid "Order types in reports."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:314
+msgid "If empty will show common and openpos orders combined."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:319
+msgid "Common orders"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:320
+msgid "Openpos orders"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:332
+msgid "Product Addons"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:338
+msgid "Addons"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:339
+msgid "Add costs fields for the addons and create an order meta with addons costs."
+msgstr ""
+
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:340
+msgid "It's necessary to add %s on %s option."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:340
+msgid "Orders > Extra Costs: From Meta"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:341
+msgid "It's also necessary that addons do not change names once purchased."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:386
+msgid "plugin"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:386
+msgid "theme"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:392
+msgid "Compatibility with %s %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:416
 #: includes/settings/class-alg-wc-cog-settings-tools.php:54
 msgid "Please, reload the page to see the next scheduled event info."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:344
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:420
 #: includes/settings/class-alg-wc-cog-settings-tools.php:59
 msgid "Next event scheduled to %s"
 msgstr ""
