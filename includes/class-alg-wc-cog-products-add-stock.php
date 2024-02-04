@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.1.8
+ * @version 3.2.5
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -178,7 +178,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * has_parent_product_manage_stock_enabled.
 		 *
-		 * @version 3.1.7
+		 * @version 3.2.5
 		 * @since   3.1.7
 		 *
 		 * @param $product_id
@@ -193,7 +193,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				) ||
 				(
 					is_a( $product = wc_get_product( $product_id ), 'WC_Product' ) &&
-					$product_id->get_manage_stock()
+					$product->get_manage_stock()
 				)
 			) {
 				return true;
@@ -378,15 +378,18 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_add_stock_history_table.
 		 *
-		 * @version 3.1.7
-		 * @since   3.1.7
+		 * @version 3.2.5
+		 * @since   3.2.5
 		 *
 		 * @param $product_id
 		 *
 		 * @return string
 		 */
 		function get_add_stock_history_table( $product_id ) {
-			$history            = get_post_meta( $product_id, '_alg_wc_cog_cost_history', true );
+			$history = get_post_meta( $product_id, '_alg_wc_cog_cost_history', true );
+			if ( ! is_array( $history ) ) {
+				return '';
+			}
 			$history_date_order = get_option( 'alg_wc_cog_products_add_stock_history_date_order', 'desc' );
 			'asc' === $history_date_order ? ksort( $history ) : krsort( $history );
 			$format = get_option( 'alg_wc_cog_products_add_stock_history_date_format', 'Y-m-d' );
