@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.2.0
+ * @version 3.2.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -525,9 +525,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 	}
 
 	/**
-	 * add_fees_to_profit_meta_key_to_order_cmb.
+	 * add_taxes_to_profit_meta_key_to_order_cmb.
 	 *
-	 * @version 2.9.0
+	 * @version 3.2.7
 	 * @since   2.9.0
 	 *
 	 * @param $meta_keys
@@ -536,7 +536,12 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 */
 	function add_taxes_to_profit_meta_key_to_order_cmb( $meta_keys ) {
 		if ( 'yes' === get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
-			$meta_keys['_alg_wc_cog_order_taxes_extra_profit'] = __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' );
+			$percentage = get_option( 'alg_wc_cog_order_taxes_to_profit_percentage', 100 );
+			$text       = __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' );
+			if ( (float) 100 !== (float) $percentage ) {
+				$text = sprintf( __( 'Taxes to profit (%s)', 'cost-of-goods-for-woocommerce' ), $percentage . '%' );
+			}
+			$meta_keys['_alg_wc_cog_order_taxes_extra_profit'] = $text;
 		}
 		return $meta_keys;
 	}
@@ -544,17 +549,17 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_order_taxes_to_profit.
 	 *
-	 * @version 3.0.2
+	 * @version 3.2.7
 	 * @since   2.9.0
 	 */
 	function add_order_taxes_to_profit( $order_values, $order_info ) {
 		if ( 'yes' === get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
 			$order                       = $order_info['order'];
 			$fees                        = (float) apply_filters( 'alg_wc_cog_order_total_taxes', $order->get_total_tax(), $order );
-			$shipping_to_profit          = (float) $fees * ( (float) get_option( 'alg_wc_cog_order_shipping_to_profit_percentage', 100 ) / 100 );
-			$order_values['profit']      += (float) $shipping_to_profit;
-			$order_values['total_price'] += (float) $shipping_to_profit;
-			$order->update_meta_data( '_alg_wc_cog_order_taxes_extra_profit', $shipping_to_profit );
+			$percentage                  = (float) $fees * ( (float) get_option( 'alg_wc_cog_order_taxes_to_profit_percentage', 100 ) / 100 );
+			$order_values['profit']      += (float) $percentage;
+			$order_values['total_price'] += (float) $percentage;
+			$order->update_meta_data( '_alg_wc_cog_order_taxes_extra_profit', $percentage );
 		} else {
 			$order = $order_info['order'];
 			$order->delete_meta_data( '_alg_wc_cog_order_taxes_extra_profit' );
@@ -566,7 +571,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_fees_to_profit_meta_key_to_order_cmb.
 	 *
-	 * @version 2.9.0
+	 * @version 3.2.7
 	 * @since   2.9.0
 	 *
 	 * @param $meta_keys
@@ -575,7 +580,12 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 */
 	function add_fees_to_profit_meta_key_to_order_cmb( $meta_keys ) {
 		if ( 'yes' === get_option( 'alg_wc_cog_order_fees_to_profit', 'no' ) ) {
-			$meta_keys['_alg_wc_cog_order_fees_extra_profit'] = __( 'Fees to profit', 'cost-of-goods-for-woocommerce' );
+			$percentage = get_option( 'alg_wc_cog_order_fees_to_profit_percentage', 100 );
+			$text       = __( 'Fees to profit', 'cost-of-goods-for-woocommerce' );
+			if ( (float) 100 !== (float) $percentage ) {
+				$text = sprintf( __( 'Fees to profit (%s)', 'cost-of-goods-for-woocommerce' ), $percentage . '%' );
+			}
+			$meta_keys['_alg_wc_cog_order_fees_extra_profit'] = $text;
 		}
 		return $meta_keys;
 	}
@@ -583,17 +593,17 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_order_fees_to_profit.
 	 *
-	 * @version 3.0.2
+	 * @version 3.2.7
 	 * @since   2.9.0
 	 */
 	function add_order_fees_to_profit( $order_values, $order_info ) {
 		if ( 'yes' === get_option( 'alg_wc_cog_order_fees_to_profit', 'no' ) ) {
 			$order                       = $order_info['order'];
 			$fees                        = (float) apply_filters( 'alg_wc_cog_order_total_fees', $order->get_total_fees(), $order );
-			$shipping_to_profit          = (float) $fees * ( (float) get_option( 'alg_wc_cog_order_shipping_to_profit_percentage', 100 ) / 100 );
-			$order_values['profit']      += (float) $shipping_to_profit;
-			$order_values['total_price'] += (float) $shipping_to_profit;
-			$order->update_meta_data( '_alg_wc_cog_order_fees_extra_profit', $shipping_to_profit );
+			$percentage                  = (float) $fees * ( (float) get_option( 'alg_wc_cog_order_fees_to_profit_percentage', 100 ) / 100 );
+			$order_values['profit']      += (float) $percentage;
+			$order_values['total_price'] += (float) $percentage;
+			$order->update_meta_data( '_alg_wc_cog_order_fees_extra_profit', $percentage );
 		} else {
 			$order = $order_info['order'];
 			$order->delete_meta_data( '_alg_wc_cog_order_fees_extra_profit' );

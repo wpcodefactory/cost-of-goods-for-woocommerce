@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings.
  *
- * @version 2.8.8
+ * @version 3.2.7
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.8.8
+	 * @version 3.2.7
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -292,12 +292,26 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'type'     => 'checkbox',
 			),
 			array(
+				'desc'     => __( 'Fees to profit - Percentage.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf(__( 'If you want to move %s of the fees to profit, set it as %s', 'cost-of-goods-for-woocommerce' ),'100%','<code>100</code>'),
+				'id'       => 'alg_wc_cog_order_fees_to_profit_percentage',
+				'default'  => '100',
+				'type'     => 'number',
+			),
+			array(
 				'title'    => __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => sprintf( __( 'Will probably make more sense if %s option is <strong>including tax</strong>.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Products > Get price method', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
 				'desc'     => __( 'Add order taxes like VAT to the order profit', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_taxes_to_profit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Taxes to profit - Percentage.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf(__( 'If you want to move %s of the taxes to profit, set it as %s', 'cost-of-goods-for-woocommerce' ),'100%','<code>100</code>'),
+				'id'       => 'alg_wc_cog_order_taxes_to_profit_percentage',
+				'default'  => '100',
+				'type'     => 'number',
 			),
 			array(
 				'title'    => __( 'Delay calculations', 'cost-of-goods-for-woocommerce' ),
