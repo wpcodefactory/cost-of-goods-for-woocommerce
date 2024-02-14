@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.1.0
+ * @version 3.2.8
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -495,11 +495,14 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_cost_html.
 	 *
-	 * @version 2.4.0
+	 * @version 3.2.8
 	 * @since   1.0.0
 	 */
 	function get_product_cost_html( $product_id ) {
 		$product = wc_get_product( $product_id );
+		if ( ! is_a( $product, 'WC_Product' ) ) {
+			return '';
+		}
 		if ( $product->is_type( 'variable' ) ) {
 			return $this->get_variable_product_html( $product_id, 'cost', '%cost%' );
 		} else {
