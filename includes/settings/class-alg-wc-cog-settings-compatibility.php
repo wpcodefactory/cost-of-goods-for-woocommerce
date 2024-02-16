@@ -361,7 +361,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 				$wc_food_opts,
 				$wc_measurement_price_calculator_opts,
 				$openpos_opts,
-				$product_addons_opts,
+				$product_addons_opts
 			);
 		}
 
