@@ -20,7 +20,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		 */
 		public $import_tool_bkg_process;
 
-
 		/**
 		 * Constructor.
 		 *

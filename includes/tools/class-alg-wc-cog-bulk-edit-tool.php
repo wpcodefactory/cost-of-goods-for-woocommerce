@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 2.9.7
+ * @version 3.2.9
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -57,6 +57,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @var Alg_WC_Cost_of_Goods_Update_Variation_Costs_Bkg_Process
 		 */
 		public $update_variation_costs_bkg_process;
+
+		/**
+         * $wp_list_bulk_edit_tool.
+         *
+         * @since 3.2.9
+         *
+		 * @var
+		 */
+        public $wp_list_bulk_edit_tool;
 
 		/**
 		 * Constructor.
@@ -591,7 +600,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display section navs HTML.
 		 *
-		 * @version 2.6.1
+		 * @version 3.2.9
 		 * @since   2.5.1
 		 */
 		function display_section_navs_html() {
@@ -607,7 +616,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				$is_current  = $section === $key ? 'current' : '';
 				$section_url = admin_url( sprintf( 'tools.php?page=%s&section=%s', str_replace('tools_page_', '', $current_screen->base ), $key ) );
 
-				$tabs_nav_html[] = sprintf( '<li><a href="%s" class="%s">%s</a></li>', $section_url, $is_current, $label );
+				$tabs_nav_html[] = sprintf( '<li><a href="%s" class="%s">%s</a></li>', esc_url( $section_url ), $is_current, $label );
 			}
 
 			printf( '<ul class="subsubsub no-float">%s</ul>', implode( ' | ', $tabs_nav_html ) );
@@ -616,7 +625,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * display_wp_list_tool.
 		 *
-		 * @version 2.7.4
+		 * @version 3.2.9
 		 * @since   2.3.1
 		 */
 		function display_bulk_edit_tools() {
@@ -667,10 +676,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			}
 
 			// Wrap up section content
-			printf( '<div class="notice is-dismissible alg_wc_cog_notice"><p></p></div><'.$container_elem_type.' method="post" action="" class="bulk-edit-form %s" data-type="%s" data-tool-type="%s"><div class="wrap alg_wc_cog_bulk_edit">%s</div></'.$container_elem_type.'>',
-				$this->get_current_section( 'form_class' ),
-				$this->get_current_section( 'id' ),
-                $tool_type,
+			printf( '<div class="notice is-dismissible alg_wc_cog_notice"><p></p></div><' . $container_elem_type . ' method="post" action="" class="bulk-edit-form %s" data-type="%s" data-tool-type="%s"><div class="wrap alg_wc_cog_bulk_edit">%s</div></' . $container_elem_type . '>',
+				esc_attr( $this->get_current_section( 'form_class' ) ),
+				esc_attr( $this->get_current_section( 'id' ) ),
+				esc_attr( $tool_type ),
 				ob_get_clean()
 			);
 		}
@@ -678,16 +687,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Return current section or any argument value of current section.
 		 *
-		 * @version 2.5.1
-		 * @since 2.5.1
+		 * @version 3.2.9
+		 * @since   2.5.1
 		 *
 		 * @param string $arg
 		 * @return int|mixed|string|null
 		 */
 		function get_current_section( $arg = '' ) {
-
 			$nav_sections = $this->get_section_nav_items();
-			$section      = isset( $_GET['section'] ) ? sanitize_text_field( $_GET['section'] ) : key( $nav_sections );
+			$section      = isset( $_GET['section'] ) ? rawurlencode( sanitize_text_field( $_GET['section'] ) ) : key( $nav_sections );
 
 			if ( $arg === 'id' ) {
 				return $section;
