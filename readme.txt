@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.4
-Stable tag: 3.2.9
+Stable tag: 3.3.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -364,6 +364,15 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.3.0 - 29/02/2024 =
+* Fix - Tools - Filter by tags from bulk edit costs has unnecessary javascript.
+* Fix - Tools - Bulk edit costs - Cost input exceeds column width.
+* Fix - COG input does not get displayed on variations when using the Subscriptions For WooCommerce Pro plugin.
+* Dev - Tools - Improve Bulk edit costs and prices code and design.
+* Dev - Tools - Create option to increase costs by x%.
+* Dev - Tools - Create option to decrease costs by x%.
+* WC tested up to: 8.6.
 
 = 3.2.9 - 17/02/2024 =
 * Fix - Vulnerability problem.

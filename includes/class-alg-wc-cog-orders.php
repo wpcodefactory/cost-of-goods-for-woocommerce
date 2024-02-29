@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.2.7
+ * @version 3.3.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -256,6 +256,15 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 * @var null
 	 */
 	protected $avoid_empty_order_metadata_saving = null;
+
+	/**
+	 * $order_extra_cost_from_meta.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @var
+	 */
+	public $order_extra_cost_from_meta;
 
 	/**
 	 * Constructor.

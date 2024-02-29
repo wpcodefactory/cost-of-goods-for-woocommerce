@@ -1,7 +1,7 @@
 /**
  * alg-wc-cog-bulk-edit-tool.js.
  *
- * @version 2.7.3
+ * @version 3.3.0
  * @since   1.3.3
  * @author  WPFactory
  */
@@ -10,55 +10,111 @@
     "use strict";
 
     /**
-     * Handle ajax form submission in bulk edit form for both by-price and by-profit.
+     * Document on Ready
      *
-     * @version 2.5.1
-     * @since 2.5.1
+     * @version 1.3.4
+     * @since   1.3.3
      */
-    $(document).on('submit', '.bulk-edit-form.ajax-submission', function (e) {
+    $(document).on('ready', function () {
 
-        let bulkEditForm = $(this),
-            bulkEditFormType = bulkEditForm.data('type'),
-            bulkEditToolType = bulkEditForm.data('tool-type'),
-            bulkEditFormSpinner = bulkEditForm.find('.spinner'),
-            bulkEditFormNotice = $('.alg_wc_cog_notice');
+        // Dropdowns with description.
+        const dropdownsWithDescription = {
+            dropdownsSelector: '',
 
-        if (confirm(algWcCog.confirmText) && typeof bulkEditFormType !== 'undefined') {
+            init: function () {
+                this.addDropdownsSelector('[data-dropdown_with_desc="true"]');
+                let dropdowns = document.querySelectorAll(this.dropdownsSelector);
+                dropdowns.forEach(function (dropdown) {
+                    let jQueryDropdown = $(dropdown);
+                    jQueryDropdown.on('change', function (e) {
+                        let selectedOption = dropdown.options[dropdown.selectedIndex];
+                        let targetSelector = dropdown.getAttribute('data-desc_target');
+                        dropdownsWithDescription.showDescriptionFromOption(selectedOption, targetSelector);
+                    });
+                    jQueryDropdown.trigger('change');
+                });
+            },
 
-            // Showing the spinner
-            bulkEditFormSpinner.addClass('is-active');
-            bulkEditFormNotice.removeClass('notice-success notice-error').fadeOut(100);
-
-            $.ajax({
-                type: 'POST',
-                context: this,
-                url: algWcCog.ajaxURL,
-                data: {
-                    'action': 'alg_wc_cog_update_product_data',
-                    'form_data': bulkEditForm.serialize(),
-                    'update_type': bulkEditFormType,
-                    'tool_type': bulkEditToolType,
-                },
-                success: function (response) {
-					// Hiding the spinner
-					bulkEditFormSpinner.removeClass('is-active');
-                    if (response.success) {
-                        bulkEditFormNotice.addClass('notice-success').find(' > p').html(response.data).parent().fadeIn(100);
-                    } else {
-                        bulkEditFormNotice.addClass('notice-error').find(' > p').html(response.data).parent().fadeIn(100);
-                    }
-                    bulkEditForm.find('select').val('').trigger('change');
-                    bulkEditForm.trigger("reset");
-
-                    return false;
+            showDescriptionFromOption: function (option, targetSelector) {
+                let desc = option.getAttribute('data-desc');
+                if (targetSelector !== null) {
+                    let targets = document.querySelectorAll(targetSelector);
+                    targets.forEach(function (target) {
+                        if (desc) {
+                            target.classList.remove('hidden');
+                            target.innerHTML = desc;
+                        } else {
+                            target.classList.add('hidden');
+                        }
+                    })
                 }
-            });
-        }
+            },
 
-        e.preventDefault();
-        return false;
+            addDropdownsSelector: function (selector) {
+                this.dropdownsSelector = selector
+            }
+        }
+        dropdownsWithDescription.init();
+
     });
 
+    $(document).on('ready', function () {
+
+        // Depend on elements.
+        const dependOnElements = {
+            init: function () {
+                let elements = document.querySelectorAll('[data-depends_on]');
+                elements.forEach(function (element) {
+                    dependOnElements.handleDependOnElem(element);
+                });
+            },
+            handleDependOnElem: function (selfElement) {
+                let settingsData = selfElement.getAttribute('data-depends_on');
+                let settingsJson = JSON.parse(settingsData);
+                if (settingsJson.sourceSelector) {
+                    let sourceSelector = document.querySelectorAll(settingsJson.sourceSelector);
+                    sourceSelector.forEach(function (sourceElement) {
+                        dependOnElements.handleSourceElem(sourceElement, selfElement, settingsJson);
+                    })
+                }
+            },
+            handleSourceElem: function (sourceElement, selfElement, settingsJson) {
+                if (settingsJson.optionSelected) {
+                    let jQuerySource = $(sourceElement);
+                    jQuerySource.on('change', function (e) {
+                        let selectedOption = sourceElement.options[sourceElement.selectedIndex];
+                        if (settingsJson.optionSelected === selectedOption.value) {
+                            dependOnElements.enableInputs(selfElement);
+                            selfElement.classList.remove('hidden');
+                        } else {
+                            dependOnElements.disableInputs(selfElement);
+                            selfElement.classList.add('hidden');
+                        }
+                    });
+                    jQuerySource.trigger('change');
+                }
+            },
+            enableInputs:function(container){
+                if(container){
+                    var inputElements = container.querySelectorAll('input');
+                    inputElements.forEach(function(input) {
+                        input.setAttribute('required', 'required');
+                        input.removeAttribute('disabled');
+                    });
+                }
+            },
+            disableInputs:function(container){
+                if(container) {
+                    var inputElements = container.querySelectorAll('input');
+                    inputElements.forEach(function (input) {
+                        input.removeAttribute('required');
+                        input.setAttribute('disabled', 'disabled');
+                    });
+                }
+            }
+        }
+        dependOnElements.init();
+    });
 
     /**
      * Document on Ready
@@ -86,47 +142,6 @@
             }
         });
     });
-
-    // Json search product tags
-	$(':input.wc-tag-search').filter(':not(.enhanced)').each(function () {
-		var return_format = $(this).data('return_id') ? 'id' : 'slug';
-		var select2_args = $.extend({
-			allowClear: $(this).data('allow_clear') ? true : false,
-			placeholder: $(this).data('placeholder'),
-			minimumInputLength: $(this).data('minimum_input_length') ? $(this).data('minimum_input_length') : 3,
-			escapeMarkup: function (m) {
-				return m;
-			},
-			ajax: {
-				url: wc_enhanced_select_params.ajax_url,
-				dataType: 'json',
-				delay: 250,
-				data: function (params) {
-					return {
-						term: params.term,
-						action: 'alg_wc_cog_json_search_tags',
-						security: wc_enhanced_select_params.search_categories_nonce
-					};
-				},
-				processResults: function (data) {
-					var terms = [];
-					if (data) {
-						$.each(data, function (id, term) {
-							terms.push({
-								id: 'id' === return_format ? term.term_id : term.slug,
-								text: term.formatted_name
-							});
-						});
-					}
-					return {
-						results: terms
-					};
-				},
-				cache: true
-			}
-		}, '');
-		$(this).selectWoo(select2_args).addClass('enhanced');
-	});
 
 })(jQuery, window, document);
 

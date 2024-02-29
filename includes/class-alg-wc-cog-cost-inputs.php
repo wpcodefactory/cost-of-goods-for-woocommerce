@@ -50,7 +50,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 2.6.5
+		 * @version 3.3.0
 		 * @since   2.6.4
 		 */
 		function add_hooks(){
@@ -59,7 +59,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 			add_action( 'woocommerce_bookings_after_display_cost', array( $this, 'add_cost_input' ) );
 			add_action( 'save_post_product', array( $this, 'save_cost_input' ), PHP_INT_MAX - 2, 2 );
 			// Cost input on admin product page (variable product)
-			add_action( 'woocommerce_variation_options_pricing', array( $this, 'add_cost_input_variation' ), 10, 3 );
+			add_action( 'woocommerce_variation_options_pricing', array( $this, 'add_cost_input_variation' ), 9, 3 );
 			add_action( 'woocommerce_save_product_variation', array( $this, 'save_cost_input_variation' ), PHP_INT_MAX, 2 );
 			add_action( 'woocommerce_product_options_general_product_data', array( $this, 'add_cost_input_variable' ), PHP_INT_MAX );
 		}

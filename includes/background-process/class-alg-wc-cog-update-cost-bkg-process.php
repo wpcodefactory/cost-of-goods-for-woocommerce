@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Background Process - Update Cost.
  *
- * @version 2.9.5
+ * @version 3.3.0
  * @since   2.5.1
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Update_Cost_Bkg_Process' ) ) :
 		/**
 		 * task.
 		 *
-		 * @version 2.9.5
+		 * @version 3.3.0
 		 * @since   2.5.1
 		 *
 		 * @param mixed $item
@@ -43,17 +43,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Update_Cost_Bkg_Process' ) ) :
 		 */
 		protected function task( $item ) {
 			parent::task( $item );
-			$product_id  = isset( $item['product_id'] ) ? $item['product_id'] : '';
-			$percentage  = isset( $item['percentage'] ) ? $item['percentage'] : '';
-			$update_type = isset( $item['update_type'] ) ? $item['update_type'] : '';
-			$costs_filter = isset( $item['costs_filter'] ) ? $item['costs_filter'] : '';
-			alg_wc_cog()->core->products->update_product_cost_by_percentage( array(
-				'product_id'        => $product_id,
-				'percentage'        => $percentage,
-				'update_type'       => $update_type, // profit | price
-				'costs_filter'      => $costs_filter,
-				'update_variations' => true
-			) );
+			$function = isset( $item['products_function'] ) ? $item['products_function'] : '';
+			call_user_func_array( array( alg_wc_cog()->core->products, $function ), array( $item ) );
+
 			return false;
 		}
 	}

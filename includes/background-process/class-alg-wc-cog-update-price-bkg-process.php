@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Background Process - Update Price.
  *
- * @version 2.7.9
+ * @version 3.3.0
  * @since   2.6.3
  * @author  WPFactory
  */
@@ -33,7 +33,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Update_Price_Bkg_Process' ) ) :
 		/**
 		 * task.
 		 *
-		 * @version 2.7.9
+		 * @version 3.3.0
 		 * @since   2.6.3
 		 *
 		 * @param mixed $item
@@ -41,7 +41,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Update_Price_Bkg_Process' ) ) :
 		 */
 		protected function task( $item ) {
 			parent::task( $item );
-			alg_wc_cog()->core->products->update_product_price_by_profit( $item );
+			$function = isset( $item['products_function'] ) ? $item['products_function'] : '';
+			call_user_func_array( array( alg_wc_cog()->core->products, $function ), array( $item ) );
 			return false;
 		}
 	}

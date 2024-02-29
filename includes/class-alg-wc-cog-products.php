@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.2.8
+ * @version 3.3.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -462,8 +462,8 @@ class Alg_WC_Cost_of_Goods_Products {
 	 * @version 2.9.9
 	 * @since   2.3.9
 	 *
-	 * @param $product
-	 * @param null $args
+	 * @param         $product
+	 * @param   null  $args
 	 *
 	 * @return mixed
 	 */
@@ -604,46 +604,31 @@ class Alg_WC_Cost_of_Goods_Products {
 	}
 
 	/**
-	 * Update product price by product cost.
+	 * update_product_price_by_profit.
 	 *
-	 * @version 2.9.0
+	 * @version 3.3.0
 	 * @since   2.6.3
 	 *
-	 * @param array $args
+	 * @param   array  $args
 	 *
 	 * @return bool
 	 */
 	function update_product_price_by_profit( $args = array() ) {
 		$args = wp_parse_args( $args, array(
-			'product_id'        => '',
-			'percentage'        => '',
-			'absolute_profit'   => '',
-			'rounding'          => '',
-			'affected_field'    => 'regular_price',
-			'update_variations' => true
+			'product_id'      => '',
+			'percentage'      => '',
+			'absolute_profit' => '',
+			'rounding'        => '',
+			'price_type'      => 'regular_price',
 		) );
-		$product_id        = $args['product_id'];
-		$percentage        = $args['percentage'];
-		$absolute_profit   = $args['absolute_profit'];
-		$rounding          = $args['rounding'];
-		$affected_field    = $args['affected_field'];
-		$update_variations = $args['update_variations'];
-		$product           = wc_get_product( $product_id );
-		$product_cost      = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
-		$new_price         = 0;
-		// Update variations recursively.
-		if (
-			$update_variations &&
-			$product->is_type( 'variable' ) && $product instanceof WC_Product_Variable
-		) {
-			foreach ( $product->get_available_variations() as $variation ) {
-				if ( ! empty( $variation_id = isset( $variation['variation_id'] ) ? $variation['variation_id'] : '' ) ) {
-					$new_args               = $args;
-					$new_args['product_id'] = $variation_id;
-					$this->update_product_price_by_profit( $new_args );
-				}
-			}
-		}
+		$product_id      = $args['product_id'];
+		$percentage      = $args['percentage'];
+		$absolute_profit = $args['absolute_profit'];
+		$rounding        = $args['rounding'];
+		$price_type      = $args['price_type'];
+		$product         = wc_get_product( $product_id );
+		$product_cost    = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
+		$new_price       = 0;
 		// If invalid product or product cost then return false.
 		if ( empty( $product_cost ) || 0 == $product_cost ) {
 			return false;
@@ -662,21 +647,22 @@ class Alg_WC_Cost_of_Goods_Products {
 		if ( ! empty( $rounding ) ) {
 			$new_price = 'round' === $rounding ? round( $new_price ) : ( 'round_up' === $rounding ? ceil( $new_price ) : floor( $new_price ) );
 		}
-		if ( 'sale_price' == $affected_field ) {
+		if ( 'sale_price' == $price_type ) {
 			$product->set_sale_price( $new_price );
 		} else {
 			$product->set_regular_price( $new_price );
 		}
 		$product->save();
+
 		return true;
 	}
 
 	/**
-     * update_variation_cost_from_parent.
-     *
-	 * @version 2.9.5
+	 * update_variation_cost_from_parent.
+	 *
+	 * @version 3.3.0
 	 * @since   2.9.5
-     *
+	 *
 	 * @param $args
 	 *
 	 * @return void
@@ -696,100 +682,114 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * update_product_price.
 	 *
-	 * @version 2.9.5
+	 * @version 3.3.0
 	 * @since   2.5.1
 	 *
-	 * @param null $args
+	 * @param   null  $args
 	 *
 	 * @return bool
 	 */
-	function update_product_cost_by_percentage( $args = null ) {
-		$args              = wp_parse_args( $args, array(
-			'product_id'        => '',
-			'costs_filter'      => 'ignore_costs', // ignore_costs, products_without_costs, products_with_costs
-			'percentage'        => 100,
-			'update_type'       => 'costs_price', // costs_profit | costs_price
-			'update_variations' => true
+	function update_product_cost_by_profit_percentage( $args = null ) {
+		$args       = wp_parse_args( $args, array(
+			'product_id' => '',
+			'percentage' => ''
 		) );
-		$percentage        = $args['percentage'];
-		$product_id        = $args['product_id'];
-		$product           = wc_get_product( $product_id );
-		$update_variations = $args['update_variations'];
-		$update_type       = $args['update_type'];
-        $costs_filter      = $args['costs_filter'];
-		if ( ! is_a( $product, 'WC_Product' ) ) {
+		$product_id = $args['product_id'];
+		$percentage = $args['percentage'];
+		$product    = wc_get_product( $product_id );
+		if ( is_a( $product, 'WC_Product' ) ) {
+			$new_cost = $product->get_price() / ( ( 100 + $percentage ) / 100 );
+			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
+
+			return true;
+		} else {
 			return false;
 		}
-		if ( $this->can_update_product_cost_based_on_costs_filter( $product_id, $costs_filter ) ) {
-			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $this->calculate_product_cost_by_percentage( $product->get_price(), $percentage, $update_type ) );
-		}
-		if (
-			$update_variations &&
-			$product->is_type( 'variable' ) && $product instanceof WC_Product_Variable
-		) {
-			foreach ( $product->get_available_variations() as $variation ) {
-				$variation_id  = isset( $variation['variation_id'] ) ? $variation['variation_id'] : '';
-				$display_price = isset( $variation['display_price'] ) ? $variation['display_price'] : '';
-				if ( empty( $variation_id ) || empty( $display_price ) ) {
-					continue;
-				}
-				if ( $this->can_update_product_cost_based_on_costs_filter( $variation_id, $costs_filter ) ) {
-					update_post_meta( $variation_id, '_alg_wc_cog_cost', $this->calculate_product_cost_by_percentage( $display_price, $percentage, $update_type ) );
-				}
-			}
-		}
-		return true;
 	}
 
 	/**
-	 * can_update_product_cost.
+	 * increase_product_cost_by_percentage.
 	 *
-	 * @version 2.9.5
-	 * @since   2.9.5
-     *
-	 * @param $product_id
-	 * @param $costs_filter
+	 * @version 3.3.0
+	 * @since   3.3.0
+	 *
+	 * @param $args
 	 *
 	 * @return bool
 	 */
-	function can_update_product_cost_based_on_costs_filter( $product_id, $costs_filter ): bool {
-		$can_update   = false;
-		if (
-			( 'products_without_costs' === $costs_filter && empty( $this->get_product_cost( $product_id, array( 'check_parent_cost' => false ) ) ) ) ||
-			( 'products_with_costs' === $costs_filter && ! empty( $this->get_product_cost( $product_id, array( 'check_parent_cost' => false ) ) ) ) ||
-			( 'ignore_costs' === $costs_filter )
-		) {
-			$can_update = true;
-		}
+	function increase_product_cost_by_percentage( $args = null ) {
+		$args       = wp_parse_args( $args, array(
+			'product_id' => '',
+			'percentage' => ''
+		) );
+		$product_id = $args['product_id'];
+		$percentage = $args['percentage'];
+		$product    = wc_get_product( $product_id );
+		if ( is_a( $product, 'WC_Product' ) ) {
+			$new_cost = $this->get_product_cost( $product_id ) + ( $this->get_product_cost( $product_id ) * ( $percentage / 100 ) );
+			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
 
-		return $can_update;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
-	 * calculate_product_cost.
+	 * decrease_product_cost_by_percentage.
 	 *
-	 * @version 2.6.3
-	 * @since   2.5.1
+	 * @version 3.3.0
+	 * @since   3.3.0
 	 *
-	 * @param $price
-	 * @param $percentage
-	 * @param string $method costs_price | costs_profit
+	 * @param $args
 	 *
-	 * @return float|int
+	 * @return bool
 	 */
-	function calculate_product_cost_by_percentage( $price, $percentage, $method ) {
-		if ( empty( $price ) ) {
-			return 0;
+	function decrease_product_cost_by_percentage( $args = null ) {
+		$args       = wp_parse_args( $args, array(
+			'product_id' => '',
+			'percentage' => ''
+		) );
+		$product_id = $args['product_id'];
+		$percentage = $args['percentage'];
+		$product    = wc_get_product( $product_id );
+		if ( is_a( $product, 'WC_Product' ) ) {
+			$new_cost = $this->get_product_cost( $product_id ) - ( $this->get_product_cost( $product_id ) * ( $percentage / 100 ) );
+			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
+
+			return true;
+		} else {
+			return false;
 		}
-		if ( 'costs_profit' === $method ) {
-			// Profit percent.
-			return $price / ( ( 100 + $percentage ) / 100 );
-			// Profit marging.
-			//return $price - ( ( $price * $percentage ) / 100 );
-		}
-		return ( $price * $percentage ) / 100;
 	}
 
+	/**
+	 * update_product_cost_by_price_percentage.
+	 *
+	 * @version 3.3.0
+	 * @since   3.3.0
+	 *
+	 * @param   null  $args
+	 *
+	 * @return bool
+	 */
+	function update_product_cost_by_price_percentage( $args = null ) {
+		$args       = wp_parse_args( $args, array(
+			'product_id' => '',
+			'percentage' => ''
+		) );
+		$product_id = $args['product_id'];
+		$percentage = $args['percentage'];
+		$product    = wc_get_product( $product_id );
+		if ( is_a( $product, 'WC_Product' ) ) {
+			$new_cost = ( $product->get_price() * $percentage ) / 100;
+			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
+
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
 
