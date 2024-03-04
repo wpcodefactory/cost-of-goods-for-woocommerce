@@ -47,12 +47,12 @@ let orders = {
 						...row,
 						{
 							display: storeCurrency.formatAmount(item.subtotals.costs_total),
-							value: item.costs_total,
+							value: item.subtotals.costs_total,
 							type: 'currency'
 						},
 						{
 							display: storeCurrency.formatAmount(item.subtotals.profit_total),
-							value: item.profit_total,
+							value: item.subtotals.profit_total,
 							type: 'currency'
 						},
 					];

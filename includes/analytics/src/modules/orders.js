@@ -112,7 +112,6 @@ let orders = {
 						type: 'currency'
 					},
 				]
-				console.log(order)
 				newRow = [...row,...individualCosts,...costAndProfit];
 			}
 			return newRow;
