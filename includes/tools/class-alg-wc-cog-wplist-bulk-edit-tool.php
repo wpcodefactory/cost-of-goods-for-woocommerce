@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 3.1.1
+ * @version 3.3.2
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -105,14 +105,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		/**
 		 * fix_paged_query_string_on_search_change.
 		 *
-		 * @version 3.1.1
+		 * @version 3.3.2
 		 * @since   2.7.1
 		 */
 		function fix_paged_query_string_on_search_change() {
+			if (
+				! function_exists( 'get_current_screen' ) ||
+				empty( $current_screen = get_current_screen() ) ||
+				'tools_page_bulk-edit-costs' !== $current_screen->id
+			) {
+				return;
+			}
 			if ( ! session_id() ) {
 				session_start();
 			}
-
 			if (
 				isset( $_GET['paged'] ) &&
 				1 !== (int) $_GET['paged'] &&
@@ -125,7 +131,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 			) {
 				if ( ! isset( $_COOKIE['alg_wc_cog_bulk_edit_cost_search'] ) || empty( $referer_search = $_COOKIE['alg_wc_cog_bulk_edit_cost_search'] ) || 
 				$referer_search != $current_search ) {
-
 					wp_safe_redirect( add_query_arg( array(
 						'paged' => 1,
 					) ) );
