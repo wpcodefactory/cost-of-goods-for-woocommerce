@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 3.2.4
+ * @version 3.3.3
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -36,7 +36,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.2.4
+		 * @version 3.3.3
 		 * @since   2.4.6
 		 */
 		function get_settings() {
@@ -230,6 +230,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 					'desc'              => __( 'Change cost of goods every time the purchase price is updated in ATUM', 'cost-of-goods-for-woocommerce' ),
 					'desc_tip'          => sprintf( __( 'The %s meta will be changed every time the %s column is updated.', 'cost-of-goods-for-woocommerce' ), '<code>' . __( '_alg_wc_cog_cost', 'cost-of-goods-for-woocommerce' ) . '</code>', '<code>' . __( 'purchase_price', 'cost-of-goods-for-woocommerce' ) . '</code>' ),
 					'id'                => 'alg_wc_cog_comp_atum_get_sync_purchase_price_with_cost',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'title'             => __( 'Add Stock sync', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Update Add Stock feature when the stock is changed from ATUM.', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => sprintf(
+						__( 'The %s option should probably be set as %s or %s.', 'cost-of-goods-for-woocommerce' ),
+						'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods' ) . '">' . __( 'Products > Add Stock > Empty cost field', 'cost-of-goods-for-woocommerce' ) . '</a>',
+						'<code>' . __( 'Uses corrent cost', 'cost-of-goods-for-woocommerce' ) . '</code>',
+						'<code>' . __( 'Uses last cost value from "Add stock history"', 'cost-of-goods-for-woocommerce' ) . '</code>'
+					),
+					'id'                => 'alg_wc_cog_comp_atum_sync_add_stock',
 					'default'           => 'no',
 					'type'              => 'checkbox',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),

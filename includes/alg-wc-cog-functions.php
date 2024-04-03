@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 3.2.1
+ * @version 3.3.3
  * @since   3.2.1
  * @author  WPFactory
  */
@@ -224,28 +224,93 @@ if ( ! function_exists( 'alg_wc_cog_sanitize_number' ) ) {
 	/**
 	 * alg_wc_cog_sanitize_number.
 	 *
-	 * @version 2.9.5
+	 * @version 3.3.3
 	 * @since   2.9.5
 	 *
 	 * @param $args
 	 *
-	 * @return numeric
+	 * @return float
 	 */
 	function alg_wc_cog_sanitize_number( $args = null ) {
-		$args = wp_parse_args( $args, array(
-			'number'                    => 0,
+		$args                      = wp_parse_args( $args, array(
+			'value'                     => 0,
 			'dots_and_commas_operation' => 'comma-to-dot', // comma-to-dot | dot-to-comma | none
+			'typecasting'               => 'smart', // float | int | smart | none
 		) );
-		$args = apply_filters( 'alg_wc_cog_sanitize_number_args', $args );
-		$number = $args['number'];
+		$args                      = apply_filters( 'alg_wc_cog_sanitize_number_args', $args );
+		$value                     = sanitize_text_field( wc_clean( $args['value'] ) );
+		$typecasting               = $args['typecasting'];
 		$dots_and_commas_operation = $args['dots_and_commas_operation'];
 		if ( 'comma-to-dot' === $dots_and_commas_operation ) {
-			$number = str_replace( ',', '.', $number );
+			$value = str_replace( ',', '.', $value );
 		} elseif ( 'dot-to-comma' === $dots_and_commas_operation ) {
-			$number = str_replace( '.', ',', (string) $number );
+			$value = str_replace( '.', ',', (string) $value );
 		}
 
-		return $number;
+		switch ( $typecasting ) {
+			case 'smart':
+				if ( strpos( $value, ',' ) === false ) {
+					$value = (float) $value;
+				}
+				break;
+			case 'float':
+				$value = (float) $value;
+				break;
+			case 'int':
+				$value = (int) $value;
+				break;
+
+		}
+
+		return $value;
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_sanitize_cost' ) ) {
+	/**
+	 * alg_wc_cog_sanitize_cost.
+	 *
+	 * @version 3.3.3
+	 * @since   3.3.3
+	 *
+	 * @param $args
+	 *
+	 * @return float
+	 */
+	function alg_wc_cog_sanitize_cost( $args = null ) {
+		$args   = wp_parse_args( $args, array(
+			'value'                     => 0,
+			'dots_and_commas_operation' => alg_wc_cog_need_to_replace_cog_comma_by_dots() ? 'comma-to-dot' : 'none'
+		) );
+		return alg_wc_cog_sanitize_number( $args );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_need_to_replace_cog_comma_by_dots' ) ) {
+	/**
+	 * alg_wc_cog_replace_cog_comma_by_dots.
+	 *
+	 * @version 3.3.3
+	 * @since   3.3.3
+	 *
+	 * @return bool
+	 */
+	function alg_wc_cog_need_to_replace_cog_comma_by_dots() {
+		return 'yes' === get_option( 'alg_wc_cog_replace_cog_comma_by_dots', alg_wc_cog_need_to_replace_cog_comma_by_dots_default() );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_need_to_replace_cog_comma_by_dots_default' ) ) {
+	/**
+	 * alg_wc_cog_replace_cog_comma_by_dots_default.
+	 *
+	 * @version 3.3.3
+	 * @since   3.3.3
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_need_to_replace_cog_comma_by_dots_default() {
+		return get_option( 'alg_wc_cog_products_sanitize_cog_meta', 'yes' );
 	}
 }
 

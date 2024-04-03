@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.2.5
+ * @version 3.3.3
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * save_product_add_stock.
 		 *
-		 * @version 3.1.7
+		 * @version 3.3.3
 		 * @since   1.7.0
 		 * @todo    [next] handle variable products (also unset `$_POST['variable_stock']`)
 		 * @todo    [maybe] remove `$this->is_add_stock`
@@ -118,8 +118,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 							'product_id' => (int) $product_id,
 							'stock'      => floatval( $_POST['alg_wc_cog_add_stock'] ),
 							'stock_prev' => isset( $_POST['_stock'] ) ? (int) $_POST['_stock'] : '',
-                            'cost_prev'  => isset( $_POST['_alg_wc_cog_cost'] ) ? (int) $_POST['_alg_wc_cog_cost'] : '',
-							'cost'       => floatval( $_POST['alg_wc_cog_add_stock_cost'] ),
+							'cost_prev'  => isset( $_POST['_alg_wc_cog_cost'] ) ? alg_wc_cog_sanitize_cost( array( 'number' => $_POST['_alg_wc_cog_cost'] ) ) : '',
+							'cost'       => alg_wc_cog_sanitize_cost( array( 'value' => $_POST['alg_wc_cog_add_stock_cost'] ) ),
 						) );
 						if ( isset( $_POST['_stock'] ) ) {
 							unset( $_POST['_stock'] );
@@ -155,7 +155,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_variation_cost_prev_from_post.
 		 *
-		 * @version 3.1.7
+		 * @version 3.3.3
 		 * @since   3.1.7
 		 *
 		 * @param $variation_id
@@ -172,7 +172,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				$variation_cost_prev = $_POST['variable_alg_wc_cog_cost'][ $variation_key ];
 			}
 
-			return $variation_cost_prev;
+			return alg_wc_cog_sanitize_cost( array( 'value' => $variation_cost_prev ) );
 		}
 
 		/**
@@ -573,7 +573,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * calculate_add_stock_cost.
 		 *
-		 * @version 2.4.2
+		 * @version 3.3.3
 		 * @since   2.4.2
 		 *
 		 * @param   null  $args
@@ -596,14 +596,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			$cost_calculation_template = $args['calculation_template'];
 			$cost_calculation_template = $this->sanitize_math_expression( str_replace( array_keys( $template_variables ), $template_variables, $cost_calculation_template ) );
 			include_once WC()->plugin_path() . '/includes/libraries/class-wc-eval-math.php';
-			$cost_now = WC_Eval_Math::evaluate( $cost_calculation_template );
+			$cost_now = (float) WC_Eval_Math::evaluate( $cost_calculation_template );
 			return $cost_now;
 		}
 
 		/**
 		 * product_add_stock.
 		 *
-		 * @version 3.1.7
+		 * @version 3.3.3
 		 * @since   1.7.0
 		 * @todo    [next] maybe use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`?
 		 * @todo    [maybe] `$cost_now`: round?
@@ -636,7 +636,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				if ( ! $cost_prev ) {
 					$cost_prev = 0;
 				}
-				$cost_now = @$this->calculate_add_stock_cost( array(
+				$cost_now = (float) @$this->calculate_add_stock_cost( array(
 					'product_id'         => $product_id,
 					'template_variables' => array(
 						'%stock_prev%' => $stock_prev,

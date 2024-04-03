@@ -2,7 +2,7 @@
 Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
-Tested up to: 6.4
+Tested up to: 6.5
 Stable tag: 3.3.2
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -364,6 +364,14 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.3.3 - 03/04/2024 =
+* Fix - Add Stock feature is not considering float values from COG.
+* Fix - Add Stock feature might conflict with the COG input.
+* Dev - Compatibility - ATUM - Add option to update Add Stock feature when the stock is changed from ATUM.
+* Products - Cost sanitization - "Replace comma by dots when updating cost meta" is now enabled by default.
+* Tested up to: 6.5.
+* WC tested up to: 8.7.
 
 = 3.3.2 - 08/03/2024 =
 * Fix - Tools - Session starts unnecessarily.

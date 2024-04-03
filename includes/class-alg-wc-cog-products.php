@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.3.0
+ * @version 3.3.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -236,7 +236,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	 *
 	 * @see https://stackoverflow.com/a/4325608/1193038
 	 *
-	 * @version 2.9.5
+	 * @version 3.3.3
 	 * @since   2.3.5
 	 *
 	 * @param $value
@@ -244,14 +244,10 @@ class Alg_WC_Cost_of_Goods_Products {
 	 * @return mixed
 	 */
 	function sanitize_cog_meta( $value ) {
-		if ( 'yes' === get_option( 'alg_wc_cog_products_sanitize_cog_meta', 'no' ) ) {
-			$value = alg_wc_cog_sanitize_number( array(
-				'number'                    => $value,
-				'dots_and_commas_operation' => 'comma-to-dot'
-			) );
-		}
-
-		return $value;
+		remove_filter( 'sanitize_post_meta_' . '_alg_wc_cog_cost', array( $this, 'sanitize_cog_meta' ) );
+		return alg_wc_cog_sanitize_cost( array(
+			'value' => $value,
+		) );
 	}
 
 	/**
@@ -406,7 +402,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_cost.
 	 *
-	 * @version 2.9.5
+	 * @version 3.3.3
 	 * @since   1.0.0
 	 */
 	function get_product_cost( $product_id, $args = null ) {
@@ -427,7 +423,7 @@ class Alg_WC_Cost_of_Goods_Products {
 			$cost = get_post_meta( $parent_id, '_alg_wc_cog_cost', true );
 		}
 		$cost = alg_wc_cog_sanitize_number( array(
-			'number'                    => $cost,
+			'value'                     => $cost,
 			'dots_and_commas_operation' => $dots_and_commas_operation
 		) );
 		$cost = $convert_to_number ? (float) $cost : $cost;

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.3.0
+ * @version 3.3.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1292,7 +1292,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.1.9
+	 * @version 3.3.3
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1425,7 +1425,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$quantity = $calculate_qty_excluding_refunds ? $item->get_quantity() + $order->get_qty_refunded_for_item( $item_id ) : $item->get_quantity();
 				if ( '' !== $cost || '' !== $handling_fee ) {
 					$cost = alg_wc_cog_sanitize_number( array(
-						'number'                    => $cost,
+						'value'                    => $cost,
 						'dots_and_commas_operation' => 'comma-to-dot'
 					) );
 					$cost            = (float) $cost;
@@ -1440,7 +1440,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$total_price += $line_total;
 					// handling fee.
 					$handling_fee = alg_wc_cog_sanitize_number( array(
-						'number'                    => $handling_fee,
+						'value'                    => $handling_fee,
 						'dots_and_commas_operation' => 'comma-to-dot'
 					) );
 					$handling_fee       = (float) $handling_fee;

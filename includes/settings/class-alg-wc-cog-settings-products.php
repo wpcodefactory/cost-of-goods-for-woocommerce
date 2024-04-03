@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 3.1.9
+ * @version 3.3.3
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.1.9
+	 * @version 3.3.3
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -389,8 +389,8 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'title'    => __( 'Cost update', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Replace comma by dots when updating cost meta', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_products_sanitize_cog_meta',
-				'default'  => 'no',
+				'id'       => 'alg_wc_cog_replace_cog_comma_by_dots',
+				'default'  => alg_wc_cog_need_to_replace_cog_comma_by_dots_default(),
 				'type'     => 'checkbox',
 			),
 			array(

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Cost archive.
  *
- * @version 3.1.7
+ * @version 3.3.3
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -161,7 +161,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * get_product_cost_archive_table.
 		 *
-		 * @version 3.1.7
+		 * @version 3.3.3
 		 * @since   3.1.7
 		 *
 		 * @param $product
@@ -187,11 +187,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 				$dots_and_commas_operation = 'comma-to-dot';
 				foreach ( $product_cost_archive as $cost_info ) {
 					$prev_cost = alg_wc_cog_sanitize_number( array(
-						'number'                    => $cost_info['prev_cost_value'],
+						'value'                    => $cost_info['prev_cost_value'],
 						'dots_and_commas_operation' => $dots_and_commas_operation
 					) );
 					$new_cost_value = alg_wc_cog_sanitize_number( array(
-						'number'                    => $cost_info['new_cost_value'],
+						'value'                    => $cost_info['new_cost_value'],
 						'dots_and_commas_operation' => $dots_and_commas_operation
 					) );
 					$table_rows[] = array(
