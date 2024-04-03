@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.3.3
+ * @version 3.3.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -678,7 +678,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * update_product_price.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.4
 	 * @since   2.5.1
 	 *
 	 * @param   null  $args
@@ -694,7 +694,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		$percentage = $args['percentage'];
 		$product    = wc_get_product( $product_id );
 		if ( is_a( $product, 'WC_Product' ) ) {
-			$new_cost = $product->get_price() / ( ( 100 + $percentage ) / 100 );
+			$new_cost = (float) $product->get_price() / ( ( 100 + $percentage ) / 100 );
 			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
 
 			return true;
@@ -762,7 +762,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * update_product_cost_by_price_percentage.
 	 *
-	 * @version 3.3.0
+	 * @version 3.3.4
 	 * @since   3.3.0
 	 *
 	 * @param   null  $args
@@ -778,7 +778,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		$percentage = $args['percentage'];
 		$product    = wc_get_product( $product_id );
 		if ( is_a( $product, 'WC_Product' ) ) {
-			$new_cost = ( $product->get_price() * $percentage ) / 100;
+			$new_cost = ( (float) $product->get_price() * $percentage ) / 100;
 			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
 
 			return true;

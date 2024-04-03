@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.5
-Stable tag: 3.3.2
+Stable tag: 3.3.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -364,6 +364,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.3.4 - 03/04/2024 =
+* Fix - Uncaught TypeError: Unsupported operand types: string / float in Alg_WC_Cost_of_Goods_Products.
 
 = 3.3.3 - 03/04/2024 =
 * Fix - Add Stock feature is not considering float values from COG.
