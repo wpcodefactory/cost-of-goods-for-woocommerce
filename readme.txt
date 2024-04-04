@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.5
-Stable tag: 3.3.4
+Stable tag: 3.3.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -13,15 +13,11 @@ Unlock detailed insights into products profitability, calculate COGS & profit ma
 
 > “Best Plugin There is For Woocommerce Profit Calculation: I cannot believe how amazing this plugin really is! I don’t normally write reviews, but I have tested a couple of plugins to calculate profit etc. But this is by far the best. There are many options to choose from and once you get it all set, it works wonders. Also Pablo from support has been great! Thank you so much in abundance.” – ⭐⭐⭐⭐⭐  [shahican](https://wordpress.org/support/topic/best-plugin-there-is-for-woocommerce-profit-calculation/)
 
+[Main Page](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Main Page**") | [Support Forum](https://wpfactory.com/support/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Support Forum**") | [Documentation & How to](https://wpfactory.com/docs/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Documentation & How to**") | [Demo](https://cogsprofitcalculator.instawp.xyz/)
+
 Every WooCommerce store owner recognizes the significance of understanding their financial health, but pinpointing exact metrics like Cost of Goods Sold (COGS) can often be a complex chore with the default WooCommerce settings.
 
-As stores expand, the urgency for comprehensive financial insights, analytics, and reports becomes paramount, there's a rising need for a precise tool tailored for this purpose, and that's why we have built this plugin for a simple reason:
-
-**Give you a full control over your Cost of Goods & Financial Reporting**
-
 So whether for a product, category, or the whole store, and for a specific period, a month, quarter, or any time frame you can think of, our plugin will give you a holistic overview of financial reporting for your WooCommerce store.
-
-Whether you sell simple products or a wide range of variations, this plugin calculates COGS with precision and offers actionable insights.
 
 **In a nutshell, this what you'll expect to get in this plugin:**
 
@@ -39,20 +35,13 @@ Whether you sell simple products or a wide range of variations, this plugin calc
 
 * **Optional Order Meta Box:** Integrate a “Cost of Goods” meta box in the admin order edit page for deeper cost insights at the order level
 
-* **Profit Warning:** Receive a notification on the admin order edit page when a particular order's profit dips below zero, ensuring vigilant monitoring
+* **Profit Warning:** Receive a notification on the admin order edit page when a particular order's profit dips below zero
 
-* **Flexible Order Costs:** Define additional costs either universally across all orders or on a per-order basis. This includes specifying extra payment gateway costs and shipping method costs
+* **Flexible Order Costs:** Define additional costs either universally across all orders or on a per-order basis
 
-* **Automatic Average Cost Calculation:** Utilize the add stock tool to auto-calculate the average product cost, reducing manual computations
+* **Automatic Average Cost Calculation**
 
-* **Analytics Integration:** Benefit from the inclusion of cost/profit columns directly in the WooCommerce Analytics > Orders section for a quick financial overview
-
----
-
-#### Useful Links ####
-* [**Plugin Main Page**](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Plugin Main Page**")
-* [**Plugin Support Forum**](https://wpfactory.com/support/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Plugin Support Forum**")
-* [**Documentation & How to**](https://wpfactory.com/docs/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Documentation & How to**")
+* **Analytics Integration**
 
 ___
 ## 🤝 Recommended By##
@@ -236,7 +225,6 @@ Opt in and include the order cost and profit on the admin new order email
 
 * Add cost & profit including charts to the report charts (Analytics > Revenue tab)
 
-* View visualized graphical costs/profit and stock reports.
 
 ### 🏆 Advanced Compatibility Options ###
 
@@ -264,28 +252,25 @@ The plugin works seamlessly with tons of plugins, but for advanced harmony with 
 
 And much more.
 
-## What's Next? Check More Plugins by WPFactory##
+## What's Next? Discover More Plugins by WPFactory ##
 
-If you're enjoying our plugin, we'd love for you to explore our other offerings. WPFactory has a diverse range of plugins tailored to enhance your experience. 
+WPFactory has a diverse range of plugins tailored to enhance your experience, some of our top-selling plugins are:
 
-Dive in and discover more tools to empower your WooCommerce Store!
+* [**Min Max Step Quantity**](https://wpfactory.com/item/product-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Min Max Step Quantity**"): Set minimum, maximum, step, and default product quantities, including dropdowns and decimal options on WooCommerce (**[Free version](https://wordpress.org/plugins/product-quantity-for-woocommerce/ "Free version")**)
 
+* [**Cost of Goods for WooCommerce**](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Cost of Goods WooCommerce**"): Enhance profit maximization and financial management by accurately calculating your WooCommerce store's COGS (**[Free version](https://wordpress.org/plugins/cost-of-goods-for-woocommerce/ "Free version")**)
 
-* [**Min Max Step Quantity**](https://wpfactory.com/item/product-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Min Max Step Quantity**"): Define a min max, step and default quantity for products, show a dropdown, quantities on archive/categories pages, use decimal quantities, and much more on WooCommerce stores (**[Try our Free version](https://wordpress.org/plugins/product-quantity-for-woocommerce/ "Try our Free version")**)
+* [**Maximum Products per User**](https://wpfactory.com/item/maximum-products-per-user-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Maximum Products per User**"): Impose personalized purchase limits based on user roles and date ranges to manage customer buying behavior (**[Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Free version")**)
 
-* [**Cost of Goods for WooCommerce**](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Cost of Goods WooCommerce**"): Make informed decisions to maximize profits, correctly calculate Cost of Goods Sold (COGS) for your WooCommerce store and enhance your financial management capabilities (**[Try our Free version](https://wordpress.org/plugins/cost-of-goods-for-woocommerce/ "Try our Free version")**)
+* [**Order Minimum/Maximum Amount**](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Order Minimum/Maximum Amount**"): Customize order limits by amount, quantity, weight, or volume, including user role, category, and more (**[Free version](https://wordpress.org/plugins/order-minimum-amount-for-woocommerce/ "Free version")**)
 
-* [**Maximum Products per User**](https://wpfactory.com/item/maximum-products-per-user-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Maximum Products per User**"): Set personalized purchase limits for your customers, define maximum product quantities, catered to specific user roles & selected date range (**[Try our Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Try our Free version")**)
+* [**EU/UK VAT Manager for WooCommerce**](https://wpfactory.com/item/eu-vat-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**EU/UK VAT Manager for WooCommerce**"): Automate VAT compliance for your WooCommerce store, including settings and VIES validation for a seamless experience (**[Free version](https://wordpress.org/plugins/eu-vat-for-woocommerce/ "Free version")**)
 
-* [**Order Minimum/Maximum Amount**](https://wpfactory.com/item/order-minimum-maximum-amount-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Order Minimum/Maximum Amount**"): Set tailored minimum and maximum order thresholds, by sum, quantity, weight, or volume, customize limits by user role, specific user, product category, shipping method, payment gateway, or even by currency (**Try our Free version](https://wordpress.org/plugins/order-minimum-amount-for-woocommerce/ "Try our Free version")**)
+* [**Email Verification for WooCommerce**](https://wpfactory.com/item/email-verification-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Email Verification for WooCommerce**"): Boost security and credibility by verifying customer emails, reducing spam, and improving email marketing (**[Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Free version")**)
 
-* [**EU/UK VAT Manager for WooCommerce**](https://wpfactory.com/item/eu-vat-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**EU/UK VAT Manager for WooCommerce**"): Streamline your WooCommerce store’s EU/UK VAT compliance effortlessly, automate VAT settings, validation (VIES), and how to apply taxes, ensuring a seamless and compliant customer experience (**[Try our Free version](https://wordpress.org/plugins/eu-vat-for-woocommerce/ "Try our Free version")**)
+* [**Free Shipping Over Amount for WooCommerce**](https://wpfactory.com/item/amount-left-free-shipping-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Free Shipping Over Amount for WooCommerce**"): Encourage higher spending by offering free shipping based on amount, with a progress bar for customers (**[Free version](https://wordpress.org/plugins/amount-left-free-shipping-woocommerce/ "Free version")**)
 
-* [**Email Verification for WooCommerce**](https://wpfactory.com/item/email-verification-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Email Verification for WooCommerce**"): Enhance WooCommerce security and credibility with Email Verification best plugin. Ensure genuine customer interactions, eliminate spam, and elevate email marketing efficiency (**[Try our Free version](https://wordpress.org/plugins/maximum-products-per-user-for-woocommerce/ "Try our Free version")**)
-
-* [**Free Shipping Over Amount for WooCommerce**](https://wpfactory.com/item/amount-left-free-shipping-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Free Shipping Over Amount for WooCommerce**"): WooCommerce Advanced Free Shipping plugin, use our plugin to quality customers for free shipping when they spend specific amount, by showing a bar on remaining amounts they need to spend to qualify for free shipping (**[Try our Free version](https://wordpress.org/plugins/amount-left-free-shipping-woocommerce/ "Try our Free version")**)
-
-* [**Dynamic Pricing & Bulk Quantity Discounts**](https://wpfactory.com/item/product-price-by-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Dynamic Pricing & Bulk Quantity Discounts**"): Create and manage advanced dynamic pricing and bulk discount rules for WooCommerce, encouraging bulk purchases and driving your sales to new heights (**[Try our Free version](https://wordpress.org/plugins/wholesale-pricing-woocommerce/ "Try our Free version")**)
+* [**Dynamic Pricing & Bulk Quantity Discounts**](https://wpfactory.com/item/product-price-by-quantity-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme "**Dynamic Pricing & Bulk Quantity Discounts**"): Advanced dynamic pricing and discount rules for WooCommerce, encouraging bulk purchases and driving more sales (**[Free version](https://wordpress.org/plugins/wholesale-pricing-woocommerce/ "Free version")**)
 
 
 ## ❤️ User Testimonials: See What Others Are Saying!##
@@ -293,17 +278,11 @@ Dive in and discover more tools to empower your WooCommerce Store!
 > “The support is super fast and amazing.
 Plugin also is great and work really smooth and nice.” – ⭐⭐⭐⭐⭐ [Sina Arzany](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
 
-> “Amazingly fast support, added a feature that we needed to work without any delay. Incredible service.
+> “Amazingly fast support, added a feature that we needed to work without any delay. Incredible service. Plug-in does exactly what we need it to do.” – ⭐⭐⭐⭐⭐ [Scott](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
 
-Plug-in does exactly what we need it to do.” – ⭐⭐⭐⭐⭐ [Scott](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
+> “Excellent plugin with so much functionality but yet so easy to use to keep track of profit at an order level! Great work team!” – ⭐⭐⭐⭐⭐ [Tye](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
 
-> “Excellent plugin with so much functionality but yet so easy to use to keep track of profit at an order level!
-
-Great work team!” – ⭐⭐⭐⭐⭐ [Tye](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme)
-
-> “BestMUST have plugin: If you need to have a control under the costs of the products you sell, this plugin is a must have. It works perfectly without any conflict with other plugins.
-
-Also I would like to point out the support of this plugin. They are always willing to help you and answering any question you could have. TOP TOP TOP” – ⭐⭐⭐⭐⭐ [betcazador](https://wordpress.org/support/topic/must-have-plugin-394/)
+> “Best MUST have plugin: If you need to have a control under the costs of the products you sell, this plugin is a must have. It works perfectly without any conflict with other plugins. Also I would like to point out the support of this plugin. They are always willing to help you and answering any question you could have. TOP TOP TOP” – ⭐⭐⭐⭐⭐ [betcazador](https://wordpress.org/support/topic/must-have-plugin-394/)
 
 
 == Frequently Asked Questions ==
@@ -364,6 +343,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.3.5 - 04/04/2024 =
+* Update - readme.txt
 
 = 3.3.4 - 03/04/2024 =
 * Fix - Uncaught TypeError: Unsupported operand types: string / float in Alg_WC_Cost_of_Goods_Products.
