@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.3.3
+ * @version 3.3.6
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * add_product_add_stock_meta_box.
 		 *
-		 * @version 3.1.8
+		 * @version 3.3.6
 		 * @since   1.7.0
 		 */
 		function add_product_add_stock_meta_box( $post_type, $post ) {
@@ -63,6 +63,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			}
 			if (
 				$post &&
+				! is_a( $post, '\Automattic\WooCommerce\Admin\Overrides\Order' ) &&
 				is_a( $product = wc_get_product( $post->ID ), 'WC_Product' ) &&
 				$this->is_add_stock_enabled() &&
 				( $product->is_type( 'simple' ) || $product->is_type( 'variable' ) )

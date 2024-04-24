@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 3.1.4
+ * @version 3.3.6
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -18,7 +18,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * Constructor.
 	 *
-	 * @version 2.8.8
+	 * @version 3.3.6
 	 * @since   2.2.0
 	 */
 	function __construct() {
@@ -26,7 +26,9 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		add_action( 'add_meta_boxes',       array( $this, 'add_order_meta_box' ) );
 		// Order extra cost: per order
 		add_action( 'add_meta_boxes',       array( $this, 'add_order_extra_cost_meta_box' ) );
-		add_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 10, 2 );
+		add_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 8, 2 );
+		add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_order_extra_cost' ), 8, 2 );
+
 		// Manual order cost.
 		add_filter( 'alg_wc_cog_order_cost', array( $this, 'save_order_cost_manually' ) );
 		add_filter( 'alg_wc_cog_order_profit', array( $this, 'calculate_profit_from_manual_cost' ) );
@@ -222,7 +224,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_extra_cost_meta_box.
 	 *
-	 * @version 2.3.0
+	 * @version 3.3.6
 	 * @since   1.7.0
 	 * @todo    [maybe] better `$title`
 	 * @todo    [maybe] better styling
@@ -235,9 +237,9 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 			if ( $is_enabled ) {
 				$id    = 'alg_wc_cog_order_' . $fee_type . '_fee';
 				$title = ucfirst( $fee_type ) . ' ' . __( 'fee', 'cost-of-goods-for-woocommerce' ) . ' (' . alg_wc_cog()->core->get_default_shop_currency_symbol() . ')';
-				$value = get_post_meta( get_the_ID(), '_' . $id, true );
-				$rows .= '<tr><td><label style="font-size:smaller;" for="' . $id . '">' . $title . '</label></td>' .
-					'<td><input name="' . $id . '" id="' . $id . '" type="number" step="0.0001" class="short wc_input_price" value="' . $value . '"></td></tr>';
+				$value = $order->get_meta( '_' . $id, true );
+				$rows  .= '<tr><td><label style="font-size:smaller;" for="' . $id . '">' . $title . '</label></td>' .
+				          '<td><input name="' . $id . '" id="' . $id . '" type="number" step="0.0001" class="short wc_input_price" value="' . $value . '"></td></tr>';
 			}
 		}
 		echo '<table class="widefat striped"><tbody>' . $rows . '</tbody></table>';
@@ -246,12 +248,13 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * save_order_extra_cost.
 	 *
-	 * @version 3.0.5
+	 * @version 3.3.6
 	 * @since   1.7.0
 	 */
 	function save_order_extra_cost( $order_id, $post ) {
 		if ( in_array( true, alg_wc_cog()->core->orders->is_order_extra_cost_per_order ) ) {
-			remove_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 10 );
+			remove_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_order_extra_cost' ), 8 );
+			remove_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 8 );
 			foreach ( alg_wc_cog()->core->orders->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 				if ( $is_enabled ) {
 					$id = 'alg_wc_cog_order_' . $fee_type . '_fee';
@@ -263,7 +266,8 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 					}
 				}
 			}
-			add_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 10, 2 );
+			add_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 8, 2 );
+			add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_order_extra_cost' ), 8, 2 );
 		}
 	}
 

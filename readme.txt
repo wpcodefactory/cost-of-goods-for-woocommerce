@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.5
-Stable tag: 3.3.5
+Stable tag: 3.3.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,13 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.3.6 - 24/04/2024 =
+* Fix - Creation of dynamic property Alg_WC_Cost_of_Goods_Pro::$wc_currency is deprecated.
+* Fix - PHP Notice:  Function ID was called incorrectly.
+* Fix - Orders - Extra Costs: Per Order - Fields are not updating if HPOS is enabled.
+* Dev - Add 'woocommerce_store_api_checkout_order_processed' hook so the costs update can work on WooCommerce blocks.
+* WC tested up to: 8.8.
 
 = 3.3.5 - 04/04/2024 =
 * Update - readme.txt
