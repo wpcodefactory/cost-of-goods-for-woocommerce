@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.3.6
+ * @version 3.3.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -879,7 +879,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * render_order_columns.
 	 *
-	 * @version 3.1.6
+	 * @version 3.3.7
 	 * @since   1.0.0
 	 * @todo    [later] order status for the fee columns
 	 * @todo    [later] forecasted profit `$value = $line_total * $average_profit_margin`
@@ -898,18 +898,21 @@ class Alg_WC_Cost_of_Goods_Orders {
 			$order = wc_get_order( $order_id );
 			$key   = $this->get_order_column_key( $column );
 			$value = $order->get_meta( $key, true );
-			echo( '' !== $value ? $this->format_order_column_value( $value, $column ) : '' );
+			if ( in_array( $column, array( 'profit', 'cost' ) ) ) {
+				$value = apply_filters( 'alc_wc_cog_order_admin_column_value', $value, array( 'invert' => true, 'order' => $order ) );
+			}
+			echo( '' !== $value ? $this->format_order_column_value( $value, $column, apply_filters( 'alc_wc_cog_order_admin_column_value_format_args', array(), array( 'order' => $order ) ) ) : '' );
 		}
 	}
 
 	/**
 	 * format_order_column_value.
 	 *
-	 * @version 2.2.0
+	 * @version 3.3.7
 	 * @since   2.2.0
 	 */
-	function format_order_column_value( $value, $column ) {
-		return ( in_array( $column, array( 'profit_percent', 'profit_margin' ) ) ? sprintf( '%0.2f%%', $value ) : wc_price( $value ) );
+	function format_order_column_value( $value, $column, $wc_price_args = null ) {
+		return ( in_array( $column, array( 'profit_percent', 'profit_margin' ) ) ? sprintf( '%0.2f%%', $value ) : wc_price( $value, $wc_price_args ) );
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 3.3.6
+ * @version 3.3.7
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -125,7 +125,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 3.1.4
+	 * @version 3.3.7
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
@@ -136,19 +136,21 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 			return;
 		}
 		$cost                = $order->get_meta( '_alg_wc_cog_order_' . 'cost', true );
+		$cost                = apply_filters( 'alc_wc_cog_order_metabox_value', $cost, array( 'invert' => true, 'order' => $order ) );
 		$handling_fee        = $order->get_meta( '_alg_wc_cog_order_' . 'handling_fee', true );
 		$profit              = $order->get_meta( '_alg_wc_cog_order_' . 'profit', true );
+		$profit              = apply_filters( 'alc_wc_cog_order_metabox_value', $profit, array( 'invert' => true, 'order' => $order ) );
 		$profit_percent      = $order->get_meta( '_alg_wc_cog_order_' . 'profit_percent', true );
 		$profit_margin       = $order->get_meta( '_alg_wc_cog_order_' . 'profit_margin', true );
 		$profit_template     = get_option( 'alg_wc_cog_orders_profit_html_template', '%profit%' );
 		$profit_placeholders = array(
-			'%profit%'         => alg_wc_cog()->core->orders->format_order_column_value( $profit, 'profit' ),
+			'%profit%'         => alg_wc_cog()->core->orders->format_order_column_value( $profit, 'profit', apply_filters( 'alc_wc_cog_order_metabox_value_format_args', array(), array( 'order' => $order ) ) ),
 			'%profit_percent%' => alg_wc_cog()->core->orders->format_order_column_value( $profit_percent, 'profit_percent' ),
 			'%profit_margin%'  => alg_wc_cog()->core->orders->format_order_column_value( $profit_margin, 'profit_margin' ),
 		);
 		$profit_html         = str_replace( array_keys( $profit_placeholders ), $profit_placeholders, $profit_template );
 		$table_args          = array( 'table_heading_type' => 'vertical', 'table_class' => 'widefat', 'columns_styles' => array( '', 'text-align:right;' ) );
-		$cost_html           = apply_filters( 'alg_wc_cog_order_metabox_cost_value_html', alg_wc_cog_format_cost( $cost ), $cost, $order_id );
+		$cost_html           = apply_filters( 'alg_wc_cog_order_metabox_cost_value_html', alg_wc_cog_format_cost( $cost, apply_filters( 'alc_wc_cog_order_metabox_value_format_args', array(), array( 'order' => $order ) ) ), $cost, $order_id );
 		$table_data          = array(
 			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ),   ( '' !== $cost   ? '<span style="color:red;">'   . $cost_html . '</span>' : '' ) ),
 			array( __( 'Profit', 'cost-of-goods-for-woocommerce' ), ( '' !== $profit ? '<span style="color:green;">' . $profit_html      . '</span>' : '' ) ),
@@ -175,8 +177,9 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		$cost_meta_keys = apply_filters( 'alg_wc_cog_cost_meta_keys', $cost_meta_keys );
 		foreach ( $cost_meta_keys as $key => $value ) {
 			$cost = $order->get_meta( $key, true );
+			$cost = apply_filters( 'alc_wc_cog_order_metabox_value', $cost, array( 'invert' => true, 'order' => $order ) );
 			if ( ! empty( $cost ) && 0 != $cost ) {
-				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost ) );
+				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost, apply_filters( 'alc_wc_cog_order_metabox_value_format_args', array(), array( 'order' => $order ) ) ) );
 			}
 		}
 		if ( count( $table_data ) > 0 ) {
@@ -189,8 +192,9 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		$extra_profit_meta_keys = apply_filters( 'alg_wc_cog_extra_profit_meta_keys', $extra_profit_meta_keys );
 		foreach ( $extra_profit_meta_keys as $key => $value ) {
 			$cost = $order->get_meta( $key, true );
+			$cost = apply_filters( 'alc_wc_cog_order_metabox_value', $cost, array( 'invert' => true, 'order' => $order ) );
 			if ( 0 != $cost && ! empty( $cost ) ) {
-				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost ) );
+				$table_data[] = array( $value, alg_wc_cog_format_cost( $cost, apply_filters( 'alc_wc_cog_order_metabox_value_format_args', array(), array( 'order' => $order ) ) ) );
 			}
 		}
 		if ( count( $table_data ) > 0 ) {

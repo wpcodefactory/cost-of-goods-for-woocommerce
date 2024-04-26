@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 3.3.3
+ * @version 3.3.7
  * @since   3.2.1
  * @author  WPFactory
  */
@@ -438,5 +438,35 @@ if ( ! function_exists( 'alg_wc_cog_generate_wpdb_prepare_placeholders_from_arra
 		}, $array );
 
 		return '(' . join( ',', $placeholders ) . ')';
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_get_admin_orders_page_url' ) ) {
+	/**
+	 * alg_wc_cog_get_admin_orders_page_url
+	 *
+	 * @version 3.3.7
+	 * @since   3.3.7
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_get_admin_orders_page_url() {
+		return class_exists( '\Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController' ) && wc_get_container()->get( \Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+			? admin_url( 'admin.php?page=wc-orders' )
+			: admin_url( 'edit.php?post_type=shop_order' );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_get_option' ) ) {
+	/**
+	 * alg_wc_cog_get_option.
+	 *
+	 * @version 3.3.7
+	 * @since   3.3.7
+	 *
+	 * @return false|mixed|null
+	 */
+	function alg_wc_cog_get_option( $option, $default_value = false, $get_value_from_cache = true ) {
+		return alg_wc_cog()->core->options->get_option( $option, $default_value, $get_value_from_cache );
 	}
 }

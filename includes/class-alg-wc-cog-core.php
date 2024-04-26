@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Core Class.
  *
- * @version 2.9.4
+ * @version 3.3.7
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -79,9 +79,18 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		public $bulk_edit_tool;
 
 		/**
+		 * Options.
+		 *
+		 * @since 3.3.7
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Options
+		 */
+		public $options;
+
+		/**
 		 * Constructor.
 		 *
-		 * @version 2.8.2
+		 * @version 3.3.7
 		 * @since   1.0.0
 		 * @todo    [next] add "delete all (products and/or orders) meta" tool
 		 * @todo    [next] add option to enter costs *with taxes*
@@ -99,6 +108,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		 * @todo    [maybe] add option to change meta keys prefix (i.e. `_alg_wc_cog`)
 		 */
 		function __construct() {
+			require_once( 'class-alg-wc-cog-options.php' );
+			$this->options = new Alg_WC_Cost_of_Goods_Options();
 			// Background process.
 			$this->init_bkg_process();
 			// Analytics.

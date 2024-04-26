@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Currencies Section Settings.
  *
- * @version 3.2.3
+ * @version 3.3.7
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.8.7
+	 * @version 3.3.7
 	 * @since   2.2.0
 	 * @todo    [next] exclude `$wc_currency` from `get_woocommerce_currencies()`?
 	 * @todo    [maybe] `alg_wc_cog_currencies_wmc`: add link to the plugin on wp.org?
@@ -39,18 +39,43 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 		$multicurrency_order_calculation_opts = array(
 			array(
 				'title' => __( 'Multi-currency management', 'cost-of-goods-for-woocommerce' ),
-				'desc'  => sprintf( __( 'Calculate %s from orders in non-default shop currency based on custom exchange rates.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'profit', 'cost-of-goods-for-woocommerce' ) . '</strong>' ). ' ' .
-				           __( 'The order profit will be calculated in the default shop base currency.', 'cost-of-goods-for-woocommerce' )	,
+				'desc'  => __( 'Some notes:', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				           alg_wc_cog_array_to_string( array(
+					           __( 'All COG related metas, such as profit and costs will be saved in the shop base currency.', 'cost-of-goods-for-woocommerce' ),
+					           __( 'All costs should be always set with the shop base currency, including cost fields present on orders.', 'cost-of-goods-for-woocommerce' ),
+				           ), array( 'item_template' => '<li>{value}</li>', 'glue' => '' ) ),
 				'type'  => 'title',
 				'id'    => 'alg_wc_cog_currencies_options',
 			),
 			array(
 				'title'             => __( 'Multi-currency management', 'cost-of-goods-for-woocommerce' ),
 				'desc'              => sprintf( __( 'Enable %s feature', 'cost-of-goods-for-woocommerce' ), strtolower( __( 'Multi-currency management', 'cost-of-goods-for-woocommerce' ) ) ),
-				//'desc_tip'          => __( 'The order profit will be calculated in the default shop base currency.', 'cost-of-goods-for-woocommerce' ),
 				'type'              => 'checkbox',
 				'id'                => 'alg_wc_cog_currencies_enabled',
 				'default'           => 'no',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'wpfse_data'        => array(
+					'hide' => true
+				)
+			),
+			array(
+				'title'             => __( 'Order values', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Display COG related values from the order, such as costs and profit, in the currency of the order', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'          => sprintf(__( 'The affected areas are the %s and the order page on the admin.', 'cost-of-goods-for-woocommerce' ), '<a href="' . alg_wc_cog_get_admin_orders_page_url() . '">' . __( 'order listing page', 'cost-of-goods-for-woocommerce' ) . '</a>'),
+				'type'              => 'checkbox',
+				'id'                => 'alg_wc_cog_currencies_display_order_currency_values',
+				'default'           => 'yes',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'wpfse_data'        => array(
+					'hide' => true
+				)
+			),
+			array(
+				'title'             => __( 'COG order fields currency', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Force shop base currency on COG order fields', 'cost-of-goods-for-woocommerce' ),
+				'type'              => 'checkbox',
+				'id'                => 'alg_wc_cog_currencies_force_sb_currency_cog_order_fields',
+				'default'           => 'yes',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 				'wpfse_data'        => array(
 					'hide' => true
