@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.3.7\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.3.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-04-26T17:24:43+02:00\n"
+"POT-Creation-Date: 2024-05-03T00:55:39+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -1104,6 +1104,15 @@ msgstr ""
 msgid "Order types in reports."
 msgstr ""
 
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:327
+#: includes/settings/class-alg-wc-cog-settings-products.php:245
+msgid "Note:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:327
+msgid "Only works with the old WooCommerce reports, and it might not work on recent versions of WooCommerce."
+msgstr ""
+
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:328
 msgid "If empty will show common and openpos orders combined."
 msgstr ""
@@ -1949,10 +1958,6 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:243
 msgid "Calculate new average cost of goods for the product based on new \"Stock\" and \"Cost\" values you enter."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:245
-msgid "Note:"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:245

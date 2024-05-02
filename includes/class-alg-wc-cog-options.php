@@ -30,9 +30,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Options' ) ) {
 		 * @version 3.3.7
 		 * @since   3.3.7
 		 *
-		 * @param $option
-		 * @param $default_value
-		 * @param $get_value_from_cache
+		 * @param  $option
+		 * @param  $default_value
+		 * @param  $get_value_from_cache
 		 *
 		 * @return false|mixed|null
 		 */

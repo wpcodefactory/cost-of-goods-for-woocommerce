@@ -324,7 +324,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 				) ),
 				array(
 					'title'    => __( 'Order types', 'cost-of-goods-for-woocommerce' ),
-					'desc'     => __( 'Order types in reports.', 'cost-of-goods-for-woocommerce' ),
+					'desc'     => __( 'Order types in reports.', 'cost-of-goods-for-woocommerce' ) . ' ' . '<strong>' . __( 'Note:', 'cost-of-goods-for-woocommerce' ) . '</strong>' . ' ' . __( 'Only works with the old WooCommerce reports, and it might not work on recent versions of WooCommerce.', 'cost-of-goods-for-woocommerce' ),
 					'desc_tip' => __( 'If empty will show common and openpos orders combined.', 'cost-of-goods-for-woocommerce' ),
 					'id'       => 'alg_wc_cog_openpos_anhvnit_report_order_type',
 					'default'  => array(),

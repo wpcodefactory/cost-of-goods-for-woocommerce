@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Stock.
  *
- * @version 3.2.2
+ * @version 3.3.8
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -334,7 +334,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		 *
 		 * @see \Automattic\WooCommerce\Admin\API\Reports\Stock\Controller::prepare_item_for_response()
 		 *
-		 * @version 2.5.5
+		 * @version 3.3.8
 		 * @since   2.4.5
 		 *
 		 * @param WP_REST_Response $response
@@ -359,12 +359,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 					}
 				}
 			}
-			// Category
+			// Category.
 			if (
-				'yes' === get_option( 'alg_wc_cog_category_enabled_on_analytics_stock', 'no' ) &&
+				'yes' === alg_wc_cog_get_option( 'alg_wc_cog_category_enabled_on_analytics_stock', 'no' ) &&
 				is_a( $product, 'WC_Product' )
 			) {
-				$response->data['product_cat'] = $this->get_categories( wc_get_product_term_ids( $product->get_id(), 'product_cat' ) );
+				$product_id = $product->get_id();
+				if ( $parent_id = wp_get_post_parent_id( $product_id ) ) {
+					$product_id = $parent_id;
+				}
+				$term_ids                      = wc_get_product_term_ids( $product_id, 'product_cat' );
+				$response->data['product_cat'] = ! empty( $term_ids ) ? $this->get_categories( $term_ids ) : array();
 			}
 			return $response;
 		}

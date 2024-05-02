@@ -617,11 +617,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				'stock'      => '',
 				'stock_prev' => '',
 				'cost'       => '',
-				'cost_prev'  => ''
+				'cost_prev'  => '',
+				'update_stock' => true
 			) );
 			$product_id = intval( $args['product_id'] );
 			$stock      = intval( $args['stock'] );
 			$cost       = floatval( $args['cost'] );
+			$update_stock = $args['update_stock'];
 			$cost = $this->get_add_stock_cost( array(
 				'cost'       => $cost,
 				'product_id' => $product_id
@@ -649,11 +651,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				) );
 				// Update Stock.
 				update_post_meta( $product_id, '_alg_wc_cog_cost', $cost_now );
-				$stock_operation = $this->calculate_update_stock_operation( $product_id, $stock_now );
-				wc_update_product_stock( $product_id, abs( $stock ), $stock_operation );
-				if ( 'set' === $stock_operation ) {
-					update_post_meta( $product_id, '_stock', $stock_now );
+				if ( $update_stock ) {
+					$stock_operation = $this->calculate_update_stock_operation( $product_id, $stock_now );
+					wc_update_product_stock( $product_id, abs( $stock ), $stock_operation );
+					if ( 'set' === $stock_operation ) {
+						update_post_meta( $product_id, '_stock', $stock_now );
+					}
 				}
+
 				// Update History.
 				$history = get_post_meta( $product_id, '_alg_wc_cog_cost_history', true );
 				if ( ! $history ) {
