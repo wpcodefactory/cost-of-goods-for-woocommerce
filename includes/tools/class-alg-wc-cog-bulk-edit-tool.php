@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 3.2.9
+ * @version 3.3.9
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -482,7 +482,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * update_prices.
 		 *
-		 * @version 3.3.0
+		 * @version 3.3.9
 		 * @since   3.3.0
 		 *
 		 * @return void
@@ -545,7 +545,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 						'products_function' => 'update_product_price_by_profit',
 						'function_params'   => array(
 							'percentage' => $price_edit_value,
-							'rounding'   => $price_rounding
+							'rounding'   => $price_rounding,
+							'price_type' => $price_type,
 						)
 					) ) );
 					break;
