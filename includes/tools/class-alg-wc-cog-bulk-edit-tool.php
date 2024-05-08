@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 3.3.9
+ * @version 3.4.0
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -217,6 +217,31 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		}
 
 		/**
+		 * handle_stock_status_filter_query.
+		 *
+		 * @version 3.4.0
+		 * @since   3.4.0
+		 *
+		 * @param $query
+		 * @param $stock_status
+		 *
+		 * @return array
+		 */
+		function handle_stock_status_filter_query( $query, $stock_status = '' ) {
+			if ( ! empty( $stock_status ) ) {
+				$query['meta_query'][] = array(
+					'relation' => 'OR',
+					array(
+						'key'   => '_stock_status',
+						'value' => $stock_status
+					),
+				);
+			}
+
+			return $query;
+		}
+
+		/**
 		 * filter_products_query_by_costs.
 		 *
 		 * @version 3.3.0
@@ -306,7 +331,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * get_products_to_be_updated.
 		 *
-		 * @version 3.3.0
+		 * @version 3.4.0
 		 * @since   3.3.0
 		 *
 		 * @param $args
@@ -314,29 +339,33 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @return array|stdClass
 		 */
 		function get_products_to_be_updated( $args ) {
-			$args               = wp_parse_args( $args, array(
+			$args = wp_parse_args( $args, array(
 				'product_category' => array(),
 				'product_tag'      => array(),
 				'cost_filter'      => '',
 				'update_method'    => '',
+				'stock_status'     => ''
 			) );
 			$product_categories = $args['product_category'];
-			$update_method      = $args['update_method'];
-			$product_tags       = $args['product_tag'];
-			$cost_filter        = $args['cost_filter'];
+			$update_method = $args['update_method'];
+			$product_tags = $args['product_tag'];
+			$cost_filter = $args['cost_filter'];
+			$stock_status_filter = $args['stock_status'];
 
 			// Product args.
-			$products_args = array(
+			$products_args            = array(
 				'type'   => array_merge( array_keys( wc_get_product_types() ) ),
 				'status' => array( 'publish' ),
 				'limit'  => '-1',
 				'return' => 'ids',
 			);
-			$products_args = $this->handle_category_filter_wc_get_products_args( $product_categories, $products_args );
-			$products_args = $this->handle_tags_filter_wc_get_products_args( $product_tags, $products_args );
+			$products_args            = $this->handle_category_filter_wc_get_products_args( $product_categories, $products_args );
+			$products_args            = $this->handle_tags_filter_wc_get_products_args( $product_tags, $products_args );
+			$products_from_taxes_args = $products_args;
 			if ( ! empty( $cost_filter ) ) {
 				$products_args = $this->handle_costs_filter_wc_get_products_args( $cost_filter, $products_args );
 			}
+			$products_args['stock_status'] = $stock_status_filter;
 
 			// Child products query args.
 			$child_products_query_args = array(
@@ -344,34 +373,35 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				'posts_per_page' => - 1,
 				'fields'         => 'ids',
 				'no_found_rows'  => true,
+
 			);
 			if ( ! empty( $cost_filter ) ) {
 				$child_products_query_args = $this->handle_costs_filter_query( $child_products_query_args, $cost_filter );
 			}
+			if ( ! empty( $stock_status_filter ) ) {
+				$child_products_query_args = $this->handle_stock_status_filter_query( $child_products_query_args, $stock_status_filter );
+			}
 
 			// Get products.
+			$products_from_taxes = empty( $product_tags ) && empty( $product_categories ) ? array() : wc_get_products( $products_from_taxes_args );
+			$products            = wc_get_products( $products_args );
+
 			switch ( $update_method ) {
 				case 'set_variation_costs_from_parents':
-					$products = wc_get_products( $products_args );
-					if ( ! empty( $products ) ) {
-						$child_products_query_args['post_parent__in']     = $products;
-						$child_products_query_args['post_parent__not_in'] = array( 0 );
-						$child_products                                   = new WP_Query( $child_products_query_args );
-						if ( $child_products->have_posts() ) {
-							$products = $child_products->posts;
-						} else {
-							$products = array();
-						}
+					$child_products_query_args['post_parent__in']     = $products_from_taxes;
+					$child_products_query_args['post_parent__not_in'] = array( 0 );
+					$child_products                                   = new WP_Query( $child_products_query_args );
+					if ( $child_products->have_posts() ) {
+						$products = $child_products->posts;
+					} else {
+						$products = array();
 					}
 					break;
 				default:
-					$products = wc_get_products( $products_args );
-					if ( ! empty( $products ) ) {
-						$child_products_query_args['post_parent__in'] = $products;
-						$child_products                               = new WP_Query( $child_products_query_args );
-						if ( $child_products->have_posts() ) {
-							$products = array_merge( $products, $child_products->posts );
-						}
+					$child_products_query_args['post_parent__in'] = $products_from_taxes;
+					$child_products                               = new WP_Query( $child_products_query_args );
+					if ( $child_products->have_posts() ) {
+						$products = array_merge( $products, $child_products->posts );
 					}
 					break;
 			}
@@ -382,7 +412,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * update_costs.
 		 *
-		 * @version 3.3.0
+		 * @version 3.4.0
 		 * @since   3.3.0
 		 *
 		 * @return void
@@ -394,7 +424,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				'costs_filter'                   => '',
 				'_nonce_costs_automatically_val' => '',
 				'product_category'               => array(),
-				'product_tag'                    => array()
+				'product_tag'                    => array(),
+				'product_stock_status'           => '',
 			) );
 
 			if (
@@ -406,17 +437,19 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			}
 
 			// Sanitize args.
-			$cost_edit_value    = floatval( $args['cost_edit_value'] );
-			$product_categories = empty( $args['product_category'] ) ? array() : array_map( 'intval', $args['product_category'] );
-			$product_tags       = empty( $args['product_tag'] ) ? array() : array_map( 'intval', $args['product_tag'] );
-			$cost_filter        = in_array( $filter = sanitize_text_field( $args['costs_filter'] ), wp_list_pluck( $this->get_cost_filter_options(), 'id' ) ) ? $filter : '';
+			$cost_edit_value     = floatval( $args['cost_edit_value'] );
+			$product_categories  = empty( $args['product_category'] ) ? array() : array_map( 'intval', $args['product_category'] );
+			$product_tags        = empty( $args['product_tag'] ) ? array() : array_map( 'intval', $args['product_tag'] );
+			$cost_filter         = in_array( $filter = sanitize_text_field( $args['costs_filter'] ), wp_list_pluck( $this->get_cost_filter_options(), 'id' ) ) ? $filter : '';
+			$stock_status_filter = sanitize_text_field( $args['product_stock_status'] );
 
 			// Get products to be updated.
 			$products = $this->get_products_to_be_updated( array(
-				'product_category' => $product_categories,
-				'product_tag'      => $product_tags,
-				'cost_filter'      => $cost_filter,
-				'update_method'    => $bulk_edit_costs_method,
+				'product_category'    => $product_categories,
+				'product_tag'         => $product_tags,
+				'cost_filter'         => $cost_filter,
+				'update_method'       => $bulk_edit_costs_method,
+				'stock_status'        => $stock_status_filter
 			) );
 
 			// Check if background process is needed.
@@ -482,7 +515,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * update_prices.
 		 *
-		 * @version 3.3.9
+		 * @version 3.4.0
 		 * @since   3.3.0
 		 *
 		 * @return void
@@ -495,7 +528,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				'price_rounding'                  => '',
 				'_nonce_prices_automatically_val' => '',
 				'product_category'                => array(),
-				'product_tag'                     => array()
+				'product_tag'                     => array(),
+				'product_stock_status'            => '',
 			) );
 
 			if (
@@ -507,17 +541,19 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			}
 
 			// Sanitize args.
-			$price_edit_value   = floatval( $args['price_edit_value'] );
-			$product_categories = empty( $args['product_category'] ) ? array() : array_map( 'intval', $args['product_category'] );
-			$product_tags       = empty( $args['product_tag'] ) ? array() : array_map( 'intval', $args['product_tag'] );
-			$price_type         = sanitize_text_field( $args['price_type'] );
-			$price_rounding     = sanitize_text_field( $args['price_rounding'] );
+			$price_edit_value    = floatval( $args['price_edit_value'] );
+			$product_categories  = empty( $args['product_category'] ) ? array() : array_map( 'intval', $args['product_category'] );
+			$product_tags        = empty( $args['product_tag'] ) ? array() : array_map( 'intval', $args['product_tag'] );
+			$price_type          = sanitize_text_field( $args['price_type'] );
+			$price_rounding      = sanitize_text_field( $args['price_rounding'] );
+			$stock_status_filter = sanitize_text_field( $args['product_stock_status'] );
 
 			// Get products to be updated.
 			$products = $this->get_products_to_be_updated( array(
 				'product_category' => $product_categories,
 				'product_tag'      => $product_tags,
 				'update_method'    => $bulk_edit_prices_method,
+				'stock_status'     => $stock_status_filter
 			) );
 
 			// Check if background process is needed.
@@ -777,7 +813,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			return array(
 				array(
 					'id'    => 'ignore_costs',
-					'label' => __( 'Update products regardless of their current cost', 'cost-of-goods-for-woocommerce' ),
+					'label' => __( 'Ignore current cost', 'cost-of-goods-for-woocommerce' ),
 					'desc'  => __( '', 'cost-of-goods-for-woocommerce' ),
 				),
 				array(
@@ -796,13 +832,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * display_bulk_edit_prices.
 		 *
-		 * @version 3.3.0
+		 * @version 3.4.0
 		 * @since   2.6.1
 		 */
 		function display_bulk_edit_prices() {
 			$disabled     = apply_filters( 'alg_wc_cog_settings', 'disabled' );
 			$blocked_text = apply_filters( 'alg_wc_cog_settings', alg_wc_cog_get_blocked_options_message() );
 			$methods = $this->get_bulk_edit_prices_methods();
+			$stock_statuses = wc_get_product_stock_status_options();
 			?>
             <table class="form-table bulk-edit-auto" role="presentation">
                 <tr>
@@ -908,6 +945,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         </p>
                     </td>
                 </tr>
+				<tr>
+					<th scope="row"><label for="product-stock-status"><?php esc_html_e( 'Filter by stock status', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+					<td>
+						<select class="wc-enhanced-select" id="product-stock-status" name="product_stock_status">
+							<option value=""><?php echo esc_html__( 'Ignore stock status', 'woocommerce' ) ?></option>
+							<?php foreach ( $stock_statuses as $status => $label ) : ?>
+								<option value="<?php echo esc_attr( $status ) ?> "><?php echo esc_html( $label ) ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+				</tr>
             </table>
 			<?php
 		}
@@ -915,7 +963,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Bulk edit costs automatically.
 		 *
-		 * @version 2.9.5
+		 * @version 3.4.0
 		 * @since   2.5.1
 		 */
 		function display_bulk_edit_costs_automatically() {
@@ -923,6 +971,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			$blocked_text = apply_filters( 'alg_wc_cog_settings', alg_wc_cog_get_blocked_options_message() );
 			$methods = $this->get_bulk_edit_costs_methods();
             $cost_filter_options = $this->get_cost_filter_options();
+			$stock_statuses = wc_get_product_stock_status_options();
 			?>
             <table class="form-table bulk-edit-auto" role="presentation">
                 <tr>
@@ -1042,6 +1091,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         </p>
                     </td>
                 </tr>
+				<tr>
+					<th scope="row"><label for="product-stock-status"><?php esc_html_e( 'Filter by stock status', 'cost-of-goods-for-woocommerce' ); ?></label></th>
+					<td>
+						<select class="wc-enhanced-select" id="product-stock-status" name="product_stock_status">
+							<option value=""><?php echo esc_html__( 'Ignore stock status', 'woocommerce' ) ?></option>
+							<?php foreach ( $stock_statuses as $status => $label ) : ?>
+								<option value="<?php echo esc_attr( $status ) ?> "><?php echo esc_html( $label ) ?></option>
+							<?php endforeach; ?>
+						</select>
+					</td>
+				</tr>
             </table>
 			<?php
 		}
