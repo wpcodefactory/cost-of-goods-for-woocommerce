@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Advanced Section Settings.
  *
- * @version 3.1.3
+ * @version 3.4.1
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -44,7 +44,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.1.3
+	 * @version 3.4.1
 	 * @since   1.7.0
 	 * @todo    [later] "Force costs update on ...": better title and desc (3x)
 	 */
@@ -71,7 +71,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
-				'title'         => __( 'Force costs update', 'cost-of-goods-for-woocommerce' ),
+				'title'         => __( 'Order item costs', 'cost-of-goods-for-woocommerce' ),
 				'desc'          => __( 'Auto fill empty order items costs on order update', 'cost-of-goods-for-woocommerce' ),
 				'id'            => 'alg_wc_cog_orders_force_on_update',
 				'default'       => 'no',
@@ -101,8 +101,8 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'type'          => 'checkbox',
 			),
 			array(
-				'title'   => __( 'Costs update hooks', 'cost-of-goods-for-woocommerce' ),
-				'desc'    => __( 'Hooks from new orders that will trigger cost update.', 'cost-of-goods-for-woocommerce' ),
+				'title'   => __( 'Order calculation hooks', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Hooks that will update order cost/profit calculation.', 'cost-of-goods-for-woocommerce' ),
 				'id'      => 'alg_wc_cog_new_order_hooks_for_cost_update',
 				'type'    => 'multiselect',
 				'class'   => 'chosen_select',
@@ -110,7 +110,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'options' => alg_wc_cog()->core->orders->get_new_order_hooks_for_cost_updating()
 			),
 			array(
-				'title'         => __( 'Metadata', 'cost-of-goods-for-woocommerce' ),
+				'title'         => __( 'Order metadata', 'cost-of-goods-for-woocommerce' ),
 				'desc'          => __( 'Avoid empty order metadata from being saved to database', 'cost-of-goods-for-woocommerce' ),
 				'id'            => 'alg_wc_cog_avoid_empty_order_metadata_saving',
 				'default'       => 'yes',

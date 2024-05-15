@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.4.0\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.4.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-08T23:20:03+02:00\n"
+"POT-Creation-Date: 2024-05-15T23:39:57+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -75,8 +75,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:281
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
-#: includes/class-alg-wc-cog-orders.php:748
-#: includes/class-alg-wc-cog-orders.php:858
+#: includes/class-alg-wc-cog-orders.php:750
+#: includes/class-alg-wc-cog-orders.php:860
 #: includes/class-alg-wc-cog-products-add-stock.php:352
 #: includes/class-alg-wc-cog-products-add-stock.php:408
 #: includes/class-alg-wc-cog-products.php:301
@@ -104,8 +104,8 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:282
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
-#: includes/class-alg-wc-cog-orders.php:749
-#: includes/class-alg-wc-cog-orders.php:868
+#: includes/class-alg-wc-cog-orders.php:751
+#: includes/class-alg-wc-cog-orders.php:870
 #: includes/class-alg-wc-cog-products.php:383
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
@@ -280,24 +280,24 @@ msgstr ""
 msgid "Shipping to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:752
-#: includes/class-alg-wc-cog-orders.php:1190
+#: includes/class-alg-wc-cog-orders.php:754
+#: includes/class-alg-wc-cog-orders.php:1196
 #: includes/pro/class-alg-wc-cog-pro.php:638
 #: includes/pro/class-alg-wc-cog-pro.php:657
 msgid "Cost of goods"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:871
+#: includes/class-alg-wc-cog-orders.php:873
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:874
+#: includes/class-alg-wc-cog-orders.php:876
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:1226
+#: includes/class-alg-wc-cog-orders.php:1232
 msgid "Handling Fee"
 msgstr ""
 
@@ -741,7 +741,7 @@ msgid "The administrator can't be blocked."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:74
-msgid "Force costs update"
+msgid "Order item costs"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:75
@@ -765,15 +765,15 @@ msgid "Only triggers with meta not starting with <code>_alg_wc_cog</code>."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:104
-msgid "Costs update hooks"
+msgid "Order calculation hooks"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:105
-msgid "Hooks from new orders that will trigger cost update."
+msgid "Hooks that will update order cost/profit calculation."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:113
-msgid "Metadata"
+msgid "Order metadata"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:114

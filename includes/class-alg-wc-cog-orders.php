@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.3.7
+ * @version 3.4.1
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -387,8 +387,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'woocommerce_before_save_order_items', array( $this, 'save_order_items_ajax' ), PHP_INT_MAX, 2 );
 		// Save order items costs on new order.
 		add_action( 'woocommerce_new_order', array( $this, 'update_order_items_costs_on_new_order' ), 10 );
-		add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'save_cost_input_shop_order_new' ), 10 );
 		add_action( 'woocommerce_new_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX, 2 );
+		add_action( 'woocommerce_store_api_checkout_order_processed', array( $this, 'save_cost_input_shop_order_new' ), 10 );
 		add_action( 'woocommerce_api_create_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 		add_action( 'woocommerce_cli_create_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 		add_action( 'kco_before_confirm_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
@@ -665,7 +665,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * get_new_order_hooks_for_cost_updating.
 	 *
-	 * @version 3.3.6
+	 * @version 3.4.1
 	 * @since   2.6.3
 	 *
 	 * @return array
@@ -677,7 +677,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 			'woocommerce_cli_create_order'                   => 'woocommerce_cli_create_order',
 			'kco_before_confirm_order'                       => 'kco_before_confirm_order',
 			'woocommerce_checkout_order_processed'           => 'woocommerce_checkout_order_processed',
-			'woocommerce_store_api_checkout_order_processed' => 'woocommerce_store_api_checkout_order_processed'
+			'woocommerce_store_api_checkout_order_processed' => 'woocommerce_store_api_checkout_order_processed',
+			'save_post_shop_order'                           => 'woocommerce_store_api_checkout_order_processed',
+			'woocommerce_process_shop_order_meta'            => 'woocommerce_process_shop_order_meta',
 		);
 	}
 
@@ -960,7 +962,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs_on_new_order.
 	 *
-	 * @version 3.3.6
+	 * @version 3.4.1
 	 * @since   3.3.6
 	 *
 	 * @param $order_id
@@ -968,12 +970,14 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 * @return void
 	 */
 	function update_order_items_costs_on_new_order( $order_id ) {
-		remove_action( 'woocommerce_new_order', array( $this, 'update_order_items_costs_on_new_order' ), 10 );
-		$this->update_order_items_costs( array(
-			'order_id'         => $order_id,
-			'is_new_order'     => true,
-			'is_no_costs_only' => false
-		) );
+		if ( in_array( current_filter(), get_option( 'alg_wc_cog_new_order_hooks_for_cost_update', array_keys( $this->get_new_order_hooks_for_cost_updating() ) ) ) ) {
+			remove_action( 'woocommerce_new_order', array( $this, 'update_order_items_costs_on_new_order' ), 10 );
+			$this->update_order_items_costs( array(
+				'order_id'         => $order_id,
+				'is_new_order'     => true,
+				'is_no_costs_only' => false
+			) );
+		}
 	}
 
 	/**
@@ -1015,24 +1019,26 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * save_cost_input_shop_order_save_post.
 	 *
-	 * @version 3.3.6
+	 * @version 3.4.1
 	 * @since   1.1.0
 	 */
 	function save_cost_input_shop_order_save_post( $post_id, $post ) {
-		remove_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
-		remove_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
+		if ( in_array( current_filter(), get_option( 'alg_wc_cog_new_order_hooks_for_cost_update', array_keys( $this->get_new_order_hooks_for_cost_updating() ) ) ) ) {
+			remove_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
+			remove_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
 
-		$this->update_order_items_costs( array(
-			'order_id'     => $post_id,
-			'is_new_order' => false,
-		) );
-
-		if ( $this->do_force_on_order_update ) {
 			$this->update_order_items_costs( array(
-				'order_id'         => $post_id,
-				'is_new_order'     => true,
-				'is_no_costs_only' => true
+				'order_id'     => $post_id,
+				'is_new_order' => false,
 			) );
+
+			if ( $this->do_force_on_order_update ) {
+				$this->update_order_items_costs( array(
+					'order_id'         => $post_id,
+					'is_new_order'     => true,
+					'is_no_costs_only' => true
+				) );
+			}
 		}
 	}
 
