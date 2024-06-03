@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Advanced Section Settings.
  *
- * @version 3.4.1
+ * @version 3.4.3
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -22,7 +22,27 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	function __construct() {
 		$this->id   = 'advanced';
 		$this->desc = __( 'Advanced', 'cost-of-goods-for-woocommerce' );
+		add_action( 'alg_wc_cog_on_update', array( $this, 'fix_calculation_hooks_default_option' ) );
 		parent::__construct();
+	}
+
+	/**
+	 * Resets the Order calculation hooks to default option.
+	 *
+	 * Necessary since version 3.4.1 for previous users, where all order calculation hooks were moved to `alg_wc_cog_new_order_hooks_for_cost_update` option, and some previous users had the option set without some important hooks.
+	 *
+	 * @version 3.4.3
+	 * @since   3.4.3
+	 *
+	 * @todo    : Remove it sometime in the future, when all users have the 'alg_wc_cog_new_order_hooks_for_cost_update' option set properly.
+	 *
+	 * @return void
+	 */
+	function fix_calculation_hooks_default_option() {
+		if ( 'yes' !== get_option( 'alg_wc_cog_calculation_hooks_reset', 'no' ) ) {
+			update_option( 'alg_wc_cog_calculation_hooks_reset', 'yes' );
+			delete_option( 'alg_wc_cog_new_order_hooks_for_cost_update' );
+		}
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.3.5
+ * @version 3.4.3
  * @since   3.0.3
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '3.4.2';
+		public $version = '3.4.3';
 
 		/**
 		 * @since 1.0.0
@@ -102,20 +102,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 				}
 			} );
 
-			// Pro
+			// Pro.
 			if ( 'cost-of-goods-for-woocommerce-pro.php' === basename( $this->get_filesystem_path() ) ) {
 				$this->pro = require_once( 'pro/class-alg-wc-cog-pro.php' );
 			}
 
-			// Include required files
+			// Include required files.
 			$this->includes();
 
-			// Admin
+			// Admin.
 			if ( is_admin() ) {
 				$this->admin();
 			}
 
-			// Generate documentation
+			// Generate documentation.
 			add_filter( 'wpfpdh_documentation_params_' . plugin_basename( $this->get_filesystem_path() ), array(
 				$this,
 				'handle_documentation_params'
@@ -189,14 +189,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since   1.1.0
 		 */
 		function admin() {
-			// Action links
+			// Action links.
 			add_filter( 'plugin_action_links_' . plugin_basename( $this->get_filesystem_path() ), array(
 				$this,
 				'action_links'
 			) );
-			// Settings
+			// Settings.
 			add_filter( 'woocommerce_get_settings_pages', array( $this, 'add_woocommerce_settings_tab' ) );
-			// Version update
+			// Version update.
 			if ( get_option( 'alg_wc_cog_version', '' ) !== $this->version ) {
 				add_action( 'admin_init', array( $this, 'version_updated' ) );
 			}
@@ -243,10 +243,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		/**
 		 * version_updated.
 		 *
-		 * @version 1.1.0
+		 * @version 3.4.3
 		 * @since   1.1.0
 		 */
 		function version_updated() {
+			do_action( 'alg_wc_cog_on_update', $this->version, get_option( 'alg_wc_cog_version', '' ) );
 			update_option( 'alg_wc_cog_version', $this->version );
 		}
 
