@@ -137,6 +137,14 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 				'type'          => 'checkbox',
 			),
 			array(
+				'title'         => __( 'Infinite loops', 'cost-of-goods-for-woocommerce' ),
+				'desc'          => __( 'Avoid infinite loops', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'      => sprintf( __( 'You can try to disable it if you\'re experiencing bug %s.', 'cost-of-goods-for-woocommerce' ), sprintf( '<a target="_blank" href="%s">#40393</a>', 'https://core.trac.wordpress.org/ticket/40393' ) ),
+				'id'            => 'alg_wc_cog_avoid_infinite_loops',
+				'default'       => 'yes',
+				'type'          => 'checkbox',
+			),
+			array(
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_advanced_options',
 			),

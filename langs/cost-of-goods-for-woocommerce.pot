@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.4.3\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.4.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-06-03T22:36:08+02:00\n"
+"POT-Creation-Date: 2024-06-04T21:26:53+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -281,7 +281,7 @@ msgid "Shipping to profit (%s)"
 msgstr ""
 
 #: includes/class-alg-wc-cog-orders.php:754
-#: includes/class-alg-wc-cog-orders.php:1193
+#: includes/class-alg-wc-cog-orders.php:1198
 #: includes/pro/class-alg-wc-cog-pro.php:638
 #: includes/pro/class-alg-wc-cog-pro.php:657
 msgid "Cost of goods"
@@ -297,7 +297,7 @@ msgstr ""
 msgid "Profit margin"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:1229
+#: includes/class-alg-wc-cog-orders.php:1234
 msgid "Handling Fee"
 msgstr ""
 
@@ -780,71 +780,83 @@ msgstr ""
 msgid "Avoid empty order metadata from being saved to database"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:147
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:140
+msgid "Infinite loops"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:141
+msgid "Avoid infinite loops"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:142
+msgid "You can try to disable it if you're experiencing bug %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:155
 msgid "Columns sorting"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:152
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:160
 msgid "Sortable columns"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:153
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:161
 #: includes/settings/class-alg-wc-cog-settings-orders.php:121
 #: includes/settings/class-alg-wc-cog-settings-orders.php:136
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:131
 msgid "Enable"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:154
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:162
 msgid "Makes columns added to admin %s and %s lists <strong>sortable</strong>."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:155
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:163
 msgid "products"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:156
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:164
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:181
 msgid "orders"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:163
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:171
 msgid "Exclude empty lines on sorting"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:177
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:185
 msgid "Background processing"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:182
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:190
 msgid "Minimum amount"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:183
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:191
 msgid "The minimum amount of results from a query in order to trigger a background processing."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:183
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:191
 msgid "Only affects \"Import Costs\" tool and \"Order cost and profit Recalculation\" for the time being."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:189
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:197
 msgid "Send email"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:190
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:198
 msgid "Send an email when a background processing is complete"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:196
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:204
 msgid "Email to"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:197
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:205
 msgid "The email address that is going to receive the email when a background processing task is complete."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:197
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:205
 msgid "Requires the \"Send email\" option enabled in order to work."
 msgstr ""
 

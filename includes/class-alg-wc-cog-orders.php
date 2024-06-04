@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.4.3
+ * @version 3.4.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1019,11 +1019,16 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * save_cost_input_shop_order_save_post.
 	 *
-	 * @version 3.4.3
+	 * @version 3.4.4
 	 * @since   1.1.0
 	 */
 	function save_cost_input_shop_order_save_post( $post_id, $post ) {
 		if ( in_array( current_filter(), get_option( 'alg_wc_cog_new_order_hooks_for_cost_update', array_keys( $this->get_new_order_hooks_for_cost_updating() ) ) ) ) {
+			if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_avoid_infinite_loops', 'yes' ) ) {
+				remove_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
+				remove_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
+			}
+
 			$this->update_order_items_costs( array(
 				'order_id'     => $post_id,
 				'is_new_order' => false,
