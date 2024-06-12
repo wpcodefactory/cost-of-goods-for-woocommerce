@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 3.3.2
+ * @version 3.4.5
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -221,7 +221,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		/**
 		 * get_tags_edit_field.
 		 *
-		 * @version 2.7.8
+		 * @version 3.4.5
 		 * @since   2.7.8
 		 *
 		 * @param $post_id
@@ -230,7 +230,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		 */
 		function get_tags_edit_field( $post_id ) {
 			ob_start();
-			echo '<select data-return_id="id" class="wc-tag-search" multiple="multiple" style="width: 50%;" id="alg_wc_cog_bulk_edit_tool_product_tag" name="alg_wc_cog_bulk_edit_tool_product_tag[' . esc_attr( $post_id ) . '][]" data-placeholder="' . esc_attr( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ) . '" data-action="json_search_tags">';
+			echo '<select data-return_id="id" class="wc-taxonomy-term-search" multiple="multiple" style="width: 50%;" id="alg_wc_cog_bulk_edit_tool_product_tag" name="alg_wc_cog_bulk_edit_tool_product_tag[' . esc_attr( $post_id ) . '][]" data-placeholder="' . esc_attr( __( 'Search for a tag&hellip;', 'cost-of-goods-for-woocommerce' ) ) . '" data-taxonomy="product_tag" data-action="json_search_tags">';
 			$term_list = wp_get_post_terms( $post_id, 'product_tag', array( 'fields' => 'all' ) );
 			foreach ( $term_list as $term ) {
 				echo '<option value="' . esc_attr( $term->term_id ) . '"' . selected( true, true, false ) . '>' . esc_html( wp_strip_all_tags( $term->name ) ) . '</option>';

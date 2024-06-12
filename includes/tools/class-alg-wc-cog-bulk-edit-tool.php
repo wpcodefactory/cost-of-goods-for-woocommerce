@@ -1222,7 +1222,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 */
 		function get_current_tab( $arg = '' ) {
 			$nav_sections = $this->get_tab_nav_items();
-			//error_log(print_r($nav_sections,true));
 			$tab = isset( $_GET['tab'] ) ? rawurlencode( sanitize_text_field( $_GET['tab'] ) ) : key( $nav_sections );
 
 			if ( $arg === 'id' ) {
