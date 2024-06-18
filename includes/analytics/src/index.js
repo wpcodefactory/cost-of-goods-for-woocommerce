@@ -1,7 +1,7 @@
 /**
  * Analytics.
  *
- * @version 2.5.5
+ * @version 3.4.6
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -25,3 +25,7 @@ products.init();
 // Categories.
 import categories from './modules/categories';
 categories.init();
+
+// Customers.
+import customers from './modules/customers';
+customers.init();

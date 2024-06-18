@@ -18,7 +18,7 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	 *
 	 * @since 2.9.4
 	 *
-	 * @var mixed Alg_WC_Cost_of_Goods_Analytics_Orders
+	 * @var Alg_WC_Cost_of_Goods_Analytics_Orders
 	 */
 	public $orders;
 
@@ -46,6 +46,9 @@ class Alg_WC_Cost_of_Goods_Analytics {
 
 		// Analytics > Products.
 		require_once('class-alg-wc-cog-analytics-categories.php');
+
+		// WooCommerce > Customers.
+		require_once('class-alg-wc-cog-analytics-customers.php');
 	}
 
 	/**

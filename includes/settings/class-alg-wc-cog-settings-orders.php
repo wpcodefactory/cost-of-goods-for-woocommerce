@@ -337,7 +337,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 					sprintf(
 						__( "It's necessary to add the %s status on %s option in order to see refunded orders on reports.", 'cost-of-goods-for-woocommerce' ),
 						'<strong>' . __( 'Refunded', 'cost-of-goods-for-woocommerce' ) . '</strong>',
-						'<strong>' . __( 'Tools & reports > Orders report: Order status', 'cost-of-goods-for-woocommerce' ) . '</strong>'
+						'<strong>' . __( 'Tools > Orders report: Order status', 'cost-of-goods-for-woocommerce' ) . '</strong>'
 					) . '<br />' .
 					sprintf(
 						__( "Enable %s options to automatically calculate refund costs.", 'cost-of-goods-for-woocommerce' ),

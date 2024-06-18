@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Orders.
  *
- * @version 3.0.2
+ * @version 3.4.6
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -167,7 +167,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_costs_select_orders_stats_total.
 		 *
-		 * @version 2.4.8
+		 * @version 3.4.6
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -176,10 +176,41 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 */
 		function add_costs_select_orders_stats_total( $clauses ) {
 			if ( apply_filters( 'alg_wc_cog_analytics_orders_costs_total_validation', false ) ) {
-				$clauses[] = ', SUM(order_cost_postmeta.meta_value) AS costs_total';
+				$clauses[] = $this->get_order_costs_total_meta_select_clauses();
 			}
 			// If we need to convert the currency
 			//$clauses[] = ', SUM(order_cost_postmeta.meta_value * COALESCE(NULLIF(REGEXP_REPLACE(REGEXP_SUBSTR(wpo.option_value, CONCAT(\'"\',\'USD\',currency_postmeta.meta_value,\'"\',\';(s|d):.+?:".*?(?=";)\')), CONCAT(\'"\',\'USD\',currency_postmeta.meta_value,\'"\',\';(s|d):.+?:"\'),\'\'),\'\'),1)) as costs_total';
+
+			return $clauses;
+		}
+
+		/**
+		 * get_order_costs_total_select_clauses.
+		 *
+		 * @version 3.4.6
+		 * @since   3.4.6
+		 *
+		 * @return string
+		 */
+		function get_order_costs_total_meta_select_clauses() {
+			return ', SUM(order_cost_postmeta.meta_value) AS costs_total';
+		}
+
+		/**
+		 * get_order_cost_meta_join_clauses.
+		 *
+		 * @version 3.4.6
+		 * @since   3.4.6
+		 *
+		 * @return string
+		 */
+		function get_order_cost_meta_join_clauses() {
+			global $wpdb;
+			if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+				$clauses = "LEFT JOIN {$wpdb->prefix}wc_orders_meta order_cost_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_cost_postmeta.order_id AND order_cost_postmeta.meta_key = '_alg_wc_cog_order_cost'";
+			} else {
+				$clauses = "LEFT JOIN {$wpdb->postmeta} order_cost_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_cost_postmeta.post_id AND order_cost_postmeta.meta_key = '_alg_wc_cog_order_cost'";
+			}
 
 			return $clauses;
 		}
@@ -246,7 +277,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_costs_join_orders.
 		 *
-		 * @version 3.0.2
+		 * @version 3.4.6
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -255,11 +286,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 */
 		function add_costs_join_orders( $clauses ) {
 			global $wpdb;
-			if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
-				$clauses[] = "LEFT JOIN {$wpdb->prefix}wc_orders_meta order_cost_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_cost_postmeta.order_id AND order_cost_postmeta.meta_key = '_alg_wc_cog_order_cost'";
-			} else {
-				$clauses[] = "LEFT JOIN {$wpdb->postmeta} order_cost_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_cost_postmeta.post_id AND order_cost_postmeta.meta_key = '_alg_wc_cog_order_cost'";
-			}
+			$clauses[] = $this->get_order_cost_meta_join_clauses();
 
 			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
 				if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
@@ -303,7 +330,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_profit_select_orders_stats_total.
 		 *
-		 * @version 2.4.1
+		 * @version 3.4.6
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -312,7 +339,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 */
 		function add_profit_select_orders_stats_total( $clauses ) {
 			if ( apply_filters( 'alg_wc_cog_analytics_orders_profit_total_validation', false ) ) {
-				$clauses[] = ', SUM(order_profit_postmeta.meta_value) AS profit_total';
+				$clauses[] = $this->get_order_profit_total_meta_select_clauses();
 			}
 
 			/*if ( 'yes' !== get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' ) ) {
@@ -343,9 +370,40 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		}
 
 		/**
+		 * get_order_costs_total_select_clauses.
+		 *
+		 * @version 3.4.6
+		 * @since   3.4.6
+		 *
+		 * @return string
+		 */
+		function get_order_profit_total_meta_select_clauses() {
+			return ', SUM(order_profit_postmeta.meta_value) AS profit_total';
+		}
+
+		/**
+		 * get_order_cost_meta_join_clauses.
+		 *
+		 * @version 3.4.6
+		 * @since   3.4.6
+		 *
+		 * @return string
+		 */
+		function get_order_profit_meta_join_clauses() {
+			global $wpdb;
+			if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+				$clauses = "LEFT JOIN {$wpdb->prefix}wc_orders_meta order_profit_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_profit_postmeta.order_id AND order_profit_postmeta.meta_key = '_alg_wc_cog_order_profit'";
+			} else {
+				$clauses = "LEFT JOIN {$wpdb->postmeta} order_profit_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_profit_postmeta.post_id AND order_profit_postmeta.meta_key = '_alg_wc_cog_order_profit'";
+			}
+
+			return $clauses;
+		}
+
+		/**
 		 * add_profit_join_orders.
 		 *
-		 * @version 3.0.2
+		 * @version 3.4.6
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -353,12 +411,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return array
 		 */
 		function add_profit_join_orders( $clauses ) {
-			global $wpdb;
-			if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
-				$clauses[] = "LEFT JOIN {$wpdb->prefix}wc_orders_meta order_profit_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_profit_postmeta.order_id AND order_profit_postmeta.meta_key = '_alg_wc_cog_order_profit'";
-			} else {
-				$clauses[] = "LEFT JOIN {$wpdb->postmeta} order_profit_postmeta ON {$wpdb->prefix}wc_order_stats.order_id = order_profit_postmeta.post_id AND order_profit_postmeta.meta_key = '_alg_wc_cog_order_profit'";
-			}
+			$clauses[] = $this->get_order_profit_meta_join_clauses();
 
 			return $clauses;
 		}

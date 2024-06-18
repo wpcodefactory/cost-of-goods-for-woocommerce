@@ -26,11 +26,11 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	 *
 	 * @version 1.7.0
 	 * @since   1.4.0
-	 * @see     "WooCommerce > Settings > Cost of Goods > Tools & Reports"
+	 * @see     "WooCommerce > Settings > Cost of Goods > Tools"
 	 */
 	function __construct() {
 		$this->id   = 'tools';
-		$this->desc = __( 'Tools & Reports', 'cost-of-goods-for-woocommerce' );
+		$this->desc = __( 'Tools', 'cost-of-goods-for-woocommerce' );
 		parent::__construct();
 	}
 
@@ -158,8 +158,8 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			array(
 				'title' => __( 'Product Import Costs Tool', 'cost-of-goods-for-woocommerce' ),
 				'type'  => 'title',
-				'desc'  => __( 'A tool created with the purpose of importing the cost meta from another plugin by replacing the cost meta.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
-				           __( 'If you wish, you can use it on the opposite way by swapping the from and to keys.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'You can also use it with any other metas.', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				'desc'  => __( 'A tool created with the purpose of importing the cost meta from another plugin by replacing the cost meta.', 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
+				           __( 'If you wish, you can use it on the opposite way by swapping the from and to keys.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'You can also use it with any other metas.', 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
 				           sprintf( __( 'You can find the Import tool at %s.', 'cost-of-goods-for-woocommerce' ),
 					           '<a href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Tools > Import Costs', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 				'id'    => 'alg_wc_cog_import_tool_options',
@@ -310,7 +310,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			),
 		);
 
-		$reports_settings = array(
+		/*$reports_settings = array(
 			array(
 				'title'    => __( 'Reports', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
@@ -390,138 +390,16 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'type'     => 'sectionend',
 				'id'       => 'alg_wc_cog_reports_options',
 			),
-		);
+		);*/
 
-		$analytics_settings = array(
-			array(
-				'title' => __( 'Analytics', 'cost-of-goods-for-woocommerce' ),
-				'desc'  => sprintf( __( 'Options related to <a href="%s">WooCommerce Analytics</a>.', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wc-admin&path=/analytics/overview' ) ) . '<br />' .
-				           sprintf( __( 'If you can\'t see the values refreshed or have issues with the analytics page, please try to <a href="%s">clear analytics cache</a>.', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wc-status&tab=tools' ) ),
-				'type'  => 'title',
-				'id'    => 'alg_wc_cog_analytics_orders_options',
-			),
-			array(
-				'title'    => __( 'Orders tab', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_analytics_orders',
-				'default'  => 'no',
-				'type'     => 'checkbox',
-				'checkboxgroup'=>'start'
-			),
-			array(
-				'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_analytics_orders_cost_profit_totals',
-				'default'           => 'no',
-				'type'              => 'checkbox',
-				'checkboxgroup'     => '',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-			),
-			array(
-				'desc'              => __( 'Add columns for individual elements from the costs total', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip'          => __( 'Adds items, shipping, gateway, shipping classes and extra costs.', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_analytics_orders_individual_costs',
-				'default'           => 'no',
-				'type'              => 'checkbox',
-				'checkboxgroup'     => 'end',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-			),
-			array(
-				'title'             => __( 'Products tab', 'cost-of-goods-for-woocommerce' ),
-				'desc'              => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_cost_and_profit_column_on_products_tab',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'default'           => 'no',
-				'type'              => 'checkbox',
-				'checkboxgroup'     => 'start'
-			),
-			array(
-				'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_cost_and_profit_totals_on_products_tab',
-				'default'           => 'no',
-				'type'              => 'checkbox',
-				'checkboxgroup'     => 'end',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-			),
-			array(
-				'title'             => __( 'Categories tab', 'cost-of-goods-for-woocommerce' ),
-				'desc'              => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_cost_and_profit_column_on_categories_tab',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'default'           => 'no',
-				'type'              => 'checkbox',
-				'checkboxgroup'     => 'start'
-			),
-			array(
-				'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_cost_and_profit_totals_on_categories_tab',
-				'default'           => 'no',
-				'type'              => 'checkbox',
-				'checkboxgroup'     => 'end',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-			),
-			array(
-				'title'             => __( 'Revenue tab', 'cost-of-goods-for-woocommerce' ),
-				'desc'              => __( 'Add "Cost" and "Profit" totals columns', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_cost_and_profit_column_on_analytics_revenue',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'default'           => 'no',
-				'type'              => 'checkbox',
-				'checkboxgroup'     => 'start'
-			),
-			array(
-				'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_cost_and_profit_totals_on_analytics_revenue',
-				'default'           => 'no',
-				'type'              => 'checkbox',
-				'checkboxgroup'     => 'end',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-			),
-			array(
-				'title'             => __( 'Stock tab', 'cost-of-goods-for-woocommerce' ),
-				'desc'              => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_cost_and_profit_enabled_on_analytics_stock',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'default'           => 'no',
-				'checkboxgroup'     => 'start',
-				'type'              => 'checkbox',
-			),
-			array(
-				'desc'              => __( 'Take stock into consideration for cost and profit calculation', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_analytics_stock_considers_stock',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'default'           => 'yes',
-				'checkboxgroup'     => '',
-				'type'              => 'checkbox',
-			),
-			array(
-				'desc'              => __( 'Add "Category" column', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_category_enabled_on_analytics_stock',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'default'           => 'no',
-				'checkboxgroup'     => '',
-				'type'              => 'checkbox',
-			),
-			array(
-				'desc'              => __( 'Add filter allowing to restrict the query', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip'          => __( 'For now, it allows to get only products with costs.', 'cost-of-goods-for-woocommerce' ),
-				'id'                => 'alg_wc_cog_filter_enabled_on_analytics_stock',
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-				'default'           => 'no',
-				'checkboxgroup'     => 'end',
-				'type'              => 'checkbox',
-			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_analytics_orders_options',
-			),
-		);
+
 
 		return array_merge(
 			$bulk_edit_costs_opts,
 			$import_tools_opts,
 			$order_tools_opts,
-			$reports_settings,
-			$analytics_settings
+			//$reports_settings,
+			//$analytics_settings
 		);
 	}
 

@@ -344,6 +344,11 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 
 == Changelog ==
 
+= 3.4.6 - 18/06/2024 =
+* Change - Report options removed, since the old WooCommerce reports doesn't work anymore.
+* Change - Analytics settings moved to its own section.
+* Dev - Analytics - Created a new option to add cost and profit columns for the admin page "WooCommerce > Customers".
+
 = 3.4.5 - 12/06/2024 =
 * Fix - Tools - Bulk edit costs - "Edit tags manually" does not work.
 * Fix - Tools - Bulk edit costs - String missing translation.

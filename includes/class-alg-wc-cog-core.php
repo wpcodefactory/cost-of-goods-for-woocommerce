@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Core Class.
  *
- * @version 3.3.7
+ * @version 3.4.6
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -88,6 +88,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		public $options;
 
 		/**
+		 * Analytics.
+		 *
+		 * @since 3.4.6
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Analytics
+		 */
+		public $analytics;
+
+		/**
 		 * Constructor.
 		 *
 		 * @version 3.3.7
@@ -113,7 +122,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 			// Background process.
 			$this->init_bkg_process();
 			// Analytics.
-			require_once( 'analytics/class-alg-wc-cog-analytics.php' );
+			$this->analytics = require_once( 'analytics/class-alg-wc-cog-analytics.php' );
 			// Import tool.
 			$this->import_tool = require_once( 'tools/class-alg-wc-cog-import-tool.php' );
 			// Products.
