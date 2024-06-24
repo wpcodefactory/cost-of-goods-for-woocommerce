@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.5
-Stable tag: 3.4.5
+Stable tag: 3.4.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,10 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.4.7 - 24/06/2024 =
+* Fix - Removed 'woocommerce_bookings_after_display_cost' so it does not conflict with the WooCommerce Bookings.
+* Dev - WC tested up to: 9.0.
 
 = 3.4.6 - 18/06/2024 =
 * Change - Report options removed, since the old WooCommerce reports doesn't work anymore.
