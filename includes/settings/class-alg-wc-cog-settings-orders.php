@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings.
  *
- * @version 3.2.7
+ * @version 3.4.8
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.2.7
+	 * @version 3.4.8
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -334,36 +334,38 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			array(
 				'title' => __( 'Refunds', 'cost-of-goods-for-woocommerce' ),
 				'desc'  =>
+					__( "Set up how refunds will affect the cost and profit.", 'cost-of-goods-for-woocommerce' ) . ' ' .
 					sprintf(
-						__( "It's necessary to add the %s status on %s option in order to see refunded orders on reports.", 'cost-of-goods-for-woocommerce' ),
-						'<strong>' . __( 'Refunded', 'cost-of-goods-for-woocommerce' ) . '</strong>',
-						'<strong>' . __( 'Tools > Orders report: Order status', 'cost-of-goods-for-woocommerce' ) . '</strong>'
-					) . '<br />' .
-					sprintf(
-						__( "Enable %s options to automatically calculate refund costs.", 'cost-of-goods-for-woocommerce' ),
-						'<strong>' . __( 'Advanced > Force costs update', 'cost-of-goods-for-woocommerce' ) . '</strong>'
-					) . '<br />' .
-					__( "It's necessary to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
+						__( "Most probably, enabling the options %s and %s should be enough in order to ignore refunded items from profit calculation.", 'cost-of-goods-for-woocommerce' ),
+						'<strong>' . __( 'Ignore refunded item cost', 'cost-of-goods-for-woocommerce' ) . '</strong>',
+						'<strong>' . __( 'Ignore item refund amount', 'cost-of-goods-for-woocommerce' ) . '</strong>'
+					) . '<br /><br />' .
+					sprintf( __( "It's necessary to manually update the order after a refund. If you change these settings you can use our %s to update the orders. ", 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=tools' ) . '">' . __( 'Orders Recalculation Tool' ) . '</a>' ),
 				'type'  => 'title',
 				'id'    => 'alg_wc_cog_refund_options',
 			),
 			array(
-				'title'    => __( 'Item quantity', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'Calculate quantity by excluding refunded items', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'This will affect both the profit and the cost.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_calculate_qty_excluding_refunds',
-				'default'  => 'no',
-				'type'     => 'checkbox',
+				'title'   => __( 'Item cost', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Ignore refunded item cost', 'cost-of-goods-for-woocommerce' ),
+				'id'      => 'alg_wc_cog_calculate_qty_excluding_refunds',
+				'default' => 'no',
+				'type'    => 'checkbox',
 			),
 			array(
-				'title'    => __( 'Refund calculation', 'cost-of-goods-for-woocommerce' ),
+				'title'   => __( 'Item total', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Ignore item refund amount', 'cost-of-goods-for-woocommerce' ),
+				'id'      => 'alg_wc_cog_ignore_item_refund_amount',
+				'default' => alg_wc_cog_get_ignore_item_refund_amount_default(),
+				'type'    => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Profit calculation', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_refund_calculation_method',
 				'default'  => 'ignore_refunds',
 				'type'     => 'radio',
 				'options'  => array(
-					'ignore_refunds'                                 => __( 'Profit ignore refunds', 'cost-of-goods-for-woocommerce' ),
+					'ignore_refunds'                                 => __( 'Use default profit calculation mechanism', 'cost-of-goods-for-woocommerce' ),
 					'profit_based_on_total_refunded'                 => __( 'Subtract total refunded from profit', 'cost-of-goods-for-woocommerce' ),
-					'profit_and_price_based_on_item_refunded_amount' => __( 'Subtract each item\'s refund amount from profit', 'cost-of-goods-for-woocommerce' ),
 					'profit_by_netpayment_and_cost_difference'       => __( 'Calculate profit by the difference between Net Payment and Cost', 'cost-of-goods-for-woocommerce' ),
 				)
 			),

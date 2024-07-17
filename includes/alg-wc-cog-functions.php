@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 3.3.7
+ * @version 3.4.8
  * @since   3.2.1
  * @author  WPFactory
  */
@@ -468,5 +468,20 @@ if ( ! function_exists( 'alg_wc_cog_get_option' ) ) {
 	 */
 	function alg_wc_cog_get_option( $option, $default_value = false, $get_value_from_cache = true ) {
 		return alg_wc_cog()->core->options->get_option( $option, $default_value, $get_value_from_cache );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_get_ignore_item_refund_amount_default' ) ) {
+	/**
+	 * alg_wc_cog_get_option.
+	 *
+	 * @version 3.4.8
+	 * @since   3.4.8
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_get_ignore_item_refund_amount_default() {
+		$order_refund_calculation_method = alg_wc_cog_get_option( 'alg_wc_cog_order_refund_calculation_method', 'ignore_refunds' );
+		return 'profit_and_price_based_on_item_refunded_amount' === $order_refund_calculation_method ? 'yes' : 'no';
 	}
 }

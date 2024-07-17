@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.4.4
+ * @version 3.4.8
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1281,7 +1281,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.3.3
+	 * @version 3.4.8
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1325,7 +1325,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$shipping_class_cost_fixed_total   = 0;
 		$shipping_class_cost_percent_total = 0;
 		$shipping_classes_cost_total       = 0;
-		// Calculate quantity ignoring refunded items
+		// Calculate quantity ignoring refunded items.
 		$calculate_qty_excluding_refunds = 'yes' === get_option( 'alg_wc_cog_calculate_qty_excluding_refunds', 'no' );
 		// Order items
 		$items_cost         = 0;
@@ -1347,8 +1347,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$per_order_fees = 0;
 		// Fees: Order extra cost: from meta (e.g. PayPal, Stripe etc.)
 		$meta_fees = 0;
-		// Refund calculation
-		$refund_calc_method = get_option( 'alg_wc_cog_order_refund_calculation_method', 'ignore_refunds' );
+		// Refund calculation.
+		$refund_profit_calc_method = get_option( 'alg_wc_cog_order_refund_calculation_method', 'ignore_refunds' );
+		$ignore_item_refund_amount = 'yes' === get_option( 'alg_wc_cog_ignore_item_refund_amount', alg_wc_cog_get_ignore_item_refund_amount_default() );
 		// Totals
 		$profit               = 0;
 		$total_cost           = 0;
@@ -1411,7 +1412,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$handling_fee = '0';
 				}
 				// calculate total profit, cost, handling fee per order items.
-				$quantity = $calculate_qty_excluding_refunds ? $item->get_quantity() + $order->get_qty_refunded_for_item( $item_id ) : $item->get_quantity();
+				$quantity = $calculate_qty_excluding_refunds ? $item->get_quantity() - abs( $order->get_qty_refunded_for_item( $item_id ) ) : $item->get_quantity();
 				if ( '' !== $cost || '' !== $handling_fee ) {
 					$cost = alg_wc_cog_sanitize_number( array(
 						'value'                    => $cost,
@@ -1420,7 +1421,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 					$cost            = (float) $cost;
 					$line_cost       = $cost * $quantity;
 					$item_line_total = $item['line_total'];
-					if ( 'profit_and_price_based_on_item_refunded_amount' === $refund_calc_method ) {
+					if ( $ignore_item_refund_amount ) {
 						$item_line_total -= $order->get_total_refunded_for_item( $item_id );
 					}
 					$line_total  = apply_filters( 'alg_wc_cog_order_line_total', $item_line_total, $order );
@@ -1629,9 +1630,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 			}
 			// Readjust profit on refunded orders
 			if ( $order_total_refunded > 0 ) {
-				if ( 'profit_based_on_total_refunded' === $refund_calc_method ) {
+				if ( 'profit_based_on_total_refunded' === $refund_profit_calc_method ) {
 					$profit -= $order_total_refunded;
-				} elseif ( 'profit_by_netpayment_and_cost_difference' === $refund_calc_method ) {
+				} elseif ( 'profit_by_netpayment_and_cost_difference' === $refund_profit_calc_method ) {
 					$the_total   = $order->get_total();
 					$tax_percent = $the_total > 0 ? 1 - ( $order->get_total_tax() / $the_total ) : 1;
 					$net_payment = apply_filters( 'alg_wc_cog_order_net_payment', $order->get_total() - $order_total_refunded );
