@@ -63,6 +63,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			}
 			if (
 				$post &&
+				'product' === $post_type &&
 				! is_a( $post, '\Automattic\WooCommerce\Admin\Overrides\Order' ) &&
 				is_a( $product = wc_get_product( $post->ID ), 'WC_Product' ) &&
 				$this->is_add_stock_enabled() &&

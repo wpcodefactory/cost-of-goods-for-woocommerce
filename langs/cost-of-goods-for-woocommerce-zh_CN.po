@@ -1,111 +1,94 @@
-# Translation of Plugins - Cost of Goods for WooCommerce - Stable (latest release) in Chinese (China)
-# This file is distributed under the same license as the Plugins - Cost of Goods for WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2021-08-19 11:03-0300\n"
+"Project-Id-Version: Plugins - Cost of Goods for WooCommerce - Stable (latest release)\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2021-08-19 11:03-0300\n"
+"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 2.1.1\n"
-"Language: zh_CN\n"
-"Project-Id-Version: Plugins - Cost of Goods for WooCommerce - Stable (latest release)\n"
-"POT-Creation-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:138
+#: includes/settings/class-alg-wc-cog-settings-tools.php:205
 msgid "Display a table at the import page"
 msgstr "在导入页面以表格形式显示"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:136
-msgid "Table"
-msgstr "表格"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:131
+#: includes/settings/class-alg-wc-cog-settings-tools.php:190
 msgid "Replace the meta value only if the from key value is not empty, null or zero"
 msgstr "只要 from 键值不为空、null 或 0，即替换 To 键值"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:124
+#: includes/settings/class-alg-wc-cog-settings-tools.php:183
 msgid "Replace the meta value only if the from key exists"
 msgstr "只要 from 键存在，即替换 To 键值"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:116
+#: includes/settings/class-alg-wc-cog-settings-tools.php:175
 msgid "Meta key replaced"
 msgstr "将此键替换（To）"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:104
+#: includes/settings/class-alg-wc-cog-settings-tools.php:163
 msgid "You can find the Import tool at %s."
 msgstr "你可以在此找到导入成本工具：%s。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:103
+#: includes/settings/class-alg-wc-cog-settings-tools.php:162
 msgid "You can also use it with any other metas."
 msgstr "你也可以将其用于处理其他任何自定义字段。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:103
+#: includes/settings/class-alg-wc-cog-settings-tools.php:162
 msgid "If you wish, you can use it on the opposite way by swapping the from and to keys."
 msgstr "如果你愿意，可以通过改变 from 和 to 键以相反的方式使用此工具。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:102
+#: includes/settings/class-alg-wc-cog-settings-tools.php:161
 msgid "A tool created with the purpose of importing the cost meta from another plugin by replacing the cost meta."
 msgstr "创建此工具的目的是为了便于导入其他插件的成本。"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:38
-msgid "Compatibility with third party plugins or solutions."
-msgstr "设置与第三方插件或解决方案的兼容性。"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:37
-msgid "Compatibility options"
-msgstr "兼容设置"
-
 #: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/stock.js:32
+#: includes/analytics/src/modules/stock.js:35
 msgid "Products with cost"
 msgstr "有成本的产品"
 
 #: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/stock.js:31
+#: includes/analytics/src/modules/stock.js:34
 msgid "Disabled"
 msgstr "已停用"
 
 #: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/stock.js:26
+#: includes/analytics/src/modules/stock.js:29
 msgid "Cost of Goods filter"
 msgstr "Cost of Goods 过滤器"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:309
-msgid "For now, allows to get only products with costs."
-msgstr "目前只允许获取已设置成本的产品。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:308
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:230
 msgid "Add filter allowing to restrict the query"
 msgstr "增加筛选器，并允许其限制查询"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:300
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:222
 msgid "Add \"Category\" column"
 msgstr "增加 “分类” 列"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:269
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:42
 msgid "Options related to <a href=\"%s\">WooCommerce Analytics</a>."
 msgstr "此选项与 <a href=\"%s\">WooCommerce Analytics</a> 插件相关。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:157
+#: includes/settings/class-alg-wc-cog-settings-products.php:68
 msgid "Get price excluding or including tax."
 msgstr "获取含税或不含税售价。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:136
+#: includes/settings/class-alg-wc-cog-settings-products.php:53
 msgid "Customizes how the profit will be displayed."
 msgstr "自定义利润显示方式。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:103
+#: includes/settings/class-alg-wc-cog-settings-products.php:99
 msgid "Customizes the cost field input label added to admin product pages."
 msgstr "自定义添加到后台产品页面的成本输入区域标签"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:77
+#: includes/settings/class-alg-wc-cog-settings-products.php:170
 msgid "Customize the product profit column width"
 msgstr "自定义产品利润列宽度"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:60
+#: includes/settings/class-alg-wc-cog-settings-products.php:153
 msgid "Customize the product cost column width"
 msgstr "自定义产品成本列宽度"
 
@@ -113,40 +96,28 @@ msgstr "自定义产品成本列宽度"
 msgid "Adds handling fees inputs for each order item to admin order edit page."
 msgstr "为后台订单编辑页面中的每个单品增加手续费输入框。"
 
-#: includes/class-alg-wc-cog-orders.php:606
+#: includes/class-alg-wc-cog-orders.php:1234
 msgid "Handling Fee"
 msgstr "手续费"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:81
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:163
 #: includes/settings/class-alg-wc-cog-settings-orders.php:128
 msgid "Item handling fees"
 msgstr "单品手续费"
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:82
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:286
 #: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/stock.js:73
+#: includes/analytics/src/modules/stock.js:76
 msgid "Category"
 msgstr "分类"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:85
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:167
 msgid "Shipping class fee (percent)"
 msgstr "配送类型费（百分比）"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:84
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:166
 msgid "Shipping class fee (fixed)"
 msgstr "配送类型费（固定）"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:322
-msgid "This will affect both the profit and the cost."
-msgstr "这将同时影响成本和利润。"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:321
-msgid "Calculate quantity by excluding refunded items"
-msgstr "通过排除已退款项目，计算项目数量"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:320
-msgid "Item quantity"
-msgstr "项目数量"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:84
 msgid "Add profit margin column"
@@ -164,14 +135,6 @@ msgstr "增加利润列"
 msgid "Add cost column"
 msgstr "增加成本列"
 
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:78
-msgid "Percent from product total."
-msgstr "产品总额的百分比。"
-
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:39
-msgid "Here you can add extra costs for your orders based on product's shipping classes."
-msgstr "此部分可以基于产品配送类型增加额外成本。"
-
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:38
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:45
 msgid "Extra shipping classes costs"
@@ -181,616 +144,422 @@ msgstr "额外配送类型成本"
 msgid "Shipping classes"
 msgstr "配送类型"
 
-#: includes/settings/class-alg-wc-settings-cog.php:60
+#: includes/settings/class-alg-wc-settings-cog.php:84
 msgid "Disabled options can be unlocked using <a href=\"%pro_version_url%\" target=\"_blank\"><strong>%pro_version_title%</strong></a>"
 msgstr "升级到 <a href=\"%pro_version_url%\" target=\"_blank\"><strong>%pro_version_title%</strong></a>，立即解锁当前禁用选项"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:108
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:355
 msgid "It's also necessary that addons do not change names once purchased."
 msgstr "也请务必不要修改插件原本名称。"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:107
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:354
 msgid "Orders > Extra Costs: From Meta"
 msgstr "订单 > 额外费用：源自字段 Meta"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:107
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:354
 msgid "It's necessary to add %s on %s option."
 msgstr "有必要添加 %s 到 %s 选项中。"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:106
-msgid "Adds costs fields for the addons and creates an order meta with addons costs."
-msgstr "为插件增加成本区域，并创建含有插件成本的订单字段。"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:105
-msgid "Product Add-Ons"
-msgstr "Product Add-Ons"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:104
-msgid "Enable compatibility with <a target=\"_blank\" href=\"%s\">%s</a> by WooCommerce"
-msgstr "启用 WooCommerce <a target=\"_blank\" href=\"%s\">%s</a> 插件兼容"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:102
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:346
 msgid "Product Addons"
 msgstr "Product Addons"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:220
-msgid "Shipping classes fees (percent)"
-msgstr "配送类型费（百分比）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:219
-msgid "Shipping classes fees (fixed)"
-msgstr "配送类型费（固定）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:218
-msgid "Shipping classes fees (all)"
-msgstr "配送类型费（全部）"
-
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:140
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:434
+#: includes/settings/class-alg-wc-cog-settings-tools.php:59
 msgid "Next event scheduled to %s"
 msgstr "下一个事件安排在 %s"
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:136
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:430
+#: includes/settings/class-alg-wc-cog-settings-tools.php:54
 msgid "Please, reload the page to see the next scheduled event info."
 msgstr "请刷新页面，以查看下一个事件信息。"
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:107
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:108
 msgid "The update will run once a day."
 msgstr "此更新每天运行一次。"
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:106
-msgid "Get currency exchange rates from <a href=\"%s\" target=\"_blank\">%s</a> automatically"
-msgstr "自动从 <a href=\"%s\" target=\"_blank\">%s</a> 获取汇率"
-
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:105
-msgid "Auto currencies rate from ExchangeRate-API"
-msgstr "从 ExchangeRate-API 自动获取汇率"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:227
+#: includes/settings/class-alg-wc-cog-settings-products.php:314
 msgid "If enabled, the stock may also be reduced."
 msgstr "如果启用，库存可能也会减少。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:226
+#: includes/settings/class-alg-wc-cog-settings-products.php:313
 msgid "Allow negative stock values"
 msgstr "允许库存值为负数"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:225
+#: includes/settings/class-alg-wc-cog-settings-products.php:312
 msgid "Negative stock"
 msgstr "负数库存"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:221
+#: includes/settings/class-alg-wc-cog-settings-products.php:289
 msgid "Uses current cost"
 msgstr "使用当前成本"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:220
+#: includes/settings/class-alg-wc-cog-settings-products.php:288
 msgid "Uses last cost value from \"Add stock\" history"
 msgstr "使用 \"添加库存\" 历史记录中的最后成本值"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:219
+#: includes/settings/class-alg-wc-cog-settings-products.php:287
 msgid "Prevents calculation"
 msgstr "禁止计算"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:212
+#: includes/settings/class-alg-wc-cog-settings-products.php:280
 msgid "Use this option if you want to Add stock without worrying about filling the cost value."
 msgstr "如果你想增加库存时，无需担心如何填写成本价值，则可使用此项。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:211
-msgid "The cost value considered when the field is empty"
-msgstr "当此区域为空时，考虑使用的成本值"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:210
+#: includes/settings/class-alg-wc-cog-settings-products.php:278
 msgid "Empty cost field"
 msgstr "清空成本区域"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:200
+#: includes/settings/class-alg-wc-cog-settings-products.php:268
 msgid "The expression used to calculate the new average cost of the product."
 msgstr "此表达式将被用于计算产品的新平均成本。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:192
+#: includes/settings/class-alg-wc-cog-settings-products.php:260
 msgid "Available placeholders: "
 msgstr "可用变量："
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:191
+#: includes/settings/class-alg-wc-cog-settings-products.php:259
 msgid "Cost calculation expression"
 msgstr "成本计算表达式"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:82
+#: includes/settings/class-alg-wc-cog-settings-products.php:175
 msgid "Any CSS unit can be used, like px, %, ch, and so on..."
 msgstr "任何 CSS 单位均可使用，譬如 px、%、ch 等等"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:81
+#: includes/settings/class-alg-wc-cog-settings-products.php:174
 msgid "Width unit"
 msgstr "宽度单位"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:65
+#: includes/settings/class-alg-wc-cog-settings-products.php:158
 msgid "Add product profit column"
 msgstr "增加产品利润列"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:55
-#: includes/settings/class-alg-wc-cog-settings-products.php:72
+#: includes/settings/class-alg-wc-cog-settings-products.php:148
+#: includes/settings/class-alg-wc-cog-settings-products.php:165
 msgid "Zero or empty values will disable width."
 msgstr "0 或留空会禁用宽度设置。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:54
-#: includes/settings/class-alg-wc-cog-settings-products.php:71
-msgid "Column width (%s)"
-msgstr "列宽（%s）"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:48
+#: includes/settings/class-alg-wc-cog-settings-products.php:141
 msgid "Add product cost column"
 msgstr "增加产品成本列"
 
 #: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:84
+#: includes/analytics/src/modules/categories.js:91
+#: includes/analytics/src/modules/orders.js:167
+#: includes/analytics/src/modules/products.js:93
+#: includes/analytics/src/modules/revenue.js:91
 msgid "Profit total"
 msgstr "利润总额"
 
 #: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:79
+#: includes/analytics/src/modules/categories.js:86
+#: includes/analytics/src/modules/orders.js:162
+#: includes/analytics/src/modules/products.js:88
+#: includes/analytics/src/modules/revenue.js:86
 msgid "Costs total"
 msgstr "成本总计"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:283
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:89
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:127
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:156
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:185
 msgid "Add \"Cost\" and \"Profit\" totals to the report charts"
 msgstr "增加 “成本” 和 “利润” 总计到报告图表"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:276
-#: includes/settings/class-alg-wc-cog-settings-tools.php:292
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:62
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:82
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:119
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:148
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:206
 msgid "Add \"Cost\" and \"Profit\" columns"
 msgstr "增加 “成本” 和 “利润” 列"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:270
-msgid "If you can't see the values refreshed or have issues with the analytics page, please try to <a href=\"%s\">clear analytics cache</a>."
-msgstr "如果你看不到刷新后的值，或者访问分析页面出错，请尝试点此 <a href=\"%s\">清除分析缓存</a>。"
-
-#: includes/settings/class-alg-wc-settings-cog.php:61
+#: includes/settings/class-alg-wc-settings-cog.php:85
 msgid "Upgrade to Pro version"
 msgstr "升级 Pro"
 
-#: includes/settings/class-alg-wc-settings-cog.php:59
+#. Plugin Name of the plugin
+#: includes/alg-wc-cog-functions.php:219
+#: includes/settings/class-alg-wc-settings-cog.php:83
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr "Cost of Goods for WooCommerce Pro"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:163
+#: includes/settings/class-alg-wc-cog-settings-products.php:74
 msgid "Number of decimal points shown in displayed costs."
 msgstr "成本中显示的小数点位数。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:162
+#: includes/settings/class-alg-wc-cog-settings-products.php:73
 msgid "Cost decimals"
 msgstr "成本小数"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:141
+#: includes/settings/class-alg-wc-cog-settings-products.php:391
 msgid "Replace comma by dots when updating cost meta"
 msgstr "更新成本字段时，以 “点” 替换 “逗号”"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:257
-msgid "Currency as Char type and not empty"
-msgstr "将货币作为 Char 数据类型处理，并且不为空"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:256
-msgid "Default"
-msgstr "默认"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:250
-msgid "CHAR type and not empty value"
-msgstr "CHAR 数据类型并且不为空值"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:250
-msgid "Use %s if some product doesn't show up on the stock report, probably if you have cost values below 1"
-msgstr "请使用 %s，如果某些产品没有显示在库存报告中，且有可能是因为你的成本数值低于 1。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:249
-msgid "Query related to costs meta in order to get the products for the stock report."
-msgstr "将查询与成本字段关联，以便获取产品和库存报告。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:248
-msgid "Meta query"
-msgstr "字段查询"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:97
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:334
 msgid "Openpos orders"
 msgstr "OpenPOS 订单"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:96
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:333
 msgid "Common orders"
 msgstr "常规订单"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:91
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:328
 msgid "If empty will show common and openpos orders combined."
 msgstr "如果留空，常规订单和 OpenPOS 订单则将组合显示。"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:90
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:327
 msgid "Order types in reports."
 msgstr "报告中将显示的订单类型。"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:83
-msgid "Manages POS orders on orders reports."
-msgstr "将 POS 订单纳入订单报告管理"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:81
-msgid "Openpos - WooCommerce Point Of Sale"
-msgstr "Openpos - WooCommerce Point Of Sale"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:80
-msgid "Enable compatibility with <a target=\"_blank\" href=\"%s\">%s</a> by <a href=\"%s\" target=\"_blank\">anhvnit</a> codenayon author"
-msgstr "启用 Codenayon 作者 <a href=\"%s\" target=\"_blank\">anhvnit</a> 的 <a target=\"_blank\" href=\"%s\">%s</a> 插件兼容"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:78
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:320
 msgid "Openpos - WooCommerce Point Of Sale(POS)"
 msgstr "Openpos - WooCommerce Point Of Sale(POS)"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:70
-msgid "Enable compatibility with <a target=\"_blank\" href=\"%s\">%s</a>"
-msgstr "启用 <a target=\"_blank\" href=\"%s\">%s</a> 插件兼容"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:154
+#: includes/settings/class-alg-wc-cog-settings-products.php:64
 msgid "Get price including tax"
 msgstr "获取含税售价"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:153
+#: includes/settings/class-alg-wc-cog-settings-products.php:63
 msgid "Get price excluding tax"
 msgstr "获取不含税售价"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:148
+#: includes/settings/class-alg-wc-cog-settings-products.php:58
 msgid "Orders > Calculations > Taxes to profit"
 msgstr "订单 > 计算设置 > 增加税费到利润"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:148
+#: includes/settings/class-alg-wc-cog-settings-products.php:58
 msgid "When using this option including tax, it will make sense to enable the option %s."
 msgstr "当此项 “含税” 时，有必要开启设置 %s。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:279
+#: includes/settings/class-alg-wc-cog-settings-orders.php:303
 msgid "Products > Get price method"
 msgstr "产品 > 获取售价方式"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:279
+#: includes/settings/class-alg-wc-cog-settings-orders.php:303
 msgid "Will probably make more sense if %s option is <strong>including tax</strong>."
 msgstr "当 %s 选项设置 <strong>含税</strong>，则有必要开启。"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:71
-msgid "Excludes Smart bundle product type from stock and orders report."
-msgstr "从库存和订单报告中排除 Smart bundle 产品类型。"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:69
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:70
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:174
 msgid "WPC Product Bundles for WooCommerce"
 msgstr "WPC Product Bundles for WooCommerce"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:342
+#: includes/settings/class-alg-wc-cog-settings-orders.php:375
 msgid "Only works with %s."
 msgstr "仅在选择 %s 时有效。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:335
-msgid "Subtract each item's refund amount from profit"
-msgstr "从利润中减去每件项目的退款金额"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:334
+#: includes/settings/class-alg-wc-cog-settings-orders.php:368
 msgid "Subtract total refunded from profit"
 msgstr "从利润中减去退款总额"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:333
-msgid "Profit ignore refunds"
-msgstr "在利润中忽略退款项"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:341
+#: includes/settings/class-alg-wc-cog-settings-orders.php:374
 msgid "Include tax on Net Payment"
 msgstr "包含税费在净付款中"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:340
+#: includes/settings/class-alg-wc-cog-settings-orders.php:373
 msgid "Net Payment inclusive of tax"
 msgstr "净付款是否含税"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:336
-#: includes/settings/class-alg-wc-cog-settings-orders.php:342
+#: includes/settings/class-alg-wc-cog-settings-orders.php:369
+#: includes/settings/class-alg-wc-cog-settings-orders.php:375
 msgid "Calculate profit by the difference between Net Payment and Cost"
 msgstr "通过净付款和成本之间差额计算成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:328
-msgid "Refund calculation"
-msgstr "退款计算"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:313
+#: includes/settings/class-alg-wc-cog-settings-orders.php:481
 msgid "Advanced > Force costs update"
 msgstr "高级 > 强制更新成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:312
-msgid "Enable %s options to automatically calculate refund costs."
-msgstr "启用 %s 选项可以自动计算退款成本。"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:309
-msgid "Tools & reports > Orders report: Order status"
-msgstr "工具 & 报告 > 订单报告：订单状态"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:308
-msgid "Refunded"
-msgstr "已退款"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:307
-msgid "It's necessary to add the %s status on %s option in order to see refunded orders on reports."
-msgstr "有必要将 %s 订单状态添加到 %s 设置中，以便在报告中查看已退款订单。"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:304
+#: includes/settings/class-alg-wc-cog-settings-orders.php:335
 msgid "Refunds"
 msgstr "退款设置"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:280
-msgid "Adds order taxes like VAT to the order profit."
-msgstr "将增值税 VAT 等订单税费添加到利润计算中"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:278
+#: includes/class-alg-wc-cog-orders.php:546
+#: includes/settings/class-alg-wc-cog-settings-orders.php:302
 msgid "Taxes to profit"
 msgstr "增加税费到利润"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:218
+#: includes/settings/class-alg-wc-cog-settings-orders.php:227
 msgid "Display the order cost and profit on the admin new order email"
 msgstr "在发给管理员的新订单邮件中，显示订单成本和利润"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:217
+#: includes/settings/class-alg-wc-cog-settings-orders.php:226
 msgid "Admin new order email"
 msgstr "管理员新订单邮件"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:212
+#: includes/settings/class-alg-wc-cog-settings-orders.php:221
 msgid "COG options regarding orders emails."
 msgstr "有关订单邮件的选项设置。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:211
+#: includes/settings/class-alg-wc-cog-settings-orders.php:220
 msgid "Orders emails"
 msgstr "订单邮件设置"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:273
-#: includes/settings/class-alg-wc-cog-settings-products.php:282
+#: includes/settings/class-alg-wc-cog-settings-products.php:360
+#: includes/settings/class-alg-wc-cog-settings-products.php:369
 msgid "Add \"Add stock\" fields to product \"%s\""
 msgstr "增加 \"增加库存\" 区域到产品 \"%s\""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:272
+#: includes/settings/class-alg-wc-cog-settings-products.php:359
 msgid "\"Add stock\" fields"
 msgstr "\"增加库存\" 区域"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:265
+#: includes/settings/class-alg-wc-cog-settings-products.php:352
 msgid "The cost field from the main variable product will replace the cost of all variations."
 msgstr "设置产品 “常规” 中的成本区域后，将会替换所有 “变量” 中的成本。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:264
+#: includes/settings/class-alg-wc-cog-settings-products.php:351
 msgid "Replace all variations from the main variable product"
 msgstr "以产品主设置替换所有变量设置"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:245
+#: includes/settings/class-alg-wc-cog-settings-products.php:332
 msgid "Cost field"
 msgstr "成本区域"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:140
-msgid "Sanitize cost meta"
-msgstr "清理成本字段"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:62
-msgid "Removes all illegal characters from a float number, like currency values for example."
-msgstr "从浮点数数据中删除所有非法字符，譬如货币符号。"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:61
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:159
 msgid "Sanitize float number"
 msgstr "清理浮点数"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
-msgid "Converts numbers using a comma for the decimal point and a dot as the thousand separator to float, like <code>1.723,07</code> to <code>1723.07</code>."
-msgstr "将使用 “点” 作千位分隔符、“逗号” 作小数点的数字转换为浮点数，例如 <code>1.723,07</code> 将被转换成 <code>1723.07</code>。"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:53
-msgid "Convert to float"
-msgstr "转换为浮点数"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:45
-msgid "Makes fine adjustments when importing a cost value to <code>_alg_wc_cog_cost</code> meta using the <strong>WP All Import</strong> plugin."
-msgstr "当使用 <strong>WP All Import</strong> 插件导入成本值到 <code>_alg_wc_cog_cost</code> 字段时，对插件进行微调。"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:44
-msgid "Enable compatibility with <a target=\"_blank\" href=\"%s\">WP All Import</a>"
-msgstr "启用 <a target=\"_blank\" href=\"%s\">WP All Import</a> 插件兼容"
-
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:43
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:144
 msgid "WP All Import"
 msgstr "WP All Import"
 
-#: includes/settings/class-alg-wc-cog-settings-compatibility.php:24
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:32
 msgid "Compatibility"
 msgstr "兼容"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:65
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:85
 msgid "The administrator can't be blocked."
 msgstr "管理员账户无法被限制。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:64
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:84
 msgid "Leave it empty to show the plugin data for all user roles."
 msgstr "留空则向所有用户组显示插件数据。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:63
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:83
 msgid "Only the selected user roles will be able to see and edit plugin data."
 msgstr "只有选中用户组有权查看和编辑插件数据。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:62
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:82
 msgid "Allowed user roles."
 msgstr "已允许的用户组。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:61
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:81
 msgid "Restrict by user role"
 msgstr "通过用户组进行限制"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:55
-msgid "Restriction"
-msgstr "权限限制设置"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:129
+#: includes/settings/class-alg-wc-cog-settings-tools.php:188
 msgid "Check key value"
 msgstr "检验键值"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:122
+#: includes/settings/class-alg-wc-cog-settings-tools.php:181
 msgid "Check if key exists"
 msgstr "检验键是否存在"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:110
+#: includes/settings/class-alg-wc-cog-settings-tools.php:169
 msgid "The meta key used to replace the cost meta value."
 msgstr "此键内容将被用来替换成本字段键值。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:244
-msgid "Function with meta"
-msgstr "带字段的函数"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:243
-msgid "Function"
-msgstr "函数"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:237
-msgid "The mechanism used to get the product price."
-msgstr "用于获取产品售价的机制。"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:147
-#: includes/settings/class-alg-wc-cog-settings-tools.php:236
+#: includes/settings/class-alg-wc-cog-settings-products.php:57
 msgid "Get price method"
 msgstr "获取售价方式"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:236
-#: includes/settings/class-alg-wc-cog-settings-tools.php:248
-msgid "Stock report"
-msgstr "库存报告"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:122
-msgid "Inventory > SKU"
-msgstr "库存 > SKU"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:121
-msgid "Inventory"
-msgstr "库存"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:119
-msgid "General > Pricing"
-msgstr "常规 > 价格"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:113
-msgid "Manages where the Cost field will be displayed on the product edit page."
-msgstr "决定成本区域会在产品编辑页面何处显示。"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:112
-msgid "Cost field position"
-msgstr "成本区域位置"
-
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:97
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:99
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1255
 msgid "Save"
 msgstr "保存"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:58
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1324
 msgid "Items per page"
 msgstr "个项目每页"
 
-#: includes/background-process/class-alg-wc-cog-recalculate-orders-bkg-process.php:30
+#: includes/background-process/class-alg-wc-cog-recalculate-orders-bkg-process.php:32
 msgid "Cost of Goods for WooCommerce - Recalculate orders"
 msgstr "Cost of Goods for WooCommerce - 重新计算订单"
 
-#: includes/background-process/class-alg-wc-cog-import-tool-bkg-process.php:30
+#: includes/background-process/class-alg-wc-cog-import-tool-bkg-process.php:32
 msgid "Cost of Goods for WooCommerce - Import Tool"
 msgstr "Cost of Goods for WooCommerce - 导入工具"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:158
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:205
 msgid "Requires the \"Send email\" option enabled in order to work."
 msgstr "务必开启 “发送邮件” 选项，以便其生效。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:158
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:205
 msgid "The email address that is going to receive the email when a background processing task is complete."
 msgstr "后台任务处理完毕时，你将通过此邮箱收到邮件通知。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:157
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:204
 msgid "Email to"
 msgstr "邮件地址"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:151
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:198
 msgid "Send an email when a background processing is complete"
 msgstr "当后台处理完毕，发送邮件通知"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:150
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:197
 msgid "Send email"
 msgstr "发送邮件"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:144
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:191
 msgid "Only affects \"Import Costs\" tool and \"Order cost and profit Recalculation\" for the time being."
 msgstr "暂时只对 “导入成本” 工具和 “订单成本和利润重新计算” 有效。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:144
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:191
 msgid "The minimum amount of results from a query in order to trigger a background processing."
 msgstr "当查询数量超过此最小值，将会触发后台处理任务。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:143
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:190
 msgid "Minimum amount"
 msgstr "触发最小值"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:138
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:185
 msgid "Background processing"
 msgstr "后台处理设置"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:139
-msgid "If you have problems accessing the \"Import Costs\" page try to disable this option."
-msgstr "如果访问导入页面有问题时，请尝试禁用此项。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:93
-msgid "Variations"
-msgstr "变量"
-
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:99
-msgid "When enabled, the plugin will try to get currency exchange rates from the \"Multi Currency for WooCommerce\" plugin (by VillaTheme) automatically."
-msgstr "当其启用，插件会自动从 \"Multi Currency for WooCommerce\" 插件获取汇率。"
-
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:97
-msgid "\"Multi Currency for WooCommerce\" plugin"
-msgstr "\"Multi Currency for WooCommerce\" 插件"
-
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:64
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:86
 msgid "Choose currencies you want to set exchange rates for, and \"Save changes\" - new settings fields will be displayed."
 msgstr "选择你想设置汇率的货币类型，点击 “保存更改”，新的设置区域就会显现。"
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:63
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:85
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:138
 msgid "Currencies"
 msgstr "支持的货币类型"
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:50
-msgid "Here you can set currency exchange rates for your orders in non-default shop currency, i.e. order cost and profit will be converted to the default shop currency according to these rates."
-msgstr "此部分可以设置非商店默认货币下单的汇率。即根据此汇率，订单成本和利润都将换算成商店默认货币。"
-
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:33
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:49
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:55
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:24
 msgid "Multicurrency"
 msgstr "多币种"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:88
+#: includes/settings/class-alg-wc-cog-settings-tools.php:104
 msgid "Leave empty to display all product types."
 msgstr "留空则显示全部产品类型。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:87
+#: includes/settings/class-alg-wc-cog-settings-tools.php:103
 msgid "Product types"
 msgstr "产品类型"
 
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:80
-#: includes/settings/class-alg-wc-cog-settings-orders.php:374
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:150
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:83
+#: includes/settings/class-alg-wc-cog-settings-orders.php:407
 msgid "Percent from order total."
 msgstr "订单总额的百分比成本。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:155
+#: includes/settings/class-alg-wc-cog-settings-orders.php:164
 msgid "This is used in meta box."
 msgstr "此设置将被用于自定义字段框。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:150
+#: includes/settings/class-alg-wc-cog-settings-orders.php:159
 msgid "Order profit HTML template."
 msgstr "订单利润 HTML 模板。"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:47
-#: includes/settings/class-alg-wc-cog-settings-orders.php:153
+#: includes/settings/class-alg-wc-cog-settings-orders.php:162
 msgid "Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit."
 msgstr "请注意：如要显示插件 v2.2.0 版本安装之前创建订单的 %s 和 %s，需要您重新计算成本和利润。"
 
-#: includes/class-alg-wc-cog-orders.php:313
+#: includes/class-alg-wc-cog-orders.php:873
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr "成本利润率"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:111
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1118
 msgid "Search"
 msgstr "搜索"
 
@@ -802,91 +571,76 @@ msgstr "https://wpfactory.com"
 msgid "WPFactory"
 msgstr "WPFactory"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:272
+#: includes/settings/class-alg-wc-cog-settings-orders.php:289
 msgid "Add  order fees to the order profit "
 msgstr "增加订单费用到利润计算中"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:271
+#: includes/class-alg-wc-cog-orders.php:590
+#: includes/settings/class-alg-wc-cog-settings-orders.php:288
 msgid "Fees to profit"
 msgstr "增加费用到利润"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:163
-msgid "Recalculate for orders with no costs"
-msgstr "重新计算无成本订单"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:154
-msgid "Recalculate for all orders"
-msgstr "重新计算全部订单"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:153
-msgid "Recalculate orders cost and profit"
-msgstr "重新计算订单成本和利润"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:100
+#: includes/settings/class-alg-wc-cog-settings-products.php:92
 msgid "Cost field label"
 msgstr "成本区域标签"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:289
+#: includes/settings/class-alg-wc-cog-settings-orders.php:320
 msgid "Leave empty to calculate right away on new order."
 msgstr "留空则新订单会立即计算费用。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:288
+#: includes/settings/class-alg-wc-cog-settings-orders.php:319
 msgid "All values will be set to zero until the required order status is set."
 msgstr "在设置必要的订单状态前，此项值会保留为空。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:287
+#: includes/settings/class-alg-wc-cog-settings-orders.php:318
 msgid "Select order statuses to delay all order profit, cost etc. calculations until."
 msgstr "选择订单状态，以延迟此状态所有订单的利润、成本等费用计算。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:286
+#: includes/settings/class-alg-wc-cog-settings-orders.php:317
 msgid "Delay calculations"
 msgstr "延迟计算"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:233
-msgid "Here you can set some options for order cost and profit calculations."
-msgstr "此部分可以为订单成本和利润计算进行设置。"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:232
+#: includes/settings/class-alg-wc-cog-settings-orders.php:241
 msgid "Calculations"
 msgstr "计算设置"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:200
+#: includes/settings/class-alg-wc-cog-settings-orders.php:209
 msgid "Save all item costs"
 msgstr "保存所有项目成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:199
+#: includes/settings/class-alg-wc-cog-settings-orders.php:208
 msgid "Fill in all item costs with the default costs"
 msgstr "以默认成本，填入全部项目成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:198
+#: includes/settings/class-alg-wc-cog-settings-orders.php:207
 msgid "Fill in empty item costs with the default costs"
 msgstr "以默认成本，填入未填写的项目成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:197
+#: includes/settings/class-alg-wc-cog-settings-orders.php:206
 msgid "Do nothing"
 msgstr "啥也不做"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:191
+#: includes/settings/class-alg-wc-cog-settings-orders.php:200
 msgid "Select what should be done when admin clicks \"Recalculate\" order button."
 msgstr "选择当管理员点击 “重新计算” 订单按钮时，应执行的操作。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:190
+#: includes/settings/class-alg-wc-cog-settings-orders.php:199
 msgid "\"Recalculate\" button"
 msgstr "“重新计算” 按钮"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:184
+#: includes/settings/class-alg-wc-cog-settings-orders.php:193
 msgid "Save item costs when editing order items (i.e. \"Edit item > Save\")"
 msgstr "编辑订单项目时（即操作：编辑项目 > 保存），同时保存项目成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:183
+#: includes/settings/class-alg-wc-cog-settings-orders.php:192
 msgid "Save on item edit"
 msgstr "项目编辑时保存"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:177
+#: includes/settings/class-alg-wc-cog-settings-orders.php:186
 msgid "Fill in item costs with the default costs when adding new items (i.e. \"Add item(s) > Add product(s)\")"
 msgstr "订单增加新项目时（即操作：添加项目 > 添加产品），以默认产品成本填入单品成本。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:176
+#: includes/settings/class-alg-wc-cog-settings-orders.php:185
 msgid "Fill in on add items"
 msgstr "增加项目时自动填入"
 
@@ -898,206 +652,125 @@ msgstr "用于后台订单编辑页面的选项设置。"
 msgid "Admin Order Edit"
 msgstr "后台订单编辑设置"
 
-#: includes/class-alg-wc-cog-products.php:35
-#: includes/settings/class-alg-wc-cog-settings-products.php:105
+#: includes/class-alg-wc-cog-cost-inputs.php:47
+#: includes/settings/class-alg-wc-cog-settings-products.php:101
 msgid "Cost (excl. tax) (%s)"
 msgstr "成本（不含税）%s"
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:182
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:118
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:371
 msgid "SKU"
 msgstr "SKU"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:449
+#: includes/settings/class-alg-wc-cog-settings-orders.php:488
 msgid "One meta key per line."
 msgstr "每行填写一种字段。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:448
+#: includes/settings/class-alg-wc-cog-settings-orders.php:487
 msgid "Ignored if empty."
 msgstr "留空将被忽略。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:447
+#: includes/settings/class-alg-wc-cog-settings-orders.php:486
 msgid "Meta keys"
 msgstr "自定义字段"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:440
+#: includes/settings/class-alg-wc-cog-settings-orders.php:473
 msgid "E.g.: %s."
 msgstr "譬如：%s。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:439
+#: includes/settings/class-alg-wc-cog-settings-orders.php:472
 msgid "Adds extra costs from order meta."
 msgstr "从订单字段增加额外成本。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:438
+#: includes/settings/class-alg-wc-cog-settings-orders.php:471
 msgid "From Meta"
 msgstr "源自字段 Meta"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:265
+#: includes/settings/class-alg-wc-cog-settings-orders.php:275
 msgid "Add order shipping cost to the order profit"
 msgstr "增加订单配送费用到利润计算中"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:264
+#: includes/class-alg-wc-cog-orders.php:634
+#: includes/settings/class-alg-wc-cog-settings-orders.php:274
 msgid "Shipping to profit"
 msgstr "增加配送费用到利润"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:156
-#: includes/settings/class-alg-wc-cog-settings-products.php:131
+#: includes/settings/class-alg-wc-cog-settings-orders.php:165
+#: includes/settings/class-alg-wc-cog-settings-products.php:48
 msgid "Profit percent is \"profit / cost\". Margin is \"profit / price\"."
 msgstr "Profit Percent 成本利润率 = 利润 / 成本。Margin 销售利润率 = 利润 / 售价。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:130
+#: includes/settings/class-alg-wc-cog-settings-products.php:47
 msgid "This is used in admin single product edit pages, and in admin products list \"Profit\" column."
 msgstr "这是作用在后台产品编辑页面，显示后台产品列表中 “利润” 列。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:151
-#: includes/settings/class-alg-wc-cog-settings-products.php:101
-#: includes/settings/class-alg-wc-cog-settings-products.php:128
+#: includes/settings/class-alg-wc-cog-settings-orders.php:160
+#: includes/settings/class-alg-wc-cog-settings-products.php:45
 msgid "Available placeholders: %s."
 msgstr "可用变量：%s。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:127
-msgid "Product profit HTML template"
-msgstr "产品利润 HTML 模板"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:231
-msgid "Meta fees (all)"
-msgstr "字段费（全部）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:230
-msgid "Per order fees: Payment"
-msgstr "每个订单费用：支付"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:229
-msgid "Per order fees: Shipping"
-msgstr "每个订单费用：配送"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:228
-msgid "Per order fees: Handling"
-msgstr "每个订单费用：手续"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:227
-msgid "Per order fees (all)"
-msgstr "每个订单费用（全部）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:226
-msgid "Order fees (percent)"
-msgstr "订单费用（百分比）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:225
-msgid "Order fees (fixed)"
-msgstr "订单费（固定）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:224
-msgid "Order fees (all)"
-msgstr "订单费（全部）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:223
-msgid "Gateway fees (percent)"
-msgstr "支付费（百分比）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:222
-msgid "Gateway fees (fixed)"
-msgstr "支付费（固定）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:221
-msgid "Gateway fees (all)"
-msgstr "支付费（全部）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:217
-msgid "Shipping method fees (percent)"
-msgstr "配送费（百分比）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:216
-msgid "Shipping method fees (fixed)"
-msgstr "配送费（固定）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:215
-msgid "Shipping method fees (all)"
-msgstr "配送费（全部）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:214
-msgid "Fees (all)"
-msgstr "费用（全部）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:213
-msgid "Item costs (excluding fees)"
-msgstr "项目成本（不含其它费用）"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:207
-msgid "To display data gathered before the plugin v2.0.0, you will need to recalculate orders cost and profit."
-msgstr "如要显示插件 v2.0.0 之前收集的数据，你需要先重新计算订单成本和利润。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:206
-msgid "Extra data"
-msgstr "额外数据"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:175
+#: includes/settings/class-alg-wc-cog-settings-tools.php:301
 msgid "Ignored if set to zero."
 msgstr "设置为 0 则被忽略。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:174
+#: includes/settings/class-alg-wc-cog-settings-tools.php:300
 msgid "Will set PHP memory limit right before tools are run."
 msgstr "请在工具运行前，设置好 PHP 内存限制。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:173
+#: includes/settings/class-alg-wc-cog-settings-tools.php:299
 msgid "megabytes"
 msgstr "megabytes = MB"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:172
+#: includes/settings/class-alg-wc-cog-settings-tools.php:298
 msgid "PHP memory limit"
 msgstr "PHP 内存限制"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:102
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:186
 msgid "Cost details"
 msgstr "成本详情"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:93
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:175
 msgid "Meta fees"
 msgstr "字段费"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:89
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:171
 msgid "Order fee (percent)"
 msgstr "订单费用（百分比）"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:88
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:170
 msgid "Order fee (fixed)"
 msgstr "订单费（固定）"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:87
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:169
 msgid "Gateway fee (percent)"
 msgstr "支付费（百分比）"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:86
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:168
 msgid "Gateway fee (fixed)"
 msgstr "支付费（固定）"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:83
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:165
 msgid "Shipping method fee (percent)"
 msgstr "配送费（百分比）"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:82
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:164
 msgid "Shipping method fee (fixed)"
 msgstr "配送费（固定）"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:260
+#: includes/settings/class-alg-wc-cog-settings-orders.php:270
 msgid "Order total incl. tax"
 msgstr "含税订单总计"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:259
+#: includes/settings/class-alg-wc-cog-settings-orders.php:269
 msgid "Order total excl. tax"
 msgstr "不含税订单总计"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:258
+#: includes/settings/class-alg-wc-cog-settings-orders.php:268
 msgid "Order subtotal excl. tax"
 msgstr "不含税订单小计"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:247
-msgid "Total to calculate all extra costs percentage fees from (%s)."
-msgstr "从 %s 总额中，以百分比方式计算额外费用。"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:246
-msgid "Order total for percentage fees"
-msgstr "百分比费用的订单总额设置"
-
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:212
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:112
 #: includes/settings/class-alg-wc-cog-settings-products.php:24
 msgid "Products"
 msgstr "产品"
@@ -1106,237 +779,166 @@ msgstr "产品"
 msgid "Save product purchase costs (cost of goods) in WooCommerce. Beautifully."
 msgstr "它可以在 WooCommerce 中保存产品购入成本（货物成本）。非常优雅！"
 
-#: includes/class-alg-wc-cog-products.php:223
+#: includes/class-alg-wc-cog-products-add-stock.php:370
 msgid "History"
 msgstr "历史"
 
-#: includes/class-alg-wc-cog-products.php:148
-#: includes/settings/class-alg-wc-cog-settings-products.php:178
+#: includes/class-alg-wc-cog-products-add-stock.php:73
+#: includes/settings/class-alg-wc-cog-settings-products.php:244
 msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to calculate new average cost of goods for the product."
 msgstr "\"库存\" 将增加到你的产品库存设置中，\"成本\" 将被用于计算产品的新平均成本。"
 
-#: includes/class-alg-wc-cog-products.php:147
+#: includes/class-alg-wc-cog-products-add-stock.php:72
 msgid "Enter values and \"Update\" the product."
 msgstr "输入值，点 “更新” 产品。"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:142
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:243
 msgid "fee"
 msgstr "费用"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:268
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:26
 msgid "Analytics"
 msgstr "分析设置"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:25
-msgid "Tools & Reports"
-msgstr "工具 & 报告"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:425
+#: includes/settings/class-alg-wc-cog-settings-orders.php:458
 msgid "One column per fee."
 msgstr "每种费用一列。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:422
+#: includes/settings/class-alg-wc-cog-settings-orders.php:455
 msgid "Will add \"%s\" columns to the WooCommerce admin %s."
 msgstr "将增加 \"%s\" 列到 WooCommerce 后台 %s。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:420
+#: includes/settings/class-alg-wc-cog-settings-orders.php:453
 msgid "Columns"
 msgstr "列"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:92
-#: includes/settings/class-alg-wc-cog-settings-orders.php:413
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:174
+#: includes/settings/class-alg-wc-cog-settings-orders.php:446
 msgid "Payment fee"
 msgstr "支付费"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:91
-#: includes/settings/class-alg-wc-cog-settings-orders.php:405
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:173
+#: includes/settings/class-alg-wc-cog-settings-orders.php:438
 msgid "Shipping fee"
 msgstr "配送费"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:90
-#: includes/settings/class-alg-wc-cog-settings-orders.php:397
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:172
+#: includes/settings/class-alg-wc-cog-settings-orders.php:430
 msgid "Handling fee"
 msgstr "手续费"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:315
-msgid "It's necessary to recalculate order's cost and profit after you change these settings."
-msgstr "完成这些设置之后，有必要重新计算订单成本和利润。"
-
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:119
-#: includes/settings/class-alg-wc-cog-settings-orders.php:390
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:219
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:96
+#: includes/settings/class-alg-wc-cog-settings-orders.php:423
 msgid "Extra costs"
 msgstr "额外成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:389
+#: includes/settings/class-alg-wc-cog-settings-orders.php:422
 msgid "Adds \"%s\" meta box to admin order edit page."
 msgstr "增加 \"%s\" 字段框到后台订单编辑页面"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:388
-#: includes/settings/class-alg-wc-cog-settings-orders.php:396
-#: includes/settings/class-alg-wc-cog-settings-orders.php:404
-#: includes/settings/class-alg-wc-cog-settings-orders.php:412
-#: includes/settings/class-alg-wc-cog-settings-orders.php:423
+#: includes/settings/class-alg-wc-cog-settings-orders.php:421
+#: includes/settings/class-alg-wc-cog-settings-orders.php:429
+#: includes/settings/class-alg-wc-cog-settings-orders.php:437
+#: includes/settings/class-alg-wc-cog-settings-orders.php:445
+#: includes/settings/class-alg-wc-cog-settings-orders.php:456
 msgid "Per Order"
 msgstr "每个订单"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:249
-#: includes/settings/class-alg-wc-cog-settings-orders.php:355
+#: includes/settings/class-alg-wc-cog-settings-orders.php:259
+#: includes/settings/class-alg-wc-cog-settings-orders.php:388
 msgid "All Orders"
 msgstr "全部订单"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:240
+#: includes/settings/class-alg-wc-cog-settings-orders.php:249
 msgid "Count empty cost items when calculating order cost and profit"
 msgstr "当计算订单成本和利润时，计入未填写成本项目"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:239
+#: includes/settings/class-alg-wc-cog-settings-orders.php:248
 msgid "Count empty cost lines"
 msgstr "计入未填写成本项目"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:46
-#: includes/settings/class-alg-wc-cog-settings-orders.php:424
+#: includes/settings/class-alg-wc-cog-settings-orders.php:457
 msgid "orders list"
 msgstr "订单列表"
 
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:75
 #: includes/settings/class-alg-wc-cog-settings-orders.php:24
-#: includes/settings/class-alg-wc-cog-settings-tools.php:275
 msgid "Orders"
 msgstr "订单"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:127
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:171
 msgid "Exclude empty lines on sorting"
 msgstr "排序时排除空行"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:120
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:164
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:181
 msgid "orders"
 msgstr "订单"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:118
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:162
 msgid "Makes columns added to admin %s and %s lists <strong>sortable</strong>."
 msgstr "启用此项，以便让已添加到后台 %s 和 %s 列表的列 <strong>可排序</strong>。"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:116
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:160
 msgid "Sortable columns"
 msgstr "列可排序"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:111
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:155
 msgid "Columns sorting"
 msgstr "列排序设置"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:78
-msgid "Force costs update"
-msgstr "强制更新成本设置"
-
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:24
-#: includes/settings/class-alg-wc-cog-settings-products.php:123
 msgid "Advanced"
 msgstr "高级"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:355
 #: includes/settings/class-alg-wc-cog-settings-orders.php:388
-#: includes/settings/class-alg-wc-cog-settings-orders.php:423
-#: includes/settings/class-alg-wc-cog-settings-orders.php:438
+#: includes/settings/class-alg-wc-cog-settings-orders.php:421
+#: includes/settings/class-alg-wc-cog-settings-orders.php:456
+#: includes/settings/class-alg-wc-cog-settings-orders.php:471
 msgid "Extra Costs"
 msgstr "额外成本"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:256
-#: includes/settings/class-alg-wc-cog-settings-products.php:283
+#: includes/settings/class-alg-wc-cog-settings-products.php:343
+#: includes/settings/class-alg-wc-cog-settings-products.php:370
 msgid "Edit"
 msgstr "编辑"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:256
-#: includes/settings/class-alg-wc-cog-settings-products.php:283
+#: includes/settings/class-alg-wc-cog-settings-products.php:343
+#: includes/settings/class-alg-wc-cog-settings-products.php:370
 msgid "Bulk Actions"
 msgstr "批量动作"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:247
-#: includes/settings/class-alg-wc-cog-settings-products.php:274
+#: includes/settings/class-alg-wc-cog-settings-products.php:334
+#: includes/settings/class-alg-wc-cog-settings-products.php:361
 msgid "Quick Edit"
 msgstr "快速编辑"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:246
-#: includes/settings/class-alg-wc-cog-settings-products.php:255
+#: includes/settings/class-alg-wc-cog-settings-products.php:333
+#: includes/settings/class-alg-wc-cog-settings-products.php:342
 msgid "Add \"Cost\" field to product \"%s\""
 msgstr "增加 \"成本\" 区域到产品 \"%s\""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:240
+#: includes/settings/class-alg-wc-cog-settings-products.php:327
 msgid "Quick and Bulk Edit"
 msgstr "快速 & 批量编辑设置"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:177
-msgid "This will automatically calculate new average cost of goods for the product, based on new \"Stock\" and \"Cost\" values you enter."
-msgstr "这将基于你录入的全新 “库存” 和 “成本” 数值，自动计算货物的平均成本。"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:184
-msgid "Add \"%s\" meta box to the product edit page"
-msgstr "增加 \"%s\" 字段框到产品编辑页面"
-
-#: includes/class-alg-wc-cog-products.php:150
-#: includes/class-alg-wc-cog-products.php:176
-#: includes/settings/class-alg-wc-cog-settings-products.php:176
-#: includes/settings/class-alg-wc-cog-settings-products.php:183
-#: includes/settings/class-alg-wc-cog-settings-products.php:185
+#: includes/class-alg-wc-cog-products-add-stock.php:75
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
+#: includes/settings/class-alg-wc-cog-settings-products.php:242
+#: includes/settings/class-alg-wc-cog-settings-products.php:250
+#: includes/settings/class-alg-wc-cog-settings-products.php:253
 msgid "Add stock"
 msgstr "增加库存设置"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:95
-msgid "General options"
-msgstr "常规设置"
-
-#: includes/settings/class-alg-wc-cog-settings-products.php:43
+#: includes/settings/class-alg-wc-cog-settings-products.php:136
 msgid "products list"
 msgstr "产品列表"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:100
-msgid "Force empty order items cost update on new order item addition."
-msgstr "新增订单项目时，强制更新订单成本为空的项目。"
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:99
-msgid "Force costs update on new order item"
-msgstr "新增订单项目时，强制更新成本"
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:92
-msgid "Force empty order items cost update on order status change."
-msgstr "订单状态改变时，强制更新订单成本为空的项目。"
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:91
-msgid "Force costs update on order status change"
-msgstr "订单状态改变时，强制更新成本"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:197
-msgid "If left empty then default value (\"Completed\", \"Processing\", \"On hold\") is used."
-msgstr "如果留空，则将使用默认值（已完成、正在处理、保留）。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:196
-msgid "\"Refunded\" status is added automatically where applicable."
-msgstr "在适用的情况下，会自动添加 “已退款” 状态。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:195
-msgid "Select order statuses for the \"Orders > Cost of Goods\" report."
-msgstr "为 \"订单 > Cost of Goods\" 报告选择订单类型。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:194
-msgid "Order status"
-msgstr "订单状态"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:194
-#: includes/settings/class-alg-wc-cog-settings-tools.php:206
-msgid "Orders report"
-msgstr "订单报告"
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:84
-msgid "Force empty order items cost update on each order update."
-msgstr "每次订单更新时，强制更新订单成本为空的项目。"
-
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:83
-msgid "Force costs update on order update"
-msgstr "订单更新时，强制更新成本"
-
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:92
-msgid "Advanced Options"
-msgstr "高级设置"
-
-#: includes/class-alg-wc-cog-products.php:712
-#: includes/class-alg-wc-cog-products.php:758
+#: includes/class-alg-wc-cog-cost-inputs.php:88
+#: includes/class-alg-wc-cog-cost-inputs.php:159
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:313
 msgid "N/A"
 msgstr "N/A"
 
@@ -1344,91 +946,88 @@ msgstr "N/A"
 msgid "Extra gateway costs"
 msgstr "额外支付成本设置"
 
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:39
-msgid "Here you can add extra costs for your orders based on order's payment gateway."
-msgstr "此部分可以基于订单付款方式增加额外成本。"
-
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:38
 msgid "Extra Payment Gateway Costs"
 msgstr "额外付款方式成本"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:24
-#: includes/settings/class-alg-wc-cog-settings-orders.php:250
+#: includes/settings/class-alg-wc-cog-settings-orders.php:260
 msgid "Payment Gateways"
 msgstr "付款方式"
 
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:115
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:133
 msgid "Save changes after enabling this option."
 msgstr "启用此项后保存更改。"
 
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:114
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:132
 msgid "Enable this if you want to use shipping methods instances (with shipping zones) instead of shipping methods."
 msgstr "如果你想用配送方式实例替换原配送方式，则启用此项。"
 
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:112
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:130
 msgid "Use shipping instances"
 msgstr "使用配送实例"
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:56
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:46
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:46
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:106
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:124
 msgid "Enable section"
 msgstr "启用此部分"
 
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:105
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:123
 msgid "Extra shipping costs"
 msgstr "额外配送成本"
 
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:99
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:117
 msgid "Here you can add extra costs for your orders based on order's shipping method."
 msgstr "此部分可以基于订单配送方式增加额外成本。"
 
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:98
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:116
 msgid "Extra Shipping Method Costs"
 msgstr "额外配送方式成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:251
+#: includes/settings/class-alg-wc-cog-settings-orders.php:261
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:24
 msgid "Shipping Methods"
 msgstr "配送方式"
 
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:79
-#: includes/settings/class-alg-wc-cog-settings-orders.php:373
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:77
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:149
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:82
+#: includes/settings/class-alg-wc-cog-settings-orders.php:406
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:96
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:139
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:152
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:191
 msgid "Percent cost"
 msgstr "百分比成本"
 
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:69
-#: includes/settings/class-alg-wc-cog-settings-orders.php:363
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:67
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:139
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:72
+#: includes/settings/class-alg-wc-cog-settings-orders.php:396
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:86
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:181
 msgid "In %s."
 msgstr "以 %s 为单位。"
 
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:68
-#: includes/settings/class-alg-wc-cog-settings-orders.php:362
-#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:66
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:138
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:71
+#: includes/settings/class-alg-wc-cog-settings-orders.php:395
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:85
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:180
 msgid "Fixed cost"
 msgstr "固定成本"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:40
-#: includes/settings/class-alg-wc-cog-settings-orders.php:234
-#: includes/settings/class-alg-wc-cog-settings-orders.php:357
-#: includes/settings/class-alg-wc-cog-settings-orders.php:391
-#: includes/settings/class-alg-wc-cog-settings-orders.php:442
+#: includes/settings/class-alg-wc-cog-settings-orders.php:243
+#: includes/settings/class-alg-wc-cog-settings-orders.php:390
+#: includes/settings/class-alg-wc-cog-settings-orders.php:424
+#: includes/settings/class-alg-wc-cog-settings-orders.php:480
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:40
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:100
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:118
 msgid "You will need to recalculate order's cost and profit after you change these settings."
 msgstr "保存设置之后，你需要重新计算订单成本和利润。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:356
+#: includes/settings/class-alg-wc-cog-settings-orders.php:389
 msgid "Here you can add extra costs for your orders, e.g. handling fees."
 msgstr "此部分可以增加订单额外成本，譬如：手续费。"
 
-#: cost-of-goods-for-woocommerce.php:191
+#: includes/class-alg-wc-cog.php:220
 msgid "Go Pro"
 msgstr "升级 Pro"
 
@@ -1451,33 +1050,33 @@ msgstr "只读"
 msgid "Adds costs inputs for each order item to admin order edit page."
 msgstr "为后台订单编辑页面中的每个单品增加成本输入框。"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:80
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:162
 #: includes/settings/class-alg-wc-cog-settings-orders.php:114
 msgid "Item costs"
 msgstr "项目成本"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:100
+#: includes/settings/class-alg-wc-cog-settings-tools.php:159
 msgid "Product Import Costs Tool"
 msgstr "产品导入成本工具设置"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:43
+#: includes/settings/class-alg-wc-cog-settings-tools.php:85
 msgid "Product Bulk Edit Costs Tool"
 msgstr "产品批量编辑成本工具设置"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:169
+#: includes/settings/class-alg-wc-cog-settings-orders.php:178
 msgid "Admin notice text"
 msgstr "后台通知文本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:163
+#: includes/settings/class-alg-wc-cog-settings-orders.php:172
 msgid "Add notice to admin order edit page in case if order profit is below zero"
 msgstr "当产品利润低于 0，将在后台订单编辑页面显示通知。"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:162
+#: includes/settings/class-alg-wc-cog-settings-orders.php:171
 msgid "Admin notice"
 msgstr "后台通知"
 
-#: includes/class-alg-wc-cog-orders.php:87
-#: includes/settings/class-alg-wc-cog-settings-orders.php:171
+#: includes/class-alg-wc-cog-orders.php:331
+#: includes/settings/class-alg-wc-cog-settings-orders.php:180
 msgid "You are selling below the cost of goods."
 msgstr "你售出的商品已低于货物成本。"
 
@@ -1486,100 +1085,82 @@ msgid "Add \"Cost of Goods\" meta box to admin order edit page"
 msgstr "增加 \"Cost of Goods\" 字段框到后台订单编辑页面"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:143
+#: includes/settings/class-alg-wc-cog-settings-products.php:201
 msgid "Meta box"
 msgstr "自定义字段框"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:61
+#: includes/settings/class-alg-wc-cog-settings-tools.php:113
 msgid "Edit prices"
 msgstr "编辑价格"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:57
+#: includes/settings/class-alg-wc-cog-settings-tools.php:99
 msgid "Search all"
 msgstr "搜索全部内容"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:56
+#: includes/settings/class-alg-wc-cog-settings-tools.php:98
 msgid "Search by title"
 msgstr "只通过标题搜索"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:106
-msgid "Tool's options can be set in \"%s\" %s."
-msgstr "此工具的设置可以在 \"%s\" %s 中找到。"
-
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:105
-msgid "Bulk edit products costs/prices/stock."
-msgstr "批量编辑产品的成本、价格、库存。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:50
-msgid "Search products"
-msgstr "搜索产品"
-
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:189
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:379
 msgid "Sale price"
 msgstr "促销价格"
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:188
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:378
 msgid "Regular price"
 msgstr "常规售价"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:251
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1510
 msgid "Sale price is higher than regular price: %s."
 msgstr "促销价格高于常规售价：%s。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:83
+#: includes/settings/class-alg-wc-cog-settings-tools.php:148
 msgid "Use product functions"
 msgstr "使用产品函数"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:82
+#: includes/settings/class-alg-wc-cog-settings-tools.php:147
 msgid "Update product meta"
 msgstr "更新产品字段"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:76
-msgid "Ignored unless \"Manage stock\" checkbox is enabled above."
-msgstr "仅当 “管理库存” 启用时生效。"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:75
+#: includes/settings/class-alg-wc-cog-settings-tools.php:140
 msgid "Stock update method"
 msgstr "库存更新方式"
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:160
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:349
 msgid "Stock status: %s"
 msgstr "库存状态：%s"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:85
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:93
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:101
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:117
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:98
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:161
 #: includes/settings/class-alg-wc-cog-settings-orders.php:121
 #: includes/settings/class-alg-wc-cog-settings-orders.php:136
-#: includes/settings/class-alg-wc-cog-settings-shipping.php:113
-#: includes/settings/class-alg-wc-cog-settings-tools.php:62
-#: includes/settings/class-alg-wc-cog-settings-tools.php:69
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:131
 msgid "Enable"
 msgstr "启用"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:68
+#: includes/settings/class-alg-wc-cog-settings-tools.php:134
 msgid "Manage stock"
 msgstr "管理库存"
 
-#: includes/settings/class-alg-wc-cog-settings-advanced.php:119
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:163
 msgid "products"
 msgstr "产品"
 
-#: includes/class-alg-wc-cog-orders.php:316
+#: includes/class-alg-wc-cog-orders.php:876
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr "销售利润率"
 
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:191
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:122
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:381
 msgid "Price"
 msgstr "价格"
 
-#: includes/class-alg-wc-cog-products.php:178
-#: includes/class-alg-wc-cog-products.php:207
-#: includes/class-alg-wc-cog-products.php:227
-#: includes/settings/class-alg-wc-cog-settings-tools.php:291
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:185
+#: includes/class-alg-wc-cog-products-add-stock.php:349
+#: includes/class-alg-wc-cog-products-add-stock.php:408
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:105
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:199
+#: includes/settings/class-alg-wc-cog-settings-tools.php:133
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:374
 msgid "Stock"
 msgstr "库存"
 
@@ -1601,79 +1182,70 @@ msgstr "选择需显示成本的订单状态。"
 msgid "Order statuses"
 msgstr "订单状态"
 
-#: includes/class-alg-wc-cog-products.php:226
+#: includes/class-alg-wc-cog-products-add-stock.php:407
+#: includes/settings/class-alg-wc-cog-settings-products.php:208
 msgid "Date"
 msgstr "日期"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:189
-msgid "Reports"
-msgstr "报告设置"
-
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:183
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:119
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:372
 msgid "Title"
 msgstr "标题"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:79
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:80
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:103
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1159
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1345
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1346
 msgid "Bulk Edit Costs"
 msgstr "批量编辑成本"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:231
-msgid "Costs have been saved."
-msgstr "成本已保存。"
-
-#: includes/settings/class-alg-wc-settings-cog.php:112
-#: includes/settings/class-alg-wc-settings-cog.php:127
+#: includes/settings/class-alg-wc-settings-cog.php:136
+#: includes/settings/class-alg-wc-settings-cog.php:151
 msgid "Your settings have been reset."
 msgstr "你的设置已被重置。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:46
+#: includes/settings/class-alg-wc-cog-settings-tools.php:88
 msgid "Tools > Bulk Edit Costs"
 msgstr "工具 > 批量编辑成本"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:45
+#: includes/settings/class-alg-wc-cog-settings-tools.php:87
 msgid "Bulk Edit tool is in %s."
 msgstr "批量编辑工具在此：%s。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:164
+#: includes/settings/class-alg-wc-cog-settings-tools.php:257
 msgid "Set items costs in orders that do not have costs set."
 msgstr "对之前没有设置成本项目设置成本。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:156
-#: includes/settings/class-alg-wc-cog-settings-tools.php:165
+#: includes/settings/class-alg-wc-cog-settings-tools.php:248
+#: includes/settings/class-alg-wc-cog-settings-tools.php:258
 msgid "Enable the checkbox and \"Save changes\" to run the tool."
 msgstr "勾选并点击 “保存更改”，以运行此工具。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:155
+#: includes/settings/class-alg-wc-cog-settings-tools.php:247
 msgid "Set items costs in all orders (overriding previous costs)."
 msgstr "设置所有订单的项目成本（将覆盖之前成本）。"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:148
-msgid "Orders Tools"
-msgstr "订单工具设置"
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:109
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:222
+#: includes/settings/class-alg-wc-cog-settings-tools.php:168
 msgid "Key to import from"
 msgstr "从此键导入（From）"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:105
+#: includes/settings/class-alg-wc-cog-settings-tools.php:164
 msgid "Tools > Import Costs"
 msgstr "工具 > 导入成本"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:47
+#: includes/settings/class-alg-wc-cog-settings-products.php:140
 msgid "Product cost"
 msgstr "产品成本"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:64
+#: includes/settings/class-alg-wc-cog-settings-products.php:157
 msgid "Product profit"
 msgstr "产品利润"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:42
+#: includes/settings/class-alg-wc-cog-settings-products.php:135
 msgid "This section lets you add custom columns to WooCommerce admin %s."
 msgstr "此部分可以添加自定义列到 WooCommerce 后台 %s 。"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:40
+#: includes/settings/class-alg-wc-cog-settings-products.php:133
 msgid "Admin products list columns"
 msgstr "后台产品列表列设置"
 
@@ -1681,7 +1253,7 @@ msgstr "后台产品列表列设置"
 msgid "Order cost"
 msgstr "产品成本"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:421
+#: includes/settings/class-alg-wc-cog-settings-orders.php:454
 msgid "Add"
 msgstr "增加"
 
@@ -1697,133 +1269,1855 @@ msgstr "此部分可以添加自定义列到 WooCommerce 后台 %s 。"
 msgid "Admin Orders List Columns"
 msgstr "后台订单列表列设置"
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:120
-msgid "General"
-msgstr "全局"
-
-#: includes/settings/class-alg-wc-settings-cog.php:84
+#: includes/settings/class-alg-wc-settings-cog.php:108
 msgid "Enable the checkbox and save changes to reset the settings."
 msgstr "勾选并保存更改，以重置此部分设置。"
 
-#: includes/settings/class-alg-wc-settings-cog.php:83
+#: includes/settings/class-alg-wc-settings-cog.php:107
 msgid "Reset"
 msgstr "重置"
 
-#: includes/settings/class-alg-wc-settings-cog.php:82
+#: includes/settings/class-alg-wc-settings-cog.php:106
 msgid "Reset section settings"
 msgstr "重置此部分设置"
 
-#: includes/settings/class-alg-wc-settings-cog.php:77
+#: includes/settings/class-alg-wc-settings-cog.php:101
 msgid "Reset Settings"
 msgstr "重置设置"
 
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:42
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:119
-#: includes/class-alg-wc-cog-products.php:150
-#: includes/class-alg-wc-cog-products.php:176
-#: includes/settings/class-alg-wc-cog-settings-orders.php:390
-#: includes/settings/class-alg-wc-cog-settings-products.php:185
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:116
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:219
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
+#: includes/settings/class-alg-wc-cog-settings-orders.php:423
+#: includes/settings/class-alg-wc-cog-settings-products.php:253
 #: includes/settings/class-alg-wc-settings-cog.php:24
 msgid "Cost of Goods"
 msgstr "Cost of Goods"
 
-#: includes/class-alg-wc-cog-products.php:711
-#: includes/class-alg-wc-cog-products.php:757
+#: includes/class-alg-wc-cog-cost-inputs.php:87
+#: includes/class-alg-wc-cog-cost-inputs.php:158
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:313
 msgid "Profit: %s"
 msgstr "利润：%s"
 
-#: includes/class-alg-wc-cog-orders.php:224
-#: includes/class-alg-wc-cog-orders.php:574
+#: includes/class-alg-wc-cog-orders.php:754
+#: includes/class-alg-wc-cog-orders.php:1198
+#: includes/pro/class-alg-wc-cog-pro.php:638
+#: includes/pro/class-alg-wc-cog-pro.php:657
 msgid "Cost of goods"
 msgstr "商品成本"
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:287
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:78
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:74
-#: includes/class-alg-wc-cog-orders.php:221
-#: includes/class-alg-wc-cog-orders.php:310
-#: includes/class-alg-wc-cog-products.php:507
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
+#: includes/analytics/class-alg-wc-cog-analytics-products.php:114
+#: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:282
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:156
+#: includes/class-alg-wc-cog-orders.php:751
+#: includes/class-alg-wc-cog-orders.php:870
+#: includes/class-alg-wc-cog-products.php:383
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:64
 #: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:39
-#: includes/analytics/src/modules/stock.js:64
+#: includes/analytics/src/modules/categories.js:38
+#: includes/analytics/src/modules/customers.js:47
+#: includes/analytics/src/modules/orders.js:26
+#: includes/analytics/src/modules/products.js:39
+#: includes/analytics/src/modules/revenue.js:38
+#: includes/analytics/src/modules/stock.js:67
 msgid "Profit"
 msgstr "利润"
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:251
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:77
-#: includes/class-alg-wc-cog-orders-meta-boxes.php:73
-#: includes/class-alg-wc-cog-orders.php:220
-#: includes/class-alg-wc-cog-orders.php:300
-#: includes/class-alg-wc-cog-products.php:184
-#: includes/class-alg-wc-cog-products.php:211
-#: includes/class-alg-wc-cog-products.php:228
-#: includes/class-alg-wc-cog-products.php:427
-#: includes/class-alg-wc-cog-products.php:438
-#: includes/class-alg-wc-cog-products.php:449
-#: includes/class-alg-wc-cog-products.php:504
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:184
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
+#: includes/analytics/class-alg-wc-cog-analytics-products.php:78
+#: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:281
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:155
+#: includes/class-alg-wc-cog-orders.php:750
+#: includes/class-alg-wc-cog-orders.php:860
+#: includes/class-alg-wc-cog-products-add-stock.php:353
+#: includes/class-alg-wc-cog-products-add-stock.php:409
+#: includes/class-alg-wc-cog-products.php:301
+#: includes/class-alg-wc-cog-products.php:312
+#: includes/class-alg-wc-cog-products.php:323
+#: includes/class-alg-wc-cog-products.php:380
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:49
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:111
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:190
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:297
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:373
 #: includes/analytics/build/index.js:1
-#: includes/analytics/src/modules/orders.js:33
-#: includes/analytics/src/modules/stock.js:58
+#: includes/analytics/src/modules/categories.js:32
+#: includes/analytics/src/modules/customers.js:41
+#: includes/analytics/src/modules/orders.js:20
+#: includes/analytics/src/modules/products.js:33
+#: includes/analytics/src/modules/revenue.js:32
+#: includes/analytics/src/modules/stock.js:61
 msgid "Cost"
 msgstr "成本"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:109
-#: includes/tools/class-alg-wc-cog-import-tool.php:182
+#: includes/tools/class-alg-wc-cog-import-tool.php:310
 msgid "plugin settings"
 msgstr "插件设置"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:181
+#: includes/tools/class-alg-wc-cog-import-tool.php:309
 msgid "Tool's options can be set in %s."
 msgstr "此工具的设置可以在 %s 中找到。"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:180
-msgid "Import products costs to \"Cost of Goods for WooCommerce\" plugin."
-msgstr "导入产品成本到 \"Cost of Goods for WooCommerce\" 插件。"
-
-#: includes/tools/class-alg-wc-cog-import-tool.php:179
+#: includes/tools/class-alg-wc-cog-import-tool.php:307
 msgid "Costs Import"
 msgstr "成本导入"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:176
+#: includes/tools/class-alg-wc-cog-import-tool.php:304
 msgid "Are you sure?"
 msgstr "你确定要这样做吗？"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:175
+#: includes/tools/class-alg-wc-cog-import-tool.php:303
 msgid "Import"
 msgstr "导入"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:121
+#: includes/tools/class-alg-wc-cog-import-tool.php:249
 msgid "Destination %s"
 msgstr "目标 %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:120
+#: includes/tools/class-alg-wc-cog-import-tool.php:248
 msgid "Source %s"
 msgstr "源自 %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:119
+#: includes/tools/class-alg-wc-cog-import-tool.php:247
 msgid "Product Title"
 msgstr "产品标题"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:118
-#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:181
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
+#: includes/tools/class-alg-wc-cog-import-tool.php:246
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:370
 msgid "Product ID"
 msgstr "产品 ID"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:56
-#: includes/tools/class-alg-wc-cog-import-tool.php:57
+#: includes/tools/class-alg-wc-cog-import-tool.php:147
+#: includes/tools/class-alg-wc-cog-import-tool.php:148
 msgid "Import Costs"
 msgstr "导入成本"
-
-#: cost-of-goods-for-woocommerce.php:188
-msgid "Settings"
-msgstr "设置"
 
 #. Plugin URI of the plugin
 msgid "https://wpfactory.com/item/cost-of-goods-for-woocommerce/"
 msgstr "https://wpfactory.com/item/cost-of-goods-for-woocommerce/"
 
-#. Plugin Name of the plugin
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:107
-msgid "Cost of Goods for WooCommerce"
-msgstr "Cost of Goods for WooCommerce"
+#: includes/alg-wc-cog-functions.php:219
+msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:101
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:36
+msgid "Items cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:102
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:42
+msgid "Shipping cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:103
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:48
+msgid "Gateway cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:104
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:54
+msgid "Extra cost"
+msgstr ""
+
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:105
+#: includes/analytics/build/index.js:1
+#: includes/analytics/src/modules/orders.js:60
+msgid "Shipping classes cost"
+msgstr ""
+
+#: includes/background-process/class-alg-wc-cog-update-cost-bkg-process.php:32
+msgid "Cost of Goods for WooCommerce - Bulk update costs"
+msgstr ""
+
+#: includes/background-process/class-alg-wc-cog-update-price-bkg-process.php:30
+msgid "Cost of Goods for WooCommerce - Bulk update prices"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders-meta-boxes.php:201
+msgid "Extra profit details"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:548
+msgid "Taxes to profit (%s)"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:592
+msgid "Fees to profit (%s)"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:636
+msgid "Shipping to profit (%s)"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-add-stock.php:448
+msgid "Variation history"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-add-stock.php:455
+#: includes/class-alg-wc-cog-products-cost-archive.php:295
+msgid "Select variation"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-add-stock.php:534
+msgid "If no variation is selected, the parent product will be updated."
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-add-stock.php:535
+msgid "Update variation(s)"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-cost-archive.php:53
+#: includes/settings/class-alg-wc-cog-settings-products.php:188
+#: includes/settings/class-alg-wc-cog-settings-products.php:194
+msgid "Cost archive"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-cost-archive.php:178
+msgid "There isn't a cost archive for this product yet."
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-cost-archive.php:179
+msgid "Please, check if the option %s is enabled and then update the cost."
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-cost-archive.php:179
+msgid "Products > Cost archive > Save cost archive"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-cost-archive.php:182
+msgid "Update date"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-cost-archive.php:183
+msgid "Previous cost"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-cost-archive.php:184
+msgid "New cost"
+msgstr ""
+
+#: includes/class-alg-wc-cog-products-cost-archive.php:288
+msgid "Variation archive"
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wc-food.php:74
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:274
+msgid "Food costs"
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wc-food.php:264
+msgid "Option(s) costs"
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro-extra-currencies-costs.php:54
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:127
+msgid "Currencies costs"
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:193
+msgid "- No change -"
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro.php:583
+msgid "Orders cost and profit successfully recalculated."
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro.php:590
+msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro.php:593
+msgid "Something went wrong..."
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro.php:711
+msgid "Cost of Goods reports are in %s and in %s."
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro.php:713
+msgid "Reports > Orders > Cost of Goods"
+msgstr ""
+
+#: includes/pro/class-alg-wc-cog-pro.php:715
+msgid "Reports > Stock > Cost of Goods"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:44
+msgid "print"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:45
+msgid "export"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:124
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:166
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:191
+msgid "Total Cost"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:125
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:170
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:195
+msgid "Total Price"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:126
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:174
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:191
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:195
+msgid "Total Profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:158
+msgid "Total Stock"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:162
+msgid "Total Products"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:178
+msgid "Average Cost"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:182
+msgid "Average Price"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:186
+msgid "Average Profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:190
+msgid "Profit Percentage"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:194
+msgid "Profit Margin"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:207
+msgid "Only products with cost, price and stock are counted in report."
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:208
+msgid "All prices exclude tax."
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:209
+msgid "Totals"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog-stock.php:216
+msgid "There are no products with cost, price and stock."
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:59
+msgid "%s costs"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:61
+msgid "Costs amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:65
+msgid "%s profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:67
+msgid "Profit amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:72
+msgid "%s item costs"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:74
+msgid "Item costs amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:78
+msgid "%s fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:80
+msgid "Fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:84
+msgid "%s shipping method fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:86
+msgid "Shipping method fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:90
+msgid "%s shipping method fees (fixed)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:92
+msgid "Shipping method fees amount (fixed)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:96
+msgid "%s shipping method fees (percent)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:98
+msgid "Shipping method fees amount (percent)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:102
+msgid "%s gateway fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:104
+msgid "Gateway fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:108
+msgid "%s gateway fees (fixed)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:110
+msgid "Gateway fees amount (fixed)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:114
+msgid "%s gateway fees (percent)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:116
+msgid "Gateway fees amount (percent)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:120
+msgid "%s order fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:122
+msgid "Order fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:126
+msgid "%s order fees (fixed)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:128
+msgid "Order fees amount (fixed)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:132
+msgid "%s order fees (percent)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:134
+msgid "Order fees amount (percent)"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:138
+msgid "%s per order fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:140
+msgid "Per order fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:144
+msgid "%s handling fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:146
+msgid "Handling fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:150
+msgid "%s shipping fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:152
+msgid "Shipping fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:156
+msgid "%s payment fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:158
+msgid "Payment fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:162
+msgid "%s meta fees"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:164
+msgid "Meta fees amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:168
+msgid "%s shipping to profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:170
+msgid "Shipping to profit amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:174
+msgid "%s fees to profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:176
+msgid "Fees to profit amount"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:180
+msgid "%s taxes to profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:182
+msgid "Taxes to profit amount"
+msgstr ""
+
+#. translators: %s: average sales
+#: includes/pro/reports/class-wc-report-alg-cog.php:272
+msgid "%s average daily profit"
+msgstr ""
+
+#. translators: %s: average sales
+#: includes/pro/reports/class-wc-report-alg-cog.php:280
+msgid "%s average monthly profit"
+msgstr ""
+
+#: includes/pro/reports/class-wc-report-alg-cog.php:359
+msgid "Average profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:75
+msgid "Advanced options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:94
+msgid "Order item costs"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:95
+msgid "Auto fill empty order items costs on order update"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:102
+msgid "Auto fill empty order items costs on order status change"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:109
+msgid "Auto fill empty order items costs on new order item addition"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:116
+msgid "Auto fill empty order items costs on order meta update"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:117
+msgid "Only triggers with meta not starting with <code>_alg_wc_cog</code>."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:124
+msgid "Order calculation hooks"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:125
+msgid "Hooks that will update order cost/profit calculation."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:133
+msgid "Order metadata"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:134
+msgid "Avoid empty order metadata from being saved to database"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:140
+msgid "Infinite loops"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:141
+msgid "Avoid infinite loops"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-advanced.php:142
+msgid "You can try to disable it if you're experiencing the bug %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:41
+msgid "Analytics options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:43
+msgid "If you can't see the values refreshed or have issues with the analytics page, please try <a href=\"%s\">clearing the analytics cache</a>."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:55
+msgid "Customers"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:56
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:76
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:113
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:142
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:171
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:200
+msgid "Options for the %s section."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:56
+msgid "WooCommerce > Customers"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:61
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:81
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:118
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:147
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:176
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:205
+msgid "Cost and profit columns"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:76
+msgid "Analytics > Orders"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:88
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:126
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:155
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:184
+msgid "Cost and profit totals"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:97
+msgid "Add columns for individual elements from the costs total"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:98
+msgid "Adds items, shipping, gateway, shipping classes and extra costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:113
+msgid "Analytics > Products"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:141
+msgid "Categories"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:142
+msgid "Analytics > Categories"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:170
+msgid "Revenue"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:171
+msgid "Analytics > Revenue"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:177
+msgid "Add \"Cost\" and \"Profit\" totals columns"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:200
+msgid "Analytics > Stock"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:213
+msgid "Consider stock"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:214
+msgid "Take stock into consideration for cost and profit calculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:221
+msgid "Category column"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:229
+msgid "Filter dropdown"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-analytics.php:231
+msgid "For now, it allows to get only products with costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:46
+msgid "WPSyncSheets"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:52
+msgid "Order export"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:53
+msgid "Export order cost to sheet"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:63
+msgid "Export order profit to sheet"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:79
+msgid "CURCY - Multi Currency for WooCommerce"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:85
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:106
+msgid "Multicurrency order calculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:86
+msgid "Get currency rates from CURCY plugin instead of the %s option"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:86
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:107
+msgid "Multicurrency > Order calculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:100
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:107
+msgid "ExchangeRate-API"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:107
+msgid "Get currency rates from %s instead of the %s option"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:122
+msgid "Metorik"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:128
+msgid "Sync cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:129
+msgid "Sync cost with %s meta"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:130
+msgid "Everytime %s meta gets updated its value is copied to %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:150
+msgid "Numbers with commas"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:151
+msgid "Convert numbers with commas to dots"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:152
+msgid "Example: <code>1723,07</code> changes to <code>1723.07</code>."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:160
+msgid "Remove all illegal characters from a float number, like currency values for example"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:180
+msgid "WooCommerce reports"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:181
+msgid "Exclude Smart bundle product type from %s and %s report"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:181
+msgid "stock"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:188
+msgid "Cost calculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:189
+msgid "Calculate Smart bundle cost from its items"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:190
+msgid "The cost will be calculated automatically when the bundle product price is updated."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:198
+msgid "Exclude Smart bundle cost from order item"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:199
+msgid "This option should be probably enabled if the above option is."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:214
+msgid "ATUM Inventory Management for WooCommerce"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:220
+msgid "Import costs tool"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:221
+msgid "Copy cost from %s plugin while using the %s tool"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:221
+msgid "ATUM"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:221
+msgid "Import costs"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:222
+msgid "The %s option will be ignored."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:229
+msgid "Cost sync"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:230
+msgid "Change cost of goods every time the purchase price is updated in ATUM"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
+msgid "The %s meta will be changed every time the %s column is updated."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
+msgid "_alg_wc_cog_cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:231
+msgid "purchase_price"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:238
+msgid "Add Stock sync"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:239
+msgid "Update Add Stock feature when the stock is changed from ATUM."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:241
+msgid "The %s option should probably be set as %s or %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:242
+msgid "Products > Add Stock > Empty cost field"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:243
+msgid "Uses corrent cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:244
+msgid "Uses last cost value from \"Add stock history\""
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:252
+msgid "Taxes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:253
+msgid "Subtract taxes from ATUM cost while using the \"Import\" or \"Cost sync\" options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:254
+msgid "The highest priority tax rate will be used, and only on taxable products."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:268
+msgid "WooCommerce Food"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:275
+msgid "Add fixed costs to food options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:276
+msgid "A metabox is going to be created on the admin products page and on the global food options."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:277
+msgid "For now, all the options costs will be \"quantity based\" calculated."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:291
+msgid "WooCommerce Measurement Price Calculator"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:298
+msgid "Adjust the cost of goods sold according to the product measurement"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:305
+msgid "Cost field label placeholder"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:306
+msgid "Add the placeholder %s to the %s option"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:326
+msgid "Order types"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:327
+#: includes/settings/class-alg-wc-cog-settings-products.php:245
+msgid "Note:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:327
+msgid "Only works with the old WooCommerce reports, and it might not work on recent versions of WooCommerce."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:352
+msgid "Addons"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:353
+msgid "Add costs fields for the addons and create an order meta with addons costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:400
+msgid "plugin"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:400
+msgid "theme"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:406
+msgid "Compatibility with %s %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:41
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:51
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:52
+msgid "Multi-currency management"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:42
+msgid "Some notes:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:44
+msgid "All COG related metas, such as profit and costs will be saved in the shop base currency."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:45
+msgid "All costs should be always set with the shop base currency, including cost fields present on orders."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:52
+msgid "Enable %s feature"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:62
+msgid "Order values"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:63
+msgid "Display COG related values from the order, such as costs and profit, in the currency of the order"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:64
+msgid "The affected areas are the %s and the order page on the admin."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:64
+msgid "order listing page"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:74
+msgid "COG order fields currency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:75
+msgid "Force shop base currency on COG order fields"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:121
+msgid "Currency costs"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:122
+msgid "Add extra costs based on the order currency."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:128
+msgid "Add extra costs based on the order currency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:139
+msgid "Choose currencies you want to add costs for, and \"Save changes\" - new settings fields will be displayed."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:155
+msgid " - Fixed cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:165
+msgid " - Percent cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:166
+msgid "Percent from order total. E.g.: If you want to add a cost of <code>50%</code> from order total you can set it as 50."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:39
+msgid "Add extra costs for your orders based on order's payment gateway."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:151
+msgid "Allow editing the total order cost value by adding a cost input"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:152
+msgid "Leaving it empty will recalculate the cost. Setting it as %s will remove the cost."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:242
+msgid "Define options for order cost and profit calculations."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:255
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:145
+msgid "Order total"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:256
+msgid "The way taxes will be considered when calculating order total on percentage costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:257
+msgid "Total to calculate all extra costs percentage costs from (%s)."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:281
+msgid "Shipping to profit - Percentage."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:282
+msgid "If you want to move %s of the shipping value to profit, set it as %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:295
+msgid "Fees to profit - Percentage."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:296
+msgid "If you want to move %s of the fees to profit, set it as %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:304
+msgid "Add order taxes like VAT to the order profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:310
+msgid "Taxes to profit - Percentage."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:311
+msgid "If you want to move %s of the taxes to profit, set it as %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:337
+msgid "Set up how refunds will affect the cost and profit."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:339
+msgid "Most probably, enabling the options %s and %s should be enough in order to ignore refunded items from profit calculation."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:340
+#: includes/settings/class-alg-wc-cog-settings-orders.php:349
+msgid "Ignore refunded item cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:341
+#: includes/settings/class-alg-wc-cog-settings-orders.php:356
+msgid "Ignore item refund amount"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:343
+msgid "It's necessary to manually update the order after a refund. If you change these settings you can use our %s to update the orders. "
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:348
+msgid "Item cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:355
+msgid "Item total"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:362
+msgid "Profit calculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:367
+msgid "Use default profit calculation mechanism"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:478
+msgid "You can also use dots to access serialized array metas. E.g.: Get fees from %s:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:478
+msgid "PayPal Payments"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:479
+msgid "The <a href=\"%s\">\"Payment Plugins for Stripe\"</a> requires the \"Display Stripe Fee\" option to be enabled in the Advanced Settings in order to add the %s meta."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:481
+msgid "If you have issues, please try to enable the %s options."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:39
+msgid "General product options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:44
+msgid "Profit HTML template"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:65
+msgid "Get regular price"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:87
+msgid "Cost field options"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:93
+msgid "Placeholders:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:147
+#: includes/settings/class-alg-wc-cog-settings-products.php:164
+msgid "Column width (%s)."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:189
+msgid "Save a history of product costs each time they get updated."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:195
+msgid "Save cost archive"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:202
+msgid "Enable a cost archive meta box on admin product page"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:209
+msgid "Date format."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:210
+#: includes/settings/class-alg-wc-cog-settings-products.php:295
+msgid "Example:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:211
+#: includes/settings/class-alg-wc-cog-settings-products.php:296
+msgid "<a target=\"_blank\" href=\"%s\">See format options.</a>"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:217
+msgid "Date order."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:219
+#: includes/settings/class-alg-wc-cog-settings-products.php:304
+msgid "Ascending"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:220
+#: includes/settings/class-alg-wc-cog-settings-products.php:305
+msgid "Descending"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:227
+msgid "MySQL"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:228
+msgid "Use %s function to get the dates"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:229
+msgid "Disable if the archive does not work. Note: If disabled, the performance will be slower."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:243
+msgid "Calculate new average cost of goods for the product based on new \"Stock\" and \"Cost\" values you enter."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:245
+msgid "The %s option has to be enabled."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:245
+msgid "Stock management"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:251
+msgid "Enable \"Add stock\" feature"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:252
+msgid "A meta box \"%s\" will be added to the product edit page."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:279
+msgid "The cost value considered when the field is empty."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:293
+msgid "History date"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:294
+msgid "History date format."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:302
+msgid "History date order."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:385
+msgid "Cost sanitization"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:390
+msgid "Cost update"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:397
+msgid "Cost import"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:398
+msgid "Get only the cost number when using the %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:398
+msgid "WooCommerce Importer"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:399
+msgid "Useful if you want to ignore price symbols from the CSV when importing."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:405
+msgid "Product export"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:406
+msgid "Convert cost to number"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:407
+msgid "If disabled it will be parsed as string."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:413
+msgid "Dots and commas operation when exporting the product cost."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:418
+msgid "Convert commas to dots"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:419
+msgid "Convert dots to commas"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:420
+msgid "None"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:39
+msgid "Add extra costs for your orders based on product's shipping classes."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:56
+msgid "Fixed cost calculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:57
+msgid "\"Per product\" calculates for each different product having a shipping class."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:57
+msgid "\"Per shipping class\" calculates for each different shipping class."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:63
+msgid "Per product"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:64
+msgid "Per shipping class"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:65
+msgid "Per item"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:97
+msgid "Percent from product total. E.g.: If you want <code>50%</code> from product total you can set it as 50."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:99
+msgid "order total"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:101
+msgid "shipping total"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:140
+msgid "Percent cost source."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:146
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:152
+msgid "Shipping total"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:151
+msgid "The way taxes will be considered when calculating shipping total on percent costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:152
+msgid "Needs %s option set as %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:157
+msgid "Shipping total excl. tax"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:158
+msgid "Shipping total incl. tax"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shipping.php:192
+msgid "Percent from %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:26
+msgid "Shortcodes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:58
+msgid "Product shortcodes"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:64
+msgid "Displays the product profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:65
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:77
+msgid "Params:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:66
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:78
+msgid "Product ID."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:66
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:78
+msgid "If empty, will try to get the current product id."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:67
+msgid "Profit template."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:67
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:68
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:79
+msgid "Default:"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:68
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:79
+msgid "HTML template."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-shortcodes.php:76
+msgid "Displays the product cost"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:33
+msgid "Tools"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:92
+msgid "Product search"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:112
+msgid "Prices"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:119
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:375
+msgid "Tags"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:120
+msgid "Edit tags"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:126
+msgid "Costs"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:127
+msgid "Show profit as cost field description"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:141
+msgid "Ignored unless \"Manage stock\" checkbox is enabled."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:195
+msgid "WooCommerce Import"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:197
+msgid "Sync with %s from WooCommerce"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:197
+msgid "Product Importer"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:198
+msgid "If enabled, our tool will run automatically along with the CSV/TXT import."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:203
+msgid "Import page table"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:206
+msgid "If you have problems accessing the \"Import Costs\" page try disabling this option."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:211
+msgid "Run automatically"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:212
+msgid "Run the import tool automatically as a recurring event"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:213
+msgid "Runs the tool based on the frequency option below."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:220
+msgid "Frequency"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:222
+msgid "If the frequency is changed after the Run automatically option is enabled, it will be necessary to disable and enable it again to see the frequency updated."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:224
+msgid "Hourly"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:225
+msgid "Daily"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:226
+msgid "Twice daily"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:227
+msgid "Weekly"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:240
+msgid "Orders recalculation tool"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:245
+msgid "Recalculate orders"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:246
+msgid "Recalculate cost and profit for all orders"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:255
+msgid "Recalculate no cost orders"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:256
+msgid "Recalculate cost and profit for orders with no costs"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:266
+msgid "After."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:267
+msgid "Recalculate cost and profit for orders after a specific date."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:275
+msgid "Before."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:276
+msgid "Recalculate cost and profit for orders before a specific date."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:284
+msgid "Date type."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:290
+msgid "Date created"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:291
+msgid "Date modified"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:292
+msgid "Date completed"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:293
+msgid "Date paid"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:463
+msgid "cost"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:624
+msgid "The %s of %d products are being updated via background processing."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:625
+msgid "An email is going to be sent to %s when the task is completed."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:627
+msgid "Successfully updated the %s of %d products."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:631
+msgid "There are no products to be updated."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:750
+msgid "Edit costs by price percentage"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:751
+msgid "Product costs will be defined from a percentage of product prices."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:755
+msgid "Edit costs by profit percentage"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:756
+msgid "Products costs will be set according to the profit percentage you'd like to achieve based on the current product prices."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:760
+msgid "Increase costs by percentage"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:761
+msgid "Product costs will be increased by %s."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:765
+msgid "Decrease costs by percentage"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:766
+msgid "Product costs will be decreased by %s."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:770
+msgid "Set variation costs from parents"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:771
+msgid "Update variations to match the cost value of their parent products."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:773
+msgid "Example: If a variable product is set with a cost of %s, all its variations will also cost %s."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:793
+msgid "Edit prices by profit percentage"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:794
+msgid "Products prices will be set according to the profit percentage you'd like to achieve based on the current product costs."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:798
+msgid "Edit prices by absolute profit"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:799
+msgid "Products prices will be set according to the absolute profit you'd like to achieve based on the current product costs."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:816
+msgid "Ignore current cost"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:821
+msgid "Only update products with no costs set, including zero or empty"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:826
+msgid "Only update products with costs already set"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:846
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:978
+msgid "Update method"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:860
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1008
+msgid "Profit percentage (%)"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:865
+msgid "Example: If set as %s, a product costing %s will have its price changed to %s, resulting in a %s profit percentage."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:876
+msgid "Absolute profit"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:881
+msgid "Example: If set as %s, a product costing %s will have its price changed to %s, resulting in an absolute profit of %s."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:892
+msgid "Price type"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:895
+msgid "Regular Price"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:896
+msgid "Sale Price"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:900
+msgid "Type of price affected by the update."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:902
+msgid "Note: If the update results in a regular price lower than the sale price, the product won't have its price changed."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:908
+msgid "Rounding"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:911
+msgid "Do not round"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:912
+msgid "Round"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:913
+msgid "Round up"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:914
+msgid "Round down"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:917
+msgid "Price rounding after the calculation."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:923
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1054
+msgid "Filters"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:927
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1058
+msgid "Filter by category"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:929
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1060
+msgid "Search for a category&hellip;"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:932
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1063
+msgid "Select only the categories you want to edit. Leave it empty to update all products."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:938
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1069
+msgid "Filter by tag(s)"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:940
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1071
+#: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:233
+msgid "Search for a tag&hellip;"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:943
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1074
+msgid "Select only the tag(s) you want to edit. Leave it empty to update all products."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:949
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1095
+msgid "Filter by stock status"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:992
+msgid "Price percentage (%)"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:996
+msgid "Most probably you should use a number between 0 and 100."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:998
+msgid "Example: If set as %s, a product priced at %s will have its cost set to %s, representing a %s margin based on the product's price."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1013
+msgid "Example: If set as %s, a product priced at %s will have its cost set to %s, resulting in a %s profit percentage."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1023
+msgid "Percentage increase (%)"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1028
+msgid "Example: If set as %s, a product costing %s will have its cost set to %s, resulting in a %s cost percentage increase."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1038
+msgid "Percentage decrease (%)"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1043
+msgid "Example: If set as %s, a product costing %s will have its cost set to %s, resulting in a %s cost percentage decrease."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1080
+msgid "Filter by cost"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1164
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1355
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1356
+msgid "Bulk Edit Prices"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1252
+msgid "Manually"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1257
+msgid "Bulk edit products costs/prices/stock manually. Tools options can be set in \"<strong>Cost of Goods for WooCommerce</strong>\" <a href=\"%s\">plugin settings</a>."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1264
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1272
+msgid "Automatically"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1265
+msgid "Set the product costs automatically."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1266
+msgid "Variation costs will also be updated accordingly."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1267
+msgid "Update Costs"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1275
+msgid "Update prices"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1277
+msgid "Set the product prices according to the cost."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1278
+msgid "Variation prices will also be updated accordingly."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1383
+msgid "Are you really want to update?"
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1490
+msgid "Data have been saved."
+msgstr ""
+
+#: includes/tools/class-alg-wc-cog-import-tool.php:308
+msgid "Import products costs to \"Cost of Goods for WooCommerce\" plugin by copying the meta from %s to %s."
+msgstr ""
