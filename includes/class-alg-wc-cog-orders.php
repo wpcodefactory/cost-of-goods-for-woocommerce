@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.4.8
+ * @version 3.5.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1281,7 +1281,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.4.8
+	 * @version 3.5.0
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1322,6 +1322,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			$shipping_classes_term_ids_used  = array();
 			$shipping_classes_fixed_cost_calculation = get_option( 'alg_wc_cog_shipping_classes_fixed_cost_calculation', 'per_product' );
 		}
+		$ignore_quantity = 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_order_calculation_ignores_quantity', 'no' );
 		$shipping_class_cost_fixed_total   = 0;
 		$shipping_class_cost_percent_total = 0;
 		$shipping_classes_cost_total       = 0;
@@ -1419,7 +1420,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 						'dots_and_commas_operation' => 'comma-to-dot'
 					) );
 					$cost            = (float) $cost;
-					$line_cost       = $cost * $quantity;
+					$line_cost       = $ignore_quantity ? $cost : $cost * $quantity;
 					$item_line_total = $item['line_total'];
 					if ( $ignore_item_refund_amount ) {
 						$item_line_total -= $order->get_total_refunded_for_item( $item_id );

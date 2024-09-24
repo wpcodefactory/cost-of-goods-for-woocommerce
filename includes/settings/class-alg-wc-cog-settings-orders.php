@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings.
  *
- * @version 3.4.8
+ * @version 3.5.0
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.8
+	 * @version 3.5.0
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -248,6 +248,13 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'title'    => __( 'Count empty cost lines', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Count empty cost items when calculating order cost and profit', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_order_count_empty_costs',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Ignore quantity', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Ignore quantity sold when calculating profit and costs', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_order_calculation_ignores_quantity',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),
