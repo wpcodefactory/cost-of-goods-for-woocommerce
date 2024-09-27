@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.4.5
+ * @version 3.5.1
  * @since   3.0.3
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '3.4.9';
+		public $version = '3.5.1';
 
 		/**
 		 * @since 1.0.0
@@ -87,10 +87,16 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		/**
 		 * Initializes.
 		 *
-		 * @version 3.0.3
+		 * @version 3.5.1
 		 * @since   2.8.1
 		 */
 		function init() {
+			// Adds cross-selling library.
+			$this->add_cross_selling_library();
+
+			// Move WC Settings tab to WPFactory menu.
+			$this->move_wc_settings_tab_to_wpfactory_menu();
+
 			// Localization
 			add_action( 'init', array( $this, 'localize' ) );
 
@@ -120,6 +126,44 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 				$this,
 				'handle_documentation_params'
 			), 10 );
+		}
+
+		/**
+		 * add_cross_selling_library.
+		 *
+		 * @version 3.5.1
+		 * @since   3.5.1
+		 *
+		 * @return void
+		 */
+		function add_cross_selling_library(){
+			if ( ! is_admin() ) {
+				return;
+			}
+			// Cross-selling library.
+			$cross_selling = new \WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling();
+			$cross_selling->setup( array( 'plugin_file_path'   => $this->get_filesystem_path() ) );
+			$cross_selling->init();
+		}
+
+		/**
+		 * move_wc_settings_tab_to_wpfactory_submenu.
+		 *
+		 * @version 3.5.1
+		 * @since   3.5.1
+		 *
+		 * @return void
+		 */
+		function move_wc_settings_tab_to_wpfactory_menu() {
+			if ( ! is_admin() ) {
+				return;
+			}
+			// WC Settings tab as WPFactory submenu item.
+			$wpf_admin_menu = \WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu::get_instance();
+			$wpf_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
+				'wc_settings_tab_id' => 'alg_wc_cost_of_goods',
+				'menu_title'         => __( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ),
+			) );
 		}
 
 		/**

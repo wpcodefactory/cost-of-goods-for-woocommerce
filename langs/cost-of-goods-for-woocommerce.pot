@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.5.0\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.5.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-09-25T00:18:52+02:00\n"
+"POT-Creation-Date: 2024-09-27T23:52:24+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -162,6 +162,7 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:116
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:219
+#: includes/class-alg-wc-cog.php:165
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
 #: includes/settings/class-alg-wc-cog-settings-orders.php:430
 #: includes/settings/class-alg-wc-cog-settings-products.php:253
@@ -282,8 +283,8 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-orders.php:754
 #: includes/class-alg-wc-cog-orders.php:1198
-#: includes/pro/class-alg-wc-cog-pro.php:644
-#: includes/pro/class-alg-wc-cog-pro.php:663
+#: includes/pro/class-alg-wc-cog-pro.php:646
+#: includes/pro/class-alg-wc-cog-pro.php:665
 msgid "Cost of goods"
 msgstr ""
 
@@ -388,7 +389,7 @@ msgstr ""
 msgid "Variation archive"
 msgstr ""
 
-#: includes/class-alg-wc-cog.php:220
+#: includes/class-alg-wc-cog.php:264
 msgid "Go Pro"
 msgstr ""
 
@@ -410,27 +411,27 @@ msgstr ""
 msgid "- No change -"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:589
+#: includes/pro/class-alg-wc-cog-pro.php:591
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:596
+#: includes/pro/class-alg-wc-cog-pro.php:598
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:599
+#: includes/pro/class-alg-wc-cog-pro.php:601
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:717
+#: includes/pro/class-alg-wc-cog-pro.php:719
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:719
+#: includes/pro/class-alg-wc-cog-pro.php:721
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:721
+#: includes/pro/class-alg-wc-cog-pro.php:723
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
 
