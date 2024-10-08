@@ -37,7 +37,7 @@ msgstr "WPFactory"
 msgid "https://wpfactory.com"
 msgstr "https://wpfactory.com"
 
-#: includes/class-alg-wc-cog.php:264
+#: includes/class-alg-wc-cog.php:265
 msgid "Go Pro"
 msgstr "Gehen Sie zum Profi"
 
@@ -3131,4 +3131,8 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:256
 msgid "Ignore quantity sold when calculating profit and costs"
+msgstr ""
+
+#: includes/class-alg-wc-cog.php:166
+msgid "Cost of Goods Sold"
 msgstr ""

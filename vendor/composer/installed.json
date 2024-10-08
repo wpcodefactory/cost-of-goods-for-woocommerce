@@ -2,23 +2,23 @@
     "packages": [
         {
             "name": "wpfactory/wpfactory-admin-menu",
-            "version": "v1.0.1",
-            "version_normalized": "1.0.1.0",
+            "version": "v1.0.2",
+            "version_normalized": "1.0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpcodefactory/wpfactory-admin-menu.git",
-                "reference": "5766f0d1337e1a94a5ed2057fe4fedd86e8562b6"
+                "reference": "89e0b637eb5af737dd4cba52a41797082cb0d7c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-admin-menu/zipball/5766f0d1337e1a94a5ed2057fe4fedd86e8562b6",
-                "reference": "5766f0d1337e1a94a5ed2057fe4fedd86e8562b6",
+                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-admin-menu/zipball/89e0b637eb5af737dd4cba52a41797082cb0d7c9",
+                "reference": "89e0b637eb5af737dd4cba52a41797082cb0d7c9",
                 "shasum": ""
             },
             "require-dev": {
                 "wp-cli/wp-cli-bundle": "*"
             },
-            "time": "2024-09-27T20:07:15+00:00",
+            "time": "2024-10-08T22:38:02+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -46,7 +46,7 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/wpcodefactory/wpfactory-admin-menu/tree/v1.0.1",
+                "source": "https://github.com/wpcodefactory/wpfactory-admin-menu/tree/v1.0.2",
                 "issues": "https://github.com/wpcodefactory/wpfactory-admin-menu/issues"
             },
             "install-path": "../wpfactory/wpfactory-admin-menu"

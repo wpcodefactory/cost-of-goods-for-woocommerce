@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.5.1
+ * @version 3.5.3
  * @since   3.0.3
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '3.5.2';
+		public $version = '3.5.3';
 
 		/**
 		 * @since 1.0.0
@@ -149,7 +149,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		/**
 		 * move_wc_settings_tab_to_wpfactory_submenu.
 		 *
-		 * @version 3.5.1
+		 * @version 3.5.3
 		 * @since   3.5.1
 		 *
 		 * @return void
@@ -163,6 +163,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 			$wpf_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
 				'wc_settings_tab_id' => 'alg_wc_cost_of_goods',
 				'menu_title'         => __( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ),
+				'page_title'         => __( 'Cost of Goods Sold', 'cost-of-goods-for-woocommerce' ),
 			) );
 		}
 
