@@ -2,7 +2,7 @@
 /**
  * WPFactory Cross-Selling
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -32,7 +32,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling'
 		 *
 		 * @var string
 		 */
-		protected $version = '1.0.0';
+		protected $version = '1.0.1';
 
 		/**
 		 * Setup args.
@@ -91,7 +91,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling'
 		/**
 		 * Setups the class.
 		 *
-		 * @version 1.0.0
+		 * @version 1.0.1
 		 * @since   1.0.0
 		 *
 		 * @param $args
@@ -117,7 +117,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling'
 			$args['admin_page'] = wp_parse_args( $args['admin_page'], array(
 				'page_title' => __( 'WPFactory Recommendations', 'wpfactory-cross-selling' ),
 				'menu_title' => __( 'Recommendations', 'wpfactory-cross-selling' ),
-				'capability' => 'manage_options',
+				'capability' => class_exists( 'WooCommerce' ) ? 'manage_woocommerce' : 'manage_options',
 				'position'   => 2
 			) );
 
