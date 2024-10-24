@@ -3136,3 +3136,15 @@ msgstr ""
 #: includes/class-alg-wc-cog.php:166
 msgid "Cost of Goods Sold"
 msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:502
+msgid "Sign handling"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:503
+msgid "Consider all values as positive"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:504
+msgid "Negative numbers will be converted to positive"
+msgstr ""

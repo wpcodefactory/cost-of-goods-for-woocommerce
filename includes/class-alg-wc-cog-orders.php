@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.5.0
+ * @version 3.5.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1281,7 +1281,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.5.0
+	 * @version 3.5.5
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1358,6 +1358,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$total_price          = 0;
 		$order_total_refunded = is_a( $order, 'WC_Order_Refund' ) ? $order->get_amount() : $order->get_total_refunded();
 		$order_total_refunded = (float) apply_filters( 'alg_wc_cog_order_total_refunded', $order_total_refunded, $order );
+		$consider_extra_costs_from_meta_as_positive = 'yes' === get_option( 'alg_wc_cog_order_extra_cost_from_meta_as_positive', 'no' );
 		do_action( 'alg_wc_cog_before_update_order_items_costs', $order );
 		// Calculations
 		if ( empty( $this->delay_calculations_status ) || $order->has_status( $this->delay_calculations_status ) ) {
@@ -1621,6 +1622,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 						array_shift( $meta_keys_splitted );
 						$fee = $this->get_array_value_by_dynamic_keys( $meta_keys_splitted, $post_meta_value );
 					}
+					$fee = $consider_extra_costs_from_meta_as_positive ? abs( $fee ) : $fee;
 					$meta_fees += apply_filters( 'alg_wc_cog_order_extra_cost_from_meta', floatval( $fee ), $order );
 				}
 				if ( 0 !== $meta_fees ) {
