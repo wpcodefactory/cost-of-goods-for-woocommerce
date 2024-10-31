@@ -2,22 +2,20 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.5.5\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.5.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-10-24T21:21:46+02:00\n"
+"POT-Creation-Date: 2024-10-31T17:13:34+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
 
 #. Plugin Name of the plugin
-#: includes/alg-wc-cog-functions.php:219
-#: includes/settings/class-alg-wc-settings-cog.php:83
-msgid "Cost of Goods for WooCommerce Pro"
+msgid "Cost of Goods: Product Cost & Profit Calculator for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin
@@ -38,6 +36,11 @@ msgstr ""
 
 #: includes/alg-wc-cog-functions.php:219
 msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
+msgstr ""
+
+#: includes/alg-wc-cog-functions.php:219
+#: includes/settings/class-alg-wc-settings-cog.php:83
+msgid "Cost of Goods for WooCommerce Pro"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:101

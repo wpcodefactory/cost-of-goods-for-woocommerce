@@ -1,0 +1,12 @@
+.gitignore export-ignore
+composer.lock export-ignore
+README.md export-ignore
+CHANGELOG.md export-ignore
+changelog.txt export-ignore
+.gitattributes export-ignore
+composer.json export-ignore
+package.json export-ignore
+package-lock.json export-ignore
+webpack.config.js export-ignore
+# SCSS
+src/scss/* export-ignore

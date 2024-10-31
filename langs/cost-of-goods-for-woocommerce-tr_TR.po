@@ -1085,7 +1085,6 @@ msgstr "Maliyetleri içe aktar"
 msgid "Tool's options can be set in %s."
 msgstr "Aracın seçenekleri %s içinde ayarlanabilir."
 
-#. Plugin Name of the plugin
 #: includes/alg-wc-cog-functions.php:219
 #: includes/settings/class-alg-wc-settings-cog.php:83
 msgid "Cost of Goods for WooCommerce Pro"
@@ -3183,4 +3182,8 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:504
 msgid "Negative numbers will be converted to positive"
+msgstr ""
+
+#. Plugin Name of the plugin
+msgid "Cost of Goods: Product Cost & Profit Calculator for WooCommerce"
 msgstr ""

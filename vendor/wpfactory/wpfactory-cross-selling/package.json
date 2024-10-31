@@ -1,0 +1,30 @@
+{
+  "name": "wpfactory-cross-selling",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "prod": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "latest",
+    "@babel/core": "latest",
+    "@babel/preset-env": "latest",
+    "babel-loader": "latest",
+    "babel-plugin-dynamic-import-webpack": "latest",
+    "css-loader": "latest",
+    "file-loader": "latest",
+    "mini-css-extract-plugin": "latest",
+    "postcss-loader": "latest",
+    "postcss-preset-env": "latest",
+    "sass": "latest",
+    "sass-loader": "latest",
+    "url-loader": "latest",
+    "webpack": "latest",
+    "webpack-cli": "latest",
+    "webpack-remove-empty-scripts": "latest"
+  }
+}

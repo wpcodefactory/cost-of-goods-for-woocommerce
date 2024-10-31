@@ -1,0 +1,31 @@
+{
+  "name": "wpfactory/wpfactory-cross-selling",
+  "autoload": {
+    "classmap": [
+      "src/php/"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/wpcodefactory/wpfactory-admin-menu"
+    }
+  ],
+  "scripts": {
+    "wp": "vendor/bin/wp",
+    "wp-create-pot": "wp i18n make-pot src/php ./langs/wpfactory-cross-selling.pot --domain=wpfactory-cross-selling",
+    "wp-update-po": "wp i18n update-po ./langs/wpfactory-cross-selling.pot",
+    "wp-make-mo": "wp i18n make-mo ./langs/",
+    "translate": [
+      "@composer run wp-create-pot",
+      "@composer run wp-update-po",
+      "@composer run wp-make-mo"
+    ]
+  },
+  "require-dev":{
+    "wp-cli/wp-cli-bundle": "*"
+  },
+  "require": {
+    "wpfactory/wpfactory-admin-menu": "*"
+  }
+}
