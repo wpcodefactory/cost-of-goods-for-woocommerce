@@ -74,7 +74,7 @@
             },
             "time": "2024-10-31T15:55:35+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "src/php/"
