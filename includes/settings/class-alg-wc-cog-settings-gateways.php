@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Gateways Section Settings
  *
- * @version 2.4.3
+ * @version 3.5.8
  * @since   1.5.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.4.3
+	 * @version 3.5.8
 	 * @since   1.5.0
 	 * @todo    [maybe] better section desc (same for `$order_extra_cost_settings` and "Shipping"): how to recalculate order's profit/cost (i.e. update order or use tool)
 	 */
@@ -83,6 +83,17 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 					'desc_tip'          => __( 'Percent from order total.', 'cost-of-goods-for-woocommerce' ),
 					'type'              => 'number',
 					'id'                => "alg_wc_cog_gateway_costs_percent[{$key}]",
+					'default'           => 0,
+					'custom_attributes' => array( 'step' => '0.000001' ),
+					'wpfse_data'    => array(
+						'hide' => true
+					)
+				),
+				array(
+					'desc'              => __( 'Max value.', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'Maximum absolute value returned for the percent calculation.', 'cost-of-goods-for-woocommerce' ),
+					'type'              => 'number',
+					'id'                => "alg_wc_cog_gateway_costs_percent_max_value[{$key}]",
 					'default'           => 0,
 					'custom_attributes' => array( 'step' => '0.000001' ),
 					'wpfse_data'    => array(

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.5.6
+ * @version 3.5.8
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1281,7 +1281,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.5.6
+	 * @version 3.5.8
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1340,6 +1340,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$gateway_cost         = 0;
 		$gateway_cost_fixed   = 0;
 		$gateway_cost_percent = 0;
+		$gateway_cost_percent_max = alg_wc_cog_get_option( 'alg_wc_cog_gateway_costs_percent_max_value', array() );
 		// Fees: Order extra cost: all orders
 		$extra_cost         = 0;
 		$extra_cost_fixed   = 0;
@@ -1569,6 +1570,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 						$order,
 						$order_gateway
 					);
+					$gateway_cost_percent_max_local = $gateway_cost_percent_max[ $order_gateway ];
+					$gateway_cost_percent = ! empty( $gateway_cost_percent_max_local ) ? min( $gateway_cost_percent_max_local, $gateway_cost_percent ) : $gateway_cost_percent;
 				}
 				$gateway_cost = ( $gateway_cost_fixed + $gateway_cost_percent );
 				$profit       -= $gateway_cost;

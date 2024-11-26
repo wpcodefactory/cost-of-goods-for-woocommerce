@@ -3147,5 +3147,13 @@ msgid "Negative numbers will be converted to positive"
 msgstr ""
 
 #. Plugin Name of the plugin
-msgid "Cost of Goods: Product Cost & Profit Calculator for WooCommerce"
+msgid "Cost of Goods: Product Cost & Profit Calculator for WooCommerce Pro"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:93
+msgid "Max value."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:94
+msgid "Maximum absolute value returned for the percent calculation."
 msgstr ""
