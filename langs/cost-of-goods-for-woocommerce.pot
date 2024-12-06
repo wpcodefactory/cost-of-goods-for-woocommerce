@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.5.8\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.5.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-11-27T00:06:10+01:00\n"
+"POT-Creation-Date: 2024-12-06T18:16:54+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -723,6 +723,7 @@ msgid "Average profit"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:24
+#: includes/settings/class-alg-wc-cog-settings-products.php:122
 msgid "Advanced"
 msgstr ""
 
@@ -1021,6 +1022,11 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:53
 msgid "Export order cost to sheet"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:64
+msgid "It's necessary to enable the new \"%s\" column on <a href=\"%s\">Order Settings</a>."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:63
@@ -2023,6 +2029,30 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:99
 msgid "Customizes the cost field input label added to admin product pages."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:111
+msgid "Cost field position"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:112
+msgid "Manages where the Cost field will be displayed on the product edit page."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:118
+msgid "General > Pricing"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:119
+msgid "General"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:120
+msgid "Inventory"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:121
+msgid "Inventory > SKU"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:133

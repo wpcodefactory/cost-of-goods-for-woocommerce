@@ -36,7 +36,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.3.3
+		 * @version 3.5.9
 		 * @since   2.4.6
 		 */
 		function get_settings() {
@@ -51,7 +51,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 				array(
 					'title'             => __( 'Order export', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => __( 'Export order cost to sheet', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip'          => sprintf( __( 'It\'s necessary to enable the new "%s" column on <a href="%s">Order Settings</a>.' ), __( 'Cost', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wpsyncsheets-for-woocommerce&tab=order-settings' ) ),
+					'desc_tip'          => sprintf( __( 'It\'s necessary to enable the new "%s" column on <a href="%s">Order Settings</a>.', 'cost-of-goods-for-woocommerce' ), __( 'Cost', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wpsyncsheets-for-woocommerce&tab=order-settings' ) ),
 					'type'              => 'checkbox',
 					'id'                => 'alg_wc_cog_comp_wpsyncsheets_export_order_cost',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
@@ -61,7 +61,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 				array(
 					//'title'             => __( 'Order export', 'cost-of-goods-for-woocommerce' ),
 					'desc'              => __( 'Export order profit to sheet', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip'          => sprintf( __( 'It\'s necessary to enable the new "%s" column on <a href="%s">Order Settings</a>.' ), __( 'Profit', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wpsyncsheets-for-woocommerce&tab=order-settings' ) ),
+					'desc_tip' => sprintf( __( 'It\'s necessary to enable the new "%s" column on <a href="%s">Order Settings</a>.', 'cost-of-goods-for-woocommerce' ), __( 'Profit', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wpsyncsheets-for-woocommerce&tab=order-settings' ) ),
 					'type'              => 'checkbox',
 					'id'                => 'alg_wc_cog_comp_wpsyncsheets_export_order_profit',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),

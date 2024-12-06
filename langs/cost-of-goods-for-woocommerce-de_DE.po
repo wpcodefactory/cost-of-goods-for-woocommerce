@@ -610,6 +610,7 @@ msgid "Average profit"
 msgstr "Durchschnittlicher Gewinn"
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:24
+#: includes/settings/class-alg-wc-cog-settings-products.php:122
 msgid "Advanced"
 msgstr "Fortschrittlich"
 
@@ -3158,4 +3159,33 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:94
 msgid "Maximum absolute value returned for the percent calculation."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
+#: includes/settings/class-alg-wc-cog-settings-compatibility.php:64
+msgid "It's necessary to enable the new \"%s\" column on <a href=\"%s\">Order Settings</a>."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:111
+msgid "Cost field position"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:112
+msgid "Manages where the Cost field will be displayed on the product edit page."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:118
+msgid "General > Pricing"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:119
+msgid "General"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:120
+msgid "Inventory"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:121
+msgid "Inventory > SKU"
 msgstr ""
