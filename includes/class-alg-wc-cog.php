@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '3.5.9';
+		public $version = '3.6.0';
 
 		/**
 		 * @since 1.0.0
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 			// Move WC Settings tab to WPFactory menu.
 			$this->move_wc_settings_tab_to_wpfactory_menu();
 
-			// Localization
+			// Localization.
 			add_action( 'init', array( $this, 'localize' ) );
 
 			// Adds compatibility with HPOS.

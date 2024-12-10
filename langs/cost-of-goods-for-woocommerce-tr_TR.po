@@ -3225,3 +3225,27 @@ msgstr ""
 #: includes/settings/class-alg-wc-cog-settings-products.php:121
 msgid "Inventory > SKU"
 msgstr ""
+
+#: includes/class-alg-wc-cog-extra-costs-labels.php:39
+msgid "handling"
+msgstr ""
+
+#: includes/class-alg-wc-cog-extra-costs-labels.php:40
+msgid "handling fee"
+msgstr ""
+
+#: includes/class-alg-wc-cog-extra-costs-labels.php:43
+msgid "shipping"
+msgstr ""
+
+#: includes/class-alg-wc-cog-extra-costs-labels.php:44
+msgid "shipping fee"
+msgstr ""
+
+#: includes/class-alg-wc-cog-extra-costs-labels.php:47
+msgid "payment"
+msgstr ""
+
+#: includes/class-alg-wc-cog-extra-costs-labels.php:48
+msgid "payment fee"
+msgstr ""

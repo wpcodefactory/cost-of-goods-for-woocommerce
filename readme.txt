@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.7
-Stable tag: 3.5.9
+Stable tag: 3.6.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -344,8 +344,12 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 
 == Changelog ==
 
+= 3.6.0 - 10/12/2024 =
+* Fix - Resolved an issue where some strings were not translatable.
+
 = 3.5.9 - 06/12/2024 =
 * Fix - Some translation domains fixed.
+* Dev - Added Dutch translation.
 * Dev - Key manager updated.
 
 = 3.5.8 - 26/11/2024 =

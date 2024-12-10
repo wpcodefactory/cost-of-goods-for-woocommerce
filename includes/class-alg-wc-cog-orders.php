@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.5.8
+ * @version 3.6.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -847,7 +847,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_order_columns.
 	 *
-	 * @version 2.3.4
+	 * @version 3.6.0
 	 * @since   1.0.0
 	 * @todo    [next] add more columns (i.e. not only cost, per order fees, profit, profit percent and profit margin)
 	 */
@@ -862,7 +862,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		if ( $this->is_columns_extra_cost_per_order && in_array( true, $this->is_order_extra_cost_per_order ) ) {
 			foreach ( $this->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 				if ( $is_enabled ) {
-					$this->order_columns[ $fee_type ] = ucfirst( $fee_type );
+					$this->order_columns[ $fee_type ] = ucfirst( alg_wc_cog()->core->extra_costs_labels->get_label( $fee_type ) );
 				}
 			}
 		}

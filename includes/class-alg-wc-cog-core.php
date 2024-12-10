@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Core Class.
  *
- * @version 3.4.6
+ * @version 3.6.0
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -97,6 +97,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		public $analytics;
 
 		/**
+		 * $extra_costs_labels.
+		 *
+		 * @since 3.6.0
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Extra_Costs_Labels
+		 */
+		public $extra_costs_labels;
+
+		/**
 		 * Constructor.
 		 *
 		 * @version 3.3.7
@@ -119,6 +128,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		function __construct() {
 			require_once( 'class-alg-wc-cog-options.php' );
 			$this->options = new Alg_WC_Cost_of_Goods_Options();
+			// Extra costs labels.
+			require_once( 'class-alg-wc-cog-extra-costs-labels.php' );
+			$this->extra_costs_labels = new Alg_WC_Cost_of_Goods_Extra_Costs_Labels();
+			$this->extra_costs_labels->init();
 			// Background process.
 			$this->init_bkg_process();
 			// Analytics.
