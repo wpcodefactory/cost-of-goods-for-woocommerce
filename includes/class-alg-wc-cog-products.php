@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.3.4
+ * @version 3.6.1
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -550,7 +550,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_variable_product_html.
 	 *
-	 * @version 2.9.4
+	 * @version 3.6.1
 	 * @since   1.0.0
 	 * @todo    [maybe] use `get_available_variations()` instead of `get_children()`?
 	 */
@@ -579,8 +579,8 @@ class Alg_WC_Cost_of_Goods_Products {
 					$cost_max                         = (float) $this->get_product_cost( $product_id_max );
 					$profit_min                       = ( 0 != $cost_min ? $min / $cost_min * 100 : '' );
 					$profit_max                       = ( 0 != $cost_max ? $max / $cost_max * 100 : '' );
-					$price_min                        = $this->get_product_price( wc_get_product( $product_id_min ), array( 'return_zero_if_empty' => true ) );
-					$price_max                        = $this->get_product_price( wc_get_product( $product_id_max ), array( 'return_zero_if_empty' => true ) );
+					$price_min                        = (float) $this->get_product_price( wc_get_product( $product_id_min ), array( 'return_zero_if_empty' => true ) );
+					$price_max                        = (float) $this->get_product_price( wc_get_product( $product_id_max ), array( 'return_zero_if_empty' => true ) );
 					$margin_min                       = ( 0 != $price_min && '' !== $min ? $min / $price_min * 100 : '' );
 					$margin_max                       = ( 0 != $price_max && '' !== $max ? $max / $price_max * 100 : '' );
 					$placeholders['%profit_percent%'] = sprintf( '%0.2f%% &ndash; %0.2f%%', $profit_min, $profit_max );
@@ -590,7 +590,7 @@ class Alg_WC_Cost_of_Goods_Products {
 				$placeholders[ "%{$profit_or_cost}%" ] = wc_price( $min );
 				if ( 'profit' === $profit_or_cost ) {
 					$cost                             = (float) $this->get_product_cost( $product_id_min );
-					$price                            = $this->get_product_price( wc_get_product( $product_id_min ) );
+					$price                            = (float) $this->get_product_price( wc_get_product( $product_id_min ) );
 					$placeholders['%profit_percent%'] = sprintf( '%0.2f%%', ( 0 != $cost ? $min / $cost * 100 : '' ) );
 					$placeholders['%profit_margin%']  = sprintf( '%0.2f%%', ( 0 != $price && '' !== $min ? $min / $price * 100 : '' ) );
 				}
