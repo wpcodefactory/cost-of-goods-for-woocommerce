@@ -6,3 +6,4 @@ package-lock.json
 vendor/wpfactory/wpf-settings-exporter
 vendor/wpfactory/wpf-documentor
 wpf-documentor
+npm-debug.log*

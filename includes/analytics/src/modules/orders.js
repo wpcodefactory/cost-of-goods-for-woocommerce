@@ -141,6 +141,7 @@ let orders = {
 						value: Formatting.formatProfit(alg_wc_cog_analytics_obj.profit_template,reportTableData.totals.costs_total,reportTableData.totals.profit_total,reportTableData.totals.net_revenue),
 					},
 				];
+				console.log(reportTableData.totals)
 				reportTableData.summary = newSummary;
 				reportTableData.headers = this.getHeaders(reportTableData);
 				reportTableData.rows = this.getRows(reportTableData)//newRows;

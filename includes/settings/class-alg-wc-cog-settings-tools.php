@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 2.9.8
+ * @version 3.6.2
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -71,7 +71,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.9.8
+	 * @version 3.6.2
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -244,12 +244,20 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			array(
 				'title'    => __( 'Recalculate orders', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Recalculate cost and profit for all orders', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Set items costs in all orders (overriding previous costs).', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( 'Enable the checkbox and "Save changes" to run the tool.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Enable the checkbox and "Save changes" to run the tool.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
 				'id'       => 'alg_wc_cog_recalculate_orders_cost_and_profit_all',
 				'default'  => 'no',
+				'checkboxgroup' => 'start',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'desc'          => __( 'Override item costs on recalculation', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'      => __( 'Disable it if you don\'t want to override the item costs.', 'cost-of-goods-for-woocommerce' ),
+				'type'          => 'checkbox',
+				'id'            => 'alg_wc_cog_recalculate_orders_override_item_costs',
+				'checkboxgroup' => 'end',
+				'default'       => 'yes',
 			),
 			array(
 				'title'    => __( 'Recalculate no cost orders', 'cost-of-goods-for-woocommerce' ),
@@ -310,96 +318,10 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			),
 		);
 
-		/*$reports_settings = array(
-			array(
-				'title'    => __( 'Reports', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'title',
-				'id'       => 'alg_wc_cog_reports_options',
-			),
-			array(
-				'title'    => __( 'Orders report', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Order status', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Select order statuses for the "Orders > Cost of Goods" report.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( '"Refunded" status is added automatically where applicable.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( 'If left empty then default value ("Completed", "Processing", "On hold") is used.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_report_orders_order_status',
-				'default'  => array( 'completed', 'processing', 'on-hold' ),
-				'type'     => 'multiselect',
-				'class'    => 'chosen_select',
-				'options'  => array_diff_key( $this->get_order_statuses(), array_flip( array( 'cancelled', 'failed' ) ) ),
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-			),
-			array(
-				'title'    => __( 'Orders report', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Extra data', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( "To display data gathered before the plugin v2.0.0, you will need to recalculate orders cost and profit.", 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_report_orders_extra_fields',
-				'default'  => array(),
-				'type'     => 'multiselect',
-				'class'    => 'chosen_select',
-				'options'  => array(
-					'_alg_wc_cog_order_items_cost'                    => __( 'Item costs (excluding fees)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_fees'                          => __( 'Fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost'                 => __( 'Shipping method fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost_fixed'           => __( 'Shipping method fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_cost_percent'         => __( 'Shipping method fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_classes_cost'         => __( 'Shipping classes fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_classes_cost_fixed'   => __( 'Shipping classes fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_classes_cost_percent' => __( 'Shipping classes fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost'                  => __( 'Gateway fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost_fixed'            => __( 'Gateway fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_gateway_cost_percent'          => __( 'Gateway fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost'                    => __( 'Order fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_fixed'              => __( 'Order fees (fixed)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_percent'            => __( 'Order fees (percent)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_per_order'          => __( 'Per order fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'handling' . '_fee'        => __( 'Per order fees: Handling', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'shipping' . '_fee'        => __( 'Per order fees: Shipping', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_' . 'payment' . '_fee'         => __( 'Per order fees: Payment', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_extra_cost_from_meta'          => __( 'Meta fees (all)', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_shipping_extra_profit'         => __( 'Shipping to profit', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_fees_extra_profit'             => __( 'Fees to profit', 'cost-of-goods-for-woocommerce' ),
-					'_alg_wc_cog_order_taxes_extra_profit'            => __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' ),
-				),
-				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-			),
-			array(
-				'title'    => __( 'Stock report', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Get price method', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'The mechanism used to get the product price.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_report_stock_price_method',
-				'default'  => array( 'default' ),
-				'type'     => 'select',
-				'class'    => 'chosen_select',
-				'options'  => array(
-					'default'                          => __( 'Function', 'cost-of-goods-for-woocommerce' ),
-					'excluding_tax_with_price_from_db' => __( 'Function with meta', 'cost-of-goods-for-woocommerce' ),
-				),
-			),
-			array(
-				'title'    => __( 'Stock report', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Meta query', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Query related to costs meta in order to get the products for the stock report.', 'cost-of-goods-for-woocommerce' ).'<br />'.
-				              sprintf( __( 'Use %s if some product doesn\'t show up on the stock report, probably if you have cost values below 1', 'cost-of-goods-for-woocommerce' ), '"' . __( 'CHAR type and not empty value', 'cost-of-goods-for-woocommerce' ) . '"' ),
-				'id'       => 'alg_wc_cog_report_stock_meta_query',
-				'default'  => array( 'default' ),
-				'type'     => 'select',
-				'class'    => 'chosen_select',
-				'options'  => array(
-					'default'  => __( 'Default', 'cost-of-goods-for-woocommerce' ),
-					'currency_as_char_and_not_empty' => __( 'Currency as Char type and not empty', 'cost-of-goods-for-woocommerce' ),
-				),
-			),
-			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_reports_options',
-			),
-		);*/
-
-
-
 		return array_merge(
 			$bulk_edit_costs_opts,
 			$import_tools_opts,
 			$order_tools_opts,
-			//$reports_settings,
-			//$analytics_settings
 		);
 	}
 

@@ -24,6 +24,6 @@
 		"@woocommerce/currency": "^3.2.1",
 		"@woocommerce/dependency-extraction-webpack-plugin": "1.6.0",
 		"@woocommerce/eslint-plugin": "1.1.0",
-		"@wordpress/scripts": "^12.6.1"
+		"@wordpress/scripts": "^30.8.1"
 	}
 }

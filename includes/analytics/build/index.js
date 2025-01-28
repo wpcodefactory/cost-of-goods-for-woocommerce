@@ -1,1 +1,827 @@
-!function(o){var t={};function e(r){if(t[r])return t[r].exports;var c=t[r]={i:r,l:!1,exports:{}};return o[r].call(c.exports,c,c.exports,e),c.l=!0,c.exports}e.m=o,e.c=t,e.d=function(o,t,r){e.o(o,t)||Object.defineProperty(o,t,{enumerable:!0,get:r})},e.r=function(o){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(o,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(o,"__esModule",{value:!0})},e.t=function(o,t){if(1&t&&(o=e(o)),8&t)return o;if(4&t&&"object"==typeof o&&o&&o.__esModule)return o;var r=Object.create(null);if(e.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:o}),2&t&&"string"!=typeof o)for(var c in o)e.d(r,c,function(t){return o[t]}.bind(null,c));return r},e.n=function(o){var t=o&&o.__esModule?function(){return o.default}:function(){return o};return e.d(t,"a",t),t},e.o=function(o,t){return Object.prototype.hasOwnProperty.call(o,t)},e.p="",e(e.s=7)}([function(o,t){o.exports=window.wp.i18n},function(o,t,e){var r=e(4),c=e(5),a=e(6);o.exports=function(o){return r(o)||c(o)||a()}},function(o,t){o.exports=window.wp.hooks},function(o,t){o.exports=window.wc.currency},function(o,t){o.exports=function(o){if(Array.isArray(o)){for(var t=0,e=new Array(o.length);t<o.length;t++)e[t]=o[t];return e}}},function(o,t){o.exports=function(o){if(Symbol.iterator in Object(o)||"[object Arguments]"===Object.prototype.toString.call(o))return Array.from(o)}},function(o,t){o.exports=function(){throw new TypeError("Invalid attempt to spread non-iterable instance")}},function(o,t,e){"use strict";e.r(t);var r=e(1),c=e.n(r),a=e(2),s=e(0),n=e(3),_=e.n(n),i={storeCurrency:null,formatProfit:function(o,t,e,r){var c={"%profit%":this.storeCurrency.formatAmount(e),"%profit_percent%":parseFloat(e/t*100).toFixed(2)+"%","%profit_margin%":parseFloat(e/r*100).toFixed(2)+"%"},a=new RegExp(Object.keys(c).join("|"),"gi");return o.replace(a,(function(o){return c[o]}))},setStoreCurrency:function(o){this.storeCurrency=o}},l=_()(wcSettings.currency);i.setStoreCurrency(l);var u={getHeaders:function(o){var t=[{label:Object(s.__)("Cost","cost-of-goods-for-woocommerce"),key:"order_cost",isNumeric:!0},{label:Object(s.__)("Profit","cost-of-goods-for-woocommerce"),key:"order_profit",isNumeric:!0}],e=[].concat(c()(o.headers),t);if(alg_wc_cog_analytics_obj.individual_order_costs_enabled){var r=[{label:Object(s.__)("Items cost","cost-of-goods-for-woocommerce"),key:"items_cost",isNumeric:!0},{label:Object(s.__)("Shipping cost","cost-of-goods-for-woocommerce"),key:"shipping_cost",isNumeric:!0},{label:Object(s.__)("Gateway cost","cost-of-goods-for-woocommerce"),key:"gateway_cost",isNumeric:!0},{label:Object(s.__)("Extra cost","cost-of-goods-for-woocommerce"),key:"extra_cost",isNumeric:!0},{label:Object(s.__)("Shipping classes cost","cost-of-goods-for-woocommerce"),key:"shipping_classes_cost",isNumeric:!0}];e=[].concat(c()(o.headers),r,t)}return e},getRows:function(o){return o.rows.map((function(t,e){var r=o.items.data[e],a=[{display:l.formatAmount(r.order_cost),value:r.order_cost,type:"currency"},{display:l.formatAmount(r.order_profit),value:r.order_profit,type:"currency"}],s=[].concat(c()(t),a);if(alg_wc_cog_analytics_obj.individual_order_costs_enabled){var n=[{display:l.formatAmount(r.items_cost),value:r.items_cost,type:"currency"},{display:l.formatAmount(r.shipping_cost),value:r.shipping_cost,type:"currency"},{display:l.formatAmount(r.gateway_cost),value:r.gateway_cost,type:"currency"},{display:l.formatAmount(r.extra_cost),value:r.extra_cost,type:"currency"},{display:l.formatAmount(r.shipping_classes_cost),value:r.shipping_classes_cost,type:"currency"}];s=[].concat(c()(t),n,a)}return s}))},init:function(){var o=this;Object(a.addFilter)("woocommerce_admin_report_table","cost-of-goods-for-woocommerce",(function(t){if(!("orders"===t.endpoint&&t.items&&t.items.data&&t.items.data.length&&alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_orders))return t;var e=[].concat(c()(t.summary),[{label:"Profit",value:i.formatProfit(alg_wc_cog_analytics_obj.profit_template,t.totals.costs_total,t.totals.profit_total,t.totals.net_revenue)}]);return t.summary=e,t.headers=o.getHeaders(t),t.rows=o.getRows(t),t})),Object(a.addFilter)("woocommerce_admin_orders_report_charts","cost-of-goods-for-woocommerce",(function(o){return alg_wc_cog_analytics_obj.cost_and_profit_totals_enabled_on_orders&&(o=[].concat(c()(o),[{key:"costs_total",label:Object(s.__)("Costs total","cost-of-goods-for-woocommerce"),type:"currency"},{key:"profit_total",label:Object(s.__)("Profit total","cost-of-goods-for-woocommerce"),type:"currency"}])),o}))}},f=_()(wcSettings.currency);i.setStoreCurrency(f);var m=function(){Object(a.addFilter)("woocommerce_admin_report_table","cost-of-goods-for-woocommerce",(function(o){if(!("revenue"===o.endpoint&&o.items&&o.items.data&&o.items.data.length&&alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_revenue))return o;var t=[].concat(c()(o.headers),[{label:Object(s.__)("Cost","cost-of-goods-for-woocommerce"),key:"costs_total",isNumeric:!0},{label:Object(s.__)("Profit","cost-of-goods-for-woocommerce"),key:"profit_total",isNumeric:!0}]),e=o.rows.map((function(t,e){var r=o.items.data[e];return[].concat(c()(t),[{display:f.formatAmount(r.subtotals.costs_total),value:r.subtotals.costs_total,type:"currency"},{display:f.formatAmount(r.subtotals.profit_total),value:r.subtotals.profit_total,type:"currency"}])})),r=[].concat(c()(o.summary),[{label:"Profit",value:i.formatProfit(alg_wc_cog_analytics_obj.profit_template,o.totals.costs_total,o.totals.profit_total,o.totals.net_revenue)}]);return o.summary=r,o.headers=t,o.rows=e,o})),Object(a.addFilter)("woocommerce_admin_revenue_report_charts","cost-of-goods-for-woocommerce",(function(o){return alg_wc_cog_analytics_obj.cost_and_profit_totals_enabled_on_revenue&&(o=[].concat(c()(o),[{key:"costs_total",label:Object(s.__)("Costs total","cost-of-goods-for-woocommerce"),type:"currency"},{key:"profit_total",label:Object(s.__)("Profit total","cost-of-goods-for-woocommerce"),type:"currency"}])),o}))},d=_()(wcSettings.currency);i.setStoreCurrency(d);var p={init:function(){this.addColumns(),this.addCOGFilter()},addCOGFilter:function(){alg_wc_cog_analytics_obj.filter_enabled_on_stock&&Object(a.addFilter)("woocommerce_admin_stock_report_filters","cost-of-goods-for-woocommerce",(function(o){return o.push({label:Object(s.__)("Cost of Goods filter","cost-of-goods-for-woocommerce"),staticParams:["paged","per_page"],param:"alg_cog_stock_filter",showFilters:function(){return!0},filters:[{label:Object(s.__)("Disabled","cost-of-goods-for-woocommerce"),value:"all"},{label:Object(s.__)("Products with cost","cost-of-goods-for-woocommerce"),value:"with_cost"}]}),o}))},addColumns:function(){Object(a.addFilter)("woocommerce_admin_report_table","cost-of-goods-for-woocommerce",(function(o){if("stock"!==o.endpoint||!o.items||!o.items.data||!o.items.data.length)return o;var t=c()(o.headers);alg_wc_cog_analytics_obj.cost_and_profit_enabled_on_stock&&(t.push({label:Object(s.__)("Cost","cost-of-goods-for-woocommerce"),key:"product_cost",isNumeric:!0}),t.push({label:Object(s.__)("Profit","cost-of-goods-for-woocommerce"),key:"product_profit",isNumeric:!0})),alg_wc_cog_analytics_obj.category_enabled_on_stock&&t.push({label:Object(s.__)("Category","cost-of-goods-for-woocommerce"),key:"product_cat"});var e=o.rows.map((function(t,e){var r=o.items.data[e],a=c()(t);return alg_wc_cog_analytics_obj.cost_and_profit_enabled_on_stock&&(a.push({display:d.formatAmount(r.product_cost),value:r.product_cost,type:"currency"}),a.push({display:d.formatAmount(r.product_profit),value:r.product_profit,type:"currency"})),alg_wc_cog_analytics_obj.category_enabled_on_stock&&a.push({display:r.product_cat,value:r.product_cat}),a}));if(alg_wc_cog_analytics_obj.cost_and_profit_enabled_on_stock){var r=alg_wc_cog_analytics_obj.consider_stock_for_calculation?o.totals.cost_with_qty:o.totals.cost,a=alg_wc_cog_analytics_obj.consider_stock_for_calculation?o.totals.profit_with_qty:o.totals.profit,n=[].concat(c()(o.summary),[{label:"Cost",value:d.formatAmount(r)},{label:"Profit",value:d.formatAmount(a)}]);o.summary=n}return o.headers=t,o.rows=e,o}))}},y=_()(wcSettings.currency);i.setStoreCurrency(y);var b=function(){Object(a.addFilter)("woocommerce_admin_report_table","cost-of-goods-for-woocommerce",(function(o){var t=new URLSearchParams(window.location.search);if("products"!==o.endpoint||!o.items||!o.items.data||!o.items.data.length||!alg_wc_cog_analytics_obj.product_cost_and_profit_columns_enabled&&"/analytics/products"===t.get("path"))return o;var e=[].concat(c()(o.headers),[{label:Object(s.__)("Cost","cost-of-goods-for-woocommerce"),key:"cost",isNumeric:!0},{label:Object(s.__)("Profit","cost-of-goods-for-woocommerce"),key:"profit",isNumeric:!0}]),r=o.rows.map((function(t,e){var r=o.items.data[e];return[].concat(c()(t),[{display:y.formatAmount(r.cost),value:r.cost,type:"currency"},{display:y.formatAmount(r.profit),value:r.profit,type:"currency"}])})),a=[].concat(c()(o.summary),[{label:"Profit",value:i.formatProfit(alg_wc_cog_analytics_obj.profit_template,o.totals.costs_total,o.totals.profit_total,o.totals.net_revenue)}]);return o.summary=a,o.rows=r,o.headers=e,o})),Object(a.addFilter)("woocommerce_admin_products_report_charts","cost-of-goods-for-woocommerce",(function(o){return alg_wc_cog_analytics_obj.product_cost_and_profit_totals_enabled&&(o=[].concat(c()(o),[{key:"costs_total",label:Object(s.__)("Costs total","cost-of-goods-for-woocommerce"),type:"currency"},{key:"profit_total",label:Object(s.__)("Profit total","cost-of-goods-for-woocommerce"),type:"currency"}])),o}))},g=_()(wcSettings.currency);i.setStoreCurrency(g);var w=function(){Object(a.addFilter)("woocommerce_admin_report_table","cost-of-goods-for-woocommerce",(function(o){if(!("categories"===o.endpoint&&o.items&&o.items.data&&o.items.data.length&&alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_categories))return o;var t=[].concat(c()(o.headers),[{label:Object(s.__)("Cost","cost-of-goods-for-woocommerce"),key:"cost",isNumeric:!0},{label:Object(s.__)("Profit","cost-of-goods-for-woocommerce"),key:"profit",isNumeric:!0}]),e=o.rows.map((function(t,e){var r=o.items.data[e];return[].concat(c()(t),[{display:g.formatAmount(r.cost),value:r.cost,type:"currency"},{display:g.formatAmount(r.profit),value:r.profit,type:"currency"}])})),r=[].concat(c()(o.summary),[{label:"Profit",value:i.formatProfit(alg_wc_cog_analytics_obj.profit_template,o.totals.costs_total,o.totals.profit_total,o.totals.net_revenue)}]);return o.summary=r,o.rows=e,o.headers=t,o})),Object(a.addFilter)("woocommerce_admin_categories_report_charts","cost-of-goods-for-woocommerce",(function(o){return alg_wc_cog_analytics_obj.cost_and_profit_totals_enabled_on_categories&&(o=[].concat(c()(o),[{key:"costs_total",label:Object(s.__)("Costs total","cost-of-goods-for-woocommerce"),type:"currency"},{key:"profit_total",label:Object(s.__)("Profit total","cost-of-goods-for-woocommerce"),type:"currency"}])),o}))},j=_()(wcSettings.currency);i.setStoreCurrency(j);var v={init:function(){var o=this;Object(a.addFilter)("woocommerce_admin_report_table","cost-of-goods-for-woocommerce",(function(t){return"customers"===t.endpoint&&t.items&&t.items.data&&t.items.data.length&&alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_orders?(t.headers=o.getHeaders(t),t.rows=o.getRows(t),t):t}))},getHeaders:function(o){var t=o.headers;if(alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_customers){var e=[{label:Object(s.__)("Cost","cost-of-goods-for-woocommerce"),key:"costs_total",isNumeric:!0},{label:Object(s.__)("Profit","cost-of-goods-for-woocommerce"),key:"profit_total",isNumeric:!0}];t=[].concat(c()(o.headers),e)}return t},getRows:function(o){return o.rows.map((function(t,e){var r=o.items.data[e],a=[{display:j.formatAmount(r.costs_total),value:r.costs_total,type:"currency"},{display:j.formatAmount(r.profit_total),value:r.profit_total,type:"currency"}];return[].concat(c()(t),a)}))}};u.init(),m(),p.init(),b(),w(),v.init()}]);
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/modules/categories.js":
+/*!***********************************!*\
+  !*** ./src/modules/categories.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @woocommerce/currency */ "@woocommerce/currency");
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _formatting_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formatting.js */ "./src/modules/formatting.js");
+/**
+ * Cost of Goods for WooCommerce - Analytics > Categories (WooCommerce Admin) Report.
+ *
+ */
+
+
+
+
+
+const storeCurrency = _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default()(wcSettings.currency);
+_formatting_js__WEBPACK_IMPORTED_MODULE_3__["default"].setStoreCurrency(storeCurrency);
+let categories = {
+  init: function () {
+    // Reports table
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_report_table', 'cost-of-goods-for-woocommerce', reportTableData => {
+      if (reportTableData.endpoint !== 'categories' || !reportTableData.items || !reportTableData.items.data || !reportTableData.items.data.length || !alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_categories) {
+        return reportTableData;
+      }
+      const newHeaders = [...reportTableData.headers, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cost', 'cost-of-goods-for-woocommerce'),
+        key: 'cost',
+        isNumeric: true
+        //isSortable: true,
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit', 'cost-of-goods-for-woocommerce'),
+        key: 'profit',
+        isNumeric: true
+        //isSortable: true,
+      }];
+      const newRows = reportTableData.rows.map((row, index) => {
+        const item = reportTableData.items.data[index];
+        const newRow = [...row, {
+          display: storeCurrency.formatAmount(item.cost),
+          value: item.cost,
+          type: 'currency'
+        }, {
+          display: storeCurrency.formatAmount(item.profit),
+          value: item.profit,
+          type: 'currency'
+        }];
+        return newRow;
+      });
+      const newSummary = [...reportTableData.summary, {
+        label: 'Profit',
+        value: _formatting_js__WEBPACK_IMPORTED_MODULE_3__["default"].formatProfit(alg_wc_cog_analytics_obj.profit_template, reportTableData.totals.costs_total, reportTableData.totals.profit_total, reportTableData.totals.net_revenue)
+      }];
+      reportTableData.summary = newSummary;
+      reportTableData.rows = newRows;
+      reportTableData.headers = newHeaders;
+      return reportTableData;
+    });
+    // Charts
+    /**
+     * @see https://github.com/woocommerce/woocommerce-admin/blob/main/client/analytics/report/orders/config.js#L50-L62
+     */
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_categories_report_charts', 'cost-of-goods-for-woocommerce', charts => {
+      if (alg_wc_cog_analytics_obj.cost_and_profit_totals_enabled_on_categories) {
+        charts = [...charts, {
+          key: 'costs_total',
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Costs total', 'cost-of-goods-for-woocommerce'),
+          type: 'currency'
+        }, {
+          key: 'profit_total',
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit total', 'cost-of-goods-for-woocommerce'),
+          type: 'currency'
+        }];
+      }
+      return charts;
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (categories);
+
+/***/ }),
+
+/***/ "./src/modules/customers.js":
+/*!**********************************!*\
+  !*** ./src/modules/customers.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @woocommerce/currency */ "@woocommerce/currency");
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _formatting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formatting */ "./src/modules/formatting.js");
+/**
+ * Cost of Goods for WooCommerce - WooCommerce > Customers report.
+ *
+ */
+
+
+
+
+
+const storeCurrency = _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default()(wcSettings.currency);
+_formatting__WEBPACK_IMPORTED_MODULE_3__["default"].setStoreCurrency(storeCurrency);
+let customers = {
+  init: function () {
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_report_table', 'cost-of-goods-for-woocommerce', reportTableData => {
+      if (reportTableData.endpoint !== 'customers' || !reportTableData.items || !reportTableData.items.data || !reportTableData.items.data.length || !alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_orders) {
+        return reportTableData;
+      }
+      reportTableData.headers = this.getHeaders(reportTableData);
+      reportTableData.rows = this.getRows(reportTableData);
+      return reportTableData;
+    });
+  },
+  getHeaders: function (reportTableData) {
+    let headers = reportTableData.headers;
+    if (alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_customers) {
+      const costAndProfitHeaders = [{
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cost', 'cost-of-goods-for-woocommerce'),
+        key: 'costs_total',
+        isNumeric: true
+        //isSortable: true,
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit', 'cost-of-goods-for-woocommerce'),
+        key: 'profit_total',
+        isNumeric: true
+        //isSortable: true,
+      }];
+      headers = [...reportTableData.headers, ...costAndProfitHeaders];
+    }
+    return headers;
+  },
+  getRows: function (reportTableData) {
+    const newRows = reportTableData.rows.map((row, index) => {
+      const item = reportTableData.items.data[index];
+      let costAndProfit = [{
+        display: storeCurrency.formatAmount(item.costs_total),
+        value: item.costs_total,
+        type: 'currency'
+      }, {
+        display: storeCurrency.formatAmount(item.profit_total),
+        value: item.profit_total,
+        type: 'currency'
+      }];
+      let newRow = [...row, ...costAndProfit];
+      return newRow;
+    });
+    return newRows;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (customers);
+
+/***/ }),
+
+/***/ "./src/modules/formatting.js":
+/*!***********************************!*\
+  !*** ./src/modules/formatting.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+let Formatting = {
+  storeCurrency: null,
+  formatProfit: function (template, cost, profit, price) {
+    let placeholders = {
+      '%profit%': this.storeCurrency.formatAmount(profit),
+      '%profit_percent%': parseFloat(profit / cost * 100).toFixed(2) + "%",
+      '%profit_margin%': parseFloat(profit / price * 100).toFixed(2) + "%"
+    };
+    let regex = new RegExp(Object.keys(placeholders).join('|'), 'gi');
+    return template.replace(regex, function (matched) {
+      return placeholders[matched];
+    });
+  },
+  setStoreCurrency: function (storeCurrency) {
+    this.storeCurrency = storeCurrency;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Formatting);
+
+/***/ }),
+
+/***/ "./src/modules/orders.js":
+/*!*******************************!*\
+  !*** ./src/modules/orders.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @woocommerce/currency */ "@woocommerce/currency");
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _formatting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formatting */ "./src/modules/formatting.js");
+/**
+ * Cost of Goods for WooCommerce - Analytics > Orders (WooCommerce Admin) Report.
+ *
+ * @see https://github.com/woocommerce/woocommerce-admin/blob/main/client/analytics/report/orders/config.js#L50-L62
+ *
+ */
+
+
+
+
+
+const storeCurrency = _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default()(wcSettings.currency);
+_formatting__WEBPACK_IMPORTED_MODULE_3__["default"].setStoreCurrency(storeCurrency);
+let orders = {
+  getHeaders: function (reportTableData) {
+    const costAndProfitHeaders = [{
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cost', 'cost-of-goods-for-woocommerce'),
+      key: 'order_cost',
+      isNumeric: true
+      //isSortable: true,
+    }, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit', 'cost-of-goods-for-woocommerce'),
+      key: 'order_profit',
+      isNumeric: true
+      //isSortable: true,
+    }];
+    let headers = [...reportTableData.headers, ...costAndProfitHeaders];
+    if (alg_wc_cog_analytics_obj.individual_order_costs_enabled) {
+      const individualCostsHeaders = [{
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Items cost', 'cost-of-goods-for-woocommerce'),
+        key: 'items_cost',
+        isNumeric: true
+        //isSortable: true,
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Shipping cost', 'cost-of-goods-for-woocommerce'),
+        key: 'shipping_cost',
+        isNumeric: true
+        //isSortable: true,
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Gateway cost', 'cost-of-goods-for-woocommerce'),
+        key: 'gateway_cost',
+        isNumeric: true
+        //isSortable: true,
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Extra cost', 'cost-of-goods-for-woocommerce'),
+        key: 'extra_cost',
+        isNumeric: true
+        //isSortable: true,
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Shipping classes cost', 'cost-of-goods-for-woocommerce'),
+        key: 'shipping_classes_cost',
+        isNumeric: true
+        //isSortable: true,
+      }];
+      headers = [...reportTableData.headers, ...individualCostsHeaders, ...costAndProfitHeaders];
+    }
+    return headers;
+  },
+  getRows: function (reportTableData) {
+    const newRows = reportTableData.rows.map((row, index) => {
+      const order = reportTableData.items.data[index];
+      let costAndProfit = [{
+        display: storeCurrency.formatAmount(order.order_cost),
+        value: order.order_cost,
+        type: 'currency'
+      }, {
+        display: storeCurrency.formatAmount(order.order_profit),
+        value: order.order_profit,
+        type: 'currency'
+      }];
+      let newRow = [...row, ...costAndProfit];
+      if (alg_wc_cog_analytics_obj.individual_order_costs_enabled) {
+        let individualCosts = [{
+          display: storeCurrency.formatAmount(order.items_cost),
+          value: order.items_cost,
+          type: 'currency'
+        }, {
+          display: storeCurrency.formatAmount(order.shipping_cost),
+          value: order.shipping_cost,
+          type: 'currency'
+        }, {
+          display: storeCurrency.formatAmount(order.gateway_cost),
+          value: order.gateway_cost,
+          type: 'currency'
+        }, {
+          display: storeCurrency.formatAmount(order.extra_cost),
+          value: order.extra_cost,
+          type: 'currency'
+        }, {
+          display: storeCurrency.formatAmount(order.shipping_classes_cost),
+          value: order.shipping_classes_cost,
+          type: 'currency'
+        }];
+        newRow = [...row, ...individualCosts, ...costAndProfit];
+      }
+      return newRow;
+    });
+    return newRows;
+  },
+  init: function () {
+    // Reports table
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_report_table', 'cost-of-goods-for-woocommerce', reportTableData => {
+      if (reportTableData.endpoint !== 'orders' || !reportTableData.items || !reportTableData.items.data || !reportTableData.items.data.length || !alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_orders) {
+        return reportTableData;
+      }
+      const newSummary = [...reportTableData.summary, {
+        label: 'Profit',
+        value: _formatting__WEBPACK_IMPORTED_MODULE_3__["default"].formatProfit(alg_wc_cog_analytics_obj.profit_template, reportTableData.totals.costs_total, reportTableData.totals.profit_total, reportTableData.totals.net_revenue)
+      }];
+      console.log(reportTableData.totals);
+      reportTableData.summary = newSummary;
+      reportTableData.headers = this.getHeaders(reportTableData);
+      reportTableData.rows = this.getRows(reportTableData); //newRows;
+      return reportTableData;
+    });
+    // Charts
+    /**
+     * @see https://github.com/woocommerce/woocommerce-admin/blob/main/client/analytics/report/orders/config.js#L50-L62
+     */
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_orders_report_charts', 'cost-of-goods-for-woocommerce', charts => {
+      if (alg_wc_cog_analytics_obj.cost_and_profit_totals_enabled_on_orders) {
+        charts = [...charts, {
+          key: 'costs_total',
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Costs total', 'cost-of-goods-for-woocommerce'),
+          type: 'currency'
+        }, {
+          key: 'profit_total',
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit total', 'cost-of-goods-for-woocommerce'),
+          type: 'currency'
+        }];
+      }
+      return charts;
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (orders);
+
+/***/ }),
+
+/***/ "./src/modules/products.js":
+/*!*********************************!*\
+  !*** ./src/modules/products.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @woocommerce/currency */ "@woocommerce/currency");
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _formatting_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formatting.js */ "./src/modules/formatting.js");
+/**
+ * Cost of Goods for WooCommerce - Analytics > Products (WooCommerce Admin) Report.
+ *
+ */
+
+
+
+
+
+const storeCurrency = _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default()(wcSettings.currency);
+_formatting_js__WEBPACK_IMPORTED_MODULE_3__["default"].setStoreCurrency(storeCurrency);
+let products = {
+  init: function () {
+    // Reports table
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_report_table', 'cost-of-goods-for-woocommerce', reportTableData => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (reportTableData.endpoint !== 'products' || !reportTableData.items || !reportTableData.items.data || !reportTableData.items.data.length || !alg_wc_cog_analytics_obj.product_cost_and_profit_columns_enabled && urlParams.get('path') === '/analytics/products') {
+        return reportTableData;
+      }
+      const newHeaders = [...reportTableData.headers, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cost', 'cost-of-goods-for-woocommerce'),
+        key: 'cost',
+        isNumeric: true
+        //isSortable: true,
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit', 'cost-of-goods-for-woocommerce'),
+        key: 'profit',
+        isNumeric: true
+        //isSortable: true,
+      }];
+      const newRows = reportTableData.rows.map((row, index) => {
+        const item = reportTableData.items.data[index];
+        const newRow = [...row, {
+          display: storeCurrency.formatAmount(item.cost),
+          value: item.cost,
+          type: 'currency'
+        }, {
+          display: storeCurrency.formatAmount(item.profit),
+          value: item.profit,
+          type: 'currency'
+        }];
+        return newRow;
+      });
+      const newSummary = [...reportTableData.summary, {
+        label: 'Profit',
+        value: _formatting_js__WEBPACK_IMPORTED_MODULE_3__["default"].formatProfit(alg_wc_cog_analytics_obj.profit_template, reportTableData.totals.costs_total, reportTableData.totals.profit_total, reportTableData.totals.net_revenue)
+      }];
+      reportTableData.summary = newSummary;
+      reportTableData.rows = newRows;
+      reportTableData.headers = newHeaders;
+      return reportTableData;
+    });
+    // Charts
+    /**
+     * @see https://github.com/woocommerce/woocommerce-admin/blob/main/client/analytics/report/orders/config.js#L50-L62
+     */
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_products_report_charts', 'cost-of-goods-for-woocommerce', charts => {
+      if (alg_wc_cog_analytics_obj.product_cost_and_profit_totals_enabled) {
+        charts = [...charts, {
+          key: 'costs_total',
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Costs total', 'cost-of-goods-for-woocommerce'),
+          type: 'currency'
+        }, {
+          key: 'profit_total',
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit total', 'cost-of-goods-for-woocommerce'),
+          type: 'currency'
+        }];
+      }
+      return charts;
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (products);
+
+/***/ }),
+
+/***/ "./src/modules/revenue.js":
+/*!********************************!*\
+  !*** ./src/modules/revenue.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @woocommerce/currency */ "@woocommerce/currency");
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _formatting_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formatting.js */ "./src/modules/formatting.js");
+/**
+ * Cost of Goods for WooCommerce - Analytics > Revenue (WooCommerce Admin) Report.
+ *
+ */
+
+
+
+
+
+const storeCurrency = _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default()(wcSettings.currency);
+_formatting_js__WEBPACK_IMPORTED_MODULE_3__["default"].setStoreCurrency(storeCurrency);
+let orders = {
+  init: function () {
+    // Reports table
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_report_table', 'cost-of-goods-for-woocommerce', reportTableData => {
+      if (reportTableData.endpoint !== 'revenue' || !reportTableData.items || !reportTableData.items.data || !reportTableData.items.data.length || !alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_revenue) {
+        return reportTableData;
+      }
+      const newHeaders = [...reportTableData.headers, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cost', 'cost-of-goods-for-woocommerce'),
+        key: 'costs_total',
+        isNumeric: true
+        //isSortable: true,
+      }, {
+        label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit', 'cost-of-goods-for-woocommerce'),
+        key: 'profit_total',
+        isNumeric: true
+        //isSortable: true,
+      }];
+      const newRows = reportTableData.rows.map((row, index) => {
+        const item = reportTableData.items.data[index];
+        const newRow = [...row, {
+          display: storeCurrency.formatAmount(item.subtotals.costs_total),
+          value: item.subtotals.costs_total,
+          type: 'currency'
+        }, {
+          display: storeCurrency.formatAmount(item.subtotals.profit_total),
+          value: item.subtotals.profit_total,
+          type: 'currency'
+        }];
+        return newRow;
+      });
+      const newSummary = [...reportTableData.summary, {
+        label: 'Profit',
+        value: _formatting_js__WEBPACK_IMPORTED_MODULE_3__["default"].formatProfit(alg_wc_cog_analytics_obj.profit_template, reportTableData.totals.costs_total, reportTableData.totals.profit_total, reportTableData.totals.net_revenue)
+      }];
+      reportTableData.summary = newSummary;
+      reportTableData.headers = newHeaders;
+      reportTableData.rows = newRows;
+      return reportTableData;
+    });
+    // Charts
+    /**
+     * @see https://github.com/woocommerce/woocommerce-admin/blob/main/client/analytics/report/orders/config.js#L50-L62
+     */
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_revenue_report_charts', 'cost-of-goods-for-woocommerce', charts => {
+      if (alg_wc_cog_analytics_obj.cost_and_profit_totals_enabled_on_revenue) {
+        charts = [...charts, {
+          key: 'costs_total',
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Costs total', 'cost-of-goods-for-woocommerce'),
+          type: 'currency'
+        }, {
+          key: 'profit_total',
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit total', 'cost-of-goods-for-woocommerce'),
+          type: 'currency'
+        }];
+      }
+      return charts;
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (orders);
+
+/***/ }),
+
+/***/ "./src/modules/stock.js":
+/*!******************************!*\
+  !*** ./src/modules/stock.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/hooks */ "@wordpress/hooks");
+/* harmony import */ var _wordpress_hooks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @woocommerce/currency */ "@woocommerce/currency");
+/* harmony import */ var _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_woocommerce_currency__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _formatting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./formatting */ "./src/modules/formatting.js");
+/**
+ * Cost of Goods for WooCommerce - Analytics > Stock (WooCommerce Admin) Report.
+ *
+ * @see https://github.com/woocommerce/woocommerce-admin/issues/4348.
+ * @todo Add cost and profit totals on summary.
+ *
+ */
+
+
+
+
+
+const storeCurrency = _woocommerce_currency__WEBPACK_IMPORTED_MODULE_2___default()(wcSettings.currency);
+_formatting__WEBPACK_IMPORTED_MODULE_3__["default"].setStoreCurrency(storeCurrency);
+let stock = {
+  init: function () {
+    this.addColumns();
+    this.addCOGFilter();
+  },
+  addCOGFilter: function () {
+    if (alg_wc_cog_analytics_obj.filter_enabled_on_stock) {
+      (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_stock_report_filters', 'cost-of-goods-for-woocommerce', obj => {
+        obj.push({
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cost of Goods filter', 'cost-of-goods-for-woocommerce'),
+          staticParams: ['paged', 'per_page'],
+          param: 'alg_cog_stock_filter',
+          showFilters: () => true,
+          filters: [{
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Disabled', 'cost-of-goods-for-woocommerce'),
+            value: 'all'
+          }, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Products with cost', 'cost-of-goods-for-woocommerce'),
+            value: 'with_cost'
+          }]
+        });
+        return obj;
+      });
+    }
+  },
+  addColumns: function () {
+    // Reports table
+    (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_0__.addFilter)('woocommerce_admin_report_table', 'cost-of-goods-for-woocommerce', reportTableData => {
+      if (reportTableData.endpoint !== 'stock' || !reportTableData.items || !reportTableData.items.data || !reportTableData.items.data.length) {
+        return reportTableData;
+      }
+      const newHeaders = [...reportTableData.headers];
+      // Cost and profit
+      if (alg_wc_cog_analytics_obj.cost_and_profit_enabled_on_stock) {
+        newHeaders.push({
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Cost', 'cost-of-goods-for-woocommerce'),
+          key: 'product_cost',
+          isNumeric: true
+          //isSortable: true,
+        });
+        newHeaders.push({
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Profit', 'cost-of-goods-for-woocommerce'),
+          key: 'product_profit',
+          isNumeric: true
+          //isSortable: true,
+        });
+      }
+      // Category
+      if (alg_wc_cog_analytics_obj.category_enabled_on_stock) {
+        newHeaders.push({
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Category', 'cost-of-goods-for-woocommerce'),
+          key: 'product_cat'
+          //isSortable: true,
+        });
+      }
+      const newRows = reportTableData.rows.map((row, index) => {
+        const product = reportTableData.items.data[index];
+        const newRow = [...row];
+        // Cost and profit
+        if (alg_wc_cog_analytics_obj.cost_and_profit_enabled_on_stock) {
+          newRow.push({
+            display: storeCurrency.formatAmount(product.product_cost),
+            value: product.product_cost,
+            type: 'currency'
+          });
+          newRow.push({
+            display: storeCurrency.formatAmount(product.product_profit),
+            value: product.product_profit,
+            type: 'currency'
+          });
+        }
+        // Category
+        if (alg_wc_cog_analytics_obj.category_enabled_on_stock) {
+          newRow.push({
+            display: product.product_cat,
+            value: product.product_cat
+          });
+        }
+        return newRow;
+      });
+      if (alg_wc_cog_analytics_obj.cost_and_profit_enabled_on_stock) {
+        let costTotals = alg_wc_cog_analytics_obj.consider_stock_for_calculation ? reportTableData.totals.cost_with_qty : reportTableData.totals.cost;
+        let profitTotals = alg_wc_cog_analytics_obj.consider_stock_for_calculation ? reportTableData.totals.profit_with_qty : reportTableData.totals.profit;
+        const newSummary = [...reportTableData.summary, {
+          label: 'Cost',
+          value: storeCurrency.formatAmount(costTotals)
+        }, {
+          label: 'Profit',
+          value: storeCurrency.formatAmount(profitTotals)
+        }];
+        reportTableData.summary = newSummary;
+      }
+      reportTableData.headers = newHeaders;
+      reportTableData.rows = newRows;
+      return reportTableData;
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (stock);
+
+/***/ }),
+
+/***/ "@woocommerce/currency":
+/*!**********************************!*\
+  !*** external ["wc","currency"] ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["wc"]["currency"];
+
+/***/ }),
+
+/***/ "@wordpress/hooks":
+/*!*******************************!*\
+  !*** external ["wp","hooks"] ***!
+  \*******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["hooks"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_orders__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/orders */ "./src/modules/orders.js");
+/* harmony import */ var _modules_revenue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/revenue */ "./src/modules/revenue.js");
+/* harmony import */ var _modules_stock__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/stock */ "./src/modules/stock.js");
+/* harmony import */ var _modules_products__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/products */ "./src/modules/products.js");
+/* harmony import */ var _modules_categories__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/categories */ "./src/modules/categories.js");
+/* harmony import */ var _modules_customers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/customers */ "./src/modules/customers.js");
+/**
+ * Analytics.
+ *
+ * @version 3.4.6
+ * @since   2.4.5
+ * @author  WPFactory
+ */
+
+// Orders.
+
+_modules_orders__WEBPACK_IMPORTED_MODULE_0__["default"].init();
+
+// Revenue.
+
+_modules_revenue__WEBPACK_IMPORTED_MODULE_1__["default"].init();
+
+// Stock.
+
+_modules_stock__WEBPACK_IMPORTED_MODULE_2__["default"].init();
+
+// Products.
+
+_modules_products__WEBPACK_IMPORTED_MODULE_3__["default"].init();
+
+// Categories.
+
+_modules_categories__WEBPACK_IMPORTED_MODULE_4__["default"].init();
+
+// Customers.
+
+_modules_customers__WEBPACK_IMPORTED_MODULE_5__["default"].init();
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=index.js.map

@@ -624,32 +624,37 @@ msgid "The <a href=\"%s\">\"Payment Plugins for Stripe\"</a> requires the \"Disp
 msgstr "De <a href=\"%s\">\"Payment Plugins for Stripe\"</a> vereist dat de \"Display Stripe Fee\" optie is ingeschakeld in de geavanceerde instellingen om de %s meta toe te voegen."
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:105
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:273
 #: includes/analytics/src/modules/orders.js:60
+#: includes/analytics/build/index.js:261
 msgid "Shipping classes cost"
 msgstr "Verzend klassen kosten"
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:104
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:268
 #: includes/analytics/src/modules/orders.js:54
+#: includes/analytics/build/index.js:255
 msgid "Extra cost"
 msgstr "Extra kosten"
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:103
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:263
 #: includes/analytics/src/modules/orders.js:48
+#: includes/analytics/build/index.js:249
 msgid "Gateway cost"
 msgstr "Kosten gateway"
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:102
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:258
 #: includes/analytics/src/modules/orders.js:42
+#: includes/analytics/build/index.js:243
 msgid "Shipping cost"
 msgstr "Verzendkosten"
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:101
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:253
 #: includes/analytics/src/modules/orders.js:36
+#: includes/analytics/build/index.js:237
 msgid "Items cost"
 msgstr "Kosten items"
 
@@ -689,43 +694,43 @@ msgstr "MySQL"
 msgid "Date format."
 msgstr "Datumnotatie."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:293
+#: includes/settings/class-alg-wc-cog-settings-tools.php:301
 msgid "Date paid"
 msgstr "Datum betaald"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:292
+#: includes/settings/class-alg-wc-cog-settings-tools.php:300
 msgid "Date completed"
 msgstr "Datum afgerond"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:291
+#: includes/settings/class-alg-wc-cog-settings-tools.php:299
 msgid "Date modified"
 msgstr "Datum gewijzigd"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:290
+#: includes/settings/class-alg-wc-cog-settings-tools.php:298
 msgid "Date created"
 msgstr "Datum gemaakt"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:284
+#: includes/settings/class-alg-wc-cog-settings-tools.php:292
 msgid "Date type."
 msgstr "Datumtype."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:276
+#: includes/settings/class-alg-wc-cog-settings-tools.php:284
 msgid "Recalculate cost and profit for orders before a specific date."
 msgstr "Herbereken kosten en winst voor bestellingen voor een specifieke datum."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:275
+#: includes/settings/class-alg-wc-cog-settings-tools.php:283
 msgid "Before."
 msgstr "Vóór."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:267
+#: includes/settings/class-alg-wc-cog-settings-tools.php:275
 msgid "Recalculate cost and profit for orders after a specific date."
 msgstr "Herbereken kosten en winst voor bestellingen na een bepaalde datum."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:266
+#: includes/settings/class-alg-wc-cog-settings-tools.php:274
 msgid "After."
 msgstr "Na."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:255
+#: includes/settings/class-alg-wc-cog-settings-tools.php:263
 msgid "Recalculate no cost orders"
 msgstr "Geen kosten bestelling herberekenen"
 
@@ -1437,18 +1442,21 @@ msgstr "Je kunt indien gewenst, het op de tegenovergestelde manier gebruiken doo
 msgid "A tool created with the purpose of importing the cost meta from another plugin by replacing the cost meta."
 msgstr "Een gereedschap gemaakt met het doel om de kosten meta uit een andere plugin te importeren door de kosten meta te vervangen."
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:596
 #: includes/analytics/src/modules/stock.js:35
+#: includes/analytics/build/index.js:621
 msgid "Products with cost"
 msgstr "Producten met kosten"
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:593
 #: includes/analytics/src/modules/stock.js:34
+#: includes/analytics/build/index.js:620
 msgid "Disabled"
 msgstr "Uitgeschakeld"
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:588
 #: includes/analytics/src/modules/stock.js:29
+#: includes/analytics/build/index.js:615
 msgid "Cost of Goods filter"
 msgstr "Cost of Goods filter"
 
@@ -1502,8 +1510,9 @@ msgid "Item handling fees"
 msgstr "Item verwerkings kosten"
 
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:286
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:629
 #: includes/analytics/src/modules/stock.js:76
+#: includes/analytics/build/index.js:662
 msgid "Category"
 msgstr "Categorie"
 
@@ -1656,19 +1665,33 @@ msgstr "Kolom breedte (%s)."
 msgid "Add product cost column"
 msgstr "Product kosten kolom toevoegen"
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:85
+#: includes/analytics/build/index.js:351
+#: includes/analytics/build/index.js:444
+#: includes/analytics/build/index.js:536
 #: includes/analytics/src/modules/categories.js:91
-#: includes/analytics/src/modules/orders.js:167
+#: includes/analytics/src/modules/orders.js:168
 #: includes/analytics/src/modules/products.js:93
 #: includes/analytics/src/modules/revenue.js:91
+#: includes/analytics/build/index.js:91
+#: includes/analytics/build/index.js:369
+#: includes/analytics/build/index.js:473
+#: includes/analytics/build/index.js:575
 msgid "Profit total"
 msgstr "Winst totaal"
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:81
+#: includes/analytics/build/index.js:347
+#: includes/analytics/build/index.js:440
+#: includes/analytics/build/index.js:532
 #: includes/analytics/src/modules/categories.js:86
-#: includes/analytics/src/modules/orders.js:162
+#: includes/analytics/src/modules/orders.js:163
 #: includes/analytics/src/modules/products.js:88
 #: includes/analytics/src/modules/revenue.js:86
+#: includes/analytics/build/index.js:86
+#: includes/analytics/build/index.js:364
+#: includes/analytics/build/index.js:468
+#: includes/analytics/build/index.js:570
 msgid "Costs total"
 msgstr "Kosten totaal"
 
@@ -2165,19 +2188,19 @@ msgstr "Dit wordt gebruikt op beheer pagina's voor het bewerken van enkelvoudige
 msgid "Available placeholders: %s."
 msgstr "Beschikbare plaatshouders: %s."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:301
+#: includes/settings/class-alg-wc-cog-settings-tools.php:309
 msgid "Ignored if set to zero."
 msgstr "Genegeerd indien ingesteld op nul."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:300
+#: includes/settings/class-alg-wc-cog-settings-tools.php:308
 msgid "Will set PHP memory limit right before tools are run."
 msgstr "Zet de PHP geheugen beperking goed, vlak voordat gereedschappen wordt gedraaid."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:299
+#: includes/settings/class-alg-wc-cog-settings-tools.php:307
 msgid "megabytes"
 msgstr "megabytes."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:298
+#: includes/settings/class-alg-wc-cog-settings-tools.php:306
 msgid "PHP memory limit"
 msgstr "PHP geheugen limiet"
 
@@ -2688,22 +2711,18 @@ msgstr "Gereedschappen > Bulkbewerk kosten"
 msgid "Bulk Edit tool is in %s."
 msgstr "Bulkbewerk gereedschap is in %s."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:257
+#: includes/settings/class-alg-wc-cog-settings-tools.php:265
 msgid "Set items costs in orders that do not have costs set."
 msgstr "Instellen item kosten in bestellingen waarvoor geen kosten zijn ingesteld."
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:256
+#: includes/settings/class-alg-wc-cog-settings-tools.php:264
 msgid "Recalculate cost and profit for orders with no costs"
 msgstr "Herbereken kosten en winst voor bestellingen zonder kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-tools.php:248
-#: includes/settings/class-alg-wc-cog-settings-tools.php:258
+#: includes/settings/class-alg-wc-cog-settings-tools.php:247
+#: includes/settings/class-alg-wc-cog-settings-tools.php:266
 msgid "Enable the checkbox and \"Save changes\" to run the tool."
 msgstr "Het selectievakje inschakelen en \"Wijzigingen opslaan\" om het gereedschap te draaien."
-
-#: includes/settings/class-alg-wc-cog-settings-tools.php:247
-msgid "Set items costs in all orders (overriding previous costs)."
-msgstr "Instellen item kosten in alle bestellingen (overschrijven van vorige kosten)."
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:246
 msgid "Recalculate cost and profit for all orders"
@@ -2796,8 +2815,8 @@ msgstr "Winst: %s"
 
 #: includes/class-alg-wc-cog-orders.php:754
 #: includes/class-alg-wc-cog-orders.php:1198
-#: includes/pro/class-alg-wc-cog-pro.php:646
-#: includes/pro/class-alg-wc-cog-pro.php:665
+#: includes/pro/class-alg-wc-cog-pro.php:652
+#: includes/pro/class-alg-wc-cog-pro.php:671
 msgid "Cost of goods"
 msgstr "Kosten van goederen"
 
@@ -2812,13 +2831,24 @@ msgstr "Kosten van goederen"
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:64
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:46
+#: includes/analytics/build/index.js:145
+#: includes/analytics/build/index.js:245
+#: includes/analytics/build/index.js:405
+#: includes/analytics/build/index.js:497
+#: includes/analytics/build/index.js:620
 #: includes/analytics/src/modules/categories.js:38
 #: includes/analytics/src/modules/customers.js:47
 #: includes/analytics/src/modules/orders.js:26
 #: includes/analytics/src/modules/products.js:39
 #: includes/analytics/src/modules/revenue.js:38
 #: includes/analytics/src/modules/stock.js:67
+#: includes/analytics/build/index.js:38
+#: includes/analytics/build/index.js:150
+#: includes/analytics/build/index.js:227
+#: includes/analytics/build/index.js:419
+#: includes/analytics/build/index.js:522
+#: includes/analytics/build/index.js:653
 msgid "Profit"
 msgstr "Winst"
 
@@ -2842,13 +2872,24 @@ msgstr "Winst"
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:297
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:373
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:41
+#: includes/analytics/build/index.js:140
+#: includes/analytics/build/index.js:240
+#: includes/analytics/build/index.js:400
+#: includes/analytics/build/index.js:492
+#: includes/analytics/build/index.js:614
 #: includes/analytics/src/modules/categories.js:32
 #: includes/analytics/src/modules/customers.js:41
 #: includes/analytics/src/modules/orders.js:20
 #: includes/analytics/src/modules/products.js:33
 #: includes/analytics/src/modules/revenue.js:32
 #: includes/analytics/src/modules/stock.js:61
+#: includes/analytics/build/index.js:32
+#: includes/analytics/build/index.js:144
+#: includes/analytics/build/index.js:221
+#: includes/analytics/build/index.js:413
+#: includes/analytics/build/index.js:516
+#: includes/analytics/build/index.js:647
 msgid "Cost"
 msgstr "Kosten"
 
@@ -2911,27 +2952,27 @@ msgstr ""
 msgid "- No change -"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:591
+#: includes/pro/class-alg-wc-cog-pro.php:593
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:598
+#: includes/pro/class-alg-wc-cog-pro.php:604
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:601
+#: includes/pro/class-alg-wc-cog-pro.php:607
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:719
+#: includes/pro/class-alg-wc-cog-pro.php:725
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:721
+#: includes/pro/class-alg-wc-cog-pro.php:727
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:723
+#: includes/pro/class-alg-wc-cog-pro.php:729
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
 
@@ -3210,4 +3251,12 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-extra-costs-labels.php:48
 msgid "payment fee"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:255
+msgid "Override item costs on recalculation"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-tools.php:256
+msgid "Disable it if you don't want to override the item costs."
 msgstr ""
