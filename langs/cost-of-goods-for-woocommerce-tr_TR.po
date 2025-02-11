@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 "X-Loco-Version: 2.4.3; wp-5.5.1\n"
 
-#: includes/class-alg-wc-cog.php:265
+#: includes/class-alg-wc-cog.php:267
 msgid "Go Pro"
 msgstr "Pro Sürüm Satın Al"
 
@@ -25,7 +25,7 @@ msgstr "Malların maliyetinin altında satış yapıyorsunuz."
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:116
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:219
-#: includes/class-alg-wc-cog.php:165
+#: includes/class-alg-wc-cog.php:167
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
 #: includes/settings/class-alg-wc-cog-settings-orders.php:430
 #: includes/settings/class-alg-wc-cog-settings-products.php:253
@@ -170,8 +170,8 @@ msgstr "ücret"
 
 #: includes/class-alg-wc-cog-orders.php:754
 #: includes/class-alg-wc-cog-orders.php:1198
-#: includes/pro/class-alg-wc-cog-pro.php:652
-#: includes/pro/class-alg-wc-cog-pro.php:671
+#: includes/pro/class-alg-wc-cog-pro.php:650
+#: includes/pro/class-alg-wc-cog-pro.php:669
 msgid "Cost of goods"
 msgstr "Malların maliyeti"
 
@@ -234,24 +234,24 @@ msgstr "Yok"
 msgid "- No change -"
 msgstr "- Değişiklik yok -"
 
-#: includes/pro/class-alg-wc-cog-pro.php:593
+#: includes/pro/class-alg-wc-cog-pro.php:591
 msgid "Orders cost and profit successfully recalculated."
 msgstr "Sipariş maliyeti ve karı başarıyla yeniden hesaplandı."
 
-#: includes/pro/class-alg-wc-cog-pro.php:607
+#: includes/pro/class-alg-wc-cog-pro.php:605
 msgid "Something went wrong..."
 msgstr "Bir şeyler yanlış gitti..."
 
-#: includes/pro/class-alg-wc-cog-pro.php:725
+#: includes/pro/class-alg-wc-cog-pro.php:723
 #, php-format
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr "Mal Maliyeti raporları %s ve %s cinsindendir."
 
-#: includes/pro/class-alg-wc-cog-pro.php:727
+#: includes/pro/class-alg-wc-cog-pro.php:725
 msgid "Reports > Orders > Cost of Goods"
 msgstr "Raporlar> Siparişler> Malların Maliyeti"
 
-#: includes/pro/class-alg-wc-cog-pro.php:729
+#: includes/pro/class-alg-wc-cog-pro.php:727
 msgid "Reports > Stock > Cost of Goods"
 msgstr "Raporlar> Stok> Mal Maliyeti"
 
@@ -1300,7 +1300,7 @@ msgstr ""
 msgid "Currencies costs"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:604
+#: includes/pro/class-alg-wc-cog-pro.php:602
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
@@ -3159,7 +3159,7 @@ msgstr ""
 #: includes/analytics/build/index.js:440
 #: includes/analytics/build/index.js:532
 #: includes/analytics/src/modules/categories.js:86
-#: includes/analytics/src/modules/orders.js:163
+#: includes/analytics/src/modules/orders.js:162
 #: includes/analytics/src/modules/products.js:88
 #: includes/analytics/src/modules/revenue.js:86
 #: includes/analytics/build/index.js:86
@@ -3174,7 +3174,7 @@ msgstr ""
 #: includes/analytics/build/index.js:444
 #: includes/analytics/build/index.js:536
 #: includes/analytics/src/modules/categories.js:91
-#: includes/analytics/src/modules/orders.js:168
+#: includes/analytics/src/modules/orders.js:167
 #: includes/analytics/src/modules/products.js:93
 #: includes/analytics/src/modules/revenue.js:91
 #: includes/analytics/build/index.js:91
@@ -3210,7 +3210,7 @@ msgstr ""
 msgid "Ignore quantity sold when calculating profit and costs"
 msgstr ""
 
-#: includes/class-alg-wc-cog.php:166
+#: includes/class-alg-wc-cog.php:168
 msgid "Cost of Goods Sold"
 msgstr ""
 

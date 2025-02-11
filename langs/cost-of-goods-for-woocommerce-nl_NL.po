@@ -33,7 +33,7 @@ msgstr "Beschouw alle waarden als positief"
 msgid "Sign handling"
 msgstr "Sign handling"
 
-#: includes/class-alg-wc-cog.php:166
+#: includes/class-alg-wc-cog.php:168
 msgid "Cost of Goods Sold"
 msgstr "Kosten van verkochte goederen"
 
@@ -1670,7 +1670,7 @@ msgstr "Product kosten kolom toevoegen"
 #: includes/analytics/build/index.js:444
 #: includes/analytics/build/index.js:536
 #: includes/analytics/src/modules/categories.js:91
-#: includes/analytics/src/modules/orders.js:168
+#: includes/analytics/src/modules/orders.js:167
 #: includes/analytics/src/modules/products.js:93
 #: includes/analytics/src/modules/revenue.js:91
 #: includes/analytics/build/index.js:91
@@ -1685,7 +1685,7 @@ msgstr "Winst totaal"
 #: includes/analytics/build/index.js:440
 #: includes/analytics/build/index.js:532
 #: includes/analytics/src/modules/categories.js:86
-#: includes/analytics/src/modules/orders.js:163
+#: includes/analytics/src/modules/orders.js:162
 #: includes/analytics/src/modules/products.js:88
 #: includes/analytics/src/modules/revenue.js:86
 #: includes/analytics/build/index.js:86
@@ -2515,7 +2515,7 @@ msgstr "Je moet de bestelling kosten en winst opnieuw berekenen nadat je deze in
 msgid "Here you can add extra costs for your orders, e.g. handling fees."
 msgstr "Hier kun je extra kosten toevoegen voor je bestellingen, b.v. behandelkosten."
 
-#: includes/class-alg-wc-cog.php:265
+#: includes/class-alg-wc-cog.php:267
 msgid "Go Pro"
 msgstr "Ga voor Pro"
 
@@ -2799,7 +2799,7 @@ msgstr "Reset instellingen"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:116
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:219
-#: includes/class-alg-wc-cog.php:165
+#: includes/class-alg-wc-cog.php:167
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
 #: includes/settings/class-alg-wc-cog-settings-orders.php:430
 #: includes/settings/class-alg-wc-cog-settings-products.php:253
@@ -2815,8 +2815,8 @@ msgstr "Winst: %s"
 
 #: includes/class-alg-wc-cog-orders.php:754
 #: includes/class-alg-wc-cog-orders.php:1198
-#: includes/pro/class-alg-wc-cog-pro.php:652
-#: includes/pro/class-alg-wc-cog-pro.php:671
+#: includes/pro/class-alg-wc-cog-pro.php:650
+#: includes/pro/class-alg-wc-cog-pro.php:669
 msgid "Cost of goods"
 msgstr "Kosten van goederen"
 
@@ -2952,27 +2952,27 @@ msgstr ""
 msgid "- No change -"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:593
+#: includes/pro/class-alg-wc-cog-pro.php:591
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:604
+#: includes/pro/class-alg-wc-cog-pro.php:602
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:607
+#: includes/pro/class-alg-wc-cog-pro.php:605
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:725
+#: includes/pro/class-alg-wc-cog-pro.php:723
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:727
+#: includes/pro/class-alg-wc-cog-pro.php:725
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:729
+#: includes/pro/class-alg-wc-cog-pro.php:727
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
 

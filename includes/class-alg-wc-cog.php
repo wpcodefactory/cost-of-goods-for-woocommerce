@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.5.3
+ * @version 3.6.3
  * @since   3.0.3
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '3.6.2';
+		public $version = '3.6.3';
 
 		/**
 		 * @since 1.0.0
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		/**
 		 * add_cross_selling_library.
 		 *
-		 * @version 3.5.1
+		 * @version 3.6.3
 		 * @since   3.5.1
 		 *
 		 * @return void
@@ -140,6 +140,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 			if ( ! is_admin() ) {
 				return;
 			}
+			require_once plugin_dir_path( alg_wc_cog()->get_filesystem_path() ) . 'vendor/autoload.php';
 			// Cross-selling library.
 			$cross_selling = new \WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling();
 			$cross_selling->setup( array( 'plugin_file_path'   => $this->get_filesystem_path() ) );
@@ -149,7 +150,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		/**
 		 * move_wc_settings_tab_to_wpfactory_submenu.
 		 *
-		 * @version 3.5.3
+		 * @version 3.6.3
 		 * @since   3.5.1
 		 *
 		 * @return void
@@ -158,6 +159,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 			if ( ! is_admin() ) {
 				return;
 			}
+			require_once plugin_dir_path( alg_wc_cog()->get_filesystem_path() ) . 'vendor/autoload.php';
 			// WC Settings tab as WPFactory submenu item.
 			$wpf_admin_menu = \WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu::get_instance();
 			$wpf_admin_menu->move_wc_settings_tab_to_wpfactory_menu( array(
