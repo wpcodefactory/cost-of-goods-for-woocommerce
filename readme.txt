@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.7
-Stable tag: 3.6.3
+Stable tag: 3.6.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.6.4 - 25/02/2025 =
+* Dev - Multicurrency - Added new option to convert Extra Costs From Meta.
 
 = 3.6.3 - 11/02/2025 =
 * Fix - Orders - Extra costs - Fixed possible error "Call to a member function get_meta() on false" on a admin order page.

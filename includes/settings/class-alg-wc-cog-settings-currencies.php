@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Currencies Section Settings.
  *
- * @version 3.3.7
+ * @version 3.6.4
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.3.7
+	 * @version 3.6.4
 	 * @since   2.2.0
 	 * @todo    [next] exclude `$wc_currency` from `get_woocommerce_currencies()`?
 	 * @todo    [maybe] `alg_wc_cog_currencies_wmc`: add link to the plugin on wp.org?
@@ -80,6 +80,14 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 				'wpfse_data'        => array(
 					'hide' => true
 				)
+			),
+			array(
+				'title'             => __( 'Extra Costs: From Meta', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Convert extra costs from meta values', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'          => __( 'Enable if the meta values are being saved in the order currency. Disable if they are stored in the shop\'s base currency.', 'cost-of-goods-for-woocommerce' ),
+				'type'              => 'checkbox',
+				'id'                => 'alg_wc_cog_currencies_convert_extra_costs_from_meta',
+				'default'           => 'no',
 			),
 			array(
 				'title'      => __( 'Currencies', 'cost-of-goods-for-woocommerce' ),

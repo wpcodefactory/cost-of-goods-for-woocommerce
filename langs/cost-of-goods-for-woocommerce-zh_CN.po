@@ -532,12 +532,12 @@ msgstr "触发最小值"
 msgid "Background processing"
 msgstr "后台处理设置"
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:86
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:94
 msgid "Choose currencies you want to set exchange rates for, and \"Save changes\" - new settings fields will be displayed."
 msgstr "选择你想设置汇率的货币类型，点击 “保存更改”，新的设置区域就会显现。"
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:85
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:138
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:93
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:146
 msgid "Currencies"
 msgstr "支持的货币类型"
 
@@ -1317,8 +1317,8 @@ msgstr "利润：%s"
 
 #: includes/class-alg-wc-cog-orders.php:754
 #: includes/class-alg-wc-cog-orders.php:1198
-#: includes/pro/class-alg-wc-cog-pro.php:650
-#: includes/pro/class-alg-wc-cog-pro.php:669
+#: includes/pro/class-alg-wc-cog-pro.php:660
+#: includes/pro/class-alg-wc-cog-pro.php:679
 msgid "Cost of goods"
 msgstr "商品成本"
 
@@ -1566,7 +1566,7 @@ msgid "Option(s) costs"
 msgstr ""
 
 #: includes/pro/class-alg-wc-cog-pro-extra-currencies-costs.php:54
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:127
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:135
 msgid "Currencies costs"
 msgstr ""
 
@@ -1574,27 +1574,27 @@ msgstr ""
 msgid "- No change -"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:591
+#: includes/pro/class-alg-wc-cog-pro.php:601
 msgid "Orders cost and profit successfully recalculated."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:602
+#: includes/pro/class-alg-wc-cog-pro.php:612
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:605
+#: includes/pro/class-alg-wc-cog-pro.php:615
 msgid "Something went wrong..."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:723
+#: includes/pro/class-alg-wc-cog-pro.php:733
 msgid "Cost of Goods reports are in %s and in %s."
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:725
+#: includes/pro/class-alg-wc-cog-pro.php:735
 msgid "Reports > Orders > Cost of Goods"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro.php:727
+#: includes/pro/class-alg-wc-cog-pro.php:737
 msgid "Reports > Stock > Cost of Goods"
 msgstr ""
 
@@ -2306,31 +2306,31 @@ msgstr ""
 msgid "Force shop base currency on COG order fields"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:121
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:129
 msgid "Currency costs"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:122
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:130
 msgid "Add extra costs based on the order currency."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:128
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:136
 msgid "Add extra costs based on the order currency"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:139
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:147
 msgid "Choose currencies you want to add costs for, and \"Save changes\" - new settings fields will be displayed."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:155
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:163
 msgid " - Fixed cost"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:165
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:173
 msgid " - Percent cost"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-currencies.php:166
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:174
 msgid "Percent from order total. E.g.: If you want to add a cost of <code>50%</code> from order total you can set it as 50."
 msgstr ""
 
@@ -3259,4 +3259,16 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:256
 msgid "Disable it if you don't want to override the item costs."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:85
+msgid "Extra Costs: From Meta"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:86
+msgid "Convert extra costs from meta values"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-currencies.php:87
+msgid "Enable if the meta values are being saved in the order currency. Disable if they are stored in the shop's base currency."
 msgstr ""
