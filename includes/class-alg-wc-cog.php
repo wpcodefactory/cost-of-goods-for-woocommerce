@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.6.3
+ * @version 3.6.6
  * @since   3.0.3
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '3.6.5';
+		public $version = '3.6.6';
 
 		/**
 		 * @since 1.0.0

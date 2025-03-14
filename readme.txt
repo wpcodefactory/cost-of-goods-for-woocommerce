@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.7
-Stable tag: 3.6.5
+Stable tag: 3.6.6
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.6.6 - 14/03/2025 =
+* Fix - Compatibility - WPC Product Bundles - Bundle cost was not being excluded from order item.
 
 = 3.6.5 - 11/03/2025 =
 * Dev - Key Manager library - Changed namespace from `v5\PucFactory` to `v5p4\PucFactory` so it won't conflict with other plugins loading possible older versions of Puc.
