@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.6.0
+ * @version 3.6.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -17,27 +17,6 @@ use \Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableControll
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Orders' ) ) :
 
 class Alg_WC_Cost_of_Goods_Orders {
-
-	/**
-	 * Is gateway costs enabled.
-	 *
-	 * @since 2.9.4
-	 */
-	public $is_gateway_costs_enabled;
-
-	/**
-	 * Gateway costs fixed.
-	 *
-	 * @since 2.9.4.
-	 */
-	public $gateway_costs_fixed;
-
-	/**
-	 * Gateway costs percent.
-	 *
-	 * @since 2.9.4.
-	 */
-	public $gateway_costs_percent;
 
 	/**
 	 * Is shipping costs enabled.
@@ -292,17 +271,11 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * get_options.
 	 *
-	 * @version 2.9.0
+	 * @version 3.6.7
 	 * @since   2.1.0
 	 * @todo    [maybe] Fees: From Meta: no `trim`?
 	 */
 	function get_options() {
-		// Fees: Gateways
-		$this->is_gateway_costs_enabled = ( 'yes' === get_option( 'alg_wc_cog_gateway_costs_enabled', 'no' ) );
-		if ( $this->is_gateway_costs_enabled ) {
-			$this->gateway_costs_fixed   = get_option( 'alg_wc_cog_gateway_costs_fixed', array() );
-			$this->gateway_costs_percent = get_option( 'alg_wc_cog_gateway_costs_percent', array() );
-		}
 		// Fees: Shipping
 		$this->is_shipping_costs_enabled = ( 'yes' === get_option( 'alg_wc_cog_shipping_costs_enabled', 'no' ) );
 		if ( $this->is_shipping_costs_enabled ) {
@@ -356,7 +329,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 3.3.6
+	 * @version 3.6.7
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -371,20 +344,26 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'added_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
 		add_action( 'updated_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
 		add_action( 'deleted_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
+
 		// Order item costs on order edit page.
 		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'add_cost_input_shop_order' ), PHP_INT_MAX, 3 );
 		add_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), 9, 2 );
 		add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_cost_input_shop_order_save_post' ), 9, 2 );
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hide_cost_input_meta_shop_order' ), PHP_INT_MAX );
+
 		// Order item handling fee on order edit page.
 		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'add_handling_fee_input_shop_order' ), PHP_INT_MAX, 3 );
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hide_handling_fee_input_meta_shop_order' ), PHP_INT_MAX );
+
 		// Admin new order (AJAX).
 		add_action( 'woocommerce_new_order_item', array( $this, 'new_order_item_ajax' ), PHP_INT_MAX, 3 );
+
 		// "Recalculate" order button (AJAX).
 		add_action( 'woocommerce_saved_order_items', array( $this, 'recalculate_order_ajax' ), PHP_INT_MAX, 2 );
+
 		// Save order items (AJAX).
 		add_action( 'woocommerce_before_save_order_items', array( $this, 'save_order_items_ajax' ), PHP_INT_MAX, 2 );
+
 		// Save order items costs on new order.
 		add_action( 'woocommerce_new_order', array( $this, 'update_order_items_costs_on_new_order' ), 10 );
 		add_action( 'woocommerce_new_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX, 2 );
@@ -394,6 +373,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'kco_before_confirm_order', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 		add_action( 'woocommerce_checkout_order_processed', array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 		add_action( 'wkwcpos_after_creating_order', array( $this, 'save_cost_input_shop_order_new_by_order' ), PHP_INT_MAX );
+
 		// Orders columns.
 		if (
 			$this->is_column_cost || ( $this->is_columns_extra_cost_per_order && in_array( true, $this->is_order_extra_cost_per_order ) ) ||
@@ -413,33 +393,144 @@ class Alg_WC_Cost_of_Goods_Orders {
 				add_filter( 'woocommerce_order_query_args', array( $this, 'sort_hpos_admin_orders' ) );
 			}
 		}
+
 		// Admin notice.
 		if ( $this->is_admin_notice ) {
 			add_action( 'admin_notices', array( $this, 'order_admin_notice' ), PHP_INT_MAX );
 		}
+
 		// Delay calculations by order status.
 		if ( ! empty( $this->delay_calculations_status ) ) {
 			foreach ( $this->delay_calculations_status as $status ) {
 				add_action( 'woocommerce_order_status_' . $status, array( $this, 'save_cost_input_shop_order_new' ), PHP_INT_MAX );
 			}
 		}
+
 		// Compatibility: "WooCommerce PDF Invoices, Packing Slips, Delivery Notes & Shipping Labels" plugin.
 		add_filter( 'wf_pklist_modify_meta_data', array( $this, 'wf_pklist_remove_cog_meta' ), PHP_INT_MAX );
+
 		// Add profit to admin email.
 		add_action( 'woocommerce_email_order_meta', array( $this, 'woocommerce_email_order_meta' ), PHP_INT_MAX, 2 );
+
 		// Adds cost of goods on orders placed by WooCommerce REST API.
 		add_action( 'woocommerce_rest_insert_shop_order_object', array( $this, 'trigger_woocommerce_new_order_on_new_order_via_rest' ), 10, 3 );
+
 		// Shipping to profit.
 		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'add_order_shipping_cost_to_profit' ), 10, 2 );
 		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_shipping_to_profit_meta_key_to_order_cmb' ) );
+
 		// Fees to profit.
 		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'add_order_fees_to_profit' ), 10, 2 );
 		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_fees_to_profit_meta_key_to_order_cmb' ) );
+
 		// Taxes to profit.
 		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'add_order_taxes_to_profit' ), 10, 2 );
 		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_taxes_to_profit_meta_key_to_order_cmb' ) );
+
 		// Avoid empty order metadata saving.
 		add_action( 'woocommerce_before_order_object_save', array( $this, 'avoid_empty_order_metadata_saving' ), 90, 2 );
+
+		// Payment gateways.
+		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'manage_payment_gateways' ), 10, 2 );
+		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_payment_gateways_profit_meta_key_to_order_cmb' ) );
+    }
+
+	/**
+	 * add_payment_gateways_profit_meta_key_to_order_cmb.
+	 *
+	 * @version 3.6.7
+	 * @since   3.6.7
+	 *
+	 * @param $meta_keys
+	 *
+	 * @return mixed
+	 */
+	function add_payment_gateways_profit_meta_key_to_order_cmb( $meta_keys ) {
+		if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
+			$text                                                  = __( 'Gateway', 'cost-of-goods-for-woocommerce' );
+			$meta_keys['_alg_wc_cog_payment_gateway_extra_profit'] = $text;
+		}
+
+		return $meta_keys;
+	}
+
+	/**
+     * manage_payment_gateways.
+     *
+	 * @version 3.6.7
+	 * @since   3.6.7
+     *
+	 * @param $order_values
+	 * @param $order_info
+	 *
+	 * @return mixed
+	 */
+    function manage_payment_gateways( $order_values, $order_info ){
+	    if (
+		    'yes' === alg_wc_cog_get_option( 'alg_wc_cog_gateways_values_enabled', alg_wc_cog_get_gateways_option_default() ) &&
+		    is_a( $order = $order_info['order'], 'WC_Order' ) &&
+		    method_exists( $order, 'get_payment_method' )
+	    ) {
+		    $gateway_costs_fixed      = alg_wc_cog_get_option( 'alg_wc_cog_gateway_costs_fixed', array() );
+		    $gateway_costs_percent    = alg_wc_cog_get_option( 'alg_wc_cog_gateway_costs_percent', array() );
+		    $order_gateway            = $order->get_payment_method();
+		    $gateway_cost_percent_max = alg_wc_cog_get_option( 'alg_wc_cog_gateway_costs_percent_max_value', array() );
+		    $gateway_cost_fixed       = 0;
+		    $gateway_cost_percent     = 0;
+
+		    // Fixed costs.
+		    if ( ! empty( $gateway_costs_fixed[ $order_gateway ] ) ) {
+			    $gateway_cost_fixed = apply_filters(
+				    'alg_wc_cog_order_gateway_cost_fixed',
+				    $gateway_costs_fixed[ $order_gateway ],
+				    $order,
+				    $order_gateway
+			    );
+		    }
+
+		    // Percent costs.
+		    if ( ! empty( $gateway_costs_percent[ $order_gateway ] ) ) {
+			    if ( ! isset( $order_total ) ) {
+				    $order_total = $this->get_order_total_for_pecentage_fees( $order );
+			    }
+			    $gateway_cost_percent           = apply_filters(
+				    'alg_wc_cog_order_gateway_cost_percent',
+				    ( $order_total * ( $gateway_costs_percent[ $order_gateway ] / 100 ) ),
+				    $order,
+				    $order_gateway
+			    );
+			    $gateway_cost_percent_max_local = $gateway_cost_percent_max[ $order_gateway ];
+			    $gateway_cost_percent           = ! empty( $gateway_cost_percent_max_local ) ? min( $gateway_cost_percent_max_local, $gateway_cost_percent ) : $gateway_cost_percent;
+		    }
+		    $gateway_cost               = ( $gateway_cost_fixed + $gateway_cost_percent );
+		    $order_values['profit']     -= (float) $gateway_cost;
+		    $order_values['total_cost'] += (float) $gateway_cost;
+		    $order_values['fees']       += (float) $gateway_cost;
+		    $order->update_meta_data( '_alg_wc_cog_order_gateway_cost', $gateway_cost );
+		    $order->update_meta_data( '_alg_wc_cog_order_gateway_cost_fixed', $gateway_cost_fixed );
+		    $order->update_meta_data( '_alg_wc_cog_order_gateway_cost_percent', $gateway_cost_percent );
+
+		    // Profit.
+		    $gateway_fixed_profit_arr = alg_wc_cog_get_option( 'alg_wc_cog_gateway_profit_fixed', array() );
+		    if ( ! empty( $gateway_fixed_profit_arr[ $order_gateway ] ) ) {
+			    $gateway_profit_fixed   = apply_filters(
+				    'alg_wc_cog_order_gateway_cost_fixed',
+				    $gateway_fixed_profit_arr[ $order_gateway ],
+				    $order,
+				    $order_gateway
+			    );
+			    $order_values['profit'] += (float) $gateway_profit_fixed;
+			    $order->update_meta_data( '_alg_wc_cog_payment_gateway_extra_profit', $gateway_profit_fixed );
+		    } else {
+			    $order->delete_meta_data( '_alg_wc_cog_payment_gateway_extra_profit' );
+		    }
+	    } else {
+		    if ( is_a( $order = $order_info['order'], 'WC_Order' ) ) {
+			    $order->delete_meta_data( '_alg_wc_cog_payment_gateway_extra_profit' );
+		    }
+	    }
+
+	    return $order_values;
     }
 
 	/**
@@ -1281,7 +1372,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.5.8
+	 * @version 3.6.7
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1299,21 +1390,25 @@ class Alg_WC_Cost_of_Goods_Orders {
 			'is_no_costs_only' => false,
 			'posted'           => false
 		) );
+
 		$order = $args['order'];
 		$is_new_order = $args['is_new_order'];
 		$is_no_costs_only = $args['is_no_costs_only'];
 		$posted = $args['posted'];
+
 		// Order
 		$order = ! empty( $order ) ? $order : wc_get_order( $args['order_id'] );
 		if ( ! $order || ! is_a( $order, '\WC_Order' ) ) {
 			return;
 		}
 		$order_id = $order->get_id();
+
 		// Fees: From Meta
 		$this->order_extra_cost_from_meta = get_option( 'alg_wc_cog_order_extra_cost_from_meta', '' );
 		if ( '' != $this->order_extra_cost_from_meta ) {
 			$this->order_extra_cost_from_meta = array_map( 'trim', explode( PHP_EOL, $this->order_extra_cost_from_meta ) );
 		}
+
 		// Shipping classes
 		$is_shipping_classes_enabled = ( 'yes' === get_option( 'alg_wc_cog_shipping_classes_enabled', 'no' ) );
 		if ( $is_shipping_classes_enabled ) {
@@ -1326,32 +1421,35 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$shipping_class_cost_fixed_total   = 0;
 		$shipping_class_cost_percent_total = 0;
 		$shipping_classes_cost_total       = 0;
+
 		// Calculate quantity ignoring refunded items.
 		$calculate_qty_excluding_refunds = 'yes' === get_option( 'alg_wc_cog_calculate_qty_excluding_refunds', 'no' );
+
 		// Order items
 		$items_cost         = 0;
 		$items_handling_fee = 0;
 		$handling_fee       = 0;
+
 		// Fees: Extra shipping method costs
 		$shipping_cost         = 0;
 		$shipping_cost_fixed   = 0;
 		$shipping_cost_percent = 0;
-		// Fees: Extra payment gateway costs
-		$gateway_cost         = 0;
-		$gateway_cost_fixed   = 0;
-		$gateway_cost_percent = 0;
-		$gateway_cost_percent_max = alg_wc_cog_get_option( 'alg_wc_cog_gateway_costs_percent_max_value', array() );
+
 		// Fees: Order extra cost: all orders
 		$extra_cost         = 0;
 		$extra_cost_fixed   = 0;
 		$extra_cost_percent = 0;
+
 		// Fees: Order extra cost: per order
 		$per_order_fees = 0;
+
 		// Fees: Order extra cost: from meta (e.g. PayPal, Stripe etc.)
 		$meta_fees = 0;
+
 		// Refund calculation.
 		$refund_profit_calc_method = get_option( 'alg_wc_cog_order_refund_calculation_method', 'ignore_refunds' );
 		$ignore_item_refund_amount = 'yes' === get_option( 'alg_wc_cog_ignore_item_refund_amount', alg_wc_cog_get_ignore_item_refund_amount_default() );
+
 		// Totals
 		$profit               = 0;
 		$total_cost           = 0;
@@ -1361,6 +1459,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$order_total_refunded = (float) apply_filters( 'alg_wc_cog_order_total_refunded', $order_total_refunded, $order );
 		$consider_extra_costs_from_meta_as_positive = 'yes' === get_option( 'alg_wc_cog_order_extra_cost_from_meta_as_positive', 'no' );
 		do_action( 'alg_wc_cog_before_update_order_items_costs', $order );
+
 		// Calculations
 		if ( empty( $this->delay_calculations_status ) || $order->has_status( $this->delay_calculations_status ) ) {
 			// Order items
@@ -1547,37 +1646,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$total_cost    += $shipping_cost;
 				$fees          += $shipping_cost;
 			}
-			// Fees: Extra payment gateway costs
-			if ( $this->is_gateway_costs_enabled && method_exists( $order, 'get_payment_method' ) ) {
-				$order_gateway = $order->get_payment_method();
-				// Fixed
-				if ( ! empty( $this->gateway_costs_fixed[ $order_gateway ] ) ) {
-					$gateway_cost_fixed = apply_filters(
-						'alg_wc_cog_order_gateway_cost_fixed',
-						$this->gateway_costs_fixed[ $order_gateway ],
-						$order,
-						$order_gateway
-					);
-				}
-				// Percent
-				if ( ! empty( $this->gateway_costs_percent[ $order_gateway ] ) ) {
-					if ( ! isset( $order_total ) ) {
-						$order_total = $this->get_order_total_for_pecentage_fees( $order );
-					}
-					$gateway_cost_percent = apply_filters(
-						'alg_wc_cog_order_gateway_cost_percent',
-						( $order_total * ( $this->gateway_costs_percent[ $order_gateway ] / 100 ) ),
-						$order,
-						$order_gateway
-					);
-					$gateway_cost_percent_max_local = $gateway_cost_percent_max[ $order_gateway ];
-					$gateway_cost_percent = ! empty( $gateway_cost_percent_max_local ) ? min( $gateway_cost_percent_max_local, $gateway_cost_percent ) : $gateway_cost_percent;
-				}
-				$gateway_cost = ( $gateway_cost_fixed + $gateway_cost_percent );
-				$profit       -= $gateway_cost;
-				$total_cost   += $gateway_cost;
-				$fees         += $gateway_cost;
-			}
 			// Fees: Order extra cost: all orders
 			if ( 0 !== $this->order_extra_cost_fixed || 0 !== $this->order_extra_cost_percent ) {
 				// Order extra cost: all orders: fixed
@@ -1662,10 +1730,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$order->update_meta_data( '_alg_wc_cog_order_shipping_classes_cost', $shipping_classes_cost_total );
 		$order->update_meta_data( '_alg_wc_cog_order_shipping_classes_cost_fixed', $shipping_class_cost_fixed_total );
 		$order->update_meta_data( '_alg_wc_cog_order_shipping_classes_cost_percent', $shipping_class_cost_percent_total );
-		// Fees: Extra payment gateway costs
-		$order->update_meta_data( '_alg_wc_cog_order_gateway_cost', $gateway_cost );
-		$order->update_meta_data( '_alg_wc_cog_order_gateway_cost_fixed', $gateway_cost_fixed );
-		$order->update_meta_data( '_alg_wc_cog_order_gateway_cost_percent', $gateway_cost_percent );
 		// Fees: Order extra cost: all orders
 		$order->update_meta_data( '_alg_wc_cog_order_extra_cost', $extra_cost );
 		$order->update_meta_data( '_alg_wc_cog_order_extra_cost_fixed', $extra_cost_fixed );

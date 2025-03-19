@@ -18,7 +18,7 @@ msgstr ""
 msgid "Go Pro"
 msgstr "Pro Sürüm Satın Al"
 
-#: includes/class-alg-wc-cog-orders.php:331
+#: includes/class-alg-wc-cog-orders.php:304
 #: includes/settings/class-alg-wc-cog-settings-orders.php:180
 msgid "You are selling below the cost of goods."
 msgstr "Malların maliyetinin altında satış yapıyorsunuz."
@@ -38,8 +38,8 @@ msgstr "Malın Maliyeti"
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:47
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:281
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
-#: includes/class-alg-wc-cog-orders.php:750
-#: includes/class-alg-wc-cog-orders.php:860
+#: includes/class-alg-wc-cog-orders.php:841
+#: includes/class-alg-wc-cog-orders.php:951
 #: includes/class-alg-wc-cog-products-add-stock.php:353
 #: includes/class-alg-wc-cog-products-add-stock.php:409
 #: includes/class-alg-wc-cog-products.php:301
@@ -79,8 +79,8 @@ msgstr "Maliyet"
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:48
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:282
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
-#: includes/class-alg-wc-cog-orders.php:751
-#: includes/class-alg-wc-cog-orders.php:870
+#: includes/class-alg-wc-cog-orders.php:842
+#: includes/class-alg-wc-cog-orders.php:961
 #: includes/class-alg-wc-cog-products.php:383
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
@@ -168,8 +168,8 @@ msgstr "Ekstra maliyet"
 msgid "fee"
 msgstr "ücret"
 
-#: includes/class-alg-wc-cog-orders.php:754
-#: includes/class-alg-wc-cog-orders.php:1198
+#: includes/class-alg-wc-cog-orders.php:845
+#: includes/class-alg-wc-cog-orders.php:1289
 #: includes/pro/class-alg-wc-cog-pro.php:660
 #: includes/pro/class-alg-wc-cog-pro.php:679
 msgid "Cost of goods"
@@ -568,13 +568,11 @@ msgid "Extra Costs"
 msgstr "Ekstra Maliyet"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:24
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:38
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:45
 #: includes/settings/class-alg-wc-cog-settings-orders.php:267
 msgid "Payment Gateways"
 msgstr "Ödeme Seçenekleri"
-
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:38
-msgid "Extra Payment Gateway Costs"
-msgstr "Ekstra Ödeme Maliyetleri"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:40
 #: includes/settings/class-alg-wc-cog-settings-orders.php:243
@@ -586,11 +584,6 @@ msgstr "Ekstra Ödeme Maliyetleri"
 msgid "You will need to recalculate order's cost and profit after you change these settings."
 msgstr "Bu ayarları değiştirdikten sonra siparişin maliyetini ve karını yeniden hesaplamanız gerekecektir."
 
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:45
-msgid "Extra gateway costs"
-msgstr "Ekstra ödeme maliyetleri"
-
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:46
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:46
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:124
 msgid "Enable section"
@@ -604,6 +597,7 @@ msgid "Fixed cost"
 msgstr "Sabit fiyat"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:72
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:105
 #: includes/settings/class-alg-wc-cog-settings-orders.php:403
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:86
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:181
@@ -771,12 +765,12 @@ msgstr "Hariç sipariş toplamı vergi"
 msgid "Order total incl. tax"
 msgstr "Sipariş toplamı dahil. vergi"
 
-#: includes/class-alg-wc-cog-orders.php:634
+#: includes/class-alg-wc-cog-orders.php:725
 #: includes/settings/class-alg-wc-cog-settings-orders.php:281
 msgid "Shipping to profit"
 msgstr "Kar için nakliye"
 
-#: includes/class-alg-wc-cog-orders.php:590
+#: includes/class-alg-wc-cog-orders.php:681
 #: includes/settings/class-alg-wc-cog-settings-orders.php:295
 msgid "Fees to profit"
 msgstr "Kar elde etmek için ücretler"
@@ -1204,34 +1198,34 @@ msgstr ""
 msgid "Extra profit details"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:546
+#: includes/class-alg-wc-cog-orders.php:637
 #: includes/settings/class-alg-wc-cog-settings-orders.php:309
 msgid "Taxes to profit"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:548
+#: includes/class-alg-wc-cog-orders.php:639
 msgid "Taxes to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:592
+#: includes/class-alg-wc-cog-orders.php:683
 msgid "Fees to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:636
+#: includes/class-alg-wc-cog-orders.php:727
 msgid "Shipping to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:873
+#: includes/class-alg-wc-cog-orders.php:964
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:876
+#: includes/class-alg-wc-cog-orders.php:967
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:1234
+#: includes/class-alg-wc-cog-orders.php:1325
 msgid "Handling Fee"
 msgstr ""
 
@@ -1975,10 +1969,6 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:174
 msgid "Percent from order total. E.g.: If you want to add a cost of <code>50%</code> from order total you can set it as 50."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-gateways.php:39
-msgid "Add extra costs for your orders based on order's payment gateway."
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:83
@@ -3309,4 +3299,20 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:87
 msgid "Enable if the meta values are being saved in the order currency. Disable if they are stored in the shop's base currency."
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:450
+msgid "Gateway"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:39
+msgid "Add extra costs/profit to the orders based on order's payment gateway."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:46
+msgid "Enable Payment Gateways section"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-gateways.php:104
+msgid "Fixed profit"
 msgstr ""

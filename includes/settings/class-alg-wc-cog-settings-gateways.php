@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Gateways Section Settings
  *
- * @version 3.5.8
+ * @version 3.6.7
  * @since   1.5.0
  * @author  WPFactory
  */
@@ -28,25 +28,25 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.5.8
+	 * @version 3.6.7
 	 * @since   1.5.0
 	 * @todo    [maybe] better section desc (same for `$order_extra_cost_settings` and "Shipping"): how to recalculate order's profit/cost (i.e. update order or use tool)
 	 */
 	function get_settings() {
 		$settings = array(
 			array(
-				'title'    => __( 'Extra Payment Gateway Costs', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( "Add extra costs for your orders based on order's payment gateway.", 'cost-of-goods-for-woocommerce' ) . ' ' .
+				'title'    => __( 'Payment Gateways', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( "Add extra costs/profit to the orders based on order's payment gateway.", 'cost-of-goods-for-woocommerce' ) . ' ' .
 					__( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
 				'id'       => 'alg_wc_cog_gateways',
 			),
 			array(
-				'title'    => __( 'Extra gateway costs', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => '<strong>' . __( 'Enable section', 'cost-of-goods-for-woocommerce' ) . '</strong>',
+				'title'    => __( 'Payment Gateways', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => '<strong>' . __( 'Enable Payment Gateways section', 'cost-of-goods-for-woocommerce' ) . '</strong>',
 				'type'     => 'checkbox',
-				'id'       => 'alg_wc_cog_gateway_costs_enabled',
-				'default'  => 'no',
+				'id'       => 'alg_wc_cog_gateways_values_enabled',
+				'default'  => alg_wc_cog_get_gateways_option_default(),
 				'wpfse_data'    => array(
 					'hide' => true
 				)
@@ -94,6 +94,17 @@ class Alg_WC_Cost_of_Goods_Settings_Gateways extends Alg_WC_Cost_of_Goods_Settin
 					'desc_tip'          => __( 'Maximum absolute value returned for the percent calculation.', 'cost-of-goods-for-woocommerce' ),
 					'type'              => 'number',
 					'id'                => "alg_wc_cog_gateway_costs_percent_max_value[{$key}]",
+					'default'           => 0,
+					'custom_attributes' => array( 'step' => '0.000001' ),
+					'wpfse_data'    => array(
+						'hide' => true
+					)
+				),
+				array(
+					'title'             => __( 'Fixed profit', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), alg_wc_cog()->core->get_default_shop_currency() ),
+					'type'              => 'number',
+					'id'                => "alg_wc_cog_gateway_profit_fixed[{$key}]",
 					'default'           => 0,
 					'custom_attributes' => array( 'step' => '0.000001' ),
 					'wpfse_data'    => array(

@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.7
-Stable tag: 3.6.6
+Stable tag: 3.6.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,11 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.6.7 - 19/03/2025 =
+* Dev - Payment Gateways - Added option to set a fixed profit.
+* Dev - Payment Gateways - Option changed from `alg_wc_cog_gateway_costs_enabled` to `alg_wc_cog_gateways_values_enabled`.
+* Dev - Payment Gateways - Code refactored.
 
 = 3.6.6 - 14/03/2025 =
 * Fix - Compatibility - WPC Product Bundles - Bundle cost was not being excluded from order item.

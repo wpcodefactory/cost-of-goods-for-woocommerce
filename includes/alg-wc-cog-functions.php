@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 3.4.8
+ * @version 3.6.7
  * @since   3.2.1
  * @author  WPFactory
  */
@@ -468,6 +468,20 @@ if ( ! function_exists( 'alg_wc_cog_get_option' ) ) {
 	 */
 	function alg_wc_cog_get_option( $option, $default_value = false, $get_value_from_cache = true ) {
 		return alg_wc_cog()->core->options->get_option( $option, $default_value, $get_value_from_cache );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_get_gateways_option_default' ) ) {
+	/**
+	 * alg_wc_cog_get_option.
+	 *
+	 * @version 3.6.7
+	 * @since   3.6.7
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_get_gateways_option_default() {
+		return alg_wc_cog_get_option( 'alg_wc_cog_gateway_costs_enabled', 'no' );
 	}
 }
 
