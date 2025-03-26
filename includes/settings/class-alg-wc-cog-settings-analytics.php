@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Section Settings.
  *
- * @version 3.4.6
+ * @version 3.6.8
  * @since   3.4.6
  * @author  WPFactory
  */
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.4.6
+		 * @version 3.6.8
 		 * @since   3.4.6
 		 *
 		 * @return array
@@ -133,6 +133,35 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 				array(
 					'type' => 'sectionend',
 					'id'   => 'alg_wc_cog_analytics_products_options',
+				),
+			);
+
+			$variation_section_opts = array(
+				array(
+					'title' => __( 'Variations', 'cost-of-goods-for-woocommerce' ),
+					'desc'  => sprintf( __( 'Options for the %s section.', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/variations' ) . '" >' . __( 'Analytics > Variations', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+					'type'  => 'title',
+					'id'    => 'alg_wc_cog_analytics_variations_options',
+				),
+				array(
+					'title'             => __( 'Cost and profit columns', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Add "Cost" and "Profit" columns', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_cost_and_profit_column_on_variations_tab',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'default'           => 'no',
+					'type'              => 'checkbox',
+				),
+				array(
+					'title'             => __( 'Cost and profit totals', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Add "Cost" and "Profit" totals to the report charts', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_cost_and_profit_totals_on_variations_tab',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_analytics_variations_options',
 				),
 			);
 
@@ -246,6 +275,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 				$products_section_opts,
 				$revenue_section_opts,
 				$orders_section_opts,
+				$variation_section_opts,
 				$categories_section_opts,
 				$stock_section_opts,
 				array()

@@ -21,18 +21,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Categories' ) ) :
 		 *
 		 */
 		function __construct() {
-			// Costs
+			// Costs.
 			add_filter( 'woocommerce_analytics_clauses_join_categories_subquery', array( $this, 'add_costs_to_categories_join_clauses' ) );
 			add_filter( 'woocommerce_analytics_clauses_select_categories_subquery', array( $this, 'add_costs_to_select_categories_subquery' ) );
 			add_filter( 'alg_wc_cog_analytics_product_cost_totals', array( $this, 'change_product_clause_based_on_categories_totals_option' ) );
 			add_filter( 'alg_wc_cog_analytics_product_cost_select', array( $this, 'change_product_clause_based_on_categories_columns_option' ) );
 			add_filter( 'alg_wc_cog_analytics_product_cost_select_subquery', array( $this, 'change_product_clause_based_on_categories_columns_option' ) );
-			// Profit
+
+			// Profit.
 			add_filter( 'woocommerce_analytics_clauses_select_categories_subquery', array( $this, 'add_profit_to_select_categories_subquery' ) );
 			add_filter( 'alg_wc_cog_analytics_product_profit_totals', array( $this, 'change_product_clause_based_on_categories_totals_option' ) );
 			add_filter( 'alg_wc_cog_analytics_product_cost_join', array( $this, 'change_product_clause_based_on_categories_totals_option' ) );
 			add_filter( 'alg_wc_cog_analytics_product_profit_select', array( $this, 'change_product_clause_based_on_categories_columns_option' ) );
 			add_filter( 'alg_wc_cog_analytics_product_profit_subquery', array( $this, 'change_product_clause_based_on_categories_columns_option' ) );
+
 			// Script localization info.
 			add_filter( 'alg_wc_cog_analytics_localization_info', array( $this, 'add_analytics_localization_info' ) );
 		}

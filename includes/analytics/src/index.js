@@ -22,6 +22,10 @@ stock.init();
 import products from './modules/products';
 products.init();
 
+// Variations.
+import variations from './modules/variations';
+variations.init();
+
 // Categories.
 import categories from './modules/categories';
 categories.init();

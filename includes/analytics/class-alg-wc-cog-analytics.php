@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Class.
  *
- * @version 2.9.4
+ * @version 3.6.8
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -23,9 +23,18 @@ class Alg_WC_Cost_of_Goods_Analytics {
 	public $orders;
 
 	/**
+	 * Orders.
+	 *
+	 * @since 3.6.8
+	 *
+	 * @var Alg_WC_Cost_of_Goods_Analytics_Products
+	 */
+	public $products;
+
+	/**
 	 * Constructor.
 	 *
-	 * @version 2.6.3
+	 * @version 3.6.8
 	 * @since   1.7.0
 	 *
 	 */
@@ -42,10 +51,13 @@ class Alg_WC_Cost_of_Goods_Analytics {
 		require_once('class-alg-wc-cog-analytics-stock.php');
 
 		// Analytics > Products.
-		require_once('class-alg-wc-cog-analytics-products.php');
+		$this->products = require_once('class-alg-wc-cog-analytics-products.php');
 
 		// Analytics > Products.
 		require_once('class-alg-wc-cog-analytics-categories.php');
+
+		// Analytics > Variations.
+		require_once('class-alg-wc-cog-analytics-variations.php');
 
 		// WooCommerce > Customers.
 		require_once('class-alg-wc-cog-analytics-customers.php');

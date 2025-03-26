@@ -23,9 +23,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Revenue' ) ) :
 		function __construct() {
 			// Script localization info.
 			add_filter( 'alg_wc_cog_analytics_localization_info', array( $this, 'add_analytics_localization_info' ) );
+
 			// Select costs and profit total columns from the orders report.
 			add_filter( 'alg_wc_cog_analytics_orders_costs_total_validation', array( $this, 'add_costs_and_profit_total_column_if_option_is_enabled' ) );
 			add_filter( 'alg_wc_cog_analytics_orders_profit_total_validation', array( $this, 'add_costs_and_profit_total_column_if_option_is_enabled' ) );
+
 			// Export.
 			add_filter( 'woocommerce_export_admin_revenue_report_row_data', array( $this, 'add_costs_and_profit_row_data_to_export' ), PHP_INT_MAX, 2 );
 			add_filter( 'woocommerce_admin_revenue_report_export_column_names', array( $this, 'add_costs_and_profit_columns_names_to_export' ), PHP_INT_MAX, 2 );

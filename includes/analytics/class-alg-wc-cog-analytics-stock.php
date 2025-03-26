@@ -34,16 +34,21 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		function __construct() {
 			// Script localization info.
 			add_filter( 'alg_wc_cog_analytics_localization_info', array( $this, 'add_analytics_localization_info' ) );
+
 			// Get column values.
 			add_filter( 'woocommerce_rest_prepare_report_stock', array( $this, 'get_column_values' ), 10, 2 );
+
 			// Export.
 			add_filter( 'woocommerce_report_stock_export_columns', array( $this, 'export_columns_names' ) );
 			add_filter( 'woocommerce_report_stock_prepare_export_item', array( $this, 'export_columns_values' ), 10, 2 );
+
 			// COG Filter (Filter products with costs).
 			add_filter( 'posts_join', array( $this, 'get_only_products_with_costs' ), 10, 2 );
+
 			// Calculate total cost and profit.
 			add_filter( 'woocommerce_analytics_stock_stats_query', array( $this, 'get_total_cost_and_profit' ) );
-			// Delete stock cost and profit totals from cache
+
+			// Delete stock cost and profit totals from cache.
 			add_action( 'woocommerce_update_product', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
 			add_action( 'woocommerce_new_product', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
 			add_action( 'update_option_woocommerce_notify_low_stock_amount', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );

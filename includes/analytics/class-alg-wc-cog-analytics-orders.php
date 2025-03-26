@@ -34,7 +34,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			// Script localization info.
 			add_filter( 'alg_wc_cog_analytics_localization_info', array( $this, 'add_analytics_localization_info' ) );
 
-			// Costs
+			// Costs.
 			add_filter( 'woocommerce_analytics_clauses_join_orders_subquery', array( $this, 'add_costs_join_orders' ) );
 			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_total', array( $this, 'add_costs_join_orders' ) );
 			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_interval', array( $this, 'add_costs_join_orders' ) );
@@ -46,7 +46,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			add_filter( 'woocommerce_admin_orders_report_export_column_names', array( $this, 'add_costs_columns_names_to_export' ), PHP_INT_MAX, 2 );
 			add_filter( 'alg_wc_cog_analytics_orders_costs_total_validation', array( $this, 'add_costs_total_column_if_option_is_enabled' ) );
 
-			// Profit
+			// Profit.
 			add_filter( 'woocommerce_analytics_clauses_join_orders_subquery', array( $this, 'add_profit_join_orders' ) );
 			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_total', array( $this, 'add_profit_join_orders' ) );
 			add_filter( 'woocommerce_analytics_clauses_join_orders_stats_interval', array( $this, 'add_profit_join_orders' ) );
@@ -58,7 +58,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			add_filter( 'woocommerce_admin_orders_report_export_column_names', array( $this, 'add_profit_columns_names_to_export' ), PHP_INT_MAX, 2 );
 			add_filter( 'alg_wc_cog_analytics_orders_profit_total_validation', array( $this, 'add_profit_total_column_if_option_is_enabled' ) );
 
-			// Individual Costs export
+			// Individual Costs export.
 			add_filter( 'woocommerce_export_admin_orders_report_row_data', array( $this, 'add_individual_costs_row_data_to_export' ), PHP_INT_MAX, 2 );
 			add_filter( 'woocommerce_admin_orders_report_export_column_names', array( $this, 'add_individual_costs_columns_names_to_export' ), PHP_INT_MAX, 2 );
 
