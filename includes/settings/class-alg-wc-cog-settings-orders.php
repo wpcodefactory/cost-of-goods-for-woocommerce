@@ -217,22 +217,30 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 
 		$order_emails_settings = array(
 			array(
-				'title'    => __( 'Orders emails', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => __( 'COG options regarding orders emails.', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Admin New Orders emails', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'COG settings for admin New Order emails.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
-				'id'       => 'alg_wc_cog_order_emails_options',
+				'id'       => 'alg_wc_cog_admin_new_order_emails_options',
 			),
 			array(
-				'title'             => __( 'Admin new order email', 'cost-of-goods-for-woocommerce' ),
-				'desc'              => __( 'Display the order cost and profit on the admin new order email', 'cost-of-goods-for-woocommerce' ),
+				'title'             => __( 'Total cost and profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Show the total order cost and profit on the admin New Order email', 'cost-of-goods-for-woocommerce' ),
 				'id'                => 'alg_wc_cog_order_admin_new_order_email_profit_and_cost',
 				'default'           => 'no',
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 				'type'              => 'checkbox',
 			),
 			array(
+				'title'             => __( 'Order item cost and profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Show the cost and profit for each individual order item in the admin New Order email', 'cost-of-goods-for-woocommerce' ),
+				'id'                => 'alg_wc_cog_order_admin_new_order_email_item_profit_and_cost',
+				'default'           => 'no',
+				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+				'type'              => 'checkbox',
+			),
+			array(
 				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_order_emails_options',
+				'id'       => 'alg_wc_cog_admin_new_order_emails_options',
 			),
 		);
 

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.4.7
+ * @version 3.6.9
  * @since   2.6.4
  * @author  WPFactory
  */
@@ -16,35 +16,27 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 	class Alg_WC_Cost_of_Goods_Cost_Inputs {
 
 		/**
-		 * Cost field template.
-		 *
-		 * @since 2.9.4
-		 *
-		 * @var string
-		 */
-		public $cost_field_template;
-
-		/**
 		 *
 		 * Alg_WC_Cost_of_Goods_Cost_Inputs constructor.
 		 *
-		 * @version 2.6.4
+		 * @version 3.6.9
 		 * @since   2.6.4
 		 *
 		 */
 		public function __construct() {
-			$this->get_options();
 			$this->add_hooks();
 		}
 
 		/**
-		 * get_options.
+		 * get_cost_field_template.
 		 *
-		 * @version 2.6.4
-		 * @since   2.6.4
+		 * @version 3.6.9
+		 * @since   3.6.9
+		 *
+		 * @return false|mixed|null
 		 */
-		function get_options() {
-			$this->cost_field_template = get_option( 'alg_wc_cog_product_cost_field_template', sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ) );
+		function get_cost_field_template(){
+			return alg_wc_cog_get_option( 'alg_wc_cog_product_cost_field_template', sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ) );
 		}
 
 		/**
@@ -67,7 +59,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 		/**
 		 * add_cost_input.
 		 *
-		 * @version 3.1.9
+		 * @version 3.6.9
 		 * @since   1.0.0
 		 * @todo    [later] rethink `$product_id` (and search all code for `get_the_ID()`)
 		 * @todo    [maybe] min_profit
@@ -83,7 +75,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 					'id'          => '_alg_wc_cog_cost',
 					'value'       => wc_format_localized_price( alg_wc_cog()->core->products->get_product_cost( $product_id ) ),
 					'data_type'   => 'price',
-					'label'       => str_replace( array_keys( $label_from_to ), $label_from_to, $this->cost_field_template ),
+					'label'       => str_replace( array_keys( $label_from_to ), $label_from_to, $this->get_cost_field_template() ),
 					'description' => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
 						( '' != ( $profit = alg_wc_cog()->core->products->get_product_profit_html( $product_id, alg_wc_cog()->core->products->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) ),
 				) );
@@ -126,7 +118,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 		/**
 		 * add_cost_input_variation.
 		 *
-		 * @version 2.3.4
+		 * @version 3.6.9
 		 * @since   1.0.0
 		 */
 		function add_cost_input_variation( $loop, $variation_data, $variation ) {
@@ -152,7 +144,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 					'id'            => "variable_alg_wc_cog_cost_{$loop}",
 					'name'          => "variable_alg_wc_cog_cost[{$loop}]",
 					'value'         => wc_format_localized_price( $value ),
-					'label'         => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->cost_field_template ),
+					'label'         => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->get_cost_field_template() ),
 					'data_type'     => 'price',
 					'wrapper_class' => 'form-row form-row-full',
 					'description'   => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),

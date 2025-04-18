@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.6.6
+ * @version 3.6.9
  * @since   3.0.3
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '3.6.8';
+		public $version = '3.6.9';
 
 		/**
 		 * @since 1.0.0
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		/**
 		 * Initializes.
 		 *
-		 * @version 3.5.1
+		 * @version 3.6.9
 		 * @since   2.8.1
 		 */
 		function init() {
@@ -95,7 +95,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 			$this->add_cross_selling_library();
 
 			// Move WC Settings tab to WPFactory menu.
-			$this->move_wc_settings_tab_to_wpfactory_menu();
+			add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
 
 			// Localization.
 			add_action( 'init', array( $this, 'localize' ) );

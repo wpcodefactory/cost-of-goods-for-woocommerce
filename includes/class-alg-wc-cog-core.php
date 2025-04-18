@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Core Class.
  *
- * @version 3.6.0
+ * @version 3.6.9
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.3.7
+		 * @version 3.6.9
 		 * @since   1.0.0
 		 * @todo    [next] add "delete all (products and/or orders) meta" tool
 		 * @todo    [next] add option to enter costs *with taxes*
@@ -126,30 +126,47 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		 * @todo    [maybe] add option to change meta keys prefix (i.e. `_alg_wc_cog`)
 		 */
 		function __construct() {
+			// Options class.
 			require_once( 'class-alg-wc-cog-options.php' );
 			$this->options = new Alg_WC_Cost_of_Goods_Options();
+
 			// Extra costs labels.
 			require_once( 'class-alg-wc-cog-extra-costs-labels.php' );
 			$this->extra_costs_labels = new Alg_WC_Cost_of_Goods_Extra_Costs_Labels();
 			$this->extra_costs_labels->init();
+
 			// Background process.
 			$this->init_bkg_process();
+
 			// Analytics.
 			$this->analytics = require_once( 'analytics/class-alg-wc-cog-analytics.php' );
+
 			// Import tool.
 			$this->import_tool = require_once( 'tools/class-alg-wc-cog-import-tool.php' );
+
 			// Products.
 			$this->products = require_once( 'class-alg-wc-cog-products.php' );
+
 			// Products - Add Stock.
 			$this->products_add_stock = require_once( 'class-alg-wc-cog-products-add-stock.php' );
+
 			// Products - Cost archive.
 			$this->products_cost_archive = require_once( 'class-alg-wc-cog-products-cost-archive.php' );
+
 			// Cost inputs.
 			$this->cost_inputs = require_once( 'class-alg-wc-cog-cost-inputs.php' );
+
 			// Orders.
 			$this->orders = require_once( 'class-alg-wc-cog-orders.php' );
+
 			// Bulk costs tool.
 			$this->init_bulk_costs_tool();
+
+			// Admin new order emails.
+			require_once( 'class-alg-wc-cog-admin-new-order-emails.php' );
+			$admin_new_order_emails = new Alg_WC_Cost_of_Goods_Admin_New_Order_Emails();
+			$admin_new_order_emails->init();
+
 			// Core loaded.
 			do_action( 'alg_wc_cog_core_loaded', $this );
 		}

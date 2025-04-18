@@ -21,15 +21,15 @@ msgstr "Maximale absolute waarde die wordt teruggegeven voor de procentberekenin
 msgid "Max value."
 msgstr "Max. waarde."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:504
+#: includes/settings/class-alg-wc-cog-settings-orders.php:512
 msgid "Negative numbers will be converted to positive"
 msgstr "Negatieve getallen worden omgezet in positieve"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:503
+#: includes/settings/class-alg-wc-cog-settings-orders.php:511
 msgid "Consider all values as positive"
 msgstr "Beschouw alle waarden als positief"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:502
+#: includes/settings/class-alg-wc-cog-settings-orders.php:510
 msgid "Sign handling"
 msgstr "Sign handling"
 
@@ -37,49 +37,49 @@ msgstr "Sign handling"
 msgid "Cost of Goods Sold"
 msgstr "Kosten van verkochte goederen"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:256
+#: includes/settings/class-alg-wc-cog-settings-orders.php:264
 msgid "Ignore quantity sold when calculating profit and costs"
 msgstr "Negeer de verkochte hoeveelheid bij het berekenen van winst en kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:255
+#: includes/settings/class-alg-wc-cog-settings-orders.php:263
 msgid "Ignore quantity"
 msgstr "Hoeveelheid negeren"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:374
+#: includes/settings/class-alg-wc-cog-settings-orders.php:382
 msgid "Use default profit calculation mechanism"
 msgstr "Standaard mechanisme voor winst berekening gebruiken"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:369
+#: includes/settings/class-alg-wc-cog-settings-orders.php:377
 msgid "Profit calculation"
 msgstr "Winst berekening"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:362
+#: includes/settings/class-alg-wc-cog-settings-orders.php:370
 msgid "Item total"
 msgstr "Item totaal"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:355
+#: includes/settings/class-alg-wc-cog-settings-orders.php:363
 msgid "Item cost"
 msgstr "Kosten item"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:350
+#: includes/settings/class-alg-wc-cog-settings-orders.php:358
 msgid "It's necessary to manually update the order after a refund. If you change these settings you can use our %s to update the orders. "
 msgstr "Het is noodzakelijk om de bestelling handmatig te updaten na een terugbetaling. Als je deze instellingen wijzigt, kun je onze %s gebruiken om de bestellingen te updaten. "
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:348
-#: includes/settings/class-alg-wc-cog-settings-orders.php:363
+#: includes/settings/class-alg-wc-cog-settings-orders.php:356
+#: includes/settings/class-alg-wc-cog-settings-orders.php:371
 msgid "Ignore item refund amount"
 msgstr "Item restitutie bedrag negeren"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:347
-#: includes/settings/class-alg-wc-cog-settings-orders.php:356
+#: includes/settings/class-alg-wc-cog-settings-orders.php:355
+#: includes/settings/class-alg-wc-cog-settings-orders.php:364
 msgid "Ignore refunded item cost"
 msgstr "Negeer terugbetaalde kosten van item"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:346
+#: includes/settings/class-alg-wc-cog-settings-orders.php:354
 msgid "Most probably, enabling the options %s and %s should be enough in order to ignore refunded items from profit calculation."
 msgstr "Hoogstwaarschijnlijk is het inschakelen van de opties %s en %s voldoende om terugbetaalde items te negeren in de winst berekening."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:344
+#: includes/settings/class-alg-wc-cog-settings-orders.php:352
 msgid "Set up how refunds will affect the cost and profit."
 msgstr "Instellen hoe restituties de kosten en winst beïnvloeden."
 
@@ -391,27 +391,27 @@ msgstr "De %s van %d producten worden geüpdatet via achtergrond verwerking."
 msgid "cost"
 msgstr "kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:318
+#: includes/settings/class-alg-wc-cog-settings-orders.php:326
 msgid "If you want to move %s of the taxes to profit, set it as %s"
 msgstr "Als je %s van de belastingen naar de winst wilt verplaatsen, stel het dan in als %s"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:317
+#: includes/settings/class-alg-wc-cog-settings-orders.php:325
 msgid "Taxes to profit - Percentage."
 msgstr "Belastingen op winst - percentage."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:303
+#: includes/settings/class-alg-wc-cog-settings-orders.php:311
 msgid "If you want to move %s of the fees to profit, set it as %s"
 msgstr "Als je %s van de kosten naar de winst wilt verplaatsen, stel dit dan in als %s"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:302
+#: includes/settings/class-alg-wc-cog-settings-orders.php:310
 msgid "Fees to profit - Percentage."
 msgstr "Kosten naar winst - percentage."
 
-#: includes/class-alg-wc-cog-orders.php:683
+#: includes/class-alg-wc-cog-orders.php:699
 msgid "Fees to profit (%s)"
 msgstr "Kosten ten opzichte van winst (%s)"
 
-#: includes/class-alg-wc-cog-orders.php:639
+#: includes/class-alg-wc-cog-orders.php:655
 msgid "Taxes to profit (%s)"
 msgstr "Belastingen op winst (in %s)"
 
@@ -622,7 +622,7 @@ msgstr "Geeft de product winst weer"
 msgid "Shortcodes"
 msgstr "Shortcodes"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:486
+#: includes/settings/class-alg-wc-cog-settings-orders.php:494
 msgid "The <a href=\"%s\">\"Payment Plugins for Stripe\"</a> requires the \"Display Stripe Fee\" option to be enabled in the Advanced Settings in order to add the %s meta."
 msgstr "De <a href=\"%s\">\"Payment Plugins for Stripe\"</a> vereist dat de \"Display Stripe Fee\" optie is ingeschakeld in de geavanceerde instellingen om de %s meta toe te voegen."
 
@@ -777,20 +777,20 @@ msgstr "verzend totaal"
 msgid "order total"
 msgstr "Totaal bestelling"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:263
+#: includes/settings/class-alg-wc-cog-settings-orders.php:271
 msgid "The way taxes will be considered when calculating order total on percentage costs."
 msgstr "De manier waarop belastingen in aanmerking worden genomen bij de berekening van het totaal van de bestelling op procentuele kosten."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:262
+#: includes/settings/class-alg-wc-cog-settings-orders.php:270
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:145
 msgid "Order total"
 msgstr "Totaal bestelling"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:242
+#: includes/settings/class-alg-wc-cog-settings-orders.php:250
 msgid "Define options for order cost and profit calculations."
 msgstr "Opties definiëren voor de berekening van bestelkosten en winst."
 
-#: includes/class-alg-wc-cog-orders.php:727
+#: includes/class-alg-wc-cog-orders.php:743
 msgid "Shipping to profit (%s)"
 msgstr "Verzending naar winst (%s)"
 
@@ -798,11 +798,11 @@ msgstr "Verzending naar winst (%s)"
 msgid "Extra profit details"
 msgstr "Extra winst details"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:289
+#: includes/settings/class-alg-wc-cog-settings-orders.php:297
 msgid "If you want to move %s of the shipping value to profit, set it as %s"
 msgstr "Als je %s van de verzend waarde naar de winst wil verplaatsen, stel het dan in als %s"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:288
+#: includes/settings/class-alg-wc-cog-settings-orders.php:296
 msgid "Shipping to profit - Percentage."
 msgstr "Verzending naar winst - Percentage."
 
@@ -1292,7 +1292,7 @@ msgstr "Import kosten"
 msgid "Take stock into consideration for cost and profit calculation"
 msgstr "Houd rekening met voorraad voor kosten- en winstberekening"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:488
+#: includes/settings/class-alg-wc-cog-settings-orders.php:496
 msgid "If you have issues, please try to enable the %s options."
 msgstr "Als je problemen ondervindt, probeer dan de %s opties in te schakelen."
 
@@ -1304,11 +1304,11 @@ msgstr "Triggert alleen met meta die niet begint met <code>_alg_wc_cog</code>."
 msgid "Auto fill empty order items costs on order meta update"
 msgstr "Kosten voor lege bestel items automatisch vullen bij meta update van bestelling"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:485
+#: includes/settings/class-alg-wc-cog-settings-orders.php:493
 msgid "PayPal Payments"
 msgstr "PayPal betalingen"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:485
+#: includes/settings/class-alg-wc-cog-settings-orders.php:493
 msgid "You can also use dots to access serialized array metas. E.g.: Get fees from %s:"
 msgstr "Je kunt ook punten gebruiken om toegang te krijgen tot geserialiseerde array meta's. Bijv.: Ontvang kosten van %s:"
 
@@ -1495,7 +1495,7 @@ msgstr "Pas de kolombreedte van de productkosten aan"
 msgid "Adds handling fees inputs for each order item to admin order edit page."
 msgstr "Voegt invoer kosten voor elk bestel item toe aan de beheer pagina voor het bewerken van bestellingen."
 
-#: includes/class-alg-wc-cog-orders.php:1325
+#: includes/class-alg-wc-cog-orders.php:1292
 msgid "Handling Fee"
 msgstr "Behandelings kosten"
 
@@ -1759,11 +1759,11 @@ msgstr "Bestellingen > Berekeningen > Belastingen naar winst"
 msgid "When using this option including tax, it will make sense to enable the option %s."
 msgstr "Wanneer je deze optie inclusief belasting gebruikt, is het logisch om de optie %s in te schakelen."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:310
+#: includes/settings/class-alg-wc-cog-settings-orders.php:318
 msgid "Products > Get price method"
 msgstr "Producten > Ontvang prijs methode"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:310
+#: includes/settings/class-alg-wc-cog-settings-orders.php:318
 msgid "Will probably make more sense if %s option is <strong>including tax</strong>."
 msgstr "Zal waarschijnlijk logischer zijn als de optie %s <strong>inclusief belasting</strong> is."
 
@@ -1775,59 +1775,43 @@ msgstr "Uitsluiten smart bundel product type van %s en %s rapport"
 msgid "WPC Product Bundles for WooCommerce"
 msgstr "WPC Product Bundles for WooCommerce"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:382
+#: includes/settings/class-alg-wc-cog-settings-orders.php:390
 msgid "Only works with %s."
 msgstr "Werkt alleen met %s"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:375
+#: includes/settings/class-alg-wc-cog-settings-orders.php:383
 msgid "Subtract total refunded from profit"
 msgstr "Trek het terug betaalde totaal af van de winst"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:381
+#: includes/settings/class-alg-wc-cog-settings-orders.php:389
 msgid "Include tax on Net Payment"
 msgstr "Inclusief belasting op netto betaling"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:380
+#: includes/settings/class-alg-wc-cog-settings-orders.php:388
 msgid "Net Payment inclusive of tax"
 msgstr "Netto betaling inclusief belasting"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:376
-#: includes/settings/class-alg-wc-cog-settings-orders.php:382
+#: includes/settings/class-alg-wc-cog-settings-orders.php:384
+#: includes/settings/class-alg-wc-cog-settings-orders.php:390
 msgid "Calculate profit by the difference between Net Payment and Cost"
 msgstr "Bereken winst d.m.v. het verschil tussen netto betaling en kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:488
+#: includes/settings/class-alg-wc-cog-settings-orders.php:496
 msgid "Advanced > Force costs update"
 msgstr "Geavanceerd > Forceer kosten update"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:342
+#: includes/settings/class-alg-wc-cog-settings-orders.php:350
 msgid "Refunds"
 msgstr "Terugbetalingen"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:311
+#: includes/settings/class-alg-wc-cog-settings-orders.php:319
 msgid "Add order taxes like VAT to the order profit"
 msgstr "Voegt bestelling belastingen zoals BTW toe aan de bestelling winst"
 
-#: includes/class-alg-wc-cog-orders.php:637
-#: includes/settings/class-alg-wc-cog-settings-orders.php:309
+#: includes/class-alg-wc-cog-orders.php:653
+#: includes/settings/class-alg-wc-cog-settings-orders.php:317
 msgid "Taxes to profit"
 msgstr "Belastingen naar winst"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:227
-msgid "Display the order cost and profit on the admin new order email"
-msgstr "Geef de bestelling kosten en winst weer op de beheer nieuwe bestelling e-mail"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:226
-msgid "Admin new order email"
-msgstr "Beheerder nieuwe bestelling e-mail"
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:221
-msgid "COG options regarding orders emails."
-msgstr "COG opties met betrekking tot bestellingen e-mails."
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:220
-msgid "Orders emails"
-msgstr "Bestellingen e-mails"
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:360
 #: includes/settings/class-alg-wc-cog-settings-products.php:369
@@ -2000,7 +1984,7 @@ msgid "Product types"
 msgstr "Product types"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:83
-#: includes/settings/class-alg-wc-cog-settings-orders.php:414
+#: includes/settings/class-alg-wc-cog-settings-orders.php:422
 msgid "Percent from order total."
 msgstr "Percentage van bestelling totaal."
 
@@ -2017,7 +2001,7 @@ msgstr "Bestel winst HTML template"
 msgid "Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit."
 msgstr "Let op: om %s en %s weer te geven voor bestellingen die zijn gemaakt voordat plugin v2.2.0 werd geïnstalleerd, moet je de kosten en winst van de bestelling opnieuw berekenen."
 
-#: includes/class-alg-wc-cog-orders.php:964
+#: includes/class-alg-wc-cog-orders.php:931
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr "Winst percentage"
@@ -2034,12 +2018,12 @@ msgstr "https://wpfactory.com"
 msgid "WPFactory"
 msgstr "WPFactory"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:296
+#: includes/settings/class-alg-wc-cog-settings-orders.php:304
 msgid "Add  order fees to the order profit "
 msgstr "Toevoegen bestelling vergoeding aan de bestelling winst "
 
-#: includes/class-alg-wc-cog-orders.php:681
-#: includes/settings/class-alg-wc-cog-settings-orders.php:295
+#: includes/class-alg-wc-cog-orders.php:697
+#: includes/settings/class-alg-wc-cog-settings-orders.php:303
 msgid "Fees to profit"
 msgstr "Kosten naar winst"
 
@@ -2047,23 +2031,23 @@ msgstr "Kosten naar winst"
 msgid "Cost field label"
 msgstr "Kosten veld label"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:327
+#: includes/settings/class-alg-wc-cog-settings-orders.php:335
 msgid "Leave empty to calculate right away on new order."
 msgstr "Laat leeg om direct te berekenen bij een nieuwe bestelling."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:326
+#: includes/settings/class-alg-wc-cog-settings-orders.php:334
 msgid "All values will be set to zero until the required order status is set."
 msgstr "Alle waarden worden op nul gezet totdat de vereiste bestel status is ingesteld."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:325
+#: includes/settings/class-alg-wc-cog-settings-orders.php:333
 msgid "Select order statuses to delay all order profit, cost etc. calculations until."
 msgstr "Selecteer bestelstatussen om alle berekeningen van bestelling winst, kosten enz. uit te stellen tot."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:324
+#: includes/settings/class-alg-wc-cog-settings-orders.php:332
 msgid "Delay calculations"
 msgstr "Vertraging berekeningen"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:241
+#: includes/settings/class-alg-wc-cog-settings-orders.php:249
 msgid "Calculations"
 msgstr "Calculaties"
 
@@ -2115,7 +2099,7 @@ msgstr "Opties voor de beheer pagina's voor het bewerken van bestellingen."
 msgid "Admin Order Edit"
 msgstr "Beheer bestelling bewerken"
 
-#: includes/class-alg-wc-cog-cost-inputs.php:47
+#: includes/class-alg-wc-cog-cost-inputs.php:39
 #: includes/settings/class-alg-wc-cog-settings-products.php:101
 msgid "Cost (excl. tax) (%s)"
 msgstr "Kosten (excl. belasting) (%s)"
@@ -2125,36 +2109,36 @@ msgstr "Kosten (excl. belasting) (%s)"
 msgid "SKU"
 msgstr "SKU"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:495
+#: includes/settings/class-alg-wc-cog-settings-orders.php:503
 msgid "One meta key per line."
 msgstr "Eén meta sleutel per regel."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:494
+#: includes/settings/class-alg-wc-cog-settings-orders.php:502
 msgid "Ignored if empty."
 msgstr "Genegeerd als deze leeg is."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:493
+#: includes/settings/class-alg-wc-cog-settings-orders.php:501
 msgid "Meta keys"
 msgstr "Meta sleutel"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:480
+#: includes/settings/class-alg-wc-cog-settings-orders.php:488
 msgid "E.g.: %s."
 msgstr "Bijv.: %s."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:479
+#: includes/settings/class-alg-wc-cog-settings-orders.php:487
 msgid "Adds extra costs from order meta."
 msgstr "Voegt extra kosten toe vanaf bestelling meta."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:478
+#: includes/settings/class-alg-wc-cog-settings-orders.php:486
 msgid "From Meta"
 msgstr "Uit meta"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:282
+#: includes/settings/class-alg-wc-cog-settings-orders.php:290
 msgid "Add order shipping cost to the order profit"
 msgstr "Voeg de verzend kosten van de bestelling toe aan de bestel winst"
 
-#: includes/class-alg-wc-cog-orders.php:725
-#: includes/settings/class-alg-wc-cog-settings-orders.php:281
+#: includes/class-alg-wc-cog-orders.php:741
+#: includes/settings/class-alg-wc-cog-settings-orders.php:289
 msgid "Shipping to profit"
 msgstr "Verzend naar winst"
 
@@ -2220,19 +2204,19 @@ msgstr "Verzend kosten (percentage)"
 msgid "Shipping method fee (fixed)"
 msgstr "Verzend kosten (vast)"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:277
+#: includes/settings/class-alg-wc-cog-settings-orders.php:285
 msgid "Order total incl. tax"
 msgstr "Bestelling totaal incl. belasting"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:276
+#: includes/settings/class-alg-wc-cog-settings-orders.php:284
 msgid "Order total excl. tax"
 msgstr "Bestelling totaal excl. belasting"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:275
+#: includes/settings/class-alg-wc-cog-settings-orders.php:283
 msgid "Order subtotal excl. tax"
 msgstr "Bestelling sub totaal excl. belasting"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:264
+#: includes/settings/class-alg-wc-cog-settings-orders.php:272
 msgid "Total to calculate all extra costs percentage costs from (%s)."
 msgstr "Totaal om alle extra kosten procentuele vergoedingen te berekenen vanaf (%s)."
 
@@ -2267,66 +2251,66 @@ msgstr "kosten"
 msgid "Analytics"
 msgstr "Analyse"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:465
+#: includes/settings/class-alg-wc-cog-settings-orders.php:473
 msgid "One column per fee."
 msgstr "Eén kolom per kosten."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:462
+#: includes/settings/class-alg-wc-cog-settings-orders.php:470
 msgid "Will add \"%s\" columns to the WooCommerce admin %s."
 msgstr "Zal kolommen \"%s\" toevoegen aan WooCommerce beheer %s."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:460
+#: includes/settings/class-alg-wc-cog-settings-orders.php:468
 msgid "Columns"
 msgstr "Kolommen"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:174
-#: includes/settings/class-alg-wc-cog-settings-orders.php:453
+#: includes/settings/class-alg-wc-cog-settings-orders.php:461
 msgid "Payment fee"
 msgstr "Betalings kosten"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:173
-#: includes/settings/class-alg-wc-cog-settings-orders.php:445
+#: includes/settings/class-alg-wc-cog-settings-orders.php:453
 msgid "Shipping fee"
 msgstr "Verzend kosten"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:172
-#: includes/settings/class-alg-wc-cog-settings-orders.php:437
+#: includes/settings/class-alg-wc-cog-settings-orders.php:445
 msgid "Handling fee"
 msgstr "Verwerkings kosten"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:219
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:96
-#: includes/settings/class-alg-wc-cog-settings-orders.php:430
+#: includes/settings/class-alg-wc-cog-settings-orders.php:438
 msgid "Extra costs"
 msgstr "Extra kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:429
+#: includes/settings/class-alg-wc-cog-settings-orders.php:437
 msgid "Adds \"%s\" meta box to admin order edit page."
 msgstr "Voegt \"%s\" meta box toe aan de beheer product bewerkings pagina toe"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:428
 #: includes/settings/class-alg-wc-cog-settings-orders.php:436
 #: includes/settings/class-alg-wc-cog-settings-orders.php:444
 #: includes/settings/class-alg-wc-cog-settings-orders.php:452
-#: includes/settings/class-alg-wc-cog-settings-orders.php:463
+#: includes/settings/class-alg-wc-cog-settings-orders.php:460
+#: includes/settings/class-alg-wc-cog-settings-orders.php:471
 msgid "Per Order"
 msgstr "Per bestelling"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:266
-#: includes/settings/class-alg-wc-cog-settings-orders.php:395
+#: includes/settings/class-alg-wc-cog-settings-orders.php:274
+#: includes/settings/class-alg-wc-cog-settings-orders.php:403
 msgid "All Orders"
 msgstr "Alle bestellingen"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:249
+#: includes/settings/class-alg-wc-cog-settings-orders.php:257
 msgid "Count empty cost items when calculating order cost and profit"
 msgstr "Tel lege kosten items mee bij het berekenen van order kosten en winst"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:248
+#: includes/settings/class-alg-wc-cog-settings-orders.php:256
 msgid "Count empty cost lines"
 msgstr "Tel lege kosten regels"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:46
-#: includes/settings/class-alg-wc-cog-settings-orders.php:464
+#: includes/settings/class-alg-wc-cog-settings-orders.php:472
 msgid "orders list"
 msgstr "bestellingen lijst"
 
@@ -2361,10 +2345,10 @@ msgstr "Kolommen sortering"
 msgid "Advanced"
 msgstr "Geavanceerd"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:395
-#: includes/settings/class-alg-wc-cog-settings-orders.php:428
-#: includes/settings/class-alg-wc-cog-settings-orders.php:463
-#: includes/settings/class-alg-wc-cog-settings-orders.php:478
+#: includes/settings/class-alg-wc-cog-settings-orders.php:403
+#: includes/settings/class-alg-wc-cog-settings-orders.php:436
+#: includes/settings/class-alg-wc-cog-settings-orders.php:471
+#: includes/settings/class-alg-wc-cog-settings-orders.php:486
 msgid "Extra Costs"
 msgstr "Extra kosten"
 
@@ -2404,8 +2388,8 @@ msgstr "Voorraad toevoegen"
 msgid "products list"
 msgstr "Producten lijst"
 
-#: includes/class-alg-wc-cog-cost-inputs.php:88
-#: includes/class-alg-wc-cog-cost-inputs.php:159
+#: includes/class-alg-wc-cog-cost-inputs.php:80
+#: includes/class-alg-wc-cog-cost-inputs.php:151
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:313
 msgid "N/A"
 msgstr "N.v.t"
@@ -2413,7 +2397,7 @@ msgstr "N.v.t"
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:24
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:38
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:45
-#: includes/settings/class-alg-wc-cog-settings-orders.php:267
+#: includes/settings/class-alg-wc-cog-settings-orders.php:275
 msgid "Payment Gateways"
 msgstr "Betaal gateways"
 
@@ -2446,13 +2430,13 @@ msgstr "Hier kun je extra kosten toevoegen voor je bestellingen op basis van de 
 msgid "Extra Shipping Method Costs"
 msgstr "Extra verzendmethode kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:268
+#: includes/settings/class-alg-wc-cog-settings-orders.php:276
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:24
 msgid "Shipping Methods"
 msgstr "Verzend methoden"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:82
-#: includes/settings/class-alg-wc-cog-settings-orders.php:413
+#: includes/settings/class-alg-wc-cog-settings-orders.php:421
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:96
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:139
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:152
@@ -2462,30 +2446,30 @@ msgstr "Percentage kosten"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:72
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:105
-#: includes/settings/class-alg-wc-cog-settings-orders.php:403
+#: includes/settings/class-alg-wc-cog-settings-orders.php:411
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:86
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:181
 msgid "In %s."
 msgstr "In %s."
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:71
-#: includes/settings/class-alg-wc-cog-settings-orders.php:402
+#: includes/settings/class-alg-wc-cog-settings-orders.php:410
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:85
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:180
 msgid "Fixed cost"
 msgstr "Vaste kosten"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:40
-#: includes/settings/class-alg-wc-cog-settings-orders.php:243
-#: includes/settings/class-alg-wc-cog-settings-orders.php:397
-#: includes/settings/class-alg-wc-cog-settings-orders.php:431
-#: includes/settings/class-alg-wc-cog-settings-orders.php:487
+#: includes/settings/class-alg-wc-cog-settings-orders.php:251
+#: includes/settings/class-alg-wc-cog-settings-orders.php:405
+#: includes/settings/class-alg-wc-cog-settings-orders.php:439
+#: includes/settings/class-alg-wc-cog-settings-orders.php:495
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:40
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:118
 msgid "You will need to recalculate order's cost and profit after you change these settings."
 msgstr "Je moet de bestelling kosten en winst opnieuw berekenen nadat je deze instellingen hebt gewijzigd."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:396
+#: includes/settings/class-alg-wc-cog-settings-orders.php:404
 msgid "Here you can add extra costs for your orders, e.g. handling fees."
 msgstr "Hier kun je extra kosten toevoegen voor je bestellingen, b.v. behandelkosten."
 
@@ -2537,7 +2521,7 @@ msgstr "Voeg een bericht toe aan de beheer pagina voor het bewerken van bestelli
 msgid "Admin notice"
 msgstr "Beheerder bericht"
 
-#: includes/class-alg-wc-cog-orders.php:304
+#: includes/class-alg-wc-cog-orders.php:884
 #: includes/settings/class-alg-wc-cog-settings-orders.php:180
 msgid "You are selling below the cost of goods."
 msgstr "Je verkoopt onder de kostprijs van goederen."
@@ -2614,7 +2598,7 @@ msgstr "Beheer voorraad"
 msgid "products"
 msgstr "producten"
 
-#: includes/class-alg-wc-cog-orders.php:967
+#: includes/class-alg-wc-cog-orders.php:934
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr "Winst marge"
@@ -2735,7 +2719,7 @@ msgstr "Lijst met kolommen voor beheer producten"
 msgid "Order cost"
 msgstr "Bestel kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:461
+#: includes/settings/class-alg-wc-cog-settings-orders.php:469
 msgid "Add"
 msgstr "Toevoegen"
 
@@ -2775,20 +2759,20 @@ msgstr "Reset instellingen"
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:219
 #: includes/class-alg-wc-cog.php:167
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
-#: includes/settings/class-alg-wc-cog-settings-orders.php:430
+#: includes/settings/class-alg-wc-cog-settings-orders.php:438
 #: includes/settings/class-alg-wc-cog-settings-products.php:253
 #: includes/settings/class-alg-wc-settings-cog.php:24
 msgid "Cost of Goods"
 msgstr "Kosten van goederen"
 
-#: includes/class-alg-wc-cog-cost-inputs.php:87
-#: includes/class-alg-wc-cog-cost-inputs.php:158
+#: includes/class-alg-wc-cog-cost-inputs.php:79
+#: includes/class-alg-wc-cog-cost-inputs.php:150
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:313
 msgid "Profit: %s"
 msgstr "Winst: %s"
 
-#: includes/class-alg-wc-cog-orders.php:845
-#: includes/class-alg-wc-cog-orders.php:1289
+#: includes/class-alg-wc-cog-admin-new-order-emails.php:92
+#: includes/class-alg-wc-cog-orders.php:1256
 #: includes/pro/class-alg-wc-cog-pro.php:660
 #: includes/pro/class-alg-wc-cog-pro.php:679
 msgid "Cost of goods"
@@ -2799,9 +2783,10 @@ msgstr "Kosten van goederen"
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:287
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:118
+#: includes/class-alg-wc-cog-admin-new-order-emails.php:148
+#: includes/class-alg-wc-cog-admin-new-order-emails.php:246
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
-#: includes/class-alg-wc-cog-orders.php:842
-#: includes/class-alg-wc-cog-orders.php:961
+#: includes/class-alg-wc-cog-orders.php:928
 #: includes/class-alg-wc-cog-products.php:383
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
@@ -2822,9 +2807,10 @@ msgstr "Winst"
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:286
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:82
+#: includes/class-alg-wc-cog-admin-new-order-emails.php:146
+#: includes/class-alg-wc-cog-admin-new-order-emails.php:245
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
-#: includes/class-alg-wc-cog-orders.php:841
-#: includes/class-alg-wc-cog-orders.php:951
+#: includes/class-alg-wc-cog-orders.php:918
 #: includes/class-alg-wc-cog-products-add-stock.php:353
 #: includes/class-alg-wc-cog-products-add-stock.php:409
 #: includes/class-alg-wc-cog-products.php:301
@@ -2900,7 +2886,7 @@ msgstr "https://wpfactory.com/item/cost-of-goods-for-woocommerce/"
 msgid "Cost of Goods: Product Cost & Profit Calculator for WooCommerce Pro"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro-compatibility-wc-food.php:264
+#: includes/pro/class-alg-wc-cog-pro-compatibility-wc-food.php:266
 msgid "Option(s) costs"
 msgstr ""
 
@@ -3229,7 +3215,7 @@ msgstr ""
 msgid "Enable if the meta values are being saved in the order currency. Disable if they are stored in the shop's base currency."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:450
+#: includes/class-alg-wc-cog-orders.php:466
 msgid "Gateway"
 msgstr ""
 
@@ -3251,4 +3237,28 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:142
 msgid "Analytics > Variations"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:220
+msgid "Admin New Orders emails"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:221
+msgid "COG settings for admin New Order emails."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:226
+msgid "Total cost and profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:227
+msgid "Show the total order cost and profit on the admin New Order email"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:234
+msgid "Order item cost and profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:235
+msgid "Show the cost and profit for each individual order item in the admin New Order email"
 msgstr ""
