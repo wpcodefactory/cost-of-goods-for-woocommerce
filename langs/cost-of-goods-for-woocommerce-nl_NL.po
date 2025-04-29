@@ -556,20 +556,20 @@ msgstr "Voorbeeld:"
 msgid "Variation archive"
 msgstr "Variatie archief"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:535
+#: includes/class-alg-wc-cog-products-add-stock.php:630
 msgid "Update variation(s)"
 msgstr "Variatie(s) updaten"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:534
+#: includes/class-alg-wc-cog-products-add-stock.php:629
 msgid "If no variation is selected, the parent product will be updated."
 msgstr "Als er geen variatie is geselecteerd, wordt het hoofdproduct geüpdatet."
 
-#: includes/class-alg-wc-cog-products-add-stock.php:455
+#: includes/class-alg-wc-cog-products-add-stock.php:550
 #: includes/class-alg-wc-cog-products-cost-archive.php:295
 msgid "Select variation"
 msgstr "Selecteer variatie"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:448
+#: includes/class-alg-wc-cog-products-add-stock.php:543
 msgid "Variation history"
 msgstr "Variatiegeschiedenis"
 
@@ -2230,16 +2230,16 @@ msgstr "Producten"
 msgid "Save product purchase costs (cost of goods) in WooCommerce. Beautifully."
 msgstr "Opslaan product aankoop kosten (kosten van goederen) in WooCommerce. Prachtig."
 
-#: includes/class-alg-wc-cog-products-add-stock.php:370
+#: includes/class-alg-wc-cog-products-add-stock.php:381
 msgid "History"
 msgstr "Geschiedenis"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:73
+#: includes/class-alg-wc-cog-products-add-stock.php:79
 #: includes/settings/class-alg-wc-cog-settings-products.php:244
 msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to calculate new average cost of goods for the product."
 msgstr "\"Voorraad\" wordt aan je inventaris toegevoegd, en \"Kosten\" worden gebruikt om nieuwe gemiddelde kosten van goederen voor het product te berekenen."
 
-#: includes/class-alg-wc-cog-products-add-stock.php:72
+#: includes/class-alg-wc-cog-products-add-stock.php:78
 msgid "Enter values and \"Update\" the product."
 msgstr "Voer waarden in en \"Update\" het product."
 
@@ -2376,7 +2376,7 @@ msgstr "Veld \"Kosten\" toevoegen aan product \"%s\""
 msgid "Quick and Bulk Edit"
 msgstr "Snel en bulkbewerken"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:75
+#: includes/class-alg-wc-cog-products-add-stock.php:81
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
 #: includes/settings/class-alg-wc-cog-settings-products.php:242
 #: includes/settings/class-alg-wc-cog-settings-products.php:250
@@ -2608,8 +2608,8 @@ msgstr "Winst marge"
 msgid "Price"
 msgstr "Prijs"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:349
-#: includes/class-alg-wc-cog-products-add-stock.php:408
+#: includes/class-alg-wc-cog-products-add-stock.php:360
+#: includes/class-alg-wc-cog-products-add-stock.php:424
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:105
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:228
@@ -2636,7 +2636,7 @@ msgstr "Selecteer bestelstatussen om de kosten weer te geven."
 msgid "Order statuses"
 msgstr "Bestel statussen"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:407
+#: includes/class-alg-wc-cog-products-add-stock.php:423
 #: includes/settings/class-alg-wc-cog-settings-products.php:208
 msgid "Date"
 msgstr "Datum"
@@ -2811,8 +2811,8 @@ msgstr "Winst"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
 #: includes/class-alg-wc-cog-orders.php:918
-#: includes/class-alg-wc-cog-products-add-stock.php:353
-#: includes/class-alg-wc-cog-products-add-stock.php:409
+#: includes/class-alg-wc-cog-products-add-stock.php:364
+#: includes/class-alg-wc-cog-products-add-stock.php:425
 #: includes/class-alg-wc-cog-products.php:301
 #: includes/class-alg-wc-cog-products.php:312
 #: includes/class-alg-wc-cog-products.php:323

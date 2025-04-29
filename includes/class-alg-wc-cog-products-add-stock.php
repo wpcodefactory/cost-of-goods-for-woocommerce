@@ -2,12 +2,14 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.3.6
+ * @version 3.7.0
  * @since   2.8.2
  * @author  WPFactory
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
 
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 
@@ -25,15 +27,18 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.1.8
+		 * @version 3.7.0
 		 * @since   2.8.2
 		 */
 		function __construct() {
-			// Add product stock
+			// Add product stock.
 			add_action( 'add_meta_boxes', array( $this, 'add_product_add_stock_meta_box' ), 10, 2 );
 			add_action( 'save_post_product', array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
 			add_action( 'admin_head', array( $this, 'create_add_stock_style' ) );
 			add_action( 'wp_ajax_get_add_stock_history_table', array( $this, 'get_add_stock_history_table_ajax' ) );
+
+			// Del add stock history date.
+			add_action( 'wp_ajax_del_add_stock_history_date', array( $this, 'del_add_stock_history_date_ajax' ) );
 		}
 
 		/**
@@ -48,6 +53,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			if ( is_null( $this->is_add_stock_enabled ) ) {
 				$this->is_add_stock_enabled = ( 'yes' === get_option( 'alg_wc_cog_products_add_stock', 'no' ) );
 			}
+
 			return $this->is_add_stock_enabled;
 		}
 
@@ -166,7 +172,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		 */
 		function get_variation_cost_prev_from_post( $variation_id ) {
 			$variation_cost_prev = '';
-			$variation_key        = $this->find_variation_key_on_post( $variation_id );
+			$variation_key       = $this->find_variation_key_on_post( $variation_id );
 			if (
 				false !== $variation_key &&
 				isset( $_POST['variable_alg_wc_cog_cost'][ $variation_key ] )
@@ -291,39 +297,44 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				return;
 			}
 			?>
-			<style>
+            <style>
                 .alg-wc-cog-variations-box {
                     min-height: 42px;
                     max-height: 200px;
                     overflow: auto;
-	                margin-top:5px;
+                    margin-top: 5px;
                     padding: 0 0.9em;
                     border: solid 1px #dcdcde;
                     background-color: #fff;
                 }
-                .alg-wc-cog-variations-box li{
-	                margin:0 0 2px 0;
+
+                .alg-wc-cog-variations-box li {
+                    margin: 0 0 2px 0;
                     padding: 0;
                     line-height: 1.69230769;
                     word-wrap: break-word;
                 }
-                @media screen and (max-width: 782px){
-                    .alg-wc-cog-variations-box li{
-                        margin-bottom:15px;
+
+                @media screen and (max-width: 782px) {
+                    .alg-wc-cog-variations-box li {
+                        margin-bottom: 15px;
                     }
                 }
-                .alg-wc-cog-variations-box label{
-	                vertical-align: baseline;
+
+                .alg-wc-cog-variations-box label {
+                    vertical-align: baseline;
                 }
-                .alg-wc-cog-add-stock-history-table-container table{
-                    margin-top:9px;
+
+                .alg-wc-cog-add-stock-history-table-container table {
+                    margin-top: 9px;
                 }
-                .alg-wc-cog-add-stock-variation-history-title .spinner{
+
+                .alg-wc-cog-add-stock-variation-history-title .spinner {
                     vertical-align: middle;
                     float: none;
                     margin: 0 0 0 5px;
                 }
-			</style>
+            </style>
 			<?php
 		}
 
@@ -341,13 +352,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			}
 
 			$negative_stock_allowed = 'yes' === get_option( 'alg_wc_cog_products_add_stock_negative_stock', 'no' );
-			$add_stock_input_min = $negative_stock_allowed ? '' : 'min="0"';
+			$add_stock_input_min    = $negative_stock_allowed ? '' : 'min="0"';
 
-			$html  = '';
+			$html = '';
 			$html .= '<table class="widefat striped"><tbody>' .
 			         '<tr>' .
 			         '<th><label for="alg_wc_cog_add_stock">' . __( 'Stock', 'cost-of-goods-for-woocommerce' ) . '</label></th>' .
-			         '<td><input name="alg_wc_cog_add_stock" id="alg_wc_cog_add_stock" class="short" type="number" '.$add_stock_input_min.'></td>' .
+			         '<td><input name="alg_wc_cog_add_stock" id="alg_wc_cog_add_stock" class="short" type="number" ' . $add_stock_input_min . '></td>' .
 			         '</tr>' .
 			         '<tr>' .
 			         '<th><label for="alg_wc_cog_add_stock_cost">' . __( 'Cost', 'cost-of-goods-for-woocommerce' ) . '</label></th>' .
@@ -380,7 +391,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_add_stock_history_table.
 		 *
-		 * @version 3.2.5
+		 * @version 3.7.0
 		 * @since   3.2.5
 		 *
 		 * @param $product_id
@@ -399,7 +410,12 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			if ( $history ) {
 				$history_rows = '';
 				foreach ( $history as $date => $record ) {
-					$history_rows .= '<tr><td>' . date( $format, $date ) . '</td><td>' . $record['stock'] . '</td><td>' . alg_wc_cog_format_cost( $record['cost'] ) . '</td></tr>';
+					$history_rows .= '<tr class="alg-wc-cog-add-stock-history-row" data-date="' . esc_attr( $date ) . '">' .
+					                 '<td>' . date( $format, $date ) . '</td>' .
+					                 '<td>' . $record['stock'] . '</td>' .
+					                 '<td>' . alg_wc_cog_format_cost( $record['cost'] ) . '</td>' .
+					                 '<td>' . '<button class="alg-wc-cog-del-add-stock-history-date" type="button"><span class="dashicons dashicons-trash"></span></button>' . '</td>' .
+					                 '</tr>';
 				}
 				$html .= '' .
 				         '<table class="widefat striped"><tbody>' .
@@ -407,12 +423,91 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				         '<th>' . __( 'Date', 'cost-of-goods-for-woocommerce' ) . '</th>' .
 				         '<th>' . __( 'Stock', 'cost-of-goods-for-woocommerce' ) . '</th>' .
 				         '<th>' . __( 'Cost', 'cost-of-goods-for-woocommerce' ) . '</th>' .
+				         '<th></th>' .
 				         '</tr>' .
 				         $history_rows .
 				         '</tbody></table>';
 			}
 
+			$html .= $this->get_del_history_date_mechanism_js($product_id);
+
+			$html .= '<style>' .
+			         '.alg-wc-cog-del-add-stock-history-date{cursor:pointer;background:none;border:none}' .
+			         '</style>';
+
 			return $html;
+		}
+
+		/**
+		 * get_del_history_date_mechanism_js.
+		 *
+		 * @version 3.7.0
+		 * @since   3.7.0
+		 *
+		 * @param $product_id
+		 *
+		 * @return false|string
+		 */
+		function get_del_history_date_mechanism_js( $product_id ) {
+			ob_start();
+			$php_to_js = array(
+				'security'   => wp_create_nonce( 'alg-cog-del-add-stock-history-date-nonce' ),
+				'action'     => 'del_add_stock_history_date',
+				'product_id' => $product_id
+			);
+			?>
+            <script>
+                (function ($, window, document) {
+                    let dataFromPHP = <?php echo wp_json_encode( $php_to_js );?>;
+                    $(document).on('ready', function () {
+                        $(document).on('click', '.alg-wc-cog-del-add-stock-history-date', function (e) {
+                            e.preventDefault();
+                            let parentRow = jQuery(this).closest('.alg-wc-cog-add-stock-history-row');
+                            if (parentRow.length) {
+                                let date = parentRow.data('date');
+                                let jsToPhpData = {
+                                    action: dataFromPHP.action,
+                                    security: dataFromPHP.security,
+                                    date: date,
+                                    productId: dataFromPHP.product_id,
+                                };
+                                parentRow.hide(500, function () {
+                                    $(this).remove();
+                                });
+                                $.post(ajaxurl, jsToPhpData, function (response) {
+                                });
+                            }
+                        });
+                    });
+                })(jQuery, window, document);
+            </script>
+			<?php
+			return ob_get_clean();
+		}
+
+		/**
+		 * del_add_stock_history_date_ajax.
+		 *
+		 * @version 3.7.0
+		 * @since   3.7.0
+		 *
+		 * @return void
+		 */
+		function del_add_stock_history_date_ajax() {
+			check_ajax_referer( 'alg-cog-del-add-stock-history-date-nonce', 'security' );
+			if (
+				current_user_can( 'edit_products' ) &&
+				isset( $_POST['date'] ) && ! empty( $date = sanitize_text_field( $_POST['date'] ) ) &&
+				isset( $_POST['productId'] ) && is_a( $product = wc_get_product( $_POST['productId'] ), 'WC_Product' )
+			) {
+				$history_meta = '_alg_wc_cog_cost_history';
+				$history      = $product->get_meta( $history_meta, true );
+				if ( isset( $history[ $date ] ) ) {
+					unset( $history[ $date ] );
+					$product->update_meta_data( $history_meta, $history );
+					$product->save();
+				}
+			}
 		}
 
 		/**
@@ -471,7 +566,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			}
 
 			$html .= $variations_dropdown_html;
-            $html.='
+			$html .= '
             <div class="alg-wc-cog-add-stock-history-table-container"></div>
             ';
 			$html .= $this->get_variations_history_script();
@@ -578,12 +673,12 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		 * @version 3.3.3
 		 * @since   2.4.2
 		 *
-		 * @param   null  $args
+		 * @param null $args
 		 *
 		 * @return mixed
 		 */
 		function calculate_add_stock_cost( $args = null ) {
-			$args = wp_parse_args( $args, array(
+			$args                      = wp_parse_args( $args, array(
 				'product_id'           => '',
 				'template_variables'   => array(
 					'%stock_prev%' => '',
@@ -594,11 +689,12 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				),
 				'calculation_template' => get_option( 'alg_wc_cog_products_add_stock_cost_calculation', '( %stock_prev% * %cost_prev% + %stock% * %cost% ) / %stock_now%' )
 			) );
-			$template_variables = $args['template_variables'];
+			$template_variables        = $args['template_variables'];
 			$cost_calculation_template = $args['calculation_template'];
 			$cost_calculation_template = $this->sanitize_math_expression( str_replace( array_keys( $template_variables ), $template_variables, $cost_calculation_template ) );
 			include_once WC()->plugin_path() . '/includes/libraries/class-wc-eval-math.php';
 			$cost_now = (float) WC_Eval_Math::evaluate( $cost_calculation_template );
+
 			return $cost_now;
 		}
 
@@ -607,35 +703,35 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		 *
 		 * @version 3.3.3
 		 * @since   1.7.0
-		 * @todo    [next] maybe use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`?
+		 * @return bool|mixed
 		 * @todo    [maybe] `$cost_now`: round?
 		 *
-		 * @return bool|mixed
+		 * @todo    [next] maybe use `$product = wc_get_product( $product_id )`, i.e. `$product->get_stock_quantity()`, `$product->set_stock_quantity( $stock_now )` and `$product->save()`?
 		 */
-		function product_add_stock( $args = null  ) {
-			$args = wp_parse_args( $args, array(
-				'product_id' => '',
-				'stock'      => '',
-				'stock_prev' => '',
-				'cost'       => '',
-				'cost_prev'  => '',
+		function product_add_stock( $args = null ) {
+			$args         = wp_parse_args( $args, array(
+				'product_id'   => '',
+				'stock'        => '',
+				'stock_prev'   => '',
+				'cost'         => '',
+				'cost_prev'    => '',
 				'update_stock' => true
 			) );
-			$product_id = intval( $args['product_id'] );
-			$stock      = intval( $args['stock'] );
-			$cost       = floatval( $args['cost'] );
+			$product_id   = intval( $args['product_id'] );
+			$stock        = intval( $args['stock'] );
+			$cost         = floatval( $args['cost'] );
 			$update_stock = $args['update_stock'];
-			$cost = $this->get_add_stock_cost( array(
+			$cost         = $this->get_add_stock_cost( array(
 				'cost'       => $cost,
 				'product_id' => $product_id
 			) );
-			$stock = (int) $stock;
-			$stock_prev = ! empty( $args['stock_prev'] ) ? (float) $args['stock_prev'] : (int) get_post_meta( $product_id, '_stock', true );
+			$stock        = (int) $stock;
+			$stock_prev   = ! empty( $args['stock_prev'] ) ? (float) $args['stock_prev'] : (int) get_post_meta( $product_id, '_stock', true );
 			if ( ! $stock_prev || '' === $stock_prev ) {
 				$stock_prev = 0;
 			}
 			$stock_now = (int) ( $stock_prev + $stock );
-			if ( 0 != $stock_now && false !== $cost) {
+			if ( 0 != $stock_now && false !== $cost ) {
 				$cost_prev = ! empty( $args['cost_prev'] ) ? (float) $args['cost_prev'] : (float) alg_wc_cog()->core->products->get_product_cost( $product_id );
 				if ( ! $cost_prev ) {
 					$cost_prev = 0;
@@ -667,8 +763,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				}
 				$history[ current_time( 'timestamp' ) ] = array( 'stock' => $stock, 'cost' => $cost );
 				update_post_meta( $product_id, '_alg_wc_cog_cost_history', $history );
+
 				return $cost_now;
 			}
+
 			return false;
 		}
 
@@ -693,6 +791,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			} elseif ( (int) $new_stock < (int) $stock_prev ) {
 				$operation = 'decrease';
 			}
+
 			return $operation;
 		}
 
@@ -702,7 +801,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		 * @version 2.4.2
 		 * @since   2.4.2
 		 *
-		 * @param   null  $args
+		 * @param null $args
 		 *
 		 * @return bool|float
 		 */
@@ -732,6 +831,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 
 				}
 			}
+
 			return $cost;
 		}
 
@@ -751,6 +851,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 
 			// Trim invalid start/end characters.
 			$expression = rtrim( ltrim( $expression, "\t\n\r\0\x0B+*/" ), "\t\n\r\0\x0B+-*/" );
+
 			return $expression;
 		}
 	}

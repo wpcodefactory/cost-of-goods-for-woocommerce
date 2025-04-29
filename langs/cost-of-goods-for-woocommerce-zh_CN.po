@@ -766,16 +766,16 @@ msgstr "产品"
 msgid "Save product purchase costs (cost of goods) in WooCommerce. Beautifully."
 msgstr "它可以在 WooCommerce 中保存产品购入成本（货物成本）。非常优雅！"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:370
+#: includes/class-alg-wc-cog-products-add-stock.php:381
 msgid "History"
 msgstr "历史"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:73
+#: includes/class-alg-wc-cog-products-add-stock.php:79
 #: includes/settings/class-alg-wc-cog-settings-products.php:244
 msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to calculate new average cost of goods for the product."
 msgstr "\"库存\" 将增加到你的产品库存设置中，\"成本\" 将被用于计算产品的新平均成本。"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:72
+#: includes/class-alg-wc-cog-products-add-stock.php:78
 msgid "Enter values and \"Update\" the product."
 msgstr "输入值，点 “更新” 产品。"
 
@@ -912,7 +912,7 @@ msgstr "增加 \"成本\" 区域到产品 \"%s\""
 msgid "Quick and Bulk Edit"
 msgstr "快速 & 批量编辑设置"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:75
+#: includes/class-alg-wc-cog-products-add-stock.php:81
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
 #: includes/settings/class-alg-wc-cog-settings-products.php:242
 #: includes/settings/class-alg-wc-cog-settings-products.php:250
@@ -1136,8 +1136,8 @@ msgstr "销售利润率"
 msgid "Price"
 msgstr "价格"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:349
-#: includes/class-alg-wc-cog-products-add-stock.php:408
+#: includes/class-alg-wc-cog-products-add-stock.php:360
+#: includes/class-alg-wc-cog-products-add-stock.php:424
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:105
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:228
@@ -1164,7 +1164,7 @@ msgstr "选择需显示成本的订单状态。"
 msgid "Order statuses"
 msgstr "订单状态"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:407
+#: includes/class-alg-wc-cog-products-add-stock.php:423
 #: includes/settings/class-alg-wc-cog-settings-products.php:208
 msgid "Date"
 msgstr "日期"
@@ -1319,8 +1319,8 @@ msgstr "利润"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
 #: includes/class-alg-wc-cog-orders.php:918
-#: includes/class-alg-wc-cog-products-add-stock.php:353
-#: includes/class-alg-wc-cog-products-add-stock.php:409
+#: includes/class-alg-wc-cog-products-add-stock.php:364
+#: includes/class-alg-wc-cog-products-add-stock.php:425
 #: includes/class-alg-wc-cog-products.php:301
 #: includes/class-alg-wc-cog-products.php:312
 #: includes/class-alg-wc-cog-products.php:323
@@ -1448,20 +1448,20 @@ msgstr ""
 msgid "Shipping to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:448
+#: includes/class-alg-wc-cog-products-add-stock.php:543
 msgid "Variation history"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:455
+#: includes/class-alg-wc-cog-products-add-stock.php:550
 #: includes/class-alg-wc-cog-products-cost-archive.php:295
 msgid "Select variation"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:534
+#: includes/class-alg-wc-cog-products-add-stock.php:629
 msgid "If no variation is selected, the parent product will be updated."
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:535
+#: includes/class-alg-wc-cog-products-add-stock.php:630
 msgid "Update variation(s)"
 msgstr ""
 

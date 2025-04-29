@@ -1,3 +1,9 @@
+=== Cost of Goods: Product Cost & Profit Calculator for WooCommerce ===
+
+== Archived Changelog Entries ==
+This file contains older changelog entries, so we can keep the size of the standard WordPress readme.txt file reasonable.
+For the latest changes, please see the "Changelog" section of the [readme.txt file](https://wordpress.org/plugins/cost-of-goods-for-woocommerce/#developers).
+
 = 3.6.1 - 17/12/2024 =
 * Fix - Fixed possible "Unsupported operand types" issue.
 * WC tested up to: 9.5.
