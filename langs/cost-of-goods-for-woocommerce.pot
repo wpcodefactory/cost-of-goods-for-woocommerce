@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.7.0\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.7.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-04-29T04:04:09+02:00\n"
+"POT-Creation-Date: 2025-05-08T21:34:20+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -44,32 +44,37 @@ msgid "Cost of Goods for WooCommerce Pro"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:101
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:253
 #: includes/analytics/src/modules/orders.js:36
+#: includes/analytics/build/index.js:237
 msgid "Items cost"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:102
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:258
 #: includes/analytics/src/modules/orders.js:42
+#: includes/analytics/build/index.js:243
 msgid "Shipping cost"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:103
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:263
 #: includes/analytics/src/modules/orders.js:48
+#: includes/analytics/build/index.js:249
 msgid "Gateway cost"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:104
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:268
 #: includes/analytics/src/modules/orders.js:54
+#: includes/analytics/build/index.js:255
 msgid "Extra cost"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:105
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:273
 #: includes/analytics/src/modules/orders.js:60
+#: includes/analytics/build/index.js:261
 msgid "Shipping classes cost"
 msgstr ""
 
@@ -95,7 +100,13 @@ msgstr ""
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:297
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:373
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:41
+#: includes/analytics/build/index.js:140
+#: includes/analytics/build/index.js:240
+#: includes/analytics/build/index.js:399
+#: includes/analytics/build/index.js:491
+#: includes/analytics/build/index.js:613
+#: includes/analytics/build/index.js:717
 #: includes/analytics/src/modules/categories.js:32
 #: includes/analytics/src/modules/customers.js:41
 #: includes/analytics/src/modules/orders.js:20
@@ -103,6 +114,13 @@ msgstr ""
 #: includes/analytics/src/modules/revenue.js:32
 #: includes/analytics/src/modules/stock.js:61
 #: includes/analytics/src/modules/variations.js:34
+#: includes/analytics/build/index.js:32
+#: includes/analytics/build/index.js:144
+#: includes/analytics/build/index.js:221
+#: includes/analytics/build/index.js:412
+#: includes/analytics/build/index.js:515
+#: includes/analytics/build/index.js:646
+#: includes/analytics/build/index.js:750
 msgid "Cost"
 msgstr ""
 
@@ -119,7 +137,13 @@ msgstr ""
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:64
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:46
+#: includes/analytics/build/index.js:145
+#: includes/analytics/build/index.js:245
+#: includes/analytics/build/index.js:404
+#: includes/analytics/build/index.js:496
+#: includes/analytics/build/index.js:619
+#: includes/analytics/build/index.js:722
 #: includes/analytics/src/modules/categories.js:38
 #: includes/analytics/src/modules/customers.js:47
 #: includes/analytics/src/modules/orders.js:26
@@ -127,12 +151,20 @@ msgstr ""
 #: includes/analytics/src/modules/revenue.js:38
 #: includes/analytics/src/modules/stock.js:67
 #: includes/analytics/src/modules/variations.js:40
+#: includes/analytics/build/index.js:38
+#: includes/analytics/build/index.js:150
+#: includes/analytics/build/index.js:227
+#: includes/analytics/build/index.js:418
+#: includes/analytics/build/index.js:521
+#: includes/analytics/build/index.js:652
+#: includes/analytics/build/index.js:756
 msgid "Profit"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:291
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:628
 #: includes/analytics/src/modules/stock.js:76
+#: includes/analytics/build/index.js:661
 msgid "Category"
 msgstr ""
 
@@ -3231,35 +3263,56 @@ msgstr ""
 msgid "Sale price"
 msgstr ""
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:81
+#: includes/analytics/build/index.js:346
+#: includes/analytics/build/index.js:439
+#: includes/analytics/build/index.js:531
+#: includes/analytics/build/index.js:757
 #: includes/analytics/src/modules/categories.js:86
 #: includes/analytics/src/modules/orders.js:162
 #: includes/analytics/src/modules/products.js:88
 #: includes/analytics/src/modules/revenue.js:86
 #: includes/analytics/src/modules/variations.js:89
+#: includes/analytics/build/index.js:86
+#: includes/analytics/build/index.js:363
+#: includes/analytics/build/index.js:467
+#: includes/analytics/build/index.js:569
+#: includes/analytics/build/index.js:805
 msgid "Costs total"
 msgstr ""
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:85
+#: includes/analytics/build/index.js:350
+#: includes/analytics/build/index.js:443
+#: includes/analytics/build/index.js:535
+#: includes/analytics/build/index.js:761
 #: includes/analytics/src/modules/categories.js:91
 #: includes/analytics/src/modules/orders.js:167
 #: includes/analytics/src/modules/products.js:93
 #: includes/analytics/src/modules/revenue.js:91
 #: includes/analytics/src/modules/variations.js:94
+#: includes/analytics/build/index.js:91
+#: includes/analytics/build/index.js:368
+#: includes/analytics/build/index.js:472
+#: includes/analytics/build/index.js:574
+#: includes/analytics/build/index.js:810
 msgid "Profit total"
 msgstr ""
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:587
 #: includes/analytics/src/modules/stock.js:29
+#: includes/analytics/build/index.js:614
 msgid "Cost of Goods filter"
 msgstr ""
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:592
 #: includes/analytics/src/modules/stock.js:34
+#: includes/analytics/build/index.js:619
 msgid "Disabled"
 msgstr ""
 
-#: includes/analytics/build/index.js:1
+#: includes/analytics/build/index.js:595
 #: includes/analytics/src/modules/stock.js:35
+#: includes/analytics/build/index.js:620
 msgid "Products with cost"
 msgstr ""

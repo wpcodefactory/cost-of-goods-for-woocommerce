@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.6.1
+ * @version 3.7.1
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -123,7 +123,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * alg_wc_cog_product_cost.
 	 *
-	 * @version 3.1.0
+	 * @version 3.7.1
 	 * @since   3.1.0
 	 *
 	 * @param $atts
@@ -139,16 +139,16 @@ class Alg_WC_Cost_of_Goods_Products {
 			'html_template' => '<span class="alg-wc-cog-product-cost">{content}</span>',
 		), $atts, 'alg_wc_cog_product_cost' );
 		$product_id    = intval( $atts['product_id'] );
-		$html_template = $atts['html_template'];
+		$html_template = html_entity_decode( $atts['html_template'] );
 		$array_from_to = array(
 			'{content}' => $this->get_product_cost_html( $product_id )
 		);
 
-		return str_replace( array_keys( $array_from_to ), $array_from_to, $html_template );
+		return str_replace( array_keys( $array_from_to ), $array_from_to, wp_kses_post( $html_template ) );
 	}
 
 	/**
-	 * @version 3.1.0
+	 * @version 3.7.1
 	 * @since   3.1.0
 	 *
 	 * @param $atts
@@ -166,13 +166,13 @@ class Alg_WC_Cost_of_Goods_Products {
 		), $atts, 'alg_wc_cog_product_profit' );
 
 		$product_id      = intval( $atts['product_id'] );
-		$profit_template = sanitize_text_field( $atts['profit_template'] );
-		$html_template   = $atts['html_template'];
+		$profit_template = html_entity_decode( $atts['profit_template'] );
+		$html_template   = html_entity_decode( $atts['html_template'] );
 		$array_from_to   = array(
-			'{content}' => $this->get_product_profit_html( $product_id, $profit_template ),
+			'{content}' => $this->get_product_profit_html( $product_id, wp_kses_post( $profit_template ) ),
 		);
 
-		return str_replace( array_keys( $array_from_to ), $array_from_to, $html_template );
+		return str_replace( array_keys( $array_from_to ), $array_from_to, wp_kses_post( $html_template ) );
 	}
 
 	/**
