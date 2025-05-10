@@ -36,7 +36,7 @@ msgstr "Malın Maliyeti"
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:286
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:313
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:82
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
@@ -82,7 +82,7 @@ msgstr "Maliyet"
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:118
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:287
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:314
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:118
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
@@ -274,7 +274,7 @@ msgid "export"
 msgstr "dışa aktar"
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
-#: includes/tools/class-alg-wc-cog-import-tool.php:246
+#: includes/tools/class-alg-wc-cog-import-tool.php:250
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:370
 msgid "Product ID"
 msgstr "Ürün ID"
@@ -1068,7 +1068,7 @@ msgstr "Satış ücreti"
 msgid "Stock status: %s"
 msgstr "Stok durumu: %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:310
+#: includes/tools/class-alg-wc-cog-import-tool.php:314
 msgid "plugin settings"
 msgstr "eklenti ayarları"
 
@@ -1077,33 +1077,33 @@ msgstr "eklenti ayarları"
 msgid "Import Costs"
 msgstr "Maliyetleri İçe Aktar"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:247
+#: includes/tools/class-alg-wc-cog-import-tool.php:251
 msgid "Product Title"
 msgstr "ürün başlığı"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:248
+#: includes/tools/class-alg-wc-cog-import-tool.php:252
 #, php-format
 msgid "Source %s"
 msgstr "Kaynak %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:249
+#: includes/tools/class-alg-wc-cog-import-tool.php:253
 #, php-format
 msgid "Destination %s"
 msgstr "Hedef %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:303
+#: includes/tools/class-alg-wc-cog-import-tool.php:307
 msgid "Import"
 msgstr "İçe Aktar"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:304
+#: includes/tools/class-alg-wc-cog-import-tool.php:308
 msgid "Are you sure?"
 msgstr "Emin misiniz?"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:307
+#: includes/tools/class-alg-wc-cog-import-tool.php:311
 msgid "Costs Import"
 msgstr "Maliyetleri içe aktar"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:309
+#: includes/tools/class-alg-wc-cog-import-tool.php:313
 #, php-format
 msgid "Tool's options can be set in %s."
 msgstr "Aracın seçenekleri %s içinde ayarlanabilir."
@@ -1168,7 +1168,7 @@ msgstr ""
 msgid "Shipping classes cost"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:291
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:318
 #: includes/analytics/build/index.js:628
 #: includes/analytics/src/modules/stock.js:76
 #: includes/analytics/build/index.js:661
@@ -3139,7 +3139,7 @@ msgstr ""
 msgid "Data have been saved."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:308
+#: includes/tools/class-alg-wc-cog-import-tool.php:312
 msgid "Import products costs to \"Cost of Goods for WooCommerce\" plugin by copying the meta from %s to %s."
 msgstr ""
 

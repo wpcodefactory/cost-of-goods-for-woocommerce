@@ -155,7 +155,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		/**
 		 * copy_product_meta.
 		 *
-		 * @version 2.8.7
+		 * @version 3.7.2
 		 * @since   2.3.0
 		 *
 		 * @param null $args
@@ -181,7 +181,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 			}
 			$source_cost = is_null( $source_value ) ? call_user_func_array( $get_cost_function, $get_cost_function_args ) : $source_value;
 			if ( $this->can_copy_cost( $source_cost, $args ) ) {
+				$prev_to_cost = call_user_func_array( $get_cost_function, array( $product_id, $to_key, true ) );
 				update_post_meta( $product_id, $to_key, $source_cost );
+				if ( $source_cost === $prev_to_cost ) {
+					do_action( "updated_post_meta", null, $product_id, $to_key, $source_cost );
+				}
 			}
 		}
 

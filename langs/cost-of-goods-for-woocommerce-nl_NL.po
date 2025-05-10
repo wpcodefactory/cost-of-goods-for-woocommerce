@@ -1273,7 +1273,7 @@ msgstr "WooCommerce rapporten"
 msgid "Percent from product total. E.g.: If you want <code>50%</code> from product total you can set it as 50."
 msgstr "Percentage van product totaal. Bijv.: als je <code>50%</code> van het product totaal wilt, kunt je dit instellen op 50."
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:308
+#: includes/tools/class-alg-wc-cog-import-tool.php:312
 msgid "Import products costs to \"Cost of Goods for WooCommerce\" plugin by copying the meta from %s to %s."
 msgstr "Importeer product kosten naar de \"Cost of Goods WooCommerce\" plugin door de meta te kopiëren van %s naar %s"
 
@@ -1512,7 +1512,7 @@ msgstr "Behandelings kosten"
 msgid "Item handling fees"
 msgstr "Item verwerkings kosten"
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:291
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:318
 #: includes/analytics/build/index.js:628
 #: includes/analytics/src/modules/stock.js:76
 #: includes/analytics/build/index.js:661
@@ -2808,7 +2808,7 @@ msgstr "Kosten van goederen"
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:118
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:287
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:314
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:118
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
@@ -2845,7 +2845,7 @@ msgstr "Winst"
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:286
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:313
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:82
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
@@ -2888,40 +2888,40 @@ msgstr "Winst"
 msgid "Cost"
 msgstr "Kosten"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:310
+#: includes/tools/class-alg-wc-cog-import-tool.php:314
 msgid "plugin settings"
 msgstr "plugin instellingen"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:309
+#: includes/tools/class-alg-wc-cog-import-tool.php:313
 msgid "Tool's options can be set in %s."
 msgstr "Gereedschap opties kunnen worden ingesteld in %s."
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:307
+#: includes/tools/class-alg-wc-cog-import-tool.php:311
 msgid "Costs Import"
 msgstr "Import kosten"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:304
+#: includes/tools/class-alg-wc-cog-import-tool.php:308
 msgid "Are you sure?"
 msgstr "Weet je het zeker?"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:303
+#: includes/tools/class-alg-wc-cog-import-tool.php:307
 msgid "Import"
 msgstr "Import"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:249
+#: includes/tools/class-alg-wc-cog-import-tool.php:253
 msgid "Destination %s"
 msgstr "Bestemming: %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:248
+#: includes/tools/class-alg-wc-cog-import-tool.php:252
 msgid "Source %s"
 msgstr "Bron: %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:247
+#: includes/tools/class-alg-wc-cog-import-tool.php:251
 msgid "Product Title"
 msgstr "Product titel"
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
-#: includes/tools/class-alg-wc-cog-import-tool.php:246
+#: includes/tools/class-alg-wc-cog-import-tool.php:250
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:370
 msgid "Product ID"
 msgstr "Product ID"

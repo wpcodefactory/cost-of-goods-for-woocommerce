@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.7.1
+ * @version 3.7.2
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -178,7 +178,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * Save profit on post meta everytime the cost or price is updated on product.
 	 *
-	 * @version 2.5.1
+	 * @version 3.7.2
 	 * @since   2.5.1
 	 *
 	 * @param $meta_id
@@ -195,9 +195,9 @@ class Alg_WC_Cost_of_Goods_Products {
 			) ) &&
 			is_a( $product = wc_get_product( $post_id ), 'WC_Product' )
 		) {
-			$profit = (float) $this->get_product_profit( $post_id );
 			$cost   = (float) $this->get_product_cost( $post_id );
 			$price  = (float) $this->get_product_price( $product );
+			$profit = (float) $this->get_product_profit( array( 'product' => $product, 'get_profit_method' => 'calculation' ) );
 			update_post_meta( $post_id, '_alg_wc_cog_profit', $profit );
 			update_post_meta( $post_id, '_alg_wc_cog_profit_percent', ( 0 != $cost ? ( $profit / $cost * 100 ) : 0 ) );
 			update_post_meta( $post_id, '_alg_wc_cog_profit_margin', ( 0 != $price ? ( $profit / $price * 100 ) : 0 ) );
@@ -509,19 +509,46 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_profit.
 	 *
-	 * @version 2.3.9
+	 * @version 3.7.2
 	 * @since   1.0.0
 	 * @todo    [next] maybe check if `wc_get_price_excluding_tax()` is numeric (e.g. maybe can return range)
 	 */
-	function get_product_profit( $product_id ) {
-		$product = wc_get_product( $product_id );
-		return ( '' === ( $cost = $this->get_product_cost( $product_id ) ) || '' === ( $price = $this->get_product_price( $product ) ) ? '' : $price - $cost );
+	function get_product_profit( $args = null ) {
+		$args = wp_parse_args( $args, array(
+			'product_id'        => '',
+			'product'           => '',
+			'get_profit_method' => 'smart', // meta || calculation || smart
+		) );
+
+		$product_id = intval( $args['product_id'] );
+		$method     = sanitize_text_field( $args['get_profit_method'] );
+		$product    = $args['product'];
+		$product    = is_a( $product, 'WC_Product' ) ? $product : wc_get_product( $product_id );
+		$product_id = $product->get_id();
+		$cost       = empty( $cost = $this->get_product_cost( $product_id ) ) ? 0 : $cost;
+		$price      = empty( $price = $this->get_product_price( $product ) ) ? 0 : $price;
+		$profit_from_meta        = $product->get_meta( '_alg_wc_cog_profit' );
+		$profit_from_calculation = $price - $cost;
+		$final_profit            = '';
+		switch ( $method ) {
+			case 'meta':
+				$final_profit = $profit_from_meta;
+				break;
+			case 'calculation':
+				$final_profit = $profit_from_calculation;
+				break;
+			case 'smart':
+				$final_profit = empty( $profit_from_meta ) ? $profit_from_calculation : $profit_from_meta;
+				break;
+		}
+
+		return $final_profit;
 	}
 
 	/**
 	 * get_product_profit_html.
 	 *
-	 * @version 2.9.6
+	 * @version 3.7.2
 	 * @since   1.0.0
 	 */
 	function get_product_profit_html( $product_id, $template = '%profit% (%profit_percent%)' ) {
@@ -530,7 +557,7 @@ class Alg_WC_Cost_of_Goods_Products {
 			if ( $product->is_type( 'variable' ) ) {
 				return $this->get_variable_product_html( $product_id, 'profit', $template );
 			} else {
-				if ( '' === ( $profit = $this->get_product_profit( $product_id ) ) ) {
+				if ( '' === ( $profit = $this->get_product_profit( array( 'product' => $product ) ) ) ) {
 					return '';
 				} else {
 					$placeholders = array(
@@ -550,7 +577,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_variable_product_html.
 	 *
-	 * @version 3.6.1
+	 * @version 3.7.2
 	 * @since   1.0.0
 	 * @todo    [maybe] use `get_available_variations()` instead of `get_children()`?
 	 */
@@ -558,7 +585,7 @@ class Alg_WC_Cost_of_Goods_Products {
 		$product = wc_get_product( $product_id );
 		$data    = array();
 		foreach ( $product->get_children() as $variation_id ) {
-			$data[ $variation_id ] = ( 'profit' === $profit_or_cost ? $this->get_product_profit( $variation_id ) : $this->get_product_cost( $variation_id ) );
+			$data[ $variation_id ] = ( 'profit' === $profit_or_cost ? $this->get_product_profit( array( 'product_id' => $variation_id ) ) : $this->get_product_cost( $variation_id ) );
 		}
 		if ( empty( $data ) ) {
 			return '';

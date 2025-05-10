@@ -108,7 +108,7 @@ msgstr "手续费"
 msgid "Item handling fees"
 msgstr "单品手续费"
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:291
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:318
 #: includes/analytics/build/index.js:628
 #: includes/analytics/src/modules/stock.js:76
 #: includes/analytics/build/index.js:661
@@ -1311,7 +1311,7 @@ msgstr "商品成本"
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:118
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:287
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:314
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:118
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
@@ -1348,7 +1348,7 @@ msgstr "利润"
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:286
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:313
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:82
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
@@ -1391,40 +1391,40 @@ msgstr "利润"
 msgid "Cost"
 msgstr "成本"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:310
+#: includes/tools/class-alg-wc-cog-import-tool.php:314
 msgid "plugin settings"
 msgstr "插件设置"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:309
+#: includes/tools/class-alg-wc-cog-import-tool.php:313
 msgid "Tool's options can be set in %s."
 msgstr "此工具的设置可以在 %s 中找到。"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:307
+#: includes/tools/class-alg-wc-cog-import-tool.php:311
 msgid "Costs Import"
 msgstr "成本导入"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:304
+#: includes/tools/class-alg-wc-cog-import-tool.php:308
 msgid "Are you sure?"
 msgstr "你确定要这样做吗？"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:303
+#: includes/tools/class-alg-wc-cog-import-tool.php:307
 msgid "Import"
 msgstr "导入"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:249
+#: includes/tools/class-alg-wc-cog-import-tool.php:253
 msgid "Destination %s"
 msgstr "目标 %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:248
+#: includes/tools/class-alg-wc-cog-import-tool.php:252
 msgid "Source %s"
 msgstr "源自 %s"
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:247
+#: includes/tools/class-alg-wc-cog-import-tool.php:251
 msgid "Product Title"
 msgstr "产品标题"
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
-#: includes/tools/class-alg-wc-cog-import-tool.php:246
+#: includes/tools/class-alg-wc-cog-import-tool.php:250
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:370
 msgid "Product ID"
 msgstr "产品 ID"
@@ -3155,7 +3155,7 @@ msgstr ""
 msgid "Data have been saved."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:308
+#: includes/tools/class-alg-wc-cog-import-tool.php:312
 msgid "Import products costs to \"Cost of Goods for WooCommerce\" plugin by copying the meta from %s to %s."
 msgstr ""
 

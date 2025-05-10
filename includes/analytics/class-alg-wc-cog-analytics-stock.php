@@ -2,12 +2,14 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Stock.
  *
- * @version 3.3.8
+ * @version 3.7.2
  * @since   2.4.5
  * @author  WPFactory
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+use Automattic\WooCommerce\Utilities\OrderUtil;
 
 if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 
@@ -124,6 +126,12 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 				set_transient( $transient_name, $total_cost_and_profit_info );
 			}
 
+			if ( 'lowstock' === $type ) {
+				$filtered_product_ids = $this->get_low_stock_product_ids();
+			} else {
+				$filtered_product_ids = $this->get_product_ids_by_stock_status( $type );
+			}
+
 			if ( ! empty( $total_cost_and_profit_info ) ) {
 				$query_results['cost']            = $total_cost_and_profit_info['cost'];
 				$query_results['cost_with_qty']   = $total_cost_and_profit_info['cost_with_qty'];
@@ -137,7 +145,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		/**
 		 * get_total_cost_and_profit_from_database.
 		 *
-		 * @version 3.2.2
+		 * @version 3.7.2
 		 * @since   3.2.1
 		 *
 		 * @param $post_ids
@@ -147,25 +155,37 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		function get_total_cost_and_profit_from_database( $post_ids = array() ) {
 			global $wpdb;
 
-			$query = "
-			SELECT COUNT(DISTINCT posts.ID) as total_products, SUM(alg_wc_cog_cost_pm.meta_value) AS cost, SUM(alg_wc_cog_cost_pm.meta_value * IF(stock_pm.meta_value = 0 or stock_pm.meta_value IS null, 1, stock_pm.meta_value)) AS cost_with_qty, SUM(alg_wc_cog_profit_pm.meta_value) AS profit, SUM(alg_wc_cog_profit_pm.meta_value * IF(stock_pm.meta_value = 0 or stock_pm.meta_value IS null, 1, stock_pm.meta_value)) AS profit_with_qty, SUM(IF(stock_pm.meta_value = 0 or stock_pm.meta_value IS null, 1, stock_pm.meta_value)) AS stock
+			$sub_query = "
+			SELECT DISTINCT posts.ID as product_id, 
+			IFNULL(alg_wc_cog_cost_pm.meta_value, 0) + 0 AS cost, 
+			IFNULL(alg_wc_cog_cost_pm.meta_value, 0) * IF(stock_pm.meta_value = 0 OR stock_pm.meta_value IS NULL, 1, stock_pm.meta_value + 0) AS cost_with_qty, 
+			IFNULL(alg_wc_cog_profit_pm.meta_value, 0) + 0 AS profit, 
+			IFNULL(alg_wc_cog_profit_pm.meta_value, 0) * IF(stock_pm.meta_value = 0 OR stock_pm.meta_value IS NULL, 1, stock_pm.meta_value + 0) AS profit_with_qty, 
+			IF(stock_pm.meta_value = 0 OR stock_pm.meta_value IS NULL, 0, stock_pm.meta_value + 0) AS stock
 			FROM {$wpdb->posts} posts
-			LEFT JOIN {$wpdb->postmeta} alg_wc_cog_cost_pm ON posts.ID = alg_wc_cog_cost_pm.post_id and alg_wc_cog_cost_pm.meta_key = '_alg_wc_cog_cost'
-			LEFT JOIN {$wpdb->postmeta} alg_wc_cog_profit_pm ON posts.ID = alg_wc_cog_profit_pm.post_id and alg_wc_cog_profit_pm.meta_key = '_alg_wc_cog_profit'
-			LEFT JOIN wp_postmeta stock_pm ON posts.ID = stock_pm.post_id AND stock_pm.meta_key = '_stock'
+			INNER JOIN {$wpdb->postmeta} alg_wc_cog_cost_pm ON posts.ID = alg_wc_cog_cost_pm.post_id and alg_wc_cog_cost_pm.meta_key = '_alg_wc_cog_cost'
+			INNER JOIN {$wpdb->postmeta} alg_wc_cog_profit_pm ON posts.ID = alg_wc_cog_profit_pm.post_id and alg_wc_cog_profit_pm.meta_key = '_alg_wc_cog_profit'
+			INNER JOIN {$wpdb->postmeta} stock_pm ON posts.ID = stock_pm.post_id AND stock_pm.meta_key = '_stock'
 			WHERE posts.post_type IN ( 'product', 'product_variation' )
-			AND alg_wc_cog_cost_pm.meta_value NOT IN ('',0) AND alg_wc_cog_profit_pm.meta_value NOT IN ('',0)
+			AND posts.post_status IN ('publish', 'private')
 			";
 
 			if ( ! empty( $post_ids ) ) {
-				$in_str = alg_wc_cog_generate_wpdb_prepare_placeholders_from_array( $post_ids );
-				$query  .= "AND posts . ID IN {$in_str}";
+				$in_str    = alg_wc_cog_generate_wpdb_prepare_placeholders_from_array( $post_ids );
+				$sub_query .= "AND posts . ID IN {$in_str}";
 			}
+
+			$main_query = "
+			SELECT COUNT(product_id) as total_products, SUM(cost) AS cost, SUM(cost_with_qty) AS cost_with_qty, SUM(profit) AS profit, SUM(profit_with_qty) AS profit_with_qty, SUM(stock) AS stock
+			FROM (
+			    {$sub_query}
+			) as alg_wc_cog_main_stock_query
+			";
 
 			$prepare_args = $post_ids;
 
 			return $wpdb->get_row(
-				$wpdb->prepare( $query, $prepare_args ),
+				$wpdb->prepare( $main_query, $prepare_args ),
 				ARRAY_A
 			);
 		}
@@ -173,7 +193,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		/**
 		 * Get count for the passed in stock status.
 		 *
-		 * @version 3.2.1
+		 * @version 3.7.2
 		 * @since   3.2.1
 		 *
 		 * @see Automattic\WooCommerce\Admin\API\Reports\Stock\Stats\DataStore::get_count()
@@ -183,16 +203,23 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		private function get_product_ids_by_stock_status( $status ) {
 			global $wpdb;
 
-			return $wpdb->get_col(
-				$wpdb->prepare(
-					"
+			$join = '';
+
+			if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
+				$join = "INNER JOIN {$wpdb->wc_product_meta_lookup} wc_product_meta_lookup ON posts.ID = wc_product_meta_lookup.product_id AND wc_product_meta_lookup.stock_status = %s";
+			} else {
+				$join = "INNER JOIN {$wpdb->postmeta} wc_product_meta_lookup ON posts.ID = wc_product_meta_lookup.post_id AND wc_product_meta_lookup.meta_key = '_stock_status' AND wc_product_meta_lookup.meta_value = %s";
+			}
+
+			$prepare_text =
+				"
 				SELECT DISTINCT posts.ID FROM {$wpdb->posts} posts
-				LEFT JOIN {$wpdb->wc_product_meta_lookup} wc_product_meta_lookup ON posts.ID = wc_product_meta_lookup.product_id
-				WHERE posts.post_type IN ( 'product', 'product_variation' )
-				AND wc_product_meta_lookup.stock_status = %s
-				",
-					$status
-				)
+				{$join}
+				WHERE posts.post_type IN ( 'product', 'product_variation' )				
+				";
+
+			return $wpdb->get_col(
+				$wpdb->prepare( $prepare_text, $status )
 			);
 		}
 
@@ -339,7 +366,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		 *
 		 * @see \Automattic\WooCommerce\Admin\API\Reports\Stock\Controller::prepare_item_for_response()
 		 *
-		 * @version 3.3.8
+		 * @version 3.7.2
 		 * @since   2.4.5
 		 *
 		 * @param WP_REST_Response $response
@@ -354,7 +381,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 				is_a( $product, 'WC_Product' )
 			) {
 				$response->data['product_cost']   = alg_wc_cog()->core->products->get_product_cost( $product->get_id() );
-				$response->data['product_profit'] = alg_wc_cog()->core->products->get_product_profit( $product->get_id() );
+				$response->data['product_profit'] = alg_wc_cog()->core->products->get_product_profit( array( 'product' => $product ) );
 				$response->data['product_price']  = (float) $product->get_price();
 				if ( $this->consider_stock_for_calculation() ) {
 					if ( $response->data['stock_quantity'] > 0 ) {

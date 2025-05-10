@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.7.1\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.7.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-08T21:34:20+02:00\n"
+"POT-Creation-Date: 2025-05-10T04:39:03+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -81,7 +81,7 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:286
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:313
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:82
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
@@ -127,7 +127,7 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:118
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:287
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:314
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:118
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Profit"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:291
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:318
 #: includes/analytics/build/index.js:628
 #: includes/analytics/src/modules/stock.js:76
 #: includes/analytics/build/index.js:661
@@ -517,7 +517,7 @@ msgid "export"
 msgstr ""
 
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
-#: includes/tools/class-alg-wc-cog-import-tool.php:246
+#: includes/tools/class-alg-wc-cog-import-tool.php:250
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:370
 msgid "Product ID"
 msgstr ""
@@ -3215,39 +3215,39 @@ msgstr ""
 msgid "Import Costs"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:247
+#: includes/tools/class-alg-wc-cog-import-tool.php:251
 msgid "Product Title"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:248
+#: includes/tools/class-alg-wc-cog-import-tool.php:252
 msgid "Source %s"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:249
+#: includes/tools/class-alg-wc-cog-import-tool.php:253
 msgid "Destination %s"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:303
+#: includes/tools/class-alg-wc-cog-import-tool.php:307
 msgid "Import"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:304
+#: includes/tools/class-alg-wc-cog-import-tool.php:308
 msgid "Are you sure?"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:307
+#: includes/tools/class-alg-wc-cog-import-tool.php:311
 msgid "Costs Import"
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:308
+#: includes/tools/class-alg-wc-cog-import-tool.php:312
 msgid "Import products costs to \"Cost of Goods for WooCommerce\" plugin by copying the meta from %s to %s."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:309
+#: includes/tools/class-alg-wc-cog-import-tool.php:313
 msgid "Tool's options can be set in %s."
 msgstr ""
 
-#: includes/tools/class-alg-wc-cog-import-tool.php:310
+#: includes/tools/class-alg-wc-cog-import-tool.php:314
 msgid "plugin settings"
 msgstr ""
 
