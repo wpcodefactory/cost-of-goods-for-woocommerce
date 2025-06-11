@@ -33,10 +33,6 @@ msgstr "Beschouw alle waarden als positief"
 msgid "Sign handling"
 msgstr "Sign handling"
 
-#: includes/class-alg-wc-cog.php:168
-msgid "Cost of Goods Sold"
-msgstr "Kosten van verkochte goederen"
-
 #: includes/settings/class-alg-wc-cog-settings-orders.php:264
 msgid "Ignore quantity sold when calculating profit and costs"
 msgstr "Negeer de verkochte hoeveelheid bij het berekenen van winst en kosten"
@@ -2500,7 +2496,7 @@ msgstr "Je moet de bestelling kosten en winst opnieuw berekenen nadat je deze in
 msgid "Here you can add extra costs for your orders, e.g. handling fees."
 msgstr "Hier kun je extra kosten toevoegen voor je bestellingen, b.v. behandelkosten."
 
-#: includes/class-alg-wc-cog.php:267
+#: includes/class-alg-wc-cog.php:271
 msgid "Go Pro"
 msgstr "Ga voor Pro"
 
@@ -3314,4 +3310,8 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:235
 msgid "Show the cost and profit for each individual order item in the admin New Order email"
+msgstr ""
+
+#: includes/class-alg-wc-cog.php:168
+msgid "Cost of Goods: Product Cost & Profit Calculator for WooCommerce"
 msgstr ""

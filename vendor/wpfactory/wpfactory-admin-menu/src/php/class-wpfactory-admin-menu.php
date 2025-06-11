@@ -2,7 +2,7 @@
 /**
  * WPFactory Admin Menu
  *
- * @version 1.0.3
+ * @version 1.0.5
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $version = '1.0.3';
+		protected $version = '1.0.5';
 
 		/**
 		 * Menu slug.
@@ -116,7 +116,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 		/**
 		 * Moves WooCommerce Settings tab to WPFactory menu as a submenu item.
 		 *
-		 * @version 1.0.2
+		 * @version 1.0.5
 		 * @since   1.0.0
 		 *
 		 * @param $args
@@ -127,16 +127,21 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 			if ( is_null( $this->wc_settings_menu_item_swapper ) ) {
 				$this->wc_settings_menu_item_swapper = new WC_Settings_Menu_Item_Swapper();
 			}
-			$args                       = wp_parse_args( $args, array(
+
+			// Initial args.
+			$args = wp_parse_args( $args, array(
 				'wc_settings_tab_id' => '',
 				'page_title'         => '',
 				'menu_title'         => '',
 				'capability'         => class_exists( 'WooCommerce' ) ? 'manage_woocommerce' : 'manage_options',
 				'position'           => 30,
+				'plugin_icon'        => array()
 			) );
 			if ( empty( $args['page_title'] ) ) {
 				$args['page_title'] = $args['menu_title'];
 			}
+
+			// Admin menu.
 			$replacement_menu_item_slug = 'admin.php?page=wc-settings&tab=' . $args['wc_settings_tab_id'];
 			add_action( 'admin_menu', function () use ( $args, $replacement_menu_item_slug ) {
 				\add_submenu_page(
@@ -149,11 +154,23 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 					$args['position']
 				);
 			} );
+
+			// Setup plugin icon.
+			$args['plugin_icon'] = wp_parse_args( $args['plugin_icon'], array(
+				'url'   => '',
+				'style' => '',
+				'width' => 35,
+			) );
+
+			// Swap.
 			$this->wc_settings_menu_item_swapper->swap( array(
 				'wc_settings_tab_id'         => $args['wc_settings_tab_id'],
 				'replacement_menu_item_slug' => $replacement_menu_item_slug,
-				'page_title'                 => $args['page_title']
+				'page_title'                 => $args['page_title'],
+				'plugin_icon'                => $args['plugin_icon']
 			) );
+
+			// Init.
 			$this->wc_settings_menu_item_swapper->init();
 		}
 

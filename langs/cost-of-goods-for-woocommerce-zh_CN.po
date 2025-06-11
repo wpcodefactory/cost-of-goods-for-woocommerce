@@ -1031,7 +1031,7 @@ msgstr "保存设置之后，你需要重新计算订单成本和利润。"
 msgid "Here you can add extra costs for your orders, e.g. handling fees."
 msgstr "此部分可以增加订单额外成本，譬如：手续费。"
 
-#: includes/class-alg-wc-cog.php:267
+#: includes/class-alg-wc-cog.php:271
 msgid "Go Pro"
 msgstr "升级 Pro"
 
@@ -3167,10 +3167,6 @@ msgstr ""
 msgid "Ignore quantity sold when calculating profit and costs"
 msgstr ""
 
-#: includes/class-alg-wc-cog.php:168
-msgid "Cost of Goods Sold"
-msgstr ""
-
 #: includes/settings/class-alg-wc-cog-settings-orders.php:510
 msgid "Sign handling"
 msgstr ""
@@ -3314,4 +3310,8 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:235
 msgid "Show the cost and profit for each individual order item in the admin New Order email"
+msgstr ""
+
+#: includes/class-alg-wc-cog.php:168
+msgid "Cost of Goods: Product Cost & Profit Calculator for WooCommerce"
 msgstr ""

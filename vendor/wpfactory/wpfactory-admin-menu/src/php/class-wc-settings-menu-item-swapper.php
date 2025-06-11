@@ -2,7 +2,7 @@
 /**
  * WPFactory Admin Menu - WooCommerce Settings Menu Item Swapper.
  *
- * @version 1.0.2
+ * @version 1.0.4
  * @since   1.0.1
  * @author  WPFactory
  */
@@ -39,11 +39,22 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 		 */
 		protected $initialized = false;
 
+		/**
+		 * swap.
+		 *
+		 * @param $args
+		 *
+		 * @version 1.0.4
+		 * @since   1.0.0
+		 *
+		 * @return void
+		 */
 		function swap( $args = null ) {
-			$args = wp_parse_args( $args, array(
+			$args                                              = wp_parse_args( $args, array(
 				'wc_settings_tab_id'         => '',
 				'replacement_menu_item_slug' => '',
-				'page_title'                 => ''
+				'page_title'                 => '',
+				'plugin_icon'                => array(),
 			) );
 			$this->args[ $args['replacement_menu_item_slug'] ] = $args;
 		}
@@ -78,7 +89,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 		/**
 		 * Adds page title.
 		 *
-		 * @version 1.0.1
+		 * @version 1.0.4
 		 * @since   1.0.1
 		 *
 		 * @return void
@@ -92,8 +103,12 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 			) {
 				$first_item = reset( $found_items );
 				$page_title = $first_item['page_title'];
+				$plugin_icon_url = $first_item['plugin_icon']['url'];
+				$plugin_icon_width = $first_item['plugin_icon']['width'];
+				$plugin_icon_style_html = $first_item['plugin_icon']['style'];
+				$plugin_icon_html = ! empty( $plugin_icon_url ) ? '<img style="'.esc_attr( $plugin_icon_style_html ).'". class="wpfam-plugin-icon" src="' . esc_url( $plugin_icon_url ) . '" width="' . esc_attr( $plugin_icon_width ) . '">' : '';
 				if ( ! empty( $page_title ) ) {
-					echo '<div class="wrap"><h1>' . esc_html( $page_title ) . '</h1></div>';
+					echo '<div class="wrap"><div class="woocommerce-layout__header"><div class="wpfam-plugin-title-wrapper"><h1 class="wpfam-plugin-title">' . $plugin_icon_html.esc_html( $page_title ) . '</h1></div></div></div>';
 				}
 			}
 		}
@@ -160,7 +175,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 		/**
 		 * Hides WooCommerce settings tabs when accessing the plugin settings page.
 		 *
-		 * @version 1.0.2
+		 * @version 1.0.4
 		 * @since   1.0.1
 		 *
 		 * @return void
@@ -182,19 +197,45 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 				}
 				?>
 				<style>
-					<?php if($show_current_plugin_tab): ?>
+					<?php if( $show_current_plugin_tab ): ?>
 					.wrap.woocommerce .nav-tab-wrapper a {
 						display: none;
 					}
 
 					<?php else: ?>
 					.nav-tab-wrapper.woo-nav-tab-wrapper{
-						display: none;
+						display: none !important;
 					}
-					.wrap.woocommerce .subsubsub{
-						border-top: 1px solid #c3c4c7;
-						margin: 7px 0 7px 0;
-						padding: 6px 0 0 0;
+
+					h1.wpfam-plugin-title{
+						padding: 0 0 0 30px;
+						font-weight: 590;
+						font-size: 16px;
+						color: #070707;
+						display: flex;
+						align-items: center;
+					}
+
+					.wpfam-plugin-title-wrapper{
+						display: flex;
+						align-items: center;
+						min-height: 60px;
+					}
+
+					.wpfam-plugin-title-wrapper .notice{
+						display:none;
+					}
+
+					.wrap.woocommerce{
+						margin-top:60px;
+					}
+
+					body.woocommerce_page_wc-settings #mainform{
+						padding-top:24px;
+					}
+
+					.wpfam-plugin-icon{
+						margin-right:3px;
 					}
 
 					<?php endif; ?>

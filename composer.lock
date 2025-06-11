@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "wpfactory/wpfactory-admin-menu",
-            "version": "v1.0.3",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wpcodefactory/wpfactory-admin-menu.git",
-                "reference": "fe48c4100a6b436a3dd39308814887119063c140"
+                "reference": "a033a459f062ee0ea43e62d6c93d8ef570ab2562"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-admin-menu/zipball/fe48c4100a6b436a3dd39308814887119063c140",
-                "reference": "fe48c4100a6b436a3dd39308814887119063c140",
+                "url": "https://api.github.com/repos/wpcodefactory/wpfactory-admin-menu/zipball/a033a459f062ee0ea43e62d6c93d8ef570ab2562",
+                "reference": "a033a459f062ee0ea43e62d6c93d8ef570ab2562",
                 "shasum": ""
             },
             "require-dev": {
@@ -49,10 +49,10 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/wpcodefactory/wpfactory-admin-menu/tree/v1.0.3",
+                "source": "https://github.com/wpcodefactory/wpfactory-admin-menu/tree/v1.0.5",
                 "issues": "https://github.com/wpcodefactory/wpfactory-admin-menu/issues"
             },
-            "time": "2024-10-14T14:01:02+00:00"
+            "time": "2025-06-11T20:49:52+00:00"
         },
         {
             "name": "wpfactory/wpfactory-cross-selling",

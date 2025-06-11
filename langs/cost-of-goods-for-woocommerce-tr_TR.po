@@ -14,7 +14,7 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 "X-Loco-Version: 2.4.3; wp-5.5.1\n"
 
-#: includes/class-alg-wc-cog.php:267
+#: includes/class-alg-wc-cog.php:271
 msgid "Go Pro"
 msgstr "Pro Sürüm Satın Al"
 
@@ -3205,10 +3205,6 @@ msgstr ""
 msgid "Ignore quantity sold when calculating profit and costs"
 msgstr ""
 
-#: includes/class-alg-wc-cog.php:168
-msgid "Cost of Goods Sold"
-msgstr ""
-
 #: includes/settings/class-alg-wc-cog-settings-orders.php:510
 msgid "Sign handling"
 msgstr ""
@@ -3352,4 +3348,8 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:235
 msgid "Show the cost and profit for each individual order item in the admin New Order email"
+msgstr ""
+
+#: includes/class-alg-wc-cog.php:168
+msgid "Cost of Goods: Product Cost & Profit Calculator for WooCommerce"
 msgstr ""
