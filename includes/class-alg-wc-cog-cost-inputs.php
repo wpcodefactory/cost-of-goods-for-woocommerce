@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.6.9
+ * @version 3.7.4
  * @since   2.6.4
  * @author  WPFactory
  */
@@ -157,26 +157,30 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 		/**
 		 * save_cost_input.
 		 *
-		 * @version 3.3.3
+		 * @version 3.7.4
 		 * @since   1.0.0
 		 * @todo    [next] maybe pre-calculate and save `_alg_wc_cog_profit` (same in `save_cost_input_variation()`)
 		 */
 		function save_cost_input( $product_id, $__post ) {
-			if ( isset( $_POST['_alg_wc_cog_cost'] ) ) {
+			static $already_ran = false;
+			if ( isset( $_POST['_alg_wc_cog_cost'] ) && ! $already_ran ) {
 				$new_cost = alg_wc_cog_sanitize_cost( array(
 						'value' => $_POST['_alg_wc_cog_cost']
 					)
 				);
 				if ( $new_cost !== (float) alg_wc_cog()->core->products->get_product_cost( $product_id ) ) {
-					update_post_meta( $product_id, '_alg_wc_cog_cost', $new_cost );
+					$product = wc_get_product( $product_id );
+					$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+					$product->save();
 				}
 			}
+			$already_ran = true;
 		}
 
 		/**
 		 * save_cost_input_variation.
 		 *
-		 * @version 3.3.3
+		 * @version 3.7.4
 		 * @since   1.0.0
 		 */
 		function save_cost_input_variation( $variation_id, $i ) {
@@ -186,7 +190,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 					)
 				);
 				if ( $new_cost !== (float) alg_wc_cog()->core->products->get_product_cost( $variation_id ) ) {
-					update_post_meta( $variation_id, '_alg_wc_cog_cost', $new_cost );
+					$product = wc_get_product( $variation_id );
+					$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+					$product->save();
 				}
 			}
 		}

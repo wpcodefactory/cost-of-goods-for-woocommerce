@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.7.2
+ * @version 3.7.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -683,7 +683,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * update_variation_cost_from_parent.
 	 *
-	 * @version 3.3.0
+	 * @version 3.7.4
 	 * @since   2.9.5
 	 *
 	 * @param $args
@@ -697,15 +697,17 @@ class Alg_WC_Cost_of_Goods_Products {
 		$product_id = $args['product_id'];
 		$product    = wc_get_product( $product_id );
 		$parent_id  = $product->get_parent_id();
-		update_post_meta( $product_id, '_alg_wc_cog_cost', $this->get_product_cost( $parent_id, array(
-			'check_parent_cost' => false
-		) ) );
+		$new_cost = $this->get_product_cost( $parent_id,
+			array( 'check_parent_cost' => false )
+		);
+		$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+		$product->save();
 	}
 
 	/**
 	 * update_product_price.
 	 *
-	 * @version 3.3.4
+	 * @version 3.7.4
 	 * @since   2.5.1
 	 *
 	 * @param   null  $args
@@ -722,7 +724,8 @@ class Alg_WC_Cost_of_Goods_Products {
 		$product    = wc_get_product( $product_id );
 		if ( is_a( $product, 'WC_Product' ) ) {
 			$new_cost = (float) $product->get_price() / ( ( 100 + $percentage ) / 100 );
-			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
+			$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+			$product->save();
 
 			return true;
 		} else {
@@ -733,7 +736,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * increase_product_cost_by_percentage.
 	 *
-	 * @version 3.3.0
+	 * @version 3.7.4
 	 * @since   3.3.0
 	 *
 	 * @param $args
@@ -750,8 +753,8 @@ class Alg_WC_Cost_of_Goods_Products {
 		$product    = wc_get_product( $product_id );
 		if ( is_a( $product, 'WC_Product' ) ) {
 			$new_cost = $this->get_product_cost( $product_id ) + ( $this->get_product_cost( $product_id ) * ( $percentage / 100 ) );
-			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
-
+			$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+			$product->save();
 			return true;
 		} else {
 			return false;
@@ -761,7 +764,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * decrease_product_cost_by_percentage.
 	 *
-	 * @version 3.3.0
+	 * @version 3.7.4
 	 * @since   3.3.0
 	 *
 	 * @param $args
@@ -778,8 +781,8 @@ class Alg_WC_Cost_of_Goods_Products {
 		$product    = wc_get_product( $product_id );
 		if ( is_a( $product, 'WC_Product' ) ) {
 			$new_cost = $this->get_product_cost( $product_id ) - ( $this->get_product_cost( $product_id ) * ( $percentage / 100 ) );
-			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
-
+			$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+			$product->save();
 			return true;
 		} else {
 			return false;
@@ -789,7 +792,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * update_product_cost_by_price_percentage.
 	 *
-	 * @version 3.3.4
+	 * @version 3.7.4
 	 * @since   3.3.0
 	 *
 	 * @param   null  $args
@@ -806,8 +809,8 @@ class Alg_WC_Cost_of_Goods_Products {
 		$product    = wc_get_product( $product_id );
 		if ( is_a( $product, 'WC_Product' ) ) {
 			$new_cost = ( (float) $product->get_price() * $percentage ) / 100;
-			update_post_meta( $product->get_id(), '_alg_wc_cog_cost', $new_cost );
-
+			$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+			$product->save();
 			return true;
 		} else {
 			return false;

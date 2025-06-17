@@ -2,7 +2,7 @@
 /**
  * WPFactory Admin Menu
  *
- * @version 1.0.5
+ * @version 1.0.6
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $version = '1.0.5';
+		protected $version = '1.0.6';
 
 		/**
 		 * Menu slug.
@@ -116,7 +116,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 		/**
 		 * Moves WooCommerce Settings tab to WPFactory menu as a submenu item.
 		 *
-		 * @version 1.0.5
+		 * @version 1.0.6
 		 * @since   1.0.0
 		 *
 		 * @param $args

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 3.5.9
+ * @version 3.7.4
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.5.9
+	 * @version 3.7.4
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -252,6 +252,13 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'desc_tip' => sprintf( __( 'A meta box "%s" will be added to the product edit page.', 'cost-of-goods-for-woocommerce' ),
 					__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_add_stock',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Format decimals', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Calculate cost using the %s option', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Cost decimals', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
+				'id'       => 'alg_wc_cog_products_add_stock_format_decimals',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

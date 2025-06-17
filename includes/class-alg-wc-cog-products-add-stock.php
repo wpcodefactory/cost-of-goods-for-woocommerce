@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.7.0
+ * @version 3.7.4
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -89,12 +89,18 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * save_product_add_stock.
 		 *
-		 * @version 3.3.3
+		 * @version 3.7.4
 		 * @since   1.7.0
 		 * @todo    [next] handle variable products (also unset `$_POST['variable_stock']`)
 		 * @todo    [maybe] remove `$this->is_add_stock`
 		 */
 		function save_product_add_stock( $product_id, $post ) {
+			static $already_ran = false;
+			if (
+				$already_ran
+			) {
+				return;
+			}
 			if (
 				$this->is_add_stock_enabled() &&
 				! empty( $_POST['alg_wc_cog_add_stock'] ) &&
@@ -135,6 +141,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 					}
 				}
 			}
+			$already_ran = true;
 		}
 
 		/**
@@ -670,7 +677,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * calculate_add_stock_cost.
 		 *
-		 * @version 3.3.3
+		 * @version 3.7.4
 		 * @since   2.4.2
 		 *
 		 * @param null $args
@@ -695,13 +702,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			include_once WC()->plugin_path() . '/includes/libraries/class-wc-eval-math.php';
 			$cost_now = (float) WC_Eval_Math::evaluate( $cost_calculation_template );
 
+			if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_products_add_stock_format_decimals', 'no' ) ) {
+				$cost_now = wc_format_decimal( $cost_now, get_option( 'alg_wc_cog_costs_decimals', wc_get_price_decimals() ) );
+			}
+
 			return $cost_now;
 		}
 
 		/**
 		 * product_add_stock.
 		 *
-		 * @version 3.3.3
+		 * @version 3.7.4
 		 * @since   1.7.0
 		 * @return bool|mixed
 		 * @todo    [maybe] `$cost_now`: round?
@@ -717,11 +728,12 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				'cost_prev'    => '',
 				'update_stock' => true
 			) );
-			$product_id   = intval( $args['product_id'] );
-			$stock        = intval( $args['stock'] );
-			$cost         = floatval( $args['cost'] );
+			$product_id = intval( $args['product_id'] );
+			$stock = intval( $args['stock'] );
+			$cost = floatval( $args['cost'] );
 			$update_stock = $args['update_stock'];
-			$cost         = $this->get_add_stock_cost( array(
+			$product = wc_get_product( $product_id );
+			$cost = $this->get_add_stock_cost( array(
 				'cost'       => $cost,
 				'product_id' => $product_id
 			) );
@@ -746,8 +758,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 						'%stock_now%'  => $stock_now,
 					)
 				) );
+				$product->update_meta_data( '_alg_wc_cog_cost', $cost_now );
+				$product->save();
+
 				// Update Stock.
-				update_post_meta( $product_id, '_alg_wc_cog_cost', $cost_now );
 				if ( $update_stock ) {
 					$stock_operation = $this->calculate_update_stock_operation( $product_id, $stock_now );
 					wc_update_product_stock( $product_id, abs( $stock ), $stock_operation );
