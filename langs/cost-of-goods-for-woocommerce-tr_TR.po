@@ -50,7 +50,7 @@ msgstr "Malın Maliyeti"
 #: includes/class-alg-wc-cog-products.php:380
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:49
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:111
-#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:190
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:195
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:54
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:297
@@ -240,7 +240,7 @@ msgstr "Kâr: %s"
 msgid "N/A"
 msgstr "Yok"
 
-#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:193
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:198
 msgid "- No change -"
 msgstr "- Değişiklik yok -"
 

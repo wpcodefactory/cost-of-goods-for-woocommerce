@@ -2,7 +2,7 @@
 /**
  * WPFactory Admin Menu
  *
- * @version 1.0.6
+ * @version 1.0.7
  * @since   1.0.0
  * @author  WPFactory
  */
@@ -30,7 +30,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 		 *
 		 * @var string
 		 */
-		protected $version = '1.0.6';
+		protected $version = '1.0.7';
 
 		/**
 		 * Menu slug.
@@ -116,7 +116,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 		/**
 		 * Moves WooCommerce Settings tab to WPFactory menu as a submenu item.
 		 *
-		 * @version 1.0.6
+		 * @version 1.0.7
 		 * @since   1.0.0
 		 *
 		 * @param $args
@@ -157,9 +157,12 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WPFactory_Admin_Menu' ) ) {
 
 			// Setup plugin icon.
 			$args['plugin_icon'] = wp_parse_args( $args['plugin_icon'], array(
-				'url'   => '',
-				'style' => '',
-				'width' => 35,
+				'wporg_plugin_slug' => '',
+				'get_url_method'    => 'manual', // wporg_plugins_api || manual
+				'url'               => '',
+				'style'             => '',
+				'width'             => '',
+				'height'            => '36',
 			) );
 
 			// Swap.
