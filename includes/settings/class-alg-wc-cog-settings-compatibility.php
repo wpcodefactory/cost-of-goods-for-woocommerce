@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 3.3.3
+ * @version 3.7.6
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -36,10 +36,41 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.5.9
+		 * @version 3.7.6
 		 * @since   2.4.6
 		 */
 		function get_settings() {
+
+			$wcfm_opts = array(
+				$this->get_default_compatibility_title_option( array(
+					'title' => __( 'WCFM', 'cost-of-goods-for-woocommerce' ),
+					'link'  => 'https://wordpress.org/plugins/wc-multivendor-marketplace',
+					'type'  => 'plugin',
+					'id'    => 'alg_wc_cog_compatibility_wcfm_options',
+				) ),
+				array(
+					'title'             => __( 'Cost input', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Add cost input to the product on the frontend manager', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => '',
+					'type'              => 'checkbox',
+					'id'                => 'alg_wc_cog_comp_wcfm_cost_input',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'default'           => 'no',
+				),
+				array(
+					'title'             => __( 'Report', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Show the total cost and profit on the Vendor\'s Sales by Date report', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => sprintf(__( 'For now, the vendor\'s profit calculation is %s.', 'cost-of-goods-for-woocommerce' ),'<code>'.__( 'Earnings - Cost', 'cost-of-goods-for-woocommerce' ).'</code>'),
+					'type'              => 'checkbox',
+					'id'                => 'alg_wc_cog_comp_wcfm_total_cost_and_profit_on_sales_by_date',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'default'           => 'no',
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_compatibility_wcfm_options',
+				),
+			);
 
 			$wp_syncsheets_opts = array(
 				$this->get_default_compatibility_title_option( array(
@@ -365,6 +396,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 			);
 
 			return array_merge(
+				$wcfm_opts,
 				$wp_syncsheets_opts,
 				$curcy_multicurrency_opts,
 				$exchangerateapi_opts,

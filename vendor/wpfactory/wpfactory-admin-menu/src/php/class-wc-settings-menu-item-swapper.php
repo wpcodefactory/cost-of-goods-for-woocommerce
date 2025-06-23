@@ -2,7 +2,7 @@
 /**
  * WPFactory Admin Menu - WooCommerce Settings Menu Item Swapper.
  *
- * @version 1.0.6
+ * @version 1.0.8
  * @since   1.0.1
  * @author  WPFactory
  */
@@ -98,7 +98,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 		/**
 		 * Adds page title.
 		 *
-		 * @version 1.0.6
+		 * @version 1.0.8
 		 * @since   1.0.1
 		 *
 		 * @return void
@@ -121,7 +121,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 
 				// Page title.
 				if ( ! empty( $page_title ) ) {
-					echo '<div class="wrap"><div class="woocommerce-layout__header"><div class="wpfam-plugin-title-wrapper"><h1 class="wpfam-plugin-title">' . $plugin_icon_html . esc_html( $page_title ) . '</h1></div></div></div>';
+					echo '<div class="woocommerce-layout__header wpfam-woocommerce-layout__header"><div class="wpfam-plugin-title-wrapper"><h1 class="wpfam-plugin-title">' . $plugin_icon_html . esc_html( $page_title ) . '</h1></div></div>';
 				}
 			}
 		}
@@ -188,7 +188,7 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 		/**
 		 * Hides WooCommerce settings tabs when accessing the plugin settings page.
 		 *
-		 * @version 1.0.6
+		 * @version 1.0.8
 		 * @since   1.0.1
 		 *
 		 * @return void
@@ -265,6 +265,20 @@ if ( ! class_exists( 'WPFactory\WPFactory_Admin_Menu\WC_Settings_Menu_Item_Swapp
 						display: none
 					}
 				</style>
+				<script>
+					// Replicates WooCommerce mechanism of adding `is-scrolled` class on `wpfam-woocommerce-layout__header`.
+					window.addEventListener( 'load', function () {
+						let isScrolling;
+						const el = document.querySelector( '.wpfam-woocommerce-layout__header' );
+						window.addEventListener( 'scroll', function () {
+							if ( window.scrollY > 0 ) {
+								el.classList.add( 'is-scrolled' );
+							} else {
+								el.classList.remove( 'is-scrolled' );
+							}
+						} );
+					} );
+				</script>
 				<?php
 			}
 		}
