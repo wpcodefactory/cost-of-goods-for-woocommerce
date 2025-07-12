@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.6.9
+ * @version 3.7.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -330,7 +330,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 3.6.9
+	 * @version 3.7.7
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -427,6 +427,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 
 		// Avoid empty order metadata saving.
 		add_action( 'woocommerce_before_order_object_save', array( $this, 'avoid_empty_order_metadata_saving' ), 90, 2 );
+
+		// Delete duplicated COG order meta.
+		add_action( 'woocommerce_before_order_object_save', array( $this, 'delete_duplicate_cog_order_metadata' ), 90, 2 );
 
 		// Payment gateways.
 		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'manage_payment_gateways' ), 10, 2 );
@@ -569,6 +572,41 @@ class Alg_WC_Cost_of_Goods_Orders {
 				) {
 					$order->delete_meta_data( $meta_data->get_data()['key'] );
 				}
+			}
+		}
+	}
+
+	/**
+	 * delete_duplicate_cog_order_metadata.
+	 *
+	 * @version 3.7.7
+	 * @since   3.7.7
+	 *
+	 * @param   WC_Abstract_Order  $order
+	 * @param                      $data_store
+	 *
+	 * @return void
+	 */
+	function delete_duplicate_cog_order_metadata( WC_Abstract_Order $order, $data_store ) {
+		$seen        = array();
+		$unique_meta = array();
+
+		foreach ( $order->get_meta_data() as $meta ) {
+			if ( substr( $meta->get_data()['key'], 0, 12 ) !== "_alg_wc_cog_" ) {
+				continue;
+			}
+
+			$key       = $meta->get_data()['key'];
+			$value     = $meta->get_data()['value'];
+			$unique_id = $key . ':' . maybe_serialize( $value );
+
+			if ( ! isset( $seen[ $unique_id ] ) ) {
+				$seen[ $unique_id ] = true;
+				$unique_meta[]      = $meta;
+			} else {
+				// Remove duplicate from order object.
+				$order->delete_meta_data( $key );
+				$order->add_meta_data( $key, $value ); // re-add only one.
 			}
 		}
 	}

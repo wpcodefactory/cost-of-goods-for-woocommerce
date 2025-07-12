@@ -18,7 +18,7 @@ msgstr ""
 msgid "Go Pro"
 msgstr "Pro Sürüm Satın Al"
 
-#: includes/class-alg-wc-cog-orders.php:884
+#: includes/class-alg-wc-cog-orders.php:922
 #: includes/settings/class-alg-wc-cog-settings-orders.php:180
 msgid "You are selling below the cost of goods."
 msgstr "Malların maliyetinin altında satış yapıyorsunuz."
@@ -41,7 +41,7 @@ msgstr "Malın Maliyeti"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
-#: includes/class-alg-wc-cog-orders.php:918
+#: includes/class-alg-wc-cog-orders.php:956
 #: includes/class-alg-wc-cog-products-add-stock.php:371
 #: includes/class-alg-wc-cog-products-add-stock.php:432
 #: includes/class-alg-wc-cog-products.php:301
@@ -87,7 +87,7 @@ msgstr "Maliyet"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
-#: includes/class-alg-wc-cog-orders.php:928
+#: includes/class-alg-wc-cog-orders.php:966
 #: includes/class-alg-wc-cog-products.php:383
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
@@ -179,7 +179,7 @@ msgid "fee"
 msgstr "ücret"
 
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:92
-#: includes/class-alg-wc-cog-orders.php:1256
+#: includes/class-alg-wc-cog-orders.php:1294
 #: includes/pro/class-alg-wc-cog-pro.php:660
 #: includes/pro/class-alg-wc-cog-pro.php:679
 msgid "Cost of goods"
@@ -777,12 +777,12 @@ msgstr "Hariç sipariş toplamı vergi"
 msgid "Order total incl. tax"
 msgstr "Sipariş toplamı dahil. vergi"
 
-#: includes/class-alg-wc-cog-orders.php:741
+#: includes/class-alg-wc-cog-orders.php:779
 #: includes/settings/class-alg-wc-cog-settings-orders.php:289
 msgid "Shipping to profit"
 msgstr "Kar için nakliye"
 
-#: includes/class-alg-wc-cog-orders.php:697
+#: includes/class-alg-wc-cog-orders.php:735
 #: includes/settings/class-alg-wc-cog-settings-orders.php:303
 msgid "Fees to profit"
 msgstr "Kar elde etmek için ücretler"
@@ -1210,34 +1210,34 @@ msgstr ""
 msgid "Extra profit details"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:653
+#: includes/class-alg-wc-cog-orders.php:691
 #: includes/settings/class-alg-wc-cog-settings-orders.php:317
 msgid "Taxes to profit"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:655
+#: includes/class-alg-wc-cog-orders.php:693
 msgid "Taxes to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:699
+#: includes/class-alg-wc-cog-orders.php:737
 msgid "Fees to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:743
+#: includes/class-alg-wc-cog-orders.php:781
 msgid "Shipping to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:931
+#: includes/class-alg-wc-cog-orders.php:969
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:934
+#: includes/class-alg-wc-cog-orders.php:972
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:1292
+#: includes/class-alg-wc-cog-orders.php:1330
 msgid "Handling Fee"
 msgstr ""
 
@@ -3305,7 +3305,7 @@ msgstr ""
 msgid "Enable if the meta values are being saved in the order currency. Disable if they are stored in the shop's base currency."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:466
+#: includes/class-alg-wc-cog-orders.php:469
 msgid "Gateway"
 msgstr ""
 
