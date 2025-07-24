@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 3.4.0
+ * @version 3.7.8
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -1363,20 +1363,19 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * enqueue_scripts_and_styles.
 		 *
-		 * @version 2.5.0
+		 * @version 3.7.8
 		 * @since   1.3.3
 		 */
 		function enqueue_scripts_and_styles( $hook ) {
             if( ! in_array( $hook, array( 'tools_page_bulk-edit-costs', 'tools_page_bulk-edit-prices' ) ) ) {
 				return;
 			}
-			$min_suffix = ( defined( 'WP_DEBUG' ) && true === WP_DEBUG ? '' : '.min' );
-			wp_enqueue_style( 'alg-wc-cog-bulk-edit-tool-style',
-				alg_wc_cog()->plugin_url() . '/includes/css/alg-wc-cog-bulk-edit-tool' . $min_suffix . '.css',
+			alg_wc_cog_enqueue_style( 'alg-wc-cog-bulk-edit-tool-style',
+				alg_wc_cog()->plugin_url() . '/includes/css/alg-wc-cog-bulk-edit-tool.css',
 				array(),
 				alg_wc_cog()->version
 			);
-			wp_enqueue_script( 'alg-wc-cog-bulk-edit-tool', alg_wc_cog()->plugin_url() . '/includes/js/alg-wc-cog-bulk-edit-tool' . $min_suffix . '.js', array( 'jquery' ), alg_wc_cog()->version, true );
+			alg_wc_cog_enqueue_script( 'alg-wc-cog-bulk-edit-tool', alg_wc_cog()->plugin_url() . '/includes/js/alg-wc-cog-bulk-edit-tool.js', array( 'jquery' ), alg_wc_cog()->version, true );
 			wp_localize_script( 'alg-wc-cog-bulk-edit-tool', 'algWcCog',
 				array(
 					'ajaxURL'     => admin_url( 'admin-ajax.php' ),

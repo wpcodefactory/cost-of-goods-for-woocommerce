@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 3.6.7
+ * @version 3.7.8
  * @since   3.2.1
  * @author  WPFactory
  */
@@ -499,3 +499,36 @@ if ( ! function_exists( 'alg_wc_cog_get_ignore_item_refund_amount_default' ) ) {
 		return 'profit_and_price_based_on_item_refunded_amount' === $order_refund_calculation_method ? 'yes' : 'no';
 	}
 }
+
+if ( ! function_exists( 'alg_wc_cog_enqueue_script' ) ) {
+	/**
+	 * alg_wc_cog_enqueue_script.
+	 *
+	 * @version 3.7.8
+	 * @since   3.7.8
+	 */
+	function alg_wc_cog_enqueue_script( $handle, $src = '', $deps = array(), $ver = false, $args = array() ) {
+		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
+			$src = str_replace( '.js', '.min.js', $src );
+		}
+
+		wp_enqueue_script( $handle, $src, $deps, $ver, $args );
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_enqueue_style' ) ) {
+	/**
+	 * alg_wc_cog_enqueue_style.
+	 *
+	 * @version 3.7.8
+	 * @since   3.7.8
+	 */
+	function alg_wc_cog_enqueue_style( $handle, $src = '', $deps = array(), $ver = false, $media = 'all' ) {
+		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
+			$src = str_replace( '.css', '.min.css', $src );
+		}
+
+		wp_enqueue_style( $handle, $src, $deps, $ver, $media );
+	}
+}
+

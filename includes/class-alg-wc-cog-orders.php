@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.7.7
+ * @version 3.7.8
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -237,15 +237,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 	protected $avoid_empty_order_metadata_saving = null;
 
 	/**
-	 * $order_extra_cost_from_meta.
-	 *
-	 * @since 3.3.0
-	 *
-	 * @var
-	 */
-	public $order_extra_cost_from_meta;
-
-	/**
 	 * Constructor.
 	 *
 	 * @version 2.2.0
@@ -271,7 +262,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * get_options.
 	 *
-	 * @version 3.6.7
+	 * @version 3.7.8
 	 * @since   2.1.0
 	 * @todo    [maybe] Fees: From Meta: no `trim`?
 	 */
@@ -330,7 +321,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 3.7.7
+	 * @version 3.7.8
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -435,6 +426,10 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'manage_payment_gateways' ), 10, 2 );
 		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_payment_gateways_profit_meta_key_to_order_cmb' ) );
 
+		// Extra costs from meta.
+		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'manage_extra_costs_from_meta' ), 10, 2 );
+		add_filter( 'alg_wc_cog_extra_profit_meta_keys', array( $this, 'add_extra_costs_from_meta_to_profit_meta_key_to_order_cmb' ) );
+
 		// Hides order item profit meta.
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hide_order_item_profit_meta' ), PHP_INT_MAX );
     }
@@ -468,6 +463,77 @@ class Alg_WC_Cost_of_Goods_Orders {
 		if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_order_taxes_to_profit', 'no' ) ) {
 			$text                                                  = __( 'Gateway', 'cost-of-goods-for-woocommerce' );
 			$meta_keys['_alg_wc_cog_payment_gateway_extra_profit'] = $text;
+		}
+
+		return $meta_keys;
+	}
+
+	/**
+	 * manage_extra_costs_from_meta.
+	 *
+	 * @version 3.7.8
+	 * @since   3.7.8
+	 *
+	 * @param $order_values
+	 * @param $order_info
+	 *
+	 * @return mixed
+	 */
+	function manage_extra_costs_from_meta( $order_values, $order_info ) {
+		$order_extra_cost_from_meta = alg_wc_cog_get_option( 'alg_wc_cog_order_extra_cost_from_meta', '' );
+		if (
+			'' != $order_extra_cost_from_meta &&
+			isset( $order_info['order'] ) &&
+			is_a( $order = $order_info['order'], 'WC_Order' )
+		) {
+			$meta_fees                                  = 0;
+			$order_extra_cost_from_meta                 = array_map( 'trim', explode( PHP_EOL, $order_extra_cost_from_meta ) );
+			$consider_extra_costs_from_meta_as_positive = 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_order_extra_cost_from_meta_as_positive', 'no' );
+			foreach ( $order_extra_cost_from_meta as $meta_key ) {
+				$meta_keys_splitted = $meta_keys_splitted_original = explode( '.', $meta_key );
+				$final_meta_key     = $meta_keys_splitted_original[0];
+				$post_meta_value    = $fee = $order->get_meta( $final_meta_key, true );
+				if ( is_array( $post_meta_value ) ) {
+					array_shift( $meta_keys_splitted );
+					$fee = $this->get_array_value_by_dynamic_keys( $meta_keys_splitted, $post_meta_value );
+				}
+				$fee       = floatval( $fee );
+				$fee       = $consider_extra_costs_from_meta_as_positive ? abs( $fee ) : $fee;
+				$meta_fees += apply_filters( 'alg_wc_cog_order_extra_cost_from_meta', floatval( $fee ), $order );
+			}
+
+			if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_order_extra_cost_from_meta_as_profit', 'no' ) ) {
+				$order_values['profit']      += (float) $meta_fees;
+				$order->update_meta_data( '_alg_wc_cog_order_extra_cost_from_meta_extra_profit', $meta_fees );
+				$order->delete_meta_data( '_alg_wc_cog_order_extra_cost_from_meta' );
+			} else {
+				if ( 0 !== $meta_fees ) {
+					$order_values['profit']     -= (float) $meta_fees;
+					$order_values['total_cost'] += (float) $meta_fees;
+					$order_values['fees']       += (float) $meta_fees;
+				}
+				$order->update_meta_data( '_alg_wc_cog_order_extra_cost_from_meta', $meta_fees );
+				$order->delete_meta_data( '_alg_wc_cog_order_extra_cost_from_meta_extra_profit' );
+			}
+		}
+
+		return $order_values;
+	}
+
+	/**
+	 * add_extra_costs_from_meta_to_profit_meta_key_to_order_cmb.
+	 *
+	 * @version 3.7.8
+	 * @since   3.7.8
+	 *
+	 * @param $meta_keys
+	 *
+	 * @return mixed
+	 */
+	function add_extra_costs_from_meta_to_profit_meta_key_to_order_cmb( $meta_keys ) {
+		if ( 'yes' === get_option( 'alg_wc_cog_order_extra_cost_from_meta_as_profit', 'no' ) ) {
+			$text                                                             = __( 'Extra costs: From meta', 'cost-of-goods-for-woocommerce' );
+			$meta_keys['_alg_wc_cog_order_extra_cost_from_meta_extra_profit'] = $text;
 		}
 
 		return $meta_keys;
@@ -1408,12 +1474,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 		}
 		$order_id = $order->get_id();
 
-		// Fees: From Meta
-		$this->order_extra_cost_from_meta = get_option( 'alg_wc_cog_order_extra_cost_from_meta', '' );
-		if ( '' != $this->order_extra_cost_from_meta ) {
-			$this->order_extra_cost_from_meta = array_map( 'trim', explode( PHP_EOL, $this->order_extra_cost_from_meta ) );
-		}
-
 		// Shipping classes
 		$is_shipping_classes_enabled = ( 'yes' === get_option( 'alg_wc_cog_shipping_classes_enabled', 'no' ) );
 		if ( $is_shipping_classes_enabled ) {
@@ -1448,9 +1508,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 		// Fees: Order extra cost: per order
 		$per_order_fees = 0;
 
-		// Fees: Order extra cost: from meta (e.g. PayPal, Stripe etc.)
-		$meta_fees = 0;
-
 		// Refund calculation.
 		$refund_profit_calc_method = get_option( 'alg_wc_cog_order_refund_calculation_method', 'ignore_refunds' );
 		$ignore_item_refund_amount = 'yes' === get_option( 'alg_wc_cog_ignore_item_refund_amount', alg_wc_cog_get_ignore_item_refund_amount_default() );
@@ -1462,7 +1519,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$total_price          = 0;
 		$order_total_refunded = is_a( $order, 'WC_Order_Refund' ) ? $order->get_amount() : $order->get_total_refunded();
 		$order_total_refunded = (float) apply_filters( 'alg_wc_cog_order_total_refunded', $order_total_refunded, $order );
-		$consider_extra_costs_from_meta_as_positive = 'yes' === get_option( 'alg_wc_cog_order_extra_cost_from_meta_as_positive', 'no' );
 		do_action( 'alg_wc_cog_before_update_order_items_costs', $order );
 
 		// Calculations
@@ -1694,26 +1750,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$total_cost   += $per_order_fees;
 				$fees         += $per_order_fees;
 			}
-			// Fees: Order extra cost: from meta (e.g. PayPal, Stripe etc.)
-			if ( '' !== $this->order_extra_cost_from_meta ) {
-				foreach ( $this->order_extra_cost_from_meta as $meta_key ) {
-					$meta_keys_splitted = $meta_keys_splitted_original = explode( '.', $meta_key );
-					$final_meta_key  = $meta_keys_splitted_original[0];
-					$post_meta_value = $fee = $order->get_meta( $final_meta_key, true );
-					if ( is_array( $post_meta_value ) ) {
-						array_shift( $meta_keys_splitted );
-						$fee = $this->get_array_value_by_dynamic_keys( $meta_keys_splitted, $post_meta_value );
-					}
-					$fee = floatval( $fee );
-					$fee = $consider_extra_costs_from_meta_as_positive ? abs( $fee ) : $fee;
-					$meta_fees += apply_filters( 'alg_wc_cog_order_extra_cost_from_meta', floatval( $fee ), $order );
-				}
-				if ( 0 !== $meta_fees ) {
-					$order_profit -= $meta_fees;
-					$total_cost   += $meta_fees;
-					$fees         += $meta_fees;
-				}
-			}
 			// Readjust profit on refunded orders
 			if ( $order_total_refunded > 0 ) {
 				if ( 'profit_based_on_total_refunded' === $refund_profit_calc_method ) {
@@ -1752,8 +1788,6 @@ class Alg_WC_Cost_of_Goods_Orders {
 				$order->update_meta_data( '_alg_wc_cog_order_' . $fee_type . '_fee', 0 );
 			}
 		}
-		// Fees: Order extra cost: from meta (e.g. PayPal, Stripe etc.)
-		$order->update_meta_data( '_alg_wc_cog_order_extra_cost_from_meta', $meta_fees );
 		// Totals
 		$order->update_meta_data( '_alg_wc_cog_order_profit', $order_profit );
 		$order->update_meta_data( '_alg_wc_cog_order_profit_percent', ( 0 != $total_cost ? ( $order_profit / $total_cost * 100 ) : 0 ) );

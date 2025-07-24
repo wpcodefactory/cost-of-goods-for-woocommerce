@@ -53,7 +53,7 @@
             addDropdownsSelector: function (selector) {
                 this.dropdownsSelector = selector
             }
-        }
+        };
         dropdownsWithDescription.init();
 
     });
@@ -112,7 +112,7 @@
                     });
                 }
             }
-        }
+        };
         dependOnElements.init();
     });
 

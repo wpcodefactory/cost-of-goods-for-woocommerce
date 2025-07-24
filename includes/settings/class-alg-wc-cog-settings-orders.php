@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings.
  *
- * @version 3.5.5
+ * @version 3.7.8
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.5.5
+	 * @version 3.7.8
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -511,6 +511,13 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'desc'     => __( 'Consider all values as positive', 'cost-of-goods-for-woocommerce' ),
 				'desc_tip' => __( 'Negative numbers will be converted to positive', 'cost-of-goods-for-woocommerce' ) ,
 				'id'       => 'alg_wc_cog_order_extra_cost_from_meta_as_positive',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Treat as profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Treat extra costs from meta as profit instead of cost', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_order_extra_cost_from_meta_as_profit',
 				'default'  => 'no',
 				'type'     => 'checkbox',
 			),

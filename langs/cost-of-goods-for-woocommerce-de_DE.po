@@ -52,7 +52,7 @@ msgstr "Deaktivierte Optionen können mit <a href=\"%s\" target=\"_blank\"><stro
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
-#: includes/class-alg-wc-cog-orders.php:956
+#: includes/class-alg-wc-cog-orders.php:1022
 #: includes/class-alg-wc-cog-products-add-stock.php:371
 #: includes/class-alg-wc-cog-products-add-stock.php:432
 #: includes/class-alg-wc-cog-products.php:301
@@ -98,7 +98,7 @@ msgstr "Kosten"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
-#: includes/class-alg-wc-cog-orders.php:966
+#: includes/class-alg-wc-cog-orders.php:1032
 #: includes/class-alg-wc-cog-products.php:383
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
@@ -254,29 +254,29 @@ msgstr "Zusätzliche Kosten"
 msgid "fee"
 msgstr "Gebühr"
 
-#: includes/class-alg-wc-cog-orders.php:922
+#: includes/class-alg-wc-cog-orders.php:988
 #: includes/settings/class-alg-wc-cog-settings-orders.php:180
 msgid "You are selling below the cost of goods."
 msgstr "Sie verkaufen unter den Warenkosten."
 
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:92
-#: includes/class-alg-wc-cog-orders.php:1294
+#: includes/class-alg-wc-cog-orders.php:1360
 #: includes/pro/class-alg-wc-cog-pro.php:660
 #: includes/pro/class-alg-wc-cog-pro.php:679
 msgid "Cost of goods"
 msgstr "Warenkosten"
 
-#: includes/class-alg-wc-cog-orders.php:969
+#: includes/class-alg-wc-cog-orders.php:1035
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr "Gewinnprozent"
 
-#: includes/class-alg-wc-cog-orders.php:972
+#: includes/class-alg-wc-cog-orders.php:1038
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr "Gewinnspanne"
 
-#: includes/class-alg-wc-cog-orders.php:1330
+#: includes/class-alg-wc-cog-orders.php:1396
 msgid "Handling Fee"
 msgstr "Bearbeitungsgebühr"
 
@@ -1288,7 +1288,7 @@ msgstr "Bestellsumme exkl. MwSt"
 msgid "Order total incl. tax"
 msgstr "Bestellsumme inkl. MwSt"
 
-#: includes/class-alg-wc-cog-orders.php:779
+#: includes/class-alg-wc-cog-orders.php:845
 #: includes/settings/class-alg-wc-cog-settings-orders.php:289
 msgid "Shipping to profit"
 msgstr "Versand zum Gewinn"
@@ -1297,7 +1297,7 @@ msgstr "Versand zum Gewinn"
 msgid "Add order shipping cost to the order profit"
 msgstr "Fügen Sie die Versandkosten der Bestellung zum Gewinn der Bestellung hinzu"
 
-#: includes/class-alg-wc-cog-orders.php:735
+#: includes/class-alg-wc-cog-orders.php:801
 #: includes/settings/class-alg-wc-cog-settings-orders.php:303
 msgid "Fees to profit"
 msgstr "Gebühren zu profitieren"
@@ -1306,7 +1306,7 @@ msgstr "Gebühren zu profitieren"
 msgid "Add  order fees to the order profit "
 msgstr "Bestellgebühren zum Bestellgewinn hinzufügen"
 
-#: includes/class-alg-wc-cog-orders.php:691
+#: includes/class-alg-wc-cog-orders.php:757
 #: includes/settings/class-alg-wc-cog-settings-orders.php:317
 msgid "Taxes to profit"
 msgstr "Steuern zum Profit"
@@ -2183,15 +2183,15 @@ msgstr "Legen Sie die Produktpreise entsprechend den Kosten fest."
 msgid "Items per page"
 msgstr "Objekte pro Seite"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1383
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1382
 msgid "Are you really want to update?"
 msgstr "Wollen Sie wirklich aktualisieren?"
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1490
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1489
 msgid "Data have been saved."
 msgstr "Daten wurden gespeichert."
 
-#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1510
+#: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1509
 msgid "Sale price is higher than regular price: %s."
 msgstr "Der Verkaufspreis ist höher als der reguläre Preis: %s."
 
@@ -2341,15 +2341,15 @@ msgstr ""
 msgid "Extra profit details"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:693
+#: includes/class-alg-wc-cog-orders.php:759
 msgid "Taxes to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:737
+#: includes/class-alg-wc-cog-orders.php:803
 msgid "Fees to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:781
+#: includes/class-alg-wc-cog-orders.php:847
 msgid "Shipping to profit (%s)"
 msgstr ""
 
@@ -3269,7 +3269,7 @@ msgstr ""
 msgid "Enable if the meta values are being saved in the order currency. Disable if they are stored in the shop's base currency."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:469
+#: includes/class-alg-wc-cog-orders.php:464
 msgid "Gateway"
 msgstr ""
 
@@ -3355,4 +3355,16 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:63
 msgid "Earnings - Cost"
+msgstr ""
+
+#: includes/class-alg-wc-cog-orders.php:535
+msgid "Extra costs: From meta"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:518
+msgid "Treat as profit"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:519
+msgid "Treat extra costs from meta as profit instead of cost"
 msgstr ""
