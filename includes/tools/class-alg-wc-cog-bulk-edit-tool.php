@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 3.7.8
+ * @version 3.7.9
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.3.0
+		 * @version 3.7.9
 		 * @since   1.2.0
 		 */
 		function __construct() {
@@ -94,21 +94,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			// Display notices
 			add_action( 'alg_wc_cog_tools_after', array( $this, 'display_notices' ), 10 );
 			// Disable screen options on Automatically tab.
-			add_filter( 'screen_options_show_screen', array( $this, 'disable_screen_option_on_automatically_tab' ), 10, 2 );
+			add_filter( 'screen_options_show_screen', array( $this, 'disable_screen_option_on_automatically_tab' ), 10 );
 		}
 
 		/**
 		 * disable_screen_option_on_automatically_tab.
 		 *
-		 * @version 3.3.0
+		 * @version 3.7.9
 		 * @since   3.3.0
 		 *
 		 * @param $show
-		 * @param $screen
 		 *
 		 * @return false|mixed
 		 */
-		function disable_screen_option_on_automatically_tab( $show, $screen ) {
+		function disable_screen_option_on_automatically_tab( $show ) {
 			if (
 				isset( $_GET['tab'] ) &&
 				'costs_automatically' === $_GET['tab'] &&
