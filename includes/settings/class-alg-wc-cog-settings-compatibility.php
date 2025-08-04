@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Compatibility Settings.
  *
- * @version 3.7.6
+ * @version 3.8.0
  * @since   2.4.6
  * @author  WPFactory
  */
@@ -36,10 +36,41 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.7.6
+		 * @version 3.8.0
 		 * @since   2.4.6
 		 */
 		function get_settings() {
+
+			$wbw_product_table_opts = array(
+				$this->get_default_compatibility_title_option( array(
+					'title' => __( 'WBW Product Table', 'cost-of-goods-for-woocommerce' ),
+					'link'  => 'https://wordpress.org/plugins/woo-product-tables/',
+					'type'  => 'plugin',
+					'id'    => 'alg_wc_cog_comp_wbw_product_table_opts',
+				) ),
+				array(
+					'title'             => __( 'Cost column', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Add cost column to product table', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => '',
+					'type'              => 'checkbox',
+					'id'                => 'alg_wc_cog_comp_wbw_product_table_cost_column',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'default'           => 'no',
+				),
+				array(
+					'title'             => __( 'Profit column', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Add profit column to product table', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => '',
+					'type'              => 'checkbox',
+					'id'                => 'alg_wc_cog_comp_wbw_product_table_profit_column',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'default'           => 'no',
+				),
+				array(
+					'type' => 'sectionend',
+					'id'   => 'alg_wc_cog_comp_wbw_product_table_opts',
+				),
+			);
 
 			$wcfm_opts = array(
 				$this->get_default_compatibility_title_option( array(
@@ -396,6 +427,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Compatibility' ) ) :
 			);
 
 			return array_merge(
+				$wbw_product_table_opts,
 				$wcfm_opts,
 				$wp_syncsheets_opts,
 				$curcy_multicurrency_opts,
