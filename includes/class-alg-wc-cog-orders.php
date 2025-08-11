@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.7.8
+ * @version 3.8.1
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -696,7 +696,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * sort_hpos_admin_orders.
 	 *
-	 * @version 3.0.2
+	 * @version 3.8.1
 	 * @since   3.0.2
 	 *
 	 * @param $args
@@ -710,7 +710,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 			'wc-orders' === $_GET['page'] &&
 			! isset( $_GET['action'] ) &&
 			isset( $_GET['orderby'] ) &&
-			! empty( $orderby = $_GET['orderby'] )
+			! empty( $orderby = $_GET['orderby'] ) &&
+			in_array( $_GET['orderby'], array( '_alg_wc_cog_order_profit', '_alg_wc_cog_order_cost' ) )
 		) {
 			$do_exclude_empty_lines = $this->is_columns_sorting_exclude_empty_lines;
 			$order                  = $_GET['order'] ?? 'asc';

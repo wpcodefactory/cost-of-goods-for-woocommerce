@@ -99,7 +99,7 @@ msgstr "自定义产品成本列宽度"
 msgid "Adds handling fees inputs for each order item to admin order edit page."
 msgstr "为后台订单编辑页面中的每个单品增加手续费输入框。"
 
-#: includes/class-alg-wc-cog-orders.php:1396
+#: includes/class-alg-wc-cog-orders.php:1397
 msgid "Handling Fee"
 msgstr "手续费"
 
@@ -399,7 +399,7 @@ msgstr "高级 > 强制更新成本"
 msgid "Refunds"
 msgstr "退款设置"
 
-#: includes/class-alg-wc-cog-orders.php:757
+#: includes/class-alg-wc-cog-orders.php:758
 #: includes/settings/class-alg-wc-cog-settings-orders.php:317
 msgid "Taxes to profit"
 msgstr "增加税费到利润"
@@ -564,7 +564,7 @@ msgstr "订单利润 HTML 模板。"
 msgid "Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit."
 msgstr "请注意：如要显示插件 v2.2.0 版本安装之前创建订单的 %s 和 %s，需要您重新计算成本和利润。"
 
-#: includes/class-alg-wc-cog-orders.php:1035
+#: includes/class-alg-wc-cog-orders.php:1036
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr "成本利润率"
@@ -585,7 +585,7 @@ msgstr "WPFactory"
 msgid "Add  order fees to the order profit "
 msgstr "增加订单费用到利润计算中"
 
-#: includes/class-alg-wc-cog-orders.php:801
+#: includes/class-alg-wc-cog-orders.php:802
 #: includes/settings/class-alg-wc-cog-settings-orders.php:303
 msgid "Fees to profit"
 msgstr "增加费用到利润"
@@ -700,7 +700,7 @@ msgstr "源自字段 Meta"
 msgid "Add order shipping cost to the order profit"
 msgstr "增加订单配送费用到利润计算中"
 
-#: includes/class-alg-wc-cog-orders.php:845
+#: includes/class-alg-wc-cog-orders.php:846
 #: includes/settings/class-alg-wc-cog-settings-orders.php:289
 msgid "Shipping to profit"
 msgstr "增加配送费用到利润"
@@ -1081,7 +1081,7 @@ msgstr "当产品利润低于 0，将在后台订单编辑页面显示通知。"
 msgid "Admin notice"
 msgstr "后台通知"
 
-#: includes/class-alg-wc-cog-orders.php:988
+#: includes/class-alg-wc-cog-orders.php:989
 #: includes/settings/class-alg-wc-cog-settings-orders.php:180
 msgid "You are selling below the cost of goods."
 msgstr "你售出的商品已低于货物成本。"
@@ -1150,7 +1150,7 @@ msgstr "管理库存"
 msgid "products"
 msgstr "产品"
 
-#: includes/class-alg-wc-cog-orders.php:1038
+#: includes/class-alg-wc-cog-orders.php:1039
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr "销售利润率"
@@ -1305,7 +1305,7 @@ msgid "Profit: %s"
 msgstr "利润：%s"
 
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:92
-#: includes/class-alg-wc-cog-orders.php:1360
+#: includes/class-alg-wc-cog-orders.php:1361
 #: includes/pro/class-alg-wc-cog-pro.php:660
 #: includes/pro/class-alg-wc-cog-pro.php:679
 msgid "Cost of goods"
@@ -1319,7 +1319,7 @@ msgstr "商品成本"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
-#: includes/class-alg-wc-cog-orders.php:1032
+#: includes/class-alg-wc-cog-orders.php:1033
 #: includes/class-alg-wc-cog-products.php:383
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/class-alg-wc-cog-pro-compatibility.php:158
@@ -1357,7 +1357,7 @@ msgstr "利润"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
-#: includes/class-alg-wc-cog-orders.php:1022
+#: includes/class-alg-wc-cog-orders.php:1023
 #: includes/class-alg-wc-cog-products-add-stock.php:371
 #: includes/class-alg-wc-cog-products-add-stock.php:432
 #: includes/class-alg-wc-cog-products.php:301
@@ -1494,15 +1494,15 @@ msgstr ""
 msgid "Extra profit details"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:759
+#: includes/class-alg-wc-cog-orders.php:760
 msgid "Taxes to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:803
+#: includes/class-alg-wc-cog-orders.php:804
 msgid "Fees to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:847
+#: includes/class-alg-wc-cog-orders.php:848
 msgid "Shipping to profit (%s)"
 msgstr ""
 
