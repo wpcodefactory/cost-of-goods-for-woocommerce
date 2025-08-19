@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.7.4
+ * @version 3.8.3
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -509,7 +509,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_profit.
 	 *
-	 * @version 3.7.2
+	 * @version 3.8.3
 	 * @since   1.0.0
 	 * @todo    [next] maybe check if `wc_get_price_excluding_tax()` is numeric (e.g. maybe can return range)
 	 */
@@ -520,14 +520,15 @@ class Alg_WC_Cost_of_Goods_Products {
 			'get_profit_method' => 'smart', // meta || calculation || smart
 		) );
 
-		$product_id = intval( $args['product_id'] );
-		$method     = sanitize_text_field( $args['get_profit_method'] );
-		$product    = $args['product'];
-		$product    = is_a( $product, 'WC_Product' ) ? $product : wc_get_product( $product_id );
-		$product_id = $product->get_id();
-		$cost       = empty( $cost = $this->get_product_cost( $product_id ) ) ? 0 : $cost;
-		$price      = empty( $price = $this->get_product_price( $product ) ) ? 0 : $price;
+		$product_id              = intval( $args['product_id'] );
+		$method                  = sanitize_text_field( $args['get_profit_method'] );
+		$product                 = $args['product'];
+		$product                 = is_a( $product, 'WC_Product' ) ? $product : wc_get_product( $product_id );
+		$product_id              = $product->get_id();
+		$cost                    = empty( $cost = $this->get_product_cost( $product_id ) ) ? 0 : $cost;
+		$price                   = empty( $price = $this->get_product_price( $product ) ) ? 0 : $price;
 		$profit_from_meta        = $product->get_meta( '_alg_wc_cog_profit' );
+		$profit_from_meta        = filter_var( $profit_from_meta, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC );
 		$profit_from_calculation = $price - $cost;
 		$final_profit            = '';
 		switch ( $method ) {
