@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.8.1
+ * @version 3.8.2
  * @since   3.0.3
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '3.8.1';
+		public $version = '3.8.2';
 
 		/**
 		 * @since 1.0.0
@@ -131,19 +131,25 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		/**
 		 * add_cross_selling_library.
 		 *
-		 * @version 3.6.3
+		 * @version 3.8.2
 		 * @since   3.5.1
 		 *
 		 * @return void
 		 */
-		function add_cross_selling_library(){
+		function add_cross_selling_library() {
 			if ( ! is_admin() ) {
 				return;
 			}
 			require_once plugin_dir_path( alg_wc_cog()->get_filesystem_path() ) . 'vendor/autoload.php';
 			// Cross-selling library.
 			$cross_selling = new \WPFactory\WPFactory_Cross_Selling\WPFactory_Cross_Selling();
-			$cross_selling->setup( array( 'plugin_file_path'   => $this->get_filesystem_path() ) );
+			$cross_selling->setup( array(
+				'plugin_file_path'    => $this->get_filesystem_path(),
+				'recommendations_box' => array(
+					'enable'             => true,
+					'wc_settings_tab_id' => 'alg_wc_cost_of_goods',
+				),
+			) );
 			$cross_selling->init();
 		}
 

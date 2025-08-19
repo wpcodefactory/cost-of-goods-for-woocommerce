@@ -158,9 +158,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			array(
 				'desc'     => __( 'Order profit HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 				              sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
-					              '<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ) . '<br>' .
-				              sprintf( __( 'Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit.', 'cost-of-goods-for-woocommerce' ),
-					              '<code>%profit_percent%</code>', '<code>%profit_margin%</code>' ),
+					              '<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ),
 				'desc_tip' => __( 'This is used in meta box.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 				              __( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_profit_html_template',
@@ -179,7 +177,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'id'       => 'alg_wc_cog_orders_admin_notice_text',
 				'default'  => __( 'You are selling below the cost of goods.', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'text',
-				'css'      => 'width:100%;',
+				//'css'      => 'width:100%;',
 			),
 			array(
 				'title'    => __( 'Fill in on add items', 'cost-of-goods-for-woocommerce' ),
@@ -349,9 +347,9 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 			array(
 				'title' => __( 'Refunds', 'cost-of-goods-for-woocommerce' ),
 				'desc'  =>
-					__( "Set up how refunds will affect the cost and profit.", 'cost-of-goods-for-woocommerce' ) . ' ' .
+					__( "Set up how refunds will affect the cost and profit.", 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
 					sprintf(
-						__( "Most probably, enabling the options %s and %s should be enough in order to ignore refunded items from profit calculation.", 'cost-of-goods-for-woocommerce' ),
+						__( "Most probably, enabling the options %s and %s should be enough to ignore refunded items from profit calculation.", 'cost-of-goods-for-woocommerce' ),
 						'<strong>' . __( 'Ignore refunded item cost', 'cost-of-goods-for-woocommerce' ) . '</strong>',
 						'<strong>' . __( 'Ignore item refund amount', 'cost-of-goods-for-woocommerce' ) . '</strong>'
 					) . '<br /><br />' .

@@ -240,7 +240,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 		$add_stock_settings = array(
 			array(
 				'title' => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
-				'desc'  => __( 'Calculate new average cost of goods for the product based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				'desc'  => __( 'Calculate new average cost of goods for the product based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
 				           __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ) . '<br /><br /> ' .
 				           '<strong>' . __( 'Note:', 'cost-of-goods-for-woocommerce' ) . '</strong>' . ' ' . sprintf( __( 'The %s option has to be enabled.', 'cost-of-goods-for-woocommerce' ), '<strong>' . '<a href="https://woo.com/wp-content/uploads/2020/03/stock_at_product_level.png?w=950" target="_blank">' . __( 'Stock management', 'cost-of-goods-for-woocommerce' ) . '</a>' . '</strong>' ),
 				'type'  => 'title',
