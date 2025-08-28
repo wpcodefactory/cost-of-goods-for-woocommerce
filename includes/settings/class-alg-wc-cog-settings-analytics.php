@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Section Settings.
  *
- * @version 3.6.8
+ * @version 3.8.4
  * @since   3.4.6
  * @author  WPFactory
  */
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.6.8
+		 * @version 3.8.4
 		 * @since   3.4.6
 		 *
 		 * @return array
@@ -239,26 +239,22 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 					'type'              => 'checkbox',
 				),
 				array(
-					'title'             => __( 'Consider stock', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => __( 'Take stock into consideration for cost and profit calculation', 'cost-of-goods-for-woocommerce' ),
-					'id'                => 'alg_wc_cog_analytics_stock_considers_stock',
-					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
-					'default'           => 'yes',
-					'type'              => 'checkbox',
-				),
-				array(
-					'title'             => __( 'Category column', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => __( 'Add "Category" column', 'cost-of-goods-for-woocommerce' ),
-					'id'                => 'alg_wc_cog_category_enabled_on_analytics_stock',
+					'title'             => __( 'Cost of Goods filter', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Add a dropdown filtering Cost of Goods products', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'Filters products and variations that have both price and cost set, and a stock quantity greater than zero.', 'cost-of-goods-for-woocommerce' ) .
+										   '<br />'
+										   . '<strong>' . __( 'Note: ', 'cost-of-goods-for-woocommerce' ) . '</strong>' .
+										   __( 'The default Show dropdown will be ignored.', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_filter_enabled_on_analytics_stock',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 					'default'           => 'no',
 					'type'              => 'checkbox',
 				),
 				array(
-					'title'             => __( 'Filter dropdown', 'cost-of-goods-for-woocommerce' ),
-					'desc'              => __( 'Add filter allowing to restrict the query', 'cost-of-goods-for-woocommerce' ),
-					'desc_tip'          => __( 'For now, it allows to get only products with costs.', 'cost-of-goods-for-woocommerce' ),
-					'id'                => 'alg_wc_cog_filter_enabled_on_analytics_stock',
+					'title'             => __( 'Extra data', 'cost-of-goods-for-woocommerce' ),
+					'desc'              => __( 'Show extra data such as total stock, total products and more', 'cost-of-goods-for-woocommerce' ),
+					'desc_tip'          => __( 'Includes product category, price, total price, total stock, total products, total average cost, price, and profit.', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_analytics_stock_extra_data',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 					'default'           => 'no',
 					'type'              => 'checkbox',

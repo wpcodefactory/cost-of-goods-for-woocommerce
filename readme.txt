@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, algoritmika, kousikmu
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.8
-Stable tag: 3.8.3
+Stable tag: 3.8.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,11 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.8.4 - 28/08/2025 =
+* Fix - Product profit was being calculated wrong on admin product page and Analytics Stock report if prices included taxes.
+* Dev - Analytics - Replace "Consider stock" option by adding new columns considering quantity.
+* Dev - Analytics - Added extra stock data option with product category, price, total price, total stock, total products, total average cost, price, and profit.
 
 = 3.8.3 - 19/08/2025 =
 * Dev - Improve profit sanitization to avoid possible errors with dirty data on database.

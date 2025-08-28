@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Products.
  *
- * @version 3.6.8
+ * @version 3.8.4
  * @since   2.5.1
  * @author  WPFactory
  */
@@ -170,14 +170,18 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_profit_total_to_select_products_stats_total_clauses.
 		 *
-		 * @version 3.6.8
+		 * @version 3.8.4
 		 * @since   3.6.8
 		 *
 		 * @return string
 		 */
 		function add_profit_total_to_select_products_stats_total_clauses() {
 			global $wpdb;
-			return ", SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue - alg_cog_oimc.meta_value * product_qty) AS profit_total";
+			$tax_operation = '';
+			if ( 'wc_get_price_including_tax' === alg_wc_cog_get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ) ) {
+				$tax_operation = "+ {$wpdb->prefix}wc_order_product_lookup.tax_amount";
+			}
+			return ", SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue {$tax_operation} - alg_cog_oimc.meta_value * product_qty) AS profit_total";
 		}
 
 		/**
@@ -219,14 +223,19 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_profit_to_select_products_subquery_clauses.
 		 *
-		 * @version 3.6.8
+		 * @version 3.8.4
 		 * @since   3.6.8
 		 *
 		 * @return string
 		 */
 		function add_profit_to_select_products_subquery_clauses() {
 			global $wpdb;
-			return ", IFNULL((SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue) - SUM(alg_cog_oimc.meta_value * product_qty)), 0) AS profit";
+			$tax_operation = '';
+			if ( 'wc_get_price_including_tax' === alg_wc_cog_get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ) ) {
+				$tax_operation = "+ {$wpdb->prefix}wc_order_product_lookup.tax_amount";
+			}
+
+			return ", IFNULL((SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue {$tax_operation}) - SUM(alg_cog_oimc.meta_value * product_qty)), 0) AS profit";
 		}
 
 		/**

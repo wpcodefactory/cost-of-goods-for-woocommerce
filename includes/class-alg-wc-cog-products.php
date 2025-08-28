@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.8.3
+ * @version 3.8.4
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -186,7 +186,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	 * @param $meta_key
 	 * @param $meta_value
 	 */
-	function save_profit_on_postmeta( $meta_id, $post_id, $meta_key, $meta_value ) {
+	function    save_profit_on_postmeta( $meta_id, $post_id, $meta_key, $meta_value ) {
 		if (
 			in_array( $meta_key, array(
 				'_alg_wc_cog_cost',
@@ -196,8 +196,16 @@ class Alg_WC_Cost_of_Goods_Products {
 			is_a( $product = wc_get_product( $post_id ), 'WC_Product' )
 		) {
 			$cost   = (float) $this->get_product_cost( $post_id );
-			$price  = (float) $this->get_product_price( $product );
-			$profit = (float) $this->get_product_profit( array( 'product' => $product, 'get_profit_method' => 'calculation' ) );
+			$price  = (float) $this->get_product_price( $product, array(
+				'method' => 'wc_get_price_excluding_tax',
+			) );
+			$profit = (float) $this->get_product_profit( array(
+				'product'           => $product,
+				'get_profit_method' => 'calculation',
+				'get_price_method'  => array(
+					'method' => 'wc_get_price_excluding_tax',
+				)
+			) );
 			update_post_meta( $post_id, '_alg_wc_cog_profit', $profit );
 			update_post_meta( $post_id, '_alg_wc_cog_profit_percent', ( 0 != $cost ? ( $profit / $cost * 100 ) : 0 ) );
 			update_post_meta( $post_id, '_alg_wc_cog_profit_margin', ( 0 != $price ? ( $profit / $price * 100 ) : 0 ) );
@@ -455,7 +463,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_price.
 	 *
-	 * @version 2.9.9
+	 * @version 3.8.4
 	 * @since   2.3.9
 	 *
 	 * @param         $product
@@ -476,7 +484,6 @@ class Alg_WC_Cost_of_Goods_Products {
 				return false; // or you might return a default value instead
 			}
 		}
-
 		$args   = wp_parse_args( $args, array(
 			'method'               => get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ),
 			'params'               => array(),
@@ -509,7 +516,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_profit.
 	 *
-	 * @version 3.8.3
+	 * @version 3.8.4
 	 * @since   1.0.0
 	 * @todo    [next] maybe check if `wc_get_price_excluding_tax()` is numeric (e.g. maybe can return range)
 	 */
@@ -518,20 +525,22 @@ class Alg_WC_Cost_of_Goods_Products {
 			'product_id'        => '',
 			'product'           => '',
 			'get_profit_method' => 'smart', // meta || calculation || smart
+			'get_price_method'  => null // @see $this->get_product_price() args.
 		) );
 
 		$product_id              = intval( $args['product_id'] );
-		$method                  = sanitize_text_field( $args['get_profit_method'] );
+		$profit_method           = sanitize_text_field( $args['get_profit_method'] );
+		$get_price_method        = $args['get_price_method'];
 		$product                 = $args['product'];
 		$product                 = is_a( $product, 'WC_Product' ) ? $product : wc_get_product( $product_id );
 		$product_id              = $product->get_id();
 		$cost                    = empty( $cost = $this->get_product_cost( $product_id ) ) ? 0 : $cost;
-		$price                   = empty( $price = $this->get_product_price( $product ) ) ? 0 : $price;
+		$price                   = empty( $price = $this->get_product_price( $product, $get_price_method ) ) ? 0 : $price;
 		$profit_from_meta        = $product->get_meta( '_alg_wc_cog_profit' );
 		$profit_from_meta        = filter_var( $profit_from_meta, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION | FILTER_FLAG_ALLOW_SCIENTIFIC );
 		$profit_from_calculation = $price - $cost;
 		$final_profit            = '';
-		switch ( $method ) {
+		switch ( $profit_method ) {
 			case 'meta':
 				$final_profit = $profit_from_meta;
 				break;
@@ -558,7 +567,12 @@ class Alg_WC_Cost_of_Goods_Products {
 			if ( $product->is_type( 'variable' ) ) {
 				return $this->get_variable_product_html( $product_id, 'profit', $template );
 			} else {
-				if ( '' === ( $profit = $this->get_product_profit( array( 'product' => $product ) ) ) ) {
+				if ( '' === ( $profit = $this->get_product_profit(
+						array(
+							'product'           => $product,
+							'get_profit_method' => 'calculation'
+                        ) )
+                    ) ) {
 					return '';
 				} else {
 					$placeholders = array(
