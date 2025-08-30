@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.8.1
+ * @version 3.8.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1442,9 +1442,60 @@ class Alg_WC_Cost_of_Goods_Orders {
 	}
 
 	/**
+	 * delete_cog_order_meta.
+	 *
+	 * @version 3.8.5
+	 * @since   3.8.5
+	 *
+	 * @param $order
+	 *
+	 * @return void
+	 */
+	function delete_cog_order_meta( $order ) {
+		if (
+			! $order ||
+			! is_a( $order, '\WC_Order' )
+		) {
+			return;
+		}
+
+		$order_meta_like     = '_alg_wc_cog_';
+		$order_itemmeta_like = '_alg_wc_cog_';
+		$order_changed       = false;
+
+		// Delete order meta.
+		foreach ( $order->get_meta_data() as $meta ) {
+			if ( strpos( $meta->key, $order_meta_like ) === 0 ) {
+				$order->delete_meta_data( $meta->key );
+				$order_changed = true;
+			}
+		}
+
+		// Delete order item meta.
+		foreach ( $order->get_items() as $item ) {
+			$item_changed = false;
+			foreach ( $item->get_meta_data() as $meta ) {
+				if ( strpos( $meta->key, $order_itemmeta_like ) === 0 ) {
+					$item->delete_meta_data( $meta->key );
+					$item_changed = true;
+				}
+			}
+			if ( $item_changed ) {
+				$item->save();
+			}
+		}
+
+		// Save order only once if changed.
+		if ( $order_changed ) {
+			$order->save();
+			clean_post_cache( $order->get_id() );
+		}
+	}
+
+	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.6.9
+	 * @version 3.8.5
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1462,20 +1513,27 @@ class Alg_WC_Cost_of_Goods_Orders {
 			'is_no_costs_only' => false,
 			'posted'           => false
 		) );
-
 		$order = $args['order'];
 		$is_new_order = $args['is_new_order'];
 		$is_no_costs_only = $args['is_no_costs_only'];
 		$posted = $args['posted'];
 
-		// Order
 		$order = ! empty( $order ) ? $order : wc_get_order( $args['order_id'] );
-		if ( ! $order || ! is_a( $order, '\WC_Order' ) ) {
+		if (
+			! $order ||
+			! is_a( $order, '\WC_Order' )
+		) {
 			return;
 		}
+
+		if ( ! apply_filters( 'alg_wc_cog_update_order_items_costs_validation', true, $order ) ) {
+			$this->delete_cog_order_meta( $order );
+			return;
+		}
+
 		$order_id = $order->get_id();
 
-		// Shipping classes
+		// Shipping classes.
 		$is_shipping_classes_enabled = ( 'yes' === get_option( 'alg_wc_cog_shipping_classes_enabled', 'no' ) );
 		if ( $is_shipping_classes_enabled ) {
 			$shipping_classes_fixed_opt   = get_option( 'alg_wc_cog_shipping_class_costs_fixed', array() );
@@ -1491,29 +1549,29 @@ class Alg_WC_Cost_of_Goods_Orders {
 		// Calculate quantity ignoring refunded items.
 		$calculate_qty_excluding_refunds = 'yes' === get_option( 'alg_wc_cog_calculate_qty_excluding_refunds', 'no' );
 
-		// Order items
+		// Order items.
 		$items_cost         = 0;
 		$items_handling_fee = 0;
 		$handling_fee       = 0;
 
-		// Fees: Extra shipping method costs
+		// Fees: Extra shipping method costs.
 		$shipping_cost         = 0;
 		$shipping_cost_fixed   = 0;
 		$shipping_cost_percent = 0;
 
-		// Fees: Order extra cost: all orders
+		// Fees: Order extra cost: all orders.
 		$extra_cost         = 0;
 		$extra_cost_fixed   = 0;
 		$extra_cost_percent = 0;
 
-		// Fees: Order extra cost: per order
+		// Fees: Order extra cost: per order.
 		$per_order_fees = 0;
 
 		// Refund calculation.
 		$refund_profit_calc_method = get_option( 'alg_wc_cog_order_refund_calculation_method', 'ignore_refunds' );
 		$ignore_item_refund_amount = 'yes' === get_option( 'alg_wc_cog_ignore_item_refund_amount', alg_wc_cog_get_ignore_item_refund_amount_default() );
 
-		// Totals
+		// Totals.
 		$order_profit         = 0;
 		$total_cost           = 0;
 		$fees                 = 0;
@@ -1522,13 +1580,13 @@ class Alg_WC_Cost_of_Goods_Orders {
 		$order_total_refunded = (float) apply_filters( 'alg_wc_cog_order_total_refunded', $order_total_refunded, $order );
 		do_action( 'alg_wc_cog_before_update_order_items_costs', $order );
 
-		// Calculations
+		// Calculations.
 		if ( empty( $this->delay_calculations_status ) || $order->has_status( $this->delay_calculations_status ) ) {
-			// Order items
+			// Order items.
 			$posted = ( $posted ? $posted : $_POST );
 			foreach ( $order->get_items() as $item_id => $item ) {
 				$item_profit = 0;
-				// calculate order items cost
+				// calculate order items cost.
 				if ( $is_new_order ) {
 					if ( ! $is_no_costs_only || '' === wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' ) ) {
 						$product_id = ( ! empty( $item['variation_id'] ) ? $item['variation_id'] : $item['product_id'] );
@@ -1549,7 +1607,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 				if ( $this->order_count_empty_costs && ! $cost ) {
 					$cost = '0';
 				}
-				// calculate order items handling_fee
+				// calculate order items handling_fee.
 				if ( $is_new_order ) {
 					if ( '' === wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_handling_fee' ) ) {
 						$product_id   = ( ! empty( $item['variation_id'] ) ? $item['variation_id'] : $item['product_id'] );
