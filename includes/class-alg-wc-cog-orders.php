@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.8.5
+ * @version 3.8.6
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -645,7 +645,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * delete_duplicate_cog_order_metadata.
 	 *
-	 * @version 3.7.7
+	 * @version 3.8.6
 	 * @since   3.7.7
 	 *
 	 * @param   WC_Abstract_Order  $order
@@ -654,26 +654,27 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 * @return void
 	 */
 	function delete_duplicate_cog_order_metadata( WC_Abstract_Order $order, $data_store ) {
-		$seen        = array();
-		$unique_meta = array();
+		$seen       = array();
+		$duplicates = array();
 
 		foreach ( $order->get_meta_data() as $meta ) {
-			if ( substr( $meta->get_data()['key'], 0, 12 ) !== "_alg_wc_cog_" ) {
+			$data  = $meta->get_data();
+			$key   = $data['key'];
+			$value = $data['value'];
+			$mid   = $data['id'];
+			if ( substr( $key, 0, 12 ) !== '_alg_wc_cog_' ) {
 				continue;
 			}
-
-			$key       = $meta->get_data()['key'];
-			$value     = $meta->get_data()['value'];
 			$unique_id = $key . ':' . maybe_serialize( $value );
-
-			if ( ! isset( $seen[ $unique_id ] ) ) {
-				$seen[ $unique_id ] = true;
-				$unique_meta[]      = $meta;
+			if ( isset( $seen[ $unique_id ] ) ) {
+				$duplicates[] = $mid;
 			} else {
-				// Remove duplicate from order object.
-				$order->delete_meta_data( $key );
-				$order->add_meta_data( $key, $value ); // re-add only one.
+				$seen[ $unique_id ] = true;
 			}
+		}
+
+		foreach ( $duplicates as $mid ) {
+			$order->delete_meta_data_by_mid( $mid );
 		}
 	}
 
