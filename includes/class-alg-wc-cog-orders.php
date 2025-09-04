@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.8.6
+ * @version 3.8.7
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -420,7 +420,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'woocommerce_before_order_object_save', array( $this, 'avoid_empty_order_metadata_saving' ), 90, 2 );
 
 		// Delete duplicated COG order meta.
-		add_action( 'woocommerce_before_order_object_save', array( $this, 'delete_duplicate_cog_order_metadata' ), 90, 2 );
+		add_action( 'woocommerce_before_order_object_save', array( $this, 'delete_duplicate_cog_order_metadata' ), 90 );
 
 		// Payment gateways.
 		add_filter( 'alg_wc_cog_update_order_values', array( $this, 'manage_payment_gateways' ), 10, 2 );
@@ -645,36 +645,46 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * delete_duplicate_cog_order_metadata.
 	 *
-	 * @version 3.8.6
+	 * @version 3.8.7
 	 * @since   3.7.7
 	 *
 	 * @param   WC_Abstract_Order  $order
-	 * @param                      $data_store
 	 *
 	 * @return void
 	 */
-	function delete_duplicate_cog_order_metadata( WC_Abstract_Order $order, $data_store ) {
+	function delete_duplicate_cog_order_metadata( WC_Abstract_Order $order ) {
 		$seen       = array();
 		$duplicates = array();
 
 		foreach ( $order->get_meta_data() as $meta ) {
 			$data  = $meta->get_data();
-			$key   = $data['key'];
-			$value = $data['value'];
-			$mid   = $data['id'];
-			if ( substr( $key, 0, 12 ) !== '_alg_wc_cog_' ) {
+			$key   = $data['key'] ?? null;
+			$value = $data['value'] ?? null;
+			$mid   = $data['id'] ?? null;
+			if ( ! $key || substr( $key, 0, 12 ) !== '_alg_wc_cog_' ) {
 				continue;
 			}
 			$unique_id = $key . ':' . maybe_serialize( $value );
 			if ( isset( $seen[ $unique_id ] ) ) {
-				$duplicates[] = $mid;
+				$duplicates[] = array(
+					'id'  => $mid,
+					'key' => $key,
+				);
 			} else {
 				$seen[ $unique_id ] = true;
 			}
 		}
 
-		foreach ( $duplicates as $mid ) {
-			$order->delete_meta_data_by_mid( $mid );
+		foreach ( $duplicates as $dup ) {
+			if ( ! empty( $dup['id'] ) ) {
+				$order->delete_meta_data_by_mid( $dup['id'] );
+			} elseif ( ! empty( $dup['key'] ) ) {
+				$order->delete_meta_data( $dup['key'] );
+			}
+		}
+
+		if ( ! empty( $duplicates ) ) {
+			$order->save();
 		}
 	}
 
@@ -1496,7 +1506,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.8.5
+	 * @version 3.8.7
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1527,8 +1537,9 @@ class Alg_WC_Cost_of_Goods_Orders {
 			return;
 		}
 
+		$this->delete_cog_order_meta( $order );
+
 		if ( ! apply_filters( 'alg_wc_cog_update_order_items_costs_validation', true, $order ) ) {
-			$this->delete_cog_order_meta( $order );
 			return;
 		}
 
