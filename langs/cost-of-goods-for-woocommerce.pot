@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.8.7\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.8.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-04T17:58:38+02:00\n"
+"POT-Creation-Date: 2025-09-10T02:48:22+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -76,7 +76,7 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:448
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:446
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:82
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
@@ -110,7 +110,7 @@ msgstr ""
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:118
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:449
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:447
 #: includes/analytics/class-alg-wc-cog-analytics-variations.php:118
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
@@ -132,7 +132,7 @@ msgstr ""
 msgid "Profit"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:450
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:448
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:124
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:166
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:191
@@ -141,7 +141,7 @@ msgstr ""
 msgid "Total Cost"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:451
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:449
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:126
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:174
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:191
@@ -151,7 +151,7 @@ msgstr ""
 msgid "Total Profit"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:455
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:453
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:122
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:381
 #: includes/analytics/build/index.js:1
@@ -159,11 +159,11 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:456
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:454
 msgid "Total price"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-stock.php:457
+#: includes/analytics/class-alg-wc-cog-analytics-stock.php:455
 #: includes/analytics/build/index.js:1
 #: includes/analytics/src/modules/stock.js:109
 msgid "Category"

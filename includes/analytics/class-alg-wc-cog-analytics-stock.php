@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Stock.
  *
- * @version 3.8.4
+ * @version 3.8.8
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -20,7 +20,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.2.2
+		 * @version 3.8.8
 		 * @since   2.4.5
 		 *
 		 * @todo Add cost and profit totals on summary.
@@ -52,18 +52,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 			// Delete stock cost and profit totals from cache.
 			add_action( 'woocommerce_update_product', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
 			add_action( 'woocommerce_new_product', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
-			add_action( 'update_option_woocommerce_notify_low_stock_amount', array(
-				$this,
-				'clear_stock_cost_and_profit_totals_cache'
-			) );
-			add_action( 'update_option_woocommerce_notify_no_stock_amount', array(
-				$this,
-				'clear_stock_cost_and_profit_totals_cache'
-			) );
-			add_action( 'admin_init', array(
-				$this,
-				'clear_stock_cost_and_profit_totals_cache_on_clear_analytics_cache'
-			) );
+			add_action( 'update_option_woocommerce_notify_low_stock_amount', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
+			add_action( 'update_option_woocommerce_notify_no_stock_amount', array( $this, 'clear_stock_cost_and_profit_totals_cache' ) );
+			add_action( 'admin_init', array( $this, 'clear_stock_cost_and_profit_totals_cache_on_clear_analytics_cache' ) );
 		}
 
 		/**
@@ -182,7 +173,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		/**
 		 * get_total_cost_and_profit_from_database.
 		 *
-		 * @version 3.8.4
+		 * @version 3.8.8
 		 * @since   3.2.1
 		 *
 		 * @param $post_ids
@@ -193,17 +184,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 			global $wpdb;
 
 			$sub_query = "
-			SELECT DISTINCT posts.ID as product_id,
-			IFNULL(alg_wc_cog_price_pm.meta_value, 0) + 0 AS price, 
-		    IFNULL(alg_wc_cog_price_pm.meta_value, 0) * IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 1, alg_wc_cog_stock_pm.meta_value + 0) AS total_price,
-			IFNULL(alg_wc_cog_cost_pm.meta_value, 0) + IFNULL(alg_wc_cog_profit_pm.meta_value, 0) AS price_ex_tax,
-		    (IFNULL(alg_wc_cog_cost_pm.meta_value, 0)*alg_wc_cog_stock_pm.meta_value) + (IFNULL(alg_wc_cog_profit_pm.meta_value, 0)*alg_wc_cog_stock_pm.meta_value) AS total_price_ex_tax,			
-			IFNULL(alg_wc_cog_cost_pm.meta_value, 0) + 0 AS cost, 
-			IFNULL(alg_wc_cog_cost_pm.meta_value, 0) * IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 1, alg_wc_cog_stock_pm.meta_value + 0) AS total_cost, 
-			IFNULL(alg_wc_cog_profit_pm.meta_value, 0) + 0 AS profit_ex_tax, 
-			IFNULL(alg_wc_cog_profit_pm.meta_value, 0) * IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 1, alg_wc_cog_stock_pm.meta_value + 0) AS total_profit_ex_tax,
-			(alg_wc_cog_price_pm.meta_value + 0) - (alg_wc_cog_cost_pm.meta_value + 0) AS profit, 
-			( (alg_wc_cog_price_pm.meta_value + 0) * alg_wc_cog_stock_pm.meta_value) - ( (alg_wc_cog_cost_pm.meta_value+ 0) * alg_wc_cog_stock_pm.meta_value) AS total_profit,
+			SELECT posts.ID as product_id,
+			alg_wc_cog_price_pm.meta_value + 0 AS price,
+			(alg_wc_cog_price_pm.meta_value + 0) * IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 1, alg_wc_cog_stock_pm.meta_value + 0) AS total_price,
+			(alg_wc_cog_cost_pm.meta_value + 0 + alg_wc_cog_profit_pm.meta_value + 0) AS price_ex_tax,
+			(alg_wc_cog_cost_pm.meta_value + 0 + alg_wc_cog_profit_pm.meta_value + 0) * IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 1, alg_wc_cog_stock_pm.meta_value + 0) AS total_price_ex_tax,
+			alg_wc_cog_cost_pm.meta_value + 0 AS cost,
+			(alg_wc_cog_cost_pm.meta_value + 0) * IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 1, alg_wc_cog_stock_pm.meta_value + 0) AS total_cost,
+			alg_wc_cog_profit_pm.meta_value + 0 AS profit_ex_tax,
+			(alg_wc_cog_profit_pm.meta_value + 0) * IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 1, alg_wc_cog_stock_pm.meta_value + 0) AS total_profit_ex_tax,
+			(alg_wc_cog_price_pm.meta_value + 0 - alg_wc_cog_cost_pm.meta_value - 0) AS profit,
+			(alg_wc_cog_price_pm.meta_value + 0 - alg_wc_cog_cost_pm.meta_value - 0) * IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 1, alg_wc_cog_stock_pm.meta_value + 0) AS total_profit,
 			IF(alg_wc_cog_stock_pm.meta_value = 0 OR alg_wc_cog_stock_pm.meta_value IS NULL, 0, alg_wc_cog_stock_pm.meta_value + 0) AS stock
 			FROM {$wpdb->posts} posts			
 			INNER JOIN {$wpdb->postmeta} alg_wc_cog_cost_pm ON posts.ID = alg_wc_cog_cost_pm.post_id and alg_wc_cog_cost_pm.meta_key = '_alg_wc_cog_cost'
@@ -211,7 +202,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 			INNER JOIN {$wpdb->postmeta} alg_wc_cog_stock_pm ON posts.ID = alg_wc_cog_stock_pm.post_id AND alg_wc_cog_stock_pm.meta_key = '_stock'
 			INNER JOIN {$wpdb->postmeta} alg_wc_cog_price_pm ON posts.ID = alg_wc_cog_price_pm.post_id AND alg_wc_cog_price_pm.meta_key = '_price'
 			WHERE posts.post_type IN ( 'product', 'product_variation' )
-			AND posts.post_status IN ('publish', 'private')
+			AND ((posts.post_status <> 'trash' AND posts.post_status <> 'auto-draft'))
 			";
 
 			if ( ! empty( $post_ids ) ) {
@@ -316,7 +307,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		/**
 		 * get_cog_product_ids.
 		 *
-		 * @version 3.8.4
+		 * @version 3.8.8
 		 * @since   3.8.4
 		 *
 		 * @return int[]|WP_Post[]
@@ -324,31 +315,38 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		function get_cog_product_ids() {
 			$args = array(
 				'post_type'      => array( 'product', 'product_variation' ),
-				'post_status'    => array( 'publish', 'private' ),
-				'fields'         => 'ids', // only get IDs
-				'posts_per_page' => - 1,    // get all
+				'post_status'    => 'any',
+				'posts_per_page' => -1,
+				'orderby'        => 'ID',
+				'order'          => 'ASC',
+				'fields'         => 'ids',
 				'meta_query'     => array(
 					'relation' => 'AND',
 					array(
 						'key'     => '_alg_wc_cog_cost',
-						'value'   => array( '', '0' ),
-						'compare' => 'NOT IN',
+						'value'   => 0,
+						'compare' => '!=',
+					),
+					array(
+						'key'     => '_alg_wc_cog_cost',
+						'value'   => '',
+						'compare' => '!=',
 					),
 					array(
 						'key'     => '_price',
-						'value'   => array( '', '0' ),
-						'compare' => 'NOT IN',
+						'value'   => 0,
+						'compare' => '!=',
 					),
 					array(
-						'key'     => '_stock',
-						'value'   => array( '', '0' ),
-						'compare' => 'NOT IN',
+						'key'     => '_price',
+						'value'   => '',
+						'compare' => '!=',
 					),
 					array(
 						'key'     => '_stock',
 						'value'   => 0,
 						'compare' => '>',
-						'type'    => 'NUMERIC',
+						'type'    => 'UNSIGNED',
 					),
 				),
 			);
