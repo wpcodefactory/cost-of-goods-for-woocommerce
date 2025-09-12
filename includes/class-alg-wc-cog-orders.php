@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.8.7
+ * @version 3.8.9
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -621,7 +621,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * avoid_empty_order_metadata_saving.
 	 *
-	 * @version 3.3.6
+	 * @version 3.8.9
 	 * @since   3.1.3
 	 *
 	 * @param   WC_Abstract_Order  $order
@@ -633,7 +633,10 @@ class Alg_WC_Cost_of_Goods_Orders {
 			foreach ( $order->get_meta_data() as $meta_data ) {
 				if (
 					substr( $meta_data->get_data()['key'], 0, 12 ) === "_alg_wc_cog_" &&
-					! in_array( $meta_data->get_data()['key'], array( '_alg_wc_cog_order_cost' ) ) &&
+					! in_array( $meta_data->get_data()['key'], array(
+						'_alg_wc_cog_order_cost',
+						'_alg_wc_cog_order_profit',
+					) ) &&
 					empty( $meta_data->get_data()['value'] )
 				) {
 					$order->delete_meta_data( $meta_data->get_data()['key'] );

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Products.
  *
- * @version 3.8.4
+ * @version 3.8.9
  * @since   2.5.1
  * @author  WPFactory
  */
@@ -170,18 +170,53 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_profit_total_to_select_products_stats_total_clauses.
 		 *
-		 * @version 3.8.4
+		 * @version 3.8.9
 		 * @since   3.6.8
 		 *
 		 * @return string
 		 */
 		function add_profit_total_to_select_products_stats_total_clauses() {
 			global $wpdb;
+
 			$tax_operation = '';
 			if ( 'wc_get_price_including_tax' === alg_wc_cog_get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ) ) {
 				$tax_operation = "+ {$wpdb->prefix}wc_order_product_lookup.tax_amount";
 			}
-			return ", SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue {$tax_operation} - alg_cog_oimc.meta_value * product_qty) AS profit_total";
+
+			$multicurrency_operation = $this->get_multicurrency_operation();
+
+			$product_net_revenue = "({$multicurrency_operation} {$wpdb->prefix}wc_order_product_lookup.product_net_revenue {$tax_operation})";
+
+			return ", SUM($product_net_revenue - alg_cog_oimc.meta_value * product_qty) AS profit_total";
+		}
+
+		/**
+		 * get_multicurrency_operation.
+		 *
+		 * @version 3.8.9
+		 * @since   3.8.9
+		 *
+		 * @return string
+		 */
+		function get_multicurrency_operation() {
+			$multicurrency_operation = "";
+			if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_currencies_enabled', 'no' ) ) {
+				$multicurrency_operation = "
+				1 / COALESCE(
+					    TRIM(BOTH '\"' FROM SUBSTRING_INDEX(
+					        REGEXP_SUBSTR(
+					            alg_cog_mcurr_rate.option_value,
+					            CONCAT(alg_cog_shop_base_curr.option_value, alg_cog_o.currency,'\";s:[0-9]+:\"([^\"]+)')                        
+					        ),
+					        '\"',
+					        -1
+					    )),
+					    '1'
+					)  *
+				";
+			}
+
+			return $multicurrency_operation;
 		}
 
 		/**
@@ -223,25 +258,30 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_profit_to_select_products_subquery_clauses.
 		 *
-		 * @version 3.8.4
+		 * @version 3.8.9
 		 * @since   3.6.8
 		 *
 		 * @return string
 		 */
 		function add_profit_to_select_products_subquery_clauses() {
 			global $wpdb;
+
 			$tax_operation = '';
 			if ( 'wc_get_price_including_tax' === alg_wc_cog_get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ) ) {
 				$tax_operation = "+ {$wpdb->prefix}wc_order_product_lookup.tax_amount";
 			}
 
-			return ", IFNULL((SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue {$tax_operation}) - SUM(alg_cog_oimc.meta_value * product_qty)), 0) AS profit";
+			$multicurrency_operation = $this->get_multicurrency_operation();
+
+			$product_net_revenue = "{$multicurrency_operation} {$wpdb->prefix}wc_order_product_lookup.product_net_revenue {$tax_operation}";
+
+			return ", IFNULL((SUM($product_net_revenue) - SUM(alg_cog_oimc.meta_value * product_qty)), 0) AS profit";
 		}
 
 		/**
 		 * add_costs_to_join_products.
 		 *
-		 * @version 3.6.8
+		 * @version 3.8.9
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -252,7 +292,32 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 			if ( apply_filters( 'alg_wc_cog_analytics_product_cost_join', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
 				global $wpdb;
 				$clauses[] = $this->add_costs_to_join_products_clauses();
+				$clauses = $this->maybe_add_multicurrency_to_join( $clauses );
+
 			}
+			return $clauses;
+		}
+
+		/**
+		 * maybe_add_multicurrency_to_join.
+		 *
+		 * @version 3.8.9
+		 * @since   3.8.9
+		 *
+		 * @param $clauses
+		 *
+		 * @return mixed
+		 */
+		function maybe_add_multicurrency_to_join( $clauses ) {
+			if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_currencies_enabled', 'no' ) ) {
+				global $wpdb;
+				$clauses[] = "
+				INNER JOIN {$wpdb->prefix}wc_orders AS alg_cog_o ON alg_cog_o.id = wp_wc_order_product_lookup.order_id
+				LEFT JOIN {$wpdb->options} AS alg_cog_mcurr_rate ON alg_cog_mcurr_rate.option_name = 'alg_wc_cog_currencies_rates'
+				INNER JOIN {$wpdb->options} AS alg_cog_shop_base_curr ON alg_cog_shop_base_curr.option_name = 'woocommerce_currency'
+				";
+			}
+
 			return $clauses;
 		}
 

@@ -52,7 +52,7 @@ msgstr "Deaktivierte Optionen können mit <a href=\"%s\" target=\"_blank\"><stro
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
-#: includes/class-alg-wc-cog-orders.php:1034
+#: includes/class-alg-wc-cog-orders.php:1037
 #: includes/class-alg-wc-cog-products-add-stock.php:371
 #: includes/class-alg-wc-cog-products-add-stock.php:432
 #: includes/class-alg-wc-cog-products.php:309
@@ -86,7 +86,7 @@ msgstr "Kosten"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
-#: includes/class-alg-wc-cog-orders.php:1044
+#: includes/class-alg-wc-cog-orders.php:1047
 #: includes/class-alg-wc-cog-products.php:391
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/class-alg-wc-cog-pro-compatibility.php:158
@@ -229,29 +229,29 @@ msgstr "Zusätzliche Kosten"
 msgid "fee"
 msgstr "Gebühr"
 
-#: includes/class-alg-wc-cog-orders.php:1000
+#: includes/class-alg-wc-cog-orders.php:1003
 #: includes/settings/class-alg-wc-cog-settings-orders.php:178
 msgid "You are selling below the cost of goods."
 msgstr "Sie verkaufen unter den Warenkosten."
 
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:92
-#: includes/class-alg-wc-cog-orders.php:1372
+#: includes/class-alg-wc-cog-orders.php:1375
 #: includes/pro/class-alg-wc-cog-pro.php:660
 #: includes/pro/class-alg-wc-cog-pro.php:679
 msgid "Cost of goods"
 msgstr "Warenkosten"
 
-#: includes/class-alg-wc-cog-orders.php:1047
+#: includes/class-alg-wc-cog-orders.php:1050
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr "Gewinnprozent"
 
-#: includes/class-alg-wc-cog-orders.php:1050
+#: includes/class-alg-wc-cog-orders.php:1053
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr "Gewinnspanne"
 
-#: includes/class-alg-wc-cog-orders.php:1408
+#: includes/class-alg-wc-cog-orders.php:1411
 msgid "Handling Fee"
 msgstr "Bearbeitungsgebühr"
 
@@ -1273,7 +1273,7 @@ msgstr "Bestellsumme exkl. MwSt"
 msgid "Order total incl. tax"
 msgstr "Bestellsumme inkl. MwSt"
 
-#: includes/class-alg-wc-cog-orders.php:857
+#: includes/class-alg-wc-cog-orders.php:860
 #: includes/settings/class-alg-wc-cog-settings-orders.php:287
 msgid "Shipping to profit"
 msgstr "Versand zum Gewinn"
@@ -1282,7 +1282,7 @@ msgstr "Versand zum Gewinn"
 msgid "Add order shipping cost to the order profit"
 msgstr "Fügen Sie die Versandkosten der Bestellung zum Gewinn der Bestellung hinzu"
 
-#: includes/class-alg-wc-cog-orders.php:813
+#: includes/class-alg-wc-cog-orders.php:816
 #: includes/settings/class-alg-wc-cog-settings-orders.php:301
 msgid "Fees to profit"
 msgstr "Gebühren zu profitieren"
@@ -1291,7 +1291,7 @@ msgstr "Gebühren zu profitieren"
 msgid "Add  order fees to the order profit "
 msgstr "Bestellgebühren zum Bestellgewinn hinzufügen"
 
-#: includes/class-alg-wc-cog-orders.php:769
+#: includes/class-alg-wc-cog-orders.php:772
 #: includes/settings/class-alg-wc-cog-settings-orders.php:315
 msgid "Taxes to profit"
 msgstr "Steuern zum Profit"
@@ -2280,15 +2280,15 @@ msgstr ""
 msgid "Extra profit details"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:771
+#: includes/class-alg-wc-cog-orders.php:774
 msgid "Taxes to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:815
+#: includes/class-alg-wc-cog-orders.php:818
 msgid "Fees to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:859
+#: includes/class-alg-wc-cog-orders.php:862
 msgid "Shipping to profit (%s)"
 msgstr ""
 
