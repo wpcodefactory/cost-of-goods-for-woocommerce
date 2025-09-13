@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.8.9
+ * @version 3.9.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1509,7 +1509,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 3.8.7
+	 * @version 3.9.0
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_alg_wc_cog_order_profit_margin`)
@@ -1540,9 +1540,8 @@ class Alg_WC_Cost_of_Goods_Orders {
 			return;
 		}
 
-		$this->delete_cog_order_meta( $order );
-
 		if ( ! apply_filters( 'alg_wc_cog_update_order_items_costs_validation', true, $order ) ) {
+			$this->delete_cog_order_meta( $order );
 			return;
 		}
 
