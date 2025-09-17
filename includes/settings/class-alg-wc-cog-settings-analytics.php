@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Section Settings.
  *
- * @version 3.8.4
+ * @version 3.9.1
  * @since   3.4.6
  * @author  WPFactory
  */
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.8.4
+		 * @version 3.9.1
 		 * @since   3.4.6
 		 *
 		 * @return array
@@ -247,6 +247,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 										   __( 'The default Show dropdown will be ignored.', 'cost-of-goods-for-woocommerce' ),
 					'id'                => 'alg_wc_cog_filter_enabled_on_analytics_stock',
 					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'checkboxgroup'     => 'start',
+					'default'           => 'no',
+					'type'              => 'checkbox',
+				),
+				array(
+					'desc'              => __( 'Generate the CSV with the products selected by the Cost of Goods filter', 'cost-of-goods-for-woocommerce' ),
+					'id'                => 'alg_wc_cog_analytics_stock_cog_products_download',
+					'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
+					'checkboxgroup'     => 'end',
 					'default'           => 'no',
 					'type'              => 'checkbox',
 				),

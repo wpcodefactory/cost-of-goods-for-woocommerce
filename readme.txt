@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.8
-Stable tag: 3.9.0
+Stable tag: 3.9.1
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,12 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.9.1 - 17/09/2025 =
+* Fix - Analytics - Improved stock calculation.
+* Fix - "Analytics > Categories" now considering Multicurrency section.
+* Fix - Analytics - Fixed Multicurrency option with the Overview and Variations sections.
+* Dev - Analytics - Stock - New option added to generate the CSV with the products selected by the Cost of Goods filter.
 
 = 3.9.0 - 13/09/2025 =
 * Fix - Fixed error where some orders could have the cost set as zero.

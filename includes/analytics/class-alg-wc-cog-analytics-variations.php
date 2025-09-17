@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Variations.
  *
- * @version 3.6.8
+ * @version 3.9.1
  * @since   3.6.8
  * @author  WPFactory
  */
@@ -193,7 +193,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Variations' ) ) :
 		/**
 		 * add_costs_to_join_variations.
 		 *
-		 * @version 3.6.8
+		 * @version 3.9.1
 		 * @since   3.6.8
 		 *
 		 * @param $clauses
@@ -204,6 +204,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Variations' ) ) :
 			if ( apply_filters( 'alg_wc_cog_analytics_product_cost_join', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_variations_tab', 'no' ) ) ) {
 				global $wpdb;
 				$clauses[] = alg_wc_cog()->core->analytics->products->add_costs_to_join_products_clauses();
+				$clauses   =  alg_wc_cog()->core->analytics->products->maybe_add_multicurrency_to_join( $clauses );
 			}
 			return $clauses;
 		}

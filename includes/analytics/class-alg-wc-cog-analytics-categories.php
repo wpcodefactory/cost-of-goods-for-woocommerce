@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Categories.
  *
- * @version 2.5.5
+ * @version 3.9.1
  * @since   2.5.5
  * @author  WPFactory
  */
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Categories' ) ) :
 		/**
 		 * add_costs_to_categories_join_clauses.
 		 *
-		 * @version 2.5.5
+		 * @version 3.9.1
 		 * @since   2.5.5
 		 *
 		 * @param $clauses
@@ -81,9 +81,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Categories' ) ) :
 		 */
 		function add_costs_to_categories_join_clauses( $clauses ) {
 			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_categories_tab', 'no' ) ) {
-				global $wpdb;
-				$clauses[] = "LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta alg_cog_oimc ON {$wpdb->prefix}wc_order_product_lookup.order_item_id = alg_cog_oimc.order_item_id AND alg_cog_oimc.meta_key = '_alg_wc_cog_item_cost'";
+				$clauses[] = alg_wc_cog()->core->analytics->products->add_costs_to_join_products_clauses();
+				$clauses   = alg_wc_cog()->core->analytics->products->maybe_add_multicurrency_to_join( $clauses );
 			}
+
 			return $clauses;
 		}
 
@@ -107,7 +108,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Categories' ) ) :
 		/**
 		 * add_profit_to_select_categories_subquery.
 		 *
-		 * @version 2.5.5
+		 * @version 3.9.1
 		 * @since   2.5.5
 		 *
 		 * @param $clauses
@@ -117,7 +118,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Categories' ) ) :
 		function add_profit_to_select_categories_subquery( $clauses ) {
 			if ( 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_categories_tab', 'no' ) ) {
 				global $wpdb;
-				$clauses[] = ", IFNULL((SUM({$wpdb->prefix}wc_order_product_lookup.product_net_revenue) - SUM(alg_cog_oimc.meta_value * product_qty)), 0) AS profit";
+				$tax_operation = '';
+				if ( 'wc_get_price_including_tax' === alg_wc_cog_get_option( 'alg_wc_cog_products_get_price_method', 'wc_get_price_excluding_tax' ) ) {
+					$tax_operation = "+ {$wpdb->prefix}wc_order_product_lookup.tax_amount";
+				}
+				$multicurrency_operation = alg_wc_cog()->core->analytics->products->get_multicurrency_operation();
+				$product_net_revenue = "{$multicurrency_operation} {$wpdb->prefix}wc_order_product_lookup.product_net_revenue {$tax_operation}";
+				$clauses[] = ", IFNULL((SUM({$product_net_revenue}) - SUM(alg_cog_oimc.meta_value * product_qty)), 0) AS profit";
 			}
 			return $clauses;
 		}

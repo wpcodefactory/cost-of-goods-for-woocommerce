@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Products.
  *
- * @version 3.8.9
+ * @version 3.9.1
  * @since   2.5.1
  * @author  WPFactory
  */
@@ -281,7 +281,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * add_costs_to_join_products.
 		 *
-		 * @version 3.8.9
+		 * @version 3.9.1
 		 * @since   2.5.1
 		 *
 		 * @param $clauses
@@ -292,8 +292,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 			if ( apply_filters( 'alg_wc_cog_analytics_product_cost_join', 'yes' === get_option( 'alg_wc_cog_cost_and_profit_column_on_products_tab', 'no' ) ) ) {
 				global $wpdb;
 				$clauses[] = $this->add_costs_to_join_products_clauses();
-				$clauses = $this->maybe_add_multicurrency_to_join( $clauses );
-
+				$clauses   = $this->maybe_add_multicurrency_to_join( $clauses );
 			}
 			return $clauses;
 		}
@@ -301,7 +300,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		/**
 		 * maybe_add_multicurrency_to_join.
 		 *
-		 * @version 3.8.9
+		 * @version 3.9.1
 		 * @since   3.8.9
 		 *
 		 * @param $clauses
@@ -311,11 +310,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		function maybe_add_multicurrency_to_join( $clauses ) {
 			if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_currencies_enabled', 'no' ) ) {
 				global $wpdb;
-				$clauses[] = "
-				INNER JOIN {$wpdb->prefix}wc_orders AS alg_cog_o ON alg_cog_o.id = wp_wc_order_product_lookup.order_id
-				LEFT JOIN {$wpdb->options} AS alg_cog_mcurr_rate ON alg_cog_mcurr_rate.option_name = 'alg_wc_cog_currencies_rates'
-				INNER JOIN {$wpdb->options} AS alg_cog_shop_base_curr ON alg_cog_shop_base_curr.option_name = 'woocommerce_currency'
-				";
+				$clauses[] = " INNER JOIN {$wpdb->prefix}wc_orders AS alg_cog_o ON alg_cog_o.id = wp_wc_order_product_lookup.order_id";
+				$clauses[] = " LEFT JOIN {$wpdb->options} AS alg_cog_mcurr_rate ON alg_cog_mcurr_rate.option_name = 'alg_wc_cog_currencies_rates'";
+				$clauses[] = " INNER JOIN {$wpdb->options} AS alg_cog_shop_base_curr ON alg_cog_shop_base_curr.option_name = 'woocommerce_currency'";
 			}
 
 			return $clauses;
@@ -331,7 +328,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Products' ) ) :
 		 */
 		function add_costs_to_join_products_clauses() {
 			global $wpdb;
-			return "LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta alg_cog_oimc ON {$wpdb->prefix}wc_order_product_lookup.order_item_id = alg_cog_oimc.order_item_id AND alg_cog_oimc.meta_key = '_alg_wc_cog_item_cost'";
+			return " LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta alg_cog_oimc ON {$wpdb->prefix}wc_order_product_lookup.order_item_id = alg_cog_oimc.order_item_id AND alg_cog_oimc.meta_key = '_alg_wc_cog_item_cost'";
 		}
 
 		/**

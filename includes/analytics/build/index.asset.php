@@ -1,1 +1,1 @@
-<?php return array('dependencies' => array('wc-currency', 'wp-hooks', 'wp-i18n'), 'version' => '37e9f6527558fb0f56053f149d527304');
+<?php return array('dependencies' => array('wc-currency', 'wp-hooks', 'wp-i18n'), 'version' => '15965a06f667fa3100c5123130498382');
