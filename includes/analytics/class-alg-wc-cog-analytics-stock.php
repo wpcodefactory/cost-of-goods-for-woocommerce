@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Stock.
  *
- * @version 3.9.1
+ * @version 3.9.2
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -453,7 +453,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 		/**
 		 * get_only_cog_products_by_posts_clauses.
 		 *
-		 * @version 3.9.1
+		 * @version 3.9.2
 		 * @since   3.8.4
 		 *
 		 * @param $clauses
@@ -494,13 +494,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Stock' ) ) :
 				))";
 
 				// Cost not empty.
-				$clauses['join'] .= " JOIN {$wpdb->postmeta} AS alg_wc_cog_cost_pm ON {$wpdb->posts}.ID = alg_wc_cog_cost_pm.post_id AND alg_wc_cog_cost_pm.meta_key = '_alg_wc_cog_cost' AND alg_wc_cog_cost_pm.meta_value != '' AND alg_wc_cog_cost_pm.meta_value != 0";
+				$clauses['join'] .= " JOIN {$wpdb->postmeta} AS alg_wc_cog_cost_pm ON {$wpdb->posts}.ID = alg_wc_cog_cost_pm.post_id AND alg_wc_cog_cost_pm.meta_key = '_alg_wc_cog_cost' AND alg_wc_cog_cost_pm.meta_value != '' AND alg_wc_cog_cost_pm.meta_value != '0'";
 
 				// Price not empty.
-				$clauses['join'] .= " JOIN {$wpdb->postmeta} AS alg_wc_cog_price_pm ON {$wpdb->posts}.ID = alg_wc_cog_price_pm.post_id AND alg_wc_cog_price_pm.meta_key = '_price' AND alg_wc_cog_price_pm.meta_value != '' AND alg_wc_cog_price_pm.meta_value != 0";
+				$clauses['join'] .= " JOIN {$wpdb->postmeta} AS alg_wc_cog_price_pm ON {$wpdb->posts}.ID = alg_wc_cog_price_pm.post_id AND alg_wc_cog_price_pm.meta_key = '_price' AND alg_wc_cog_price_pm.meta_value != '' AND alg_wc_cog_price_pm.meta_value != '0'";
 
 				// Stock not empty and greater than zero.
-				$clauses['join'] .= " JOIN {$wpdb->postmeta} AS alg_wc_cog_stock_pm ON {$wpdb->posts}.ID = alg_wc_cog_stock_pm.post_id AND alg_wc_cog_stock_pm.meta_key = '_stock' AND alg_wc_cog_stock_pm.meta_value != '' AND alg_wc_cog_stock_pm.meta_value != 0 AND alg_wc_cog_stock_pm.meta_value > 0 AND alg_wc_cog_stock_pm.meta_value IS NOT NULL";
+				$clauses['join'] .= " JOIN {$wpdb->postmeta} AS alg_wc_cog_stock_pm ON {$wpdb->posts}.ID = alg_wc_cog_stock_pm.post_id AND alg_wc_cog_stock_pm.meta_key = '_stock' AND CAST(alg_wc_cog_stock_pm.meta_value AS SIGNED) > '0'";
 
 			}
 
