@@ -344,6 +344,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 
 == Changelog ==
 
+= 3.9.4 - 22/10/2025 =
+* Fix - Add stock - Fixed Uncaught TypeError: Cannot access offset of type string.
+
 = 3.9.3 - 17/10/2025 =
 * Fix - Products - Cost field was not working with the "Bulk actions > Edit" option.
 

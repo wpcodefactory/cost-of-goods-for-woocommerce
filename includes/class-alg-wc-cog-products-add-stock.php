@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.7.4
+ * @version 3.9.4
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -348,7 +348,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * product_add_stock_meta_box.
 		 *
-		 * @version 3.1.7
+		 * @version 3.9.4
 		 * @since   1.7.0
 		 * @todo    [next] add option to delete all/selected history
 		 */
@@ -378,7 +378,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				$html .= $this->get_variations_history_html( $product );
 			} else {
 				$history = get_post_meta( get_the_ID(), '_alg_wc_cog_cost_history', true );
-				if ( $history ) {
+				if ( ! empty( $history ) && is_array( $history ) ) {
 					$history_rows = '';
 					foreach ( $history as $date => $record ) {
 						$history_rows .= '<tr><td>' . date( 'Y-m-d', $date ) . '</td><td>' . $record['stock'] . '</td><td>' . alg_wc_cog_format_cost( $record['cost'] ) . '</td></tr>';
@@ -712,7 +712,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * product_add_stock.
 		 *
-		 * @version 3.7.4
+		 * @version 3.9.4
 		 * @since   1.7.0
 		 * @return bool|mixed
 		 * @todo    [maybe] `$cost_now`: round?
@@ -772,7 +772,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 
 				// Update History.
 				$history = get_post_meta( $product_id, '_alg_wc_cog_cost_history', true );
-				if ( ! $history ) {
+				if ( ! is_array( $history ) ) {
 					$history = array();
 				}
 				$history[ current_time( 'timestamp' ) ] = array( 'stock' => $stock, 'cost' => $cost );
