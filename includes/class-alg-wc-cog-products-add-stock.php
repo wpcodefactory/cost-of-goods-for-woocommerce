@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.9.4
+ * @version 3.9.5
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -348,7 +348,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * product_add_stock_meta_box.
 		 *
-		 * @version 3.9.4
+		 * @version 3.9.5
 		 * @since   1.7.0
 		 * @todo    [next] add option to delete all/selected history
 		 */
@@ -379,20 +379,45 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			} else {
 				$history = get_post_meta( get_the_ID(), '_alg_wc_cog_cost_history', true );
 				if ( ! empty( $history ) && is_array( $history ) ) {
-					$history_rows = '';
-					foreach ( $history as $date => $record ) {
-						$history_rows .= '<tr><td>' . date( 'Y-m-d', $date ) . '</td><td>' . $record['stock'] . '</td><td>' . alg_wc_cog_format_cost( $record['cost'] ) . '</td></tr>';
-					}
+					$this->maybe_fix_history( $history );
 					$html .= '' .
-					         '<details style="margin-top:5px">' .
-					         '<summary style="cursor:pointer">' . __( 'History', 'cost-of-goods-for-woocommerce' ) . '</summary>' .
-					         $this->get_add_stock_history_table( get_the_ID() ) .
-					         '</details>';
+							 '<details style="margin-top:5px">' .
+							 '<summary style="cursor:pointer">' . __( 'History', 'cost-of-goods-for-woocommerce' ) . '</summary>' .
+							 $this->get_add_stock_history_table( get_the_ID() ) .
+							 '</details>';
 				}
 			}
 
 			echo '<div style="margin-top:10px;clear:both"></div>';
 			echo $html;
+		}
+
+		/**
+		 * Fixes invalid _alg_wc_cog_cost_history data if needed.
+		 *
+		 * @version 3.9.5
+		 * @since   3.9.5
+		 *
+		 * @param $history
+		 *
+		 * @return array|mixed
+		 */
+		private function maybe_fix_history( $history ) {
+			if ( ! is_array( $history ) ) {
+				return $history;
+			}
+			$needs_repair = false;
+			foreach ( $history as $date => $record ) {
+				if ( ! is_array( $record ) ) {
+					unset( $history[ $date ] );
+					$needs_repair = true;
+				}
+			}
+			if ( $needs_repair ) {
+				update_post_meta( get_the_ID(), '_alg_wc_cog_cost_history', $history );
+			}
+
+			return $history;
 		}
 
 		/**

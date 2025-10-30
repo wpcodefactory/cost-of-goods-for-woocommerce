@@ -54,7 +54,7 @@ msgstr "Deaktivierte Optionen können mit <a href=\"%s\" target=\"_blank\"><stro
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
 #: includes/class-alg-wc-cog-orders.php:1037
 #: includes/class-alg-wc-cog-products-add-stock.php:371
-#: includes/class-alg-wc-cog-products-add-stock.php:432
+#: includes/class-alg-wc-cog-products-add-stock.php:457
 #: includes/class-alg-wc-cog-products.php:309
 #: includes/class-alg-wc-cog-products.php:320
 #: includes/class-alg-wc-cog-products.php:331
@@ -300,7 +300,7 @@ msgid "Add stock"
 msgstr "Vorrat hinzufügen"
 
 #: includes/class-alg-wc-cog-products-add-stock.php:367
-#: includes/class-alg-wc-cog-products-add-stock.php:431
+#: includes/class-alg-wc-cog-products-add-stock.php:456
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:105
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:228
@@ -309,11 +309,11 @@ msgstr "Vorrat hinzufügen"
 msgid "Stock"
 msgstr "Lager"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:388
+#: includes/class-alg-wc-cog-products-add-stock.php:385
 msgid "History"
 msgstr "Geschichte"
 
-#: includes/class-alg-wc-cog-products-add-stock.php:430
+#: includes/class-alg-wc-cog-products-add-stock.php:455
 #: includes/settings/class-alg-wc-cog-settings-products.php:208
 msgid "Date"
 msgstr "Datum"
@@ -2348,20 +2348,20 @@ msgstr ""
 msgid "Shipping to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:550
+#: includes/class-alg-wc-cog-products-add-stock.php:575
 msgid "Variation history"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:557
+#: includes/class-alg-wc-cog-products-add-stock.php:582
 #: includes/class-alg-wc-cog-products-cost-archive.php:295
 msgid "Select variation"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:636
+#: includes/class-alg-wc-cog-products-add-stock.php:661
 msgid "If no variation is selected, the parent product will be updated."
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-add-stock.php:637
+#: includes/class-alg-wc-cog-products-add-stock.php:662
 msgid "Update variation(s)"
 msgstr ""
 
