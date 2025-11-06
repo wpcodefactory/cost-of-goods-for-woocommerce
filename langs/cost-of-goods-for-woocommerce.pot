@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.9.5\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.9.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-30T01:59:08+01:00\n"
+"POT-Creation-Date: 2025-11-06T22:45:13+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -95,8 +95,8 @@ msgstr ""
 #: includes/class-alg-wc-cog-products.php:388
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:49
 #: includes/pro/class-alg-wc-cog-pro-compatibility.php:147
-#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:111
-#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:195
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:99
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:157
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:116
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:359
@@ -273,7 +273,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:116
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:219
 #: includes/class-alg-wc-cog.php:172
-#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:91
 #: includes/settings/class-alg-wc-cog-settings-orders.php:436
 #: includes/settings/class-alg-wc-cog-settings-products.php:253
 #: includes/settings/class-alg-wc-settings-cog.php:24
@@ -423,7 +423,7 @@ msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to c
 msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:81
-#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:103
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:91
 #: includes/settings/class-alg-wc-cog-settings-products.php:242
 #: includes/settings/class-alg-wc-cog-settings-products.php:250
 #: includes/settings/class-alg-wc-cog-settings-products.php:253
@@ -432,7 +432,7 @@ msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:367
 #: includes/class-alg-wc-cog-products-add-stock.php:456
-#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:105
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:93
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:228
 #: includes/settings/class-alg-wc-cog-settings-tools.php:133
@@ -522,7 +522,7 @@ msgstr ""
 msgid "Currencies costs"
 msgstr ""
 
-#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:198
+#: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:160
 msgid "- No change -"
 msgstr ""
 
