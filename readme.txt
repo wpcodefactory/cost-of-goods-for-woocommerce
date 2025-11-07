@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.8
-Stable tag: 3.9.6
+Stable tag: 3.9.7
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,11 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.9.7 - 07/11/2025 =
+* Dev - Products - Added new option to set a last update date template.
+* Dev - Products - Added new option to display a last update date as cost input description on admin product pages.
+* Dev - Products - Improved Standards on Cost Archive code.
 
 = 3.9.6 - 06/11/2025 =
 * Fix - Products - Improved reliability of Cost and Add Stock fields on Quick end Bulk Edit.

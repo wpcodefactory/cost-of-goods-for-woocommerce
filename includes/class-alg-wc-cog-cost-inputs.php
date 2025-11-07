@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.7.4
+ * @version 3.9.7
  * @since   2.6.4
  * @author  WPFactory
  */
@@ -42,18 +42,52 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 		/**
 		 * add_hooks.
 		 *
-		 * @version 3.4.7
+		 * @version 3.9.7
 		 * @since   2.6.4
 		 */
 		function add_hooks(){
-			// Cost input on admin product page (simple product)
+
+			// Cost input on admin product page (simple product).
 			add_action( get_option( 'alg_wc_cog_product_cost_field_position', 'woocommerce_product_options_pricing' ), array( $this, 'add_cost_input' ) );
-			//add_action( 'woocommerce_bookings_after_display_cost', array( $this, 'add_cost_input' ) );
 			add_action( 'save_post_product', array( $this, 'save_cost_input' ), PHP_INT_MAX - 2, 2 );
-			// Cost input on admin product page (variable product)
+
+			// Cost input on admin product page (variable product).
 			add_action( 'woocommerce_variation_options_pricing', array( $this, 'add_cost_input_variation' ), 9, 3 );
 			add_action( 'woocommerce_save_product_variation', array( $this, 'save_cost_input_variation' ), PHP_INT_MAX, 2 );
 			add_action( 'woocommerce_product_options_general_product_data', array( $this, 'add_cost_input_variable' ), PHP_INT_MAX );
+
+			// Add profit html template on cost input description.
+			add_filter( 'alg_wc_cog_cost_input_description', array( $this, 'add_profit_html_template_on_cost_input_description' ), 10, 2 );
+
+			// Add last cost update date on cost input description.
+			add_filter( 'alg_wc_cog_cost_input_description', array( $this, 'add_last_update_date_on_cost_input_description' ), 10, 2 );
+		}
+
+		/**
+		 * add_last_update_date_on_cost_input_description.
+		 *
+		 * @version 3.9.7
+		 * @since   3.9.7
+		 *
+		 * @param $description
+		 * @param $args
+		 *
+		 * @throws Exception
+		 * @return void
+		 */
+		function add_last_update_date_on_cost_input_description( $description, $args ) {
+			$product_id  = $args['product_id'];
+			if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_last_update_date_as_cost_input_desc_on_admin_product_page', 'no' ) ) {
+				$last_update_date = alg_wc_cog()->core->products_cost_archive->get_product_cost_last_update_date( array(
+					'product_id'    => $product_id,
+					'return_method' => 'template'
+				) );
+				if ( ! empty( $last_update_date ) ) {
+					$description .= '<br />';
+					$description .= $last_update_date;
+				}
+			}
+			return $description;
 		}
 
 		/**
@@ -76,11 +110,50 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 					'value'       => wc_format_localized_price( alg_wc_cog()->core->products->get_product_cost( $product_id ) ),
 					'data_type'   => 'price',
 					'label'       => str_replace( array_keys( $label_from_to ), $label_from_to, $this->get_cost_field_template() ),
-					'description' => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
-						( '' != ( $profit = alg_wc_cog()->core->products->get_product_profit_html( $product_id, alg_wc_cog()->core->products->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) ),
+					'description' => $this->get_cost_input_description( array( 'product_id' => $product_id ) ),
 				) );
 			}
 			do_action( 'alg_wc_cog_cost_input', $product_id );
+		}
+
+		/**
+		 * add_profit_html_template_on_cost_input_description.
+		 *
+		 * @version 3.9.7
+		 * @since   3.9.7
+		 *
+		 * @param $description
+		 * @param $args
+		 *
+		 * @return string
+		 */
+		function add_profit_html_template_on_cost_input_description( $description, $args ) {
+			$product_id  = $args['product_id'];
+			$description = sprintf(
+				__( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
+				( '' != ( $profit = alg_wc_cog()->core->products->get_product_profit_html( $product_id, alg_wc_cog()->core->products->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) )
+			);
+
+			return $description;
+		}
+
+		/**
+		 * get_cost_input_description
+		 *
+		 * @version 3.9.7
+		 * @since   3.9.7
+		 *
+		 * @param   null  $args
+		 *
+		 * @return mixed|null
+		 */
+		function get_cost_input_description( $args = null ) {
+			$args = wp_parse_args( $args, array(
+				'product_id' => '',
+				'context'    => 'admin_product_page' // 'admin_product_page,'
+			) );
+
+			return apply_filters( 'alg_wc_cog_cost_input_description', '', $args );
 		}
 
 		/**
@@ -118,7 +191,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 		/**
 		 * add_cost_input_variation.
 		 *
-		 * @version 3.6.9
+		 * @version 3.9.7
 		 * @since   1.0.0
 		 */
 		function add_cost_input_variation( $loop, $variation_data, $variation ) {
@@ -147,8 +220,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Cost_Inputs' ) ) :
 					'label'         => str_replace( '%currency_symbol%', alg_wc_cog()->core->get_default_shop_currency_symbol(), $this->get_cost_field_template() ),
 					'data_type'     => 'price',
 					'wrapper_class' => 'form-row form-row-full',
-					'description'   => sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
-						( '' != ( $profit = alg_wc_cog()->core->products->get_product_profit_html( $variation->ID, alg_wc_cog()->core->products->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) ),
+					'description' => $this->get_cost_input_description( array( 'product_id' => $variation->ID ) ),
 				) );
 			}
 			do_action( 'alg_wc_cog_cost_input_variation', $hook_data );

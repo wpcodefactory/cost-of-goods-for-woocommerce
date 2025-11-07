@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Cost archive.
  *
- * @version 3.3.3
+ * @version 3.9.7
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -56,6 +56,58 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 						'side'
 					);
 				}
+			}
+		}
+
+		/**
+		 * get_product_cost_last_update_date.
+		 *
+		 * @version 3.9.7
+		 * @since   3.9.7
+		 *
+		 * @param   null  $args
+		 *
+		 * @throws Exception
+		 * @return void
+		 */
+		function get_product_cost_last_update_date( $args = null ) {
+			if ( 'yes' !== alg_wc_cog_get_option( 'alg_wc_cog_save_cost_archive', 'no' ) ) {
+				return null;
+			}
+
+			// Args.
+			$args          = wp_parse_args( $args, array(
+				'product_id'    => '',
+				'return_method' => 'date' // 'date','template'
+			) );
+			$product_id    = $args['product_id'];
+			$return_method = $args['return_method'];
+
+			// Archive.
+			$archive = $this->get_product_cost_archive( array(
+				'product_id' => $product_id,
+				'order'      => 'desc',
+				'orderby'    => 'update_datetime'
+			) );
+
+			if ( ! empty( $archive ) ) {
+				$date = wp_date( get_option( 'alg_wc_cog_save_cost_archive_date_format', 'Y-m-d' ), $archive[0]['update_date'] );
+
+				switch ( $return_method ) {
+					case 'date':
+						return $date;
+						break;
+					case 'template':
+						$template = alg_wc_cog_get_option( 'alg_wc_cog_last_update_date_template', __( 'Last update date: %last_update_date%', 'cost-of-goods-for-woocommerce' ) );
+						$data     = array(
+							'%last_update_date%' => $date,
+						);
+
+						return '<span class="alg-wc-cog-last-cost-update-date">' . str_replace( array_keys( $data ), array_values( $data ), $template ) . '</span>';
+						break;
+				}
+			} else {
+				return null;
 			}
 		}
 
@@ -322,7 +374,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * get_variations_history_script.
 		 *
-		 * @version 3.1.7
+		 * @version 3.9.7
 		 * @since   3.1.7
 		 *
 		 * @return false|string
@@ -331,27 +383,27 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 			ob_start();
 			$ajax_nonce = wp_create_nonce( "cost_archive_table_nonce" );
 			?>
-            <script>
-                (function () {
-                    const dropdown = document.querySelector('select[name="alg_wc_cog_cost_archive_variation_id"]');
-                    dropdown.addEventListener('change', function (event) {
-                        jQuery('.alg-wc-cog-cost-archive-variation-title .spinner').addClass('is-active');
-                        let data = {
-                            action: 'get_cost_archive_table',
-                            security: '<?php echo $ajax_nonce; ?>',
-                            variation_id: event.target.value
-                        };
-                        jQuery.post(ajaxurl, data, function (response) {
-                            jQuery('.alg-wc-cog-cost-archive-variation-title .spinner').removeClass('is-active');
-                            if (response.success) {
-                                jQuery('.alg-wc-cog-cost-archive-table-container').html(response.data.html);
-                            } else {
-                                jQuery('.alg-wc-cog-cost-archive-table-container').html('');
-                            }
-                        });
-                    });
-                }());
-            </script>
+			<script>
+				( function () {
+					const dropdown = document.querySelector( 'select[name="alg_wc_cog_cost_archive_variation_id"]' );
+					dropdown.addEventListener( 'change', function ( event ) {
+						jQuery( '.alg-wc-cog-cost-archive-variation-title .spinner' ).addClass( 'is-active' );
+						let data = {
+							action: 'get_cost_archive_table',
+							security: '<?php echo $ajax_nonce; ?>',
+							variation_id: event.target.value
+						};
+						jQuery.post( ajaxurl, data, function ( response ) {
+							jQuery( '.alg-wc-cog-cost-archive-variation-title .spinner' ).removeClass( 'is-active' );
+							if ( response.success ) {
+								jQuery( '.alg-wc-cog-cost-archive-table-container' ).html( response.data.html );
+							} else {
+								jQuery( '.alg-wc-cog-cost-archive-table-container' ).html( '' );
+							}
+						} );
+					} );
+				}() );
+			</script>
 			<?php
 			$output = ob_get_contents();
 			ob_end_clean();

@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.7.4
+	 * @version 3.9.7
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -226,10 +226,32 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'title'          => __( 'MySQL', 'cost-of-goods-for-woocommerce' ),
 				'desc'           => sprintf( __( 'Use %s function to get the dates', 'cost-of-goods-for-woocommerce' ), '<code>REGEXP_SUBSTR</code>' ),
-				'desc_tip'       => __( 'Disable if the archive does not work. Note: If disabled, the performance will be slower.', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip'       => __( 'Disable if the archive does not work. Note: Disabling it may reduce performance on the cost archive.', 'cost-of-goods-for-woocommerce' ),
 				'id'             => 'alg_wc_cog_save_cost_archive_mysql_regexp_substr',
 				'default'        => 'yes',
 				'type'           => 'checkbox',
+			),
+			array(
+				'title'          => __( 'Last update date', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Display as cost input description on admin product pages', 'cost-of-goods-for-woocommerce' ),
+				'id'      => 'alg_wc_cog_last_update_date_as_cost_input_desc_on_admin_product_page',
+				'default' => 'no',
+				'type'    => 'checkbox',
+				'checkboxgroup' => 'start',
+			),
+			/*array(
+				'desc'    => __( 'Display as cost input description on bulk and quick edit', 'cost-of-goods-for-woocommerce' ),
+				'id'      => 'alg_wc_cog_last_update_date_as_cost_input_desc_on_bulk_and_quick_edit',
+				'default' => 'no',
+				'type'    => 'checkbox',
+				'checkboxgroup' => 'end',
+			),*/
+			array(
+
+				'desc'           => __( 'Last update date template.', 'cost-of-goods-for-woocommerce' ),
+				'id'             => 'alg_wc_cog_last_update_date_template',
+				'default'        => __( 'Last update date: %last_update_date%', 'cost-of-goods-for-woocommerce' ),
+				'type'           => 'text',
 			),
 			array(
 				'type'     => 'sectionend',
