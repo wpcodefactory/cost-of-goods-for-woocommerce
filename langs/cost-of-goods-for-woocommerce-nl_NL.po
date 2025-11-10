@@ -532,7 +532,7 @@ msgstr "<a target=\"_blank\" href=\"%s\">Bekijk de opties voor het format.</a>"
 msgid "Example:"
 msgstr "Voorbeeld:"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:340
+#: includes/class-alg-wc-cog-products-cost-archive.php:355
 msgid "Variation archive"
 msgstr "Variatie archief"
 
@@ -545,7 +545,7 @@ msgid "If no variation is selected, the parent product will be updated."
 msgstr "Als er geen variatie is geselecteerd, wordt het hoofdproduct geüpdatet."
 
 #: includes/class-alg-wc-cog-products-add-stock.php:582
-#: includes/class-alg-wc-cog-products-cost-archive.php:347
+#: includes/class-alg-wc-cog-products-cost-archive.php:362
 msgid "Select variation"
 msgstr "Selecteer variatie"
 
@@ -972,27 +972,27 @@ msgstr "Cijfers met komma's"
 msgid "Sync cost"
 msgstr "Synchronisatie kosten"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:236
+#: includes/class-alg-wc-cog-products-cost-archive.php:248
 msgid "New cost"
 msgstr "Nieuwe kosten"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:235
+#: includes/class-alg-wc-cog-products-cost-archive.php:247
 msgid "Previous cost"
 msgstr "Vorige kosten"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:234
+#: includes/class-alg-wc-cog-products-cost-archive.php:246
 msgid "Update date"
 msgstr "Datum geüpdatet"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:231
+#: includes/class-alg-wc-cog-products-cost-archive.php:243
 msgid "Products > Cost archive > Save cost archive"
 msgstr "Producten > Kosten archief > Kosten archief opslaan"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:231
+#: includes/class-alg-wc-cog-products-cost-archive.php:243
 msgid "Please, check if the option %s is enabled and then update the cost."
 msgstr "Controleer of de optie %s is ingeschakeld en update vervolgens de kosten."
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:230
+#: includes/class-alg-wc-cog-products-cost-archive.php:242
 msgid "There isn't a cost archive for this product yet."
 msgstr "Er is nog geen kosten archief voor dit product."
 
@@ -3406,7 +3406,7 @@ msgstr ""
 msgid "Generate the CSV with the products selected by the Cost of Goods filter"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:101
+#: includes/class-alg-wc-cog-products-cost-archive.php:113
 #: includes/settings/class-alg-wc-cog-settings-products.php:253
 msgid "Last update date: %last_update_date%"
 msgstr ""

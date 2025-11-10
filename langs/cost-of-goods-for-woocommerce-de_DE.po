@@ -322,27 +322,27 @@ msgstr "Datum"
 msgid "Cost archive"
 msgstr "Kostenarchiv"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:230
+#: includes/class-alg-wc-cog-products-cost-archive.php:242
 msgid "There isn't a cost archive for this product yet."
 msgstr "Für dieses Produkt gibt es noch kein Kostenarchiv."
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:231
+#: includes/class-alg-wc-cog-products-cost-archive.php:243
 msgid "Please, check if the option %s is enabled and then update the cost."
 msgstr "Bitte überprüfen Sie, ob die Option %s aktiviert ist, und aktualisieren Sie dann die Kosten."
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:231
+#: includes/class-alg-wc-cog-products-cost-archive.php:243
 msgid "Products > Cost archive > Save cost archive"
 msgstr "Produkte > Kostenarchiv > Kostenarchiv speichern"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:234
+#: includes/class-alg-wc-cog-products-cost-archive.php:246
 msgid "Update date"
 msgstr "Aktualisierungsdatum"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:235
+#: includes/class-alg-wc-cog-products-cost-archive.php:247
 msgid "Previous cost"
 msgstr "Bisherige Kosten"
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:236
+#: includes/class-alg-wc-cog-products-cost-archive.php:248
 msgid "New cost"
 msgstr "Neue Kosten"
 
@@ -2351,7 +2351,7 @@ msgid "Variation history"
 msgstr ""
 
 #: includes/class-alg-wc-cog-products-add-stock.php:582
-#: includes/class-alg-wc-cog-products-cost-archive.php:347
+#: includes/class-alg-wc-cog-products-cost-archive.php:362
 msgid "Select variation"
 msgstr ""
 
@@ -2363,7 +2363,7 @@ msgstr ""
 msgid "Update variation(s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:340
+#: includes/class-alg-wc-cog-products-cost-archive.php:355
 msgid "Variation archive"
 msgstr ""
 
@@ -3408,7 +3408,7 @@ msgstr ""
 msgid "Generate the CSV with the products selected by the Cost of Goods filter"
 msgstr ""
 
-#: includes/class-alg-wc-cog-products-cost-archive.php:101
+#: includes/class-alg-wc-cog-products-cost-archive.php:113
 #: includes/settings/class-alg-wc-cog-settings-products.php:253
 msgid "Last update date: %last_update_date%"
 msgstr ""
