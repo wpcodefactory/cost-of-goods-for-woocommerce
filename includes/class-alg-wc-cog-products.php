@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 3.8.4
+ * @version 4.0.0
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -516,7 +516,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_profit.
 	 *
-	 * @version 3.8.4
+	 * @version 4.0.0
 	 * @since   1.0.0
 	 * @todo    [next] maybe check if `wc_get_price_excluding_tax()` is numeric (e.g. maybe can return range)
 	 */
@@ -533,6 +533,10 @@ class Alg_WC_Cost_of_Goods_Products {
 		$get_price_method        = $args['get_price_method'];
 		$product                 = $args['product'];
 		$product                 = is_a( $product, 'WC_Product' ) ? $product : wc_get_product( $product_id );
+		if ( ! is_a( $product, 'WC_Product' ) ) {
+			return 0;
+		}
+
 		$product_id              = $product->get_id();
 		$cost                    = empty( $cost = $this->get_product_cost( $product_id ) ) ? 0 : $cost;
 		$price                   = empty( $price = $this->get_product_price( $product, $get_price_method ) ) ? 0 : $price;
