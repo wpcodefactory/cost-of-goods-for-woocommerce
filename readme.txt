@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.8
-Stable tag: 3.9.8
+Stable tag: 3.9.9
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 3.9.9 - 20/11/2025 =
+* Dev - Advanced - Added the `woocommerce_update_order` hook to the option Order calculation hooks.
 
 = 3.9.8 - 10/11/2025 =
 * Dev - Products - Last Update Date now being saved as `_alg_wc_cog_last_update_date` meta.

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.9.0
+ * @version 3.9.9
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -321,7 +321,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 3.7.8
+	 * @version 3.9.9
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -329,10 +329,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 */
 	function add_hooks() {
 		add_action( 'woocommerce_new_order_item', array( $this, 'update_order_items_costs_new_item' ), 10, 3 );
-		add_action( 'woocommerce_order_status_changed', array(
-			$this,
-			'update_order_items_costs_order_status_changed'
-		), 10, 1 );
+		add_action( 'woocommerce_order_status_changed', array( $this, 'update_order_items_costs_order_status_changed' ), 10, 1 );
 		add_action( 'added_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
 		add_action( 'updated_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
 		add_action( 'deleted_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10, 4 );
@@ -341,6 +338,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 		add_action( 'woocommerce_before_order_itemmeta', array( $this, 'add_cost_input_shop_order' ), PHP_INT_MAX, 3 );
 		add_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), 9, 2 );
 		add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_cost_input_shop_order_save_post' ), 9, 2 );
+		add_action( 'woocommerce_update_order', array( $this, 'save_cost_input_shop_order_save_post' ), 9, 2 );
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hide_cost_input_meta_shop_order' ), PHP_INT_MAX );
 
 		// Order item handling fee on order edit page.
@@ -898,6 +896,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	 */
 	function get_new_order_hooks_for_cost_updating() {
 		return array(
+			'woocommerce_update_order'                       => 'woocommerce_update_order',
 			'woocommerce_new_order'                          => 'woocommerce_new_order',
 			'woocommerce_api_create_order'                   => 'woocommerce_api_create_order',
 			'woocommerce_cli_create_order'                   => 'woocommerce_cli_create_order',
@@ -1196,7 +1195,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * save_cost_input_shop_order_save_post.
 	 *
-	 * @version 3.4.4
+	 * @version 3.9.9
 	 * @since   1.1.0
 	 */
 	function save_cost_input_shop_order_save_post( $post_id, $post ) {
@@ -1204,6 +1203,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 			if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_avoid_infinite_loops', 'yes' ) ) {
 				remove_action( 'save_post_shop_order', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
 				remove_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
+				remove_action( 'woocommerce_update_order', array( $this, 'save_cost_input_shop_order_save_post' ), 9 );
 			}
 
 			$this->update_order_items_costs( array(

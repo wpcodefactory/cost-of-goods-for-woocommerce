@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 3.9.8\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 3.9.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-10T18:37:47+01:00\n"
+"POT-Creation-Date: 2025-11-20T18:43:39+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -86,7 +86,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:146
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:245
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:155
-#: includes/class-alg-wc-cog-orders.php:1037
+#: includes/class-alg-wc-cog-orders.php:1036
 #: includes/class-alg-wc-cog-products-add-stock.php:371
 #: includes/class-alg-wc-cog-products-add-stock.php:457
 #: includes/class-alg-wc-cog-products.php:309
@@ -133,7 +133,7 @@ msgstr ""
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:148
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
-#: includes/class-alg-wc-cog-orders.php:1047
+#: includes/class-alg-wc-cog-orders.php:1046
 #: includes/class-alg-wc-cog-products.php:391
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/class-alg-wc-cog-pro-compatibility.php:158
@@ -357,52 +357,52 @@ msgstr ""
 msgid "fee"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:464
+#: includes/class-alg-wc-cog-orders.php:462
 msgid "Gateway"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:535
+#: includes/class-alg-wc-cog-orders.php:533
 msgid "Extra costs: From meta"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:772
+#: includes/class-alg-wc-cog-orders.php:770
 #: includes/settings/class-alg-wc-cog-settings-orders.php:315
 msgid "Taxes to profit"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:774
+#: includes/class-alg-wc-cog-orders.php:772
 msgid "Taxes to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:816
+#: includes/class-alg-wc-cog-orders.php:814
 #: includes/settings/class-alg-wc-cog-settings-orders.php:301
 msgid "Fees to profit"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:818
+#: includes/class-alg-wc-cog-orders.php:816
 msgid "Fees to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:860
+#: includes/class-alg-wc-cog-orders.php:858
 #: includes/settings/class-alg-wc-cog-settings-orders.php:287
 msgid "Shipping to profit"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:862
+#: includes/class-alg-wc-cog-orders.php:860
 msgid "Shipping to profit (%s)"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:1003
+#: includes/class-alg-wc-cog-orders.php:1002
 #: includes/settings/class-alg-wc-cog-settings-orders.php:178
 msgid "You are selling below the cost of goods."
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:1050
+#: includes/class-alg-wc-cog-orders.php:1049
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit percent"
 msgstr ""
 
-#: includes/class-alg-wc-cog-orders.php:1053
+#: includes/class-alg-wc-cog-orders.php:1052
 #: includes/settings/class-alg-wc-cog-settings-orders.php:48
 msgid "Profit margin"
 msgstr ""
