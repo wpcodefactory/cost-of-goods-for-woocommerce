@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 3.6.2
+ * @version 4.0.1
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -69,9 +69,31 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	}
 
 	/**
+	 * get_product_attributes.
+	 *
+	 * @version 4.0.1
+	 * @since   4.0.1
+	 *
+	 * @return array
+	 */
+	function get_product_attributes() {
+		$attribute_taxonomies = wc_get_attribute_taxonomies();
+		$result               = array();
+
+		foreach ( $attribute_taxonomies as $attr ) {
+			$taxonomy = wc_attribute_taxonomy_name( $attr->attribute_name );
+			$label    = $attr->attribute_label;
+
+			$result[ $taxonomy ] = $label;
+		}
+
+		return $result;
+	}
+
+	/**
 	 * get_settings.
 	 *
-	 * @version 3.6.2
+	 * @version 4.0.1
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -80,11 +102,36 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	 */
 	function get_settings() {
 
+		$bulk_edit_opts = array(
+			array(
+				'title' => __( 'Bulk edit options', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Bulk edit options for %s and %s.', 'cost-of-goods-for-woocommerce' ),
+					'<a href="' . admin_url( 'tools.php?page=bulk-edit-costs' ) . '">' . __( 'Tools > Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ) . '</a>',
+					'<a href="' . admin_url( 'tools.php?page=bulk-edit-prices' ) . '">' . __( 'Tools > Bulk Edit Prices', 'cost-of-goods-for-woocommerce' ) . '</a>'
+				),
+				'type'  => 'title',
+				'id'    => 'alg_wc_cog_bulk_edit_opts',
+			),
+			array(
+				'title'   => __( 'Filterable attributes', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Product attributes available for filtering on bulk edit.', 'cost-of-goods-for-woocommerce' ),
+				'type'    => 'multiselect',
+				'class'   => 'chosen_select',
+				'id'      => 'alg_wc_cog_bulk_edit_filterable_taxes',
+				'default' => array(),
+				'options' => $this->get_product_attributes(),
+			),
+			array(
+				'type' => 'sectionend',
+				'id'   => 'alg_wc_cog_bulk_edit_opts',
+			),
+		);
+
 		$bulk_edit_costs_opts = array(
 			array(
-				'title'    => __( 'Product Bulk Edit Costs Tool', 'cost-of-goods-for-woocommerce' ),
+				'title'    => __( 'Bulk edit costs tool', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
-				'desc'     => sprintf( __( 'Bulk Edit tool is in %s.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'The Bulk Edit Costs tool is located in %s.', 'cost-of-goods-for-woocommerce' ),
 					'<a href="' . admin_url( 'tools.php?page=bulk-edit-costs' ) . '">' . __( 'Tools > Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_cog_bulk_edit_tool_options',
 			),
@@ -156,7 +203,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 
 		$import_tools_opts = array(
 			array(
-				'title' => __( 'Product Import Costs Tool', 'cost-of-goods-for-woocommerce' ),
+				'title' => __( 'Product import costs tool', 'cost-of-goods-for-woocommerce' ),
 				'type'  => 'title',
 				'desc'  => __( 'A tool created with the purpose of importing the cost meta from another plugin by replacing the cost meta.', 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
 				           __( 'If you wish, you can use it on the opposite way by swapping the from and to keys.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'You can also use it with any other metas.', 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
@@ -319,6 +366,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 		);
 
 		return array_merge(
+			$bulk_edit_opts,
 			$bulk_edit_costs_opts,
 			$import_tools_opts,
 			$order_tools_opts,

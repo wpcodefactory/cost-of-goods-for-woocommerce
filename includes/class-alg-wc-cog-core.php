@@ -25,6 +25,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		public $import_tool;
 
 		/**
+		 * Bulk edit attr filtering.
+		 *
+		 * @since 4.0.1
+		 *
+		 * @var Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering
+		 */
+		public $bulk_edit_attr_filtering;
+
+		/**
 		 * Products.
 		 *
 		 * @since 2.9.4
@@ -108,7 +117,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.6.9
+		 * @version 4.0.1
 		 * @since   1.0.0
 		 * @todo    [next] add "delete all (products and/or orders) meta" tool
 		 * @todo    [next] add option to enter costs *with taxes*
@@ -140,6 +149,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Core' ) ) :
 
 			// Analytics.
 			$this->analytics = require_once( 'analytics/class-alg-wc-cog-analytics.php' );
+
+			// Import tool.
+			require_once( 'tools/class-alg-wc-cog-bulk-edit-attr-filtering.php' );
+			$this->bulk_edit_attr_filtering = new Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering();
+			$this->bulk_edit_attr_filtering->init();
 
 			// Import tool.
 			$this->import_tool = require_once( 'tools/class-alg-wc-cog-import-tool.php' );

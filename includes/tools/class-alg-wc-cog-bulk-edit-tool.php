@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 3.7.9
+ * @version 4.0.1
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -74,25 +74,33 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @since   1.2.0
 		 */
 		function __construct() {
-			// Bkg Process
+
+			// Bkg Process.
 			$this->init_bkg_process();
 			add_action( 'admin_init', array( $this, 'save_costs' ) );
 			add_filter( 'woocommerce_screen_ids', array( $this, 'add_tool_to_wc_screen_ids' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts_and_styles' ) );
 			add_action( 'admin_menu', array( $this, 'create_wp_list_tool' ) );
 			add_action( 'set-screen-option', array( $this, 'set_screen_option' ), 10, 3 );
+
 			// Update costs.
 			add_action( 'admin_init', array( $this, 'update_costs' ) );
+
 			// Update prices.
 			add_action( 'admin_init', array( $this, 'update_prices' ) );
+
 			// Remove query args.
 			add_action( 'admin_init', array( $this, 'remove_query_args' ) );
+
 			// Json search tags.
 			add_action( 'wp_ajax_' . 'alg_wc_cog_json_search_tags', array( $this, 'json_search_tags' ) );
+
 			// Filter products by costs.
 			add_filter( 'woocommerce_product_data_store_cpt_get_products_query', array( $this, 'filter_products_query_by_costs' ), 10, 2 );
-			// Display notices
+
+			// Display notices.
 			add_action( 'alg_wc_cog_tools_after', array( $this, 'display_notices' ), 10 );
+
 			// Disable screen options on Automatically tab.
 			add_filter( 'screen_options_show_screen', array( $this, 'disable_screen_option_on_automatically_tab' ), 10 );
 		}
@@ -330,7 +338,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * get_products_to_be_updated.
 		 *
-		 * @version 3.4.0
+		 * @version 4.0.1
 		 * @since   3.3.0
 		 *
 		 * @param $args
@@ -338,17 +346,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @return array|stdClass
 		 */
 		function get_products_to_be_updated( $args ) {
-			$args = wp_parse_args( $args, array(
+			$args                = wp_parse_args( $args, array(
 				'product_category' => array(),
 				'product_tag'      => array(),
 				'cost_filter'      => '',
 				'update_method'    => '',
 				'stock_status'     => ''
 			) );
-			$product_categories = $args['product_category'];
-			$update_method = $args['update_method'];
-			$product_tags = $args['product_tag'];
-			$cost_filter = $args['cost_filter'];
+			$product_categories  = $args['product_category'];
+			$update_method       = $args['update_method'];
+			$product_tags        = $args['product_tag'];
+			$cost_filter         = $args['cost_filter'];
 			$stock_status_filter = $args['stock_status'];
 
 			// Product args.
@@ -360,6 +368,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			);
 			$products_args            = $this->handle_category_filter_wc_get_products_args( $product_categories, $products_args );
 			$products_args            = $this->handle_tags_filter_wc_get_products_args( $product_tags, $products_args );
+			$products_args            = apply_filters( 'alg_wc_cog_bulk_edit_get_products_args', $products_args, $args );
 			$products_from_taxes_args = $products_args;
 			if ( ! empty( $cost_filter ) ) {
 				$products_args = $this->handle_costs_filter_wc_get_products_args( $cost_filter, $products_args );
@@ -372,8 +381,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				'posts_per_page' => - 1,
 				'fields'         => 'ids',
 				'no_found_rows'  => true,
-
 			);
+			$child_products_query_args = apply_filters( 'alg_wc_cog_bulk_edit_get_child_products_args', $child_products_query_args, $args );
 			if ( ! empty( $cost_filter ) ) {
 				$child_products_query_args = $this->handle_costs_filter_query( $child_products_query_args, $cost_filter );
 			}
@@ -831,7 +840,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * display_bulk_edit_prices.
 		 *
-		 * @version 3.4.0
+		 * @version 4.0.1
 		 * @since   2.6.1
 		 */
 		function display_bulk_edit_prices() {
@@ -922,6 +931,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
             <h2><?php esc_html_e( 'Filters', 'cost-of-goods-for-woocommerce' ); ?></h2>
 
             <table class="form-table bulk-edit-auto" role="presentation">
+				<?php alg_wc_cog()->core->bulk_edit_attr_filtering->render_attributes(); ?>
                 <tr>
                     <th scope="row"><label for="product-category"><?php esc_html_e( 'Filter by category', 'cost-of-goods-for-woocommerce' ); ?></label></th>
                     <td>
@@ -962,7 +972,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Bulk edit costs automatically.
 		 *
-		 * @version 3.4.0
+		 * @version 4.0.1
 		 * @since   2.5.1
 		 */
 		function display_bulk_edit_costs_automatically() {
@@ -1053,6 +1063,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			<h2><?php esc_html_e( 'Filters', 'cost-of-goods-for-woocommerce' ); ?></h2>
 
             <table class="form-table bulk-edit-auto" role="presentation">
+				<?php alg_wc_cog()->core->bulk_edit_attr_filtering->render_attributes(); ?>
                 <tr>
                     <th scope="row"><label for="product-category"><?php esc_html_e( 'Filter by category', 'cost-of-goods-for-woocommerce' ); ?></label></th>
                     <td>
