@@ -423,12 +423,22 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 			),
 			array(
-				'title'    => __( 'Cost import', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Get only the cost number when using the %s', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'edit.php?post_type=product&page=product_importer' ) . '">' . __( 'WooCommerce Importer', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
-				'desc_tip' => __( 'Useful if you want to ignore price symbols from the CSV when importing.', 'cost-of-goods-for-woocommerce' ),
-				'id'       => 'alg_wc_cog_import_csv_get_only_cost_number',
-				'default'  => 'no',
-				'type'     => 'checkbox',
+				'title'         => __( 'Cost import', 'cost-of-goods-for-woocommerce' ),
+				'desc'          => sprintf( __( 'Get only the cost number when using the %s', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'edit.php?post_type=product&page=product_importer' ) . '">' . __( 'WooCommerce Importer', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+				'desc_tip'      => __( 'Useful if you want to ignore price symbols from the CSV when importing.', 'cost-of-goods-for-woocommerce' ) . ' '.
+				                   sprintf( __( 'Example: %s becomes %s', 'cost-of-goods-for-woocommerce' ), '<code>$1.179,00</code>', '<code>1.179,00</code>' ),
+				'id'            => 'alg_wc_cog_import_csv_get_only_cost_number',
+				'default'       => 'no',
+				'type'          => 'checkbox',
+				'checkboxgroup' => 'start',
+			),
+			array(
+				'desc'          => sprintf( __( 'Normalize cost when using the %s', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'edit.php?post_type=product&page=product_importer' ) . '">' . __( 'WooCommerce Importer', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+				'desc_tip'      => sprintf( __( 'Converts costs such as %s or %s to %s.', 'cost-of-goods-for-woocommerce' ), '<code>1.179,00</code>', '<code>1,179.00</code>', '<code>1179.00</code>' ),
+				'id'            => 'alg_wc_cog_import_csv_normalize_cost',
+				'default'       => 'no',
+				'type'          => 'checkbox',
+				'checkboxgroup' => 'end',
 			),
 			array(
 				'title'    => __( 'Product export', 'cost-of-goods-for-woocommerce' ),

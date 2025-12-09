@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 4.0.0
+ * @version 4.0.2
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -261,7 +261,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * parse_import_data.
 	 *
-	 * @version 2.7.0
+	 * @version 4.0.2
 	 * @since   1.5.1
 	 */
 	function parse_import_data( $data, $importer ) {
@@ -278,10 +278,18 @@ class Alg_WC_Cost_of_Goods_Products {
 		if ( isset( $data['meta_data'] ) && is_array( $data['meta_data'] ) && ! empty( $data['meta_data'] ) ) {
 			foreach ( $data['meta_data'] as $key => $value ) {
 				if ( '_alg_wc_cog_cost' === $value['key'] ) {
-					$data['meta_data'][ $key ]['value'] = 'yes' === get_option( 'alg_wc_cog_import_csv_get_only_cost_number', 'no' ) ? $this->get_only_number( $value['value'] ) : $value['value'];
+					$final_value = $value['value'];
+					if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_import_csv_get_only_cost_number', 'no' ) ) {
+						$final_value = $this->get_only_number( $final_value );
+					}
+					if ( 'yes' === alg_wc_cog_get_option( 'alg_wc_cog_import_csv_normalize_cost', 'no' ) ) {
+						$final_value = alg_wc_cog_normalize_price( $final_value );
+					}
+					$data['meta_data'][ $key ]['value'] = $final_value;
 				}
 			}
 		}
+
 		return $data;
 	}
 

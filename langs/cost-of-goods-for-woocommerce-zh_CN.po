@@ -1297,7 +1297,7 @@ msgstr "商品成本"
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:246
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:156
 #: includes/class-alg-wc-cog-orders.php:1046
-#: includes/class-alg-wc-cog-products.php:391
+#: includes/class-alg-wc-cog-products.php:399
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/class-alg-wc-cog-pro-compatibility.php:158
 #: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
@@ -1337,10 +1337,10 @@ msgstr "利润"
 #: includes/class-alg-wc-cog-orders.php:1036
 #: includes/class-alg-wc-cog-products-add-stock.php:371
 #: includes/class-alg-wc-cog-products-add-stock.php:457
-#: includes/class-alg-wc-cog-products.php:309
-#: includes/class-alg-wc-cog-products.php:320
-#: includes/class-alg-wc-cog-products.php:331
-#: includes/class-alg-wc-cog-products.php:388
+#: includes/class-alg-wc-cog-products.php:317
+#: includes/class-alg-wc-cog-products.php:328
+#: includes/class-alg-wc-cog-products.php:339
+#: includes/class-alg-wc-cog-products.php:396
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:49
 #: includes/pro/class-alg-wc-cog-pro-compatibility.php:147
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:99
@@ -2535,6 +2535,7 @@ msgid "Get only the cost number when using the %s"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:427
+#: includes/settings/class-alg-wc-cog-settings-products.php:436
 msgid "WooCommerce Importer"
 msgstr ""
 
@@ -2542,31 +2543,31 @@ msgstr ""
 msgid "Useful if you want to ignore price symbols from the CSV when importing."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:434
+#: includes/settings/class-alg-wc-cog-settings-products.php:444
 msgid "Product export"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:435
+#: includes/settings/class-alg-wc-cog-settings-products.php:445
 msgid "Convert cost to number"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:436
+#: includes/settings/class-alg-wc-cog-settings-products.php:446
 msgid "If disabled it will be parsed as string."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:442
+#: includes/settings/class-alg-wc-cog-settings-products.php:452
 msgid "Dots and commas operation when exporting the product cost."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:447
+#: includes/settings/class-alg-wc-cog-settings-products.php:457
 msgid "Convert commas to dots"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:448
+#: includes/settings/class-alg-wc-cog-settings-products.php:458
 msgid "Convert dots to commas"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-products.php:449
+#: includes/settings/class-alg-wc-cog-settings-products.php:459
 msgid "None"
 msgstr ""
 
@@ -3458,4 +3459,16 @@ msgstr ""
 
 #: includes/tools/class-alg-wc-cog-bulk-edit-attr-filtering.php:182
 msgid "Select the %s terms you want to filter."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:429
+msgid "Example: %s becomes %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:436
+msgid "Normalize cost when using the %s"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-products.php:437
+msgid "Converts costs such as %s or %s to %s."
 msgstr ""

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 3.7.8
+ * @version 4.0.2
  * @since   3.2.1
  * @author  WPFactory
  */
@@ -263,6 +263,33 @@ if ( ! function_exists( 'alg_wc_cog_sanitize_number' ) ) {
 		}
 
 		return $value;
+	}
+}
+
+if ( ! function_exists( 'alg_wc_cog_normalize_price' ) ) {
+	/**
+	 * alg_wc_cog_normalize_price.
+	 *
+	 * @version 4.0.2
+	 * @since   4.0.2
+	 *
+	 * @param $price
+	 *
+	 * @return string
+	 */
+	function alg_wc_cog_normalize_price( $price ) {
+		$price = trim( $price );
+
+		if ( preg_match( '/^\d{1,3}(\.\d{3})*,\d+$/', $price ) ) {
+			$price = str_replace( '.', '', $price );
+			return str_replace( ',', '.', $price );
+		}
+
+		if ( preg_match( '/^\d{1,3}(,\d{3})*\.\d+$/', $price ) ) {
+			return str_replace( ',', '', $price );
+		}
+
+		return $price;
 	}
 }
 
