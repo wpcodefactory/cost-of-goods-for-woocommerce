@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Currencies Section Settings.
  *
- * @version 3.6.4
+ * @version 4.0.5
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.6.4
+	 * @version 4.0.5
 	 * @since   2.2.0
 	 * @todo    [next] exclude `$wc_currency` from `get_woocommerce_currencies()`?
 	 * @todo    [maybe] `alg_wc_cog_currencies_wmc`: add link to the plugin on wp.org?
@@ -43,7 +43,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 				           alg_wc_cog_array_to_string( array(
 					           __( 'All COG related metas, such as profit and costs will be saved in the shop base currency.', 'cost-of-goods-for-woocommerce' ),
 					           __( 'All costs should be always set with the shop base currency, including cost fields present on orders.', 'cost-of-goods-for-woocommerce' ),
-				           ), array( 'item_template' => '<li>{value}</li>', 'glue' => '' ) ),
+				           ), array( 'item_template' => '- {value}', 'glue' => '<br />' ) ),
 				'type'  => 'title',
 				'id'    => 'alg_wc_cog_currencies_options',
 			),

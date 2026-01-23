@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 6.9
-Stable tag: 4.0.4
+Stable tag: 4.0.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -343,6 +343,11 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 4.0.5 - 23/01/2026 =
+* WC tested up to: 10.4.
+* Dev - Updated Key Manager library to version 1.0.8.
+* Improved Settings text from Analytics and Multicurrency sections.
 
 = 4.0.4 - 22/12/2025 =
 * Updated cross-selling library to version 1.0.9.

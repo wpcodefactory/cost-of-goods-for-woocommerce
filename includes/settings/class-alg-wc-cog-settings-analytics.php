@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Section Settings.
  *
- * @version 3.9.1
+ * @version 4.0.5
  * @since   3.4.6
  * @author  WPFactory
  */
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.9.1
+		 * @version 4.0.5
 		 * @since   3.4.6
 		 *
 		 * @return array
@@ -39,8 +39,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$analytics_settings = array(
 				array(
 					'title' => __( 'Analytics options', 'cost-of-goods-for-woocommerce' ),
-					'desc'  => sprintf( __( 'Options related to <a href="%s">WooCommerce Analytics</a>.', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wc-admin&path=/analytics/overview' ) ) . ' ' .
-					           sprintf( __( 'If you can\'t see the values refreshed or have issues with the analytics page, please try <a href="%s">clearing the analytics cache</a>.', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wc-status&tab=tools' ) ),
+					'desc'  => sprintf( __( 'Options related to <a href="%s">WooCommerce Analytics</a>.', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wc-admin&path=/analytics/overview' ) ) . '<br /><br />' .
+					           __( 'Some notes:', 'cost-of-goods-for-woocommerce' ) . '<br />' .
+					           alg_wc_cog_array_to_string( array(
+						           sprintf(
+							           __( 'If you can\'t see the values refreshed or have issues with the analytics page, please try <a href="%s">clearing the analytics cache</a>.', 'cost-of-goods-for-woocommerce' ),
+							           admin_url( 'admin.php?page=wc-status&tab=tools' )
+						           ),
+						           sprintf(
+							           __( 'If the profit is empty and there is a %s currency at the <a href="%s">Multicurrency</a> section, make sure it\'s set to %s.', 'cost-of-goods-for-woocommerce' ),
+							           get_option( 'woocommerce_currency' ) . get_option( 'woocommerce_currency' ),
+							           admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=currencies' ),
+							           '<code>1</code>'
+						           ),
+					           ), array( 'item_template' => '- {value}', 'glue' => '<br />' ) ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_cog_analytics_options',
 				),
