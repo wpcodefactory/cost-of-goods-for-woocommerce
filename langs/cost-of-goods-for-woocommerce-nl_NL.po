@@ -21,15 +21,15 @@ msgstr "Maximale absolute waarde die wordt teruggegeven voor de procentberekenin
 msgid "Max value."
 msgstr "Max. waarde."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:510
+#: includes/settings/class-alg-wc-cog-settings-orders.php:520
 msgid "Negative numbers will be converted to positive"
 msgstr "Negatieve getallen worden omgezet in positieve"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:509
+#: includes/settings/class-alg-wc-cog-settings-orders.php:519
 msgid "Consider all values as positive"
 msgstr "Beschouw alle waarden als positief"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:508
+#: includes/settings/class-alg-wc-cog-settings-orders.php:518
 msgid "Sign handling"
 msgstr "Sign handling"
 
@@ -214,6 +214,7 @@ msgstr "Alle COG-gerelateerde meta's, zoals winst en kosten, worden opgeslagen i
 
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:43
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:42
+#: includes/settings/class-alg-wc-cog-settings-orders.php:493
 msgid "Some notes:"
 msgstr "Enkele opmerkingen:"
 
@@ -603,7 +604,7 @@ msgstr "Geeft de product winst weer"
 msgid "Shortcodes"
 msgstr "Shortcodes"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:492
+#: includes/settings/class-alg-wc-cog-settings-orders.php:502
 msgid "The <a href=\"%s\">\"Payment Plugins for Stripe\"</a> requires the \"Display Stripe Fee\" option to be enabled in the Advanced Settings in order to add the %s meta."
 msgstr "De <a href=\"%s\">\"Payment Plugins for Stripe\"</a> vereist dat de \"Display Stripe Fee\" optie is ingeschakeld in de geavanceerde instellingen om de %s meta toe te voegen."
 
@@ -1271,10 +1272,6 @@ msgstr "ATUM Inventory Management for WooCommerce"
 msgid "Import costs"
 msgstr "Import kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:494
-msgid "If you have issues, please try to enable the %s options."
-msgstr "Als je problemen ondervindt, probeer dan de %s opties in te schakelen."
-
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:117
 msgid "Only triggers with meta not starting with <code>_alg_wc_cog</code>."
 msgstr "Triggert alleen met meta die niet begint met <code>_alg_wc_cog</code>."
@@ -1283,11 +1280,11 @@ msgstr "Triggert alleen met meta die niet begint met <code>_alg_wc_cog</code>."
 msgid "Auto fill empty order items costs on order meta update"
 msgstr "Kosten voor lege bestel items automatisch vullen bij meta update van bestelling"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:491
+#: includes/settings/class-alg-wc-cog-settings-orders.php:501
 msgid "PayPal Payments"
 msgstr "PayPal betalingen"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:491
+#: includes/settings/class-alg-wc-cog-settings-orders.php:501
 msgid "You can also use dots to access serialized array metas. E.g.: Get fees from %s:"
 msgstr "Je kunt ook punten gebruiken om toegang te krijgen tot geserialiseerde array meta's. Bijv.: Ontvang kosten van %s:"
 
@@ -1781,10 +1778,6 @@ msgstr "Netto betaling inclusief belasting"
 msgid "Calculate profit by the difference between Net Payment and Cost"
 msgstr "Bereken winst d.m.v. het verschil tussen netto betaling en kosten"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:494
-msgid "Advanced > Force costs update"
-msgstr "Geavanceerd > Forceer kosten update"
-
 #: includes/settings/class-alg-wc-cog-settings-orders.php:348
 msgid "Refunds"
 msgstr "Terugbetalingen"
@@ -2093,19 +2086,19 @@ msgstr "Kosten (excl. belasting) (%s)"
 msgid "SKU"
 msgstr "SKU"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:501
+#: includes/settings/class-alg-wc-cog-settings-orders.php:511
 msgid "One meta key per line."
 msgstr "Eén meta sleutel per regel."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:500
+#: includes/settings/class-alg-wc-cog-settings-orders.php:510
 msgid "Ignored if empty."
 msgstr "Genegeerd als deze leeg is."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:499
+#: includes/settings/class-alg-wc-cog-settings-orders.php:509
 msgid "Meta keys"
 msgstr "Meta sleutel"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:486
+#: includes/settings/class-alg-wc-cog-settings-orders.php:487
 msgid "E.g.: %s."
 msgstr "Bijv.: %s."
 
@@ -2447,7 +2440,7 @@ msgstr "Vaste kosten"
 #: includes/settings/class-alg-wc-cog-settings-orders.php:249
 #: includes/settings/class-alg-wc-cog-settings-orders.php:403
 #: includes/settings/class-alg-wc-cog-settings-orders.php:437
-#: includes/settings/class-alg-wc-cog-settings-orders.php:493
+#: includes/settings/class-alg-wc-cog-settings-orders.php:503
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:40
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:118
 msgid "You will need to recalculate order's cost and profit after you change these settings."
@@ -3323,11 +3316,11 @@ msgstr ""
 msgid "Extra costs: From meta"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:516
+#: includes/settings/class-alg-wc-cog-settings-orders.php:526
 msgid "Treat as profit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:517
+#: includes/settings/class-alg-wc-cog-settings-orders.php:527
 msgid "Treat extra costs from meta as profit instead of cost"
 msgstr ""
 
@@ -3476,4 +3469,20 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:50
 msgid "If the profit is empty and there is a %s currency at the <a href=\"%s\">Multicurrency</a> section, make sure it's set to %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:497
+msgid "If you're using the plugin %s, try using the %s meta key."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:498
+msgid "Payment Plugins for PayPal WooCommerce"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:504
+msgid "If you have issues, please try to enable the option %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:504
+msgid "Advanced > Auto fill empty order items costs on order update"
 msgstr ""

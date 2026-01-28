@@ -605,7 +605,7 @@ msgstr "Ödeme Seçenekleri"
 #: includes/settings/class-alg-wc-cog-settings-orders.php:249
 #: includes/settings/class-alg-wc-cog-settings-orders.php:403
 #: includes/settings/class-alg-wc-cog-settings-orders.php:437
-#: includes/settings/class-alg-wc-cog-settings-orders.php:493
+#: includes/settings/class-alg-wc-cog-settings-orders.php:503
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:40
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:118
 msgid "You will need to recalculate order's cost and profit after you change these settings."
@@ -856,20 +856,20 @@ msgstr "Meta'dan"
 msgid "Adds extra costs from order meta."
 msgstr "Sipariş metasından ekstra maliyetler ekler."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:486
+#: includes/settings/class-alg-wc-cog-settings-orders.php:487
 #, php-format
 msgid "E.g.: %s."
 msgstr "Örneğin: %s."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:499
+#: includes/settings/class-alg-wc-cog-settings-orders.php:509
 msgid "Meta keys"
 msgstr "Meta anahtarlar"
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:500
+#: includes/settings/class-alg-wc-cog-settings-orders.php:510
 msgid "Ignored if empty."
 msgstr "Boşsa yok sayılır."
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:501
+#: includes/settings/class-alg-wc-cog-settings-orders.php:511
 msgid "One meta key per line."
 msgstr "Satır başına bir meta anahtar."
 
@@ -1888,6 +1888,7 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:43
 #: includes/settings/class-alg-wc-cog-settings-currencies.php:42
+#: includes/settings/class-alg-wc-cog-settings-orders.php:493
 msgid "Some notes:"
 msgstr ""
 
@@ -2149,24 +2150,16 @@ msgstr ""
 msgid "Only works with %s."
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:491
+#: includes/settings/class-alg-wc-cog-settings-orders.php:501
 msgid "You can also use dots to access serialized array metas. E.g.: Get fees from %s:"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:491
+#: includes/settings/class-alg-wc-cog-settings-orders.php:501
 msgid "PayPal Payments"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:492
+#: includes/settings/class-alg-wc-cog-settings-orders.php:502
 msgid "The <a href=\"%s\">\"Payment Plugins for Stripe\"</a> requires the \"Display Stripe Fee\" option to be enabled in the Advanced Settings in order to add the %s meta."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:494
-msgid "If you have issues, please try to enable the %s options."
-msgstr ""
-
-#: includes/settings/class-alg-wc-cog-settings-orders.php:494
-msgid "Advanced > Force costs update"
 msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:39
@@ -3171,15 +3164,15 @@ msgstr ""
 msgid "Ignore quantity sold when calculating profit and costs"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:508
+#: includes/settings/class-alg-wc-cog-settings-orders.php:518
 msgid "Sign handling"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:509
+#: includes/settings/class-alg-wc-cog-settings-orders.php:519
 msgid "Consider all values as positive"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:510
+#: includes/settings/class-alg-wc-cog-settings-orders.php:520
 msgid "Negative numbers will be converted to positive"
 msgstr ""
 
@@ -3360,11 +3353,11 @@ msgstr ""
 msgid "Extra costs: From meta"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:516
+#: includes/settings/class-alg-wc-cog-settings-orders.php:526
 msgid "Treat as profit"
 msgstr ""
 
-#: includes/settings/class-alg-wc-cog-settings-orders.php:517
+#: includes/settings/class-alg-wc-cog-settings-orders.php:527
 msgid "Treat extra costs from meta as profit instead of cost"
 msgstr ""
 
@@ -3513,4 +3506,20 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:50
 msgid "If the profit is empty and there is a %s currency at the <a href=\"%s\">Multicurrency</a> section, make sure it's set to %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:497
+msgid "If you're using the plugin %s, try using the %s meta key."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:498
+msgid "Payment Plugins for PayPal WooCommerce"
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:504
+msgid "If you have issues, please try to enable the option %s."
+msgstr ""
+
+#: includes/settings/class-alg-wc-cog-settings-orders.php:504
+msgid "Advanced > Auto fill empty order items costs on order update"
 msgstr ""
