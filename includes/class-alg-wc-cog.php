@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '4.0.6';
+		public $version = '4.0.7';
 
 		/**
 		 * @since 1.0.0
