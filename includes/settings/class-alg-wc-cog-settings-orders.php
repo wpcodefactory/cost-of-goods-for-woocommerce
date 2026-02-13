@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Section Settings.
  *
- * @version 4.0.6
+ * @version 4.0.8
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.6
+	 * @version 4.0.8
 	 * @since   1.7.0
 	 * @todo    [later] `alg_wc_cog_order_prepopulate_in_ajax`: remove (i.e. always enabled)
 	 * @todo    [later] `alg_wc_cog_order_save_items_ajax`: remove (i.e. always enabled)
@@ -38,15 +38,16 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 	 */
 	function get_settings() {
 
-		$order_columns_settings = array(
+		$admin_orders_cost_column_settings = array(
 			array(
-				'title'    => __( 'Admin Orders List Columns', 'cost-of-goods-for-woocommerce' ),
-				'type'     => 'title',
-				'desc'     => sprintf( __( 'This section lets you add custom columns to the WooCommerce admin %s.', 'cost-of-goods-for-woocommerce' ),
-					'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders list', 'cost-of-goods-for-woocommerce' ) . '</a>' ) . '<br>' .
-					sprintf( __( 'Please note: to display %s and %s for orders created before plugin v2.2.0 was installed, you will need to recalculate orders cost and profit.', 'cost-of-goods-for-woocommerce' ),
-						'"' . __( 'Profit percent', 'cost-of-goods-for-woocommerce' ) . '"', '"' . __( 'Profit margin', 'cost-of-goods-for-woocommerce' ) . '"' ),
-				'id'       => 'alg_wc_cog_orders_columns_options',
+				'title' => __( 'Cost column', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'desc'  =>
+					sprintf(
+						__( 'Cost column displayed on the WooCommerce admin %s.', 'cost-of-goods-for-woocommerce' ),
+						'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders page', 'cost-of-goods-for-woocommerce' ) . '</a>'
+					),
+				'id' => 'alg_wc_cog_orders_cost_column_opts',
 			),
 			array(
 				'title'    => __( 'Order cost', 'cost-of-goods-for-woocommerce' ),
@@ -56,9 +57,16 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'type'     => 'checkbox',
 			),
 			array(
-				'desc'     => __( 'Order statuses', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Select order statuses to show cost.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( 'Leave empty to show for all orders.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Cost column width (%s unit).', 'cost-of-goods-for-woocommerce' ), 'ch' ),
+				'desc_tip' => __( 'Zero or empty values will disable custom width.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_column_cost_width',
+				'default'  => 3,
+				'type'     => 'number',
+			),
+			array(
+				'title'     => __( 'Order statuses', 'cost-of-goods-for-woocommerce' ),
+				'desc' => __( 'Select order statuses to show cost.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				              __( 'Leave empty to show for all orders.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_cost_order_status',
 				'default'  => array(),
 				'type'     => 'multiselect',
@@ -66,31 +74,68 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'options'  => $this->get_order_statuses(),
 			),
 			array(
-				'title'    => __( 'Order profit', 'cost-of-goods-for-woocommerce' ),
+				'type' => 'sectionend',
+				'id'   => 'alg_wc_cog_orders_cost_column_opts',
+			),
+		);
+
+		$admin_orders_profit_column_settings = array(
+			array(
+				'title' => __( 'Profit columns', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				'desc'  =>
+					sprintf(
+						__( 'Columns displayed on the WooCommerce admin %s related to profit.', 'cost-of-goods-for-woocommerce' ),
+						'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders page', 'cost-of-goods-for-woocommerce' ) . '</a>'
+					),
+				'id' => 'alg_wc_cog_orders_cost_column_opts',
+			),
+			array(
+				'title'    => __( 'Profit', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Add profit column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_profit',
 				'default'  => 'yes',
 				'type'     => 'checkbox',
-				'checkboxgroup' => 'start',
 			),
 			array(
+				'desc'     => sprintf( __( 'Profit column width (%s unit).', 'cost-of-goods-for-woocommerce' ), 'ch' ),
+				'desc_tip' => __( 'Zero or empty values will disable custom width.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_column_profit_width',
+				'default'  => 3,
+				'type'     => 'number',
+			),
+			array(
+				'title'    => __( 'Profit percent', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Add profit percent column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_profit_percent',
 				'default'  => 'no',
 				'type'     => 'checkbox',
-				'checkboxgroup' => '',
 			),
 			array(
+				'desc'     => sprintf( __( 'Profit percent column width (%s unit).', 'cost-of-goods-for-woocommerce' ), 'ch' ),
+				'desc_tip' => __( 'Zero or empty values will disable custom width.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_column_profit_percent_width',
+				'default'  => 5,
+				'type'     => 'number',
+			),
+			array(
+				'title'    => __( 'Profit margin', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Add profit margin column', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_profit_margin',
 				'default'  => 'no',
 				'type'     => 'checkbox',
-				'checkboxgroup' => 'end',
 			),
 			array(
-				'desc'     => __( 'Order statuses', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => __( 'Select order statuses to show profit.', 'cost-of-goods-for-woocommerce' ) . ' ' .
-					__( 'Leave empty to show for all orders.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => sprintf( __( 'Profit margin column width (%s unit).', 'cost-of-goods-for-woocommerce' ), 'ch' ),
+				'desc_tip' => __( 'Zero or empty values will disable custom width.', 'cost-of-goods-for-woocommerce' ),
+				'id'       => 'alg_wc_cog_orders_column_profit_margin_width',
+				'default'  => 5,
+				'type'     => 'number',
+			),
+			array(
+				'title'     => __( 'Order statuses', 'cost-of-goods-for-woocommerce' ),
+				'desc' => __( 'Select order statuses to show profit.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				              __( 'Leave empty to show for all orders.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_orders_columns_profit_order_status',
 				'default'  => array(),
 				'type'     => 'multiselect',
@@ -98,8 +143,8 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 				'options'  => $this->get_order_statuses(),
 			),
 			array(
-				'type'     => 'sectionend',
-				'id'       => 'alg_wc_cog_orders_columns_options',
+				'type' => 'sectionend',
+				'id'   => 'alg_wc_cog_orders_cost_column_opts',
 			),
 		);
 
@@ -536,7 +581,8 @@ class Alg_WC_Cost_of_Goods_Settings_Orders extends Alg_WC_Cost_of_Goods_Settings
 		);
 
 		return array_merge(
-			$order_columns_settings,
+			$admin_orders_cost_column_settings,
+			$admin_orders_profit_column_settings,
 			$order_edit_settings,
 			$order_emails_settings,
 			$order_calculation_settings,

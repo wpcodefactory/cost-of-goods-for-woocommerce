@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 3.9.9
+ * @version 4.0.8
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -321,7 +321,7 @@ class Alg_WC_Cost_of_Goods_Orders {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 3.9.9
+	 * @version 4.0.8
 	 * @since   2.1.0
 	 * @todo    [next] Save order items costs on new order: REST API?
 	 * @todo    [next] Save order items costs on new order: `wp_insert_post`?
@@ -430,7 +430,39 @@ class Alg_WC_Cost_of_Goods_Orders {
 
 		// Hides order item profit meta.
 		add_filter( 'woocommerce_hidden_order_itemmeta', array( $this, 'hide_order_item_profit_meta' ), PHP_INT_MAX );
+
+		// Orders page columns.
+		add_action( 'admin_head-woocommerce_page_wc-orders', array( $this, 'handle_orders_page_columns_width' ) );
     }
+
+	/**
+	 * handle_orders_page_columns_width.
+	 *
+	 * @version 4.0.8
+	 * @since   4.0.8
+	 *
+	 * @return void
+	 */
+	function handle_orders_page_columns_width() {
+		$columns = array(
+			array( 'key' => 'cost', 'value' => alg_wc_cog_get_option( 'alg_wc_cog_orders_column_cost_width', 3 ) ),
+			array( 'key' => 'profit', 'value' => alg_wc_cog_get_option( 'alg_wc_cog_orders_column_profit_width', 3 ) ),
+			array( 'key' => 'profit_percent', 'value' => alg_wc_cog_get_option( 'alg_wc_cog_orders_column_profit_percent', 5 ) ),
+			array( 'key' => 'profit_margin', 'value' => alg_wc_cog_get_option( 'alg_wc_cog_orders_column_profit_margin', 5 ) ),
+		);
+		$style   = '';
+		foreach ( $columns as $data ) {
+			if ( ! empty( $data['value'] ) ) {
+				$key   = $data['key'];
+				$style .= " .wp-list-table .column-{$key}{width:" . esc_attr( $data['value'] ) . "ch !important}";
+			}
+		}
+		?>
+		<style>
+			<?php echo esc_attr( $style ); ?>
+		</style>
+		<?php
+	}
 
 	/**
 	 * hide_order_item_profit_meta.
