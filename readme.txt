@@ -344,6 +344,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 
 == Changelog ==
 
+= 4.0.9 - 03/03/2026 =
+* Fix - Fixed "Analytics > Products" report.
+
 = 4.0.8 - 13/02/2026 =
 * Dev - Orders - Added options to setup the cost and profit columns width.
 * WC tested up to: 10.5.
