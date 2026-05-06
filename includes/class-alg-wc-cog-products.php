@@ -123,7 +123,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * alg_wc_cog_product_cost.
 	 *
-	 * @version 3.7.1
+	 * @version 4.1.1
 	 * @since   3.1.0
 	 *
 	 * @param $atts
@@ -144,11 +144,11 @@ class Alg_WC_Cost_of_Goods_Products {
 			'{content}' => $this->get_product_cost_html( $product_id )
 		);
 
-		return str_replace( array_keys( $array_from_to ), $array_from_to, wp_kses_post( $html_template ) );
+		return wp_kses_post( str_replace( array_keys( $array_from_to ), $array_from_to, wp_kses_post( $html_template ) ) );
 	}
 
 	/**
-	 * @version 3.7.1
+	 * @version 4.1.1
 	 * @since   3.1.0
 	 *
 	 * @param $atts
@@ -172,7 +172,7 @@ class Alg_WC_Cost_of_Goods_Products {
 			'{content}' => $this->get_product_profit_html( $product_id, wp_kses_post( $profit_template ) ),
 		);
 
-		return str_replace( array_keys( $array_from_to ), $array_from_to, wp_kses_post( $html_template ) );
+		return wp_kses_post( str_replace( array_keys( $array_from_to ), $array_from_to, wp_kses_post( $html_template ) ) );
 	}
 
 	/**
