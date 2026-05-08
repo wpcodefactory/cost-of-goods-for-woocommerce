@@ -33,7 +33,7 @@ msgstr "Malların maliyetinin altında satış yapıyorsunuz."
 msgid "Cost of Goods"
 msgstr "Malın Maliyeti"
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:439
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:526
@@ -80,7 +80,7 @@ msgstr "Malın Maliyeti"
 msgid "Cost"
 msgstr "Maliyet"
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:475
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:118
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:527

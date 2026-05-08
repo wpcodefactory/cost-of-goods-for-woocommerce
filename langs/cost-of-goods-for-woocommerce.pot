@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 4.1.1\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 4.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-05-06T23:14:20+02:00\n"
+"POT-Creation-Date: 2026-05-08T17:26:13+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -78,7 +78,7 @@ msgstr ""
 msgid "Shipping classes cost"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:439
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:526
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:475
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:118
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:527

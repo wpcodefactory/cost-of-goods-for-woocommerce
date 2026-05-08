@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Orders.
  *
- * @version 3.4.6
+ * @version 4.1.2
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -277,7 +277,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_costs_join_orders.
 		 *
-		 * @version 3.4.6
+		 * @version 4.1.2
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -288,7 +288,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			global $wpdb;
 			$clauses[] = $this->get_order_cost_meta_join_clauses();
 
-			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
+			// Individual cost JOINs are only needed in the per-order subquery (list view).
+			// Adding them to the stats aggregate queries (_stats_total / _stats_interval) is
+			// unnecessary and causes row multiplication when duplicate meta rows exist,
+			// inflating orders_count in Analytics > Revenue and similar reports.
+			if (
+				'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) &&
+				'woocommerce_analytics_clauses_join_orders_subquery' === current_filter()
+			) {
 				if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {
 					$clauses[] = "LEFT JOIN {$wpdb->prefix}wc_orders_meta items_cost_pm ON {$wpdb->prefix}wc_order_stats.order_id = items_cost_pm.order_id AND items_cost_pm.meta_key = '_alg_wc_cog_order_items_cost'";
 					$clauses[] = "LEFT JOIN {$wpdb->prefix}wc_orders_meta shipping_cost_pm ON {$wpdb->prefix}wc_order_stats.order_id = shipping_cost_pm.order_id AND shipping_cost_pm.meta_key = '_alg_wc_cog_order_shipping_cost'";

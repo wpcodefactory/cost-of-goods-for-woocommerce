@@ -44,7 +44,7 @@ msgstr "Gehen Sie zum Profi"
 msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
 msgstr "Deaktivierte Optionen können mit <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a> entsperrt werden"
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:432
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:439
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:49
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:526
@@ -91,7 +91,7 @@ msgstr "Deaktivierte Optionen können mit <a href=\"%s\" target=\"_blank\"><stro
 msgid "Cost"
 msgstr "Kosten"
 
-#: includes/analytics/class-alg-wc-cog-analytics-orders.php:468
+#: includes/analytics/class-alg-wc-cog-analytics-orders.php:475
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:118
 #: includes/analytics/class-alg-wc-cog-analytics-revenue.php:50
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:527
