@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 7.0
-Stable tag: 4.1.3
+Stable tag: 4.1.4
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -80,7 +80,7 @@ ___
 
 #### 🚀 Save Historical Data for Cost of Goods ####
 
-By preserving past cost data, this feature enables businesses to track how the cost structure of their products has evolved, providing a clear window into shifts in supplier pricing, manufacturing costs, or other contributing factors. 
+By preserving past cost data, this feature enables businesses to track how the cost structure of their products has evolved, providing a clear window into shifts in supplier pricing, manufacturing costs, or other contributing factors.
 
 Such historical data becomes invaluable when analyzing profitability trends, forecasting future expenses, and making informed pricing decisions.
 
@@ -150,7 +150,7 @@ Such historical data becomes invaluable when analyzing profitability trends, for
 
 ### 🚀 Costs Bulk Edit Tools ###
 
-Navigating the financial aspects of a WooCommerce store can often be complex, especially when it comes to making widespread changes to product costs. 
+Navigating the financial aspects of a WooCommerce store can often be complex, especially when it comes to making widespread changes to product costs.
 
 Our plugin seamlessly addresses this challenge, introducing free tools that empower store owners to apply bulk changes to product costs, without the usual hassles, using these methods:
 
@@ -168,7 +168,7 @@ Once you set product costs, you can use our built-in tool to change product pric
 
 * Import and export product costs from and to a CSV file with standard WooCommerce Import and Export tools
 
-* You can also use our import tool if you need to import costs from another product metas 
+* You can also use our import tool if you need to import costs from another product metas
 
 ### 🚀 More Advanced Options ###
 
@@ -180,7 +180,7 @@ Once you set product costs, you can use our built-in tool to change product pric
 
 * Unlimited costs update hooks that can be used to trigger cost update
 
-___ 
+___
 ## 🏆 Do More: PRO Version ##
 
 Everything highlighted above —and much more— is accessible in the complimentary version. However, for those seeking to elevate their experience and dive deeper, we offer the upgraded [Cost of Goods for WooCommerce Pro](https://wpfactory.com/item/cost-of-goods-for-woocommerce/?utm_source=wporg&utm_medium=organic&utm_campaign=readme) plugin.
@@ -343,6 +343,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 4.1.4 - 22/05/2026 =
+* Update `$version` property.
 
 = 4.1.3 - 22/05/2026 =
 * Tested up to: 7.0.
