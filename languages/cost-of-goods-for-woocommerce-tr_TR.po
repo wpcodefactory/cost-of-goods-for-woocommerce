@@ -1100,7 +1100,8 @@ msgstr "Maliyetleri içe aktar"
 msgid "Tool's options can be set in %s."
 msgstr "Aracın seçenekleri %s içinde ayarlanabilir."
 
-#: includes/alg-wc-cog-functions.php:219
+#. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
+#: includes/alg-wc-cog-functions.php:220
 #: includes/settings/class-alg-wc-settings-cog.php:83
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr ""
@@ -1119,10 +1120,6 @@ msgstr ""
 
 #. Author URI of the plugin
 msgid "https://wpfactory.com"
-msgstr ""
-
-#: includes/alg-wc-cog-functions.php:219
-msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
 msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:101
@@ -3546,4 +3543,9 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:129
 msgid "Profit margin column width (%s unit)."
+msgstr ""
+
+#. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
+#: includes/alg-wc-cog-functions.php:220
+msgid "Disabled options can be unlocked using <a href=\"%1$s\" target=\"_blank\"><strong>%2$s</strong></a>"
 msgstr ""

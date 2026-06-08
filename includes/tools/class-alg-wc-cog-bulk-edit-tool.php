@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Tool Class.
  *
- * @version 4.0.1
+ * @version 4.1.5
  * @since   1.2.0
  * @author  WPFactory
  */
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * disable_screen_option_on_automatically_tab.
 		 *
-		 * @version 3.7.9
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @param $show
@@ -116,11 +116,16 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @return false|mixed
 		 */
 		function disable_screen_option_on_automatically_tab( $show ) {
+			$tab  = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$tab  = ! empty( $tab ) ? $tab : ( isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$page = ! empty( $page ) ? $page : ( isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
 			if (
-				isset( $_GET['tab'] ) &&
-				'costs_automatically' === $_GET['tab'] &&
-				isset( $_GET['page'] ) &&
-				'bulk-edit-costs' === $_GET['page']
+				! empty( $tab ) &&
+				'costs_automatically' === $tab &&
+				! empty( $page ) &&
+				'bulk-edit-costs' === $page
 			) {
 				$show = false;
 			}
@@ -151,7 +156,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * display_notices.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @return void
@@ -163,7 +168,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 					'{content}' => '%2$s',
 				);
 				$content       = str_replace( array_keys( $array_from_to ), $array_from_to, $notice_data['content_template'] );
-				printf( '<div class="%1$s">' . $content . '</div>', esc_attr( $class ), wp_kses_post( $notice_data['content'] ) );
+				printf( '<div class="%1$s">' . wp_kses_post( $content ) . '</div>', esc_attr( $class ), wp_kses_post( $notice_data['content'] ) );
 			}
 		}
 
@@ -272,7 +277,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 *
 		 * @see WC_AJAX::json_search_categories()
 		 *
-		 * @version 2.7.3
+		 * @version 4.1.5
 		 * @since   2.7.3
 		 */
 		function json_search_tags() {
@@ -281,7 +286,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			if ( ! current_user_can( 'edit_products' ) ) {
 				wp_die( - 1 );
 			}
-			$search_text = isset( $_GET['term'] ) ? wc_clean( wp_unslash( $_GET['term'] ) ) : '';
+			$search_text = filter_input( INPUT_GET, 'term', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$search_text = ! empty( $search_text ) ? wc_clean( wp_unslash( $search_text ) ) : '';
 			if ( ! $search_text ) {
 				wp_die();
 			}
@@ -308,17 +314,22 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * remove_query_args.
 		 *
-		 * @version 2.7.1
+		 * @version 4.1.5
 		 * @since   2.7.1
 		 *
 		 */
 		function remove_query_args() {
+			$page             = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$wp_http_referer  = filter_input( INPUT_GET, '_wp_http_referer', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$request_uri      = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
+
 			if (
-				isset( $_GET['page'] ) &&
-				'bulk-edit-costs' === $_GET['page'] &&
-				! empty( $_GET['_wp_http_referer'] )
+				'bulk-edit-costs' === $page &&
+				! empty( $wp_http_referer ) &&
+				! empty( $request_uri )
 			) {
-				wp_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), wp_unslash( $_SERVER['REQUEST_URI'] ) ) );
+				wp_safe_redirect( remove_query_arg( array( '_wp_http_referer', '_wpnonce' ), $request_uri ) );
+				exit;
 			}
 		}
 
@@ -420,12 +431,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * update_costs.
 		 *
-		 * @version 3.4.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @return void
 		 */
 		function update_costs() {
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$args = wp_parse_args( $_POST, array(
 				'bulk_edit_costs_method'         => 'edit_costs_by_price_percentage',
 				'cost_edit_value'                => '',
@@ -523,12 +535,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * update_prices.
 		 *
-		 * @version 3.4.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @return void
 		 */
 		function update_prices() {
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
 			$args = wp_parse_args( $_POST, array(
 				'bulk_edit_prices_method'         => 'edit_prices_by_profit_percentage',
 				'price_edit_value'                => '',
@@ -610,7 +623,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * handle_notices_from_update.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @param $args
@@ -629,10 +642,15 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 
 			if ( ! empty( $products ) ) {
 				if ( $need_bkg_process ) {
-					$notice_msg = sprintf( __( 'The %s of %d products are being updated via background processing.', 'cost-of-goods-for-woocommerce' ), $dynamic_word, count( $products ) );
-					$notice_msg .= 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ? ' ' . sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), '<code>' . get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) . '</code>' ) : '';
+					/* translators: 1: Updated field label (cost/price), 2: Number of products. */
+					$notice_msg = sprintf( __( 'The %1$s of %2$d products are being updated via background processing.', 'cost-of-goods-for-woocommerce' ), $dynamic_word, count( $products ) );
+					if ( 'yes' === get_option( 'alg_wc_cog_bkg_process_send_email', 'yes' ) ) {
+						/* translators: %s: Email address where completion notice will be sent. */
+						$notice_msg .= ' ' . sprintf( __( 'An email is going to be sent to %s when the task is completed.', 'cost-of-goods-for-woocommerce' ), '<code>' . get_option( 'alg_wc_cog_bkg_process_email_to', get_option( 'admin_email' ) ) . '</code>' );
+					}
 				} else {
-					$notice_msg = sprintf( __( 'Successfully updated the %s of %d products.', 'cost-of-goods-for-woocommerce' ), $dynamic_word, count( $products ) );
+					/* translators: 1: Updated field label (cost/price), 2: Number of products. */
+					$notice_msg = sprintf( __( 'Successfully updated the %1$s of %2$d products.', 'cost-of-goods-for-woocommerce' ), $dynamic_word, count( $products ) );
 				}
 				$this->add_notice( 'success', $notice_msg );
 			} else {
@@ -746,7 +764,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * get_bulk_edit_costs_methods.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @return array[]
@@ -766,11 +784,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				array(
 					'id'    => 'increase_costs_by_percentage',
 					'label' => __( 'Increase costs by percentage', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Percentage placeholder, e.g. x%. */
 					'desc'  => sprintf( __( 'Product costs will be increased by %s.', 'cost-of-goods-for-woocommerce' ), '<code>x%</code>' ),
 				),
 				array(
 					'id'    => 'decrease_costs_by_percentage',
 					'label' => __( 'Decrease costs by percentage', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Percentage placeholder, e.g. x%. */
 					'desc'  => sprintf( __( 'Product costs will be decreased by %s.', 'cost-of-goods-for-woocommerce' ), '<code>x%</code>' ),
 				),
 				array(
@@ -778,7 +798,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 					'label' => __( 'Set variation costs from parents', 'cost-of-goods-for-woocommerce' ),
 					'desc'  => __( 'Update variations to match the cost value of their parent products.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 					           sprintf(
-						           __( 'Example: If a variable product is set with a cost of %s, all its variations will also cost %s.', 'cost-of-goods-for-woocommerce' ),
+						           /* translators: 1: Parent product cost example, 2: Variation cost example. */
+						           __( 'Example: If a variable product is set with a cost of %1$s, all its variations will also cost %2$s.', 'cost-of-goods-for-woocommerce' ),
 						           '<code>' . wc_price( '150' ) . '</code>',
 						           '<code>' . wc_price( '150' ) . '</code>'
 					           ),
@@ -812,7 +833,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * get_cost_filter_options.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @return array[]
@@ -822,17 +843,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				array(
 					'id'    => 'ignore_costs',
 					'label' => __( 'Ignore current cost', 'cost-of-goods-for-woocommerce' ),
-					'desc'  => __( '', 'cost-of-goods-for-woocommerce' ),
+					'desc'  => '',
 				),
 				array(
 					'id'    => 'products_without_costs',
 					'label' => __( 'Only update products with no costs set, including zero or empty', 'cost-of-goods-for-woocommerce' ),
-					'desc'  => __( '', 'cost-of-goods-for-woocommerce' ),
+					'desc'  => '',
 				),
 				array(
 					'id'    => 'products_with_costs',
 					'label' => __( 'Only update products with costs already set', 'cost-of-goods-for-woocommerce' ),
-					'desc'  => __( '', 'cost-of-goods-for-woocommerce' ),
+					'desc'  => '',
 				),
 			);
 		}
@@ -840,7 +861,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * display_bulk_edit_prices.
 		 *
-		 * @version 4.0.1
+		 * @version 4.1.5
 		 * @since   2.6.1
 		 */
 		function display_bulk_edit_prices() {
@@ -869,8 +890,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                     <td>
                         <input id="profit_percentage" name="price_edit_value" step="0.01" min="0" type="number" placeholder="">
                         <p class="description">
-	                        <?php echo wp_kses_post( sprintf(
-		                        __( 'Example: If set as %s, a product costing %s will have its price changed to %s, resulting in a %s profit percentage.', 'cost-of-goods-for-woocommerce' ),
+	                        <?php
+	                        /* translators: 1: Input percentage, 2: Product cost, 3: Updated price, 4: Resulting profit percentage. */
+	                        echo wp_kses_post( sprintf(
+		                        __( 'Example: If set as %1$s, a product costing %2$s will have its price changed to %3$s, resulting in a %4$s profit percentage.', 'cost-of-goods-for-woocommerce' ),
 		                        '<code>10</code>',
 		                        '<code>' . wc_price( 50 ) . '</code>',
 		                        '<code>' . wc_price( 55 ) . '</code>',
@@ -886,7 +909,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         <input id="absolute_profit" name="price_edit_value" step="0.01" min="0" type="number" placeholder="">
                         <p class="description">
                             <?php echo wp_kses_post( sprintf(
-		                        __( 'Example: If set as %s, a product costing %s will have its price changed to %s, resulting in an absolute profit of %s.', 'cost-of-goods-for-woocommerce' ),
+	                        	/* translators: 1: Input absolute profit, 2: Product cost, 3: Updated price, 4: Resulting absolute profit. */
+	                        	__( 'Example: If set as %1$s, a product costing %2$s will have its price changed to %3$s, resulting in an absolute profit of %4$s.', 'cost-of-goods-for-woocommerce' ),
 		                        '<code>10</code>',
 		                        '<code>' . wc_price( 50 ) . '</code>',
 		                        '<code>' . wc_price( 60 ) . '</code>',
@@ -939,7 +963,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         </select>
                         <p class="description">
 							<?php esc_html_e( 'Select only the categories you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
-							<?php echo ( ! empty( $blocked_text ) ) ? '<br />' . $blocked_text : ''; ?>
+							<?php echo ( ! empty( $blocked_text ) ) ? wp_kses_post( '<br />' . $blocked_text ) : ''; ?>
                         </p>
                     </td>
                 </tr>
@@ -950,7 +974,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         </select>
                         <p class="description">
 							<?php esc_html_e( 'Select only the tag(s) you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
-							<?php echo ( ! empty( $blocked_text ) ) ? '<br />' . $blocked_text : ''; ?>
+							<?php echo ( ! empty( $blocked_text ) ) ? wp_kses_post( '<br />' . $blocked_text ) : ''; ?>
                         </p>
                     </td>
                 </tr>
@@ -972,7 +996,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Bulk edit costs automatically.
 		 *
-		 * @version 4.0.1
+		 * @version 4.1.5
 		 * @since   2.5.1
 		 */
 		function display_bulk_edit_costs_automatically() {
@@ -1003,8 +1027,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         <input style="" id="price_percentage" name="cost_edit_value" step="0.01" type="number" required placeholder="">
                         <p class="description">
 	                        <?php esc_html_e( 'Most probably you should use a number between 0 and 100.', 'cost-of-goods-for-woocommerce' ); ?>
-	                        <?php echo wp_kses_post( sprintf(
-		                        __( 'Example: If set as %s, a product priced at %s will have its cost set to %s, representing a %s margin based on the product\'s price.', 'cost-of-goods-for-woocommerce' ),
+	                        <?php
+	                        /* translators: 1: Input percentage, 2: Product price, 3: Updated cost, 4: Resulting margin percentage. */
+	                        echo wp_kses_post( sprintf(
+		                        __( 'Example: If set as %1$s, a product priced at %2$s will have its cost set to %3$s, representing a %4$s margin based on the product\'s price.', 'cost-of-goods-for-woocommerce' ),
 		                        '<code>' . '10' . '</code>',
 		                        '<code>' . wc_price( '150' ) . '</code>',
 		                        '<code>' . wc_price( '15' ) . '</code>',
@@ -1018,8 +1044,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                     <td>
                         <input style="" id="profit_percentage" name="cost_edit_value" step="0.01" type="number" required placeholder="">
                         <p class="description">
-	                        <?php echo wp_kses_post( sprintf(
-		                        __( 'Example: If set as %s, a product priced at %s will have its cost set to %s, resulting in a %s profit percentage.', 'cost-of-goods-for-woocommerce' ),
+	                        <?php
+	                        /* translators: 1: Input percentage, 2: Product price, 3: Updated cost, 4: Resulting profit percentage. */
+	                        echo wp_kses_post( sprintf(
+		                        __( 'Example: If set as %1$s, a product priced at %2$s will have its cost set to %3$s, resulting in a %4$s profit percentage.', 'cost-of-goods-for-woocommerce' ),
 		                        '<code>' . '10' . '</code>',
 		                        '<code>' . wc_price( '150' ) . '</code>',
 		                        '<code>' . wc_price( '136.36' ) . '</code>',
@@ -1033,8 +1061,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                     <td>
                         <input style="" id="percentage_increase" name="cost_edit_value" step="0.01" type="number" required placeholder="">
                         <p class="description">
-				            <?php echo wp_kses_post( sprintf(
-					            __( 'Example: If set as %s, a product costing %s will have its cost set to %s, resulting in a %s cost percentage increase.', 'cost-of-goods-for-woocommerce' ),
+				            <?php
+				            /* translators: 1: Input percentage, 2: Current cost, 3: Updated cost, 4: Cost increase percentage. */
+				            echo wp_kses_post( sprintf(
+					            __( 'Example: If set as %1$s, a product costing %2$s will have its cost set to %3$s, resulting in a %4$s cost percentage increase.', 'cost-of-goods-for-woocommerce' ),
 					            '<code>' . '10' . '</code>',
 					            '<code>' . wc_price( '150' ) . '</code>',
 					            '<code>' . wc_price( '165' ) . '</code>',
@@ -1048,8 +1078,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                     <td>
                         <input style="" id="percentage_decrease" name="cost_edit_value" step="0.01" type="number" required placeholder="">
                         <p class="description">
-				            <?php echo wp_kses_post( sprintf(
-					            __( 'Example: If set as %s, a product costing %s will have its cost set to %s, resulting in a %s cost percentage decrease.', 'cost-of-goods-for-woocommerce' ),
+				            <?php
+				            /* translators: 1: Input percentage, 2: Current cost, 3: Updated cost, 4: Cost decrease percentage. */
+				            echo wp_kses_post( sprintf(
+					            __( 'Example: If set as %1$s, a product costing %2$s will have its cost set to %3$s, resulting in a %4$s cost percentage decrease.', 'cost-of-goods-for-woocommerce' ),
 					            '<code>' . '10' . '</code>',
 					            '<code>' . wc_price( '150' ) . '</code>',
 					            '<code>' . wc_price( '135' ) . '</code>',
@@ -1071,7 +1103,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
                         </select>
                         <p class="description">
 	                        <?php esc_html_e( 'Select only the categories you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
-	                        <?php echo ( ! empty( $blocked_text ) ) ? '<br />' . $blocked_text : ''; ?>
+	                        <?php echo ( ! empty( $blocked_text ) ) ? wp_kses_post( '<br />' . $blocked_text ) : ''; ?>
                         </p>
                     </td>
                 </tr>
@@ -1082,7 +1114,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			            </select>
 			            <p class="description">
 				            <?php esc_html_e( 'Select only the tag(s) you want to edit. Leave it empty to update all products.', 'cost-of-goods-for-woocommerce' ); ?>
-				            <?php echo ( ! empty( $blocked_text ) ) ? '<br />' . $blocked_text : ''; ?>
+				            <?php echo ( ! empty( $blocked_text ) ) ? wp_kses_post( '<br />' . $blocked_text ) : ''; ?>
 			            </p>
 		            </td>
 	            </tr>
@@ -1097,7 +1129,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 	                        <?php endforeach; ?>
                         </select>
                         <p class="description dropdown-description">
-				            <?php echo ( ! empty( $blocked_text ) ) ? $blocked_text : ''; ?>
+				            <?php echo ( ! empty( $blocked_text ) ) ? wp_kses_post( $blocked_text ) : ''; ?>
                         </p>
                     </td>
                 </tr>
@@ -1119,20 +1151,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * Display content for Manually Section.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   2.5.1
 		 */
 		function display_bulk_edit_costs_manually() {
 			echo '<form method="get" style="margin-top:30px"><input type="hidden" name="page" value="bulk-edit-costs"/>';
 			$this->wp_list_bulk_edit_tool->prepare_items();
-			$this->wp_list_bulk_edit_tool->search_box( __( 'Search', 'cost-of-goods-for-woocommerce' ), 'alg_wc_cog_search' );
+			$this->wp_list_bulk_edit_tool->search_box( esc_html__( 'Search', 'cost-of-goods-for-woocommerce' ), 'alg_wc_cog_search' );
 			$this->wp_list_bulk_edit_tool->display();
 		}
 
 		/**
 		 * display_tabs_navs_html.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @return void
@@ -1142,7 +1174,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 
 			$tabs_nav_html = array();
 			$nav_tabs      = $this->get_tab_nav_items();
-			$tab           = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : key( $nav_tabs );
+			$tab           = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			if ( empty( $tab ) && isset( $_GET['tab'] ) ) {
+				$tab = sanitize_text_field( wp_unslash( $_GET['tab'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			}
+			$tab           = ! empty( $tab ) ? sanitize_text_field( wp_unslash( $tab ) ) : key( $nav_tabs );
 
 			if ( count( $nav_tabs ) > 1 ) {
 				foreach ( $nav_tabs as $key => $tab_value ) {
@@ -1154,14 +1190,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 				}
 
 				//printf( '<nav class="nav-tab-wrapper woo-nav-tab-wrapper">%s</nav>', implode( ' | ', $tabs_nav_html ) );
-				printf( '<nav class="nav-tab-wrapper woo-nav-tab-wrapper">%s</nav>', implode( '', $tabs_nav_html ) );
+				printf( '<nav class="nav-tab-wrapper woo-nav-tab-wrapper">%s</nav>', wp_kses_post( implode( '', $tabs_nav_html ) ) );
 			}
 		}
 
 		/**
 		 * display_wp_list_tool.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   2.3.1
 		 */
 		function display_bulk_edit_tools() {
@@ -1178,7 +1214,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 			ob_start();
 
 			// Section heading title.
-			printf( '<h1 class="wp-heading-inline">%s</h1>', $page_title, $this->get_current_tab( 'label' ), $this->get_current_tab( 'save_btn_top' ) );
+			echo '<h1 class="wp-heading-inline">' . esc_html( $page_title ) . '</h1>';
+			echo wp_kses_post( $this->get_current_tab( 'label' ) );
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Tab config is generated by trusted internal code.
+			echo $this->get_current_tab( 'save_btn_top' );
 
 			// Section navigations.
 			$this->display_tabs_navs_html();
@@ -1187,7 +1226,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 
 			// Tab description.
 			if ( ! empty( $tab_desc = $this->get_current_tab( 'desc' ) ) ) {
-				printf( '<p>%s</p>', $tab_desc );
+				printf( '<p>%s</p>', wp_kses_post( $tab_desc ) );
 			}
 
 
@@ -1197,33 +1236,58 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 
 			// Bottom save button.
 			if ( ! empty( $save_btn_bottom = $this->get_current_tab( 'save_btn_bottom' ) ) ) {
+				$tab_nonce_action = "_nonce_{$this->get_current_tab( 'id' )}_action";
+				$tab_nonce_name   = "_nonce_{$this->get_current_tab( 'id' )}_val";
+				$nonce_field      = wp_nonce_field( $tab_nonce_action, $tab_nonce_name, true, false );
 				printf( '<div class="form-action">%s%s<span class="spinner"></span></div>',
-					wp_nonce_field( "_nonce_{$this->get_current_tab( 'id' )}_action", "_nonce_{$this->get_current_tab( 'id' )}_val" ),
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_nonce_field() returns trusted hidden input markup.
+					$nonce_field,
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Tab config is generated by trusted internal code.
 					$save_btn_bottom
 				);
 			}
 
 			$container_elem_type = 'form';
+			$page                = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$tab                 = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			if ( empty( $page ) && isset( $_GET['page'] ) ) {
+				$page = sanitize_text_field( wp_unslash( $_GET['page'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			}
+			if ( empty( $tab ) && isset( $_GET['tab'] ) ) {
+				$tab = sanitize_text_field( wp_unslash( $_GET['tab'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			}
 			if (
-				( isset( $_GET['page'] ) && 'bulk-edit-costs' === $_GET['page'] ) &&
-				( ! isset( $_GET['tab'] ) || 'costs_manually' === $_GET['tab'] )
+				( 'bulk-edit-costs' === $page ) &&
+				( empty( $tab ) || 'costs_manually' === $tab )
 			) {
 				$container_elem_type = 'div';
 				echo '</form>';
 			}
 
 			// Wrap up section content.
-			printf( '<div class="notice is-dismissible alg_wc_cog_notice"><p></p></div><' . $container_elem_type . ' method="post" action="" class="bulk-edit-form %s" data-tool-type="%s"><div class="wrap alg_wc_cog_bulk_edit">%s</div></' . $container_elem_type . '>',
-				esc_attr( $this->get_current_tab( 'form_class' ) ),
-				esc_attr( $tool_type ),
-				ob_get_clean()
-			);
+			$section_content = ob_get_clean();
+
+			if ( 'form' === $container_elem_type ) {
+				printf( '<div class="notice is-dismissible alg_wc_cog_notice"><p></p></div><form method="post" action="" class="bulk-edit-form %1$s" data-tool-type="%2$s"><div class="wrap alg_wc_cog_bulk_edit">%3$s</div></form>',
+					esc_attr( $this->get_current_tab( 'form_class' ) ),
+					esc_attr( $tool_type ),
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Section content is built by trusted internal callbacks.
+					$section_content
+				);
+			} else {
+				printf( '<div class="notice is-dismissible alg_wc_cog_notice"><p></p></div><div method="post" action="" class="bulk-edit-form %1$s" data-tool-type="%2$s"><div class="wrap alg_wc_cog_bulk_edit">%3$s</div></div>',
+					esc_attr( $this->get_current_tab( 'form_class' ) ),
+					esc_attr( $tool_type ),
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Section content is built by trusted internal callbacks.
+					$section_content
+				);
+			}
 		}
 
 		/**
 		 * get_current_tab.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @param $arg
@@ -1232,7 +1296,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 */
 		function get_current_tab( $arg = '' ) {
 			$nav_sections = $this->get_tab_nav_items();
-			$tab = isset( $_GET['tab'] ) ? rawurlencode( sanitize_text_field( $_GET['tab'] ) ) : key( $nav_sections );
+			$tab          = filter_input( INPUT_GET, 'tab', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			if ( empty( $tab ) && isset( $_GET['tab'] ) ) {
+				$tab = sanitize_text_field( wp_unslash( $_GET['tab'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			}
+			$tab          = ! empty( $tab ) ? rawurlencode( sanitize_text_field( wp_unslash( $tab ) ) ) : key( $nav_sections );
 
 			if ( $arg === 'id' ) {
 				return $tab;
@@ -1248,7 +1316,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * get_tab_nav_items.
 		 *
-		 * @version 3.3.0
+		 * @version 4.1.5
 		 * @since   3.3.0
 		 *
 		 * @return mixed|null
@@ -1264,6 +1332,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 					'save_btn_bottom' => sprintf( '<input type="submit" name="alg_wc_cog_bulk_edit_tool_save_costs" class="button-primary" value="%s">',
 						esc_html__( 'Save', 'cost-of-goods-for-woocommerce' )
 					),
+					/* translators: %s: URL to plugin settings page. */
 					'desc'            => sprintf( __( 'Bulk edit products costs/prices/stock manually. Tools options can be set in "<strong>Cost of Goods for WooCommerce</strong>" <a href="%s">plugin settings</a>.', 'cost-of-goods-for-woocommerce' ),
 						admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=tools' )
 					),
@@ -1411,7 +1480,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * save_costs.
 		 *
-		 * @version 2.8.8
+		 * @version 4.1.5
 		 * @since   1.2.0
 		 * @see     https://wordpress.org/support/topic/you-should-add-posibility-to-edit-regular-price-and-sale-price/
 		 * @todo    [next] prices: `$do_update_func`
@@ -1419,27 +1488,38 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		 * @todo    [maybe] output some error on ` ! ( $product = wc_get_product( $product_id ) )`?
 		 */
 		function save_costs() {
+			$save_costs          = filter_input( INPUT_POST, 'alg_wc_cog_bulk_edit_tool_save_costs', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$nonce_costs_manually = filter_input( INPUT_POST, '_nonce_costs_manually_val', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$save_costs           = ! empty( $save_costs ) ? $save_costs : ( isset( $_POST['alg_wc_cog_bulk_edit_tool_save_costs'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_wc_cog_bulk_edit_tool_save_costs'] ) ) : '' );
+			$nonce_costs_manually = ! empty( $nonce_costs_manually ) ? $nonce_costs_manually : ( isset( $_POST['_nonce_costs_manually_val'] ) ? sanitize_text_field( wp_unslash( $_POST['_nonce_costs_manually_val'] ) ) : '' );
+
 			if (
-				isset( $_POST['alg_wc_cog_bulk_edit_tool_save_costs'] ) &&
-				isset( $_POST['_nonce_costs_manually_val'] ) &&
-				wp_verify_nonce( $_REQUEST['_nonce_costs_manually_val'], '_nonce_costs_manually_action' ) &&
+				! empty( $save_costs ) &&
+				! empty( $nonce_costs_manually ) &&
+				wp_verify_nonce( $nonce_costs_manually, '_nonce_costs_manually_action' ) &&
 				current_user_can( 'manage_woocommerce' )
 			) {
+				$posted_costs = filter_input( INPUT_POST, 'alg_wc_cog_bulk_edit_tool_costs', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+				$posted_regular_prices = filter_input( INPUT_POST, 'alg_wc_cog_bulk_edit_tool_regular_price', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+				$posted_sale_prices = filter_input( INPUT_POST, 'alg_wc_cog_bulk_edit_tool_sale_price', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+				$posted_stock = filter_input( INPUT_POST, 'alg_wc_cog_bulk_edit_tool_stock', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+				$posted_product_tags = filter_input( INPUT_POST, 'alg_wc_cog_bulk_edit_tool_product_tag', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+
 				// Do edit prices.
 				$do_edit_prices = ( 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_edit_prices', 'no' ) );
 				if ( $do_edit_prices ) {
 					$error_sale_price_ids = array();
 				}
 				// Manually.
-				if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_costs'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_costs'] ) ) {
-					foreach ( $_POST['alg_wc_cog_bulk_edit_tool_costs'] as $product_id => $cost_value ) {
+				if ( is_array( $posted_costs ) ) {
+					foreach ( $posted_costs as $product_id => $cost_value ) {
 						update_post_meta( sanitize_key( $product_id ), '_alg_wc_cog_cost', sanitize_text_field( $cost_value ) );
 					}
 				}
 				// Prices.
 				if ( $do_edit_prices ) {
-					if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_regular_price'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_regular_price'] ) ) {
-						$regular_prices = wc_clean( $_POST['alg_wc_cog_bulk_edit_tool_regular_price'] );
+					if ( is_array( $posted_regular_prices ) ) {
+						$regular_prices = wc_clean( $posted_regular_prices );
 						foreach ( $regular_prices as $product_id => $regular_price_value ) {
 							if ( $product = wc_get_product( $product_id ) ) {
 								$product->set_regular_price( $regular_price_value );
@@ -1447,8 +1527,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 							}
 						}
 					}
-					if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_sale_price'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_sale_price'] ) ) {
-						$sale_prices = wc_clean( $_POST['alg_wc_cog_bulk_edit_tool_sale_price'] );
+					if ( is_array( $posted_sale_prices ) ) {
+						$sale_prices = wc_clean( $posted_sale_prices );
 						foreach ( $sale_prices as $product_id => $sale_price_value ) {
 							if ( $product = wc_get_product( $product_id ) ) {
 								if ( $sale_price_value <= $product->get_regular_price() ) {
@@ -1462,9 +1542,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 					}
 				}
 				// Stock.
-				if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_stock'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_stock'] ) ) {
+				if ( is_array( $posted_stock ) ) {
 					$do_update_func = ( 'func' === get_option( 'alg_wc_cog_bulk_edit_tool_manage_stock_method', 'meta' ) );
-					foreach ( $_POST['alg_wc_cog_bulk_edit_tool_stock'] as $product_id => $stock_value ) {
+					foreach ( $posted_stock as $product_id => $stock_value ) {
 						if ( $do_update_func && ( $product = wc_get_product( $product_id ) ) ) {
 							$product->set_stock_quantity( sanitize_text_field( $stock_value ) );
 							$product->save();
@@ -1474,8 +1554,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 					}
 				}
 				// Tags update.
-				if ( isset( $_POST['alg_wc_cog_bulk_edit_tool_product_tag'] ) && is_array( $_POST['alg_wc_cog_bulk_edit_tool_product_tag'] ) ) {
-					foreach ( $_POST['alg_wc_cog_bulk_edit_tool_product_tag'] as $product_id => $tag_ids ) {
+				if ( is_array( $posted_product_tags ) ) {
+					foreach ( $posted_product_tags as $product_id => $tag_ids ) {
 						$tag_ids = array_map( 'intval', $tag_ids );
 						wp_set_post_terms( $product_id, $tag_ids, 'product_tag' );
 					}
@@ -1492,11 +1572,11 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * admin_notice_costs_saved.
 		 *
-		 * @version 1.2.0
+		 * @version 4.1.5
 		 * @since   1.2.0
 		 */
 		function admin_notice_costs_saved() {
-			echo '<div class="notice notice-success is-dismissible"><p><strong>' . __( 'Data have been saved.', 'cost-of-goods-for-woocommerce' ) . '</strong></p></div>';
+			echo '<div class="notice notice-success is-dismissible"><p><strong>' . esc_html__( 'Data have been saved.', 'cost-of-goods-for-woocommerce' ) . '</strong></p></div>';
 		}
 
 		/**
@@ -1512,12 +1592,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Tool' ) ) :
 		/**
 		 * admin_notice_sale_price_higher.
 		 *
-		 * @version 1.4.0
+		 * @version 4.1.5
 		 * @since   1.4.0
 		 */
 		function admin_notice_sale_price_higher() {
-			echo '<div class="notice notice-error is-dismissible"><p><strong>' . sprintf( __( 'Sale price is higher than regular price: %s.', 'cost-of-goods-for-woocommerce' ),
-					implode( ', ', array_map( array( $this, 'get_the_title' ), $this->error_sale_price_ids ) ) ) . '</strong></p></div>';
+			/* translators: %s: Comma-separated list of product titles and IDs. */
+			$message = sprintf( __( 'Sale price is higher than regular price: %s.', 'cost-of-goods-for-woocommerce' ), implode( ', ', array_map( 'esc_html', array_map( array( $this, 'get_the_title' ), $this->error_sale_price_ids ) ) ) );
+			echo '<div class="notice notice-error is-dismissible"><p><strong>' . esc_html( $message ) . '</strong></p></div>';
 		}
 	}
 

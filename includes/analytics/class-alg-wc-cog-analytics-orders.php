@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics - Orders.
  *
- * @version 4.1.2
+ * @version 4.1.5
  * @since   2.4.5
  * @author  WPFactory
  */
@@ -88,7 +88,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_individual_costs_columns_names_to_export.
 		 *
-		 * @version 3.0.0
+		 * @version 4.1.5
 		 * @since   3.0.0
 		 *
 		 * @param $columns
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return mixed
 		 */
 		function add_individual_costs_columns_names_to_export( $columns, $exporter ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
+			if ( $this->is_individual_costs_enabled() ) {
 				$columns['items_cost']            = __( 'Items cost', 'cost-of-goods-for-woocommerce' );
 				$columns['shipping_cost']         = __( 'Shipping cost', 'cost-of-goods-for-woocommerce' );
 				$columns['gateway_cost']          = __( 'Gateway cost', 'cost-of-goods-for-woocommerce' );
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_individual_costs_row_data_to_export.
 		 *
-		 * @version 3.0.0
+		 * @version 4.1.5
 		 * @since   3.0.0
 		 *
 		 * @param $row
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return mixed
 		 */
 		function add_individual_costs_row_data_to_export( $row, $item ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
+			if ( $this->is_individual_costs_enabled() ) {
 				$row['items_cost']            = $item['items_cost'];
 				$row['shipping_cost']         = $item['shipping_cost'];
 				$row['gateway_cost']          = $item['gateway_cost'];
@@ -132,9 +132,33 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		}
 
 		/**
+		 * is_cost_and_profit_totals_enabled.
+
+		 * @version 4.1.5
+		 * @since   4.1.5
+		 *
+		 * @return bool
+		 */
+		function is_cost_and_profit_totals_enabled() {
+			return (bool) apply_filters( 'alg_wc_cog_analytics_orders_cost_profit_totals_enabled', false );
+		}
+
+		/**
+		 * is_individual_costs_enabled.
+		 *
+		 * @version 4.1.5
+		 * @since   4.1.5
+		 *
+		 * @return bool
+		 */
+		function is_individual_costs_enabled() {
+			return (bool) apply_filters( 'alg_wc_cog_analytics_orders_individual_costs_enabled', false );
+		}
+
+		/**
 		 * add_analytics_localization_info.
 		 *
-		 * @version 2.9.8
+		 * @version 4.1.5
 		 * @since   2.4.5
 		 *
 		 * @param $info
@@ -142,9 +166,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return mixed
 		 */
 		function add_analytics_localization_info( $info ) {
-			$info['cost_and_profit_totals_enabled_on_orders']  = 'yes' === get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' );
+			$info['cost_and_profit_totals_enabled_on_orders']  = $this->is_cost_and_profit_totals_enabled();
 			$info['cost_and_profit_columns_enabled_on_orders'] = 'yes' === get_option( 'alg_wc_cog_analytics_orders', 'no' );
-			$info['individual_order_costs_enabled']            = 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' );
+			$info['individual_order_costs_enabled']            = $this->is_individual_costs_enabled();
 
 			return $info;
 		}
@@ -218,7 +242,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_costs_total_column_if_option_is_enabled.
 		 *
-		 * @version 2.4.8
+		 * @version 4.1.5
 		 * @since   2.4.8
 		 *
 		 * @param $validation
@@ -226,7 +250,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return bool
 		 */
 		function add_costs_total_column_if_option_is_enabled( $validation ) {
-			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' ) ) {
+			if ( $this->is_cost_and_profit_totals_enabled() ) {
 				$validation = true;
 			}
 			return $validation;
@@ -235,7 +259,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_profit_total_column_if_option_is_enabled.
 		 *
-		 * @version 2.4.8
+		 * @version 4.1.5
 		 * @since   2.4.8
 		 *
 		 * @param $validation
@@ -243,7 +267,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		 * @return bool
 		 */
 		function add_profit_total_column_if_option_is_enabled($validation){
-			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_cost_profit_totals', 'no' ) ) {
+			if ( $this->is_cost_and_profit_totals_enabled() ) {
 				$validation = true;
 			}
 			return $validation;
@@ -252,7 +276,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_costs_select_orders_subquery.
 		 *
-		 * @version 2.9.8
+		 * @version 4.1.5
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -264,7 +288,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 				$clauses[] = ', IFNULL(order_cost_postmeta.meta_value, 0) AS order_cost';
 			}
 
-			if ( 'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) ) {
+			if ( $this->is_individual_costs_enabled() ) {
 				$clauses[] = ', IFNULL(items_cost_pm.meta_value, 0) AS items_cost';
 				$clauses[] = ', IFNULL(shipping_cost_pm.meta_value, 0) AS shipping_cost';
 				$clauses[] = ', IFNULL(gateway_cost_pm.meta_value, 0) AS gateway_cost';
@@ -277,7 +301,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 		/**
 		 * add_costs_join_orders.
 		 *
-		 * @version 4.1.2
+		 * @version 4.1.5
 		 * @since   2.4.1
 		 *
 		 * @param $clauses
@@ -293,7 +317,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Analytics_Orders' ) ) :
 			// unnecessary and causes row multiplication when duplicate meta rows exist,
 			// inflating orders_count in Analytics > Revenue and similar reports.
 			if (
-				'yes' === get_option( 'alg_wc_cog_analytics_orders_individual_costs', 'no' ) &&
+				$this->is_individual_costs_enabled() &&
 				'woocommerce_analytics_clauses_join_orders_subquery' === current_filter()
 			) {
 				if ( OrderUtil::custom_orders_table_usage_is_enabled() ) {

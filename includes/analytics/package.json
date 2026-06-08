@@ -5,7 +5,9 @@
 	"version": "2.4.1",
 	"description": "cog-analytics",
 	"scripts": {
-		"build": "set NODE_OPTIONS=--openssl-legacy-provider && wp-scripts build",
+		"build": "set NODE_OPTIONS=--openssl-legacy-provider && node .\\node_modules\\@wordpress\\scripts\\bin\\wp-scripts.js build --config webpack.config.js && node .\\node_modules\\@wordpress\\scripts\\bin\\wp-scripts.js build --config ..\\pro\\analytics\\webpack.config.js",
+		"build:free": "set NODE_OPTIONS=--openssl-legacy-provider && node .\\node_modules\\@wordpress\\scripts\\bin\\wp-scripts.js build --config webpack.config.js",
+		"build:pro": "set NODE_OPTIONS=--openssl-legacy-provider && node .\\node_modules\\@wordpress\\scripts\\bin\\wp-scripts.js build --config ..\\pro\\analytics\\webpack.config.js",
 		"check-engines": "wp-scripts check-engines",
 		"check-licenses": "wp-scripts check-licenses",
 		"format:js": "wp-scripts format-js",
@@ -16,6 +18,8 @@
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"packages-update": "wp-scripts packages-update",
 		"start": "set NODE_OPTIONS=--openssl-legacy-provider && wp-scripts start",
+		"start:free": "set NODE_OPTIONS=--openssl-legacy-provider && wp-scripts start",
+		"start:pro": "set NODE_OPTIONS=--openssl-legacy-provider && node .\\node_modules\\@wordpress\\scripts\\bin\\wp-scripts.js start --config ..\\pro\\analytics\\webpack.config.js",
 		"test:e2e": "wp-scripts test-e2e",
 		"test:unit": "wp-scripts test-unit-js"
 	},

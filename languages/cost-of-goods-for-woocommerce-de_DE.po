@@ -15,7 +15,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Loco-Version: 2.6.3; wp-6.1.1\n"
 
-#: includes/alg-wc-cog-functions.php:219
+#. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
+#: includes/alg-wc-cog-functions.php:220
 #: includes/settings/class-alg-wc-settings-cog.php:83
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr "Warenkosten für WooCommerce Pro"
@@ -39,10 +40,6 @@ msgstr "https://wpfactory.com"
 #: includes/class-alg-wc-cog.php:277
 msgid "Go Pro"
 msgstr "Gehen Sie zum Profi"
-
-#: includes/alg-wc-cog-functions.php:219
-msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
-msgstr "Deaktivierte Optionen können mit <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a> entsperrt werden"
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:439
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
@@ -3512,4 +3509,9 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:129
 msgid "Profit margin column width (%s unit)."
+msgstr ""
+
+#. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
+#: includes/alg-wc-cog-functions.php:220
+msgid "Disabled options can be unlocked using <a href=\"%1$s\" target=\"_blank\"><strong>%2$s</strong></a>"
 msgstr ""

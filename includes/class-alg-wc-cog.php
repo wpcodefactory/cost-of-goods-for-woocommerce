@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 3.8.2
+ * @version 4.1.5
  * @since   3.0.3
  * @author  WPFactory
  */
@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '4.1.4';
+		public $version = '4.1.5';
 
 		/**
 		 * @since 1.0.0
@@ -87,7 +87,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 		/**
 		 * Initializes.
 		 *
-		 * @version 3.6.9
+		 * @version 4.1.5
 		 * @since   2.8.1
 		 */
 		function init() {
@@ -96,9 +96,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 
 			// Move WC Settings tab to WPFactory menu.
 			add_action( 'init', array( $this, 'move_wc_settings_tab_to_wpfactory_menu' ) );
-
-			// Localization.
-			add_action( 'init', array( $this, 'localize' ) );
 
 			// Adds compatibility with HPOS.
 			add_action( 'before_woocommerce_init', function () {
@@ -212,18 +209,6 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods' ) ) :
 			$params['pro_settings_filter'] = 'alg_wc_cog_settings';
 
 			return $params;
-		}
-
-		/**
-		 * localize.
-		 *
-		 * @version 3.0.3
-		 * @since   2.3.3
-		 *
-		 */
-		function localize() {
-			// Set up localisation
-			load_plugin_textdomain( 'cost-of-goods-for-woocommerce', false, dirname( plugin_basename( $this->get_filesystem_path() ) ) . '/langs/' );
 		}
 
 		/**

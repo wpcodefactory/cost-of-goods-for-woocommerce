@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 3.6.3
+ * @version 4.1.5
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -79,7 +79,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * save_order_cost_manually.
 	 *
-	 * @version 2.8.8
+	 * @version 4.1.5
 	 * @since   2.8.8
 	 *
 	 * @param $order_cost
@@ -87,10 +87,25 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	 * @return float
 	 */
 	function save_order_cost_manually( $order_cost ) {
+		if ( isset( $_POST['alg_wc_cog_order_cost_input'] ) ) {
+			if ( isset( $_POST['woocommerce_meta_nonce'] ) ) {
+				$nonce = sanitize_text_field( wp_unslash( $_POST['woocommerce_meta_nonce'] ) );
+				if ( ! wp_verify_nonce( $nonce, 'woocommerce_save_data' ) ) {
+					return $order_cost;
+				}
+			} elseif ( isset( $_POST['_wpnonce'] ) && isset( $_POST['post_ID'] ) ) {
+				$post_id = absint( wp_unslash( $_POST['post_ID'] ) );
+				$nonce   = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) );
+				if ( ! wp_verify_nonce( $nonce, 'update-order_' . $post_id ) && ! wp_verify_nonce( $nonce, 'update-post_' . $post_id ) ) {
+					return $order_cost;
+				}
+			}
+		}
+
 		if (
 			'yes' === get_option( 'alg_wc_cog_edit_order_cost_manually', 'no' ) &&
 			isset( $_POST['alg_wc_cog_order_cost_input'] ) &&
-			'' !== ( $order_cost_input = $_POST['alg_wc_cog_order_cost_input'] ) &&
+			'' !== ( $order_cost_input = sanitize_text_field( wp_unslash( $_POST['alg_wc_cog_order_cost_input'] ) ) ) &&
 			(float) $order_cost !== (float) $order_cost_input
 		) {
 			$this->order_cost_values['automatic'] = $order_cost;
@@ -125,7 +140,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_meta_box.
 	 *
-	 * @version 3.3.7
+	 * @version 4.1.5
 	 * @since   1.4.0
 	 * @todo    [maybe] order total
 	 */
@@ -135,6 +150,16 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 		if ( ! is_a( $order, 'WC_Order' ) ) {
 			return;
 		}
+		$allowed_html = wp_kses_allowed_html( 'post' );
+		$allowed_html['input'] = array(
+			'style'  => true,
+			'type'   => true,
+			'step'   => true,
+			'name'   => true,
+			'id'     => true,
+			'value'  => true,
+			'class'  => true,
+		);
 		$cost                = $order->get_meta( '_alg_wc_cog_order_' . 'cost', true );
 		$cost                = apply_filters( 'alc_wc_cog_order_metabox_value', $cost, array( 'invert' => true, 'order' => $order ) );
 		$handling_fee        = $order->get_meta( '_alg_wc_cog_order_' . 'handling_fee', true );
@@ -155,7 +180,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 			array( __( 'Cost', 'cost-of-goods-for-woocommerce' ),   ( '' !== $cost   ? '<span style="color:red;">'   . $cost_html . '</span>' : '' ) ),
 			array( __( 'Profit', 'cost-of-goods-for-woocommerce' ), ( '' !== $profit ? '<span style="color:green;">' . $profit_html      . '</span>' : '' ) ),
 		);
-		echo alg_wc_cog_get_table_html( $table_data, $table_args );
+		echo wp_kses( alg_wc_cog_get_table_html( $table_data, $table_args ), $allowed_html );
 		// Cost details
 		$table_data     = array();
 		$cost_meta_keys = array(
@@ -183,8 +208,8 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 			}
 		}
 		if ( count( $table_data ) > 0 ) {
-			echo '<h5>' . __( 'Cost details', 'cost-of-goods-for-woocommerce' ) . '</h5>';
-			echo alg_wc_cog_get_table_html( $table_data, $table_args );
+			echo '<h5>' . esc_html__( 'Cost details', 'cost-of-goods-for-woocommerce' ) . '</h5>';
+			echo wp_kses( alg_wc_cog_get_table_html( $table_data, $table_args ), $allowed_html );
 		}
 		// Extra profit details.
 		$table_data             = array();
@@ -198,8 +223,8 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 			}
 		}
 		if ( count( $table_data ) > 0 ) {
-			echo '<h5>' . __( 'Extra profit details', 'cost-of-goods-for-woocommerce' ) . '</h5>';
-			echo alg_wc_cog_get_table_html( $table_data, $table_args );
+			echo '<h5>' . esc_html__( 'Extra profit details', 'cost-of-goods-for-woocommerce' ) . '</h5>';
+			echo wp_kses( alg_wc_cog_get_table_html( $table_data, $table_args ), $allowed_html );
 		}
 	}
 
@@ -228,7 +253,7 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	/**
 	 * render_order_extra_cost_meta_box.
 	 *
-	 * @version 3.6.3
+	 * @version 4.1.5
 	 * @since   1.7.0
 	 * @todo    [maybe] better `$title`
 	 * @todo    [maybe] better styling
@@ -237,33 +262,57 @@ class Alg_WC_Cost_of_Goods_Orders_Meta_Boxes {
 	function render_order_extra_cost_meta_box( $post ) {
 		$order = is_a( $post, 'WC_Order' ) ? $post : wc_get_order( $post->ID );
 		$rows  = '';
+		$allowed_html = wp_kses_allowed_html( 'post' );
+		$allowed_html['input'] = array(
+			'name'   => true,
+			'id'     => true,
+			'type'   => true,
+			'step'   => true,
+			'class'  => true,
+			'value'  => true,
+		);
 		foreach ( alg_wc_cog()->core->orders->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 			if ( $is_enabled ) {
 				$id    = 'alg_wc_cog_order_' . $fee_type . '_fee';
 				$title = ucfirst( $fee_type ) . ' ' . __( 'fee', 'cost-of-goods-for-woocommerce' ) . ' (' . alg_wc_cog()->core->get_default_shop_currency_symbol() . ')';
 				$value = $order->get_meta( '_' . $id, true );
-				$rows  .= '<tr><td><label style="font-size:smaller;" for="' . $id . '">' . $title . '</label></td>' .
-				          '<td><input name="' . $id . '" id="' . $id . '" type="number" step="0.0001" class="short wc_input_price" value="' . $value . '"></td></tr>';
+				$rows  .= '<tr><td><label style="font-size:smaller;" for="' . esc_attr( $id ) . '">' . esc_html( $title ) . '</label></td>' .
+				          '<td><input name="' . esc_attr( $id ) . '" id="' . esc_attr( $id ) . '" type="number" step="0.0001" class="short wc_input_price" value="' . esc_attr( $value ) . '"></td></tr>';
 			}
 		}
-		echo '<table class="widefat striped"><tbody>' . $rows . '</tbody></table>';
+		echo wp_kses( '<table class="widefat striped"><tbody>' . $rows . '</tbody></table>', $allowed_html );
 	}
 
 	/**
 	 * save_order_extra_cost.
 	 *
-	 * @version 3.3.6
+	 * @version 4.1.5
 	 * @since   1.7.0
 	 */
 	function save_order_extra_cost( $order_id, $post ) {
 		if ( in_array( true, alg_wc_cog()->core->orders->is_order_extra_cost_per_order ) ) {
+			if ( isset( $_POST['woocommerce_meta_nonce'] ) ) {
+				$nonce = sanitize_text_field( wp_unslash( $_POST['woocommerce_meta_nonce'] ) );
+				if ( ! wp_verify_nonce( $nonce, 'woocommerce_save_data' ) ) {
+					return;
+				}
+			} elseif ( isset( $_POST['_wpnonce'] ) ) {
+				$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) );
+				if ( ! wp_verify_nonce( $nonce, 'update-order_' . $order_id ) && ! wp_verify_nonce( $nonce, 'update-post_' . $order_id ) ) {
+					return;
+				}
+			} else {
+				return;
+			}
+
 			remove_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_order_extra_cost' ), 8 );
 			remove_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 8 );
 			foreach ( alg_wc_cog()->core->orders->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 				if ( $is_enabled ) {
 					$id = 'alg_wc_cog_order_' . $fee_type . '_fee';
 					if ( isset( $_POST[ $id ] ) ) {
-						$value = floatval( $_POST[ $id ] );
+						// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+						$value = (float) wc_clean( wp_unslash( $_POST[ $id ] ) );
 						$order = wc_get_order( $order_id );
 						$order->update_meta_data( '_' . $id, $value );
 						$order->save();

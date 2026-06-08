@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 3.9.5
+ * @version 4.1.5
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -89,51 +89,89 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * save_product_add_stock.
 		 *
-		 * @version 3.7.4
+		 * @version 4.1.5
 		 * @since   1.7.0
 		 * @todo    [next] handle variable products (also unset `$_POST['variable_stock']`)
 		 * @todo    [maybe] remove `$this->is_add_stock`
 		 */
 		function save_product_add_stock( $product_id, $post ) {
 			static $already_ran = false;
+			$is_valid_request = false;
+
 			if (
 				$already_ran
 			) {
 				return;
 			}
+
+			if ( isset( $_POST['woocommerce_meta_nonce'] ) ) {
+				$is_valid_request = wp_verify_nonce(
+					sanitize_text_field( wp_unslash( $_POST['woocommerce_meta_nonce'] ) ),
+					'woocommerce_save_data'
+				);
+			} elseif ( isset( $_POST['_wpnonce'] ) ) {
+				$is_valid_request = wp_verify_nonce(
+					sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ),
+					'update-post_' . $product_id
+				) || wp_verify_nonce(
+					sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ),
+					'update-product_' . $product_id
+				);
+			}
+
+			if ( ! $is_valid_request ) {
+				return;
+			}
+
+			$add_stock_raw      = isset( $_POST['alg_wc_cog_add_stock'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_wc_cog_add_stock'] ) ) : '';
+			$add_stock_cost_raw = isset( $_POST['alg_wc_cog_add_stock_cost'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_wc_cog_add_stock_cost'] ) ) : '';
+			$parent_stock_prev  = isset( $_POST['_stock'] ) ? (int) wc_clean( wp_unslash( $_POST['_stock'] ) ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$parent_cost_prev   = isset( $_POST['_alg_wc_cog_cost'] ) ? alg_wc_cog_sanitize_cost( array( 'value' => sanitize_text_field( wp_unslash( $_POST['_alg_wc_cog_cost'] ) ) ) ) : '';
+			$manage_stock       = isset( $_POST['_manage_stock'] ) ? sanitize_text_field( wp_unslash( $_POST['_manage_stock'] ) ) : '';
+			$variation_post_ids = isset( $_POST['variable_post_id'] ) ? array_map( 'absint', (array) wp_unslash( $_POST['variable_post_id'] ) ) : array();
+			$variation_stocks   = isset( $_POST['variable_stock'] ) ? array_map( 'wc_clean', (array) wp_unslash( $_POST['variable_stock'] ) ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$variation_costs    = isset( $_POST['variable_alg_wc_cog_cost'] ) ? array_map( array( $this, 'sanitize_variation_cost' ), (array) wp_unslash( $_POST['variable_alg_wc_cog_cost'] ) ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+			$variation_manage_stock = isset( $_POST['variable_manage_stock'] ) ? array_map( 'sanitize_text_field', (array) wp_unslash( $_POST['variable_manage_stock'] ) ) : array();
+			$add_stock          = alg_wc_cog_sanitize_number( array( 'value' => $add_stock_raw, 'dots_and_commas_operation' => 'comma-to-dot' ) );
+			$add_stock_cost     = alg_wc_cog_sanitize_cost( array( 'value' => $add_stock_cost_raw ) );
+			$empty_cost_action  = apply_filters( 'alg_wc_cog_products_add_stock_empty_cost_action', 'do_nothing' );
+			$add_stock_variation_ids = isset( $_POST['alg_wc_cog_add_stock_variation_ids'] ) ? array_map( 'absint', (array) wp_unslash( $_POST['alg_wc_cog_add_stock_variation_ids'] ) ) : array();
 			if (
 				$this->is_add_stock_enabled() &&
-				! empty( $_POST['alg_wc_cog_add_stock'] ) &&
+				'' !== (string) $add_stock_raw &&
 				(
-					'do_nothing' !== ( $empty_cost_action = get_option( 'alg_wc_cog_products_add_stock_empty_cost_action', 'do_nothing' ) )
+					'do_nothing' !== $empty_cost_action
 					||
 					(
 						'do_nothing' === $empty_cost_action
-						&& ! empty( $_POST['alg_wc_cog_add_stock_cost'] )
+						&& '' !== (string) $add_stock_cost_raw
 					)
 				)
 			) {
-				if ( isset( $_POST['alg_wc_cog_add_stock_variation_ids'] ) && ! empty( $add_stock_variation_ids = $_POST['alg_wc_cog_add_stock_variation_ids'] ) ) {
+				if ( ! empty( $add_stock_variation_ids ) ) {
 					foreach ( $add_stock_variation_ids as $variation_id ) {
-						if ( $this->has_variation_manage_stock_enabled( $variation_id ) ) {
+						$variation_key = $this->find_variation_key_on_post( $variation_id, $variation_post_ids );
+						if ( $this->has_variation_manage_stock_enabled( $variation_id, $variation_key, $variation_manage_stock ) ) {
 							$this->product_add_stock( array(
 								'product_id' => (int) $variation_id,
-								'stock'      => floatval( $_POST['alg_wc_cog_add_stock'] ),
-								'stock_prev' => $this->get_variation_stock_prev_from_post( $variation_id ),
-								'cost_prev'  => $this->get_variation_cost_prev_from_post( $variation_id ),
-								'cost'       => floatval( $_POST['alg_wc_cog_add_stock_cost'] ),
+								'stock'      => (float) $add_stock,
+								'stock_prev' => $this->get_variation_stock_prev_from_post( $variation_key, $variation_stocks ),
+								'cost_prev'  => $this->get_variation_cost_prev_from_post( $variation_key, $variation_costs ),
+								'cost'       => (float) $add_stock_cost,
 							) );
-							$this->maybe_unset_variable_stock_from_post( $variation_id );
+							if ( false !== $variation_key && isset( $_POST['variable_stock'][ $variation_key ] ) ) {
+								unset( $_POST['variable_stock'][ $variation_key ] );
+							}
 						}
 					}
 				} else {
-					if ( $this->has_parent_product_manage_stock_enabled( $product_id ) ) {
+					if ( $this->has_parent_product_manage_stock_enabled( $product_id, $manage_stock ) ) {
 						$this->product_add_stock( array(
 							'product_id' => (int) $product_id,
-							'stock'      => floatval( $_POST['alg_wc_cog_add_stock'] ),
-							'stock_prev' => isset( $_POST['_stock'] ) ? (int) $_POST['_stock'] : '',
-							'cost_prev'  => isset( $_POST['_alg_wc_cog_cost'] ) ? alg_wc_cog_sanitize_cost( array( 'number' => $_POST['_alg_wc_cog_cost'] ) ) : '',
-							'cost'       => alg_wc_cog_sanitize_cost( array( 'value' => $_POST['alg_wc_cog_add_stock_cost'] ) ),
+							'stock'      => (float) $add_stock,
+							'stock_prev' => $parent_stock_prev,
+							'cost_prev'  => $parent_cost_prev,
+							'cost'       => (float) $add_stock_cost,
 						) );
 						if ( isset( $_POST['_stock'] ) ) {
 							unset( $_POST['_stock'] );
@@ -147,21 +185,21 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_variation_stock_prev_from_post.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
-		 * @param $variation_id
+		 * @param int   $variation_key Variation index.
+		 * @param array $variation_stocks Variation stock values.
 		 *
 		 * @return mixed|string
 		 */
-		function get_variation_stock_prev_from_post( $variation_id ) {
+		function get_variation_stock_prev_from_post( $variation_key, $variation_stocks ) {
 			$variation_stock_prev = '';
-			$variation_key        = $this->find_variation_key_on_post( $variation_id );
 			if (
 				false !== $variation_key &&
-				isset( $_POST['variable_stock'][ $variation_key ] )
+				isset( $variation_stocks[ $variation_key ] )
 			) {
-				$variation_stock_prev = $_POST['variable_stock'][ $variation_key ];
+				$variation_stock_prev = $variation_stocks[ $variation_key ];
 			}
 
 			return $variation_stock_prev;
@@ -170,21 +208,21 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_variation_cost_prev_from_post.
 		 *
-		 * @version 3.3.3
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
-		 * @param $variation_id
+		 * @param int   $variation_key Variation index.
+		 * @param array $variation_costs Variation cost values.
 		 *
 		 * @return mixed|string
 		 */
-		function get_variation_cost_prev_from_post( $variation_id ) {
+		function get_variation_cost_prev_from_post( $variation_key, $variation_costs ) {
 			$variation_cost_prev = '';
-			$variation_key       = $this->find_variation_key_on_post( $variation_id );
 			if (
 				false !== $variation_key &&
-				isset( $_POST['variable_alg_wc_cog_cost'][ $variation_key ] )
+				isset( $variation_costs[ $variation_key ] )
 			) {
-				$variation_cost_prev = $_POST['variable_alg_wc_cog_cost'][ $variation_key ];
+				$variation_cost_prev = $variation_costs[ $variation_key ];
 			}
 
 			return alg_wc_cog_sanitize_cost( array( 'value' => $variation_cost_prev ) );
@@ -193,18 +231,18 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * has_parent_product_manage_stock_enabled.
 		 *
-		 * @version 3.2.5
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
-		 * @param $product_id
+		 * @param int    $product_id Product ID.
+		 * @param string $manage_stock Posted manage stock value.
 		 *
 		 * @return bool
 		 */
-		function has_parent_product_manage_stock_enabled( $product_id ) {
+		function has_parent_product_manage_stock_enabled( $product_id, $manage_stock = '' ) {
 			if (
 				(
-					isset( $_POST['_manage_stock'] ) &&
-					'yes' === $_POST['_manage_stock']
+					'yes' === $manage_stock
 				) ||
 				(
 					is_a( $product = wc_get_product( $product_id ), 'WC_Product' ) &&
@@ -218,40 +256,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		}
 
 		/**
-		 * maybe_unset_variable_stock_from_post.
-		 *
-		 * @version 3.1.7
-		 * @since   3.1.7
-		 *
-		 * @param $variation_id
-		 *
-		 * @return void
-		 */
-		function maybe_unset_variable_stock_from_post( $variation_id ) {
-			$post_variation_key = $this->find_variation_key_on_post( $variation_id );
-			if (
-				false !== $post_variation_key &&
-				isset( $_POST['variable_stock'] ) &&
-				isset( $_POST['variable_stock'][ $post_variation_key ] )
-			) {
-				unset( $_POST['variable_stock'][ $post_variation_key ] );
-			}
-		}
-
-		/**
 		 * find_variation_key_on_post.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
-		 * @param $variation_id
+		 * @param int   $variation_id Variation product ID.
+		 * @param array $variation_post_ids Variation post IDs.
 		 *
 		 * @return false|int|string
 		 */
-		function find_variation_key_on_post( $variation_id ) {
+		function find_variation_key_on_post( $variation_id, $variation_post_ids = array() ) {
 			$variation_key = false;
-			if ( isset( $_POST['variable_post_id'] ) && ! empty( $_POST['variable_post_id'] ) ) {
-				$variation_key = array_search( $variation_id, $_POST['variable_post_id'] );
+			if ( ! empty( $variation_post_ids ) ) {
+				$variation_key = array_search( (int) $variation_id, $variation_post_ids, true );
 			}
 
 			return $variation_key;
@@ -260,21 +278,22 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * has_variation_manage_stock_enabled.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
-		 * @param $variation_id
+		 * @param int        $variation_id Variation product ID.
+		 * @param int|false  $variation_key Variation index.
+		 * @param array      $variation_manage_stock Posted manage stock values.
 		 *
 		 * @return bool
 		 */
-		function has_variation_manage_stock_enabled( $variation_id ) {
+		function has_variation_manage_stock_enabled( $variation_id, $variation_key = false, $variation_manage_stock = array() ) {
 			$has_variation_manage_stock_enabled = false;
-			$variation_key                      = $this->find_variation_key_on_post( $variation_id );
 			if (
 				(
 					false !== $variation_key &&
-					isset( $_POST['variable_manage_stock'] ) && ! empty( $variable_manage_stock = $_POST['variable_manage_stock'] ) &&
-					isset( $variable_manage_stock[ $variation_key ] ) && 'on' === $variable_manage_stock[ $variation_key ]
+					! empty( $variation_manage_stock ) &&
+					isset( $variation_manage_stock[ $variation_key ] ) && 'on' === $variation_manage_stock[ $variation_key ]
 				) ||
 				(
 					is_a( $variation = wc_get_product( $variation_id ), 'WC_Product' ) &&
@@ -285,6 +304,20 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			}
 
 			return $has_variation_manage_stock_enabled;
+		}
+
+		/**
+		 * sanitize_variation_cost.
+		 *
+		 * @version 4.1.5
+		 * @since   4.1.5
+		 *
+		 * @param string $cost Variation cost value.
+		 *
+		 * @return string
+		 */
+		function sanitize_variation_cost( $cost ) {
+			return alg_wc_cog_sanitize_cost( array( 'value' => $cost ) );
 		}
 
 		/**
@@ -348,7 +381,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * product_add_stock_meta_box.
 		 *
-		 * @version 3.9.5
+		 * @version 4.1.5
 		 * @since   1.7.0
 		 * @todo    [next] add option to delete all/selected history
 		 */
@@ -389,6 +422,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			}
 
 			echo '<div style="margin-top:10px;clear:both"></div>';
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML is assembled internally from escaped strings and trusted helper output.
 			echo $html;
 		}
 
@@ -423,7 +457,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_add_stock_history_table.
 		 *
-		 * @version 3.7.0
+		 * @version 4.1.5
 		 * @since   3.2.5
 		 *
 		 * @param $product_id
@@ -443,9 +477,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				$history_rows = '';
 				foreach ( $history as $date => $record ) {
 					$history_rows .= '<tr class="alg-wc-cog-add-stock-history-row" data-date="' . esc_attr( $date ) . '">' .
-					                 '<td>' . date( $format, $date ) . '</td>' .
-					                 '<td>' . $record['stock'] . '</td>' .
-					                 '<td>' . alg_wc_cog_format_cost( $record['cost'] ) . '</td>' .
+					                 '<td>' . esc_html( wp_date( $format, (int) $date ) ) . '</td>' .
+					                 '<td>' . esc_html( $record['stock'] ) . '</td>' .
+					                 '<td>' . wp_kses_post( alg_wc_cog_format_cost( $record['cost'] ) ) . '</td>' .
 					                 '<td>' . '<button class="alg-wc-cog-del-add-stock-history-date" type="button"><span class="dashicons dashicons-trash"></span></button>' . '</td>' .
 					                 '</tr>';
 				}
@@ -461,7 +495,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 				         '</tbody></table>';
 			}
 
-			$html .= $this->get_del_history_date_mechanism_js($product_id);
+			$html .= $this->get_del_history_date_mechanism_js( $product_id );
 
 			$html .= '<style>' .
 			         '.alg-wc-cog-del-add-stock-history-date{cursor:pointer;background:none;border:none}' .
@@ -520,7 +554,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * del_add_stock_history_date_ajax.
 		 *
-		 * @version 3.7.0
+		 * @version 4.1.5
 		 * @since   3.7.0
 		 *
 		 * @return void
@@ -529,8 +563,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			check_ajax_referer( 'alg-cog-del-add-stock-history-date-nonce', 'security' );
 			if (
 				current_user_can( 'edit_products' ) &&
-				isset( $_POST['date'] ) && ! empty( $date = sanitize_text_field( $_POST['date'] ) ) &&
-				isset( $_POST['productId'] ) && is_a( $product = wc_get_product( $_POST['productId'] ), 'WC_Product' )
+				isset( $_POST['date'] ) && ! empty( $date = sanitize_text_field( wp_unslash( $_POST['date'] ) ) ) &&
+				isset( $_POST['productId'] ) && is_a( $product = wc_get_product( absint( wp_unslash( $_POST['productId'] ) ) ), 'WC_Product' )
 			) {
 				$history_meta = '_alg_wc_cog_cost_history';
 				$history      = $product->get_meta( $history_meta, true );
@@ -545,14 +579,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_add_stock_history_table_ajax.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
 		 * @return void
 		 */
 		function get_add_stock_history_table_ajax() {
 			check_ajax_referer( 'add_stock_history_table_nonce', 'security' );
-			$variation_id = intval( $_POST['variation_id'] );
+			$variation_id = isset( $_POST['variation_id'] ) ? absint( wp_unslash( $_POST['variation_id'] ) ) : 0;
 			if ( ! empty( $variation_id ) ) {
 				$table = $this->get_add_stock_history_table( $variation_id );
 				wp_send_json_success( array( 'html' => $table ) );
@@ -609,7 +643,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_variations_history_script.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
 		 * @return false|string
@@ -625,7 +659,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
                         jQuery('.alg-wc-cog-add-stock-variation-history-title .spinner').addClass('is-active');
                         let data = {
                             action: 'get_add_stock_history_table',
-                            security: '<?php echo $ajax_nonce; ?>',
+							security: '<?php echo esc_js( $ajax_nonce ); ?>',
                             variation_id: event.target.value
                         };
                         jQuery.post(ajaxurl, data, function (response) {
@@ -649,7 +683,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_variations_to_update_html.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
 		 * @param $parent_product
@@ -679,11 +713,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 					$variation_name = $variation_obj->get_formatted_name();
 					$variation_name = str_replace( $variation_obj->get_title(), "", $variation_name );
 					$variation_name = preg_replace( '/^\s\-\s/', '', $variation_name );
+					$variation_name = preg_replace( '/\<span.*\<\/span\>/', '', $variation_name );
+					$variation_name = wp_strip_all_tags( $variation_name );
 
 					// Display variation attributes as checkboxes.
 					$variations_html .= '<li>';
 					$variations_html .= '<input id="alg_wc_cog_add_stock_variation_' . esc_attr( $variation_id ) . '" type="checkbox" name="alg_wc_cog_add_stock_variation_ids[]" value="' . esc_attr( $variation_id ) . '"/> ';
-					$variations_html .= '<label for="alg_wc_cog_add_stock_variation_' . esc_attr( $variation_id ) . '">' . $variation_name . '</label>';
+					$variations_html .= '<label for="alg_wc_cog_add_stock_variation_' . esc_attr( $variation_id ) . '">' . esc_html( $variation_name ) . '</label>';
 					$variations_html .= '</li>';
 				}
 
@@ -702,7 +738,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * calculate_add_stock_cost.
 		 *
-		 * @version 3.7.4
+		 * @version 4.1.5
 		 * @since   2.4.2
 		 *
 		 * @param null $args
@@ -719,7 +755,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 					'%cost%'       => '',
 					'%stock_now%'  => '',
 				),
-				'calculation_template' => get_option( 'alg_wc_cog_products_add_stock_cost_calculation', '( %stock_prev% * %cost_prev% + %stock% * %cost% ) / %stock_now%' )
+				'calculation_template' => apply_filters( 'alg_wc_cog_products_add_stock_cost_calculation_template', '( %stock_prev% * %cost_prev% + %stock% * %cost% ) / %stock_now%' )
 			) );
 			$template_variables        = $args['template_variables'];
 			$cost_calculation_template = $args['calculation_template'];
@@ -837,7 +873,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 		/**
 		 * get_add_stock_cost.
 		 *
-		 * @version 2.4.2
+		 * @version 4.1.5
 		 * @since   2.4.2
 		 *
 		 * @param null $args
@@ -848,7 +884,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Add_Stock' ) ) {
 			$args = wp_parse_args( $args, array(
 				'cost'              => '',
 				'product_id'        => '',
-				'empty_cost_action' => get_option( 'alg_wc_cog_products_add_stock_empty_cost_action', 'do_nothing' )
+				'empty_cost_action' => apply_filters( 'alg_wc_cog_products_add_stock_empty_cost_action', 'do_nothing' )
 			) );
 			$cost = $args['cost'];
 			if ( empty( $cost ) ) {

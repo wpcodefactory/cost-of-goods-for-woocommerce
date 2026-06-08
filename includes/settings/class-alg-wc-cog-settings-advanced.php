@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Advanced Section Settings.
  *
- * @version 3.4.3
+ * @version 4.1.5
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -64,7 +64,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.4.1
+	 * @version 4.1.5
 	 * @since   1.7.0
 	 * @todo    [later] "Force costs update on ...": better title and desc (3x)
 	 */
@@ -139,6 +139,7 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'title'         => __( 'Infinite loops', 'cost-of-goods-for-woocommerce' ),
 				'desc'          => __( 'Avoid infinite loops', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Link to WordPress Core ticket #40393. */
 				'desc_tip'      => sprintf( __( 'You can try to disable it if you\'re experiencing the bug %s.', 'cost-of-goods-for-woocommerce' ), sprintf( '<a target="_blank" href="%s">#40393</a>', 'https://core.trac.wordpress.org/ticket/40393' ) ),
 				'id'            => 'alg_wc_cog_avoid_infinite_loops',
 				'default'       => 'yes',
@@ -159,7 +160,8 @@ class Alg_WC_Cost_of_Goods_Settings_Advanced extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'title'    => __( 'Sortable columns', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Makes columns added to admin %s and %s lists <strong>sortable</strong>.', 'cost-of-goods-for-woocommerce' ),
+				/* translators: 1: Link to products admin list, 2: Link to orders admin list. */
+				'desc_tip' => sprintf( __( 'Makes columns added to admin %1$s and %2$s lists <strong>sortable</strong>.', 'cost-of-goods-for-woocommerce' ),
 					'<a href="' . admin_url( 'edit.php?post_type=product' )    . '">' . __( 'products', 'cost-of-goods-for-woocommerce' ) . '</a>',
 					'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders', 'cost-of-goods-for-woocommerce' )   . '</a>' ),
 				'id'       => 'alg_wc_cog_columns_sorting',

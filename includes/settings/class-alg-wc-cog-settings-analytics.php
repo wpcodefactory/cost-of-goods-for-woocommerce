@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Analytics Section Settings.
  *
- * @version 4.0.5
+ * @version 4.1.5
  * @since   3.4.6
  * @author  WPFactory
  */
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 4.0.5
+		 * @version 4.1.5
 		 * @since   3.4.6
 		 *
 		 * @return array
@@ -39,15 +39,18 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$analytics_settings = array(
 				array(
 					'title' => __( 'Analytics options', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Link to WooCommerce Analytics overview page. */
 					'desc'  => sprintf( __( 'Options related to <a href="%s">WooCommerce Analytics</a>.', 'cost-of-goods-for-woocommerce' ), admin_url( 'admin.php?page=wc-admin&path=/analytics/overview' ) ) . '<br /><br />' .
 					           __( 'Some notes:', 'cost-of-goods-for-woocommerce' ) . '<br />' .
 					           alg_wc_cog_array_to_string( array(
 						           sprintf(
+							           /* translators: %s: Link to WooCommerce Status > Tools page. */
 							           __( 'If you can\'t see the values refreshed or have issues with the analytics page, please try <a href="%s">clearing the analytics cache</a>.', 'cost-of-goods-for-woocommerce' ),
 							           admin_url( 'admin.php?page=wc-status&tab=tools' )
 						           ),
 						           sprintf(
-							           __( 'If the profit is empty and there is a %s currency at the <a href="%s">Multicurrency</a> section, make sure it\'s set to %s.', 'cost-of-goods-for-woocommerce' ),
+							           /* translators: 1: Store currency code, 2: Link to multicurrency settings, 3: Value that should be set. */
+							           __( 'If the profit is empty and there is a %1$s currency at the <a href="%2$s">Multicurrency</a> section, make sure it\'s set to %3$s.', 'cost-of-goods-for-woocommerce' ),
 							           get_option( 'woocommerce_currency' ) . get_option( 'woocommerce_currency' ),
 							           admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=currencies' ),
 							           '<code>1</code>'
@@ -65,6 +68,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$customers_section_opts = array(
 				array(
 					'title' => __( 'Customers', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Link to WooCommerce > Customers analytics section. */
 					'desc'  => sprintf( __( 'Options for the %s section.', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-admin&path=/customers' ) . '" >' . __( 'WooCommerce > Customers', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_cog_analytics_orders_options',
@@ -85,6 +89,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$orders_section_opts = array(
 				array(
 					'title' => __( 'Orders', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Link to Analytics > Orders section. */
 					'desc'  => sprintf( __( 'Options for the %s section.', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/orders' ) . '" >' . __( 'Analytics > Orders', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_cog_analytics_orders_options',
@@ -122,6 +127,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$products_section_opts = array(
 				array(
 					'title' => __( 'Products', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Link to Analytics > Products section. */
 					'desc'  => sprintf( __( 'Options for the %s section.', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/products' ) . '" >' . __( 'Analytics > Products', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_cog_analytics_products_options',
@@ -151,6 +157,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$variation_section_opts = array(
 				array(
 					'title' => __( 'Variations', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Link to Analytics > Variations section. */
 					'desc'  => sprintf( __( 'Options for the %s section.', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/variations' ) . '" >' . __( 'Analytics > Variations', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_cog_analytics_variations_options',
@@ -180,6 +187,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$categories_section_opts = array(
 				array(
 					'title' => __( 'Categories', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Link to Analytics > Categories section. */
 					'desc'  => sprintf( __( 'Options for the %s section.', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/categories' ) . '" >' . __( 'Analytics > Categories', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_cog_analytics_categories_options',
@@ -209,6 +217,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$revenue_section_opts = array(
 				array(
 					'title' => __( 'Revenue', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Link to Analytics > Revenue section. */
 					'desc'  => sprintf( __( 'Options for the %s section.', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/revenue' ) . '" >' . __( 'Analytics > Revenue', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_cog_analytics_revenue_options',
@@ -238,6 +247,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Analytics' ) ) :
 			$stock_section_opts = array(
 				array(
 					'title' => __( 'Stock', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Link to Analytics > Stock section. */
 					'desc'  => sprintf( __( 'Options for the %s section.', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'admin.php?page=wc-admin&path=/analytics/stock' ) . '" >' . __( 'Analytics > Stock', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 					'type'  => 'title',
 					'id'    => 'alg_wc_cog_analytics_stock_options',

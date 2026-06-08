@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 3.4.5
+ * @version 4.1.5
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		/**
 		 * prepare_items.
 		 *
-		 * @version 2.7.3
+		 * @version 4.1.5
 		 * @since   2.3.1
 		 */
 		public function prepare_items() {
@@ -46,9 +46,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 				'paginate'       => true,
 				'tax_query'     => array(),
 				'posts_per_page' => $per_page,
-				'paged'          => isset( $_GET['paged'] ) ? filter_var( $_GET['paged'], FILTER_SANITIZE_NUMBER_INT ) : 1,
+				'paged'          => isset( $_GET['paged'] ) ? filter_var( wp_unslash( $_GET['paged'] ), FILTER_SANITIZE_NUMBER_INT ) : 1,
 				'orderby'        => 'ID',
-				'order'          => isset( $_GET['order'] ) ? strtoupper( sanitize_text_field( $_GET['order'] ) ) : 'ASC',
+				'order'          => isset( $_GET['order'] ) ? strtoupper( sanitize_text_field( wp_unslash( $_GET['order'] ) ) ) : 'ASC',
 				'type'           => ( ! empty( $types ) ? $types : array_merge( array_keys( wc_get_product_types() ), array( 'variation' ) ) ),
 			);
 			// Search.
@@ -63,7 +63,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 				}
 			}
 			// Tax query - Product tag.
-			if ( isset( $_GET['product_tag'] ) && ! empty( $product_tag = sanitize_text_field( $_GET['product_tag'] ) ) ) {
+			if ( isset( $_GET['product_tag'] ) && ! empty( $product_tag = sanitize_text_field( wp_unslash( $_GET['product_tag'] ) ) ) ) {
 				$args['tax_query'][] = array(
 					'taxonomy' => 'product_tag',
 					'terms'    => array( esc_attr( $product_tag ) ),
@@ -100,15 +100,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 				'total_pages' => $products->max_num_pages,
 			] );
 			$this->items = $products->products;
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended
 		}
 
 		/**
 		 * fix_paged_query_string_on_search_change.
 		 *
-		 * @version 3.3.2
+		 * @version 4.1.5
 		 * @since   2.7.1
 		 */
 		function fix_paged_query_string_on_search_change() {
+			// phpcs:disable WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 			if (
 				! function_exists( 'get_current_screen' ) ||
 				empty( $current_screen = get_current_screen() ) ||
@@ -138,20 +140,21 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 				}
 			}
 
-			$_SESSION['alg_wc_cog_bulk_edit_cost_search'] = isset( $_GET['s'] ) ? $_GET['s'] : '';
+			$_SESSION['alg_wc_cog_bulk_edit_cost_search'] = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
 
 			if ( ! isset( $_COOKIE['alg_wc_cog_bulk_edit_cost_search'] ) ) {
 				if ( isset( $_GET['s'] ) ) {
-					$s = $_GET['s'];
+					$s = sanitize_text_field( wp_unslash( $_GET['s'] ) );
 					setcookie( 'alg_wc_cog_bulk_edit_cost_search', $s, time() + 86400 ); 
 				}
 			} else {
 				unset( $_COOKIE['alg_wc_cog_bulk_edit_cost_search'] );
 				if ( isset( $_GET['s'] ) ) {
-					$s = $_GET['s'];
+					$s = sanitize_text_field( wp_unslash( $_GET['s'] ) );
 					setcookie( 'alg_wc_cog_bulk_edit_cost_search', $s, time() + 86400 ); 
 				}
 			}
+			// phpcs:enable WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 		}
 
 		/**
@@ -185,7 +188,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 			?>
 
 			</form><form method="post">
-			<table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
+			<table class="wp-list-table <?php echo esc_attr( implode( ' ', $this->get_table_classes() ) ); ?>">
 				<thead>
 				<tr>
 					<?php $this->print_column_headers(); ?>
@@ -195,7 +198,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 				<tbody id="the-list"
 					<?php
 					if ( $singular ) {
-						echo " data-wp-lists='list:$singular'";
+						echo ' data-wp-lists="list:' . esc_attr( $singular ) . '"';
 					}
 					?>
 				>
@@ -262,7 +265,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 		 * @todo    [maybe] better description here and in settings
 		 * @todo    [maybe] bulk edit order items meta
 		 *
-		 * @version 2.8.9
+		 * @version 4.1.5
 		 * @since   2.3.1
 		 *
 		 * @param object $item
@@ -310,6 +313,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 					$show_profit = 'yes' === get_option( 'alg_wc_cog_bulk_edit_tool_profit_on_cost_desc', 'no' );
 					$value       = alg_wc_cog()->core->products->get_product_cost( $item->get_id() );
 					if ( $show_profit ) {
+						/* translators: %s: Profit value or "N/A". */
 						$profit_html = sprintf( __( 'Profit: %s', 'cost-of-goods-for-woocommerce' ), ( '' != ( $profit = alg_wc_cog()->core->products->get_product_profit_html( $item->get_id(), alg_wc_cog()->core->products->product_profit_html_template ) ) ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) ) );
 					} else {
 						$profit_html = '';
@@ -329,9 +333,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 						return $termlink;
 					}, 10, 3 );
 					if ( $this->need_to_edit_tags() ) {
-						echo $this->get_tags_edit_field( $item->get_id() );
+						echo $this->get_tags_edit_field( $item->get_id() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					}
-					echo '<div class="alg-wc-cog-product-tags">' . wc_get_product_tag_list( $item->get_id() ) . '</div>';
+					echo '<div class="alg-wc-cog-product-tags">' . wp_kses_post( wc_get_product_tag_list( $item->get_id() ) ) . '</div>';
 					break;
 				case '_stock':
 					if ( 'yes' !== get_option( 'alg_wc_cog_bulk_edit_tool_manage_stock', 'no' ) ) {
@@ -346,7 +350,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool' ) ) :
 						                ' class="alg_wc_cog_bet_input short"' .
 						                ' initial-value="' . $stock_value . '"' .
 						                ' value="' . $stock_value . '"' . '>';
-						$result       .= wc_help_tip( sprintf( __( 'Stock status: %s', 'cost-of-goods-for-woocommerce' ), $stock_status ) );
+						$result       .= wc_help_tip(
+						/* translators: %s: Stock status value (e.g. "instock", "outofstock", "N/A"). */
+						sprintf( __( 'Stock status: %s', 'cost-of-goods-for-woocommerce' ), $stock_status )
+					);
 					}
 					break;
 				default:

@@ -1348,10 +1348,6 @@ msgstr "E-mail wordt verzonden naar %s wanneer de taak is afgerond."
 msgid "Cost of Goods for WooCommerce - Bulk update costs"
 msgstr "Cost of Goods for WooCommerce - Bulk update kosten"
 
-#: includes/alg-wc-cog-functions.php:219
-msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
-msgstr "Uitgeschakelde opties kunnen worden ontgrendeld met behulp van <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
-
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:218
 msgid "Add \"Cost\" and \"Profit\" totals columns"
 msgstr "\"Kosten\" en \"Winst\" totaal kolommen toevoegen"
@@ -1687,7 +1683,8 @@ msgstr "Analytics > Bestellingen"
 msgid "Upgrade to Pro version"
 msgstr "Upgrade naar Pro versie"
 
-#: includes/alg-wc-cog-functions.php:219
+#. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
+#: includes/alg-wc-cog-functions.php:220
 #: includes/settings/class-alg-wc-settings-cog.php:83
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr "Cost of Goods for WooCommerce Pro"
@@ -3510,4 +3507,9 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:129
 msgid "Profit margin column width (%s unit)."
+msgstr ""
+
+#. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
+#: includes/alg-wc-cog-functions.php:220
+msgid "Disabled options can be unlocked using <a href=\"%1$s\" target=\"_blank\"><strong>%2$s</strong></a>"
 msgstr ""

@@ -3,11 +3,11 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 7.0
-Stable tag: 4.1.4
+Stable tag: 4.1.5
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Unlock detailed insights into products profitability, calculate COGS & profit margins, and get a better financial analytics insights with our Cost of Goods Sold (COGS) plugin
+Calculate COGS & profit margins, unlock detailed insights into product profitability, and get better financial analytics with our COGS plugin
 
 == Description ==
 
@@ -343,6 +343,15 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 6. Cost of goods columns in "Analytics > Orders" report.
 
 == Changelog ==
+
+= 4.1.5 - 08/06/2026 =
+* Fix - Fixed I18n issues on functions.
+* Fix - Fixed nonce, escaping and validation checks.
+* Fix - Removed unnecessary `load_plugin_textdomain()` function.
+* Fix - Changed Short Description from readme.txt.
+* Fix - Code refactoring.
+* Fix - Fixed `WordPress.WP.I18n.MissingTranslatorsComment` issues.
+* Dev - Moved translations to languages folder.
 
 = 4.1.4 - 22/05/2026 =
 * Update `$version` property.

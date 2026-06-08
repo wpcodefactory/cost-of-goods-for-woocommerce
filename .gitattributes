@@ -7,13 +7,13 @@ composer.lock export-ignore
 includes/analytics/README.md export-ignore
 includes/analytics/package.json export-ignore
 includes/analytics/package-lock.json export-ignore
-includes/analytics/package-lock.json export-ignore
 includes/analytics/pnpm-lock.yaml export-ignore
-includes/analytics/node_modules/
-includes/analytics/webpack.config.js
+includes/analytics/node_modules/ export-ignore
+includes/analytics/webpack.config.js export-ignore
 includes/analytics/.prettierrc.json export-ignore
 includes/analytics/.gitignore export-ignore
 includes/analytics/.eslintrc.js export-ignore
+includes/pro/analytics/webpack.config.js export-ignore
 # WPF Documentor
 vendor/wpfactory/wpf-settings-exporter export-ignore
 vendor/wpfactory/wpf-documentor export-ignore

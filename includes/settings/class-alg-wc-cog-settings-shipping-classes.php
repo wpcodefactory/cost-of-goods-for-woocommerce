@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Shipping classes Settings.
  *
- * @version 3.1.2
+ * @version 4.1.5
  * @since   2.4.3
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 		/**
 		 * get_settings.
 		 *
-		 * @version 3.1.2
+		 * @version 4.1.5
 		 * @since   2.4.3
 		 * @todo    [maybe] better section desc (same for `$order_extra_cost_settings` and "Shipping"): how to recalculate order's profit/cost (i.e. update order or use tool)
 		 */
@@ -83,6 +83,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Settings_Shipping_Classes' ) ) :
 					),
 					array(
 						'title'             => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
+						/* translators: %s: Shop currency code. */
 						'desc_tip'          => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), alg_wc_cog()->core->get_default_shop_currency() ),
 						'type'              => 'number',
 						'id'                => "alg_wc_cog_shipping_class_costs_fixed[{$key}]",

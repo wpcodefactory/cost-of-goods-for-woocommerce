@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Currencies Section Settings.
  *
- * @version 4.0.5
+ * @version 4.1.5
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.5
+	 * @version 4.1.5
 	 * @since   2.2.0
 	 * @todo    [next] exclude `$wc_currency` from `get_woocommerce_currencies()`?
 	 * @todo    [maybe] `alg_wc_cog_currencies_wmc`: add link to the plugin on wp.org?
@@ -49,6 +49,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 			),
 			array(
 				'title'             => __( 'Multi-currency management', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Feature name. */
 				'desc'              => sprintf( __( 'Enable %s feature', 'cost-of-goods-for-woocommerce' ), strtolower( __( 'Multi-currency management', 'cost-of-goods-for-woocommerce' ) ) ),
 				'type'              => 'checkbox',
 				'id'                => 'alg_wc_cog_currencies_enabled',
@@ -61,6 +62,7 @@ class Alg_WC_Cost_of_Goods_Settings_Currencies extends Alg_WC_Cost_of_Goods_Sett
 			array(
 				'title'             => __( 'Order values', 'cost-of-goods-for-woocommerce' ),
 				'desc'              => __( 'Display COG related values from the order, such as costs and profit, in the currency of the order', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Link to the order listing page. */
 				'desc_tip'          => sprintf(__( 'The affected areas are the %s and the order page on the admin.', 'cost-of-goods-for-woocommerce' ), '<a href="' . alg_wc_cog_get_admin_orders_page_url() . '">' . __( 'order listing page', 'cost-of-goods-for-woocommerce' ) . '</a>'),
 				'type'              => 'checkbox',
 				'id'                => 'alg_wc_cog_currencies_display_order_currency_values',

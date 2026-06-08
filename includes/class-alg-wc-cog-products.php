@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 4.0.2
+ * @version 4.1.5
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -215,7 +215,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * handle_product_columns_style.
 	 *
-	 * @version 2.4.2
+	 * @version 4.1.5
 	 * @since   2.4.2
 	 */
 	function handle_product_columns_style() {
@@ -229,11 +229,11 @@ class Alg_WC_Cost_of_Goods_Products {
 		?>
 		<style>
 			.wp-list-table .column-cost {
-			<?php echo $cost_width_style; ?>
+			<?php echo esc_html( $cost_width_style ); ?>
 			}
 
 			.wp-list-table .column-profit {
-			<?php echo $profit_width_style; ?>
+			<?php echo esc_html( $profit_width_style ); ?>
 			}
 		</style>
 		<?php
@@ -374,7 +374,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * product_pre_get_posts_order_by_column.
 	 *
-	 * @version 2.1.0
+	 * @version 4.1.5
 	 * @since   1.7.0
 	 */
 	function product_pre_get_posts_order_by_column( $query ) {
@@ -409,9 +409,11 @@ class Alg_WC_Cost_of_Goods_Products {
 	 */
 	function render_product_columns( $column, $product_id ) {
 		if ( 'profit' === $column || 'cost' === $column ) {
-			echo ( 'cost' === $column ?
-				$this->get_product_cost_html( $product_id ) :
-				$this->get_product_profit_html( $product_id, $this->product_profit_html_template ) );
+			echo wp_kses_post(
+				'cost' === $column ?
+					$this->get_product_cost_html( $product_id ) :
+					$this->get_product_profit_html( $product_id, $this->product_profit_html_template )
+			);
 		}
 	}
 
@@ -486,10 +488,9 @@ class Alg_WC_Cost_of_Goods_Products {
 			$product_id = $product;
 			$product = wc_get_product( $product_id );
 			
-			// If it's still not a valid product object, log an error and return false
+			// If it's still not a valid product object, return false.
 			if ( !( $product instanceof WC_Product ) ) {
-				error_log( "Invalid product ID: $product_id" );
-				return false; // or you might return a default value instead
+				return false;
 			}
 		}
 		$args   = wp_parse_args( $args, array(
@@ -506,7 +507,7 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_cost_html.
 	 *
-	 * @version 3.2.8
+	 * @version 4.1.5
 	 * @since   1.0.0
 	 */
 	function get_product_cost_html( $product_id ) {
@@ -515,16 +516,16 @@ class Alg_WC_Cost_of_Goods_Products {
 			return '';
 		}
 		if ( $product->is_type( 'variable' ) ) {
-			return $this->get_variable_product_html( $product_id, 'cost', '%cost%' );
+			return wp_kses_post( $this->get_variable_product_html( $product_id, 'cost', '%cost%' ) );
 		} else {
-			return ( '' === ( $cost = $this->get_product_cost( $product_id ) ) ? '' : alg_wc_cog_format_cost( $cost ) );
+			return wp_kses_post( '' === ( $cost = $this->get_product_cost( $product_id ) ) ? '' : alg_wc_cog_format_cost( $cost ) );
 		}
 	}
 
 	/**
 	 * get_product_profit.
 	 *
-	 * @version 4.0.0
+	 * @version 4.1.5
 	 * @since   1.0.0
 	 * @todo    [next] maybe check if `wc_get_price_excluding_tax()` is numeric (e.g. maybe can return range)
 	 */
@@ -570,14 +571,14 @@ class Alg_WC_Cost_of_Goods_Products {
 	/**
 	 * get_product_profit_html.
 	 *
-	 * @version 3.7.2
+	 * @version 4.1.5
 	 * @since   1.0.0
 	 */
 	function get_product_profit_html( $product_id, $template = '%profit% (%profit_percent%)' ) {
 		$product = wc_get_product( $product_id );
 		if ( is_a( $product, 'WC_Product' ) ) {
 			if ( $product->is_type( 'variable' ) ) {
-				return $this->get_variable_product_html( $product_id, 'profit', $template );
+				return wp_kses_post( $this->get_variable_product_html( $product_id, 'profit', $template ) );
 			} else {
 				if ( '' === ( $profit = $this->get_product_profit(
 						array(
@@ -593,7 +594,7 @@ class Alg_WC_Cost_of_Goods_Products {
 						'%profit_margin%'  => sprintf( '%0.2f%%', ( 0 != ( $price = $this->get_product_price( $product ) ) ? $profit / $price * 100 : '' ) ),
 					);
 
-					return str_replace( array_keys( $placeholders ), $placeholders, $template );
+					return wp_kses_post( str_replace( array_keys( $placeholders ), $placeholders, $template ) );
 				}
 			}
 		} else {

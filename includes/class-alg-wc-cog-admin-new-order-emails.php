@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Admin new order emails.
  *
- * @version 3.6.9
+ * @version 4.1.5
  * @since   3.6.9
  *
  * @see woocommerce/templates/emails/email-order-details.php
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Admin_New_Order_Emails' ) ) {
 		/**
 		 * enable_cog_admin_new_order_email_meta.
 		 *
-		 * @version 3.6.9
+		 * @version 4.1.5
 		 * @since   3.6.9
 		 *
 		 * @param $enabled
@@ -60,24 +60,41 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Admin_New_Order_Emails' ) ) {
 		 * @return bool
 		 */
 		function enable_cog_admin_new_order_email_meta( $enabled ) {
-			$options = array(
-				array( 'option_id' => 'alg_wc_cog_order_admin_new_order_email_profit_and_cost', 'default' => 'no' ),
-				array( 'option_id' => 'alg_wc_cog_order_admin_new_order_email_item_profit_and_cost', 'default' => 'no' ),
-			);
-			foreach ( $options as $option ) {
-				if ( 'yes' === alg_wc_cog_get_option( $option['option_id'], $option['default'] ) ) {
-					return true;
-					break;
-				}
+			if ( $this->is_total_cost_and_profit_email_enabled() || $this->is_item_cost_and_profit_email_enabled() ) {
+				return true;
 			}
 
 			return $enabled;
 		}
 
 		/**
+		 * is_total_cost_and_profit_email_enabled.
+		 *
+		 * @version 4.1.5
+		 * @since   4.1.5
+		 *
+		 * @return bool
+		 */
+		function is_total_cost_and_profit_email_enabled() {
+			return (bool) apply_filters( 'alg_wc_cog_order_admin_new_order_email_total_enabled', false );
+		}
+
+		/**
+		 * is_item_cost_and_profit_email_enabled.
+		 *
+		 * @version 4.1.5
+		 * @since   4.1.5
+		 *
+		 * @return bool
+		 */
+		function is_item_cost_and_profit_email_enabled() {
+			return (bool) apply_filters( 'alg_wc_cog_order_admin_new_order_email_item_enabled', false );
+		}
+
+		/**
 		 * add_new_order_email_cog_title.
 		 *
-		 * @version 3.6.9
+		 * @version 4.1.5
 		 * @since   3.6.9
 		 *
 		 * @param $order_obj
@@ -89,7 +106,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Admin_New_Order_Emails' ) ) {
 			$email_improvements_enabled = FeaturesUtil::feature_is_enabled( 'email_improvements' );
 			$heading_class              = $email_improvements_enabled ? 'email-order-detail-heading' : '';
 			?>
-            <h2 class="<?php echo esc_attr( $heading_class ); ?>"><?php _e( 'Cost of goods', 'cost-of-goods-for-woocommerce' ) ?></h2>
+			<h2 class="<?php echo esc_attr( $heading_class ); ?>"><?php esc_html_e( 'Cost of goods', 'cost-of-goods-for-woocommerce' ); ?></h2>
 			<?php
 		}
 
@@ -118,7 +135,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Admin_New_Order_Emails' ) ) {
 		/**
 		 * add_individual_item_cost_and_profit.
 		 *
-		 * @version 3.6.9
+		 * @version 4.1.5
 		 * @since   3.6.9
 		 *
 		 * @param $order
@@ -128,7 +145,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Admin_New_Order_Emails' ) ) {
 		 * @return void
 		 */
 		function add_individual_item_cost_and_profit( $order, $sent_to_admin ) {
-			if ( 'yes' !== alg_wc_cog_get_option( 'alg_wc_cog_order_admin_new_order_email_item_profit_and_cost', 'no' ) ) {
+			if ( ! $this->is_item_cost_and_profit_email_enabled() ) {
 				return;
 			}
 			$email_improvements_enabled = FeaturesUtil::feature_is_enabled( 'email_improvements' );
@@ -188,10 +205,10 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Admin_New_Order_Emails' ) ) {
 							?>
                         </td>
                         <td class="td font-family" style="vertical-align:middle;">
-							<?php echo '<span style="color:red;">' . alg_wc_cog_format_cost( wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' ) ) . '</span>'; ?>
+							<?php echo wp_kses_post( '<span style="color:red;">' . alg_wc_cog_format_cost( wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_cost' ) ) . '</span>' ); ?>
                         </td>
                         <td class="td font-family" style="vertical-align:middle;">
-							<?php echo '<span style="color:green;">' . alg_wc_cog_format_cost( wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_profit' ) ) . '</span>'; ?>
+							<?php echo wp_kses_post( '<span style="color:green;">' . alg_wc_cog_format_cost( wc_get_order_item_meta( $item_id, '_alg_wc_cog_item_profit' ) ) . '</span>' ); ?>
                         </td>
                     </tr>
 
@@ -205,14 +222,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Admin_New_Order_Emails' ) ) {
 		/**
 		 * woocommerce_email_order_meta.
 		 *
-		 * @version 3.6.9
+		 * @version 4.1.5
 		 * @since   2.3.5
 		 *
 		 * @param $order
 		 * @param $sent_to_admin
 		 */
 		function add_total_cost_and_profit( $order, $sent_to_admin ) {
-			if ( 'yes' !== alg_wc_cog_get_option( 'alg_wc_cog_order_admin_new_order_email_profit_and_cost', 'no' ) ) {
+			if ( ! $this->is_total_cost_and_profit_email_enabled() ) {
 				return;
 			}
 			$email_improvements_enabled = FeaturesUtil::feature_is_enabled( 'email_improvements' );
@@ -247,7 +264,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Admin_New_Order_Emails' ) ) {
 			);
 			?>
 
-			<?php echo alg_wc_cog_get_table_html( $table_data, $table_args ); ?>
+			<?php echo wp_kses_post( alg_wc_cog_get_table_html( $table_data, $table_args ) ); ?>
 			<?php
 		}
 

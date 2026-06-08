@@ -143,12 +143,12 @@ class Alg_WC_Settings_Cost_of_Goods extends WC_Settings_Page {
 	/**
 	 * admin_notices_settings_reset_success.
 	 *
-	 * @version 1.2.0
+	 * @version 4.1.5
 	 * @since   1.1.0
 	 */
 	function admin_notices_settings_reset_success() {
 		echo '<div class="notice notice-warning is-dismissible"><p><strong>' .
-			__( 'Your settings have been reset.', 'cost-of-goods-for-woocommerce' ) . '</strong></p></div>';
+			esc_html__( 'Your settings have been reset.', 'cost-of-goods-for-woocommerce' ) . '</strong></p></div>';
 	}
 
 

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Cost archive.
  *
- * @version 3.9.8
+ * @version 4.1.5
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   2.8.2
 		 */
 		function __construct() {
@@ -126,7 +126,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * get_product_cost_archive.
 		 *
-		 * @version 2.9.3
+		 * @version 4.1.5
 		 * @since   2.8.2
 		 *
 		 * @param $args
@@ -140,31 +140,33 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 				'order'      => strtoupper( get_option( 'alg_wc_cog_cost_archive_date_order', 'desc' ) ),
 				'orderby'    => 'update_datetime'
 			) );
-			$order      = strtoupper( $args['order'] );
-			$orderby    = $args['orderby'];
+			$order      = in_array( strtoupper( $args['order'] ), array( 'ASC', 'DESC' ), true ) ? strtoupper( $args['order'] ) : 'DESC';
+			$allowed_orderbys = array( 'update_datetime' );
+			$orderby    = in_array( $args['orderby'], $allowed_orderbys, true ) ? $args['orderby'] : 'update_datetime';
 			$product_id = intval( $args['product_id'] );
 			$use_mysql_regexp_substr = 'yes' === get_option( 'alg_wc_cog_save_cost_archive_mysql_regexp_substr', 'yes' );
 			global $wpdb;
 			if ( $use_mysql_regexp_substr ) {
-				$query = "
-					SELECT meta_value, FROM_UNIXTIME(REGEXP_SUBSTR(meta_value,'(?<=update_date\";i:).+?(?=;)')) AS update_datetime
+				$query = $wpdb->prepare(
+					"SELECT meta_value, FROM_UNIXTIME(REGEXP_SUBSTR(meta_value,'(?<=update_date\";i:).+?(?=;)')) AS update_datetime
 					FROM {$wpdb->postmeta}
-					WHERE post_id = %d AND meta_key = %s
-				";
+					WHERE post_id = %d AND meta_key = %s",
+					$product_id,
+					'_alg_wc_cog_cost_archive'
+				);
 				if ( ! empty( $orderby ) ) {
-					$query .= "ORDER BY {$orderby} {$order}";
+					$query .= " ORDER BY {$orderby} {$order}";
 				}
 			} else {
-				$query = "
-					SELECT meta_value
+				$query = $wpdb->prepare(
+					"SELECT meta_value
 					FROM {$wpdb->postmeta}
-					WHERE post_id = %d AND meta_key = %s
-				";
+					WHERE post_id = %d AND meta_key = %s",
+					$product_id,
+					'_alg_wc_cog_cost_archive'
+				);
 			}
-			$results          = $wpdb->get_results(
-				$wpdb->prepare( $query, $product_id, '_alg_wc_cog_cost_archive' ),
-				ARRAY_A
-			);
+			$results = $wpdb->get_results( $query, ARRAY_A );
 			if ( ! $use_mysql_regexp_substr ) {
 				foreach ( $results as $key => $result ) {
 					$results[ $key ]['update_datetime'] = wp_date( "Y-m-d H:i:s", unserialize( $result['meta_value'] )['update_date'] );
@@ -187,7 +189,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * product_add_stock_meta_box.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   2.8.2
 		 * @todo    [next] add option to delete all/selected history
 		 */
@@ -197,16 +199,16 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 				return;
 			}
 			if ( $product->is_type( 'variable' ) ) {
-				echo $this->get_variations_archive_html( $product );
+				echo wp_kses_post( $this->get_variations_archive_html( $product ) );
 			} else {
-				echo $this->get_product_cost_archive_table( $product );
+				echo wp_kses_post( $this->get_product_cost_archive_table( $product ) );
 			}
 		}
 
 		/**
 		 * get_cost_archive_table_ajax.
 		 *
-		 * @version 3.1.7
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
 		 * @return void
@@ -214,7 +216,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		 */
 		function get_cost_archive_table_ajax() {
 			check_ajax_referer( 'cost_archive_table_nonce', 'security' );
-			$variation_id = intval( $_POST['variation_id'] );
+			$variation_id = isset( $_POST['variation_id'] ) ? absint( wp_unslash( $_POST['variation_id'] ) ) : 0;
 			if ( ! empty( $variation_id ) ) {
 				$table = $this->get_product_cost_archive_table( wc_get_product( $variation_id ) );
 				wp_send_json_success( array( 'html' => $table ) );
@@ -225,7 +227,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * get_product_cost_archive_table.
 		 *
-		 * @version 3.3.3
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
 		 * @param $product
@@ -240,7 +242,8 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 			$html='';
 			if ( empty( $product_cost_archive ) ) {
 				$html.= '<p>'.__( 'There isn\'t a cost archive for this product yet.', 'cost-of-goods-for-woocommerce' ).'</p>';
-				$html.= '<p>' . sprintf( __( 'Please, check if the option %s is enabled and then update the cost.', 'cost-of-goods-for-woocommerce' ), '<strong><a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods' ) . '">' . __( 'Products > Cost archive > Save cost archive', 'cost-of-goods-for-woocommerce' ) . '</a></strong>' ) . '</p>';
+				/* translators: %s: settings link. */
+				$html.= '<p>' . sprintf( __( 'Please, check if the option %s is enabled and then update the cost.', 'cost-of-goods-for-woocommerce' ), '<strong><a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods' ) ) . '">' . esc_html__( 'Products > Cost archive > Save cost archive', 'cost-of-goods-for-woocommerce' ) . '</a></strong>' ) . '</p>';
 			} else {
 				$table_columns = array(
 					'update_date'     => __( 'Update date', 'cost-of-goods-for-woocommerce' ),
@@ -389,7 +392,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 		/**
 		 * get_variations_history_script.
 		 *
-		 * @version 3.9.7
+		 * @version 4.1.5
 		 * @since   3.1.7
 		 *
 		 * @return false|string
@@ -405,7 +408,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Products_Cost_Archive' ) ) {
 						jQuery( '.alg-wc-cog-cost-archive-variation-title .spinner' ).addClass( 'is-active' );
 						let data = {
 							action: 'get_cost_archive_table',
-							security: '<?php echo $ajax_nonce; ?>',
+							security: '<?php echo esc_js( $ajax_nonce ); ?>',
 							variation_id: event.target.value
 						};
 						jQuery.post( ajaxurl, data, function ( response ) {

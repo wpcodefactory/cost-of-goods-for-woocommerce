@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Bulk Edit Attribute Filtering Class.
  *
- * @version 4.0.1
+ * @version 4.1.5
  * @since   4.0.1
  * @author  WPFactory
  */
@@ -40,7 +40,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 		/**
 		 * get_child_products_args.
 		 *
-		 * @version 4.0.1
+		 * @version 4.1.5
 		 * @since   4.0.1
 		 *
 		 * @param $args
@@ -48,7 +48,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 		 * @return mixed
 		 */
 		function get_child_products_args( $args ) {
-			$filtered_attr = $_POST['alg_wc_cog_bulk_edit_filtered_attr'] ?? [];
+			$settings_nonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			if ( empty( $settings_nonce ) || ! wp_verify_nonce( $settings_nonce, 'woocommerce-settings' ) ) {
+				return $args;
+			}
+
+			$filtered_attr = filter_input( INPUT_POST, 'alg_wc_cog_bulk_edit_filtered_attr', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+			$filtered_attr = is_array( $filtered_attr ) ? $filtered_attr : array();
 			$meta_query    = array();
 
 			foreach ( $filtered_attr as $taxonomy => $term_ids ) {
@@ -83,6 +89,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 					$meta_query = array_merge( $args['meta_query'], $meta_query );
 				}
 
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Filtering by selected attributes requires meta query.
 				$args['meta_query'] = array_merge(
 					array( 'relation' => 'AND' ),
 					$meta_query
@@ -95,7 +102,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 		/**
 		 * get_products_args.
 		 *
-		 * @version 4.0.1
+		 * @version 4.1.5
 		 * @since   4.0.1
 		 *
 		 * @param $args
@@ -103,7 +110,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 		 * @return mixed
 		 */
 		function get_products_args( $args ) {
-			$filtered_attr = $_POST['alg_wc_cog_bulk_edit_filtered_attr'] ?? array();
+			$settings_nonce = filter_input( INPUT_POST, '_wpnonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			if ( empty( $settings_nonce ) || ! wp_verify_nonce( $settings_nonce, 'woocommerce-settings' ) ) {
+				return $args;
+			}
+
+			$filtered_attr = filter_input( INPUT_POST, 'alg_wc_cog_bulk_edit_filtered_attr', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
+			$filtered_attr = is_array( $filtered_attr ) ? $filtered_attr : array();
 			$tax_query     = array();
 			foreach ( $filtered_attr as $taxonomy => $term_ids ) {
 				if ( empty( $term_ids ) ) {
@@ -131,6 +144,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 					$tax_query = array_merge( $args['tax_query'], $tax_query );
 				}
 
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Filtering by selected attributes requires taxonomy query.
 				$args['tax_query'] = array_merge(
 					array( 'relation' => 'AND' ),
 					$tax_query
@@ -143,7 +157,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 		/**
 		 * render_attributes.
 		 *
-		 * @version 4.0.1
+		 * @version 4.1.5
 		 * @since   4.0.1
 		 *
 		 * @return void
@@ -155,12 +169,13 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 			foreach ( $taxes as $taxonomy ) :
 
 				$label = wc_attribute_label( $taxonomy );
-				$id   = 'attr-' . esc_attr( $taxonomy );
+				$id   = 'attr-' . $taxonomy;
 				?>
 
 				<tr>
 					<th scope="row">
-						<label for="<?php echo $id; ?>">
+						<label for="<?php echo esc_attr( $id ); ?>">
+							<?php /* translators: %s: Product attribute label. */ ?>
 							<?php echo esc_html( sprintf( __( 'Filter by %s', 'cost-of-goods-for-woocommerce' ), $label ) ); ?>
 						</label>
 					</th>
@@ -172,15 +187,17 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Bulk_Edit_Attr_Filtering' ) ) {
 							class="wc-taxonomy-term-search"
 							multiple="multiple"
 							style="width: 50%;"
-							id="<?php echo $id; ?>"
+							id="<?php echo esc_attr( $id ); ?>"
 							name="alg_wc_cog_bulk_edit_filtered_attr[<?php echo esc_attr( $taxonomy ); ?>][]"
+							<?php /* translators: %s: Product attribute label in lowercase. */ ?>
 							data-placeholder="<?php echo esc_attr( sprintf( __( 'Search for a %s…', 'cost-of-goods-for-woocommerce' ), strtolower( $label ) ) ); ?>"
 							data-taxonomy="<?php echo esc_attr( $taxonomy ); ?>"
 						></select>
 
 						<p class="description">
+							<?php /* translators: %s: Product attribute label in lowercase. */ ?>
 							<?php echo esc_html( sprintf( __( 'Select the %s terms you want to filter.', 'cost-of-goods-for-woocommerce' ), strtolower( $label ) ) ); ?>
-							<?php echo ( ! empty( $blocked_text ) ) ? '<br />' . $blocked_text : ''; ?>
+							<?php echo ( ! empty( $blocked_text ) ) ? wp_kses_post( '<br />' . $blocked_text ) : ''; ?>
 						</p>
 					</td>
 				</tr>

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Tools Section Settings.
  *
- * @version 4.0.1
+ * @version 4.1.5
  * @since   1.4.0
  * @author  WPFactory
  */
@@ -37,7 +37,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_import_tool_cron_info.
 	 *
-	 * @version 2.8.1
+	 * @version 4.1.5
 	 * @since   2.8.1
 	 *
 	 * @return string
@@ -48,7 +48,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			$output = '';
 			if (
 				( ! $event_timestamp = wp_next_scheduled( 'alg_wc_cog_run_import_tool' ) ) &&
-				isset( $_POST['alg_wc_cog_import_tool_cron'] )
+				isset( $_POST['alg_wc_cog_import_tool_cron'] ) // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			) {
 				$output = '<br />';
 				$output .= '<span style="font-weight: bold; color: green;">' . __( 'Please, reload the page to see the next scheduled event info.', 'cost-of-goods-for-woocommerce' ) . '</span>';
@@ -56,7 +56,8 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				$output              = '<br />';
 				$now                 = current_time( 'timestamp', true );
 				$pretty_time_missing = human_time_diff( $now, $event_timestamp );
-				$output              .= sprintf( __( 'Next event scheduled to %s', 'cost-of-goods-for-woocommerce' ), '<strong>' . get_date_from_gmt( date( 'Y-m-d H:i:s', $event_timestamp ), get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ) ) . '</strong>' );
+				/* translators: %s: Formatted date and time of next scheduled event. */
+				$output              .= sprintf( __( 'Next event scheduled to %s', 'cost-of-goods-for-woocommerce' ), '<strong>' . get_date_from_gmt( gmdate( 'Y-m-d H:i:s', $event_timestamp ), get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ) ) . '</strong>' );
 				$output              .= ' ' . '(' . $pretty_time_missing . ' left)';
 			}
 			self::$run_import_tool_cron_output = $output;
@@ -93,7 +94,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.0.1
+	 * @version 4.1.5
 	 * @since   1.4.0
 	 * @todo    [later] better descriptions
 	 * @todo    [maybe] add "PHP time limit" option, i.e. `set_time_limit()`
@@ -105,7 +106,8 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 		$bulk_edit_opts = array(
 			array(
 				'title' => __( 'Bulk edit options', 'cost-of-goods-for-woocommerce' ),
-				'desc'     => sprintf( __( 'Bulk edit options for %s and %s.', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %1$s: Link to Bulk Edit Costs tool, %2$s: Link to Bulk Edit Prices tool. */
+				'desc'     => sprintf( __( 'Bulk edit options for %1$s and %2$s.', 'cost-of-goods-for-woocommerce' ),
 					'<a href="' . admin_url( 'tools.php?page=bulk-edit-costs' ) . '">' . __( 'Tools > Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ) . '</a>',
 					'<a href="' . admin_url( 'tools.php?page=bulk-edit-prices' ) . '">' . __( 'Tools > Bulk Edit Prices', 'cost-of-goods-for-woocommerce' ) . '</a>'
 				),
@@ -131,6 +133,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			array(
 				'title'    => __( 'Bulk edit costs tool', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
+				/* translators: %s: Link to the Bulk Edit Costs tool page. */
 				'desc'     => sprintf( __( 'The Bulk Edit Costs tool is located in %s.', 'cost-of-goods-for-woocommerce' ),
 					'<a href="' . admin_url( 'tools.php?page=bulk-edit-costs' ) . '">' . __( 'Tools > Bulk Edit Costs', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_cog_bulk_edit_tool_options',
@@ -207,8 +210,11 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 				'type'  => 'title',
 				'desc'  => __( 'A tool created with the purpose of importing the cost meta from another plugin by replacing the cost meta.', 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
 				           __( 'If you wish, you can use it on the opposite way by swapping the from and to keys.', 'cost-of-goods-for-woocommerce' ) . ' ' . __( 'You can also use it with any other metas.', 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
-				           sprintf( __( 'You can find the Import tool at %s.', 'cost-of-goods-for-woocommerce' ),
-					           '<a href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Tools > Import Costs', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
+		           sprintf(
+			           /* translators: %s: Link to the Import Costs tool page. */
+			           __( 'You can find the Import tool at %s.', 'cost-of-goods-for-woocommerce' ),
+			           '<a href="' . admin_url( 'tools.php?page=import-costs' ) . '">' . __( 'Tools > Import Costs', 'cost-of-goods-for-woocommerce' ) . '</a>'
+		           ),
 				'id'    => 'alg_wc_cog_import_tool_options',
 			),
 			array(
@@ -241,6 +247,7 @@ class Alg_WC_Cost_of_Goods_Settings_Tools extends Alg_WC_Cost_of_Goods_Settings_
 			array(
 				'title'    => __( 'WooCommerce Import', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'checkbox',
+				/* translators: %s: Link to the WooCommerce Product Importer. */
 				'desc'     => sprintf( __( 'Sync with %s from WooCommerce', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'edit.php?post_type=product&page=product_importer' ) . '" target="_blank">' . __( 'Product Importer', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 				'desc_tip' => __( 'If enabled, our tool will run automatically along with the CSV/TXT import.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_import_tool_sync_wc_import',

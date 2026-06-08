@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Import Tool Class.
  *
- * @version 2.8.7
+ * @version 4.1.5
  * @since   1.1.0
  * @author  WPFactory
  */
@@ -225,7 +225,7 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		/**
 		 * import_tool.
 		 *
-		 * @version 2.4.6
+		 * @version 4.1.5
 		 * @since   1.0.0
 		 * @todo    [later] use `wc_get_products()`
 		 * @todo    [later] better description here and in settings
@@ -234,8 +234,14 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 		 * @todo    [maybe] import order items meta
 		 */
 		function import_tool( $args = null ) {
+			$import_submit = filter_input( INPUT_POST, 'alg_wc_cog_import', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$import_submit = ! empty( $import_submit ) ? $import_submit : ( isset( $_POST['alg_wc_cog_import'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_wc_cog_import'] ) ) : '' );
+			$import_nonce  = filter_input( INPUT_POST, 'alg_wc_cog_import_nonce', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+			$import_nonce  = ! empty( $import_nonce ) ? $import_nonce : ( isset( $_POST['alg_wc_cog_import_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['alg_wc_cog_import_nonce'] ) ) : '' );
+			$has_valid_import_nonce = ! empty( $import_nonce ) && wp_verify_nonce( $import_nonce, 'alg_wc_cog_import_action' );
+
 			$args = wp_parse_args( $args, array(
-				'perform_import' => isset( $_POST['alg_wc_cog_import'] ),
+				'perform_import' => ( ! empty( $import_submit ) && $has_valid_import_nonce ),
 				'display_output' => true
 			) );
 			$perform_import            = $args['perform_import'];
@@ -249,7 +255,9 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 			$table_data[]              = array(
 				__( 'Product ID', 'cost-of-goods-for-woocommerce' ),
 				__( 'Product Title', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Source custom field key. */
 				sprintf( __( 'Source %s', 'cost-of-goods-for-woocommerce' ), '<code>' . $key_from . '</code>' ),
+				/* translators: %s: Destination custom field key. */
 				sprintf( __( 'Destination %s', 'cost-of-goods-for-woocommerce' ), '<code>' . $key_to . '</code>' ),
 			);
 			$args                      = array(
@@ -303,20 +311,38 @@ if ( ! class_exists( 'Alg_WC_Cost_of_Goods_Import_Tool' ) ) :
 				}
 				$alg_wc_cog_get_table_html = alg_wc_cog_get_table_html( $table_data, array( 'table_heading_type' => 'horizontal', 'table_class' => 'widefat striped' ) );
 			}
-			$button_form = '<form method="post" action="">' .
-			               '<input type="submit" name="alg_wc_cog_import" class="button-primary" value="' . __( 'Import', 'cost-of-goods-for-woocommerce' ) . '"' .
-			               ' onclick="return confirm(\'' . __( 'Are you sure?', 'cost-of-goods-for-woocommerce' ) . '\')">' .
-			               '</form>';
-			$html        = '<div class="wrap">' .
-			               '<h1>' . __( 'Costs Import', 'cost-of-goods-for-woocommerce' ) . '</h1>' .
-			               '<p>' . sprintf( __( 'Import products costs to "Cost of Goods for WooCommerce" plugin by copying the meta from %s to %s.', 'cost-of-goods-for-woocommerce' ), '<code>' . get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' ) . '</code>', '<code>' . get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' ) . '</code>' ) . ' ' .
-			               sprintf( __( 'Tool\'s options can be set in %s.', 'cost-of-goods-for-woocommerce' ),
-				               '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=tools' ) . '">' . __( 'plugin settings', 'cost-of-goods-for-woocommerce' ) . '</a>'
-			               ) . '</p>' .
-			               '<p>' . $button_form . '</p>' .
-			               '<p>' . $alg_wc_cog_get_table_html . '</p>' .
-			               '</div>';
-			echo $html;
+			$import_nonce_field = wp_nonce_field( 'alg_wc_cog_import_action', 'alg_wc_cog_import_nonce', true, false );
+			?>
+			<div class="wrap">
+				<h1><?php esc_html_e( 'Costs Import', 'cost-of-goods-for-woocommerce' ); ?></h1>
+				<p>
+					<?php
+					/* translators: 1: Source custom field key, 2: Destination custom field key. */
+					echo wp_kses_post( sprintf( __( 'Import products costs to "Cost of Goods for WooCommerce" plugin by copying the meta from %1$s to %2$s.', 'cost-of-goods-for-woocommerce' ), '<code>' . get_option( 'alg_wc_cog_tool_key', '_wc_cog_cost' ) . '</code>', '<code>' . get_option( 'alg_wc_cog_tool_key_to', '_alg_wc_cog_cost' ) . '</code>' ) );
+					echo ' ';
+					/* translators: %s: Link to plugin settings page. */
+					echo wp_kses_post( sprintf( __( 'Tool\'s options can be set in %s.', 'cost-of-goods-for-woocommerce' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=tools' ) ) . '">' . esc_html__( 'plugin settings', 'cost-of-goods-for-woocommerce' ) . '</a>' ) );
+					?>
+				</p>
+				<p>
+					<form method="post" action="">
+						<?php
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_nonce_field() outputs trusted nonce markup.
+						echo $import_nonce_field;
+						?>
+						<input type="submit" name="alg_wc_cog_import" class="button-primary" value="<?php echo esc_attr__( 'Import', 'cost-of-goods-for-woocommerce' ); ?>" onclick="return confirm('<?php echo esc_js( __( 'Are you sure?', 'cost-of-goods-for-woocommerce' ) ); ?>')">
+					</form>
+				</p>
+				<?php if ( ! empty( $alg_wc_cog_get_table_html ) ) : ?>
+					<p>
+						<?php
+						// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Table HTML is generated by plugin helper.
+						echo $alg_wc_cog_get_table_html;
+						?>
+					</p>
+				<?php endif; ?>
+			</div>
+			<?php
 		}
 
 	}

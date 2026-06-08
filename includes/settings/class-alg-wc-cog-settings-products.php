@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 3.7.4
+ * @version 4.1.5
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 3.9.7
+	 * @version 4.1.5
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `alg_wc_cog_products_add_stock`: better description
@@ -42,6 +42,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'          => __( 'Profit HTML template', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: List of available placeholder codes. */
 				'desc'           => sprintf( __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
 					'<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ),
 				'desc_tip'       => __( 'This is used in admin single product edit pages, and in admin products list "Profit" column.', 'cost-of-goods-for-woocommerce' ) . ' ' .
@@ -55,6 +56,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( 'Get price method', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Setting name "Orders > Calculations > Taxes to profit". */
 				'desc_tip' => sprintf( __( 'When using this option including tax, it will make sense to enable the option %s.', 'cost-of-goods-for-woocommerce' ), '"' . __( 'Orders > Calculations > Taxes to profit', 'cost-of-goods-for-woocommerce' ) . '"' ),
 				'id'       => 'alg_wc_cog_products_get_price_method',
 				'default'  => 'wc_get_price_excluding_tax',
@@ -98,6 +100,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 					) . '.',
 				'desc_tip'   => __( 'Customizes the cost field input label added to admin product pages.', 'cost-of-goods-for-woocommerce' ),
 				'id'         => 'alg_wc_cog_product_cost_field_template',
+				/* translators: %s: Placeholder for currency symbol. */
 				'default'    => sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ),
 				'type'       => 'text',
 				'wpfse_data' => array(
@@ -132,6 +135,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			array(
 				'title'    => __( 'Admin products list columns', 'cost-of-goods-for-woocommerce' ),
 				'type'     => 'title',
+				/* translators: %s: Link to the WooCommerce admin products list. */
 				'desc'     => sprintf( __( 'This section lets you add custom columns to WooCommerce admin %s.', 'cost-of-goods-for-woocommerce' ),
 					'<a href="' . admin_url( 'edit.php?post_type=product' ) . '">' . __( 'products list', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 				'id'       => 'alg_wc_cog_products_columns_options',
@@ -144,7 +148,10 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 			),
 			array(
-				'desc'     => sprintf( __( 'Column width (%s).', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
+				'desc'     => sprintf(
+					/* translators: %s: CSS width unit, e.g. % or px. */
+					__( 'Column width (%s).', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' )
+				),
 				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_columns_cost_width',
 				'default'  => '10',
@@ -161,7 +168,10 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'type'     => 'checkbox',
 			),
 			array(
-				'desc'     => sprintf( __( 'Column width (%s).', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' ) ),
+				'desc'     => sprintf(
+					/* translators: %s: CSS width unit, e.g. % or px. */
+					__( 'Column width (%s).', 'cost-of-goods-for-woocommerce' ), get_option( 'alg_wc_cog_products_columns_width_unit', '%' )
+				),
 				'desc_tip' => __( 'Zero or empty values will disable width.', 'cost-of-goods-for-woocommerce' ),
 				'id'       => 'alg_wc_cog_products_columns_profit_width',
 				'default'  => '11',
@@ -208,7 +218,9 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'title'   => __( 'Date', 'cost-of-goods-for-woocommerce' ),
 				'desc'    => __( 'Date format.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 				             __( 'Example:', 'cost-of-goods-for-woocommerce' ) . ' ' . '<code>Y-m-d H:i:s</code>.' . ' ' .
-				             sprintf( __( '<a target="_blank" href="%s">See format options.</a>', 'cost-of-goods-for-woocommerce' ), 'https://www.php.net/manual/en/datetime.format.php' ),
+				             sprintf(
+					             /* translators: %s: URL to PHP date format documentation. */
+					             __( '<a target="_blank" href="%s">See format options.</a>', 'cost-of-goods-for-woocommerce' ), 'https://www.php.net/manual/en/datetime.format.php' ),
 				'id'      => 'alg_wc_cog_save_cost_archive_date_format',
 				'default' => 'Y-m-d',
 				'type'    => 'text',
@@ -225,6 +237,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'          => __( 'MySQL', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: MySQL function name, e.g. REGEXP_SUBSTR. */
 				'desc'           => sprintf( __( 'Use %s function to get the dates', 'cost-of-goods-for-woocommerce' ), '<code>REGEXP_SUBSTR</code>' ),
 				'desc_tip'       => __( 'Disable if the archive does not work. Note: Disabling it may reduce performance on the cost archive.', 'cost-of-goods-for-woocommerce' ),
 				'id'             => 'alg_wc_cog_save_cost_archive_mysql_regexp_substr',
@@ -264,13 +277,19 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'title' => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
 				'desc'  => __( 'Calculate new average cost of goods for the product based on new "Stock" and "Cost" values you enter.', 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
 				           __( '"Stock" will be added to your inventory, and "Cost" will be used to calculate new average cost of goods for the product.', 'cost-of-goods-for-woocommerce' ) . '<br /><br /> ' .
-				           '<strong>' . __( 'Note:', 'cost-of-goods-for-woocommerce' ) . '</strong>' . ' ' . sprintf( __( 'The %s option has to be enabled.', 'cost-of-goods-for-woocommerce' ), '<strong>' . '<a href="https://woo.com/wp-content/uploads/2020/03/stock_at_product_level.png?w=950" target="_blank">' . __( 'Stock management', 'cost-of-goods-for-woocommerce' ) . '</a>' . '</strong>' ),
+				           '<strong>' . __( 'Note:', 'cost-of-goods-for-woocommerce' ) . '</strong>' . ' ' .
+				           sprintf(
+					           /* translators: %s: Link to "Stock management" setting in bold. */
+					           __( 'The %s option has to be enabled.', 'cost-of-goods-for-woocommerce' ),
+					           '<strong>' . '<a href="https://woo.com/wp-content/uploads/2020/03/stock_at_product_level.png?w=950" target="_blank">' . __( 'Stock management', 'cost-of-goods-for-woocommerce' ) . '</a>' . '</strong>'
+				           ),
 				'type'  => 'title',
 				'id'    => 'alg_wc_cog_add_stock_options',
 			),
 			array(
 				'title'    => __( 'Add stock', 'cost-of-goods-for-woocommerce' ),
 				'desc'     => __( 'Enable "Add stock" feature', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Meta box title, e.g. "Cost of Goods: Add stock". */
 				'desc_tip' => sprintf( __( 'A meta box "%s" will be added to the product edit page.', 'cost-of-goods-for-woocommerce' ),
 					__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Add stock', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_add_stock',
@@ -279,6 +298,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( 'Format decimals', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Setting name "Cost decimals" in bold. */
 				'desc'     => sprintf( __( 'Calculate cost using the %s option', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Cost decimals', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
 				'id'       => 'alg_wc_cog_products_add_stock_format_decimals',
 				'default'  => 'no',
@@ -322,7 +342,9 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'title'   => __( 'History date', 'cost-of-goods-for-woocommerce' ),
 				'desc'    => __( 'History date format.', 'cost-of-goods-for-woocommerce' ) . ' ' .
 				             __( 'Example:', 'cost-of-goods-for-woocommerce' ) . ' ' . '<code>Y-m-d H:i:s</code>.' . ' ' .
-				             sprintf( __( '<a target="_blank" href="%s">See format options.</a>', 'cost-of-goods-for-woocommerce' ), 'https://www.php.net/manual/en/datetime.format.php' ),
+				             sprintf(
+					             /* translators: %s: URL to PHP date format documentation. */
+					             __( '<a target="_blank" href="%s">See format options.</a>', 'cost-of-goods-for-woocommerce' ), 'https://www.php.net/manual/en/datetime.format.php' ),
 				'id'             => 'alg_wc_cog_products_add_stock_history_date_format',
 				'default'        => 'Y-m-d',
 				'type'           => 'text',
@@ -359,6 +381,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( 'Cost field', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: "Quick Edit" action name. */
 				'desc' => sprintf( __( 'Add "Cost" field to product "%s"', 'cost-of-goods-for-woocommerce' ),
 					__( 'Quick Edit', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_quick_edit',
@@ -368,6 +391,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
+				/* translators: %s: "Bulk Actions > Edit" action name. */
 				'desc' => sprintf( __( 'Add "Cost" field to product "%s"', 'cost-of-goods-for-woocommerce' ),
 					__( 'Bulk Actions', 'cost-of-goods-for-woocommerce' ) . ' > ' . __( 'Edit', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_bulk_edit',
@@ -386,6 +410,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'    => __( '"Add stock" fields', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: "Quick Edit" action name. */
 				'desc' => sprintf( __( 'Add "Add stock" fields to product "%s"', 'cost-of-goods-for-woocommerce' ),
 					__( 'Quick Edit', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_add_stock_quick_edit',
@@ -395,6 +420,7 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 				'custom_attributes' => apply_filters( 'alg_wc_cog_settings', array( 'disabled' => 'disabled' ) ),
 			),
 			array(
+				/* translators: %s: "Bulk Actions > Edit" action name. */
 				'desc' => sprintf( __( 'Add "Add stock" fields to product "%s"', 'cost-of-goods-for-woocommerce' ),
 					__( 'Bulk Actions', 'cost-of-goods-for-woocommerce' ) . ' > ' . __( 'Edit', 'cost-of-goods-for-woocommerce' ) ),
 				'id'       => 'alg_wc_cog_products_add_stock_bulk_edit',
@@ -424,17 +450,22 @@ class Alg_WC_Cost_of_Goods_Settings_Products extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'title'         => __( 'Cost import', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Link to the WooCommerce Importer page. */
 				'desc'          => sprintf( __( 'Get only the cost number when using the %s', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'edit.php?post_type=product&page=product_importer' ) . '">' . __( 'WooCommerce Importer', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
 				'desc_tip'      => __( 'Useful if you want to ignore price symbols from the CSV when importing.', 'cost-of-goods-for-woocommerce' ) . ' '.
-				                   sprintf( __( 'Example: %s becomes %s', 'cost-of-goods-for-woocommerce' ), '<code>$1.179,00</code>', '<code>1.179,00</code>' ),
+				                   sprintf(
+					                   /* translators: %1$s: Example input value, %2$s: Example output value. */
+					                   __( 'Example: %1$s becomes %2$s', 'cost-of-goods-for-woocommerce' ), '<code>$1.179,00</code>', '<code>1.179,00</code>' ),
 				'id'            => 'alg_wc_cog_import_csv_get_only_cost_number',
 				'default'       => 'no',
 				'type'          => 'checkbox',
 				'checkboxgroup' => 'start',
 			),
 			array(
+				/* translators: %s: Link to the WooCommerce Importer page. */
 				'desc'          => sprintf( __( 'Normalize cost when using the %s', 'cost-of-goods-for-woocommerce' ), '<a href="' . admin_url( 'edit.php?post_type=product&page=product_importer' ) . '">' . __( 'WooCommerce Importer', 'cost-of-goods-for-woocommerce' ) . '</a>' ),
-				'desc_tip'      => sprintf( __( 'Converts costs such as %s or %s to %s.', 'cost-of-goods-for-woocommerce' ), '<code>1.179,00</code>', '<code>1,179.00</code>', '<code>1179.00</code>' ),
+				/* translators: %1$s: Example European format, %2$s: Example US format, %3$s: Normalized output. */
+				'desc_tip'      => sprintf( __( 'Converts costs such as %1$s or %2$s to %3$s.', 'cost-of-goods-for-woocommerce' ), '<code>1.179,00</code>', '<code>1,179.00</code>', '<code>1179.00</code>' ),
 				'id'            => 'alg_wc_cog_import_csv_normalize_cost',
 				'default'       => 'no',
 				'type'          => 'checkbox',

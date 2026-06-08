@@ -291,7 +291,8 @@ msgstr "增加 “成本” 和 “利润” 列"
 msgid "Upgrade to Pro version"
 msgstr "升级 Pro"
 
-#: includes/alg-wc-cog-functions.php:219
+#. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
+#: includes/alg-wc-cog-functions.php:220
 #: includes/settings/class-alg-wc-settings-cog.php:83
 msgid "Cost of Goods for WooCommerce Pro"
 msgstr "Cost of Goods for WooCommerce Pro"
@@ -1399,10 +1400,6 @@ msgstr "导入成本"
 #. Plugin URI of the plugin
 msgid "https://wpfactory.com/item/cost-of-goods-for-woocommerce/"
 msgstr "https://wpfactory.com/item/cost-of-goods-for-woocommerce/"
-
-#: includes/alg-wc-cog-functions.php:219
-msgid "Disabled options can be unlocked using <a href=\"%s\" target=\"_blank\"><strong>%s</strong></a>"
-msgstr ""
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:101
 #: includes/analytics/build/index.js:253
@@ -3510,4 +3507,9 @@ msgstr ""
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:129
 msgid "Profit margin column width (%s unit)."
+msgstr ""
+
+#. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
+#: includes/alg-wc-cog-functions.php:220
+msgid "Disabled options can be unlocked using <a href=\"%1$s\" target=\"_blank\"><strong>%2$s</strong></a>"
 msgstr ""

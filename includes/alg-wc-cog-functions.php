@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Functions.
  *
- * @version 4.0.2
+ * @version 4.1.5
  * @since   3.2.1
  * @author  WPFactory
  */
@@ -162,22 +162,23 @@ if ( ! function_exists( 'alg_wc_cog_is_user_allowed' ) ) {
 	/**
 	 * alg_wc_cog_is_user_allowed.
 	 *
-	 * @version 2.3.4
+	 * @version 4.1.5
 	 * @since   2.3.4
 	 */
 	function alg_wc_cog_is_user_allowed( $user = null ) {
 		$user = ( null != $user ) ? $user : ( is_user_logged_in() ? wp_get_current_user() : null );
+		$allowed_user_roles = apply_filters( 'alg_wc_cog_is_user_allowed_roles', array(), $user );
 		if (
 			! $user ||
 			in_array( 'administrator', $user->roles ) ||
-			empty( $allowed_user_roles = get_option( 'alg_wc_cog_allowed_user_roles', array() ) )
+			empty( $allowed_user_roles )
 		) {
-			return true;
+			return apply_filters( 'alg_wc_cog_is_user_allowed', true, $user, $allowed_user_roles );
 		}
 		if ( count( array_intersect( $allowed_user_roles, $user->roles ) ) > 0 ) {
-			return true;
+			return apply_filters( 'alg_wc_cog_is_user_allowed', true, $user, $allowed_user_roles );
 		}
-		return false;
+		return apply_filters( 'alg_wc_cog_is_user_allowed', false, $user, $allowed_user_roles );
 	}
 }
 
@@ -210,13 +211,14 @@ if ( ! function_exists( 'alg_wc_cog_get_blocked_options_message' ) ) {
 	/**
 	 * alg_wc_cog_get_blocked_options_message.
 	 *
-	 * @version 2.5.1
+	 * @version 4.1.5
 	 * @since   2.5.1
 	 *
 	 * @return string
 	 */
 	function alg_wc_cog_get_blocked_options_message() {
-		return sprintf( __( 'Disabled options can be unlocked using <a href="%s" target="_blank"><strong>%s</strong></a>', 'cost-of-goods-for-woocommerce' ), 'https://wpfactory.com/item/cost-of-goods-for-woocommerce/', __( 'Cost of Goods for WooCommerce Pro', 'cost-of-goods-for-woocommerce' ) );
+		/* translators: 1: URL to the Pro plugin page, 2: Pro plugin name. */
+		return sprintf( __( 'Disabled options can be unlocked using <a href="%1$s" target="_blank"><strong>%2$s</strong></a>', 'cost-of-goods-for-woocommerce' ), 'https://wpfactory.com/item/cost-of-goods-for-woocommerce/', __( 'Cost of Goods for WooCommerce Pro', 'cost-of-goods-for-woocommerce' ) );
 	}
 }
 

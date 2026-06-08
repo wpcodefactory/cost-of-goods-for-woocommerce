@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Shipping Section Settings.
  *
- * @version 2.9.1
+ * @version 4.1.5
  * @since   1.5.0
  * @author  WPFactory
  */
@@ -106,7 +106,7 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 	/**
 	 * get_settings.
 	 *
-	 * @version 2.9.1
+	 * @version 4.1.5
 	 * @since   1.5.0
 	 * @todo    [maybe] output "No available shipping methods." on empty `$shipping_methods`
 	 */
@@ -149,7 +149,8 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 			),
 			array(
 				'desc'     => __( 'The way taxes will be considered when calculating shipping total on percent costs.', 'cost-of-goods-for-woocommerce' ),
-				'desc_tip' => sprintf( __( 'Needs %s option set as %s.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Percent cost', 'cost-of-goods-for-woocommerce' ) . '</strong>', '<code>' . __( 'Shipping total', 'cost-of-goods-for-woocommerce' ) . '</code>' ),
+				/* translators: %1$s: Setting name "Percent cost", %2$s: Setting value "Shipping total". */
+				'desc_tip' => sprintf( __( 'Needs %1$s option set as %2$s.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Percent cost', 'cost-of-goods-for-woocommerce' ) . '</strong>', '<code>' . __( 'Shipping total', 'cost-of-goods-for-woocommerce' ) . '</code>' ),
 				'type'     => 'select',
 				'id'       => 'alg_wc_cog_shipping_total_percent_calculation',
 				'class'    => 'chosen_select',
@@ -178,6 +179,7 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 				),
 				array(
 					'title'    => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Shop currency code. */
 					'desc_tip' => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), alg_wc_cog()->core->get_default_shop_currency() ),
 					'type'     => 'number',
 					'id'       => "alg_wc_cog_shipping_costs_fixed[{$key}]",
@@ -189,6 +191,7 @@ class Alg_WC_Cost_of_Goods_Settings_Shipping extends Alg_WC_Cost_of_Goods_Settin
 				),
 				array(
 					'title'             => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
+					/* translators: %s: Source for percentage calculation, e.g. "Order total" or "Shipping total". */
 					'desc_tip'          => sprintf( __( 'Percent from %s.', 'cost-of-goods-for-woocommerce' ), $this->get_percent_cost_source_string() ),
 					'type'              => 'number',
 					'id'                => "alg_wc_cog_shipping_costs_percent[{$key}]",
