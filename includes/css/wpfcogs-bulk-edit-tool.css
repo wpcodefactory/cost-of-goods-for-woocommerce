@@ -1,0 +1,45 @@
+/**
+ * wpfcogs-bulk-edit-tool.css.
+ *
+ * @version 3.3.0
+ * @since   1.3.3
+ */
+.wpfcogs_bet_active_row {
+    background-color: #fefbcc !important;
+}
+
+.wpfcogs_bet_modified_row {
+    background-color: #dffecc !important;
+}
+
+.wpfcogs_bulk_edit p.search-box {
+    float: left;
+    margin: 0;
+    vertical-align: top;
+}
+
+.wpfcogs_bulk_edit .tablenav.top {
+    clear: none;
+    float: right;
+    vertical-align: top;
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-top: 0;
+}
+
+.wpfcogs_notice {
+    display: none;
+}
+
+.form-action .spinner {
+    float: none;
+    margin: -3px 0 0 10px;
+}
+
+.wpfcogs_bet_input{
+    max-width:100%;
+}
+
+.form-table td p.dropdown-description{
+    margin-top:7px;
+}

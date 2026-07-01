@@ -1,0 +1,295 @@
+<?php
+/**
+ * Cost of Goods for WooCommerce - Costs input.
+ *
+ * @version 4.1.5
+ * @since   2.6.4
+ * @author  WPFactory
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} // Exit if accessed directly
+
+if ( ! class_exists( 'WPFCOGS_Cost_Inputs' ) ) :
+
+	class WPFCOGS_Cost_Inputs {
+
+		/**
+		 *
+		 * WPFCOGS_Cost_Inputs constructor.
+		 *
+		 * @version 3.6.9
+		 * @since   2.6.4
+		 *
+		 */
+		public function __construct() {
+			$this->add_hooks();
+		}
+
+		/**
+		 * get_cost_field_template.
+		 *
+		 * @version 4.1.5
+		 * @since   3.6.9
+		 *
+		 * @return false|mixed|null
+		 */
+		function get_cost_field_template(){
+			/* translators: %s: currency symbol placeholder. */
+			return wpfcogs_get_option( 'alg_wc_cog_product_cost_field_template', sprintf( __( 'Cost (excl. tax) (%s)', 'cost-of-goods-for-woocommerce' ), '%currency_symbol%' ) );
+		}
+
+		/**
+		 * add_hooks.
+		 *
+		 * @version 3.9.7
+		 * @since   2.6.4
+		 */
+		function add_hooks(){
+
+			// Cost input on admin product page (simple product).
+			add_action( get_option( 'alg_wc_cog_product_cost_field_position', 'woocommerce_product_options_pricing' ), array( $this, 'add_cost_input' ) );
+			add_action( 'save_post_product', array( $this, 'save_cost_input' ), PHP_INT_MAX - 2, 2 );
+
+			// Cost input on admin product page (variable product).
+			add_action( 'woocommerce_variation_options_pricing', array( $this, 'add_cost_input_variation' ), 9, 3 );
+			add_action( 'woocommerce_save_product_variation', array( $this, 'save_cost_input_variation' ), PHP_INT_MAX, 2 );
+			add_action( 'woocommerce_product_options_general_product_data', array( $this, 'add_cost_input_variable' ), PHP_INT_MAX );
+
+			// Add profit html template on cost input description.
+			add_filter( 'wpfcogs_cost_input_description', array( $this, 'add_profit_html_template_on_cost_input_description' ), 10, 2 );
+
+			// Add last cost update date on cost input description.
+			add_filter( 'wpfcogs_cost_input_description', array( $this, 'add_last_update_date_on_cost_input_description' ), 10, 2 );
+		}
+
+		/**
+		 * add_last_update_date_on_cost_input_description.
+		 *
+		 * @version 3.9.7
+		 * @since   3.9.7
+		 *
+		 * @param $description
+		 * @param $args
+		 *
+		 * @throws Exception
+		 * @return void
+		 */
+		function add_last_update_date_on_cost_input_description( $description, $args ) {
+			$product_id  = $args['product_id'];
+			if ( 'yes' === wpfcogs_get_option( 'alg_wc_cog_last_update_date_as_cost_input_desc_on_admin_product_page', 'no' ) ) {
+				$last_update_date = wpfcogs()->core->products_cost_archive->get_product_cost_last_update_date( array(
+					'product_id'    => $product_id,
+					'return_method' => 'template'
+				) );
+				if ( ! empty( $last_update_date ) ) {
+					$description .= '<br />';
+					$description .= $last_update_date;
+				}
+			}
+			return $description;
+		}
+
+		/**
+		 * add_cost_input.
+		 *
+		 * @version 3.6.9
+		 * @since   1.0.0
+		 * @todo    [later] rethink `$product_id` (and search all code for `get_the_ID()`)
+		 * @todo    [maybe] min_profit
+		 */
+		function add_cost_input() {
+			if ( ! apply_filters( 'wpfcogs_create_product_meta_box_validation', true ) ) {
+				return;
+			}
+			$product_id = get_the_ID();
+			if ( apply_filters( 'wpfcogs_add_cost_input_validation', true, $product_id ) ) {
+				$label_from_to = $this->get_cost_input_label_placeholders( $product_id );
+				woocommerce_wp_text_input( array(
+					'id'          => '_alg_wc_cog_cost',
+					'value'       => wc_format_localized_price( wpfcogs()->core->products->get_product_cost( $product_id ) ),
+					'data_type'   => 'price',
+					'label'       => str_replace( array_keys( $label_from_to ), $label_from_to, $this->get_cost_field_template() ),
+					'description' => $this->get_cost_input_description( array( 'product_id' => $product_id ) ),
+				) );
+			}
+			do_action( 'wpfcogs_cost_input', $product_id );
+		}
+
+		/**
+		 * add_profit_html_template_on_cost_input_description.
+		 *
+		 * @version 4.1.5
+		 * @since   3.9.7
+		 *
+		 * @param $description
+		 * @param $args
+		 *
+		 * @return string
+		 */
+		function add_profit_html_template_on_cost_input_description( $description, $args ) {
+			$product_id = $args['product_id'];
+			$profit     = wpfcogs()->core->products->get_product_profit_html( $product_id, wpfcogs()->core->products->product_profit_html_template );
+			$description = sprintf(
+				/* translators: %s: product profit value or N/A text. */
+				__( 'Profit: %s', 'cost-of-goods-for-woocommerce' ),
+				( '' !== $profit ? $profit : __( 'N/A', 'cost-of-goods-for-woocommerce' ) )
+			);
+
+			return $description;
+		}
+
+		/**
+		 * get_cost_input_description
+		 *
+		 * @version 3.9.7
+		 * @since   3.9.7
+		 *
+		 * @param   null  $args
+		 *
+		 * @return mixed|null
+		 */
+		function get_cost_input_description( $args = null ) {
+			$args = wp_parse_args( $args, array(
+				'product_id' => '',
+				'context'    => 'admin_product_page' // 'admin_product_page,'
+			) );
+
+			return apply_filters( 'wpfcogs_cost_input_description', '', $args );
+		}
+
+		/**
+		 * get_cost_input_label_placeholders.
+		 *
+		 * @version 3.1.9
+		 * @since   3.1.9
+		 *
+		 * @param $product_id
+		 *
+		 * @return mixed|null
+		 */
+		function get_cost_input_label_placeholders( $product_id = null ) {
+			return apply_filters( 'wpfcogs_cost_input_label_placeholders', array(
+				'%currency_symbol%' => wpfcogs()->core->get_default_shop_currency_symbol()
+			), $product_id );
+		}
+
+		/**
+		 * add_cost_input_variable.
+		 *
+		 * @version 1.0.1
+		 * @since   1.0.0
+		 * @todo    [fix] this is not showing when creating *new* variable product
+		 * @todo    [maybe] move this to "Inventory" tab
+		 */
+		function add_cost_input_variable() {
+			if ( ( $product = wc_get_product() ) && $product->is_type( 'variable' ) ) {
+				echo '<div class="options_group show_if_variable">';
+				$this->add_cost_input();
+				echo '</div>';
+			}
+		}
+
+		/**
+		 * add_cost_input_variation.
+		 *
+		 * @version 3.9.7
+		 * @since   1.0.0
+		 */
+		function add_cost_input_variation( $loop, $variation_data, $variation ) {
+			if ( ! apply_filters( 'wpfcogs_create_product_meta_box_validation', true ) ) {
+				return;
+			}
+			if (
+				! isset( $variation_data['_alg_wc_cog_cost'][0] ) ||
+				empty( $value = $variation_data['_alg_wc_cog_cost'][0] )
+			) {
+				$product           = wc_get_product( $variation->ID );
+				$parent_product_id = $product->get_parent_id();
+				$value             = wpfcogs()->core->products->get_product_cost( $parent_product_id, array( 'check_parent_cost' => false ) );
+			}
+			$hook_data = array(
+				'variation_id'   => $variation->ID,
+				'value'          => $value,
+				'variation_data' => $variation_data,
+				'loop'           => $loop,
+			);
+			if ( apply_filters( 'wpfcogs_add_cost_input_variation_validation', true, $hook_data ) ) {
+				woocommerce_wp_text_input( array(
+					'id'            => "variable_wpfcogs_cost_{$loop}",
+					'name'          => "variable_wpfcogs_cost[{$loop}]",
+					'value'         => wc_format_localized_price( $value ),
+					'label'         => str_replace( '%currency_symbol%', wpfcogs()->core->get_default_shop_currency_symbol(), $this->get_cost_field_template() ),
+					'data_type'     => 'price',
+					'wrapper_class' => 'form-row form-row-full',
+					'description' => $this->get_cost_input_description( array( 'product_id' => $variation->ID ) ),
+				) );
+			}
+			do_action( 'wpfcogs_cost_input_variation', $hook_data );
+		}
+
+		/**
+		 * save_cost_input.
+		 *
+		 * @version 4.1.5
+		 * @since   1.0.0
+		 * @todo    [next] maybe pre-calculate and save `_wpfcogs_profit` (same in `save_cost_input_variation()`)
+		 */
+		function save_cost_input( $product_id, $__post ) {
+			static $already_ran = false;
+			$nonce = isset( $_POST['woocommerce_meta_nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['woocommerce_meta_nonce'] ) ) : '';
+			if ( ! wp_verify_nonce( $nonce, 'woocommerce_save_data' ) ) {
+				return;
+			}
+
+			if ( isset( $_POST['_alg_wc_cog_cost'] ) && ! $already_ran ) {
+				$new_cost = wpfcogs_sanitize_cost( array(
+					'value' => sanitize_text_field( wp_unslash( $_POST['_alg_wc_cog_cost'] ) )
+					)
+				);
+				if ( $new_cost !== (float) wpfcogs()->core->products->get_product_cost( $product_id ) ) {
+					$product = wc_get_product( $product_id );
+					$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+					$product->save();
+				}
+			}
+			$already_ran = true;
+		}
+
+		/**
+		 * save_cost_input_variation.
+		 *
+		 * @version 4.1.5
+		 * @since   1.0.0
+		 */
+		function save_cost_input_variation( $variation_id, $i ) {
+			$nonce_is_valid = false;
+			if ( isset( $_POST['woocommerce_meta_nonce'] ) ) {
+				$nonce          = sanitize_text_field( wp_unslash( $_POST['woocommerce_meta_nonce'] ) );
+				$nonce_is_valid = wp_verify_nonce( $nonce, 'woocommerce_save_data' );
+			} elseif ( isset( $_POST['security'] ) ) {
+				$nonce_is_valid = false !== check_ajax_referer( 'save-variations', 'security', false );
+			}
+
+			if ( ! $nonce_is_valid ) {
+				return;
+			}
+
+			if ( isset( $_POST['variable_wpfcogs_cost'][ $i ] ) ) {
+				$new_cost = wpfcogs_sanitize_cost( array(
+					'value' => sanitize_text_field( wp_unslash( $_POST['variable_wpfcogs_cost'][ $i ] ) )
+					)
+				);
+				if ( $new_cost !== (float) wpfcogs()->core->products->get_product_cost( $variation_id ) ) {
+					$product = wc_get_product( $variation_id );
+					$product->update_meta_data( '_alg_wc_cog_cost', $new_cost );
+					$product->save();
+				}
+			}
+		}
+
+	}
+endif;
+
+return new WPFCOGS_Cost_Inputs();

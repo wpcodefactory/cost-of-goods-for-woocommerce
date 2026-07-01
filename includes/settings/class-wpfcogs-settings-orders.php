@@ -1,0 +1,645 @@
+<?php
+/**
+ * Cost of Goods for WooCommerce - Orders Section Settings.
+ *
+ * @version 4.1.5
+ * @since   1.7.0
+ * @author  WPFactory
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+if ( ! class_exists( 'WPFCOGS_Settings_Orders' ) ) :
+
+class WPFCOGS_Settings_Orders extends WPFCOGS_Settings_Section {
+
+	/**
+	 * Constructor.
+	 *
+	 * @version 1.7.0
+	 * @since   1.7.0
+	 */
+	function __construct() {
+		$this->id   = 'orders';
+		$this->desc = __( 'Orders', 'cost-of-goods-for-woocommerce' );
+		parent::__construct();
+	}
+
+	/**
+	 * get_settings.
+	 *
+	 * @version 4.1.5
+	 * @since   1.7.0
+	 * @todo    [later] `wpfcogs_order_prepopulate_in_ajax`: remove (i.e. always enabled)
+	 * @todo    [later] `wpfcogs_order_save_items_ajax`: remove (i.e. always enabled)
+	 * @todo    [maybe] `wpfcogs_order_prepopulate_on_recalculate_order`: default to `yes`
+	 * @todo    [docs] "Extra Costs: From Meta": better description
+	 * @todo    [docs] "Extra Cost: Per Order": better description?
+	 */
+	function get_settings() {
+
+		$admin_orders_cost_column_settings = array(
+			array(
+				'title' => __( 'Cost column', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				/* translators: %s: Link to the WooCommerce admin orders page. */
+				'desc'  =>
+					sprintf(
+						__( 'Cost column displayed on the WooCommerce admin %s.', 'cost-of-goods-for-woocommerce' ),
+						'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders page', 'cost-of-goods-for-woocommerce' ) . '</a>'
+					),
+				'id' => 'alg_wc_cog_orders_cost_column_opts',
+			),
+			array(
+				'title'    => __( 'Order cost', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add cost column', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_columns_cost',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => sprintf(
+					/* translators: %s: CSS width unit, e.g. ch. */
+					__( 'Cost column width (%s unit).', 'cost-of-goods-for-woocommerce' ), 'ch'
+				),
+				'desc_tip' => __( 'Zero or empty values will disable custom width.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_column_cost_width',
+				'default'  => 3,
+				'type'     => 'number',
+			),
+			array(
+				'title'     => __( 'Order statuses', 'cost-of-goods-for-woocommerce' ),
+				'desc' => __( 'Select order statuses to show cost.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				              __( 'Leave empty to show for all orders.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_columns_cost_order_status',
+				'default'  => array(),
+				'type'     => 'multiselect',
+				'class'    => 'chosen_select',
+				'options'  => $this->get_order_statuses(),
+			),
+			array(
+				'type' => 'sectionend',
+				'id' => 'alg_wc_cog_orders_cost_column_opts',
+			),
+		);
+
+		$admin_orders_profit_column_settings = array(
+			array(
+				'title' => __( 'Profit columns', 'cost-of-goods-for-woocommerce' ),
+				'type'  => 'title',
+				/* translators: %s: Link to the WooCommerce admin orders page. */
+				'desc'  =>
+					sprintf(
+						__( 'Columns displayed on the WooCommerce admin %s related to profit.', 'cost-of-goods-for-woocommerce' ),
+						'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders page', 'cost-of-goods-for-woocommerce' ) . '</a>'
+					),
+				'id' => 'alg_wc_cog_orders_cost_column_opts',
+			),
+			array(
+				'title'    => __( 'Profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add profit column', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_columns_profit',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => sprintf(
+					/* translators: %s: CSS width unit, e.g. ch. */
+					__( 'Profit column width (%s unit).', 'cost-of-goods-for-woocommerce' ), 'ch'
+				),
+				'desc_tip' => __( 'Zero or empty values will disable custom width.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_column_profit_width',
+				'default'  => 3,
+				'type'     => 'number',
+			),
+			array(
+				'title'    => __( 'Profit percent', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add profit percent column', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_columns_profit_percent',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => sprintf(
+					/* translators: %s: CSS width unit, e.g. ch. */
+					__( 'Profit percent column width (%s unit).', 'cost-of-goods-for-woocommerce' ), 'ch'
+				),
+				'desc_tip' => __( 'Zero or empty values will disable custom width.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_column_profit_percent_width',
+				'default'  => 5,
+				'type'     => 'number',
+			),
+			array(
+				'title'    => __( 'Profit margin', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add profit margin column', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_columns_profit_margin',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => sprintf(
+					/* translators: %s: CSS width unit, e.g. ch. */
+					__( 'Profit margin column width (%s unit).', 'cost-of-goods-for-woocommerce' ), 'ch'
+				),
+				'desc_tip' => __( 'Zero or empty values will disable custom width.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_column_profit_margin_width',
+				'default'  => 5,
+				'type'     => 'number',
+			),
+			array(
+				'title'     => __( 'Order statuses', 'cost-of-goods-for-woocommerce' ),
+				'desc' => __( 'Select order statuses to show profit.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				              __( 'Leave empty to show for all orders.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_columns_profit_order_status',
+				'default'  => array(),
+				'type'     => 'multiselect',
+				'class'    => 'chosen_select',
+				'options'  => $this->get_order_statuses(),
+			),
+			array(
+				'type' => 'sectionend',
+				'id' => 'alg_wc_cog_orders_cost_column_opts',
+			),
+		);
+
+		$order_edit_settings = array(
+			array(
+				'title'    => __( 'Admin Order Edit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Options for the admin order edit pages.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'title',
+				'id' => 'alg_wc_cog_order_edit_options',
+			),
+			array(
+				'title'    => __( 'Item costs', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Adds costs inputs for each order item to admin order edit page.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_item_costs',
+				'default'  => 'yes',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'yes'      => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+					'readonly' => __( 'Readonly', 'cost-of-goods-for-woocommerce' ),
+					'no'       => __( 'Disable', 'cost-of-goods-for-woocommerce' ),
+					'meta'     => __( 'Disable but show as standard meta', 'cost-of-goods-for-woocommerce' ),
+				),				
+			),
+			array(
+				'title'    => __( 'Item handling fees', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Adds handling fees inputs for each order item to admin order edit page.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_item_handling_fees',
+				'default'  => 'no',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'no'       => __( 'Disable', 'cost-of-goods-for-woocommerce' ),
+					'yes'      => __( 'Enable', 'cost-of-goods-for-woocommerce' ),
+					'readonly' => __( 'Readonly', 'cost-of-goods-for-woocommerce' ),
+					'meta'     => __( 'Disable but show as standard meta', 'cost-of-goods-for-woocommerce' ),
+				),
+				'custom_attributes' => apply_filters( 'wpfcogs_settings', array( 'disabled' => 'disabled' ) ),
+			),
+			array(
+				'title'         => __( 'Meta box', 'cost-of-goods-for-woocommerce' ),
+				'desc'          => __( 'Add "Cost of Goods" meta box to admin order edit page', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_meta_box',
+				'default'       => 'yes',
+				'checkboxgroup' => 'start',
+				'type'          => 'checkbox',
+			),
+			array(
+				'desc'          => __( 'Allow editing the total order cost value by adding a cost input', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: HTML code tag showing the value "0". */
+				'desc_tip'      => sprintf(__( 'Leaving it empty will recalculate the cost. Setting it as %s will remove the cost.', 'cost-of-goods-for-woocommerce' ),'<code>0</code>'),
+				'id' => 'alg_wc_cog_edit_order_cost_manually',
+				'default'       => 'no',
+				'checkboxgroup' => 'end',
+				'type'          => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Order profit HTML template.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				              sprintf(
+					              /* translators: %s: List of available placeholder codes. */
+					              __( 'Available placeholders: %s.', 'cost-of-goods-for-woocommerce' ),
+					              '<code>' . implode( '</code>, <code>', array( '%profit%', '%profit_percent%', '%profit_margin%' ) ) . '</code>' ),
+				'desc_tip' => __( 'This is used in meta box.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				              __( 'Profit percent is "profit / cost". Margin is "profit / price".', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_profit_html_template',
+				'default'  => '%profit%',
+				'type'     => 'text'
+			),
+			array(
+				'title'    => __( 'Admin notice', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add notice to admin order edit page in case if order profit is below zero', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_admin_notice',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Admin notice text', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_admin_notice_text',
+				'default'  => __( 'You are selling below the cost of goods.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'text',
+				//'css'      => 'width:100%;',
+			),
+			array(
+				'title'    => __( 'Fill in on add items', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Fill in item costs with the default costs when adding new items (i.e. "Add item(s) > Add product(s)")', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_prepopulate_in_ajax',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Save on item edit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Save item costs when editing order items (i.e. "Edit item > Save")', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_save_items_ajax',
+				'default'  => 'yes',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( '"Recalculate" button', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Select what should be done when admin clicks "Recalculate" order button.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_prepopulate_on_recalculate_order',
+				'default'  => 'no',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'no'   => __( 'Do nothing', 'cost-of-goods-for-woocommerce' ),
+					'yes'  => __( 'Fill in empty item costs with the default costs', 'cost-of-goods-for-woocommerce' ),
+					'all'  => __( 'Fill in all item costs with the default costs', 'cost-of-goods-for-woocommerce' ),
+					'save' => __( 'Save all item costs', 'cost-of-goods-for-woocommerce' ),
+				),
+			),
+			array(
+				'type'     => 'sectionend',
+				'id' => 'alg_wc_cog_order_edit_options',
+			),
+		);
+
+		$order_emails_settings = array(
+			array(
+				'title'    => __( 'Admin New Orders emails', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'COG settings for admin New Order emails.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'title',
+				'id' => 'alg_wc_cog_admin_new_order_emails_options',
+			),
+			array(
+				'title'             => __( 'Total cost and profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Show the total order cost and profit on the admin New Order email', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_admin_new_order_email_profit_and_cost',
+				'default'           => 'no',
+				'custom_attributes' => apply_filters( 'wpfcogs_settings', array( 'disabled' => 'disabled' ) ),
+				'type'              => 'checkbox',
+			),
+			array(
+				'title'             => __( 'Order item cost and profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'              => __( 'Show the cost and profit for each individual order item in the admin New Order email', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_admin_new_order_email_item_profit_and_cost',
+				'default'           => 'no',
+				'custom_attributes' => apply_filters( 'wpfcogs_settings', array( 'disabled' => 'disabled' ) ),
+				'type'              => 'checkbox',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id' => 'alg_wc_cog_admin_new_order_emails_options',
+			),
+		);
+
+		$order_calculation_settings = array(
+			array(
+				'title'    => __( 'Calculations', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Define options for order cost and profit calculations.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+					__( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'title',
+				'id' => 'alg_wc_cog_order_calculation_options',
+			),
+			array(
+				'title'    => __( 'Count empty cost lines', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Count empty cost items when calculating order cost and profit', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_count_empty_costs',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Ignore quantity', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Ignore quantity sold when calculating profit and costs', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_calculation_ignores_quantity',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Order total', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'The way taxes will be considered when calculating order total on percentage costs.', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: List of extra cost categories, e.g. "All Orders", "Payment Gateways", "Shipping Methods". */
+				'desc_tip' => sprintf( __( 'Total to calculate all extra costs percentage costs from (%s).', 'cost-of-goods-for-woocommerce' ),
+					'"' . implode( '", "', array(
+						__( 'All Orders', 'cost-of-goods-for-woocommerce' ),
+						__( 'Payment Gateways', 'cost-of-goods-for-woocommerce' ),
+						__( 'Shipping Methods', 'cost-of-goods-for-woocommerce' ),
+					) ) . '"' ),
+				'id' => 'alg_wc_cog_order_extra_cost_percent_total',
+				'default'  => 'subtotal_excl_tax',
+				'type'     => 'select',
+				'class'    => 'chosen_select',
+				'options'  => array(
+					'subtotal_excl_tax' => __( 'Order subtotal excl. tax', 'cost-of-goods-for-woocommerce' ),
+					'total_excl_tax'    => __( 'Order total excl. tax', 'cost-of-goods-for-woocommerce' ),
+					'total_incl_tax'    => __( 'Order total incl. tax', 'cost-of-goods-for-woocommerce' ),
+				),
+			),
+			array(
+				'title'    => __( 'Shipping to profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add order shipping cost to the order profit', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_shipping_to_profit',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Shipping to profit - Percentage.', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %1$s: Example percentage value (e.g. 100%%), %2$s: HTML code tag showing the numeric value (e.g. 100). */
+				'desc_tip' => sprintf(__( 'If you want to move %1$s of the shipping value to profit, set it as %2$s', 'cost-of-goods-for-woocommerce' ),'100%','<code>100</code>'),
+				'id' => 'alg_wc_cog_order_shipping_to_profit_percentage',
+				'default'  => '100',
+				'type'     => 'number',
+			),
+			array(
+				'title'    => __( 'Fees to profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add  order fees to the order profit ', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_fees_to_profit',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Fees to profit - Percentage.', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %1$s: Example percentage value (e.g. 100%%), %2$s: HTML code tag showing the numeric value (e.g. 100). */
+				'desc_tip' => sprintf(__( 'If you want to move %1$s of the fees to profit, set it as %2$s', 'cost-of-goods-for-woocommerce' ),'100%','<code>100</code>'),
+				'id' => 'alg_wc_cog_order_fees_to_profit_percentage',
+				'default'  => '100',
+				'type'     => 'number',
+			),
+			array(
+				'title'    => __( 'Taxes to profit', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Setting name "Products > Get price method" in bold. */
+				'desc_tip' => sprintf( __( 'Will probably make more sense if %s option is <strong>including tax</strong>.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Products > Get price method', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
+				'desc'     => __( 'Add order taxes like VAT to the order profit', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_taxes_to_profit',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'desc'     => __( 'Taxes to profit - Percentage.', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %1$s: Example percentage value (e.g. 100%%), %2$s: HTML code tag showing the numeric value (e.g. 100). */
+				'desc_tip' => sprintf(__( 'If you want to move %1$s of the taxes to profit, set it as %2$s', 'cost-of-goods-for-woocommerce' ),'100%','<code>100</code>'),
+				'id' => 'alg_wc_cog_order_taxes_to_profit_percentage',
+				'default'  => '100',
+				'type'     => 'number',
+			),
+			array(
+				'title'    => __( 'Delay calculations', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Select order statuses to delay all order profit, cost etc. calculations until.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+					__( 'All values will be set to zero until the required order status is set.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+					__( 'Leave empty to calculate right away on new order.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_orders_delay_calculations_status',
+				'default'  => array(),
+				'type'     => 'multiselect',
+				'class'    => 'chosen_select',
+				'options'  => $this->get_order_statuses(),
+			),
+			array(
+				'type'     => 'sectionend',
+				'id' => 'alg_wc_cog_order_calculation_options',
+			),
+		);
+
+		$refunds_settings = array(
+			array(
+				'title' => __( 'Refunds', 'cost-of-goods-for-woocommerce' ),
+				'desc'  =>
+					__( "Set up how refunds will affect the cost and profit.", 'cost-of-goods-for-woocommerce' ) . '<br /><br />' .
+					/* translators: %1$s: First option name in bold ("Ignore refunded item cost"), %2$s: Second option name in bold ("Ignore item refund amount"). */
+					sprintf(
+						__( 'Most probably, enabling the options %1$s and %2$s should be enough to ignore refunded items from profit calculation.', 'cost-of-goods-for-woocommerce' ),
+						'<strong>' . __( 'Ignore refunded item cost', 'cost-of-goods-for-woocommerce' ) . '</strong>',
+						'<strong>' . __( 'Ignore item refund amount', 'cost-of-goods-for-woocommerce' ) . '</strong>'
+					) . '<br /><br />' .
+					/* translators: %s: Link to the Orders Recalculation Tool page. */
+					sprintf(
+						__( "It's necessary to manually update the order after a refund. If you change these settings you can use our %s to update the orders.", 'cost-of-goods-for-woocommerce' ),
+						'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=tools' ) . '">' . __( 'Orders Recalculation Tool', 'cost-of-goods-for-woocommerce' ) . '</a>'
+					),
+				'type'  => 'title',
+				'id' => 'alg_wc_cog_refund_options',
+			),
+			array(
+				'title'   => __( 'Item cost', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Ignore refunded item cost', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_calculate_qty_excluding_refunds',
+				'default' => 'no',
+				'type'    => 'checkbox',
+			),
+			array(
+				'title'   => __( 'Item total', 'cost-of-goods-for-woocommerce' ),
+				'desc'    => __( 'Ignore item refund amount', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_ignore_item_refund_amount',
+				'default' => wpfcogs_get_ignore_item_refund_amount_default(),
+				'type'    => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Profit calculation', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_refund_calculation_method',
+				'default'  => 'ignore_refunds',
+				'type'     => 'radio',
+				'options'  => array(
+					'ignore_refunds'                                 => __( 'Use default profit calculation mechanism', 'cost-of-goods-for-woocommerce' ),
+					'profit_based_on_total_refunded'                 => __( 'Subtract total refunded from profit', 'cost-of-goods-for-woocommerce' ),
+					'profit_by_netpayment_and_cost_difference'       => __( 'Calculate profit by the difference between Net Payment and Cost', 'cost-of-goods-for-woocommerce' ),
+				)
+			),
+			array(
+				'title'    => __( 'Net Payment inclusive of tax', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Include tax on Net Payment', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => sprintf( __( 'Only works with %s.', 'cost-of-goods-for-woocommerce' ), '<strong>' . __( 'Calculate profit by the difference between Net Payment and Cost', 'cost-of-goods-for-woocommerce' ) . '</strong>' ),
+				'id' => 'alg_wc_cog_net_payment_inclusive_of_tax',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id' => 'alg_wc_cog_refund_options',
+			),
+		);
+
+		$order_extra_cost_settings = array(
+			array(
+				'title'    => __( 'Extra Costs', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'All Orders', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Here you can add extra costs for your orders, e.g. handling fees.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+					__( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'title',
+				'id' => 'alg_wc_cog_order_extra_cost_options',
+			),
+			array(
+				'title'             => __( 'Fixed cost', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Shop currency code. */
+				'desc_tip'          => sprintf( __( 'In %s.', 'cost-of-goods-for-woocommerce' ), wpfcogs()->core->get_default_shop_currency() ),
+				'type'              => 'number',
+				'id' => 'alg_wc_cog_order_extra_cost_fixed',
+				'default'           => 0,
+				'custom_attributes' => array( 'step' => '0.000001' ),
+				'wpfse_data'    => array(
+					'description' => ''
+				)
+			),
+			array(
+				'title'    => __( 'Percent cost', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Percent from order total.', 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'number',
+				'id' => 'alg_wc_cog_order_extra_cost_percent',
+				'default'  => 0,
+				'custom_attributes' => array( 'step' => '0.000001' ),
+			),
+			array(
+				'type'     => 'sectionend',
+				'id' => 'alg_wc_cog_order_extra_cost_options',
+			),
+		);
+
+		$order_extra_cost_per_order_settings = array(
+			array(
+				'title'    => __( 'Extra Costs', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Per Order', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Meta box title, e.g. "Cost of Goods: Extra costs". */
+				'desc'     => sprintf( __( 'Adds "%s" meta box to admin order edit page.', 'cost-of-goods-for-woocommerce' ),
+						__( 'Cost of Goods', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Extra costs', 'cost-of-goods-for-woocommerce' ) ) . ' ' .
+					__( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ),
+				'type'     => 'title',
+				'id' => 'alg_wc_cog_order_extra_cost_per_order_options',
+			),
+			array(
+				'title'    => __( 'Per Order', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Handling fee', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_extra_cost_per_order_handling_fee',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+				'checkboxgroup' => 'start',
+			),
+			array(
+				'title'    => __( 'Per Order', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Shipping fee', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_extra_cost_per_order_shipping_fee',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+				'checkboxgroup' => '',
+			),
+			array(
+				'title'    => __( 'Per Order', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Payment fee', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_extra_cost_per_order_payment_fee',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+				'checkboxgroup' => 'end',
+			),
+			array(
+				'title'    => __( 'Columns', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Add', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %1$s: Column group name, %2$s: Link to WooCommerce admin orders list. */
+				'desc_tip' => sprintf( __( 'Will add "%1$s" columns to the WooCommerce admin %2$s.', 'cost-of-goods-for-woocommerce' ),
+						__( 'Extra Costs', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'Per Order', 'cost-of-goods-for-woocommerce' ),
+						'<a href="' . admin_url( 'edit.php?post_type=shop_order' ) . '">' . __( 'orders list', 'cost-of-goods-for-woocommerce' ) . '</a>' ) . ' ' .
+					__( 'One column per fee.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_extra_cost_per_order_columns',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'type'     => 'sectionend',
+				'id' => 'alg_wc_cog_order_extra_cost_per_order_options',
+			),
+		);
+
+		$order_extra_cost_from_meta_settings = array(
+			array(
+				'title' => __( 'Extra Costs', 'cost-of-goods-for-woocommerce' ) . ': ' . __( 'From Meta', 'cost-of-goods-for-woocommerce' ),
+				'desc'  => __( 'Adds extra costs from order meta.', 'cost-of-goods-for-woocommerce' ) . ' ' .
+				           sprintf(
+					           /* translators: %s: List of example meta keys like Stripe and PayPal fees. */
+					           __( 'E.g.: %s.', 'cost-of-goods-for-woocommerce' ),
+					           implode( ', ', array(
+						           'Stripe: ' . '<code>_stripe_fee</code>',
+						           'PayPal: ' . '<code>PayPal Transaction Fee</code>'
+					           ) )
+				           ) . '<br /><br />' .
+				           '<strong>' . __( 'Some notes:', 'cost-of-goods-for-woocommerce' ) . '</strong>' .
+				           '<br />' .
+				           '- ' .
+				           sprintf(
+					           /* translators: %1$s: Link to Payment Plugins for PayPal plugin, %2$s: Meta key example. */
+					           __( 'If you\'re using the plugin %1$s, try using the %2$s meta key.', 'cost-of-goods-for-woocommerce' ),
+					           '<a href="https://wordpress.org/plugins/pymntpl-paypal-woocommerce/" target="_blank">' . __( 'Payment Plugins for PayPal WooCommerce', 'cost-of-goods-for-woocommerce' ) . '</a>',
+					           '<code>_paypal_fee</code>'
+				           ) . '<br />' .
+				           '- ' . sprintf(
+					           /* translators: %s: Link to PayPal Payments plugin. */
+					           __( 'You can also use dots to access serialized array metas. E.g.: Get fees from %s:', 'cost-of-goods-for-woocommerce' ),
+					           '<a href="https://woocommerce.com/pt-br/products/woocommerce-paypal-payments/" target="_blank">' . __( 'PayPal Payments', 'cost-of-goods-for-woocommerce' ) . '</a>'
+				           ) . ' ' . '<code>_ppcp_paypal_fees.paypal_fee.value</code>.' . '<br />' .
+				           '- ' . sprintf(
+					           /* translators: %1$s: URL to the Payment Plugins for Stripe plugin, %2$s: Meta key example. */
+					           __( 'The <a href="%1$s">"Payment Plugins for Stripe"</a> requires the "Display Stripe Fee" option to be enabled in the Advanced Settings in order to add the %2$s meta.', 'cost-of-goods-for-woocommerce' ),
+					           'https://wordpress.org/plugins/woo-stripe-payment/',
+					           '<code>_stripe_fee</code>'
+				           ) . '<br />' .
+				           '- ' . __( "You will need to recalculate order's cost and profit after you change these settings.", 'cost-of-goods-for-woocommerce' ) . '<br />' .
+				           '- ' . sprintf(
+					           /* translators: %s: Link to the Advanced settings page. */
+					           __( "If you have issues, please try to enable the option %s.", 'cost-of-goods-for-woocommerce' ),
+					           '<a href="'.admin_url('admin.php?page=wc-settings&tab=alg_wc_cost_of_goods&section=advanced').'">'.__( 'Advanced > Auto fill empty order items costs on order update', 'cost-of-goods-for-woocommerce' ) . '</a>'
+				           ),
+				'type'  => 'title',
+				'id' => 'alg_wc_cog_order_extra_cost_from_meta_options',
+			),
+			array(
+				'title'    => __( 'Meta keys', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Ignored if empty.', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'One meta key per line.', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_extra_cost_from_meta',
+				'default'  => '',
+				'type'     => 'textarea',
+				'css'      => 'height:100px;',
+			),
+			array(
+				'title'    => __( 'Sign handling', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Consider all values as positive', 'cost-of-goods-for-woocommerce' ),
+				'desc_tip' => __( 'Negative numbers will be converted to positive', 'cost-of-goods-for-woocommerce' ) ,
+				'id' => 'alg_wc_cog_order_extra_cost_from_meta_as_positive',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'title'    => __( 'Treat as profit', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Treat extra costs from meta as profit instead of cost', 'cost-of-goods-for-woocommerce' ),
+				'id' => 'alg_wc_cog_order_extra_cost_from_meta_as_profit',
+				'default'  => 'no',
+				'type'     => 'checkbox',
+			),
+			array(
+				'type' => 'sectionend',
+				'id' => 'alg_wc_cog_order_extra_cost_from_meta_options',
+			),
+		);
+
+		return array_merge(
+			$admin_orders_cost_column_settings,
+			$admin_orders_profit_column_settings,
+			$order_edit_settings,
+			$order_emails_settings,
+			$order_calculation_settings,
+			$refunds_settings,
+			$order_extra_cost_settings,
+			$order_extra_cost_per_order_settings,
+			$order_extra_cost_from_meta_settings
+		);
+	}
+
+}
+
+endif;
+
+return new WPFCOGS_Settings_Orders();

@@ -57,7 +57,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 
 = 3.4.8 - 17/07/2024 =
 * Dev - Orders - Refunds options redesigned to make it easier to understand.
-* Dev - New filter `alg_wc_cog_stock_report_export_record` added.
+* Dev - New filter `wpfcogs_stock_report_export_record` added.
 * Tested up to: 6.6.
 * WC tested up to: 9.1.
 
@@ -80,7 +80,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 = 3.4.3 - 03/06/2024 =
 * Fix - Avoid WordPress bug "https://core.trac.wordpress.org/ticket/40393" by not using `remove_filter()` in some places.
 * Fix - Advanced - Order calculation hooks - Some important hooks are not set for previous users.
-* Dev - New action `alg_wc_cog_on_update`.
+* Dev - New action `wpfcogs_on_update`.
 
 = 3.4.2 - 21/05/2024 =
 * Fix - Products - Quick and Bulk Edit - Add "Cost" field to product "Quick Edit" conflicts with the "WooCommerce Advanced Bulk Edit" plugin.
@@ -109,7 +109,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Fix - Creation of dynamic property is deprecated.
 
 = 3.3.6 - 24/04/2024 =
-* Fix - Creation of dynamic property Alg_WC_Cost_of_Goods_Pro::$wc_currency is deprecated.
+* Fix - Creation of dynamic property WPFCOGS_Pro::$wc_currency is deprecated.
 * Fix - PHP Notice:  Function ID was called incorrectly.
 * Fix - Orders - Extra Costs: Per Order - Fields are not updating if HPOS is enabled.
 * Dev - Add 'woocommerce_store_api_checkout_order_processed' hook so the costs update can work on WooCommerce blocks.
@@ -119,7 +119,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Update - readme.txt
 
 = 3.3.4 - 03/04/2024 =
-* Fix - Uncaught TypeError: Unsupported operand types: string / float in Alg_WC_Cost_of_Goods_Products.
+* Fix - Uncaught TypeError: Unsupported operand types: string / float in WPFCOGS_Products.
 
 = 3.3.3 - 03/04/2024 =
 * Fix - Add Stock feature is not considering float values from COG.
@@ -146,10 +146,10 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 
 = 3.2.9 - 17/02/2024 =
 * Fix - Vulnerability problem.
-* Fix - Creation of dynamic property Alg_WC_Cost_of_Goods_Bulk_Edit_Tool::$wp_list_bulk_edit_tool.
+* Fix - Creation of dynamic property WPFCOGS_Bulk_Edit_Tool::$wp_list_bulk_edit_tool.
 
 = 3.2.8 - 14/02/2024 =
-* Fix - Call to a member function is_type() on bool in class-alg-wc-cog-products.php:504.
+* Fix - Call to a member function is_type() on bool in class-wpfcogs-products.php:504.
 
 = 3.2.7 - 13/02/2024 =
 * Fix - Orders - Calculations - Shipping to profit percentage is going to fees and taxes to profit.
@@ -184,10 +184,10 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 = 3.1.9 - 19/12/2023 =
 * Dev - Compatibility - Measurement Price Calculator - Add option to adjust the cost of goods sold according to the product measurement.
 * Dev - Compatibility - Measurement Price Calculator - Create option to add the placeholder `%measurement_unit%` to the cost field label option.
-* Dev - Add filter hook `alg_wc_cog_cost_input_label_placeholders`.
+* Dev - Add filter hook `wpfcogs_cost_input_label_placeholders`.
 
 = 3.1.8 - 13/12/2023 =
-* Fix - Uncaught Error: Call to a member function is_type() on bool in `Alg_WC_Cost_of_Goods_Products_Add_Stock`.
+* Fix - Uncaught Error: Call to a member function is_type() on bool in `WPFCOGS_Products_Add_Stock`.
 * WC tested up to: 8.4.
 
 = 3.1.7 - 13/12/2023 =
@@ -200,14 +200,14 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Create "Cost archive" date order option.
 
 = 3.1.6 - 08/12/2023 =
-* Fix - "PHP Fatal error: Uncaught TypeError: array_keys(): Argument #1 ($array) must be of type array, null given in `Alg_WC_Cost_of_Goods_Orders`".
+* Fix - "PHP Fatal error: Uncaught TypeError: array_keys(): Argument #1 ($array) must be of type array, null given in `WPFCOGS_Orders`".
 * Dev - Move product shortcodes settings to its own section.
 
 = 3.1.5 - 28/11/2023 =
-* Fix - Update stock triggers the error "Call to undefined method `Alg_WC_Cost_of_Goods_Products::product_add_stock()`".
+* Fix - Update stock triggers the error "Call to undefined method `WPFCOGS_Products::product_add_stock()`".
 
 = 3.1.4 - 28/11/2023 =
-* Fix - Orders page triggers the error "Call to a member function `get_meta()` on bool in `Alg_WC_Cost_of_Goods_Orders_Meta_Boxes`".
+* Fix - Orders page triggers the error "Call to a member function `get_meta()` on bool in `WPFCOGS_Orders_Meta_Boxes`".
 * WC tested up to: 8.3.
 
 = 3.1.3 - 16/11/2023 =
@@ -218,11 +218,11 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - New Option "Per Item" Under Extra shipping classes costs > Fixed cost calculation.
 
 = 3.1.1 - 20/10/2023 =
-* Fix - Alg_WC_Cost_of_Goods_WP_List_Bulk_Edit_Tool->fix_paged_query_string_on_search_change() with cookies.
+* Fix - WPFCOGS_WP_List_Bulk_Edit_Tool->fix_paged_query_string_on_search_change() with cookies.
 
 = 3.1.0 - 19/10/2023 =
-* Dev - Shortcodes - New shortcode: `[alg_wc_cog_product_profit]`.
-* Dev - Shortcodes - New shortcode: `[alg_wc_cog_product_cost]`.
+* Dev - Shortcodes - New shortcode: `[wpfcogs_product_profit]`.
+* Dev - Shortcodes - New shortcode: `[wpfcogs_product_cost]`.
 
 = 3.0.9 - 18/10/2023 =
 * Fix - Analytics - Cost and Profit columns are not present in Products CSV sent by email.
@@ -246,7 +246,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Fix - Fix error where free and pro versions are enabled simultaneously and the free version is updated before pro version.
 
 = 3.0.3 - 18/08/2023 =
-* Fix - Undefined property: `Alg_WC_Cost_of_Goods_Orders::$order_columns`.
+* Fix - Undefined property: `WPFCOGS_Orders::$order_columns`.
 * Dev - Move main class to a separate file.
 * Tested up to: 6.3.
 * WC tested up to: 8.0.
@@ -262,7 +262,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Tools - Analytics - Orders - Individual elements should be present on the CSV.
 
 = 2.9.9 - 25/05/2023 =
-* Update function Alg_WC_Cost_of_Goods_Products() ->get_product_price() with condition if product object exist or not .
+* Update function WPFCOGS_Products() ->get_product_price() with condition if product object exist or not .
 
 = 2.9.8 - 16/05/2023 =
 * Fix - Analytics - Update dependencies.
@@ -273,7 +273,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Fix - Bulk edit prices - Calculation is incorrect.
 
 = 2.9.6 - 18/04/2023 =
-* Fix - `class-alg-wc-cog-products.php:456` - Call to a member function is_type() on bool.
+* Fix - `class-wpfcogs-products.php:456` - Call to a member function is_type() on bool.
 * WC tested up to: 7.6.
 
 = 2.9.5 - 17/04/2023 =
@@ -283,7 +283,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 
 = 2.9.4 - 04/04/2023 =
 * Fix - "Creation of dynamic property" PHP warning is being triggered on multiple locations.
-* Fix - Unsupported operand type: float / string on line 482 in `class-alg-wc-cog-products.php`.
+* Fix - Unsupported operand type: float / string on line 482 in `class-wpfcogs-products.php`.
 
 = 2.9.3 - 29/03/2023 =
 * Fix - Reports - Stock - Cost of Goods - Products registered with price/cost starting with comma or dot won't be displayed on report.
@@ -307,7 +307,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 = 2.9.0 - 16/02/2023 =
 * Fix - Bulk update prices - Variations are not getting updated.
 * Dev - Orders - Calculations - Display "Shipping", "Fees" and "Taxes to profit" on order meta box as extra profit.
-* Dev - New filters: `alg_wc_cog_extra_profit_meta_keys`.
+* Dev - New filters: `wpfcogs_extra_profit_meta_keys`.
 * WC tested up to: 7.4.
 
 = 2.8.9 - 06/02/2023 =
@@ -320,7 +320,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Fix - Multicurrency - Currencies costs - Profit does not change.
 * Dev - Orders - Calculations - New option: Shipping to profit - Percentage.
 * Dev - Orders - Admin order edit - Meta box - New option: Allow editing the total order cost value by adding a cost input.
-* Dev - New filters - `alg_wc_cog_order_cost`, `alg_wc_cog_order_profit`, `alg_wc_cog_order_metabox_cost_value_html`.
+* Dev - New filters - `wpfcogs_order_cost`, `wpfcogs_order_profit`, `wpfcogs_order_metabox_cost_value_html`.
 
 = 2.8.7 - 20/01/2023 =
 * Fix - Implement access control and nonce check on Bulk edit tool.
@@ -328,7 +328,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Fix - Compatibility - WC Foods - PHP warning triggers sometimes.
 * Dev - Multicurrency - Currencies cost - New option: Add extra costs based on the order currency.
 * Dev - Compatibility - ATUM - Taxes - New option: Subtract taxes from ATUM cost while using the "Import" or "Cost sync" options.
-* Dev - New filters: `alg_wc_cog_update_order_values`, `alg_wc_cog_currencies_costs_total`, `alg_wc_cog_currencies_costs_percentage_total`.
+* Dev - New filters: `wpfcogs_update_order_values`, `wpfcogs_currencies_costs_total`, `wpfcogs_currencies_costs_percentage_total`.
 * Move Multicurrency advanced section to Compatibility section.
 
 = 2.8.6 - 13/01/2023 =
@@ -352,8 +352,8 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Products - Cost archive - New option: Enable a cost archive meta box.
 * Dev - Compatibility - ATUM - New option: Change cost of goods every time the purchase price is updated in ATUM.
 * Dev - Compatibility - WC Foods - New option: Add fixed costs to food options.
-* Dev - New filters: `alg_wc_cog_cost_meta_keys`, `alg_wc_cog_update_order_item_values`, `alg_wc_cog_food_options_fixed_costs_total`.
-* Dev - New actions: `alg_wc_cog_update_order_values_action`.
+* Dev - New filters: `wpfcogs_cost_meta_keys`, `wpfcogs_update_order_item_values`, `wpfcogs_food_options_fixed_costs_total`.
+* Dev - New actions: `wpfcogs_update_order_values_action`.
 
 = 2.8.1 - 19/12/2022 =
 * Dev - Improve the way of initializing the main class.
@@ -451,8 +451,8 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 
 = 2.5.7 - 23/05/2022 =
 * Dev - Compatibility - ATUM - New option: "Use function from ATUM plugin to copy the cost meta".
-* Dev - Tools - Product import costs tool - Create `alg_wc_cog_copy_product_meta_args` filter.
-* Dev - Tools - Product import costs tool - Create `alg_wc_cog_can_copy_cost` filter.
+* Dev - Tools - Product import costs tool - Create `wpfcogs_copy_product_meta_args` filter.
+* Dev - Tools - Product import costs tool - Create `wpfcogs_can_copy_cost` filter.
 * Dev - Tools - Product Import Costs Tool - Improve `copy_product_meta()` function.
 * Dev - Move compatibility code to an exclusive class.
 * Dev - Add "Bulk edit costs" and "Import costs" to plugin action links.
@@ -460,7 +460,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 
 = 2.5.6 - 10/05/2022 =
 * Dev - Remove `package-lock.json`.
-* Dev - Sync `_alg_wc_cog_cost` meta between different languages while using Polylang/WPML.
+* Dev - Sync `_wpfcogs_cost` meta between different languages while using Polylang/WPML.
 
 = 2.5.5 - 18/04/2022 =
 * Fix - Tools - Analytics - Products tab does not take quantity into consideration.
@@ -476,8 +476,8 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Advanced - Force costs update - Create option to auto fill empty order items costs on order meta update.
 
 = 2.5.3 - 14/03/2022 =
-* Fix - Orders - Admin new order email - Too few arguments to function `Alg_WC_Cost_of_Goods_Orders::woocommerce_email_order_meta()` when used with the "Woo Custom Emails" plugin.
-* Fix - Orders - Admin new order email - Too few arguments to function `Alg_WC_Cost_of_Goods_Orders::woocommerce_email_order_meta()` when used with the "Woo Custom Emails" plugin.
+* Fix - Orders - Admin new order email - Too few arguments to function `WPFCOGS_Orders::woocommerce_email_order_meta()` when used with the "Woo Custom Emails" plugin.
+* Fix - Orders - Admin new order email - Too few arguments to function `WPFCOGS_Orders::woocommerce_email_order_meta()` when used with the "Woo Custom Emails" plugin.
 * Fix - Products - Add stock - Improve method used to update stock. From `update_post_meta()` to `wc_update_product_stock()`.
 * Dev - Orders - Extra Costs: From Meta - Use dots to access serialized array metas.
 
@@ -499,7 +499,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 
 = 2.4.9 - 06/10/2021 =
 * Fix - Add cost of goods on orders placed by WooCommerce REST API.
-* Dev - Improve `Alg_WC_Cost_of_Goods_Orders::update_order_items_costs()` function args.
+* Dev - Improve `WPFCOGS_Orders::update_order_items_costs()` function args.
 * WC tested up to: 5.7.
 
 = 2.4.8 - 13/09/2021 =
@@ -519,12 +519,12 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Add chinese translation.
 
 = 2.4.6 - 17/08/2021 =
-* Fix - Uncaught TypeError: Unsupported operand types: int + string in `Alg_WC_Cost_of_Goods_Orders:888`.
+* Fix - Uncaught TypeError: Unsupported operand types: int + string in `WPFCOGS_Orders:888`.
 * Dev - Tools - Import - Create "Meta key replaced" option.
 * Add compatibility admin settings section.
 
 = 2.4.5 - 16/08/2021 =
-* Fix - Check if order is from a `\WC_Order` type on `Alg_WC_Cost_of_Goods_Orders::update_order_items_costs()`.
+* Fix - Check if order is from a `\WC_Order` type on `WPFCOGS_Orders::update_order_items_costs()`.
 * Dev - Tools - Analytics - Stock - Create option to add cost and profit columns.
 * Dev - Tools - Analytics - Stock - Create option to add category column.
 * Dev - Tools - Analytics - Stock - Create option to add a cost of goods filter allowing for example to filter only products with costs.
@@ -549,7 +549,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * WC tested up to: 5.4.
 
 = 2.4.2 - 20/05/2021 =
-* Fix - Unsupported operand types: string * int on alg-wc-cog-orders.php:614 on PHP 8.
+* Fix - Unsupported operand types: string * int on wpfcogs-orders.php:614 on PHP 8.
 * Fix - Unsupported operand types: float - string on PHP 8.
 * Dev - Products - Admin products list columns - Add "Column width" option for cost and profit.
 * Dev - Products - Admin products list columns - Add "Column width unit" option for cost and profit.
@@ -574,12 +574,12 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Advanced - Add compatibility with "Openpos - WooCommerce Point Of Sale" plugin allowing to manage POS orders on orders reports.
 * Dev - Products - Add "get price method" option.
 * Dev - Advanced - Add compatibility with "Openpos - WooCommerce Point Of Sale" plugin allowing to manage POS orders on orders reports.
-* Dev - Add `alg_wc_cog_before_update_order_items_costs` hook.
+* Dev - Add `wpfcogs_before_update_order_items_costs` hook.
 
 = 2.3.8 - 22/02/2021 =
 * Dev - Tools & Reports - Reports - Stock - Add SKU reference.
 * Dev - Advanced - Add compatibility with WPC bundle products for WooCommerce.
-* Dev - Developers - Create `alg_wc_cog_stock_report_args` filter.
+* Dev - Developers - Create `wpfcogs_stock_report_args` filter.
 * WC tested up to: 5.0.
 
 = 2.3.7 - 28/01/2021 =
@@ -596,7 +596,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Orders - Refunds - Add "Refund calculation" option.
 * Dev - Orders - Refunds - Add "Net Payment inclusive of tax" option.
 * Dev - Calculations - Add "Taxes to profit" option.
-* Dev - Create `table_attributes` param for `$args` param from `alg_wc_cog_get_table_html()` function.
+* Dev - Create `table_attributes` param for `$args` param from `wpfcogs_get_table_html()` function.
 * Dev - Orders - Create option to display the order cost and profit on the admin new order email.
 * Dev - Products - Add "Sanitize cog meta" option.
 * Dev - Products - Create "Add stock" fields option for quick and bulk edit actions.
@@ -612,15 +612,15 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Advanced - Compatibility - WP All Import - Add "Sanitize float number" option.
 * Dev - Advanced - Restriction - Add "Restrict by user role" option.
 * Dev - Products - Quick edit - Add "Replace all variations" option.
-* Dev - Tools & Reports - Add `alg_wc_cog_create_import_tool_validation` filter.
-* Dev - Tools & Reports - Add `alg_wc_cog_create_edit_costs_tool_validation` filter.
-* Dev - Tools & Reports - Add `alg_wc_cog_create_report_validation` filter.
-* Dev - Tools & Reports - Add `alg_wc_cog_create_analytics_orders_validation` filter.
-* Dev - Orders - Add `alg_wc_cog_create_orders_columns_validation` filter.
-* Dev - Orders - Add `alg_wc_cog_create_order_meta_box_validation` filter.
-* Dev - Products - Add `alg_wc_cog_create_product_columns_validation` filter.
-* Dev - Products - Add `alg_wc_cog_create_product_meta_box_validation` filter.
-* Dev - Add `alg_wc_cog_create_wc_settings_tab_validation` filter.
+* Dev - Tools & Reports - Add `wpfcogs_create_import_tool_validation` filter.
+* Dev - Tools & Reports - Add `wpfcogs_create_edit_costs_tool_validation` filter.
+* Dev - Tools & Reports - Add `wpfcogs_create_report_validation` filter.
+* Dev - Tools & Reports - Add `wpfcogs_create_analytics_orders_validation` filter.
+* Dev - Orders - Add `wpfcogs_create_orders_columns_validation` filter.
+* Dev - Orders - Add `wpfcogs_create_order_meta_box_validation` filter.
+* Dev - Products - Add `wpfcogs_create_product_columns_validation` filter.
+* Dev - Products - Add `wpfcogs_create_product_meta_box_validation` filter.
+* Dev - Add `wpfcogs_create_wc_settings_tab_validation` filter.
 * Tested up to: 5.6
 
 = 2.3.3 - 20/11/2020 =
@@ -653,7 +653,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Advanced - Background Processing - Background Add "Send email" option.
 * Dev - Advanced - Background Processing - Add "Email to" option.
 * Dev - Advanced - Background Processing - Add "Minimum amount" option.
-* Dev - Advanced - Background processing - Add `alg_wc_cog_bkg_process_email_params` filter.
+* Dev - Advanced - Background processing - Add `wpfcogs_bkg_process_email_params` filter.
 
 = 2.2.0 - 01/10/2020 =
 * Fix - Tools & Reports - Analytics - If order doesn't have cost/profit set, it's excluded from the report - this is fixed now.
@@ -663,8 +663,8 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Orders - Admin Orders List Columns - "Profit percent" and "Profit margin" columns added.
 * Dev - Orders - Admin Order Edit - Meta box - "Order profit HTML template" option added.
 * Dev - Orders - Displaying all COG data in default shop currency now (i.e. instead of in order currency).
-* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_item_cost` - Order variable added to the filter's params.
-* Dev - Orders - `update_order_items_costs()` - `alg_wc_cog_order_shipping_cost_fixed`, `alg_wc_cog_order_shipping_cost_percent`, `alg_wc_cog_order_gateway_cost_fixed`, `alg_wc_cog_order_gateway_cost_percent`, `alg_wc_cog_order_extra_cost_fixed`, `alg_wc_cog_order_extra_cost_percent`, `alg_wc_cog_order_total_for_pecentage_fees`, `alg_wc_cog_order_line_total`, `alg_wc_cog_order_extra_cost_from_meta`, `alg_wc_cog_order_shipping_total`, `alg_wc_cog_order_total_fees` filters added.
+* Dev - Orders - `update_order_items_costs()` - `wpfcogs_order_item_cost` - Order variable added to the filter's params.
+* Dev - Orders - `update_order_items_costs()` - `wpfcogs_order_shipping_cost_fixed`, `wpfcogs_order_shipping_cost_percent`, `wpfcogs_order_gateway_cost_fixed`, `wpfcogs_order_gateway_cost_percent`, `wpfcogs_order_extra_cost_fixed`, `wpfcogs_order_extra_cost_percent`, `wpfcogs_order_total_for_pecentage_fees`, `wpfcogs_order_line_total`, `wpfcogs_order_extra_cost_from_meta`, `wpfcogs_order_shipping_total`, `wpfcogs_order_total_fees` filters added.
 * Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to the CSV *server* export.
 * Dev - Tools & Reports - Analytics - "Cost" and "Profit" columns added to REST report orders schema.
 * Dev - Tools & Reports - Product Bulk Edit Costs Tool - Code refactoring (now using `wc_get_products()` function etc.).
@@ -683,7 +683,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 
 = 2.1.1 - 14/09/2020 =
 * Dev - Products - Admin settings rearranged.
-* Dev - Products - `alg_wc_cog_get_product_cost` filter added.
+* Dev - Products - `wpfcogs_get_product_cost` filter added.
 * Dev - Orders - Calculations - "Fees to profit" option added.
 * Dev - Orders - `update_order_items_costs()` - Additional safe checks added.
 * WC tested up to: 4.5.
@@ -708,7 +708,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 * Dev - Orders - General - Meta box - Colors added to the profit and cost values.
 * Dev - Orders - General - Meta box - "Cost details" table added (displayed only if cost consists of more than one element).
 * Dev - Orders - Saving total items cost and fees (shipping, gateway, order, total etc.) in order meta now.
-* Dev - Orders - `alg_wc_cog_order_item_cost` filter added.
+* Dev - Orders - `wpfcogs_order_item_cost` filter added.
 * Dev - Tools & Reports - Orders Tools - Now deleting shop order transients after recalculation.
 * Dev - Tools & Reports - Orders Tools - "PHP memory limit" option added.
 * Dev - Tools & Reports - Product Bulk Edit Costs Tool - "SKU" column added.
@@ -855,7 +855,7 @@ For the latest changes, please see the "Changelog" section of the [readme.txt fi
 = 1.1.0 - 06/12/2018 =
 * Fix - Comma decimal separator bug fixed.
 * Dev - Profit in percent added to profit HTML output.
-* Dev - Cost meta changed from `_alg_cost` to `_alg_wc_cog_cost`.
+* Dev - Cost meta changed from `_alg_cost` to `_wpfcogs_cost`.
 * Dev - Forcing cost of goods to be always set excluding taxes.
 * Dev - Saving costs as order item meta.
 * Dev - Saving total cost and profit as order meta.

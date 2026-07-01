@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Cost of Goods for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: admin\n"
-"Language-Team: Türkçe\n"
+"Language-Team: TÃ¼rkÃ§e\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,12 +16,12 @@ msgstr ""
 
 #: includes/class-alg-wc-cog.php:277
 msgid "Go Pro"
-msgstr "Pro Sürüm Satın Al"
+msgstr "Pro SÃ¼rÃ¼m SatÄ±n Al"
 
 #: includes/class-alg-wc-cog-orders.php:1034
 #: includes/settings/class-alg-wc-cog-settings-orders.php:223
 msgid "You are selling below the cost of goods."
-msgstr "Malların maliyetinin altında satış yapıyorsunuz."
+msgstr "MallarÄ±n maliyetinin altÄ±nda satÄ±ÅŸ yapÄ±yorsunuz."
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:116
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:219
@@ -31,7 +31,7 @@ msgstr "Malların maliyetinin altında satış yapıyorsunuz."
 #: includes/settings/class-alg-wc-cog-settings-products.php:275
 #: includes/settings/class-alg-wc-settings-cog.php:24
 msgid "Cost of Goods"
-msgstr "Malın Maliyeti"
+msgstr "MalÄ±n Maliyeti"
 
 #: includes/analytics/class-alg-wc-cog-analytics-orders.php:439
 #: includes/analytics/class-alg-wc-cog-analytics-products.php:82
@@ -52,7 +52,7 @@ msgstr "Malın Maliyeti"
 #: includes/pro/class-alg-wc-cog-pro-compatibility.php:147
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:99
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:157
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:121
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:121
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:116
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:359
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:373
@@ -92,7 +92,7 @@ msgstr "Maliyet"
 #: includes/class-alg-wc-cog-products.php:399
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/class-alg-wc-cog-pro-compatibility.php:158
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:123
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:123
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:126
 #: includes/settings/class-alg-wc-cog-settings-orders.php:94
 #: includes/analytics/build/index.js:46
@@ -122,31 +122,31 @@ msgstr "Kar"
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:162
 #: includes/settings/class-alg-wc-cog-settings-orders.php:159
 msgid "Item costs"
-msgstr "Öğe maliyetleri"
+msgstr "Ã–ÄŸe maliyetleri"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:164
 msgid "Shipping method fee (fixed)"
-msgstr "Gönderim yöntemi ücreti (sabit)"
+msgstr "GÃ¶nderim yÃ¶ntemi Ã¼creti (sabit)"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:165
 msgid "Shipping method fee (percent)"
-msgstr "Gönderim yöntemi ücreti (yüzde)"
+msgstr "GÃ¶nderim yÃ¶ntemi Ã¼creti (yÃ¼zde)"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:168
 msgid "Gateway fee (fixed)"
-msgstr "Ağ geçidi ücreti (sabit)"
+msgstr "AÄŸ geÃ§idi Ã¼creti (sabit)"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:169
 msgid "Gateway fee (percent)"
-msgstr "Ağ geçidi ücreti (yüzde)"
+msgstr "AÄŸ geÃ§idi Ã¼creti (yÃ¼zde)"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:170
 msgid "Order fee (fixed)"
-msgstr "Sipariş ücreti (sabit)"
+msgstr "SipariÅŸ Ã¼creti (sabit)"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:171
 msgid "Order fee (percent)"
-msgstr "Sipariş ücreti (yüzde)"
+msgstr "SipariÅŸ Ã¼creti (yÃ¼zde)"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:172
 #: includes/settings/class-alg-wc-cog-settings-orders.php:488
@@ -156,20 +156,20 @@ msgstr "Hizmet bedeli"
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:173
 #: includes/settings/class-alg-wc-cog-settings-orders.php:496
 msgid "Shipping fee"
-msgstr "Nakliye ücreti"
+msgstr "Nakliye Ã¼creti"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:174
 #: includes/settings/class-alg-wc-cog-settings-orders.php:504
 msgid "Payment fee"
-msgstr "Ödeme ücreti"
+msgstr "Ã–deme Ã¼creti"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:175
 msgid "Meta fees"
-msgstr "Meta ücretleri"
+msgstr "Meta Ã¼cretleri"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:186
 msgid "Cost details"
-msgstr "Maliyet ayrıntıları"
+msgstr "Maliyet ayrÄ±ntÄ±larÄ±"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:219
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:108
@@ -179,29 +179,29 @@ msgstr "Ekstra maliyet"
 
 #: includes/class-alg-wc-cog-orders-meta-boxes.php:243
 msgid "fee"
-msgstr "ücret"
+msgstr "Ã¼cret"
 
 #: includes/class-alg-wc-cog-admin-new-order-emails.php:92
 #: includes/class-alg-wc-cog-orders.php:1407
 #: includes/pro/class-alg-wc-cog-pro.php:660
 #: includes/pro/class-alg-wc-cog-pro.php:679
 msgid "Cost of goods"
-msgstr "Malların maliyeti"
+msgstr "MallarÄ±n maliyeti"
 
 #: includes/class-alg-wc-cog-cost-inputs.php:39
 #: includes/settings/class-alg-wc-cog-settings-products.php:101
 #, php-format
 msgid "Cost (excl. tax) (%s)"
-msgstr "Maliyet (vergi hariç) (%s)"
+msgstr "Maliyet (vergi hariÃ§) (%s)"
 
 #: includes/class-alg-wc-cog-products-add-stock.php:78
 msgid "Enter values and \"Update\" the product."
-msgstr "Değerleri girin ve ürünü \"Güncelleyin\"."
+msgstr "DeÄŸerleri girin ve Ã¼rÃ¼nÃ¼ \"GÃ¼ncelleyin\"."
 
 #: includes/class-alg-wc-cog-products-add-stock.php:79
 #: includes/settings/class-alg-wc-cog-settings-products.php:266
 msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to calculate new average cost of goods for the product."
-msgstr "\"Stok\" envanterinize eklenecek ve \"Maliyet\", ürün için yeni ortalama mal maliyetini hesaplamak için kullanılacaktır."
+msgstr "\"Stok\" envanterinize eklenecek ve \"Maliyet\", Ã¼rÃ¼n iÃ§in yeni ortalama mal maliyetini hesaplamak iÃ§in kullanÄ±lacaktÄ±r."
 
 #: includes/class-alg-wc-cog-products-add-stock.php:81
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:91
@@ -214,7 +214,7 @@ msgstr "Stok ekle"
 #: includes/class-alg-wc-cog-products-add-stock.php:367
 #: includes/class-alg-wc-cog-products-add-stock.php:456
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:93
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:120
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:120
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:240
 #: includes/settings/class-alg-wc-cog-settings-tools.php:180
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:374
@@ -223,7 +223,7 @@ msgstr "Stok"
 
 #: includes/class-alg-wc-cog-products-add-stock.php:385
 msgid "History"
-msgstr "Geçmiş"
+msgstr "GeÃ§miÅŸ"
 
 #: includes/class-alg-wc-cog-products-add-stock.php:455
 #: includes/settings/class-alg-wc-cog-settings-products.php:208
@@ -235,7 +235,7 @@ msgstr "Tarih"
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:313
 #, php-format
 msgid "Profit: %s"
-msgstr "Kâr: %s"
+msgstr "KÃ¢r: %s"
 
 #: includes/class-alg-wc-cog-cost-inputs.php:134
 #: includes/pro/class-alg-wc-cog-pro-compatibility-wcfm.php:245
@@ -245,50 +245,50 @@ msgstr "Yok"
 
 #: includes/pro/class-alg-wc-cog-pro-quick-and-bulk-edit.php:160
 msgid "- No change -"
-msgstr "- Değişiklik yok -"
+msgstr "- DeÄŸiÅŸiklik yok -"
 
 #: includes/pro/class-alg-wc-cog-pro.php:601
 msgid "Orders cost and profit successfully recalculated."
-msgstr "Sipariş maliyeti ve karı başarıyla yeniden hesaplandı."
+msgstr "SipariÅŸ maliyeti ve karÄ± baÅŸarÄ±yla yeniden hesaplandÄ±."
 
 #: includes/pro/class-alg-wc-cog-pro.php:615
 msgid "Something went wrong..."
-msgstr "Bir şeyler yanlış gitti..."
+msgstr "Bir ÅŸeyler yanlÄ±ÅŸ gitti..."
 
 #: includes/pro/class-alg-wc-cog-pro.php:733
 #, php-format
 msgid "Cost of Goods reports are in %s and in %s."
-msgstr "Mal Maliyeti raporları %s ve %s cinsindendir."
+msgstr "Mal Maliyeti raporlarÄ± %s ve %s cinsindendir."
 
 #: includes/pro/class-alg-wc-cog-pro.php:735
 msgid "Reports > Orders > Cost of Goods"
-msgstr "Raporlar> Siparişler> Malların Maliyeti"
+msgstr "Raporlar> SipariÅŸler> MallarÄ±n Maliyeti"
 
 #: includes/pro/class-alg-wc-cog-pro.php:737
 msgid "Reports > Stock > Cost of Goods"
 msgstr "Raporlar> Stok> Mal Maliyeti"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:44
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:44
 msgid "print"
-msgstr "Yazdır"
+msgstr "YazdÄ±r"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:45
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:45
 msgid "export"
-msgstr "dışa aktar"
+msgstr "dÄ±ÅŸa aktar"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:117
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:117
 #: includes/tools/class-alg-wc-cog-import-tool.php:250
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:370
 msgid "Product ID"
-msgstr "Ürün ID"
+msgstr "ÃœrÃ¼n ID"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:119
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:119
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:372
 msgid "Title"
-msgstr "Başlık"
+msgstr "BaÅŸlÄ±k"
 
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:533
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:122
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:122
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:381
 #: includes/analytics/build/index.js:614
 #: includes/analytics/src/modules/stock.js:67
@@ -297,18 +297,18 @@ msgid "Price"
 msgstr "Fiyat"
 
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:528
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:124
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:166
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:191
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:124
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:166
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:191
 #: includes/analytics/build/index.js:635
 #: includes/analytics/src/modules/stock.js:88
 #: includes/analytics/build/index.js:673
 msgid "Total Cost"
 msgstr "Toplam Maliyet"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:125
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:170
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:195
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:125
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:170
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:195
 #: includes/analytics/build/index.js:620
 #: includes/analytics/src/modules/stock.js:73
 #: includes/analytics/build/index.js:658
@@ -316,277 +316,277 @@ msgid "Total Price"
 msgstr "Toplam fiyat"
 
 #: includes/analytics/class-alg-wc-cog-analytics-stock.php:529
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:126
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:174
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:191
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:195
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:126
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:174
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:191
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:195
 #: includes/analytics/build/index.js:647
 #: includes/analytics/src/modules/stock.js:100
 #: includes/analytics/build/index.js:685
 msgid "Total Profit"
 msgstr "Toplam kar"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:158
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:158
 msgid "Total Stock"
 msgstr "Toplam Stok"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:162
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:162
 msgid "Total Products"
-msgstr "Toplam Ürünler"
+msgstr "Toplam ÃœrÃ¼nler"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:178
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:178
 msgid "Average Cost"
 msgstr "Ortalama tutar"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:182
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:182
 msgid "Average Price"
 msgstr "Ortalama fiyat"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:186
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:186
 msgid "Average Profit"
 msgstr "Ortalama Kar"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:190
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:190
 msgid "Profit Percentage"
-msgstr "Kar Yüzdesi"
+msgstr "Kar YÃ¼zdesi"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:194
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:194
 msgid "Profit Margin"
-msgstr "Kar marjı"
+msgstr "Kar marjÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:207
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:207
 msgid "Only products with cost, price and stock are counted in report."
-msgstr "Raporda sadece maliyeti, fiyatı ve stoku olan ürünler sayılır."
+msgstr "Raporda sadece maliyeti, fiyatÄ± ve stoku olan Ã¼rÃ¼nler sayÄ±lÄ±r."
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:208
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:208
 msgid "All prices exclude tax."
-msgstr "Tüm fiyatlara vergi dahil değildir."
+msgstr "TÃ¼m fiyatlara vergi dahil deÄŸildir."
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:209
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:209
 msgid "Totals"
 msgstr "Toplamlar"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:212
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:212
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:124
 #: includes/settings/class-alg-wc-cog-settings-products.php:24
 msgid "Products"
-msgstr "Ürünler"
+msgstr "ÃœrÃ¼nler"
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:216
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:216
 msgid "There are no products with cost, price and stock."
-msgstr "Maliyeti, fiyatı ve stoku olan ürün bulunmamaktadır."
+msgstr "Maliyeti, fiyatÄ± ve stoku olan Ã¼rÃ¼n bulunmamaktadÄ±r."
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:59
+#: includes/pro/reports/class-wpfcogs-wc-report.php:59
 #, php-format
 msgid "%s costs"
 msgstr "%s maliyetleri"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:61
+#: includes/pro/reports/class-wpfcogs-wc-report.php:61
 msgid "Costs amount"
-msgstr "Maliyet tutarı"
+msgstr "Maliyet tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:65
+#: includes/pro/reports/class-wpfcogs-wc-report.php:65
 #, php-format
 msgid "%s profit"
 msgstr "%s kar"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:67
+#: includes/pro/reports/class-wpfcogs-wc-report.php:67
 msgid "Profit amount"
-msgstr "Kar miktarı"
+msgstr "Kar miktarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:72
+#: includes/pro/reports/class-wpfcogs-wc-report.php:72
 #, php-format
 msgid "%s item costs"
-msgstr "%s öğe maliyeti"
+msgstr "%s Ã¶ÄŸe maliyeti"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:74
+#: includes/pro/reports/class-wpfcogs-wc-report.php:74
 msgid "Item costs amount"
-msgstr "Öğe maliyeti tutarı"
+msgstr "Ã–ÄŸe maliyeti tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:78
+#: includes/pro/reports/class-wpfcogs-wc-report.php:78
 #, php-format
 msgid "%s fees"
-msgstr "%s ücret"
+msgstr "%s Ã¼cret"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:80
+#: includes/pro/reports/class-wpfcogs-wc-report.php:80
 msgid "Fees amount"
-msgstr "Ücret tutarı"
+msgstr "Ãœcret tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:84
+#: includes/pro/reports/class-wpfcogs-wc-report.php:84
 #, php-format
 msgid "%s shipping method fees"
-msgstr "%s gönderim yöntemi ücreti"
+msgstr "%s gÃ¶nderim yÃ¶ntemi Ã¼creti"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:86
+#: includes/pro/reports/class-wpfcogs-wc-report.php:86
 msgid "Shipping method fees amount"
-msgstr "Gönderim yöntemi ücret tutarı"
+msgstr "GÃ¶nderim yÃ¶ntemi Ã¼cret tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:90
+#: includes/pro/reports/class-wpfcogs-wc-report.php:90
 #, php-format
 msgid "%s shipping method fees (fixed)"
-msgstr "%s gönderim yöntemi ücretleri (sabit)"
+msgstr "%s gÃ¶nderim yÃ¶ntemi Ã¼cretleri (sabit)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:92
+#: includes/pro/reports/class-wpfcogs-wc-report.php:92
 msgid "Shipping method fees amount (fixed)"
-msgstr "Gönderim yöntemi ücret tutarı (sabit)"
+msgstr "GÃ¶nderim yÃ¶ntemi Ã¼cret tutarÄ± (sabit)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:96
+#: includes/pro/reports/class-wpfcogs-wc-report.php:96
 #, php-format
 msgid "%s shipping method fees (percent)"
-msgstr "%s gönderim yöntemi ücretleri (yüzde)"
+msgstr "%s gÃ¶nderim yÃ¶ntemi Ã¼cretleri (yÃ¼zde)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:98
+#: includes/pro/reports/class-wpfcogs-wc-report.php:98
 msgid "Shipping method fees amount (percent)"
-msgstr "Gönderim yöntemi ücret tutarı (yüzde)"
+msgstr "GÃ¶nderim yÃ¶ntemi Ã¼cret tutarÄ± (yÃ¼zde)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:102
+#: includes/pro/reports/class-wpfcogs-wc-report.php:102
 #, php-format
 msgid "%s gateway fees"
-msgstr "%s ağ geçidi ücretleri"
+msgstr "%s aÄŸ geÃ§idi Ã¼cretleri"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:104
+#: includes/pro/reports/class-wpfcogs-wc-report.php:104
 msgid "Gateway fees amount"
-msgstr "Ağ geçidi ücreti tutarı"
+msgstr "AÄŸ geÃ§idi Ã¼creti tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:108
+#: includes/pro/reports/class-wpfcogs-wc-report.php:108
 #, php-format
 msgid "%s gateway fees (fixed)"
-msgstr "%s ağ geçidi ücretleri (sabit)"
+msgstr "%s aÄŸ geÃ§idi Ã¼cretleri (sabit)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:110
+#: includes/pro/reports/class-wpfcogs-wc-report.php:110
 msgid "Gateway fees amount (fixed)"
-msgstr "Ağ geçidi ücreti tutarı (sabit)"
+msgstr "AÄŸ geÃ§idi Ã¼creti tutarÄ± (sabit)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:114
+#: includes/pro/reports/class-wpfcogs-wc-report.php:114
 #, php-format
 msgid "%s gateway fees (percent)"
-msgstr "%s ağ geçidi ücretleri (yüzde)"
+msgstr "%s aÄŸ geÃ§idi Ã¼cretleri (yÃ¼zde)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:116
+#: includes/pro/reports/class-wpfcogs-wc-report.php:116
 msgid "Gateway fees amount (percent)"
-msgstr "Ağ geçidi ücreti tutarı (yüzde)"
+msgstr "AÄŸ geÃ§idi Ã¼creti tutarÄ± (yÃ¼zde)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:120
+#: includes/pro/reports/class-wpfcogs-wc-report.php:120
 #, php-format
 msgid "%s order fees"
-msgstr "%s sipariş ücreti"
+msgstr "%s sipariÅŸ Ã¼creti"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:122
+#: includes/pro/reports/class-wpfcogs-wc-report.php:122
 msgid "Order fees amount"
-msgstr "Sipariş ücreti tutarı"
+msgstr "SipariÅŸ Ã¼creti tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:126
+#: includes/pro/reports/class-wpfcogs-wc-report.php:126
 #, php-format
 msgid "%s order fees (fixed)"
-msgstr "%s sipariş ücreti (sabit)"
+msgstr "%s sipariÅŸ Ã¼creti (sabit)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:128
+#: includes/pro/reports/class-wpfcogs-wc-report.php:128
 msgid "Order fees amount (fixed)"
-msgstr "Sipariş ücreti tutarı (sabit)"
+msgstr "SipariÅŸ Ã¼creti tutarÄ± (sabit)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:132
+#: includes/pro/reports/class-wpfcogs-wc-report.php:132
 #, php-format
 msgid "%s order fees (percent)"
-msgstr "%s sipariş ücreti (yüzde)"
+msgstr "%s sipariÅŸ Ã¼creti (yÃ¼zde)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:134
+#: includes/pro/reports/class-wpfcogs-wc-report.php:134
 msgid "Order fees amount (percent)"
-msgstr "Sipariş ücreti tutarı (yüzde)"
+msgstr "SipariÅŸ Ã¼creti tutarÄ± (yÃ¼zde)"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:138
+#: includes/pro/reports/class-wpfcogs-wc-report.php:138
 #, php-format
 msgid "%s per order fees"
-msgstr "sipariş başına ücret %s"
+msgstr "sipariÅŸ baÅŸÄ±na Ã¼cret %s"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:140
+#: includes/pro/reports/class-wpfcogs-wc-report.php:140
 msgid "Per order fees amount"
-msgstr "Sipariş başına ücret tutarı"
+msgstr "SipariÅŸ baÅŸÄ±na Ã¼cret tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:144
+#: includes/pro/reports/class-wpfcogs-wc-report.php:144
 #, php-format
 msgid "%s handling fees"
-msgstr "%s işlem ücreti"
+msgstr "%s iÅŸlem Ã¼creti"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:146
+#: includes/pro/reports/class-wpfcogs-wc-report.php:146
 msgid "Handling fees amount"
-msgstr "İşlem ücreti tutarı"
+msgstr "Ä°ÅŸlem Ã¼creti tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:150
+#: includes/pro/reports/class-wpfcogs-wc-report.php:150
 #, php-format
 msgid "%s shipping fees"
-msgstr "%s kargo ücreti"
+msgstr "%s kargo Ã¼creti"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:152
+#: includes/pro/reports/class-wpfcogs-wc-report.php:152
 msgid "Shipping fees amount"
-msgstr "Kargo ücreti tutarı"
+msgstr "Kargo Ã¼creti tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:156
+#: includes/pro/reports/class-wpfcogs-wc-report.php:156
 #, php-format
 msgid "%s payment fees"
-msgstr "%s ödeme ücretleri"
+msgstr "%s Ã¶deme Ã¼cretleri"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:158
+#: includes/pro/reports/class-wpfcogs-wc-report.php:158
 msgid "Payment fees amount"
-msgstr "Ödeme ücreti tutarı"
+msgstr "Ã–deme Ã¼creti tutarÄ±"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:162
+#: includes/pro/reports/class-wpfcogs-wc-report.php:162
 #, php-format
 msgid "%s meta fees"
-msgstr "%s meta ücretleri"
+msgstr "%s meta Ã¼cretleri"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:164
+#: includes/pro/reports/class-wpfcogs-wc-report.php:164
 msgid "Meta fees amount"
-msgstr "Meta ücret tutarı"
+msgstr "Meta Ã¼cret tutarÄ±"
 
 #. translators: %s: average sales
-#: includes/pro/reports/class-wc-report-alg-cog.php:272
+#: includes/pro/reports/class-wpfcogs-wc-report.php:272
 #, php-format
 msgid "%s average daily profit"
-msgstr "%s ortalama günlük kâr"
+msgstr "%s ortalama gÃ¼nlÃ¼k kÃ¢r"
 
 #. translators: %s: average sales
-#: includes/pro/reports/class-wc-report-alg-cog.php:280
+#: includes/pro/reports/class-wpfcogs-wc-report.php:280
 #, php-format
 msgid "%s average monthly profit"
-msgstr "%s ortalama aylık kar"
+msgstr "%s ortalama aylÄ±k kar"
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:359
+#: includes/pro/reports/class-wpfcogs-wc-report.php:359
 msgid "Average profit"
 msgstr "Ortalama kar"
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:24
 #: includes/settings/class-alg-wc-cog-settings-products.php:122
 msgid "Advanced"
-msgstr "Gelişmiş"
+msgstr "GeliÅŸmiÅŸ"
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:161
 #: includes/settings/class-alg-wc-cog-settings-orders.php:166
 #: includes/settings/class-alg-wc-cog-settings-orders.php:181
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:131
 msgid "Enable"
-msgstr "etkinleştir"
+msgstr "etkinleÅŸtir"
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:160
 msgid "Sortable columns"
-msgstr "Sıralanabilir sütunlar"
+msgstr "SÄ±ralanabilir sÃ¼tunlar"
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:162
 #, php-format
 msgid "Makes columns added to admin %s and %s lists <strong>sortable</strong>."
-msgstr "Yönetici %s ve %s listelerine sütunların <strong>sıralanabilir</strong> olmasını sağlar."
+msgstr "YÃ¶netici %s ve %s listelerine sÃ¼tunlarÄ±n <strong>sÄ±ralanabilir</strong> olmasÄ±nÄ± saÄŸlar."
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:163
 msgid "products"
-msgstr "ürünler"
+msgstr "Ã¼rÃ¼nler"
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:164
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:243
 msgid "orders"
-msgstr "siparişler"
+msgstr "sipariÅŸler"
 
 #: includes/settings/class-alg-wc-cog-settings-advanced.php:171
 msgid "Exclude empty lines on sorting"
-msgstr "Sıralamada boş satırları hariç tut"
+msgstr "SÄ±ralamada boÅŸ satÄ±rlarÄ± hariÃ§ tut"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:446
 #: includes/settings/class-alg-wc-cog-settings-orders.php:479
@@ -600,7 +600,7 @@ msgstr "Ekstra Maliyet"
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:45
 #: includes/settings/class-alg-wc-cog-settings-orders.php:318
 msgid "Payment Gateways"
-msgstr "Ödeme Seçenekleri"
+msgstr "Ã–deme SeÃ§enekleri"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:40
 #: includes/settings/class-alg-wc-cog-settings-orders.php:294
@@ -610,12 +610,12 @@ msgstr "Ödeme Seçenekleri"
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:40
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:118
 msgid "You will need to recalculate order's cost and profit after you change these settings."
-msgstr "Bu ayarları değiştirdikten sonra siparişin maliyetini ve karını yeniden hesaplamanız gerekecektir."
+msgstr "Bu ayarlarÄ± deÄŸiÅŸtirdikten sonra sipariÅŸin maliyetini ve karÄ±nÄ± yeniden hesaplamanÄ±z gerekecektir."
 
 #: includes/settings/class-alg-wc-cog-settings-shipping-classes.php:46
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:124
 msgid "Enable section"
-msgstr "Bölümü etkinleştir"
+msgstr "BÃ¶lÃ¼mÃ¼ etkinleÅŸtir"
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:71
 #: includes/settings/class-alg-wc-cog-settings-orders.php:453
@@ -631,7 +631,7 @@ msgstr "Sabit fiyat"
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:181
 #, php-format
 msgid "In %s."
-msgstr "%s içinde."
+msgstr "%s iÃ§inde."
 
 #: includes/settings/class-alg-wc-cog-settings-gateways.php:82
 #: includes/settings/class-alg-wc-cog-settings-orders.php:464
@@ -640,20 +640,20 @@ msgstr "%s içinde."
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:152
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:191
 msgid "Percent cost"
-msgstr "Maliyet yüzdesi"
+msgstr "Maliyet yÃ¼zdesi"
 
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:87
 #: includes/settings/class-alg-wc-cog-settings-orders.php:24
 msgid "Orders"
-msgstr "Siparişler"
+msgstr "SipariÅŸler"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:515
 msgid "orders list"
-msgstr "sipariş listesi"
+msgstr "sipariÅŸ listesi"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:53
 msgid "Order cost"
-msgstr "Sipariş maliyeti"
+msgstr "SipariÅŸ maliyeti"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:512
 msgid "Add"
@@ -662,7 +662,7 @@ msgstr "Ekle"
 #: includes/settings/class-alg-wc-cog-settings-orders.php:67
 #: includes/settings/class-alg-wc-cog-settings-orders.php:136
 msgid "Order statuses"
-msgstr "Sipariş durumları"
+msgstr "SipariÅŸ durumlarÄ±"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:68
 msgid "Select order statuses to show cost."
@@ -671,23 +671,23 @@ msgstr "Select order statuses to show cost."
 #: includes/settings/class-alg-wc-cog-settings-orders.php:69
 #: includes/settings/class-alg-wc-cog-settings-orders.php:138
 msgid "Leave empty to show for all orders."
-msgstr "Tüm siparişlerde göstermek için boş bırakın."
+msgstr "TÃ¼m sipariÅŸlerde gÃ¶stermek iÃ§in boÅŸ bÄ±rakÄ±n."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:137
 msgid "Select order statuses to show profit."
-msgstr "Kârı göstermek için sipariş durumlarını seçin."
+msgstr "KÃ¢rÄ± gÃ¶stermek iÃ§in sipariÅŸ durumlarÄ±nÄ± seÃ§in."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:153
 msgid "Admin Order Edit"
-msgstr "Yönetici Siparişi Düzenleme"
+msgstr "YÃ¶netici SipariÅŸi DÃ¼zenleme"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:154
 msgid "Options for the admin order edit pages."
-msgstr "Yönetici sipariş düzenleme sayfaları için seçenekler."
+msgstr "YÃ¶netici sipariÅŸ dÃ¼zenleme sayfalarÄ± iÃ§in seÃ§enekler."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:160
 msgid "Adds costs inputs for each order item to admin order edit page."
-msgstr "Yönetici sipariş düzenleme sayfasına her sipariş öğesi için maliyet girişleri ekler."
+msgstr "YÃ¶netici sipariÅŸ dÃ¼zenleme sayfasÄ±na her sipariÅŸ Ã¶ÄŸesi iÃ§in maliyet giriÅŸleri ekler."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:167
 #: includes/settings/class-alg-wc-cog-settings-orders.php:182
@@ -697,12 +697,12 @@ msgstr "Sadece oku"
 #: includes/settings/class-alg-wc-cog-settings-orders.php:168
 #: includes/settings/class-alg-wc-cog-settings-orders.php:180
 msgid "Disable"
-msgstr "Devre dışı bırak"
+msgstr "Devre dÄ±ÅŸÄ± bÄ±rak"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:169
 #: includes/settings/class-alg-wc-cog-settings-orders.php:183
 msgid "Disable but show as standard meta"
-msgstr "Devre dışı bırak ancak standart meta olarak göster"
+msgstr "Devre dÄ±ÅŸÄ± bÄ±rak ancak standart meta olarak gÃ¶ster"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:188
 #: includes/settings/class-alg-wc-cog-settings-products.php:201
@@ -711,43 +711,43 @@ msgstr "Meta kutusu"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:214
 msgid "Admin notice"
-msgstr "Yönetici bildirimi"
+msgstr "YÃ¶netici bildirimi"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:221
 msgid "Admin notice text"
-msgstr "Yönetici bildirim metni"
+msgstr "YÃ¶netici bildirim metni"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:228
 msgid "Fill in on add items"
-msgstr "Eklenen öğeleri doldurun"
+msgstr "Eklenen Ã¶ÄŸeleri doldurun"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:235
 msgid "Save on item edit"
-msgstr "Öğe düzenlemeye kaydet"
+msgstr "Ã–ÄŸe dÃ¼zenlemeye kaydet"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:242
 msgid "\"Recalculate\" button"
-msgstr "\"Yeniden hesapla\" düğmesi"
+msgstr "\"Yeniden hesapla\" dÃ¼ÄŸmesi"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:243
 msgid "Select what should be done when admin clicks \"Recalculate\" order button."
-msgstr "Yönetici \"Siparişi Yeniden Hesapla\" düğmesini tıkladığında ne yapılacağını seçin."
+msgstr "YÃ¶netici \"SipariÅŸi Yeniden Hesapla\" dÃ¼ÄŸmesini tÄ±kladÄ±ÄŸÄ±nda ne yapÄ±lacaÄŸÄ±nÄ± seÃ§in."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:249
 msgid "Do nothing"
-msgstr "Hiçbir şey yapma"
+msgstr "HiÃ§bir ÅŸey yapma"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:250
 msgid "Fill in empty item costs with the default costs"
-msgstr "Boş ürün maliyetlerini varsayılan maliyetlerle doldurun"
+msgstr "BoÅŸ Ã¼rÃ¼n maliyetlerini varsayÄ±lan maliyetlerle doldurun"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:251
 msgid "Fill in all item costs with the default costs"
-msgstr "Tüm kalem maliyetlerini varsayılan maliyetlerle doldurun"
+msgstr "TÃ¼m kalem maliyetlerini varsayÄ±lan maliyetlerle doldurun"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:252
 msgid "Save all item costs"
-msgstr "Tüm ürün maliyetlerinden tasarruf edin"
+msgstr "TÃ¼m Ã¼rÃ¼n maliyetlerinden tasarruf edin"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:292
 msgid "Calculations"
@@ -755,59 +755,59 @@ msgstr "Hesaplamalar"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:299
 msgid "Count empty cost lines"
-msgstr "Boş maliyet satırlarını sayın"
+msgstr "BoÅŸ maliyet satÄ±rlarÄ±nÄ± sayÄ±n"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:317
 #: includes/settings/class-alg-wc-cog-settings-orders.php:446
 msgid "All Orders"
-msgstr "Tüm siparişler"
+msgstr "TÃ¼m sipariÅŸler"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:319
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:24
 msgid "Shipping Methods"
-msgstr "Nakliye Yöntemleri"
+msgstr "Nakliye YÃ¶ntemleri"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:326
 msgid "Order subtotal excl. tax"
-msgstr "Ara toplam hariç sipariş vergi"
+msgstr "Ara toplam hariÃ§ sipariÅŸ vergi"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:327
 msgid "Order total excl. tax"
-msgstr "Hariç sipariş toplamı vergi"
+msgstr "HariÃ§ sipariÅŸ toplamÄ± vergi"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:328
 msgid "Order total incl. tax"
-msgstr "Sipariş toplamı dahil. vergi"
+msgstr "SipariÅŸ toplamÄ± dahil. vergi"
 
 #: includes/class-alg-wc-cog-orders.php:890
 #: includes/settings/class-alg-wc-cog-settings-orders.php:332
 msgid "Shipping to profit"
-msgstr "Kar için nakliye"
+msgstr "Kar iÃ§in nakliye"
 
 #: includes/class-alg-wc-cog-orders.php:846
 #: includes/settings/class-alg-wc-cog-settings-orders.php:346
 msgid "Fees to profit"
-msgstr "Kar elde etmek için ücretler"
+msgstr "Kar elde etmek iÃ§in Ã¼cretler"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:375
 msgid "Delay calculations"
-msgstr "Gecikme hesaplamaları"
+msgstr "Gecikme hesaplamalarÄ±"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:376
 msgid "Select order statuses to delay all order profit, cost etc. calculations until."
-msgstr "Tüm sipariş karı, maliyet vb. Hesaplamalarının tarihine kadar geciktirmek için sipariş durumlarını seçin."
+msgstr "TÃ¼m sipariÅŸ karÄ±, maliyet vb. HesaplamalarÄ±nÄ±n tarihine kadar geciktirmek iÃ§in sipariÅŸ durumlarÄ±nÄ± seÃ§in."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:377
 msgid "All values will be set to zero until the required order status is set."
-msgstr "Gerekli sipariş durumu ayarlanana kadar tüm değerler sıfır olarak ayarlanacaktır."
+msgstr "Gerekli sipariÅŸ durumu ayarlanana kadar tÃ¼m deÄŸerler sÄ±fÄ±r olarak ayarlanacaktÄ±r."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:378
 msgid "Leave empty to calculate right away on new order."
-msgstr "Yeni siparişte hemen hesaplamak için boş bırakın."
+msgstr "Yeni sipariÅŸte hemen hesaplamak iÃ§in boÅŸ bÄ±rakÄ±n."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:447
 msgid "Here you can add extra costs for your orders, e.g. handling fees."
-msgstr "Burada siparişleriniz için ekstra maliyetler ekleyebilirsiniz, örn. hizmet bedeli."
+msgstr "Burada sipariÅŸleriniz iÃ§in ekstra maliyetler ekleyebilirsiniz, Ã¶rn. hizmet bedeli."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:479
 #: includes/settings/class-alg-wc-cog-settings-orders.php:487
@@ -815,25 +815,25 @@ msgstr "Burada siparişleriniz için ekstra maliyetler ekleyebilirsiniz, örn. h
 #: includes/settings/class-alg-wc-cog-settings-orders.php:503
 #: includes/settings/class-alg-wc-cog-settings-orders.php:514
 msgid "Per Order"
-msgstr "Sipariş Başına"
+msgstr "SipariÅŸ BaÅŸÄ±na"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:480
 #, php-format
 msgid "Adds \"%s\" meta box to admin order edit page."
-msgstr "Yönetici sipariş düzenleme sayfasına \"%s\" meta kutusu ekler."
+msgstr "YÃ¶netici sipariÅŸ dÃ¼zenleme sayfasÄ±na \"%s\" meta kutusu ekler."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:511
 msgid "Columns"
-msgstr "Sütunlar"
+msgstr "SÃ¼tunlar"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:513
 #, php-format
 msgid "Will add \"%s\" columns to the WooCommerce admin %s."
-msgstr "WooCommerce yöneticisine %s \"%s\" sütunları ekleyecektir."
+msgstr "WooCommerce yÃ¶neticisine %s \"%s\" sÃ¼tunlarÄ± ekleyecektir."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:516
 msgid "One column per fee."
-msgstr "Ücret başına bir sütun."
+msgstr "Ãœcret baÅŸÄ±na bir sÃ¼tun."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:529
 msgid "From Meta"
@@ -841,12 +841,12 @@ msgstr "Meta'dan"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:530
 msgid "Adds extra costs from order meta."
-msgstr "Sipariş metasından ekstra maliyetler ekler."
+msgstr "SipariÅŸ metasÄ±ndan ekstra maliyetler ekler."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:532
 #, php-format
 msgid "E.g.: %s."
-msgstr "Örneğin: %s."
+msgstr "Ã–rneÄŸin: %s."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:554
 msgid "Meta keys"
@@ -854,56 +854,56 @@ msgstr "Meta anahtarlar"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:555
 msgid "Ignored if empty."
-msgstr "Boşsa yok sayılır."
+msgstr "BoÅŸsa yok sayÄ±lÄ±r."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:556
 msgid "One meta key per line."
-msgstr "Satır başına bir meta anahtar."
+msgstr "SatÄ±r baÅŸÄ±na bir meta anahtar."
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:135
 #, php-format
 msgid "This section lets you add custom columns to WooCommerce admin %s."
-msgstr "Bu bölüm, WooCommerce yöneticisine %s özel sütunlar eklemenizi sağlar."
+msgstr "Bu bÃ¶lÃ¼m, WooCommerce yÃ¶neticisine %s Ã¶zel sÃ¼tunlar eklemenizi saÄŸlar."
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:136
 msgid "products list"
-msgstr "ürünlerin listesi"
+msgstr "Ã¼rÃ¼nlerin listesi"
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:140
 msgid "Product cost"
-msgstr "Ürün maliyeti"
+msgstr "ÃœrÃ¼n maliyeti"
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:157
 msgid "Product profit"
-msgstr "Ürün karı"
+msgstr "ÃœrÃ¼n karÄ±"
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:92
 msgid "Cost field label"
-msgstr "Maliyet alanı etiketi"
+msgstr "Maliyet alanÄ± etiketi"
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:205
 #: includes/settings/class-alg-wc-cog-settings-products.php:45
 #, php-format
 msgid "Available placeholders: %s."
-msgstr "Kullanılabilir değişkenler: %s."
+msgstr "KullanÄ±labilir deÄŸiÅŸkenler: %s."
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:47
 msgid "This is used in admin single product edit pages, and in admin products list \"Profit\" column."
-msgstr "Bu, yönetici tek ürün düzenleme sayfalarında ve yönetici ürünler listesinin \"Kar\" sütununda kullanılır."
+msgstr "Bu, yÃ¶netici tek Ã¼rÃ¼n dÃ¼zenleme sayfalarÄ±nda ve yÃ¶netici Ã¼rÃ¼nler listesinin \"Kar\" sÃ¼tununda kullanÄ±lÄ±r."
 
 #: includes/settings/class-alg-wc-cog-settings-orders.php:208
 #: includes/settings/class-alg-wc-cog-settings-products.php:48
 msgid "Profit percent is \"profit / cost\". Margin is \"profit / price\"."
-msgstr "Kar yüzdesi \"kar / maliyet\" tir. Marj \"kar / fiyat\" dır."
+msgstr "Kar yÃ¼zdesi \"kar / maliyet\" tir. Marj \"kar / fiyat\" dÄ±r."
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:356
 msgid "Quick and Bulk Edit"
-msgstr "Hızlı ve Toplu Düzenleme"
+msgstr "HÄ±zlÄ± ve Toplu DÃ¼zenleme"
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:363
 #: includes/settings/class-alg-wc-cog-settings-products.php:390
 msgid "Quick Edit"
-msgstr "Hızlı Düzenle"
+msgstr "HÄ±zlÄ± DÃ¼zenle"
 
 #: includes/settings/class-alg-wc-cog-settings-products.php:372
 #: includes/settings/class-alg-wc-cog-settings-products.php:399
@@ -913,11 +913,11 @@ msgstr "Toplu eylemler"
 #: includes/settings/class-alg-wc-cog-settings-products.php:372
 #: includes/settings/class-alg-wc-cog-settings-products.php:399
 msgid "Edit"
-msgstr "Düzenle"
+msgstr "DÃ¼zenle"
 
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:116
 msgid "Extra Shipping Method Costs"
-msgstr "Ekstra Nakliye Yöntemi Maliyetleri"
+msgstr "Ekstra Nakliye YÃ¶ntemi Maliyetleri"
 
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:117
 msgid "Here you can add extra costs for your orders based on order's shipping method."
@@ -925,74 +925,74 @@ msgstr "Here you can add extra costs for your orders based on order's shipping m
 
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:123
 msgid "Extra shipping costs"
-msgstr "Ekstra nakliye masrafları"
+msgstr "Ekstra nakliye masraflarÄ±"
 
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:130
 msgid "Use shipping instances"
-msgstr "Nakliye örneklerini kullanın"
+msgstr "Nakliye Ã¶rneklerini kullanÄ±n"
 
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:132
 msgid "Enable this if you want to use shipping methods instances (with shipping zones) instead of shipping methods."
-msgstr "Gönderim yöntemleri yerine gönderi yöntemi örneklerini (gönderi bölgeleri ile) kullanmak istiyorsanız bunu etkinleştirin."
+msgstr "GÃ¶nderim yÃ¶ntemleri yerine gÃ¶nderi yÃ¶ntemi Ã¶rneklerini (gÃ¶nderi bÃ¶lgeleri ile) kullanmak istiyorsanÄ±z bunu etkinleÅŸtirin."
 
 #: includes/settings/class-alg-wc-cog-settings-shipping.php:133
 msgid "Save changes after enabling this option."
-msgstr "Bu seçeneği etkinleştirdikten sonra değişiklikleri kaydedin."
+msgstr "Bu seÃ§eneÄŸi etkinleÅŸtirdikten sonra deÄŸiÅŸiklikleri kaydedin."
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:109
 #: includes/settings/class-alg-wc-cog-settings-tools.php:135
 msgid "Tools > Bulk Edit Costs"
-msgstr "Araçlar> Maliyetleri Toplu Düzenleme"
+msgstr "AraÃ§lar> Maliyetleri Toplu DÃ¼zenleme"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:145
 msgid "Search by title"
-msgstr "Başlığa göre ara"
+msgstr "BaÅŸlÄ±ÄŸa gÃ¶re ara"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:146
 msgid "Search all"
-msgstr "Tümünü ara"
+msgstr "TÃ¼mÃ¼nÃ¼ ara"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:160
 msgid "Edit prices"
-msgstr "Fiyatları düzenleyin"
+msgstr "FiyatlarÄ± dÃ¼zenleyin"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:181
 msgid "Manage stock"
-msgstr "Stokları yönet"
+msgstr "StoklarÄ± yÃ¶net"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:187
 msgid "Stock update method"
-msgstr "Stok güncelleme yöntemi"
+msgstr "Stok gÃ¼ncelleme yÃ¶ntemi"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:194
 msgid "Update product meta"
-msgstr "Ürün metasını güncelle"
+msgstr "ÃœrÃ¼n metasÄ±nÄ± gÃ¼ncelle"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:195
 msgid "Use product functions"
-msgstr "Ürün işlevlerini kullanın"
+msgstr "ÃœrÃ¼n iÅŸlevlerini kullanÄ±n"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:211
 msgid "Tools > Import Costs"
-msgstr "Araçlar> Maliyetleri İçe Aktar"
+msgstr "AraÃ§lar> Maliyetleri Ä°Ã§e Aktar"
 
 #: includes/settings/class-alg-wc-cog-settings-compatibility.php:284
 #: includes/settings/class-alg-wc-cog-settings-tools.php:215
 msgid "Key to import from"
-msgstr "İçe aktarılacak anahtar"
+msgstr "Ä°Ã§e aktarÄ±lacak anahtar"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:294
 #: includes/settings/class-alg-wc-cog-settings-tools.php:313
 msgid "Enable the checkbox and \"Save changes\" to run the tool."
-msgstr "Aracı çalıştırmak için onay kutusunu ve \"Değişiklikleri kaydet\" i etkinleştirin."
+msgstr "AracÄ± Ã§alÄ±ÅŸtÄ±rmak iÃ§in onay kutusunu ve \"DeÄŸiÅŸiklikleri kaydet\" i etkinleÅŸtirin."
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:312
 msgid "Set items costs in orders that do not have costs set."
-msgstr "Belirlenmiş maliyetleri olmayan siparişlerde ürün maliyetlerini ayarlayın."
+msgstr "BelirlenmiÅŸ maliyetleri olmayan sipariÅŸlerde Ã¼rÃ¼n maliyetlerini ayarlayÄ±n."
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:353
 msgid "PHP memory limit"
-msgstr "PHP bellek sınırı"
+msgstr "PHP bellek sÄ±nÄ±rÄ±"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:354
 msgid "megabytes"
@@ -1000,11 +1000,11 @@ msgstr "megabayt"
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:355
 msgid "Will set PHP memory limit right before tools are run."
-msgstr "Araçlar çalıştırılmadan hemen önce PHP bellek sınırını ayarlayacaktır."
+msgstr "AraÃ§lar Ã§alÄ±ÅŸtÄ±rÄ±lmadan hemen Ã¶nce PHP bellek sÄ±nÄ±rÄ±nÄ± ayarlayacaktÄ±r."
 
 #: includes/settings/class-alg-wc-cog-settings-tools.php:356
 msgid "Ignored if set to zero."
-msgstr "Sıfıra ayarlanırsa yoksayılır."
+msgstr "SÄ±fÄ±ra ayarlanÄ±rsa yoksayÄ±lÄ±r."
 
 #: includes/settings/class-alg-wc-cog-settings-analytics.php:26
 msgid "Analytics"
@@ -1012,37 +1012,37 @@ msgstr "Analitik"
 
 #: includes/settings/class-alg-wc-settings-cog.php:101
 msgid "Reset Settings"
-msgstr "Ayarları Sıfırla"
+msgstr "AyarlarÄ± SÄ±fÄ±rla"
 
 #: includes/settings/class-alg-wc-settings-cog.php:106
 msgid "Reset section settings"
-msgstr "Bölüm ayarlarını sıfırla"
+msgstr "BÃ¶lÃ¼m ayarlarÄ±nÄ± sÄ±fÄ±rla"
 
 #: includes/settings/class-alg-wc-settings-cog.php:107
 msgid "Reset"
-msgstr "Sıfırla"
+msgstr "SÄ±fÄ±rla"
 
 #: includes/settings/class-alg-wc-settings-cog.php:108
 msgid "Enable the checkbox and save changes to reset the settings."
-msgstr "Ayarları sıfırlamak için onay kutusunu etkinleştirin ve değişiklikleri kaydedin."
+msgstr "AyarlarÄ± sÄ±fÄ±rlamak iÃ§in onay kutusunu etkinleÅŸtirin ve deÄŸiÅŸiklikleri kaydedin."
 
 #: includes/settings/class-alg-wc-settings-cog.php:136
 #: includes/settings/class-alg-wc-settings-cog.php:151
 msgid "Your settings have been reset."
-msgstr "Ayarlarınız sıfırlandı."
+msgstr "AyarlarÄ±nÄ±z sÄ±fÄ±rlandÄ±."
 
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1519
 #, php-format
 msgid "Sale price is higher than regular price: %s."
-msgstr "İndirimli fiyat normal fiyattan yüksek: %s."
+msgstr "Ä°ndirimli fiyat normal fiyattan yÃ¼ksek: %s."
 
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1169
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1355
 #: includes/tools/class-alg-wc-cog-bulk-edit-tool.php:1356
 msgid "Bulk Edit Costs"
-msgstr "Toplu Maliyetleri Düzenleme "
+msgstr "Toplu Maliyetleri DÃ¼zenleme "
 
-#: includes/pro/reports/class-wc-report-alg-cog-stock.php:118
+#: includes/pro/reports/class-wpfcogs-wc-report-stock.php:118
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:371
 msgid "SKU"
 msgstr "SKU"
@@ -1053,7 +1053,7 @@ msgstr "Normal fiyat"
 
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:379
 msgid "Sale price"
-msgstr "Satış ücreti"
+msgstr "SatÄ±ÅŸ Ã¼creti"
 
 #: includes/tools/class-alg-wc-cog-wplist-bulk-edit-tool.php:349
 #, php-format
@@ -1062,16 +1062,16 @@ msgstr "Stok durumu: %s"
 
 #: includes/tools/class-alg-wc-cog-import-tool.php:314
 msgid "plugin settings"
-msgstr "eklenti ayarları"
+msgstr "eklenti ayarlarÄ±"
 
 #: includes/tools/class-alg-wc-cog-import-tool.php:147
 #: includes/tools/class-alg-wc-cog-import-tool.php:148
 msgid "Import Costs"
-msgstr "Maliyetleri İçe Aktar"
+msgstr "Maliyetleri Ä°Ã§e Aktar"
 
 #: includes/tools/class-alg-wc-cog-import-tool.php:251
 msgid "Product Title"
-msgstr "ürün başlığı"
+msgstr "Ã¼rÃ¼n baÅŸlÄ±ÄŸÄ±"
 
 #: includes/tools/class-alg-wc-cog-import-tool.php:252
 #, php-format
@@ -1085,7 +1085,7 @@ msgstr "Hedef %s"
 
 #: includes/tools/class-alg-wc-cog-import-tool.php:307
 msgid "Import"
-msgstr "İçe Aktar"
+msgstr "Ä°Ã§e Aktar"
 
 #: includes/tools/class-alg-wc-cog-import-tool.php:308
 msgid "Are you sure?"
@@ -1093,12 +1093,12 @@ msgstr "Emin misiniz?"
 
 #: includes/tools/class-alg-wc-cog-import-tool.php:311
 msgid "Costs Import"
-msgstr "Maliyetleri içe aktar"
+msgstr "Maliyetleri iÃ§e aktar"
 
 #: includes/tools/class-alg-wc-cog-import-tool.php:313
 #, php-format
 msgid "Tool's options can be set in %s."
-msgstr "Aracın seçenekleri %s içinde ayarlanabilir."
+msgstr "AracÄ±n seÃ§enekleri %s iÃ§inde ayarlanabilir."
 
 #. translators: 1: URL to the Pro plugin page, 2: Pro plugin name.
 #: includes/alg-wc-cog-functions.php:220
@@ -1297,27 +1297,27 @@ msgstr ""
 msgid "Orders cost and profit recalculating via background processing. You should receive an e-mail when it's complete if the \"Advanced > Background processing > Send email\" option is enabled."
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:168
+#: includes/pro/reports/class-wpfcogs-wc-report.php:168
 msgid "%s shipping to profit"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:170
+#: includes/pro/reports/class-wpfcogs-wc-report.php:170
 msgid "Shipping to profit amount"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:174
+#: includes/pro/reports/class-wpfcogs-wc-report.php:174
 msgid "%s fees to profit"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:176
+#: includes/pro/reports/class-wpfcogs-wc-report.php:176
 msgid "Fees to profit amount"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:180
+#: includes/pro/reports/class-wpfcogs-wc-report.php:180
 msgid "%s taxes to profit"
 msgstr ""
 
-#: includes/pro/reports/class-wc-report-alg-cog.php:182
+#: includes/pro/reports/class-wpfcogs-wc-report.php:182
 msgid "Taxes to profit amount"
 msgstr ""
 
@@ -3466,7 +3466,7 @@ msgid "Filter by %s"
 msgstr ""
 
 #: includes/tools/class-alg-wc-cog-bulk-edit-attr-filtering.php:177
-msgid "Search for a %s…"
+msgid "Search for a %sâ€¦"
 msgstr ""
 
 #: includes/tools/class-alg-wc-cog-bulk-edit-attr-filtering.php:182

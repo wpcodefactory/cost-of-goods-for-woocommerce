@@ -30,7 +30,7 @@ let orders = {
 			},
 		];
 		let headers = [...reportTableData.headers, ...costAndProfitHeaders];
-		if (alg_wc_cog_analytics_obj.individual_order_costs_enabled) {
+		if (wpfcogs_analytics_obj.individual_order_costs_enabled) {
 			const individualCostsHeaders = [
 				{
 					label: __('Items cost', 'cost-of-goods-for-woocommerce'),
@@ -84,7 +84,7 @@ let orders = {
 				},
 			];
 			let newRow = [...row,...costAndProfit];
-			if (alg_wc_cog_analytics_obj.individual_order_costs_enabled) {
+			if (wpfcogs_analytics_obj.individual_order_costs_enabled) {
 				let individualCosts = [
 					{
 						display: storeCurrency.formatAmount(order.items_cost),
@@ -130,7 +130,7 @@ let orders = {
 					!reportTableData.items ||
 					!reportTableData.items.data ||
 					!reportTableData.items.data.length ||
-					!alg_wc_cog_analytics_obj.cost_and_profit_columns_enabled_on_orders
+					!wpfcogs_analytics_obj.cost_and_profit_columns_enabled_on_orders
 				) {
 					return reportTableData;
 				}
@@ -138,7 +138,7 @@ let orders = {
 					...reportTableData.summary,
 					{
 						label: 'Profit',
-						value: Formatting.formatProfit(alg_wc_cog_analytics_obj.profit_template,reportTableData.totals.costs_total,reportTableData.totals.profit_total,reportTableData.totals.net_revenue),
+						value: Formatting.formatProfit(wpfcogs_analytics_obj.profit_template,reportTableData.totals.costs_total,reportTableData.totals.profit_total,reportTableData.totals.net_revenue),
 					},
 				];
 				reportTableData.summary = newSummary;
@@ -155,7 +155,7 @@ let orders = {
 			'woocommerce_admin_orders_report_charts',
 			'cost-of-goods-for-woocommerce',
 			(charts) => {
-				if (alg_wc_cog_analytics_obj.cost_and_profit_totals_enabled_on_orders) {
+				if (wpfcogs_analytics_obj.cost_and_profit_totals_enabled_on_orders) {
 					charts = [...charts,
 						{
 							key: 'costs_total',

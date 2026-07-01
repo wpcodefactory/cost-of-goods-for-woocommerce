@@ -85,7 +85,7 @@ msgid "Additional Custom Emails & Recipients for WooCommerce"
 msgstr ""
 
 #: class-products.php:135
-msgid "Level Up Your Store’s Communication and Boost Customer Satisfaction with Custom Email Notifications for WooCommerce."
+msgid "Level Up Your Storeâ€™s Communication and Boost Customer Satisfaction with Custom Email Notifications for WooCommerce."
 msgstr ""
 
 #: class-products.php:146
@@ -129,7 +129,7 @@ msgid "Encourage Purchases by Displaying MSRP and Proving Your Prices Beat the M
 msgstr ""
 
 #: class-products.php:198
-msgid "File Renaming on Upload – WordPress Plugin"
+msgid "File Renaming on Upload â€“ WordPress Plugin"
 msgstr ""
 
 #: class-products.php:199

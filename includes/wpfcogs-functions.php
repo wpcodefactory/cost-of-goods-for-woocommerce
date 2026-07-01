@@ -1,0 +1,563 @@
+<?php
+/**
+ * Cost of Goods for WooCommerce - Functions.
+ *
+ * @version 4.1.5
+ * @since   3.2.1
+ * @author  WPFactory
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+if ( ! function_exists( 'wpfcogs_log' ) ) {
+	/**
+	 * wpfcogs_log.
+	 *
+	 * @version 2.1.0
+	 * @since   1.6.0
+	 */
+	function wpfcogs_log( $message ) {
+		if ( function_exists( 'wc_get_logger' ) && ( $log = wc_get_logger() ) ) {
+			$log->log( 'info', $message, array( 'source' => 'wpfcogs' ) );
+		}
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_pre_get_posts_order_by_column' ) ) {
+	/**
+	 * wpfcogs_pre_get_posts_order_by_column.
+	 *
+	 * @version 2.6.7
+	 * @since   1.7.0
+	 */
+	function wpfcogs_pre_get_posts_order_by_column( $query, $post_type, $do_exclude_empty_lines ) {
+		if (
+			$query->is_main_query() && ( $orderby = $query->get( 'orderby' ) ) &&
+			isset( $query->query['post_type'] ) && $post_type === $query->query['post_type'] &&
+			isset( $query->is_admin ) && 1 == $query->is_admin
+		) {
+			switch ( $orderby ) {
+				case '_alg_wc_cog_profit':
+					$orderby = '_alg_wc_cog_profit_percent';
+					break;
+			}
+			$key_fragment = '_alg_wc_cog_';
+			if ( $key_fragment === substr( $orderby, 0, strlen( $key_fragment ) ) ) {
+				if ( $do_exclude_empty_lines ) {
+					$query->set( 'meta_key', $orderby );
+				} else {
+					$query->set( 'meta_query', array(
+						'relation' => 'OR',
+						array(
+							'key'     => $orderby,
+							'compare' => 'NOT EXISTS'
+						),
+						array(
+							'key'     => $orderby,
+							'compare' => 'EXISTS'
+						),
+					) );
+				}
+				$query->set( 'orderby', 'meta_value_num ID' );
+			}
+		}
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_insert_in_array' ) ) {
+	/**
+	 * wpfcogs_insert_in_array.
+	 *
+	 * @version 2.1.0
+	 * @since   1.7.0
+	 */
+	function wpfcogs_insert_in_array( $original_array, $array_to_insert, $key_to_insert_after ) {
+		if ( empty( $array_to_insert ) ) {
+			return $original_array;
+		}
+		$result   = array();
+		$is_found = false;
+		foreach ( $original_array as $key => $title ) {
+			$result[ $key ] = $title;
+			if ( $key_to_insert_after === $key ) {
+				$result   = array_merge( $result, $array_to_insert );
+				$is_found = true;
+			}
+		}
+		return ( $is_found ? $result : array_merge( $result, $array_to_insert ) );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_table_html' ) ) {
+	/**
+	 * wpfcogs_get_table_html.
+	 *
+	 * @version 2.3.5
+	 * @since   1.0.0
+	 */
+	function wpfcogs_get_table_html( $data, $args = array() ) {
+		$args = array_merge( array(
+			'table_class'        => '',
+			'table_style'        => '',
+			'row_styles'         => '',
+			'table_heading_type' => 'horizontal',
+			'columns_classes'    => array(),
+			'columns_styles'     => array(),
+			'table_attributes'   => array(),
+		), $args );
+		// Custom attribute handling.
+		$table_attributes = array();
+		if ( ! empty( $args['table_attributes'] ) ) {
+			foreach ( $args['table_attributes'] as $attribute => $attribute_value ) {
+				$table_attributes[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+			}
+		}
+		$html = '';
+		$html .= '<table' . ( '' == $args['table_class']  ? '' : ' class="' . $args['table_class'] . '"' ) .
+	         ' '.implode( ' ', $table_attributes ).
+			( '' == $args['table_style']  ? '' : ' style="' . $args['table_style'] . '"' ) . '>';
+		$html .= '<tbody>';
+		$row_styles = ( '' == $args['row_styles'] ? '' : ' style="' . $args['row_styles']  . '"' );
+		foreach( $data as $row_number => $row ) {
+			$html .= '<tr' . $row_styles . '>';
+			foreach( $row as $column_number => $value ) {
+				$th_or_td     = ( ( 0 === $row_number && 'horizontal' === $args['table_heading_type'] ) || ( 0 === $column_number && 'vertical' === $args['table_heading_type'] ) ?
+					'th' : 'td' );
+				$column_class = ( isset( $args['columns_classes'][ $column_number ] ) ? ' class="' . $args['columns_classes'][ $column_number ] . '"' : '' );
+				$column_style = ( isset( $args['columns_styles'][ $column_number ] )  ? ' style="' . $args['columns_styles'][ $column_number ]  . '"' : '' );
+				$html .= '<' . $th_or_td . $column_class . $column_style . '>';
+				$html .= $value;
+				$html .= '</' . $th_or_td . '>';
+			}
+			$html .= '</tr>';
+		}
+		$html .= '</tbody>';
+		$html .= '</table>';
+		return $html;
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_format_cost' ) ) {
+	/**
+	 * wpfcogs_format_cost.
+	 *
+	 * @version 2.4.0
+	 * @since   2.4.0
+	 *
+	 * @param float $cost Raw price.
+	 * @param array $args
+	 *
+	 * @return string
+	 */
+	function wpfcogs_format_cost( $cost, $args = array() ) {
+		$args = wp_parse_args( $args, array(
+			'decimals' => get_option( 'alg_wc_cog_costs_decimals', wc_get_price_decimals() )
+		) );
+
+		return wc_price( $cost, $args );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_is_user_allowed' ) ) {
+	/**
+	 * wpfcogs_is_user_allowed.
+	 *
+	 * @version 4.1.5
+	 * @since   2.3.4
+	 */
+	function wpfcogs_is_user_allowed( $user = null ) {
+		$user = ( null != $user ) ? $user : ( is_user_logged_in() ? wp_get_current_user() : null );
+		$allowed_user_roles = apply_filters( 'wpfcogs_is_user_allowed_roles', array(), $user );
+		if (
+			! $user ||
+			in_array( 'administrator', $user->roles ) ||
+			empty( $allowed_user_roles )
+		) {
+			return apply_filters( 'wpfcogs_is_user_allowed', true, $user, $allowed_user_roles );
+		}
+		if ( count( array_intersect( $allowed_user_roles, $user->roles ) ) > 0 ) {
+			return apply_filters( 'wpfcogs_is_user_allowed', true, $user, $allowed_user_roles );
+		}
+		return apply_filters( 'wpfcogs_is_user_allowed', false, $user, $allowed_user_roles );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_array_to_string' ) ) {
+	/**
+	 * converts array to string.
+	 *
+	 * @version 2.4.2
+	 * @since   2.4.2
+	 *
+	 * @param $arr
+	 * @param array $args
+	 *
+	 * @return string
+	 */
+	function wpfcogs_array_to_string( $arr, $args = array() ) {
+		$args            = wp_parse_args( $args, array(
+			'glue'          => ', ',
+			'item_template' => '{value}' //  {key} and {value} allowed
+		) );
+		$transformed_arr = array_map( function ( $key, $value ) use ( $args ) {
+			$item = str_replace( array( '{key}', '{value}' ), array( $key, $value ), $args['item_template'] );
+			return $item;
+		}, array_keys( $arr ), $arr );
+		return implode( $args['glue'], $transformed_arr );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_blocked_options_message' ) ) {
+	/**
+	 * wpfcogs_get_blocked_options_message.
+	 *
+	 * @version 4.1.6
+	 * @since   2.5.1
+	 *
+	 * @return string
+	 */
+	function wpfcogs_get_blocked_options_message() {
+		/* translators: 1: URL to the Pro plugin page, 2: Pro plugin name. */
+		return sprintf( __( 'Disabled options can be unlocked using <a href="%1$s" target="_blank"><strong>%2$s</strong></a>', 'cost-of-goods-for-woocommerce' ), 'https://wpfactory.com/item/cost-of-goods-for-woocommerce/', esc_html__( 'Cost of Goods for WooCommerce Pro', 'cost-of-goods-for-woocommerce' ) );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_sanitize_number' ) ) {
+	/**
+	 * wpfcogs_sanitize_number.
+	 *
+	 * @version 3.3.3
+	 * @since   2.9.5
+	 *
+	 * @param $args
+	 *
+	 * @return float
+	 */
+	function wpfcogs_sanitize_number( $args = null ) {
+		$args                      = wp_parse_args( $args, array(
+			'value'                     => 0,
+			'dots_and_commas_operation' => 'comma-to-dot', // comma-to-dot | dot-to-comma | none
+			'typecasting'               => 'smart', // float | int | smart | none
+		) );
+		$args                      = apply_filters( 'wpfcogs_sanitize_number_args', $args );
+		$value                     = sanitize_text_field( wc_clean( $args['value'] ) );
+		$typecasting               = $args['typecasting'];
+		$dots_and_commas_operation = $args['dots_and_commas_operation'];
+		if ( 'comma-to-dot' === $dots_and_commas_operation ) {
+			$value = str_replace( ',', '.', $value );
+		} elseif ( 'dot-to-comma' === $dots_and_commas_operation ) {
+			$value = str_replace( '.', ',', (string) $value );
+		}
+
+		switch ( $typecasting ) {
+			case 'smart':
+				if ( strpos( $value, ',' ) === false ) {
+					$value = (float) $value;
+				}
+				break;
+			case 'float':
+				$value = (float) $value;
+				break;
+			case 'int':
+				$value = (int) $value;
+				break;
+
+		}
+
+		return $value;
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_normalize_price' ) ) {
+	/**
+	 * wpfcogs_normalize_price.
+	 *
+	 * @version 4.0.2
+	 * @since   4.0.2
+	 *
+	 * @param $price
+	 *
+	 * @return string
+	 */
+	function wpfcogs_normalize_price( $price ) {
+		$price = trim( $price );
+
+		if ( preg_match( '/^\d{1,3}(\.\d{3})*,\d+$/', $price ) ) {
+			$price = str_replace( '.', '', $price );
+			return str_replace( ',', '.', $price );
+		}
+
+		if ( preg_match( '/^\d{1,3}(,\d{3})*\.\d+$/', $price ) ) {
+			return str_replace( ',', '', $price );
+		}
+
+		return $price;
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_sanitize_cost' ) ) {
+	/**
+	 * wpfcogs_sanitize_cost.
+	 *
+	 * @version 3.3.3
+	 * @since   3.3.3
+	 *
+	 * @param $args
+	 *
+	 * @return float
+	 */
+	function wpfcogs_sanitize_cost( $args = null ) {
+		$args   = wp_parse_args( $args, array(
+			'value'                     => 0,
+			'dots_and_commas_operation' => wpfcogs_need_to_replace_cog_comma_by_dots() ? 'comma-to-dot' : 'none'
+		) );
+		return wpfcogs_sanitize_number( $args );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_need_to_replace_cog_comma_by_dots' ) ) {
+	/**
+	 * wpfcogs_replace_cog_comma_by_dots.
+	 *
+	 * @version 3.3.3
+	 * @since   3.3.3
+	 *
+	 * @return bool
+	 */
+	function wpfcogs_need_to_replace_cog_comma_by_dots() {
+		return 'yes' === get_option( 'alg_wc_cog_replace_cog_comma_by_dots', wpfcogs_need_to_replace_cog_comma_by_dots_default() );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_need_to_replace_cog_comma_by_dots_default' ) ) {
+	/**
+	 * wpfcogs_replace_cog_comma_by_dots_default.
+	 *
+	 * @version 3.3.3
+	 * @since   3.3.3
+	 *
+	 * @return string
+	 */
+	function wpfcogs_need_to_replace_cog_comma_by_dots_default() {
+		return get_option( 'alg_wc_cog_products_sanitize_cog_meta', 'yes' );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_regular_price' ) ) {
+	/**
+	 * wpfcogs_get_regular_price.
+	 *
+	 * @version 2.7.8
+	 * @since   2.7.8
+	 *
+	 * @return string
+	 */
+	function wpfcogs_get_regular_price( $product, $args = null ) {
+		$regular_price = 0;
+		if ( is_a( $product, 'WC_Product' ) ) {
+			$regular_price = $product->get_regular_price();
+		}
+		return $regular_price;
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_html_table_structure' ) ) {
+	/**
+	 * wpfcogs_get_html_table_structure.
+	 *
+	 * @version 2.8.2
+	 * @since   2.8.2
+	 *
+	 * @return string
+	 */
+	function wpfcogs_get_html_table_structure( $args = null ) {
+		// Args.
+		$args          = wp_parse_args( $args, array(
+			'table_classes'    => array(),
+			'table_attributes' => array(),
+			'cols'             => array(),
+			'rows'             => array()
+		) );
+		$cols          = $args['cols'];
+		$rows          = $args['rows'];
+		$table_classes = $args['table_classes'];
+		// Table classes.
+		$table_classes_html = ! empty( $table_classes ) ? ' class="' . implode( " ", $table_classes ) . '"' : '';
+		// Table attributes.
+		$table_attributes      = $args['table_attributes'];
+		$table_attributes_html = array();
+		if ( ! empty( $args['table_attributes'] ) ) {
+			foreach ( $args['table_attributes'] as $attribute => $attribute_value ) {
+				$table_attributes_html[] = esc_attr( $attribute ) . '="' . esc_attr( $attribute_value ) . '"';
+			}
+		}
+		$html_table = '<table' . $table_classes_html . ' ' . implode( ' ', $table_attributes_html ) . '>';
+		// Thead.
+		$html_table .= '<thead><tr>';
+		foreach ( $cols as $col_id => $col_label ) {
+			$html_table .= '<th>' . $col_label . '</th>';
+		}
+		$html_table .= '</tr></thead>';
+		// Tbody.
+		$html_table .= '<tbody>';
+		foreach ( $rows as $rows_content ) {
+			$html_table .= '<tr>';
+			foreach ( $rows_content['val_by_col'] as $col_value ) {
+				$html_table .= '<td>' . $col_value . '</td>';
+			}
+			$html_table .= '</tr>';
+		}
+		$html_table .= '</tbody>';
+		$html_table .= '</table>';
+		return $html_table;
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_cost_subtracting_tax_rate' ) ) {
+	/**
+	 * get_cost_subtracting_tax_rate.
+	 *
+	 * @version 2.8.7
+	 * @since   2.8.7
+	 *
+	 * @param null $args
+	 *
+	 * @return float|bool
+	 */
+	function wpfcogs_get_cost_subtracting_tax_rate( $args = null ) {
+		$args       = wp_parse_args( $args, array(
+			'product_id' => '',
+			'cost'       => '',
+		) );
+		$cost       = (float) $args['cost'];
+		$product_id = intval( $args['product_id'] );
+		$product    = wc_get_product( $product_id );
+		$tax        = new WC_Tax();
+		if ( ! is_a( $product, 'WC_Product' ) ) {
+			return false;
+		}
+		if (
+			'none' === $product->get_tax_status() ||
+			empty( $rates = $tax->get_rates_for_tax_class( $product->get_tax_class() ) ) ||
+			empty( $tax_rate = array_shift( $rates ) ) ||
+			! property_exists( $tax_rate, 'tax_rate' )
+		) {
+			return $cost;
+		}
+		return $cost / ( 1 + ( $tax_rate->tax_rate / 100 ) );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_generate_wpdb_prepare_placeholders_from_array' ) ) {
+	/**
+	 * wpfcogs_generate_wpdb_prepare_placeholders_from_array.
+	 *
+	 * @link https://stackoverflow.com/a/72147500/1193038
+	 *
+	 * @version 3.2.1
+	 * @since   3.2.1
+	 *
+	 * @param $array
+	 *
+	 * @return string
+	 */
+	function wpfcogs_generate_wpdb_prepare_placeholders_from_array( $array ) {
+		$placeholders = array_map( function ( $item ) {
+			return is_string( $item ) ? '%s' : ( is_float( $item ) ? '%f' : ( is_int( $item ) ? '%d' : '' ) );
+		}, $array );
+
+		return '(' . join( ',', $placeholders ) . ')';
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_admin_orders_page_url' ) ) {
+	/**
+	 * wpfcogs_get_admin_orders_page_url
+	 *
+	 * @version 3.3.7
+	 * @since   3.3.7
+	 *
+	 * @return string
+	 */
+	function wpfcogs_get_admin_orders_page_url() {
+		return class_exists( '\Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController' ) && wc_get_container()->get( \Automattic\WooCommerce\Internal\DataStores\Orders\CustomOrdersTableController::class )->custom_orders_table_usage_is_enabled()
+			? admin_url( 'admin.php?page=wc-orders' )
+			: admin_url( 'edit.php?post_type=shop_order' );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_option' ) ) {
+	/**
+	 * wpfcogs_get_option.
+	 *
+	 * @version 3.3.7
+	 * @since   3.3.7
+	 *
+	 * @return false|mixed|null
+	 */
+	function wpfcogs_get_option( $option, $default_value = false, $get_value_from_cache = true ) {
+		return wpfcogs()->core->options->get_option( $option, $default_value, $get_value_from_cache );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_gateways_option_default' ) ) {
+	/**
+	 * wpfcogs_get_option.
+	 *
+	 * @version 3.6.7
+	 * @since   3.6.7
+	 *
+	 * @return string
+	 */
+	function wpfcogs_get_gateways_option_default() {
+		return wpfcogs_get_option( 'alg_wc_cog_gateway_costs_enabled', 'no' );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_get_ignore_item_refund_amount_default' ) ) {
+	/**
+	 * wpfcogs_get_option.
+	 *
+	 * @version 3.4.8
+	 * @since   3.4.8
+	 *
+	 * @return string
+	 */
+	function wpfcogs_get_ignore_item_refund_amount_default() {
+		$order_refund_calculation_method = wpfcogs_get_option( 'alg_wc_cog_order_refund_calculation_method', 'ignore_refunds' );
+		return 'profit_and_price_based_on_item_refunded_amount' === $order_refund_calculation_method ? 'yes' : 'no';
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_enqueue_script' ) ) {
+	/**
+	 * wpfcogs_enqueue_script.
+	 *
+	 * @version 3.7.8
+	 * @since   3.7.8
+	 */
+	function wpfcogs_enqueue_script( $handle, $src = '', $deps = array(), $ver = false, $args = array() ) {
+		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
+			$src = str_replace( '.js', '.min.js', $src );
+		}
+
+		wp_enqueue_script( $handle, $src, $deps, $ver, $args );
+	}
+}
+
+if ( ! function_exists( 'wpfcogs_enqueue_style' ) ) {
+	/**
+	 * wpfcogs_enqueue_style.
+	 *
+	 * @version 3.7.8
+	 * @since   3.7.8
+	 */
+	function wpfcogs_enqueue_style( $handle, $src = '', $deps = array(), $ver = false, $media = 'all' ) {
+		if ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) {
+			$src = str_replace( '.css', '.min.css', $src );
+		}
+
+		wp_enqueue_style( $handle, $src, $deps, $ver, $media );
+	}
+}
+
