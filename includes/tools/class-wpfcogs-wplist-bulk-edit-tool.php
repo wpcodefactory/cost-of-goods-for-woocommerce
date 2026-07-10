@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - WP_List Bulk Edit Tool Class.
  *
- * @version 4.1.6
+ * @version 4.1.7
  * @since   2.3.1
  * @author  WPFactory
  */
@@ -263,7 +263,7 @@ if ( ! class_exists( 'WPFCOGS_WP_List_Bulk_Edit_Tool' ) ) :
 		 * @todo    [maybe] better description here and in settings
 		 * @todo    [maybe] bulk edit order items meta
 		 *
-		 * @version 4.1.6
+		 * @version 4.1.7
 		 * @since   2.3.1
 		 *
 		 * @param object $item
@@ -276,22 +276,22 @@ if ( ! class_exists( 'WPFCOGS_WP_List_Bulk_Edit_Tool' ) ) :
 			switch ( $column_name ) {
 				case 'id':
 					$product_id = empty( $parent_id = $item->get_parent_id() ) ? $item->get_id() : $parent_id;
-					$result     = '<a href="' . get_edit_post_link( $product_id ) . '">' . $item->get_id() . '</a>';
+					$result     = '<a href="' . esc_url( get_edit_post_link( $product_id ) ) . '">' . esc_html( $item->get_id() ) . '</a>';
 					break;
 				case '_sku':
-					$result = $item->get_sku();
+					$result = esc_html( $item->get_sku() );
 					break;
 				case 'title':
-					$result = '<a href="' . $item->get_permalink() . '">' . $item->get_formatted_name() . '</a>';
+					$result = '<a href="' . esc_url( $item->get_permalink() ) . '">' . esc_html( $item->get_formatted_name() ) . '</a>';
 					break;
 				case '_price':
-					$result = $item->get_price();
+					$result = esc_html( $item->get_price() );
 					break;
 				case '_regular_price':
 					$product_id = $item->get_id();
 					$regular_price = get_post_meta( $product_id, '_regular_price', true );
 					$result='<input' .
-					        ' name="wpfcogs_bulk_edit_tool_regular_price[' . $product_id . ']"' .
+					        ' name="wpfcogs_bulk_edit_tool_regular_price[' . esc_attr( $product_id ) . ']"' .
 					        ' type="text"' .
 					        ' class="wpfcogs_bet_input short wc_input_price"' .
 					        ' initial-value="' . esc_attr( $regular_price ) . '"' .
@@ -301,7 +301,7 @@ if ( ! class_exists( 'WPFCOGS_WP_List_Bulk_Edit_Tool' ) ) :
 					$product_id = $item->get_id();
 					$sale_price    = get_post_meta( $product_id, '_sale_price', true );
 					$result='<input' .
-					        ' name="wpfcogs_bulk_edit_tool_sale_price[' . $product_id . ']"' .
+					        ' name="wpfcogs_bulk_edit_tool_sale_price[' . esc_attr( $product_id ) . ']"' .
 					        ' type="text"' .
 					        ' class="wpfcogs_bet_input short wc_input_price"' .
 					        ' initial-value="' . esc_attr( $sale_price ) . '"' .
@@ -317,33 +317,49 @@ if ( ! class_exists( 'WPFCOGS_WP_List_Bulk_Edit_Tool' ) ) :
 						$profit_html = '';
 					}
 					$result = '<input' .
-					          ' name="wpfcogs_bulk_edit_tool_costs[' . $item->get_id() . ']"' .
+					          ' name="wpfcogs_bulk_edit_tool_costs[' . esc_attr( $item->get_id() ) . ']"' .
 					          ' type="text"' .
 					          ' class="wpfcogs_bet_input short wc_input_price"' .
 					          ' initial-value="' . esc_attr( $value ) . '"' .
-					          ' value="' . esc_attr( $value ) . '"' . '>'.'<span class="wpfcogs-cost-description">'.$profit_html.'</span>';
+					          ' value="' . esc_attr( $value ) . '"' . '>'.'<span class="wpfcogs-cost-description">' . wp_kses_post( $profit_html ) . '</span>';
 					break;
 				case '_tags':
 					add_filter( 'term_link', function ( $termlink, $term, $taxonomy ) {
 						if ( 'product_tag' === $taxonomy ) {
-							$termlink = admin_url( 'tools.php?page=bulk-edit-costs&section=costs_manually&product_tag=' . $term->slug );
+							$termlink = admin_url( 'tools.php?page=bulk-edit-costs&section=costs_manually&product_tag=' . rawurlencode( $term->slug ) );
 						}
 						return $termlink;
 					}, 10, 3 );
 					if ( $this->need_to_edit_tags() ) {
-						echo $this->get_tags_edit_field( $item->get_id() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						echo wp_kses( $this->get_tags_edit_field( $item->get_id() ), array(
+							'select' => array(
+								'class'          => true,
+								'data-action'     => true,
+								'data-placeholder' => true,
+								'data-return_id'  => true,
+								'data-taxonomy'   => true,
+								'id'              => true,
+								'multiple'        => true,
+								'name'            => true,
+								'style'           => true,
+							),
+							'option' => array(
+								'value'   => true,
+								'selected' => true,
+							),
+						) );
 					}
 					echo '<div class="wpfcogs-product-tags">' . wp_kses_post( wc_get_product_tag_list( $item->get_id() ) ) . '</div>';
 					break;
 				case '_stock':
 					if ( 'yes' !== get_option( 'alg_wc_cog_bulk_edit_tool_manage_stock', 'no' ) ) {
-						$result = $item->get_stock_quantity();
+						$result = esc_html( $item->get_stock_quantity() );
 					} else {
 						$product_id   = $item->get_id();
 						$stock_value  = ( '' === ( $stock = get_post_meta( $product_id, '_stock', true ) ) ? '' : floatval( $stock ) );
 						$stock_status = ( '' == ( $_stock_status = get_post_meta( $product_id, '_stock_status', true ) ) ? 'N/A' : $_stock_status );
 						$result       = '<input' .
-						                ' name="wpfcogs_bulk_edit_tool_stock[' . $product_id . ']"' .
+						                ' name="wpfcogs_bulk_edit_tool_stock[' . esc_attr( $product_id ) . ']"' .
 						                ' type="text"' .
 						                ' class="wpfcogs_bet_input short"' .
 						                ' initial-value="' . esc_attr( $stock_value ) . '"' .
@@ -355,7 +371,7 @@ if ( ! class_exists( 'WPFCOGS_WP_List_Bulk_Edit_Tool' ) ) :
 					}
 					break;
 				default:
-					$result = $item->{$column_name};
+					$result = esc_html( $item->{$column_name} );
 			}
 			return $result;
 		}

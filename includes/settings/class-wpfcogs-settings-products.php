@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 4.1.5
+ * @version 4.1.7
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class WPFCOGS_Settings_Products extends WPFCOGS_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.5
+	 * @version 4.1.7
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `wpfcogs_products_add_stock`: better description
@@ -117,13 +117,7 @@ class WPFCOGS_Settings_Products extends WPFCOGS_Settings_Section {
 				'default'  => 'woocommerce_product_options_pricing',
 				'type'     => 'select',
 				'class'    => 'chosen_select',
-				'options'  => array(
-					'woocommerce_product_options_pricing'                => __( 'General > Pricing', 'cost-of-goods-for-woocommerce' ),
-					'woocommerce_product_options_general_product_data'   => __( 'General', 'cost-of-goods-for-woocommerce' ),
-					'woocommerce_product_options_inventory_product_data' => __( 'Inventory', 'cost-of-goods-for-woocommerce' ),
-					'woocommerce_product_options_sku'                    => __( 'Inventory > SKU', 'cost-of-goods-for-woocommerce' ),
-					'woocommerce_product_options_advanced'               => __( 'Advanced', 'cost-of-goods-for-woocommerce' ),
-				),
+				'options'  => wpfcogs()->core->cost_inputs->get_cost_field_position_options(),
 			),
 			array(
 				'type'     => 'sectionend',

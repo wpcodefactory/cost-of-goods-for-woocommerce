@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Background Process.
  *
- * @version 2.6.8
+ * @version 4.1.7
  * @since   2.3.0
  * @author  WPFactory
  */
@@ -217,7 +217,7 @@ if ( ! class_exists( 'WPFCOGS_Bkg_Process' ) ) :
 		/**
 		 * dispatch.
 		 *
-		 * @version 2.3.0
+		 * @version 4.1.7
 		 * @since   2.3.0
 		 */
 		public function dispatch() {
@@ -229,6 +229,8 @@ if ( ! class_exists( 'WPFCOGS_Bkg_Process' ) ) :
 					array( 'source' => $this->get_logger_context() )
 				);
 			}
+
+			return $dispatched;
 		}
 
 	}

@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Costs input.
  *
- * @version 4.1.5
+ * @version 4.1.7
  * @since   2.6.4
  * @author  WPFactory
  */
@@ -41,15 +41,81 @@ if ( ! class_exists( 'WPFCOGS_Cost_Inputs' ) ) :
 		}
 
 		/**
+		 * get_cost_field_positions.
+		 *
+		 * @version 4.1.7
+		 * @since   4.1.7
+		 *
+		 * @param bool $with_labels
+		 *
+		 * @return array
+		 */
+		function get_cost_field_positions( $with_labels = false ) {
+			$positions = array(
+				'woocommerce_product_options_pricing',
+				'woocommerce_product_options_general_product_data',
+				'woocommerce_product_options_inventory_product_data',
+				'woocommerce_product_options_sku',
+				'woocommerce_product_options_advanced',
+			);
+
+			if ( ! $with_labels ) {
+				return $positions;
+			}
+
+			$position_labels = array();
+			foreach ( $positions as $position ) {
+				switch ( $position ) {
+					case 'woocommerce_product_options_pricing':
+						$position_labels[ $position ] = __( 'General > Pricing', 'cost-of-goods-for-woocommerce' );
+						break;
+					case 'woocommerce_product_options_general_product_data':
+						$position_labels[ $position ] = __( 'General', 'cost-of-goods-for-woocommerce' );
+						break;
+					case 'woocommerce_product_options_inventory_product_data':
+						$position_labels[ $position ] = __( 'Inventory', 'cost-of-goods-for-woocommerce' );
+						break;
+					case 'woocommerce_product_options_sku':
+						$position_labels[ $position ] = __( 'Inventory > SKU', 'cost-of-goods-for-woocommerce' );
+						break;
+					case 'woocommerce_product_options_advanced':
+						$position_labels[ $position ] = __( 'Advanced', 'cost-of-goods-for-woocommerce' );
+						break;
+				}
+			}
+
+			return $position_labels;
+		}
+
+		/**
+		 * get_cost_field_position_options.
+		 *
+		 * @version 4.1.7
+		 * @since   4.1.7
+		 *
+		 * @return array
+		 */
+		function get_cost_field_position_options() {
+			return $this->get_cost_field_positions( true );
+		}
+
+		/**
 		 * add_hooks.
 		 *
-		 * @version 3.9.7
+		 * @version 4.1.7
 		 * @since   2.6.4
 		 */
 		function add_hooks(){
 
 			// Cost input on admin product page (simple product).
-			add_action( get_option( 'alg_wc_cog_product_cost_field_position', 'woocommerce_product_options_pricing' ), array( $this, 'add_cost_input' ) );
+			$position = get_option( 'alg_wc_cog_product_cost_field_position', 'woocommerce_product_options_pricing' );
+			$allowed_positions = $this->get_cost_field_positions();
+
+			if ( ! in_array( $position, $allowed_positions, true ) ) {
+				$position = 'woocommerce_product_options_pricing';
+			}
+
+			add_action( $position, array( $this, 'add_cost_input' ) );
 			add_action( 'save_post_product', array( $this, 'save_cost_input' ), PHP_INT_MAX - 2, 2 );
 
 			// Cost input on admin product page (variable product).
