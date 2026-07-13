@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 4.1.7\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 4.1.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-10T01:41:34+02:00\n"
+"POT-Creation-Date: 2026-07-13T21:31:26+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -409,7 +409,7 @@ msgid "Variation history"
 msgstr ""
 
 #: includes/class-wpfcogs-products-add-stock.php:631
-#: includes/class-wpfcogs-products-cost-archive.php:370
+#: includes/class-wpfcogs-products-cost-archive.php:408
 msgid "Select variation"
 msgstr ""
 
@@ -421,44 +421,44 @@ msgstr ""
 msgid "Update variation(s)"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:53
+#: includes/class-wpfcogs-products-cost-archive.php:89
 #: includes/settings/class-wpfcogs-settings-products.php:192
 #: includes/settings/class-wpfcogs-settings-products.php:198
 msgid "Cost archive"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:113
+#: includes/class-wpfcogs-products-cost-archive.php:149
 #: includes/settings/class-wpfcogs-settings-products.php:260
 msgid "Last update date: %last_update_date%"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:249
+#: includes/class-wpfcogs-products-cost-archive.php:287
 msgid "There isn't a cost archive for this product yet."
 msgstr ""
 
 #. translators: %s: settings link.
-#: includes/class-wpfcogs-products-cost-archive.php:251
+#: includes/class-wpfcogs-products-cost-archive.php:289
 msgid "Please, check if the option %s is enabled and then update the cost."
 msgstr ""
 
 #. translators: %s: settings link.
-#: includes/class-wpfcogs-products-cost-archive.php:251
+#: includes/class-wpfcogs-products-cost-archive.php:289
 msgid "Products > Cost archive > Save cost archive"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:254
+#: includes/class-wpfcogs-products-cost-archive.php:292
 msgid "Update date"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:255
+#: includes/class-wpfcogs-products-cost-archive.php:293
 msgid "Previous cost"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:256
+#: includes/class-wpfcogs-products-cost-archive.php:294
 msgid "New cost"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:363
+#: includes/class-wpfcogs-products-cost-archive.php:401
 msgid "Variation archive"
 msgstr ""
 

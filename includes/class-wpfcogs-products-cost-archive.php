@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Cost archive.
  *
- * @version 4.1.6
+ * @version 4.1.8
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -25,7 +25,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 4.1.5
+		 * @version 4.1.8
 		 * @since   2.8.2
 		 */
 		function __construct() {
@@ -33,8 +33,44 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 			add_action( 'update_post_meta', array( $this, 'on_update_post_meta' ), 10, 4 );
 			add_action( 'add_post_meta', array( $this, 'save_cost_archive' ), 10, 3 );
 			add_action( 'wp_ajax_wpfcogs_get_cost_archive_table', array( $this, 'wpfcogs_get_cost_archive_table_ajax' ) );
+			add_action( 'admin_head', array( $this, 'create_cost_archive_style' ) );
 			// Meta box.
 			add_action( 'add_meta_boxes', array( $this, 'add_cost_archive_meta_box' ) );
+		}
+
+		/**
+		 * create_cost_archive_style.
+		 *
+		 * @version 4.1.8
+		 * @since   4.1.8
+		 *
+		 * @return void
+		 */
+		function create_cost_archive_style() {
+			if (
+				is_null( $screen = get_current_screen() ) ||
+				'product' !== $screen->post_type ||
+				'post' !== $screen->base
+			) {
+				return;
+			}
+			?>
+			<style>
+				.wpfcogs-cost-archive-table-container table {
+					margin-top: 9px;
+				}
+
+				.wpfcogs-cost-archive-variation-title .spinner {
+					vertical-align: middle;
+					float: none;
+					margin: 0 0 0 5px;
+				}
+
+				select[name="wpfcogs_cost_archive_variation_id"] {
+					width: 100%;
+				}
+			</style>
+			<?php
 		}
 
 		/**
@@ -189,7 +225,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 		/**
 		 * product_add_stock_meta_box.
 		 *
-		 * @version 4.1.6
+		 * @version 4.1.8
 		 * @since   2.8.2
 		 * @todo    [next] add option to delete all/selected history
 		 */
@@ -201,6 +237,8 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 			if ( $product->is_type( 'variable' ) ) {
 				$allowed_html = wp_kses_allowed_html( 'post' );
 				$allowed_html['script'] = array( 'type' => true );
+				$allowed_html['select'] = array( 'style' => true, 'class' => true, 'name' => true );
+				$allowed_html['option'] = array( 'value' => true, 'selected' => true );
 				echo wp_kses( $this->get_variations_archive_html( $product ), $allowed_html );
 			} else {
 				echo wp_kses_post( $this->get_product_cost_archive_table( $product ) );

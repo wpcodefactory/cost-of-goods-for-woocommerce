@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Add Stock.
  *
- * @version 4.1.6
+ * @version 4.1.8
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -27,7 +27,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 3.7.0
+		 * @version 4.1.8
 		 * @since   2.8.2
 		 */
 		function __construct() {
@@ -35,7 +35,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 			add_action( 'add_meta_boxes', array( $this, 'add_product_add_stock_meta_box' ), 10, 2 );
 			add_action( 'save_post_product', array( $this, 'save_product_add_stock' ), PHP_INT_MAX, 2 );
 			add_action( 'admin_head', array( $this, 'create_add_stock_style' ) );
-			add_action( 'wp_ajax_wpfcogs_get_add_stock_history_table', array( $this, 'wpfcogs_get_add_stock_history_table_ajax' ) );
+			add_action( 'wp_ajax_wpfcogs_get_add_stock_history_table', array( $this, 'get_add_stock_history_table_ajax' ) );
 
 			// Del add stock history date.
 			add_action( 'wp_ajax_wpfcogs_del_add_stock_history_date', array( $this, 'wpfcogs_del_add_stock_history_date_ajax' ) );
@@ -89,7 +89,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 		/**
 		 * save_product_add_stock.
 		 *
-		 * @version 4.1.6
+		 * @version 4.1.8
 		 * @since   1.7.0
 		 * @todo    [next] handle variable products (also unset `$_POST['variable_stock']`)
 		 * @todo    [maybe] remove `$this->is_add_stock`
@@ -387,7 +387,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 		/**
 		 * product_add_stock_meta_box.
 		 *
-		 * @version 4.1.6
+		 * @version 4.1.8
 		 * @since   1.7.0
 		 * @todo    [next] add option to delete all/selected history
 		 */
@@ -429,7 +429,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 
 			echo '<div style="margin-top:10px;clear:both"></div>';
 			$allowed_html = wp_kses_allowed_html( 'post' );
-			$allowed_html['input']    = array( 'type' => true, 'name' => true, 'id' => true, 'class' => true, 'min' => true, 'step' => true );
+			$allowed_html['input']    = array( 'type' => true, 'name' => true, 'id' => true, 'class' => true, 'min' => true, 'step' => true, 'value' => true, 'checked' => true );
 			$allowed_html['select']   = array( 'style' => true, 'class' => true, 'name' => true );
 			$allowed_html['option']   = array( 'value' => true, 'selected' => true );
 			$allowed_html['script']   = array( 'type' => true );
@@ -591,7 +591,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 		/**
 		 * get_add_stock_history_table_ajax.
 		 *
-		 * @version 4.1.6
+		 * @version 4.1.8
 		 * @since   3.1.7
 		 *
 		 * @return void
@@ -698,7 +698,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 		/**
 		 * get_variations_to_update_html.
 		 *
-		 * @version 4.1.5
+		 * @version 4.1.8
 		 * @since   3.1.7
 		 *
 		 * @param $parent_product
@@ -718,7 +718,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 
 			// Check if variations exist.
 			if ( $variations ) {
-				$variations_html .= '<form><ul>';
+				$variations_html .= '<ul>';
 
 				foreach ( $variations as $variation_data ) {
 					$variation_id  = $variation_data['variation_id'];
@@ -738,7 +738,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Add_Stock' ) ) {
 					$variations_html .= '</li>';
 				}
 
-				$variations_html .= '</ul></form>';
+				$variations_html .= '</ul>';
 			}
 
 			$array_from_to = array(
