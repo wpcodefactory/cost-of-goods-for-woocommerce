@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Meta Boxes Class.
  *
- * @version 4.1.6
+ * @version 4.1.9
  * @since   2.2.0
  * @author  WPFactory
  */
@@ -253,7 +253,7 @@ class WPFCOGS_Orders_Meta_Boxes {
 	/**
 	 * render_order_extra_cost_meta_box.
 	 *
-	 * @version 4.1.5
+	 * @version 4.1.9
 	 * @since   1.7.0
 	 * @todo    [maybe] better `$title`
 	 * @todo    [maybe] better styling
@@ -273,7 +273,7 @@ class WPFCOGS_Orders_Meta_Boxes {
 		);
 		foreach ( wpfcogs()->core->orders->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 			if ( $is_enabled ) {
-				$id    = 'wpfcogs_order_' . $fee_type . '_fee';
+				$id    = 'alg_wc_cog_order_' . $fee_type . '_fee';
 				$title = ucfirst( $fee_type ) . ' ' . __( 'fee', 'cost-of-goods-for-woocommerce' ) . ' (' . wpfcogs()->core->get_default_shop_currency_symbol() . ')';
 				$value = $order->get_meta( '_' . $id, true );
 				$rows  .= '<tr><td><label style="font-size:smaller;" for="' . esc_attr( $id ) . '">' . esc_html( $title ) . '</label></td>' .
@@ -286,7 +286,7 @@ class WPFCOGS_Orders_Meta_Boxes {
 	/**
 	 * save_order_extra_cost.
 	 *
-	 * @version 4.1.6
+	 * @version 4.1.9
 	 * @since   1.7.0
 	 */
 	function save_order_extra_cost( $order_id, $post ) {
@@ -305,18 +305,27 @@ class WPFCOGS_Orders_Meta_Boxes {
 				return;
 			}
 
+			$order = wc_get_order( $order_id );
+			if ( ! is_a( $order, 'WC_Order' ) ) {
+				return;
+			}
 			remove_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_order_extra_cost' ), 8 );
 			remove_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 8 );
+			$do_save = false;
 			foreach ( wpfcogs()->core->orders->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
 				if ( $is_enabled ) {
-					$id = 'wpfcogs_order_' . $fee_type . '_fee';
-					if ( isset( $_POST[ $id ] ) ) {
-						$value = (float) sanitize_text_field( wp_unslash( $_POST[ $id ] ) );
-						$order = wc_get_order( $order_id );
+					$id = 'alg_wc_cog_order_' . $fee_type . '_fee';
+					$legacy_id = 'wpfcogs_order_' . $fee_type . '_fee';
+					if ( isset( $_POST[ $id ] ) || isset( $_POST[ $legacy_id ] ) ) {
+						$posted_value = isset( $_POST[ $id ] ) ? $_POST[ $id ] : $_POST[ $legacy_id ];
+						$value = (float) sanitize_text_field( wp_unslash( $posted_value ) );
 						$order->update_meta_data( '_' . $id, $value );
-						$order->save();
+						$do_save = true;
 					}
 				}
+			}
+			if ( $do_save ) {
+				$order->save();
 			}
 			add_action( 'save_post_shop_order', array( $this, 'save_order_extra_cost' ), 8, 2 );
 			add_action( 'woocommerce_process_shop_order_meta', array( $this, 'save_order_extra_cost' ), 8, 2 );

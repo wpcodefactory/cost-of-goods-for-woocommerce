@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Class.
  *
- * @version 4.1.5
+ * @version 4.1.9
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -86,7 +86,7 @@ class WPFCOGS_Products {
 	/**
 	 * add_hooks.
 	 *
-	 * @version 3.1.0
+	 * @version 4.1.9
 	 * @since   2.1.0
 	 */
 	function add_hooks() {
@@ -104,12 +104,12 @@ class WPFCOGS_Products {
 		// Products > Export (WooCommerce)
 		add_filter( 'woocommerce_product_export_column_names', array( $this, 'add_export_column' ) );
 		add_filter( 'woocommerce_product_export_product_default_columns', array( $this, 'add_export_column' ) );
-		add_filter( 'woocommerce_product_export_product_column_wpfcogs_cost', array( $this, 'add_export_data' ), 10, 2 );
+		add_filter( 'woocommerce_product_export_product_column_alg_wc_cog_cost', array( $this, 'add_export_data' ), 10, 2 );
 		// Products > Import (WooCommerce)
 		add_filter( 'woocommerce_csv_product_import_mapping_options', array( $this, 'add_import_mapping_option' ) );
 		add_filter( 'woocommerce_csv_product_import_mapping_default_columns', array( $this, 'set_import_mapping_option_default' ) );
 		add_filter( 'woocommerce_product_importer_parsed_data', array( $this, 'parse_import_data' ), 10, 2 );
-		// Sanitize cog meta (_wpfcogs_cost)
+		// Sanitize COG meta (_alg_wc_cog_cost)
 		add_filter( 'sanitize_post_meta_' . '_alg_wc_cog_cost', array( $this, 'sanitize_cog_meta' ) );
 		// Save profit.
 		add_action( 'updated_post_meta', array( $this, 'save_profit_on_postmeta' ), 10, 4 );
@@ -261,22 +261,28 @@ class WPFCOGS_Products {
 	/**
 	 * parse_import_data.
 	 *
-	 * @version 4.0.2
+	 * @version 4.1.9
 	 * @since   1.5.1
 	 */
 	function parse_import_data( $data, $importer ) {
-		if ( isset( $data['wpfcogs_cost'] ) ) {
+		if ( isset( $data['alg_wc_cog_cost'] ) || isset( $data['wpfcogs_cost'] ) ) {
+			$import_cost = isset( $data['alg_wc_cog_cost'] ) ? $data['alg_wc_cog_cost'] : $data['wpfcogs_cost'];
 			if ( ! isset( $data['meta_data'] ) ) {
 				$data['meta_data'] = array();
 			}
 			$data['meta_data'][] = array(
-				'key'   => '_' . 'wpfcogs_cost',
-				'value' => $data['wpfcogs_cost'],
+				'key'   => '_alg_wc_cog_cost',
+				'value' => $import_cost,
 			);
+			unset( $data['alg_wc_cog_cost'] );
 			unset( $data['wpfcogs_cost'] );
 		}
 		if ( isset( $data['meta_data'] ) && is_array( $data['meta_data'] ) && ! empty( $data['meta_data'] ) ) {
 			foreach ( $data['meta_data'] as $key => $value ) {
+				if ( '_wpfcogs_cost' === $value['key'] ) {
+					$data['meta_data'][ $key ]['key'] = '_alg_wc_cog_cost';
+					$value['key'] = '_alg_wc_cog_cost';
+				}
 				if ( '_alg_wc_cog_cost' === $value['key'] ) {
 					$final_value = $value['value'];
 					if ( 'yes' === wpfcogs_get_option( 'alg_wc_cog_import_csv_get_only_cost_number', 'no' ) ) {
@@ -310,33 +316,33 @@ class WPFCOGS_Products {
 	/**
 	 * set_import_mapping_option_default.
 	 *
-	 * @version 1.7.2
+	 * @version 4.1.9
 	 * @since   1.5.1
 	 */
 	function set_import_mapping_option_default( $columns ) {
-		$columns[ __( 'Cost', 'cost-of-goods-for-woocommerce' ) ] = 'wpfcogs_cost';
+		$columns[ __( 'Cost', 'cost-of-goods-for-woocommerce' ) ] = 'alg_wc_cog_cost';
 		return $columns;
 	}
 
 	/**
 	 * add_import_mapping_option.
 	 *
-	 * @version 1.5.1
+	 * @version 4.1.9
 	 * @since   1.5.1
 	 */
 	function add_import_mapping_option( $options ) {
-		$options['wpfcogs_cost'] = __( 'Cost', 'cost-of-goods-for-woocommerce' );
+		$options['alg_wc_cog_cost'] = __( 'Cost', 'cost-of-goods-for-woocommerce' );
 		return $options;
 	}
 
 	/**
 	 * add_export_column.
 	 *
-	 * @version 1.5.1
+	 * @version 4.1.9
 	 * @since   1.5.1
 	 */
 	function add_export_column( $columns ) {
-		$columns['wpfcogs_cost'] = __( 'Cost', 'cost-of-goods-for-woocommerce' );
+		$columns['alg_wc_cog_cost'] = __( 'Cost', 'cost-of-goods-for-woocommerce' );
 		return $columns;
 	}
 

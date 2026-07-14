@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Orders Class.
  *
- * @version 4.1.6
+ * @version 4.1.9
  * @since   2.1.0
  * @author  WPFactory
  */
@@ -1146,7 +1146,7 @@ class WPFCOGS_Orders {
 	/**
 	 * update_order_item_costs_on_order_meta_update.
 	 *
-	 * @version 3.0.2
+	 * @version 4.1.9
 	 * @since   1.5.4
 	 *
 	 * @param $meta_id
@@ -1158,7 +1158,7 @@ class WPFCOGS_Orders {
 		if (
 			'yes' === get_option( 'alg_wc_cog_orders_force_on_order_meta_update', 'no' ) &&
 			'shop_order' === OrderUtil::get_order_type( $post_id ) &&
-			'_wpfcogs' !== substr( $meta_key, 0, 11 ) &&
+			'_alg_wc_cog_' !== substr( $meta_key, 0, 12 ) &&
 			! in_array( $meta_key, array( '_edit_lock' ) )
 		) {
 			remove_action( 'added_post_meta', array( $this, 'update_order_item_costs_on_order_meta_update' ), 10 );
@@ -1570,7 +1570,7 @@ class WPFCOGS_Orders {
 	/**
 	 * update_order_items_costs.
 	 *
-	 * @version 4.1.5
+	 * @version 4.1.9
 	 * @since   1.1.0
 	 * @todo    [maybe] filters: add more?
 	 * @todo    [maybe] `$total_price`: customizable calculation method (e.g. `$order->get_subtotal()`) (this will affect `_wpfcogs_order_profit_margin`)
@@ -1894,12 +1894,8 @@ class WPFCOGS_Orders {
 				$total_cost   += $extra_cost;
 				$fees         += $extra_cost;
 			}
-			// Fees: Order extra cost: per order
-			foreach ( $this->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
-				if ( $is_enabled && 0 !== ( (float) $fee = $order->get_meta( '_alg_wc_cog_order_' . $fee_type . '_fee', true ) ) ) {
-					$per_order_fees += (float) $fee;
-				}
-			}
+			// Fees: Order extra cost: per order.
+			$per_order_fees = $this->get_order_extra_cost_per_order_fees( $order );
 			if ( 0 !== $per_order_fees ) {
 				$order_profit -= $per_order_fees;
 				$total_cost   += $per_order_fees;
@@ -1956,6 +1952,45 @@ class WPFCOGS_Orders {
 			'order'    => $order,
 		) );
 
+	}
+
+	/**
+	 * get_order_extra_cost_per_order_fees.
+	 *
+	 * Sums enabled per-order extra fees and migrates legacy wrong-prefixed keys.
+	 *
+	 * @version 4.1.9
+	 * @since   4.1.9
+	 *
+	 * @param WC_Order $order
+	 *
+	 * @return float
+	 */
+	function get_order_extra_cost_per_order_fees( $order ) {
+		$per_order_fees = 0;
+		foreach ( $this->is_order_extra_cost_per_order as $fee_type => $is_enabled ) {
+			$meta_key = '_alg_wc_cog_order_' . $fee_type . '_fee';
+			$fee      = $order->get_meta( $meta_key, true );
+			if ( '' === $fee ) {
+				$wrong_meta_key      = 'wpfcogs_order_' . $fee_type . '_fee';
+				$wrong_meta_key_2    = '_wpfcogs_order_' . $fee_type . '_fee';
+				$fee_from_wrong_meta = $order->get_meta( $wrong_meta_key, true );
+				if ( '' === $fee_from_wrong_meta ) {
+					$fee_from_wrong_meta = $order->get_meta( $wrong_meta_key_2, true );
+				}
+				if ( '' !== $fee_from_wrong_meta ) {
+					$fee = $fee_from_wrong_meta;
+					$order->update_meta_data( $meta_key, $fee_from_wrong_meta );
+					$order->delete_meta_data( $wrong_meta_key );
+					$order->delete_meta_data( $wrong_meta_key_2 );
+				}
+			}
+			if ( $is_enabled && 0 !== (float) $fee ) {
+				$per_order_fees += (float) $fee;
+			}
+		}
+
+		return $per_order_fees;
 	}
 
 	/**
