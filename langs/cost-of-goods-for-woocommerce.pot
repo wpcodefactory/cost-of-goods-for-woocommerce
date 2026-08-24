@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 4.1.9\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 4.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-14T22:40:57+02:00\n"
+"POT-Creation-Date: 2026-08-24T23:09:35+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -78,7 +78,7 @@ msgstr ""
 #: includes/class-wpfcogs-products.php:402
 #: includes/pro/analytics/class-wpfcogs-pro-analytics-products.php:82
 #: includes/pro/analytics/class-wpfcogs-pro-analytics-revenue.php:49
-#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:544
+#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:548
 #: includes/pro/analytics/class-wpfcogs-pro-analytics-variations.php:82
 #: includes/pro/class-wpfcogs-pro-compatibility-wpsyncsheets.php:49
 #: includes/pro/class-wpfcogs-pro-compatibility.php:147
@@ -110,7 +110,7 @@ msgstr ""
 #: includes/class-wpfcogs-products.php:405
 #: includes/pro/analytics/class-wpfcogs-pro-analytics-products.php:118
 #: includes/pro/analytics/class-wpfcogs-pro-analytics-revenue.php:50
-#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:545
+#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:549
 #: includes/pro/analytics/class-wpfcogs-pro-analytics-variations.php:118
 #: includes/pro/class-wpfcogs-pro-compatibility-wpsyncsheets.php:53
 #: includes/pro/class-wpfcogs-pro-compatibility.php:158
@@ -470,7 +470,7 @@ msgstr ""
 msgid "Go Pro"
 msgstr ""
 
-#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:546
+#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:550
 #: includes/pro/reports/class-wc-report-wpfcogs-stock.php:128
 #: includes/pro/reports/class-wc-report-wpfcogs-stock.php:170
 #: includes/pro/reports/class-wc-report-wpfcogs-stock.php:195
@@ -482,7 +482,7 @@ msgstr ""
 msgid "Total Cost"
 msgstr ""
 
-#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:547
+#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:551
 #: includes/pro/reports/class-wc-report-wpfcogs-stock.php:130
 #: includes/pro/reports/class-wc-report-wpfcogs-stock.php:178
 #: includes/pro/reports/class-wc-report-wpfcogs-stock.php:195
@@ -496,7 +496,7 @@ msgstr ""
 msgid "Total Profit"
 msgstr ""
 
-#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:551
+#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:555
 #: includes/pro/reports/class-wc-report-wpfcogs-stock.php:126
 #: includes/pro/reports/class-wpfcogs-wc-report-stock.php:126
 #: includes/tools/class-wpfcogs-wplist-bulk-edit-tool.php:402
@@ -505,11 +505,11 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
-#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:552
+#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:556
 msgid "Total price"
 msgstr ""
 
-#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:553
+#: includes/pro/analytics/class-wpfcogs-pro-analytics-stock.php:557
 #: includes/pro/analytics/build/index.js:1
 #: includes/pro/analytics/src/modules/stock.js:109
 msgid "Category"
