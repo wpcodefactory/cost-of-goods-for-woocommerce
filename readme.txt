@@ -344,6 +344,9 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 
 == Changelog ==
 
+= 4.2.1 - 18/09/2026 =
+* Security - minor hardening.
+
 = 4.2.0 - 24/08/2026 =
 * Fix - Fixed Analytics Stock cost/profit totals cache.
 * WC tested up to: 11.0.

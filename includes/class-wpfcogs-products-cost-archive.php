@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Cost archive.
  *
- * @version 4.1.8
+ * @version 4.2.1
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -160,9 +160,35 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 		}
 
 		/**
+		 * maybe_get_cost_archive_meta_value.
+		 *
+		 * @version 4.2.1
+		 * @since   4.2.1
+		 *
+		 * @param mixed $meta_value Raw `_alg_wc_cog_cost_archive` meta value from the database.
+		 *
+		 * @return array|null Validated cost-archive entry with expected keys only, or `null` if invalid.
+		 */
+		function maybe_get_cost_archive_meta_value( $meta_value ) {
+			if ( ! is_string( $meta_value ) || ! is_serialized( $meta_value, true ) ) {
+				return null;
+			}
+			// phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_unserialize -- Legacy meta format is PHP-serialized data; allowed_classes is disabled to prevent object injection.
+			$archive = unserialize( $meta_value, array( 'allowed_classes' => false ) );
+			if ( ! is_array( $archive ) || ! isset( $archive['update_date'], $archive['prev_cost_value'], $archive['new_cost_value'] ) ) {
+				return null;
+			}
+			return array(
+				'update_date'     => absint( $archive['update_date'] ),
+				'prev_cost_value' => is_scalar( $archive['prev_cost_value'] ) ? $archive['prev_cost_value'] : '',
+				'new_cost_value'  => is_scalar( $archive['new_cost_value'] ) ? $archive['new_cost_value'] : '',
+			);
+		}
+
+		/**
 		 * get_product_cost_archive.
 		 *
-		 * @version 4.1.5
+		 * @version 4.2.1
 		 * @since   2.8.2
 		 *
 		 * @param $args
@@ -205,7 +231,12 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 			$results = $wpdb->get_results( $query, ARRAY_A );
 			if ( ! $use_mysql_regexp_substr ) {
 				foreach ( $results as $key => $result ) {
-					$results[ $key ]['update_datetime'] = wp_date( "Y-m-d H:i:s", unserialize( $result['meta_value'] )['update_date'] );
+					$archive = $this->maybe_get_cost_archive_meta_value( $result['meta_value'] );
+					if ( empty( $archive ) ) {
+						unset( $results[ $key ] );
+						continue;
+					}
+					$results[ $key ]['update_datetime'] = wp_date( "Y-m-d H:i:s", $archive['update_date'] );
 				}
 				if ( 'update_datetime' === $orderby && 'desc' === strtolower( $order ) ) {
 					usort( $results, function ( $a, $b ) {
@@ -215,9 +246,12 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 			}
 			$filtered_results = array();
 			foreach ( $results as $result ) {
-				$arr                    = unserialize( $result['meta_value'] );
-				$arr['update_datetime'] = $result['update_datetime'];
-				$filtered_results[]     = $arr;
+				$archive = $this->maybe_get_cost_archive_meta_value( $result['meta_value'] );
+				if ( empty( $archive ) ) {
+					continue;
+				}
+				$archive['update_datetime'] = $result['update_datetime'];
+				$filtered_results[]         = $archive;
 			}
 			return $filtered_results;
 		}
