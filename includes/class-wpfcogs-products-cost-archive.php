@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products - Cost archive.
  *
- * @version 4.2.1
+ * @version 4.2.2
  * @since   2.8.2
  * @author  WPFactory
  */
@@ -25,7 +25,7 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @version 4.1.8
+		 * @version 4.2.2
 		 * @since   2.8.2
 		 */
 		function __construct() {
@@ -34,6 +34,9 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 			add_action( 'add_post_meta', array( $this, 'save_cost_archive' ), 10, 3 );
 			add_action( 'wp_ajax_wpfcogs_get_cost_archive_table', array( $this, 'wpfcogs_get_cost_archive_table_ajax' ) );
 			add_action( 'admin_head', array( $this, 'create_cost_archive_style' ) );
+			// Last update datetime.
+			add_action( 'updated_post_meta', array( $this, 'save_last_update_datetime' ), 10, 4 );
+			add_action( 'added_post_meta', array( $this, 'save_last_update_datetime' ), 10, 4 );
 			// Meta box.
 			add_action( 'add_meta_boxes', array( $this, 'add_cost_archive_meta_box' ) );
 		}
@@ -403,6 +406,28 @@ if ( ! class_exists( 'WPFCOGS_Products_Cost_Archive' ) ) {
 					$product->save();
 				}
 			}
+		}
+
+		/**
+		 * save_last_update_datetime.
+		 *
+		 * @version 4.2.2
+		 * @since   4.2.2
+		 *
+		 * @param $meta_id
+		 * @param $post_id
+		 * @param $meta_key
+		 * @param $meta_value
+		 */
+		function save_last_update_datetime( $meta_id, $post_id, $meta_key, $meta_value ) {
+			if (
+				'yes' !== wpfcogs_get_option( 'alg_wc_cog_save_last_update_datetime', 'no' ) ||
+				'_alg_wc_cog_last_update_date' !== $meta_key ||
+				! is_a( wc_get_product( $post_id ), 'WC_Product' )
+			) {
+				return;
+			}
+			update_post_meta( $post_id, '_alg_wc_cog_last_update_datetime', wp_date( 'Y-m-d H:i:s', $meta_value ) );
 		}
 
 		/**

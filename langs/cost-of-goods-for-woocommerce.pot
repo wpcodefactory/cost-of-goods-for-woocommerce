@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 4.2.1\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 4.2.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-21T17:08:59+02:00\n"
+"POT-Creation-Date: 2026-10-02T22:51:10+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -226,7 +226,7 @@ msgstr ""
 #: includes/class-wpfcogs.php:169
 #: includes/pro/class-wpfcogs-pro-quick-and-bulk-edit.php:100
 #: includes/settings/class-wpfcogs-settings-orders.php:510
-#: includes/settings/class-wpfcogs-settings-products.php:288
+#: includes/settings/class-wpfcogs-settings-products.php:297
 #: includes/settings/class-wpfcogs-settings.php:24
 msgid "Cost of Goods"
 msgstr ""
@@ -372,15 +372,15 @@ msgid "Enter values and \"Update\" the product."
 msgstr ""
 
 #: includes/class-wpfcogs-products-add-stock.php:79
-#: includes/settings/class-wpfcogs-settings-products.php:273
+#: includes/settings/class-wpfcogs-settings-products.php:282
 msgid "\"Stock\" will be added to your inventory, and \"Cost\" will be used to calculate new average cost of goods for the product."
 msgstr ""
 
 #: includes/class-wpfcogs-products-add-stock.php:81
 #: includes/pro/class-wpfcogs-pro-quick-and-bulk-edit.php:100
-#: includes/settings/class-wpfcogs-settings-products.php:271
-#: includes/settings/class-wpfcogs-settings-products.php:284
-#: includes/settings/class-wpfcogs-settings-products.php:288
+#: includes/settings/class-wpfcogs-settings-products.php:280
+#: includes/settings/class-wpfcogs-settings-products.php:293
+#: includes/settings/class-wpfcogs-settings-products.php:297
 msgid "Add stock"
 msgstr ""
 
@@ -409,7 +409,7 @@ msgid "Variation history"
 msgstr ""
 
 #: includes/class-wpfcogs-products-add-stock.php:631
-#: includes/class-wpfcogs-products-cost-archive.php:442
+#: includes/class-wpfcogs-products-cost-archive.php:467
 msgid "Select variation"
 msgstr ""
 
@@ -421,44 +421,44 @@ msgstr ""
 msgid "Update variation(s)"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:89
+#: includes/class-wpfcogs-products-cost-archive.php:92
 #: includes/settings/class-wpfcogs-settings-products.php:192
 #: includes/settings/class-wpfcogs-settings-products.php:198
 msgid "Cost archive"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:149
+#: includes/class-wpfcogs-products-cost-archive.php:152
 #: includes/settings/class-wpfcogs-settings-products.php:260
 msgid "Last update date: %last_update_date%"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:321
+#: includes/class-wpfcogs-products-cost-archive.php:324
 msgid "There isn't a cost archive for this product yet."
 msgstr ""
 
 #. translators: %s: settings link.
-#: includes/class-wpfcogs-products-cost-archive.php:323
+#: includes/class-wpfcogs-products-cost-archive.php:326
 msgid "Please, check if the option %s is enabled and then update the cost."
 msgstr ""
 
 #. translators: %s: settings link.
-#: includes/class-wpfcogs-products-cost-archive.php:323
+#: includes/class-wpfcogs-products-cost-archive.php:326
 msgid "Products > Cost archive > Save cost archive"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:326
+#: includes/class-wpfcogs-products-cost-archive.php:329
 msgid "Update date"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:327
+#: includes/class-wpfcogs-products-cost-archive.php:330
 msgid "Previous cost"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:328
+#: includes/class-wpfcogs-products-cost-archive.php:331
 msgid "New cost"
 msgstr ""
 
-#: includes/class-wpfcogs-products-cost-archive.php:435
+#: includes/class-wpfcogs-products-cost-archive.php:460
 msgid "Variation archive"
 msgstr ""
 
@@ -1570,7 +1570,7 @@ msgid "Order types in reports."
 msgstr ""
 
 #: includes/settings/class-wpfcogs-settings-compatibility.php:402
-#: includes/settings/class-wpfcogs-settings-products.php:274
+#: includes/settings/class-wpfcogs-settings-products.php:283
 msgid "Note:"
 msgstr ""
 
@@ -2396,7 +2396,7 @@ msgstr ""
 
 #. translators: %s: Setting name "Cost decimals" in bold.
 #: includes/settings/class-wpfcogs-settings-products.php:75
-#: includes/settings/class-wpfcogs-settings-products.php:296
+#: includes/settings/class-wpfcogs-settings-products.php:305
 msgid "Cost decimals"
 msgstr ""
 
@@ -2501,13 +2501,13 @@ msgid "Date format."
 msgstr ""
 
 #: includes/settings/class-wpfcogs-settings-products.php:214
-#: includes/settings/class-wpfcogs-settings-products.php:338
+#: includes/settings/class-wpfcogs-settings-products.php:347
 msgid "Example:"
 msgstr ""
 
 #. translators: %s: URL to PHP date format documentation.
 #: includes/settings/class-wpfcogs-settings-products.php:217
-#: includes/settings/class-wpfcogs-settings-products.php:341
+#: includes/settings/class-wpfcogs-settings-products.php:350
 msgid "<a target=\"_blank\" href=\"%s\">See format options.</a>"
 msgstr ""
 
@@ -2516,12 +2516,12 @@ msgid "Date order."
 msgstr ""
 
 #: includes/settings/class-wpfcogs-settings-products.php:225
-#: includes/settings/class-wpfcogs-settings-products.php:349
+#: includes/settings/class-wpfcogs-settings-products.php:358
 msgid "Ascending"
 msgstr ""
 
 #: includes/settings/class-wpfcogs-settings-products.php:226
-#: includes/settings/class-wpfcogs-settings-products.php:350
+#: includes/settings/class-wpfcogs-settings-products.php:359
 msgid "Descending"
 msgstr ""
 
@@ -2550,217 +2550,230 @@ msgstr ""
 msgid "Last update date template."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:272
+#: includes/settings/class-wpfcogs-settings-products.php:264
+msgid "Last update datetime"
+msgstr ""
+
+#: includes/settings/class-wpfcogs-settings-products.php:265
+msgid "Save last update as datetime"
+msgstr ""
+
+#. translators: %s: Meta key, e.g. _alg_wc_cog_last_update_datetime.
+#: includes/settings/class-wpfcogs-settings-products.php:267
+msgid "Saves a %s product meta on database."
+msgstr ""
+
+#: includes/settings/class-wpfcogs-settings-products.php:281
 msgid "Calculate new average cost of goods for the product based on new \"Stock\" and \"Cost\" values you enter."
 msgstr ""
 
 #. translators: %s: "Stock management" setting name in bold.
-#: includes/settings/class-wpfcogs-settings-products.php:277
+#: includes/settings/class-wpfcogs-settings-products.php:286
 msgid "The %s option has to be enabled."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:278
+#: includes/settings/class-wpfcogs-settings-products.php:287
 msgid "Stock management"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:285
+#: includes/settings/class-wpfcogs-settings-products.php:294
 msgid "Enable \"Add stock\" feature"
 msgstr ""
 
 #. translators: %s: Meta box title, e.g. "Cost of Goods: Add stock".
-#: includes/settings/class-wpfcogs-settings-products.php:287
+#: includes/settings/class-wpfcogs-settings-products.php:296
 msgid "A meta box \"%s\" will be added to the product edit page."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:294
+#: includes/settings/class-wpfcogs-settings-products.php:303
 msgid "Format decimals"
 msgstr ""
 
 #. translators: %s: Setting name "Cost decimals" in bold.
-#: includes/settings/class-wpfcogs-settings-products.php:296
+#: includes/settings/class-wpfcogs-settings-products.php:305
 msgid "Calculate cost using the %s option"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:302
+#: includes/settings/class-wpfcogs-settings-products.php:311
 msgid "Cost calculation expression"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:303
+#: includes/settings/class-wpfcogs-settings-products.php:312
 msgid "Available placeholders: "
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:311
+#: includes/settings/class-wpfcogs-settings-products.php:320
 msgid "The expression used to calculate the new average cost of the product."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:321
+#: includes/settings/class-wpfcogs-settings-products.php:330
 msgid "Empty cost field"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:322
+#: includes/settings/class-wpfcogs-settings-products.php:331
 msgid "The cost value considered when the field is empty."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:323
+#: includes/settings/class-wpfcogs-settings-products.php:332
 msgid "Use this option if you want to Add stock without worrying about filling the cost value."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:330
+#: includes/settings/class-wpfcogs-settings-products.php:339
 msgid "Prevents calculation"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:331
+#: includes/settings/class-wpfcogs-settings-products.php:340
 msgid "Uses last cost value from \"Add stock\" history"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:332
+#: includes/settings/class-wpfcogs-settings-products.php:341
 msgid "Uses current cost"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:336
+#: includes/settings/class-wpfcogs-settings-products.php:345
 msgid "History date"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:337
+#: includes/settings/class-wpfcogs-settings-products.php:346
 msgid "History date format."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:347
+#: includes/settings/class-wpfcogs-settings-products.php:356
 msgid "History date order."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:357
+#: includes/settings/class-wpfcogs-settings-products.php:366
 msgid "Negative stock"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:358
+#: includes/settings/class-wpfcogs-settings-products.php:367
 msgid "Allow negative stock values"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:359
+#: includes/settings/class-wpfcogs-settings-products.php:368
 msgid "If enabled, the stock may also be reduced."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:372
+#: includes/settings/class-wpfcogs-settings-products.php:381
 msgid "Quick and Bulk Edit"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:377
+#: includes/settings/class-wpfcogs-settings-products.php:386
 msgid "Cost field"
 msgstr ""
 
 #. translators: %s: "Quick Edit" action name.
 #. translators: %s: "Bulk Actions > Edit" action name.
-#: includes/settings/class-wpfcogs-settings-products.php:379
-#: includes/settings/class-wpfcogs-settings-products.php:389
+#: includes/settings/class-wpfcogs-settings-products.php:388
+#: includes/settings/class-wpfcogs-settings-products.php:398
 msgid "Add \"Cost\" field to product \"%s\""
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:380
-#: includes/settings/class-wpfcogs-settings-products.php:409
+#: includes/settings/class-wpfcogs-settings-products.php:389
+#: includes/settings/class-wpfcogs-settings-products.php:418
 msgid "Quick Edit"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:390
-#: includes/settings/class-wpfcogs-settings-products.php:419
+#: includes/settings/class-wpfcogs-settings-products.php:399
+#: includes/settings/class-wpfcogs-settings-products.php:428
 msgid "Bulk Actions"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:390
-#: includes/settings/class-wpfcogs-settings-products.php:419
+#: includes/settings/class-wpfcogs-settings-products.php:399
+#: includes/settings/class-wpfcogs-settings-products.php:428
 msgid "Edit"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:398
+#: includes/settings/class-wpfcogs-settings-products.php:407
 msgid "Replace all variations from the main variable product"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:399
+#: includes/settings/class-wpfcogs-settings-products.php:408
 msgid "The cost field from the main variable product will replace the cost of all variations."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:406
+#: includes/settings/class-wpfcogs-settings-products.php:415
 msgid "\"Add stock\" fields"
 msgstr ""
 
 #. translators: %s: "Quick Edit" action name.
 #. translators: %s: "Bulk Actions > Edit" action name.
-#: includes/settings/class-wpfcogs-settings-products.php:408
-#: includes/settings/class-wpfcogs-settings-products.php:418
+#: includes/settings/class-wpfcogs-settings-products.php:417
+#: includes/settings/class-wpfcogs-settings-products.php:427
 msgid "Add \"Add stock\" fields to product \"%s\""
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:434
+#: includes/settings/class-wpfcogs-settings-products.php:443
 msgid "Cost sanitization"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:439
+#: includes/settings/class-wpfcogs-settings-products.php:448
 msgid "Cost update"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:440
+#: includes/settings/class-wpfcogs-settings-products.php:449
 msgid "Replace comma by dots when updating cost meta"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:446
+#: includes/settings/class-wpfcogs-settings-products.php:455
 msgid "Cost import"
 msgstr ""
 
 #. translators: %s: Link to the WooCommerce Importer page.
-#: includes/settings/class-wpfcogs-settings-products.php:448
+#: includes/settings/class-wpfcogs-settings-products.php:457
 msgid "Get only the cost number when using the %s"
 msgstr ""
 
 #. translators: %s: Link to the WooCommerce Importer page.
-#: includes/settings/class-wpfcogs-settings-products.php:448
-#: includes/settings/class-wpfcogs-settings-products.php:460
+#: includes/settings/class-wpfcogs-settings-products.php:457
+#: includes/settings/class-wpfcogs-settings-products.php:469
 msgid "WooCommerce Importer"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:449
+#: includes/settings/class-wpfcogs-settings-products.php:458
 msgid "Useful if you want to ignore price symbols from the CSV when importing."
 msgstr ""
 
 #. translators: %1$s: Example input value, %2$s: Example output value.
-#: includes/settings/class-wpfcogs-settings-products.php:452
+#: includes/settings/class-wpfcogs-settings-products.php:461
 msgid "Example: %1$s becomes %2$s"
 msgstr ""
 
 #. translators: %s: Link to the WooCommerce Importer page.
-#: includes/settings/class-wpfcogs-settings-products.php:460
+#: includes/settings/class-wpfcogs-settings-products.php:469
 msgid "Normalize cost when using the %s"
 msgstr ""
 
 #. translators: %1$s: Example European format, %2$s: Example US format, %3$s: Normalized output.
-#: includes/settings/class-wpfcogs-settings-products.php:462
+#: includes/settings/class-wpfcogs-settings-products.php:471
 msgid "Converts costs such as %1$s or %2$s to %3$s."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:469
+#: includes/settings/class-wpfcogs-settings-products.php:478
 msgid "Product export"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:470
+#: includes/settings/class-wpfcogs-settings-products.php:479
 msgid "Convert cost to number"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:471
+#: includes/settings/class-wpfcogs-settings-products.php:480
 msgid "If disabled it will be parsed as string."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:477
+#: includes/settings/class-wpfcogs-settings-products.php:486
 msgid "Dots and commas operation when exporting the product cost."
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:482
+#: includes/settings/class-wpfcogs-settings-products.php:491
 msgid "Convert commas to dots"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:483
+#: includes/settings/class-wpfcogs-settings-products.php:492
 msgid "Convert dots to commas"
 msgstr ""
 
-#: includes/settings/class-wpfcogs-settings-products.php:484
+#: includes/settings/class-wpfcogs-settings-products.php:493
 msgid "None"
 msgstr ""
 

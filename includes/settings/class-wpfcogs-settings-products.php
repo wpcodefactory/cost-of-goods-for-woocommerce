@@ -2,7 +2,7 @@
 /**
  * Cost of Goods for WooCommerce - Products Section Settings.
  *
- * @version 4.1.7
+ * @version 4.2.2
  * @since   1.7.0
  * @author  WPFactory
  */
@@ -28,7 +28,7 @@ class WPFCOGS_Settings_Products extends WPFCOGS_Settings_Section {
 	/**
 	 * get_settings.
 	 *
-	 * @version 4.1.7
+	 * @version 4.2.2
 	 * @since   1.7.0
 	 * @todo    [later] Cost field label: use in quick and bulk edit
 	 * @todo    [later] `wpfcogs_products_add_stock`: better description
@@ -259,6 +259,15 @@ class WPFCOGS_Settings_Products extends WPFCOGS_Settings_Section {
 				'id' => 'alg_wc_cog_last_update_date_template',
 				'default'        => __( 'Last update date: %last_update_date%', 'cost-of-goods-for-woocommerce' ),
 				'type'           => 'text',
+			),
+			array(
+				'title'    => __( 'Last update datetime', 'cost-of-goods-for-woocommerce' ),
+				'desc'     => __( 'Save last update as datetime', 'cost-of-goods-for-woocommerce' ),
+				/* translators: %s: Meta key, e.g. _alg_wc_cog_last_update_datetime. */
+				'desc_tip' => sprintf( __( 'Saves a %s product meta on database.', 'cost-of-goods-for-woocommerce' ), '<code>_alg_wc_cog_last_update_datetime</code>' ),
+				'id'      => 'alg_wc_cog_save_last_update_datetime',
+				'default' => 'no',
+				'type'    => 'checkbox',
 			),
 			array(
 				'type'     => 'sectionend',
