@@ -3,7 +3,7 @@ Contributors: wpcodefactory, omardabbas, karzin, anbinder, kousikmukherjeeli
 Tags: woocommerce, cost, cost of goods, profit, profit calculator
 Requires at least: 6.1
 Tested up to: 7.1
-Stable tag: 4.2.2
+Stable tag: 4.2.3
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -344,8 +344,11 @@ Once activated, access the plugin's settings by navigating to “WooCommerce > S
 
 == Changelog ==
 
+= 4.2.3 - 02/10/2026 =
+* Dev - Products - Improved Last update datetime description.
+
 = 4.2.2 - 02/10/2026 =
-* Dev - Products - Added new option to save the last update as datetime in `_alg_wc_cog_last_update_datetime` meta.
+* Dev - Products - Added new option to save the last update date and time (`Y-m-d H:i:s`) in `_alg_wc_cog_last_update_datetime` meta.
 
 = 4.2.1 - 18/09/2026 =
 * Security - minor hardening.

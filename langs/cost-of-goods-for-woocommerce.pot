@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: cost-of-goods-for-woocommerce 4.2.2\n"
+"Project-Id-Version: cost-of-goods-for-woocommerce 4.2.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cost-of-goods-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-02T22:51:10+02:00\n"
+"POT-Creation-Date: 2026-10-02T23:36:14+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: cost-of-goods-for-woocommerce\n"
@@ -2558,9 +2558,9 @@ msgstr ""
 msgid "Save last update as datetime"
 msgstr ""
 
-#. translators: %s: Meta key, e.g. _alg_wc_cog_last_update_datetime.
+#. translators: %1$s: Date and time format, %2$s: Meta key.
 #: includes/settings/class-wpfcogs-settings-products.php:267
-msgid "Saves a %s product meta on database."
+msgid "Saves the last update date and time (%1$s) in a %2$s product meta on database."
 msgstr ""
 
 #: includes/settings/class-wpfcogs-settings-products.php:281
