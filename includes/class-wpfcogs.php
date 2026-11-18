@@ -35,7 +35,7 @@ if ( ! class_exists( 'WPFCOGS' ) ) :
 		 * @since 1.0.0
 		 * @var   string
 		 */
-		public $version = '4.2.3';
+		public $version = '4.2.4';
 
 		/**
 		 * @since 1.0.0
